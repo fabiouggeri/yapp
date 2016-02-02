@@ -1,0 +1,381 @@
+grammar HarbourPP;
+
+/*********************************************************************************
+                              RULES
+**********************************************************************************/
+
+PreProcessor : Statements EOI;
+
+@SkipNode
+Statements : Statement*;
+
+@Memoize
+@SkipNode
+Ignore : Whitespace | BlockComment | LineComment | ContinueNL;
+
+@Atomic
+Whitespace : Space+;
+
+@Memoize
+@Atomic
+BlockComment : '/*' ('*/'! .)* '*/';
+
+@Atomic
+LineComment : ('//' | '&&') (('\n' | EOI)! .)*;
+
+@Memoize
+ContinueNL : Space* ';' (BlockComment | LineComment | Whitespace)* NewLine;
+
+@Rule(Spacing)
+OptionalSpacing : Ignore*;
+
+@Rule(Spacing)
+@SyntaxOnly
+IgnoreOptionalSpacing : Ignore*;
+
+@Rule(Spacing)
+@SyntaxOnly
+IgnoreSpacing : Ignore+;
+
+Spacing : Ignore+;
+
+@SkipNode
+Statement : DirectiveStatement | EmptyStatement | AnyStatement;
+
+@SkipNode
+DirectiveStatement : IgnoreOptionalSpacing DirectiveMark IgnoreOptionalSpacing 
+                     ( DefineDirective 
+                     | StdOutDirective 
+                     | CommandDirective 
+                     | XCommandDirective 
+                     | YCommandDirective 
+                     | TranslateDirective 
+                     | XTranslateDirective 
+                     | YTranslateDirective 
+                     | IfDefDirective 
+                     | IfNDefDirective 
+                     | ElseDirective 
+                     | ElseIfDirective 
+                     | EndIfDirective 
+                     | UndefDirective 
+                     | ErrorDirective 
+                     | IncludeDirective 
+                     | LineDirective 
+                     | UncommandDirective 
+                     | XUncommandDirective 
+                     | YUncommandDirective 
+                     | UntranslateDirective 
+                     | XUntranslateDirective 
+                     | YUntranslateDirective 
+                     | DumpBlock) 
+                     IgnoreOptionalSpacing EndStmt;
+
+EmptyStatement : Ignore* AloneLineComment? EndEmptyStmt;
+
+AnyStatement : AnyRules EndStmt;
+
+@Rule(EndStmt)
+EndEmptyStmt : NewLine EMPTY;
+
+@Atomic
+NewLine : '\n' | '\r\n';
+
+@Memoize
+@Atomic
+AloneLineComment : '*' (('\n' | EOI)! .)*;
+
+AnyRules : AnyRule+;
+
+EndStmt : NewLine | EOI;
+
+DirectiveMark : IgnoreOptionalSpacing '#';
+
+DefineDirective : Define IgnoreSpacing Identifier DefineParameters? IgnoreOptionalSpacing ResultRules?;
+
+StdOutDirective : StdOut ResultRules;
+
+CommandDirective : Command IgnoreOptionalSpacing MatchPattern IgnoreOptionalSpacing ResultSep IgnoreOptionalSpacing ResultPattern?;
+
+XCommandDirective : XCommand directivePattern;
+
+YCommandDirective : YCommand IgnoreOptionalSpacing MatchPattern IgnoreOptionalSpacing ResultSep IgnoreOptionalSpacing ResultPattern?;
+
+TranslateDirective : Translate directivePattern;
+
+XTranslateDirective : XTranslate directivePattern;
+
+YTranslateDirective : YTranslate directivePattern;
+
+IfDefDirective : IfDef IgnoreSpacing Identifier;
+
+IfNDefDirective : IfNDef IgnoreSpacing Identifier;
+
+@SyntaxOnly
+@Atomic
+ElseDirective : "else" DiscardedRemainingLine;
+
+ElseIfDirective : ElseIf IgnoreSpacing Identifier;
+
+@SyntaxOnly
+@Atomic
+EndIfDirective : EndIf DiscardedRemainingLine;
+
+UndefDirective : Undef IgnoreSpacing Identifier;
+
+ErrorDirective : "error" ResultRules;
+
+@Atomic
+IncludeName : (DoubleQuoteString | SingleQuoteString);
+
+IncludeDirective : Include IgnoreSpacing IncludeName;
+
+LineDirective : "line" DiscardedRemainingLine;
+
+UncommandDirective : Uncommand undefDirectivePattern;
+
+XUncommandDirective : Xuncommand undefDirectivePattern;
+
+YUncommandDirective : Yuncommand undefDirectivePattern;
+
+UntranslateDirective : Untranslate undefDirectivePattern;
+
+XUntranslateDirective : Xuntranslate undefDirectivePattern;
+
+YUntranslateDirective : Yuntranslate undefDirectivePattern;
+
+DumpBlock : BeginDumpBlock EndStmt ((EndDumpBlock | EOI)! .)* EndDumpBlock;
+
+@SyntaxOnly
+@Atomic
+Define : "defi" ("ne" | "n")?;
+
+DefineParameters : '(' IgnoreOptionalSpacing ParametersList? ')';
+
+ResultRules : AnyRules;
+
+@SkipNode
+ParametersList : Identifier (IgnoreOptionalSpacing ',' IgnoreOptionalSpacing Identifier)* IgnoreOptionalSpacing;
+
+@SyntaxOnly
+@Atomic
+StdOut : "stdo" ("ut" | "u")?;
+
+@SyntaxOnly
+@Atomic
+Command : "comm" ("and" | "an" | "a")?;
+
+MatchPattern : MatchChunk+;
+
+@SyntaxOnly
+@Atomic
+ResultSep : '=' IgnoreOptionalSpacing '>';
+
+ResultPattern : ResultChunk+;
+
+@SyntaxOnly
+@Atomic
+YCommand : "ycom" ("mand" | "man" | "ma" | "m")?;
+
+@SkipNode
+directivePattern : IgnoreOptionalSpacing MatchPattern IgnoreOptionalSpacing ResultSep IgnoreOptionalSpacing ResultPattern?;
+
+@SkipNode
+undefDirectivePattern : IgnoreOptionalSpacing MatchPattern IgnoreOptionalSpacing;
+
+@SyntaxOnly
+@Atomic
+Uncommand : "unco" ("mmand" | "mman" | "mma" | "mm" | "m")?;
+
+@SyntaxOnly
+@Atomic
+Xuncommand : "xunc" ("ommand" | "omman" | "omma" | "omm" | "om" | "o")?;
+
+@SyntaxOnly
+@Atomic
+Yuncommand : "yunc" ("ommand" | "omman" | "omma" | "omm" | "om" | "o")?;
+
+@SyntaxOnly
+@Atomic
+XCommand : "xcom" ("mand" | "man" | "ma" | "m")?;
+
+@SyntaxOnly
+@Atomic
+Untranslate : "untr" ("anslate" | "anslat" | "ansla" | "ansl" | "ans" | "an" | "a")?;
+
+@SyntaxOnly
+@Atomic
+Xuntranslate : "xunt" ("ranslate" | "ranslat" | "ransla" | "ransl" | "rans" | "ran" | "ra" | "r")?;
+
+@SyntaxOnly
+@Atomic
+Yuntranslate : "yunt" ("ranslate" | "ranslat" | "ransla" | "ransl" | "rans" | "ran" | "ra" | "r")?;
+
+@SyntaxOnly
+@Atomic
+Translate : "tran" ("slate" | "slat" | "sla" | "sl" | "s")?;
+
+@SyntaxOnly
+@Atomic
+YTranslate : "ytra" ("nslate" | "nslat" | "nsla" | "nsl" | "ns" | "n")?;
+
+@SyntaxOnly
+@Atomic
+XTranslate : "xtra" ("nslate" | "nslat" | "nsla" | "nsl" | "ns" | "n")?;
+
+@Atomic
+EscapedChar : '\\' ('\n'! .);
+
+OptionalMatchMarker : '[' IgnoreOptionalSpacing OptionalMatchMarkerPattern IgnoreOptionalSpacing ']';
+
+@Rule(MatchPattern)
+OptionalMatchMarkerPattern : OptionalMatchMarkerChunk+;
+
+@SkipNode
+OptionalMatchMarkerChunk : ResultSep! (OptionalMatchMarker | MatchMarker | Identifier | Literal | Ignore | EscapedChar | Separator);
+
+@SkipNode
+MatchMarker : IdMarker | ListMarker | RestrictMarker | WildMarker | ExtendedMarker | IdentifierMarker;
+
+@SkipNode
+Literal : LogicalLiteral | DoubleQuoteString | SingleQuoteString | DateTimeLiteral | NumberLiteral | MultiLineDoubleQuoteString | MultiLineSingleQuoteString;
+
+@Atomic
+Separator : ".or." | ".and." | ".not." | ':=' | '==' | '!=' | '>=' | '<=' | '->' | '++' | '--' | '+=' | '-=' 
+          | '*=' | '/=' | '%=' | '^=' | '**' | '^^' | '<<' | '>>' | '::' | '<>' | '...' | '&&' | '||' | '^^' 
+          | '**=' | '$' | ',' | '>' | '+' | '*' | '!' | '-' | '/' | '(' | ')' | ':' | '{' | '}' | '%' | '\\' 
+          | '?' | '~' | '.' | '@' | '|' | '&' | '=' | '^' | '#' | ';' | '<' | '[' | '"' | '\'' | '_';
+
+@SkipNode
+MatchChunk : ResultSep! (OptionalMatchMarker | MatchMarker | Identifier | Literal | Ignore | EscapedChar | ']' | Separator);
+
+IdMarker : '<' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '>';
+
+ListMarker : '<' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing ',' IgnoreOptionalSpacing '...' IgnoreOptionalSpacing '>';
+
+RestrictMarker : '<' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing ':' IgnoreOptionalSpacing RestrictValues IgnoreOptionalSpacing '>';
+
+WildMarker : '<' IgnoreOptionalSpacing '*' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '*' IgnoreOptionalSpacing '>';
+
+ExtendedMarker : '<' IgnoreOptionalSpacing '(' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing ')' IgnoreOptionalSpacing '>';
+
+IdentifierMarker : '<' IgnoreOptionalSpacing '!' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '!' IgnoreOptionalSpacing '>';
+
+RestrictValues : RestrictValue (IgnoreOptionalSpacing ',' IgnoreOptionalSpacing RestrictValue)*;
+
+RestrictValue : (('>' | ',')! (Identifier | Literal | Ignore | EscapedChar | Separator))+;
+
+NullMarker : '<' IgnoreOptionalSpacing '-' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '-' IgnoreOptionalSpacing '>';
+
+@SkipNode
+ResultMarker : IdMarker | DumbStringifyMarker | NormalStringifyMarker | SmartStringifyMarker | BlockifyMarker | LogifyMarker | NullMarker;
+
+DumbStringifyMarker : DirectiveMark IgnoreOptionalSpacing '<' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '>';
+
+NormalStringifyMarker : '<' IgnoreOptionalSpacing (('"' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '"') | ('\'' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '\'')) IgnoreOptionalSpacing '>';
+
+SmartStringifyMarker : '<' IgnoreOptionalSpacing '(' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing ')' IgnoreOptionalSpacing '>';
+
+BlockifyMarker : '<' IgnoreOptionalSpacing '{' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '}' IgnoreOptionalSpacing '>';
+
+LogifyMarker : '<' IgnoreOptionalSpacing '.' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '.' IgnoreOptionalSpacing '>';
+
+OptionalResultMarker : '[' IgnoreOptionalSpacing OptionalResultMarkerPattern IgnoreOptionalSpacing ']';
+
+@Rule(ResultPattern)
+OptionalResultMarkerPattern : OptionalResultMarkerChunk+;
+
+@SkipNode
+OptionalResultMarkerChunk : OptionalResultMarker | ResultMarker | Identifier | Literal | Ignore | EscapedChar | Separator;
+
+@SkipNode
+ResultChunk : OptionalResultMarker | ResultMarker | Identifier | Literal | Ignore | EscapedChar | ']' | Separator;
+
+@SyntaxOnly
+@Atomic
+IfDef : "ifde" ("f")?;
+
+@SyntaxOnly
+@Atomic
+IfNDef : "ifnd" ("ef" | "e")?;
+
+DiscardedRemainingLine : (EndStmt! .)*;
+
+@SyntaxOnly
+@Atomic
+ElseIf : "else" ("if" | "i")?;
+
+@SyntaxOnly
+@Atomic
+EndIf : "endi" ("f")?;
+
+@SyntaxOnly
+@Atomic
+Undef : "unde" ("f")?;
+
+@SyntaxOnly
+@Atomic
+Include : "incl" ("ude" | "ud" | "u")?;
+
+@Atomic
+DoubleQuoteString : '"' (('\n' | '\"')! .)* '"';
+
+@Atomic
+SingleQuoteString : '\'' (('\n' | '\'')! .)* '\'';
+
+BeginDumpBlock : "pragma" IgnoreSpacing "begindump";
+
+EndDumpBlock : "pragma" IgnoreSpacing "enddump";
+
+@SkipNode
+BracketSequence : ('[' (']'! AnyRule)+ ']') | BracketString;
+
+@SkipNode
+AnyRule : BracketSequence | Literal | Ignore | Identifier | Separator;
+
+@Atomic
+BracketString : '[' (('\n' | ']')! .)* ']';
+
+@Atomic
+LogicalLiteral : ".T." | ".F." | ".Y." | ".N.";
+
+@Atomic
+DateTimeLiteral : ('0d' Digit Digit Digit Digit Digit Digit Digit Digit) | ("d" (('"' DatePattern ("T"? TimePattern)? '"') | ('\'' DatePattern ("T"? TimePattern)? '\'') | ('[' DatePattern ("T"? TimePattern)? ']'))) | ('{' '^' (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)? TimePattern? Ignore '}');
+
+@Atomic
+NumberLiteral : (IntegerNumber '.' IntegerNumber) | (IntegerNumber '.' Letter!) | IntegerNumber | ('.' IntegerNumber);
+
+MultiLineDoubleQuoteString : '"' (MultilineDoubleQuoteStringSegment BreakString)+ (('\n' | '\"')! .)* '"';
+
+MultiLineSingleQuoteString : '\'' (MultilineSingleQuoteStringSegment BreakString)+ (('\n' | '\'')! .)* '\'';
+
+BreakString : ';' (' ' | '\t' | '\f')* NewLine;
+
+@Atomic
+MultilineDoubleQuoteStringSegment : ((('\n' | '\"') | BreakString)! .)+;
+
+@Atomic
+MultilineSingleQuoteStringSegment : ((('\n' | '\'') | BreakString)! .)+;
+
+@Atomic
+Letter : [a-z] | [A-Z];
+
+@Fragment
+@Atomic
+Digit : [0-9];
+
+@Memoize
+@Atomic
+IntegerNumber : Digit+;
+
+@Atomic
+TimePattern : IntegerNumber (':' IntegerNumber (':' IntegerNumber)? ('.' IntegerNumber)?)? ("AM" | "PM")?;
+
+@Atomic
+DatePattern : IntegerNumber ('-' | '/' | '.') IntegerNumber ('-' | '/' | '.') IntegerNumber;
+
+@Fragment
+@Atomic
+Space : (' ' | '\t' | '\f');
+
+@Atomic
+Identifier : ([A-Z] | [a-z] | '_') ([A-Z] | [a-z] | [0-9] | '_')*;

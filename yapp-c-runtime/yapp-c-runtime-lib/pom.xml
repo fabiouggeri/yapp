@@ -1,0 +1,133 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <parent>
+      <groupId>br.com.uggeri.yapp</groupId>
+      <artifactId>yapp-c-runtime-superpom</artifactId>
+      <version>1.0-SNAPSHOT</version>
+   </parent>
+
+   <groupId>br.com.uggeri.yapp</groupId>
+   <artifactId>yapp-c-runtime-lib</artifactId>
+   <packaging>lib</packaging>
+
+   <name>Yapp - C Runtime Library</name>
+
+   <url>http://maven.apache.org</url>
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>br.com.uggeri.maven.builder</groupId>
+            <artifactId>maven-build-plugin</artifactId>
+            <version>${build-plugin-version}</version>
+            <extensions>true</extensions>
+
+            <configuration>
+               <directory>${project.basedir}/target</directory>
+               <outputDirectory>${project.basedir}/target/classes/${c-classifier}</outputDirectory>
+               <testOutputDirectory>${project.basedir}/target/test-classes/${c-classifier}</testOutputDirectory>
+               <sourceDirectory>${project.basedir}/src/main</sourceDirectory>
+               <testSourceDirectory>${project.basedir}/src/test</testSourceDirectory>
+               
+               <envVars>
+                  <INCLUDE>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE;C:\Program Files (x86)\Windows Kits\8.1\include\shared;C:\Program Files (x86)\Windows Kits\8.1\include\um;C:\Program Files (x86)\Windows Kits\8.1\include\winrt</INCLUDE>
+                  <LIB>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\LIB;C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86</LIB>
+                  <LIBPATH>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\LIB;C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral;C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1\ExtensionSDKs\Microsoft.VCLibs\12.0\References\CommonConfiguration\neutral</LIBPATH>
+               </envVars>
+
+               <classifier>${c-classifier}</classifier>
+                     
+               <defines>
+                  <__ARCH__>${os-target}${arch-target}</__ARCH__>
+                  <__CC__>${c-compiler}</__CC__>
+               </defines>
+
+               <toolsMapping>
+                  <!-- Configuracao da ferramenta para compilacao dos fontes em C e CPP-->
+                  <toolMapping>
+                     <tool>
+                        <groupId>br.com.uggeri.build.tools</groupId>
+                        <artifactId>maven-build-custom</artifactId>
+                        <version>${build-plugin-version}</version>
+                        <scope>runtime</scope>
+                     </tool>
+                     <toolClass>br.com.uggeri.build.tools.custom.compiler.CustomCompiler</toolClass>
+                           
+                     <toolConfig>
+                        <outputType>obj</outputType>
+                        <sourceTypes>
+                           <type>c</type>
+                           <type>cpp</type>
+                        </sourceTypes>
+                        <includeTypes>
+                           <type>h</type>
+                           <type>hpp</type>
+                        </includeTypes>
+                        <!--commandLine>clang -c -Ofast -I"C:\Program Files (x86)\mingw-builds\x32-4.8.1-posix-dwarf-rev5\mingw32\i686-w64-mingw32\include" #{includesPaths, '-I', ' -I'} #{defines, '-D', ' -D', '='} -o #{outputFile} #{inputFile}</commandLine-->
+                        <commandLine>gcc -Ofast -c #{includesPaths, '-I', ' -I'} #{defines, '-D', ' -D', '='} -o #{outputFile} #{inputFile}</commandLine>
+                        <!--commandLine>cl /W3 /GL /Ox /c #{includesPaths, '/I', ' /I'} #{defines, '/D', ' /D', '='} /Fo#{outputFile} #{inputFile}</commandLine-->
+                     </toolConfig>
+                  </toolMapping>
+                  
+                  <!-- Configuracao da ferramenta para geracao (linker) de executaveis  -->
+                  <toolMapping>
+                     <tool>
+                        <groupId>br.com.uggeri.build.tools</groupId>
+                        <artifactId>maven-build-custom</artifactId>
+                        <version>${build-plugin-version}</version>
+                        <scope>runtime</scope>
+                     </tool>
+                     <toolClass>br.com.uggeri.build.tools.custom.packer.CustomPacker</toolClass>
+                           
+                     <toolConfig>
+                        <outputType>exe</outputType>
+                        <sourceTypes>
+                           <type>o</type>
+                        </sourceTypes>
+                        <packagingTypes>
+                           <type>exe</type>
+                        </packagingTypes>
+                        <!--commandLine>clang -Ofast #{inputFiles,, ' '} #{inputLibraries, '-l', ' -l'} -o#{outputFile}</commandLine-->
+                        <commandLine>gcc -Ofast #{inputFiles,, ' '} #{inputLibraries, '-l', ' -l'} -o#{outputFile}</commandLine>
+                        <!--commandLine>link /INCREMENTAL:no /FORCE:MULTIPLE #{inputFiles,, ' '} #{inputLibraries, '-l', ' -l'} libcmt.lib /OUT:#{outputFile}</commandLine-->
+                     </toolConfig>
+                  </toolMapping>    
+                  
+                  <!-- Configuracao da ferramenta para geracao (archiver) de bibliotecas  -->
+                  <toolMapping>
+                     <tool>
+                        <groupId>br.com.uggeri.build.tools</groupId>
+                        <artifactId>maven-build-custom</artifactId>
+                        <version>${build-plugin-version}</version>
+                        <scope>runtime</scope>
+                     </tool>
+                     <toolClass>br.com.uggeri.build.tools.custom.packer.CustomPacker</toolClass>
+                           
+                     <toolConfig>
+                        <outputType>a</outputType>
+                        <sourceTypes>
+                           <type>o</type>
+                        </sourceTypes>
+                        <packagingTypes>
+                           <type>lib</type>
+                        </packagingTypes>
+                        <!--commandLine>llvm-ar rcs #{outputFile} #{inputFiles,, ' '}</commandLine-->
+                        <commandLine>ar rcs #{outputFile} #{inputFiles,, ' '}</commandLine>
+                        <!--commandLine>lib /SUBSYSTEM:CONSOLE /OUT:#{outputFile} #{inputFiles,, ' '}</commandLine-->
+                     </toolConfig>
+                  </toolMapping>    
+               </toolsMapping>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+
+   <dependencies>
+      <dependency>
+         <groupId>br.com.uggeri.yapp</groupId>
+         <artifactId>yapp-c-runtime-headers</artifactId>
+         <type>include</type>
+         <version>${project.version}</version>
+      </dependency>
+   </dependencies>
+</project>

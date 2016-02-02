@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <parent>
+      <groupId>br.com.uggeri.yapp</groupId>
+      <artifactId>yapp-super-pom</artifactId>
+      <version>1.0-SNAPSHOT</version>
+   </parent>
+
+   <groupId>br.com.uggeri.yapp</groupId>
+   <artifactId>yapp-c-runtime-superpom</artifactId>
+   <packaging>pom</packaging>
+
+   <name>Yapp - C Runtime</name>
+
+   <url>http://maven.apache.org</url>
+   
+   <properties>
+      <build-plugin-version>1.0-SNAPSHOT</build-plugin-version>
+      <arch-target>32</arch-target>
+      <os-target>win</os-target>
+      <c-compiler>gcc</c-compiler>
+      <c-compiler-version>4.8.1</c-compiler-version>
+      <lib-assembler>ar</lib-assembler>
+      <lib-assembler-version>2.23.2</lib-assembler-version>
+      <linker>ld</linker>
+      <linker-version>2.23.2</linker-version>
+      <target-platform>${os-target}${arch-target}</target-platform>
+      <c-classifier>${os-target}${arch-target}-${c-compiler}</c-classifier>
+   </properties>
+   
+   <modules>
+      <module>yapp-c-runtime-headers</module>
+      <module>yapp-c-runtime-lib</module>
+   </modules>
+   
+</project>

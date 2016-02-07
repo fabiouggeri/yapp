@@ -908,28 +908,17 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       final LiteralRulesGroup rulesGroup = new LiteralRulesGroup();
       boolean defaultMatch = false;
 
-      /*
-      a,b,c -> R1
-      a - z, A - Z -> R2
-      a, c -> R3
-      x -> R4
-      ----------------------
-      switch (c) {
-      case a:
-         if R1 else if R2 else if R3
-      }
-       */
       for (GrammarRule r : rules) {
          Set<Character> charSet;
-         Map<Character, List<GrammarRule>> groupedRules = new HashMap<Character, List<GrammarRule>>();
          FirstCharsVisitor visitor = new FirstCharsVisitor();
          r.visit(options, visitor);
          charSet = visitor.getCharSet();
          for (char c : charSet) {
-            List<GrammarRule> rulesList = groupedRules.get(c);
+            final CharPooler cp = new CharPooler(c, false);
+            List<GrammarRule> rulesList = rulesGroup.groupedRules.get(cp);
             if (rulesList == null) {
                rulesList = new ArrayList<GrammarRule>();
-               groupedRules.put(c, rulesList);
+               rulesGroup.groupedRules.put(cp, rulesList);
             }
             rulesList.add(r);
          }

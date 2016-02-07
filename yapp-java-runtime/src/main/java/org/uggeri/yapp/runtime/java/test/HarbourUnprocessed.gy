@@ -11,8 +11,7 @@ Statements : ( OptionalSpacing ((Statement EndStmt) | (IgnoreLine EndStmt) | End
              OptionalSpacing (Statement | IgnoreLine )?;
 
 @Memoize
-Statement : Spacing
-          | LocalVariablesDeclaration
+Statement : LocalVariablesDeclaration
           | FunctionDeclaration
           | ProcedureDeclaration
           | MethodDefinition
@@ -28,29 +27,29 @@ Statement : Spacing
           | IfBegin
           | ElseIfBegin
           | ElseBegin
-          | EndIfKeyword
+          | IfEnd
           | DoWhileBegin
-          | EndDoKeyword
+          | DoWhileEnd
           | ForNextBegin
-          | EndForKeyword
+          | ForNextEnd
           | BeginSequenceBegin
           | RecoverBegin
           | AlwaysBegin
-          | EndSequenceKeyword
+          | BeginSequenceEnd
           | DoCaseBegin
           | DoCaseOptionBegin
           | OtherwiseBegin
-          | EndCaseKeyword
+          | DoCaseEnd
           | ForEachBegin
           | ForEachEnd
           | SwitchBegin
           | SwitchOptionBegin
           | SwitchDefaultBegin
-          | EndSwitchKeyword
+          | SwitchEnd
           | TryCatchBegin
           | CatchBlockBegin
           | FinallyBlockBegin
-          | EndTryKeyword
+          | TryCatchEnd
           | EndKeyword
           | Return
           | Break
@@ -73,6 +72,8 @@ Statement : Spacing
           | QualifiedExpression
           | BeginTransaction
           | CommitTransaction
+          | BeginProducer
+          | EndProducer
           | RollbackTransaction
           | UseAs
           | UseArea
@@ -88,9 +89,9 @@ Statement : Spacing
 
 LocalVariablesDeclaration : "local":4 VariableDeclarationList;
 
-FunctionDeclaration : FunctionModifier? "function":4 Identifier ParParametersDeclaration?;
+FunctionDeclaration : FunctionModifier "function":4 Identifier ParParametersDeclaration?;
 
-ProcedureDeclaration : FunctionModifier? "procedure":4 Identifier ParParametersDeclaration?;
+ProcedureDeclaration : FunctionModifier "procedure":4 Identifier ParParametersDeclaration?;
 
 MethodDefinition : ( "method" | "classmethod" | "constructor" )
                    ( "procedure" | "function" )?
@@ -264,6 +265,10 @@ UnknownIdentifier : UnknownIdentifierPattern OptionalSpacing;
 @Rule(UnknownIdentifier)
 UnknownIdentifierPattern : IdentifierPattern ('(' | '->')!;
 
+BeginProducer : "begin" "producer" ("transaction" IntegerNumber)? "wait"?;
+
+EndProducer : "end" "producer";
+
 BeginTransaction : "begin" "transaction";
 
 CommitTransaction : "commit" "transaction";
@@ -373,7 +378,8 @@ OldStyleCommands : ArrobaGetSay
                  | LabelCmd
                  | IndexOnCmd
                  | ReindexCmd
-                 | QOutCommand;
+                 | QOutCommand
+                 | MenuToCmd;
 
 ArrobaGetSay : '@' CmdComplementation;
 
@@ -485,6 +491,8 @@ ReindexCmd : "reindex" CmdComplementation;
 
 QOutCommand : ('?' | '??') CmdComplementation;
 
+MenuToCmd : "menu" "to" LeftValue;
+
 @Memoize
 IgnoreLine : (('\n' | '\r' | EOI)! .)+;
 
@@ -497,20 +505,24 @@ ParametersDeclarationList : ParameterDeclaration (',' ParameterDeclaration)*;
 @SkipNode
 CommaVariableDefinition : ',' VariableDefinition;
 
-VariableDefinition : AnyIdentifier OptionalArrayDimension AsType InitializeVariable?;
+VariableDefinition : AnyIdentifier OptionalArrayDimension AsType InitializeVariable;
 
 @SkipNode
 VariableDefinitionCommaList : CommaVariableDefinition*;
 
-AssignmentOperator : ':=' | EqualOperator;
-
 @SkipNode
-@NotExtendLiterals
-EqualOperator : '=' ('>' | '=')! OptionalSpacing;
+AssignmentOperator : AssignmentOperatorOnly OptionalSpacing;
 
-InitializeVariable : AssignmentOperator ExpressionAsType;
+@Atomic
+@Rule(AssignmentOperator)
+AssignmentOperatorOnly : ':=' | EqualOperator;
 
-ExpressionAsType : Expression AsType?;
+@Fragment
+EqualOperator : '=' ('>' | '=')!;
+
+InitializeVariable : (AssignmentOperator ExpressionAsType)?;
+
+ExpressionAsType : Expression AsType;
 
 AsType : AsDataType?;
 
@@ -562,7 +574,7 @@ IfBegin : "if" Condition;
 Condition : Expression;
 
 @NotExtendLiterals
-EndIfKeyword : "endif":4 IgnoreRestOfLine;
+IfEnd : "endif":4 IgnoreRestOfLine;
 
 @NotExtendLiterals
 @Memoize
@@ -570,22 +582,22 @@ EndKeyword : "end" IgnoreRestOfLine;
 
 DoWhileBegin : "do"? "while":4 Condition;
 
-EndDoKeyword : "end" "do"
-             | "enddo":4;
+DoWhileEnd : "end" "do"
+           | "enddo":4;
 
 ForNextBegin : "for" ForIndexInitialization "to" Expression Step;
 
 @NotExtendLiterals
-EndForKeyword : ( "end" "for"
-                | "next"
-                | "endfor":4 ) IgnoreRestOfLine;
+ForNextEnd : ( "end" "for"
+             | "next"
+             | "endfor":4 ) IgnoreRestOfLine;
 
 BeginSequenceBegin : BeginSequenceKeyword WithCodeBlock;
 
 DoCaseBegin : "do" "case";
 
-EndCaseKeyword : "end" "case"
-               | "endcase":4;
+DoCaseEnd : "end" "case"
+          | "endcase":4;
 
 ForEachBegin : "for" "each" Variable "in" Expression;
 
@@ -593,11 +605,11 @@ ForEachEnd : "next";
 
 SwitchBegin : "switch":4 Expression;
 
-EndSwitchKeyword : "end" "switch";
+SwitchEnd : "end" "switch";
 
 TryCatchBegin : "try";
 
-EndTryKeyword : "end" "try";
+TryCatchEnd : "end" "try";
 
 FinallyBlockBegin : "finally";
 
@@ -710,7 +722,7 @@ OptionalParametersList : ParametersList?;
 @Fragment
 IIFKeyword : "iif" | "if";
 
-ElseIfBegin : "elseif" Condition;
+ElseIfBegin : "elseif":5 Condition;
 
 ElseBegin : "else";
 
@@ -726,7 +738,7 @@ Step : StepArgument?;
 @Rule(Assignment)
 ForIndexInitialization : (AliasedField | Macro | QualifiedVariable | Variable) AssignmentOperator Expression;
 
-BeginSequenceKeyword : "begin" "sequence":4;
+BeginSequenceKeyword : "begin":4 "sequence":4;
 
 @SkipNode
 WithOption : "with" CodeBlockLiteral;
@@ -736,8 +748,8 @@ CodeBlockLiteral : CodeBlockPattern OptionalSpacing;
 
 WithCodeBlock : WithOption?;
 
-EndSequenceKeyword : "end" "sequence":4
-                   | "endsequence":4;
+BeginSequenceEnd : "end" "sequence":4
+                 | "endsequence":4;
 
 @SkipNode
 UsingSpec : "using":4 Variable;
@@ -848,63 +860,79 @@ IndexItem : Expression;
 
 ArrayIndex : '[' IndexList ']';
 
-AssignOperator : ':='
-               | '+='
-               | '-='
-               | '*='
-               | '/='
-               | '%='
-               | '^='
-               | EqualOperator;
+@SkipNode
+AssignOperator : AssignOperatorOnly OptionalSpacing;
+
+@Atomic
+@Rule(AssignOperator)
+AssignOperatorOnly : ':='
+                   | '+='
+                   | '-='
+                   | '*='
+                   | '/='
+                   | '%='
+                   | '^='
+                   | EqualOperator;
 
 @SkipNode
 @Memoize
 Expression : AssignmentExpression
            | MathExpression
-           | RelationalExpression
+           | ComparisonExpression
            | ConditionalExpression
-           | PrefixedExpression
-           | PostfixedExpression
            | PrimaryExpression;
 
 @Memoize
 AssignmentExpression : LeftValue AssignOperator (ValueByReference | Expression);
 
 @SkipNode
-ConditionOperator : ".and."
-                  | ".or.";
+ConditionOperator : ConditionOperatorOnly OptionalSpacing;
+
+@Atomic
+@Rule(ConditionOperator)
+ConditionOperatorOnly : ".and."
+                      | ".or.";
 
 @Memoize
 ConditionalExpression : PrimaryExpression ConditionOperator Expression;
 
-RelationalOperator : '>='
-                   | '<='
-                   | '<>'
-                   | '#'
-                   | '!='
-                   | GreaterOperator
-                   | LessOperator
-                   | '=='
-                   | '$'
-                   | "in"
-                   | EqualOperator;
+@SkipNode
+ComparisonOperator : ComparisonOperatorOnly OptionalSpacing;
+
+@Atomic
+@Rule(ComparisonOperator)
+ComparisonOperatorOnly : '>='
+                       | '<='
+                       | '<>'
+                       | '#'
+                       | '!='
+                       | GreaterOperator
+                       | LessOperator
+                       | '=='
+                       | '$'
+                       | "in"
+                       | EqualOperator;
 
 @Memoize
-RelationalExpression : PrimaryExpression RelationalOperator Expression;
+ComparisonExpression : PrimaryExpression ComparisonOperator Expression;
 
 @SkipNode
-MathOperator : PlusSign
-             | MinusSign
-             | '**'
-             | '*'
-             | '/'
-             | '%'
-             | '^^'
-             | '^'
-             | '|'
-             | '&'
-             | '<<'
-             | '>>';
+MathOperator : MathOperatorOnly OptionalSpacing;
+
+@Atomic
+@Rule(MathOperator)
+MathOperatorOnly : PlusSign
+                 | MinusSign
+                 | '**'
+                 | '*'
+                 | '/'
+                 | '%'
+                 | '^^'
+                 | '^'
+                 | '|'
+                 | '&'
+                 | '<<'
+                 | '>>';
 
 @Memoize
 MathExpression : PrimaryExpression MathOperator Expression;
@@ -913,30 +941,40 @@ MathExpression : PrimaryExpression MathOperator Expression;
 PrefixedExpression : PrefixOperator Expression;
 
 @Memoize
-PostfixedExpression : PrimaryExpression PostfixOperator+;
+PostfixedExpression : ( QualifiedExpression
+                      | AtomicExpression ) PostfixOperator+;
 
 @SkipNode
 @Memoize
-PrimaryExpression : QualifiedExpression
+PrimaryExpression : PrefixedExpression
+                  | PostfixedExpression
+                  | QualifiedExpression
                   | AtomicExpression;
 
-@SkipNode
-@NotExtendLiterals
-PlusSign : '+' '+'! OptionalSpacing;
+@Fragment
+PlusSign : '+' '+'!;
+
+@Fragment
+MinusSign : '-' '-'!;
 
 @SkipNode
-@NotExtendLiterals
-MinusSign : '-' '-'! OptionalSpacing;
+PrefixOperator : PrefixOperatorOnly OptionalSpacing;
+
+@Atomic
+@Rule(PrefixOperator)
+PrefixOperatorOnly : '++'
+                   | '--'
+                   | NotOperator
+                   | PlusSign
+                   | MinusSign;
 
 @SkipNode
-PrefixOperator : '++'
-               | '--'
-               | NotOperator
-               | PlusSign
-               | MinusSign;
+PostfixOperator : PostfixOperatorOnly OptionalSpacing;
 
-PostfixOperator : '++'
-                | '--';
+@Atomic
+@Rule(PostfixOperator)
+PostfixOperatorOnly : '++'
+                    | '--';
 
 @SkipNode
 @Memoize
@@ -982,17 +1020,15 @@ LeftValue : SelfExpression
           | Macro
           | Variable;
 
-@NotExtendLiterals
+@Fragment
 NotOperator : ( ".not."
-              | ('!' '='!) ) OptionalSpacing;
+              | ('!' '='!) );
 
-@SkipNode
-@NotExtendLiterals
-GreaterOperator : '>' '='! OptionalSpacing;
+@Fragment
+GreaterOperator : '>' '='!;
 
-@SkipNode
-@NotExtendLiterals
-LessOperator : '<' ('=' | '>')! OptionalSpacing;
+@Fragment
+LessOperator : '<' ('=' | '>')!;
 
 @NotExtendLiterals
 Dump : "begindump" (EndDump! .)* EndDump;
@@ -1003,9 +1039,12 @@ ParameterDeclaration : Identifier AsType;
 
 ParametersDeclaration : ParametersDeclarationList | '...' | ')'&;
 
-FunctionModifier : "static":4
-                 | "init"
-                 | "exit";
+@SkipNode
+FunctionModifiers : "static":4
+                  | "init"
+                  | "exit";
+
+FunctionModifier : FunctionModifiers?;
 
 @SkipNode
 StringLiteral : StringPattern OptionalSpacing;
@@ -1103,6 +1142,7 @@ TestNoAlpha : ([a-z] | [A-Z] | [0-9] | '_')!;
 @SyntaxOnly
 @FollowLiterals
 @Memoize
+@Rule(Spacing)
 OptionalSpacing : ( Whitespace
                   | LineComment
                   | BlockComment

@@ -11,6 +11,7 @@ import org.uggeri.yapp.generation.stmt.SwitchOption;
 import org.uggeri.yapp.generation.stmt.SwitchStatement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -40,7 +41,7 @@ public class JavaSwitchStatement extends AbstractJavaCodeFragment implements Swi
    }
 
    @Override
-   public SwitchOption switchOption(Object... values) {
+   public SwitchOption switchOption(Set<?> values) {
       final SwitchOption option = new JavaSwitchOption(values);
       options.add(option);
       return option;

@@ -38,10 +38,10 @@ public class TesteExecucao {
    public static void main(String[] args) {
       //char c = '\u005cn';
       //new TesteExecucao().testesDiversos();
-      //new TesteExecucao().testeParseJavaSources();
+      new TesteExecucao().testeParseJavaSources();
       //new TesteExecucao().testeExecucaoJava();
       //new TesteExecucao().testeExecucaoHarbourPP();
-      new TesteExecucao().testeExecucaoHarbourUnprocessed();
+      //new TesteExecucao().testeExecucaoHarbourUnprocessed();
       //new TesteExecucao().testeExecucao();
    }
 
@@ -130,8 +130,10 @@ public class TesteExecucao {
             totalTime += scanSources(child, 0, rulesProfiles);
          }
       } else if (file.getName().toLowerCase().endsWith(".java")) {
-         totalTime += parseJavaFile(file, rulesProfiles);
-         countLinesJavaFile(file);
+         //if (file.getName().equalsIgnoreCase("ParserTokenManager.java")) {
+            totalTime += parseJavaFile(file, rulesProfiles);
+            countLinesJavaFile(file);
+         //}
       }
       return totalTime;
    }

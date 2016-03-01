@@ -157,6 +157,8 @@ public class JavaParser implements Parser {
    private Node optionalSpacing$RuleMemoLastNode;
    private int integerLiteral$RuleMemoStart = -1;
    private int integerLiteral$RuleMemoEnd;
+   private Node integerLiteral$RuleMemoFirstNode;
+   private Node integerLiteral$RuleMemoLastNode;
 
    private int[] newArrayInt(final int size) {
       final int[] array = new int[size];
@@ -358,10 +360,56 @@ public class JavaParser implements Parser {
    public void setTrace(boolean trace) {
    }
 
+   private Node lastChild(Node node) {
+      Node child = node.getFirstChild();
+      if (child != null) {
+         while (child.getSibling() != null) {
+            child = child.getSibling();
+         }
+      }
+      return child;
+   }
+
+   private Node removeNode(Node parent, Node left, Node node) {
+      if (node.getFirstChild() != null) {
+         if (node.getSibling() != null) {
+            lastChild(node).setSibling(node.getSibling());
+         }
+         if (left == null) {
+            parent.setFirstChild(node.getFirstChild());
+         } else {
+            left.setSibling(node.getFirstChild());
+         }
+         return node.getFirstChild();
+      } else if (left == null) {
+         parent.setFirstChild(node.getSibling());
+      } else {
+         left.setSibling(node.getSibling());
+      }
+      return node.getSibling();
+   }
+
+   private void removeSkipedNodes(Node node) {
+      if (node != null) {
+         Node leftNode = null;
+         Node child = node.getFirstChild();
+         while (child != null) {
+            if (child.isSkiped()) {
+               child = removeNode(node, leftNode, child);
+            } else {
+               removeSkipedNodes(child);
+               leftNode = child;
+               child = child.getSibling();
+            }
+         }
+      }
+   }
+
    @Override
    public Node parse(InputBuffer inputBuffer) {
       buffer = inputBuffer;
       if (compilationUnit$Rule()) {
+         removeSkipedNodes(currentNode);
          return currentNode;
       } else {
          return null;
@@ -525,22 +573,53 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (ClassDeclaration | EnumDeclaration | InterfaceDeclaration | AnnotationDeclaration | Semicolon)
-      // ClassDeclaration
-      match = classDeclaration$Rule();
-      if (! match) {
-         // EnumDeclaration
-         match = enumDeclaration$Rule();
-         if (! match) {
-            // InterfaceDeclaration
-            match = interfaceDeclaration$Rule();
+      switch(buffer.getChar(index)) {
+         case ';': {
+            // Semicolon
+            match = semicolon$Rule();
+            break;
+         }
+         case '@':
+         case 'p':
+         case 'a':
+         case 's':
+         case 't':
+         case 'f':
+         case 'v':
+         case 'n': {
+            // ClassDeclaration
+            match = classDeclaration$Rule();
             if (! match) {
-               // AnnotationDeclaration
-               match = annotationDeclaration$Rule();
+               // EnumDeclaration
+               match = enumDeclaration$Rule();
                if (! match) {
-                  // Semicolon
-                  match = semicolon$Rule();
+                  // InterfaceDeclaration
+                  match = interfaceDeclaration$Rule();
+                  if (! match) {
+                     // AnnotationDeclaration
+                     match = annotationDeclaration$Rule();
+                  }
                }
             }
+            break;
+         }
+         case 'c': {
+            // ClassDeclaration
+            match = classDeclaration$Rule();
+            break;
+         }
+         case 'e': {
+            // EnumDeclaration
+            match = enumDeclaration$Rule();
+            break;
+         }
+         case 'i': {
+            // InterfaceDeclaration
+            match = interfaceDeclaration$Rule();
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -585,9 +664,14 @@ public class JavaParser implements Parser {
       if (annotation$RuleMemoStart == index) {
          if (annotation$RuleMemoStart <= annotation$RuleMemoEnd) {
             index = annotation$RuleMemoEnd;
-            if (! currentRuleIsAtomic && annotation$RuleMemoFirstNode != null) {
-               lastNode.setSibling(annotation$RuleMemoFirstNode);
-               currentNode = annotation$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (annotation$RuleMemoStart == annotation$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ANNOTATION, annotation$RuleMemoStart, annotation$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(annotation$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(annotation$RuleMemoFirstNode);
+                  currentNode = annotation$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -737,9 +821,14 @@ public class JavaParser implements Parser {
       if (modifiers$RuleMemoStart == index) {
          if (modifiers$RuleMemoStart <= modifiers$RuleMemoEnd) {
             index = modifiers$RuleMemoEnd;
-            if (! currentRuleIsAtomic && modifiers$RuleMemoFirstNode != null) {
-               lastNode.setSibling(modifiers$RuleMemoFirstNode);
-               currentNode = modifiers$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (modifiers$RuleMemoStart == modifiers$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.MODIFIERS, modifiers$RuleMemoStart, modifiers$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(modifiers$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(modifiers$RuleMemoFirstNode);
+                  currentNode = modifiers$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -1289,9 +1378,14 @@ public class JavaParser implements Parser {
       if (qualifiedClassName$RuleMemoStart == index) {
          if (qualifiedClassName$RuleMemoStart <= qualifiedClassName$RuleMemoEnd) {
             index = qualifiedClassName$RuleMemoEnd;
-            if (! currentRuleIsAtomic && qualifiedClassName$RuleMemoFirstNode != null) {
-               lastNode.setSibling(qualifiedClassName$RuleMemoFirstNode);
-               currentNode = qualifiedClassName$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (qualifiedClassName$RuleMemoStart == qualifiedClassName$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.QUALIFIED_CLASS_NAME, qualifiedClassName$RuleMemoStart, qualifiedClassName$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(qualifiedClassName$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(qualifiedClassName$RuleMemoFirstNode);
+                  currentNode = qualifiedClassName$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -1448,9 +1542,14 @@ public class JavaParser implements Parser {
       if (identifier$RuleMemoStart == index) {
          if (identifier$RuleMemoStart <= identifier$RuleMemoEnd) {
             index = identifier$RuleMemoEnd;
-            if (! currentRuleIsAtomic && identifier$RuleMemoFirstNode != null) {
-               lastNode.setSibling(identifier$RuleMemoFirstNode);
-               currentNode = identifier$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (identifier$RuleMemoStart == identifier$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.IDENTIFIER, identifier$RuleMemoStart, identifier$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(identifier$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(identifier$RuleMemoFirstNode);
+                  currentNode = identifier$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -1467,32 +1566,515 @@ public class JavaParser implements Parser {
       // ('abstract' | 'continue' | 'for' | 'new' | 'switch' | 'assert' | 'default' | 'goto' | 'package' | 'synchronized' | 'boolean' | 'do' | 'if' | 'private' | 'this' | 'break' | 'double' | 'implements' | 'protected' | 'throws' | 'throw' | 'byte' | 'else' | 'import' | 'public' | 'case' | 'enum' | 'instanceof' | 'return' | 'transient' | 'catch' | 'extends' | 'int' | 'short' | 'try' | 'char' | 'final' | 'interface' | 'static' | 'void' | 'class' | 'finally' | 'long' | 'strictfp' | 'volatile' | 'const' | 'float' | 'native' | 'super' | 'while')
       int startIndex_2 = index;
       switch(buffer.getChar(index)) {
-         case 'w':
+         case 'l': {
+            ++index;
+            // 'ong'
+            if (match = stringTest("ong", 3)) {
+               index += 3;
+            }
+            break;
+         }
+         case 'n': {
+            ++index;
+            // ('ative' | 'ew')
+            switch(buffer.getChar(index)) {
+               case 'a': {
+                  ++index;
+                  // 'tive'
+                  if (match = stringTest("tive", 4)) {
+                     index += 4;
+                  }
+                  break;
+               }
+               case 'e': {
+                  ++index;
+                  // 'w'
+                  if (match = buffer.matchChar(index, 'w')) {
+                     ++index;
+                  }
+                  break;
+               }
+               default: {
+                  match = false;
+               }
+            }
+            break;
+         }
+         case 'p': {
+            ++index;
+            // ('rotected' | 'ackage' | 'rivate' | 'ublic')
+            switch(buffer.getChar(index)) {
+               case 'a': {
+                  ++index;
+                  // 'ckage'
+                  if (match = stringTest("ckage", 5)) {
+                     index += 5;
+                  }
+                  break;
+               }
+               case 'r': {
+                  ++index;
+                  // ('otected' | 'ivate')
+                  switch(buffer.getChar(index)) {
+                     case 'o': {
+                        ++index;
+                        // 'tected'
+                        if (match = stringTest("tected", 6)) {
+                           index += 6;
+                        }
+                        break;
+                     }
+                     case 'i': {
+                        ++index;
+                        // 'vate'
+                        if (match = stringTest("vate", 4)) {
+                           index += 4;
+                        }
+                        break;
+                     }
+                     default: {
+                        match = false;
+                     }
+                  }
+                  break;
+               }
+               case 'u': {
+                  ++index;
+                  // 'blic'
+                  if (match = stringTest("blic", 4)) {
+                     index += 4;
+                  }
+                  break;
+               }
+               default: {
+                  match = false;
+               }
+            }
+            break;
+         }
+         case 'r': {
+            ++index;
+            // 'eturn'
+            if (match = stringTest("eturn", 5)) {
+               index += 5;
+            }
+            break;
+         }
+         case 's': {
+            ++index;
+            // ('ynchronized' | 'trictfp' | 'witch' | 'tatic' | 'hort' | 'uper')
+            switch(buffer.getChar(index)) {
+               case 't': {
+                  ++index;
+                  // ('rictfp' | 'atic')
+                  switch(buffer.getChar(index)) {
+                     case 'a': {
+                        ++index;
+                        // 'tic'
+                        if (match = stringTest("tic", 3)) {
+                           index += 3;
+                        }
+                        break;
+                     }
+                     case 'r': {
+                        ++index;
+                        // 'ictfp'
+                        if (match = stringTest("ictfp", 5)) {
+                           index += 5;
+                        }
+                        break;
+                     }
+                     default: {
+                        match = false;
+                     }
+                  }
+                  break;
+               }
+               case 'u': {
+                  ++index;
+                  // 'per'
+                  if (match = stringTest("per", 3)) {
+                     index += 3;
+                  }
+                  break;
+               }
+               case 'w': {
+                  ++index;
+                  // 'itch'
+                  if (match = stringTest("itch", 4)) {
+                     index += 4;
+                  }
+                  break;
+               }
+               case 'h': {
+                  ++index;
+                  // 'ort'
+                  if (match = stringTest("ort", 3)) {
+                     index += 3;
+                  }
+                  break;
+               }
+               case 'y': {
+                  ++index;
+                  // 'nchronized'
+                  if (match = stringTest("nchronized", 10)) {
+                     index += 10;
+                  }
+                  break;
+               }
+               default: {
+                  match = false;
+               }
+            }
+            break;
+         }
+         case 't': {
+            ++index;
+            // ('ransient' | 'hrows' | 'hrow' | 'his' | 'ry')
+            switch(buffer.getChar(index)) {
+               case 'r': {
+                  ++index;
+                  // ('ansient' | 'y')
+                  switch(buffer.getChar(index)) {
+                     case 'a': {
+                        ++index;
+                        // 'nsient'
+                        if (match = stringTest("nsient", 6)) {
+                           index += 6;
+                        }
+                        break;
+                     }
+                     case 'y': {
+                        ++index;
+                        // <EMPTY>
+                        match = true;
+                        break;
+                     }
+                     default: {
+                        match = false;
+                     }
+                  }
+                  break;
+               }
+               case 'h': {
+                  ++index;
+                  // ('rows' | 'row' | 'is')
+                  switch(buffer.getChar(index)) {
+                     case 'r': {
+                        ++index;
+                        // ('ows' | 'ow')
+                        if (buffer.matchChar(index, 'o')) {
+                           ++index;
+                           // ('ws' | 'w')
+                           if (buffer.matchChar(index, 'w')) {
+                              ++index;
+                              // ('s' | <EMPTY>)
+                              if (buffer.matchChar(index, 's')) {
+                                 ++index;
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
+                              }
+                           } else {
+                              match = false;
+                           }
+                        } else {
+                           match = false;
+                        }
+                        break;
+                     }
+                     case 'i': {
+                        ++index;
+                        // 's'
+                        if (match = buffer.matchChar(index, 's')) {
+                           ++index;
+                        }
+                        break;
+                     }
+                     default: {
+                        match = false;
+                     }
+                  }
+                  break;
+               }
+               default: {
+                  match = false;
+               }
+            }
+            break;
+         }
+         case 'v': {
+            ++index;
+            // ('olatile' | 'oid')
+            if (buffer.matchChar(index, 'o')) {
+               ++index;
+               // ('latile' | 'id')
+               switch(buffer.getChar(index)) {
+                  case 'l': {
+                     ++index;
+                     // 'atile'
+                     if (match = stringTest("atile", 5)) {
+                        index += 5;
+                     }
+                     break;
+                  }
+                  case 'i': {
+                     ++index;
+                     // 'd'
+                     if (match = buffer.matchChar(index, 'd')) {
+                        ++index;
+                     }
+                     break;
+                  }
+                  default: {
+                     match = false;
+                  }
+               }
+            } else {
+               match = false;
+            }
+            break;
+         }
+         case 'w': {
             ++index;
             // 'hile'
             if (match = stringTest("hile", 4)) {
                index += 4;
             }
             break;
-         case 'f':
+         }
+         case 'a': {
+            ++index;
+            // ('bstract' | 'ssert')
+            switch(buffer.getChar(index)) {
+               case 'b': {
+                  ++index;
+                  // 'stract'
+                  if (match = stringTest("stract", 6)) {
+                     index += 6;
+                  }
+                  break;
+               }
+               case 's': {
+                  ++index;
+                  // 'sert'
+                  if (match = stringTest("sert", 4)) {
+                     index += 4;
+                  }
+                  break;
+               }
+               default: {
+                  match = false;
+               }
+            }
+            break;
+         }
+         case 'b': {
+            ++index;
+            // ('oolean' | 'reak' | 'yte')
+            switch(buffer.getChar(index)) {
+               case 'o': {
+                  ++index;
+                  // 'olean'
+                  if (match = stringTest("olean", 5)) {
+                     index += 5;
+                  }
+                  break;
+               }
+               case 'r': {
+                  ++index;
+                  // 'eak'
+                  if (match = stringTest("eak", 3)) {
+                     index += 3;
+                  }
+                  break;
+               }
+               case 'y': {
+                  ++index;
+                  // 'te'
+                  if (match = stringTest("te", 2)) {
+                     index += 2;
+                  }
+                  break;
+               }
+               default: {
+                  match = false;
+               }
+            }
+            break;
+         }
+         case 'c': {
+            ++index;
+            // ('ontinue' | 'atch' | 'lass' | 'onst' | 'ase' | 'har')
+            switch(buffer.getChar(index)) {
+               case 'l': {
+                  ++index;
+                  // 'ass'
+                  if (match = stringTest("ass", 3)) {
+                     index += 3;
+                  }
+                  break;
+               }
+               case 'o': {
+                  ++index;
+                  // ('ntinue' | 'nst')
+                  if (buffer.matchChar(index, 'n')) {
+                     ++index;
+                     // ('tinue' | 'st')
+                     switch(buffer.getChar(index)) {
+                        case 's': {
+                           ++index;
+                           // 't'
+                           if (match = buffer.matchChar(index, 't')) {
+                              ++index;
+                           }
+                           break;
+                        }
+                        case 't': {
+                           ++index;
+                           // 'inue'
+                           if (match = stringTest("inue", 4)) {
+                              index += 4;
+                           }
+                           break;
+                        }
+                        default: {
+                           match = false;
+                        }
+                     }
+                  } else {
+                     match = false;
+                  }
+                  break;
+               }
+               case 'a': {
+                  ++index;
+                  // ('tch' | 'se')
+                  switch(buffer.getChar(index)) {
+                     case 's': {
+                        ++index;
+                        // 'e'
+                        if (match = buffer.matchChar(index, 'e')) {
+                           ++index;
+                        }
+                        break;
+                     }
+                     case 't': {
+                        ++index;
+                        // 'ch'
+                        if (match = stringTest("ch", 2)) {
+                           index += 2;
+                        }
+                        break;
+                     }
+                     default: {
+                        match = false;
+                     }
+                  }
+                  break;
+               }
+               case 'h': {
+                  ++index;
+                  // 'ar'
+                  if (match = stringTest("ar", 2)) {
+                     index += 2;
+                  }
+                  break;
+               }
+               default: {
+                  match = false;
+               }
+            }
+            break;
+         }
+         case 'd': {
+            ++index;
+            // ('efault' | 'ouble' | 'o')
+            switch(buffer.getChar(index)) {
+               case 'o': {
+                  ++index;
+                  // ('uble' | <EMPTY>)
+                  if (buffer.matchChar(index, 'u')) {
+                     ++index;
+                     // 'ble'
+                     if (match = stringTest("ble", 3)) {
+                        index += 3;
+                     }
+                  } else {
+                     match = true;
+                  }
+                  break;
+               }
+               case 'e': {
+                  ++index;
+                  // 'fault'
+                  if (match = stringTest("fault", 5)) {
+                     index += 5;
+                  }
+                  break;
+               }
+               default: {
+                  match = false;
+               }
+            }
+            break;
+         }
+         case 'e': {
+            ++index;
+            // ('xtends' | 'lse' | 'num')
+            switch(buffer.getChar(index)) {
+               case 'l': {
+                  ++index;
+                  // 'se'
+                  if (match = stringTest("se", 2)) {
+                     index += 2;
+                  }
+                  break;
+               }
+               case 'n': {
+                  ++index;
+                  // 'um'
+                  if (match = stringTest("um", 2)) {
+                     index += 2;
+                  }
+                  break;
+               }
+               case 'x': {
+                  ++index;
+                  // 'tends'
+                  if (match = stringTest("tends", 5)) {
+                     index += 5;
+                  }
+                  break;
+               }
+               default: {
+                  match = false;
+               }
+            }
+            break;
+         }
+         case 'f': {
             ++index;
             // ('inally' | 'inal' | 'loat' | 'or')
             switch(buffer.getChar(index)) {
-               case 'o':
-                  ++index;
-                  // 'r'
-                  if (match = buffer.matchChar(index, 'r')) {
-                     ++index;
-                  }
-                  break;
-               case 'l':
+               case 'l': {
                   ++index;
                   // 'oat'
                   if (match = stringTest("oat", 3)) {
                      index += 3;
                   }
                   break;
-               case 'i':
+               }
+               case 'o': {
+                  ++index;
+                  // 'r'
+                  if (match = buffer.matchChar(index, 'r')) {
+                     ++index;
+                  }
+                  break;
+               }
+               case 'i': {
                   ++index;
                   // ('nally' | 'nal')
                   if (buffer.matchChar(index, 'n')) {
@@ -1523,139 +2105,70 @@ public class JavaParser implements Parser {
                      match = false;
                   }
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             break;
-         case 'd':
+         }
+         case 'g': {
             ++index;
-            // ('efault' | 'ouble' | 'o')
-            switch(buffer.getChar(index)) {
-               case 'e':
-                  ++index;
-                  // 'fault'
-                  if (match = stringTest("fault", 5)) {
-                     index += 5;
-                  }
-                  break;
-               case 'o':
-                  ++index;
-                  // ('uble' | <EMPTY>)
-                  if (buffer.matchChar(index, 'u')) {
-                     ++index;
-                     // 'ble'
-                     if (match = stringTest("ble", 3)) {
-                        index += 3;
-                     }
-                  } else {
-                     match = true;
-                  }
-                  break;
-               default:
-                  match = false;
+            // 'oto'
+            if (match = stringTest("oto", 3)) {
+               index += 3;
             }
             break;
-         case 's':
-            ++index;
-            // ('ynchronized' | 'trictfp' | 'witch' | 'tatic' | 'hort' | 'uper')
-            switch(buffer.getChar(index)) {
-               case 'h':
-                  ++index;
-                  // 'ort'
-                  if (match = stringTest("ort", 3)) {
-                     index += 3;
-                  }
-                  break;
-               case 'w':
-                  ++index;
-                  // 'itch'
-                  if (match = stringTest("itch", 4)) {
-                     index += 4;
-                  }
-                  break;
-               case 'u':
-                  ++index;
-                  // 'per'
-                  if (match = stringTest("per", 3)) {
-                     index += 3;
-                  }
-                  break;
-               case 't':
-                  ++index;
-                  // ('rictfp' | 'atic')
-                  switch(buffer.getChar(index)) {
-                     case 'r':
-                        ++index;
-                        // 'ictfp'
-                        if (match = stringTest("ictfp", 5)) {
-                           index += 5;
-                        }
-                        break;
-                     case 'a':
-                        ++index;
-                        // 'tic'
-                        if (match = stringTest("tic", 3)) {
-                           index += 3;
-                        }
-                        break;
-                     default:
-                        match = false;
-                  }
-                  break;
-               case 'y':
-                  ++index;
-                  // 'nchronized'
-                  if (match = stringTest("nchronized", 10)) {
-                     index += 10;
-                  }
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'b':
-            ++index;
-            // ('oolean' | 'reak' | 'yte')
-            switch(buffer.getChar(index)) {
-               case 'r':
-                  ++index;
-                  // 'eak'
-                  if (match = stringTest("eak", 3)) {
-                     index += 3;
-                  }
-                  break;
-               case 'o':
-                  ++index;
-                  // 'olean'
-                  if (match = stringTest("olean", 5)) {
-                     index += 5;
-                  }
-                  break;
-               case 'y':
-                  ++index;
-                  // 'te'
-                  if (match = stringTest("te", 2)) {
-                     index += 2;
-                  }
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'i':
+         }
+         case 'i': {
             ++index;
             // ('mplements' | 'nstanceof' | 'nterface' | 'mport' | 'nt' | 'f')
             switch(buffer.getChar(index)) {
-               case 'f':
+               case 'm': {
                   ++index;
-                  // <EMPTY>
-                  match = true;
+                  // ('plements' | 'port')
+                  if (buffer.matchChar(index, 'p')) {
+                     ++index;
+                     // ('lements' | 'ort')
+                     switch(buffer.getChar(index)) {
+                        case 'l': {
+                           ++index;
+                           // 'ements'
+                           if (match = stringTest("ements", 6)) {
+                              index += 6;
+                           }
+                           break;
+                        }
+                        case 'o': {
+                           ++index;
+                           // 'rt'
+                           if (match = stringTest("rt", 2)) {
+                              index += 2;
+                           }
+                           break;
+                        }
+                        default: {
+                           match = false;
+                        }
+                     }
+                  } else {
+                     match = false;
+                  }
                   break;
-               case 'n':
+               }
+               case 'n': {
                   ++index;
                   // ('stanceof' | 'terface' | 't')
                   switch(buffer.getChar(index)) {
-                     case 't':
+                     case 's': {
+                        ++index;
+                        // 'tanceof'
+                        if (match = stringTest("tanceof", 7)) {
+                           index += 7;
+                        }
+                        break;
+                     }
+                     case 't': {
                         ++index;
                         // ('erface' | <EMPTY>)
                         if (buffer.matchChar(index, 'e')) {
@@ -1668,355 +2181,28 @@ public class JavaParser implements Parser {
                            match = true;
                         }
                         break;
-                     case 's':
-                        ++index;
-                        // 'tanceof'
-                        if (match = stringTest("tanceof", 7)) {
-                           index += 7;
-                        }
-                        break;
-                     default:
+                     }
+                     default: {
                         match = false;
+                     }
                   }
                   break;
-               case 'm':
-                  ++index;
-                  // ('plements' | 'port')
-                  if (buffer.matchChar(index, 'p')) {
-                     ++index;
-                     // ('lements' | 'ort')
-                     switch(buffer.getChar(index)) {
-                        case 'o':
-                           ++index;
-                           // 'rt'
-                           if (match = stringTest("rt", 2)) {
-                              index += 2;
-                           }
-                           break;
-                        case 'l':
-                           ++index;
-                           // 'ements'
-                           if (match = stringTest("ements", 6)) {
-                              index += 6;
-                           }
-                           break;
-                        default:
-                           match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'g':
-            ++index;
-            // 'oto'
-            if (match = stringTest("oto", 3)) {
-               index += 3;
-            }
-            break;
-         case 'v':
-            ++index;
-            // ('olatile' | 'oid')
-            if (buffer.matchChar(index, 'o')) {
-               ++index;
-               // ('latile' | 'id')
-               switch(buffer.getChar(index)) {
-                  case 'l':
-                     ++index;
-                     // 'atile'
-                     if (match = stringTest("atile", 5)) {
-                        index += 5;
-                     }
-                     break;
-                  case 'i':
-                     ++index;
-                     // 'd'
-                     if (match = buffer.matchChar(index, 'd')) {
-                        ++index;
-                     }
-                     break;
-                  default:
-                     match = false;
                }
-            } else {
-               match = false;
-            }
-            break;
-         case 'e':
-            ++index;
-            // ('xtends' | 'lse' | 'num')
-            switch(buffer.getChar(index)) {
-               case 'x':
+               case 'f': {
                   ++index;
-                  // 'tends'
-                  if (match = stringTest("tends", 5)) {
-                     index += 5;
-                  }
+                  // <EMPTY>
+                  match = true;
                   break;
-               case 'n':
-                  ++index;
-                  // 'um'
-                  if (match = stringTest("um", 2)) {
-                     index += 2;
-                  }
-                  break;
-               case 'l':
-                  ++index;
-                  // 'se'
-                  if (match = stringTest("se", 2)) {
-                     index += 2;
-                  }
-                  break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             break;
-         case 't':
-            ++index;
-            // ('ransient' | 'hrows' | 'hrow' | 'his' | 'ry')
-            switch(buffer.getChar(index)) {
-               case 'h':
-                  ++index;
-                  // ('rows' | 'row' | 'is')
-                  switch(buffer.getChar(index)) {
-                     case 'r':
-                        ++index;
-                        // ('ows' | 'ow')
-                        if (buffer.matchChar(index, 'o')) {
-                           ++index;
-                           // ('ws' | 'w')
-                           if (buffer.matchChar(index, 'w')) {
-                              ++index;
-                              // ('s' | <EMPTY>)
-                              if (buffer.matchChar(index, 's')) {
-                                 ++index;
-                                 // <EMPTY>
-                                 match = true;
-                              } else {
-                                 match = true;
-                              }
-                           } else {
-                              match = false;
-                           }
-                        } else {
-                           match = false;
-                        }
-                        break;
-                     case 'i':
-                        ++index;
-                        // 's'
-                        if (match = buffer.matchChar(index, 's')) {
-                           ++index;
-                        }
-                        break;
-                     default:
-                        match = false;
-                  }
-                  break;
-               case 'r':
-                  ++index;
-                  // ('ansient' | 'y')
-                  switch(buffer.getChar(index)) {
-                     case 'a':
-                        ++index;
-                        // 'nsient'
-                        if (match = stringTest("nsient", 6)) {
-                           index += 6;
-                        }
-                        break;
-                     case 'y':
-                        ++index;
-                        // <EMPTY>
-                        match = true;
-                        break;
-                     default:
-                        match = false;
-                  }
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'c':
-            ++index;
-            // ('ontinue' | 'atch' | 'lass' | 'onst' | 'ase' | 'har')
-            switch(buffer.getChar(index)) {
-               case 'h':
-                  ++index;
-                  // 'ar'
-                  if (match = stringTest("ar", 2)) {
-                     index += 2;
-                  }
-                  break;
-               case 'a':
-                  ++index;
-                  // ('tch' | 'se')
-                  switch(buffer.getChar(index)) {
-                     case 't':
-                        ++index;
-                        // 'ch'
-                        if (match = stringTest("ch", 2)) {
-                           index += 2;
-                        }
-                        break;
-                     case 's':
-                        ++index;
-                        // 'e'
-                        if (match = buffer.matchChar(index, 'e')) {
-                           ++index;
-                        }
-                        break;
-                     default:
-                        match = false;
-                  }
-                  break;
-               case 'o':
-                  ++index;
-                  // ('ntinue' | 'nst')
-                  if (buffer.matchChar(index, 'n')) {
-                     ++index;
-                     // ('tinue' | 'st')
-                     switch(buffer.getChar(index)) {
-                        case 't':
-                           ++index;
-                           // 'inue'
-                           if (match = stringTest("inue", 4)) {
-                              index += 4;
-                           }
-                           break;
-                        case 's':
-                           ++index;
-                           // 't'
-                           if (match = buffer.matchChar(index, 't')) {
-                              ++index;
-                           }
-                           break;
-                        default:
-                           match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-                  break;
-               case 'l':
-                  ++index;
-                  // 'ass'
-                  if (match = stringTest("ass", 3)) {
-                     index += 3;
-                  }
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'r':
-            ++index;
-            // 'eturn'
-            if (match = stringTest("eturn", 5)) {
-               index += 5;
-            }
-            break;
-         case 'a':
-            ++index;
-            // ('bstract' | 'ssert')
-            switch(buffer.getChar(index)) {
-               case 's':
-                  ++index;
-                  // 'sert'
-                  if (match = stringTest("sert", 4)) {
-                     index += 4;
-                  }
-                  break;
-               case 'b':
-                  ++index;
-                  // 'stract'
-                  if (match = stringTest("stract", 6)) {
-                     index += 6;
-                  }
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'p':
-            ++index;
-            // ('rotected' | 'ackage' | 'rivate' | 'ublic')
-            switch(buffer.getChar(index)) {
-               case 'u':
-                  ++index;
-                  // 'blic'
-                  if (match = stringTest("blic", 4)) {
-                     index += 4;
-                  }
-                  break;
-               case 'r':
-                  ++index;
-                  // ('otected' | 'ivate')
-                  switch(buffer.getChar(index)) {
-                     case 'o':
-                        ++index;
-                        // 'tected'
-                        if (match = stringTest("tected", 6)) {
-                           index += 6;
-                        }
-                        break;
-                     case 'i':
-                        ++index;
-                        // 'vate'
-                        if (match = stringTest("vate", 4)) {
-                           index += 4;
-                        }
-                        break;
-                     default:
-                        match = false;
-                  }
-                  break;
-               case 'a':
-                  ++index;
-                  // 'ckage'
-                  if (match = stringTest("ckage", 5)) {
-                     index += 5;
-                  }
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'n':
-            ++index;
-            // ('ative' | 'ew')
-            switch(buffer.getChar(index)) {
-               case 'e':
-                  ++index;
-                  // 'w'
-                  if (match = buffer.matchChar(index, 'w')) {
-                     ++index;
-                  }
-                  break;
-               case 'a':
-                  ++index;
-                  // 'tive'
-                  if (match = stringTest("tive", 4)) {
-                     index += 4;
-                  }
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'l':
-            ++index;
-            // 'ong'
-            if (match = stringTest("ong", 3)) {
-               index += 3;
-            }
-            break;
-         default:
+         }
+         default: {
             match = false;
+         }
       }
       if (! match) {
          index = startIndex_2;
@@ -2138,9 +2324,14 @@ public class JavaParser implements Parser {
       if (typeParameters$RuleMemoStart == index) {
          if (typeParameters$RuleMemoStart <= typeParameters$RuleMemoEnd) {
             index = typeParameters$RuleMemoEnd;
-            if (! currentRuleIsAtomic && typeParameters$RuleMemoFirstNode != null) {
-               lastNode.setSibling(typeParameters$RuleMemoFirstNode);
-               currentNode = typeParameters$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (typeParameters$RuleMemoStart == typeParameters$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.TYPE_PARAMETERS, typeParameters$RuleMemoStart, typeParameters$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(typeParameters$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(typeParameters$RuleMemoFirstNode);
+                  currentNode = typeParameters$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -2263,12 +2454,33 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (Semicolon | StaticBlock | MethodDeclaration | ConstructorDeclaration | FieldsDeclarations | InterfaceDeclaration | ClassDeclaration | EnumDeclaration | AnnotationDeclaration)
-      // Semicolon
-      match = semicolon$Rule();
-      if (! match) {
-         // StaticBlock
-         match = staticBlock$Rule();
-         if (! match) {
+      switch(buffer.getChar(index)) {
+         case ';': {
+            // Semicolon
+            match = semicolon$Rule();
+            break;
+         }
+         case '{': {
+            // StaticBlock
+            match = staticBlock$Rule();
+            break;
+         }
+         case '<': {
+            // MethodDeclaration
+            match = methodDeclaration$Rule();
+            if (! match) {
+               // ConstructorDeclaration
+               match = constructorDeclaration$Rule();
+            }
+            break;
+         }
+         case '@':
+         case 'p':
+         case 'a':
+         case 't':
+         case 'f':
+         case 'v':
+         case 'n': {
             // MethodDeclaration
             match = methodDeclaration$Rule();
             if (! match) {
@@ -2295,6 +2507,150 @@ public class JavaParser implements Parser {
                   }
                }
             }
+            break;
+         }
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'b':
+         case 'd':
+         case '$':
+         case 'g':
+         case 'h':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'o':
+         case 'q':
+         case 'r':
+         case 'u':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // MethodDeclaration
+            match = methodDeclaration$Rule();
+            if (! match) {
+               // ConstructorDeclaration
+               match = constructorDeclaration$Rule();
+               if (! match) {
+                  // FieldsDeclarations
+                  match = fieldsDeclarations$Rule();
+               }
+            }
+            break;
+         }
+         case 'c': {
+            // MethodDeclaration
+            match = methodDeclaration$Rule();
+            if (! match) {
+               // ConstructorDeclaration
+               match = constructorDeclaration$Rule();
+               if (! match) {
+                  // FieldsDeclarations
+                  match = fieldsDeclarations$Rule();
+                  if (! match) {
+                     // ClassDeclaration
+                     match = classDeclaration$Rule();
+                  }
+               }
+            }
+            break;
+         }
+         case 's': {
+            // StaticBlock
+            match = staticBlock$Rule();
+            if (! match) {
+               // MethodDeclaration
+               match = methodDeclaration$Rule();
+               if (! match) {
+                  // ConstructorDeclaration
+                  match = constructorDeclaration$Rule();
+                  if (! match) {
+                     // FieldsDeclarations
+                     match = fieldsDeclarations$Rule();
+                     if (! match) {
+                        // InterfaceDeclaration
+                        match = interfaceDeclaration$Rule();
+                        if (! match) {
+                           // ClassDeclaration
+                           match = classDeclaration$Rule();
+                           if (! match) {
+                              // EnumDeclaration
+                              match = enumDeclaration$Rule();
+                              if (! match) {
+                                 // AnnotationDeclaration
+                                 match = annotationDeclaration$Rule();
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         }
+         case 'e': {
+            // MethodDeclaration
+            match = methodDeclaration$Rule();
+            if (! match) {
+               // ConstructorDeclaration
+               match = constructorDeclaration$Rule();
+               if (! match) {
+                  // FieldsDeclarations
+                  match = fieldsDeclarations$Rule();
+                  if (! match) {
+                     // EnumDeclaration
+                     match = enumDeclaration$Rule();
+                  }
+               }
+            }
+            break;
+         }
+         case 'i': {
+            // MethodDeclaration
+            match = methodDeclaration$Rule();
+            if (! match) {
+               // ConstructorDeclaration
+               match = constructorDeclaration$Rule();
+               if (! match) {
+                  // FieldsDeclarations
+                  match = fieldsDeclarations$Rule();
+                  if (! match) {
+                     // InterfaceDeclaration
+                     match = interfaceDeclaration$Rule();
+                  }
+               }
+            }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -2412,11 +2768,20 @@ public class JavaParser implements Parser {
          match = methodSignature$Rule();
          if (match) {
             // (Block | EmptyBody)
-            // Block
-            match = block$Rule();
-            if (! match) {
-               // EmptyBody
-               match = emptyBody$Rule();
+            switch(buffer.getChar(index)) {
+               case '{': {
+                  // Block
+                  match = block$Rule();
+                  break;
+               }
+               case ';': {
+                  // EmptyBody
+                  match = emptyBody$Rule();
+                  break;
+               }
+               default: {
+                  match = false;
+               }
             }
          }
       }
@@ -2521,9 +2886,14 @@ public class JavaParser implements Parser {
       if (type$RuleMemoStart == index) {
          if (type$RuleMemoStart <= type$RuleMemoEnd) {
             index = type$RuleMemoEnd;
-            if (! currentRuleIsAtomic && type$RuleMemoFirstNode != null) {
-               lastNode.setSibling(type$RuleMemoFirstNode);
-               currentNode = type$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (type$RuleMemoStart == type$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.TYPE, type$RuleMemoStart, type$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(type$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(type$RuleMemoFirstNode);
+                  currentNode = type$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -2532,14 +2902,83 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (Array | BasicType | QualifiedClassName)
-      // Array
-      match = array$Rule();
-      if (! match) {
-         // BasicType
-         match = basicType$Rule();
-         if (! match) {
-            // QualifiedClassName
-            match = qualifiedClassName$Rule();
+      switch(buffer.getChar(index)) {
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case '$':
+         case 'e':
+         case 'g':
+         case 'h':
+         case 'j':
+         case 'k':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // Array
+            match = array$Rule();
+            if (! match) {
+               // QualifiedClassName
+               match = qualifiedClassName$Rule();
+            }
+            break;
+         }
+         case 'b':
+         case 'c':
+         case 's':
+         case 'd':
+         case 'f':
+         case 'i':
+         case 'l': {
+            // Array
+            match = array$Rule();
+            if (! match) {
+               // BasicType
+               match = basicType$Rule();
+               if (! match) {
+                  // QualifiedClassName
+                  match = qualifiedClassName$Rule();
+               }
+            }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -2815,9 +3254,14 @@ public class JavaParser implements Parser {
       if (dimensions$RuleMemoStart == index) {
          if (dimensions$RuleMemoStart <= dimensions$RuleMemoEnd) {
             index = dimensions$RuleMemoEnd;
-            if (! currentRuleIsAtomic && dimensions$RuleMemoFirstNode != null) {
-               lastNode.setSibling(dimensions$RuleMemoFirstNode);
-               currentNode = dimensions$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (dimensions$RuleMemoStart == dimensions$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.DIMENSIONS, dimensions$RuleMemoStart, dimensions$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(dimensions$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(dimensions$RuleMemoFirstNode);
+                  currentNode = dimensions$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -2928,30 +3372,142 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (InterfaceMethod | ConstantsDeclarations | InterfaceDeclaration | AnnotationDeclaration | ClassDeclaration | EnumDeclaration | Semicolon)
-      // InterfaceMethod
-      match = interfaceMethod$Rule();
-      if (! match) {
-         // ConstantsDeclarations
-         match = constantsDeclarations$Rule();
-         if (! match) {
-            // InterfaceDeclaration
-            match = interfaceDeclaration$Rule();
+      switch(buffer.getChar(index)) {
+         case ';': {
+            // Semicolon
+            match = semicolon$Rule();
+            break;
+         }
+         case '<': {
+            // InterfaceMethod
+            match = interfaceMethod$Rule();
+            break;
+         }
+         case '@':
+         case 'p':
+         case 'a':
+         case 's':
+         case 't':
+         case 'f':
+         case 'v':
+         case 'n': {
+            // InterfaceMethod
+            match = interfaceMethod$Rule();
             if (! match) {
-               // AnnotationDeclaration
-               match = annotationDeclaration$Rule();
+               // ConstantsDeclarations
+               match = constantsDeclarations$Rule();
                if (! match) {
-                  // ClassDeclaration
-                  match = classDeclaration$Rule();
+                  // InterfaceDeclaration
+                  match = interfaceDeclaration$Rule();
                   if (! match) {
-                     // EnumDeclaration
-                     match = enumDeclaration$Rule();
+                     // AnnotationDeclaration
+                     match = annotationDeclaration$Rule();
                      if (! match) {
-                        // Semicolon
-                        match = semicolon$Rule();
+                        // ClassDeclaration
+                        match = classDeclaration$Rule();
+                        if (! match) {
+                           // EnumDeclaration
+                           match = enumDeclaration$Rule();
+                        }
                      }
                   }
                }
             }
+            break;
+         }
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'b':
+         case 'd':
+         case '$':
+         case 'g':
+         case 'h':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'o':
+         case 'q':
+         case 'r':
+         case 'u':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // InterfaceMethod
+            match = interfaceMethod$Rule();
+            if (! match) {
+               // ConstantsDeclarations
+               match = constantsDeclarations$Rule();
+            }
+            break;
+         }
+         case 'c': {
+            // InterfaceMethod
+            match = interfaceMethod$Rule();
+            if (! match) {
+               // ConstantsDeclarations
+               match = constantsDeclarations$Rule();
+               if (! match) {
+                  // ClassDeclaration
+                  match = classDeclaration$Rule();
+               }
+            }
+            break;
+         }
+         case 'e': {
+            // InterfaceMethod
+            match = interfaceMethod$Rule();
+            if (! match) {
+               // ConstantsDeclarations
+               match = constantsDeclarations$Rule();
+               if (! match) {
+                  // EnumDeclaration
+                  match = enumDeclaration$Rule();
+               }
+            }
+            break;
+         }
+         case 'i': {
+            // InterfaceMethod
+            match = interfaceMethod$Rule();
+            if (! match) {
+               // ConstantsDeclarations
+               match = constantsDeclarations$Rule();
+               if (! match) {
+                  // InterfaceDeclaration
+                  match = interfaceDeclaration$Rule();
+               }
+            }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -3135,11 +3691,91 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (ArrayInitializer | Expression)
-      // ArrayInitializer
-      match = arrayInitializer$Rule();
-      if (! match) {
-         // Expression
-         match = expression$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '~': {
+            // Expression
+            match = expression$Rule();
+            break;
+         }
+         case '{': {
+            // ArrayInitializer
+            match = arrayInitializer$Rule();
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -3444,11 +4080,20 @@ public class JavaParser implements Parser {
       // (Final | Annotation)*
       do {
          // (Final | Annotation)
-         // Final
-         match = final$Rule();
-         if (! match) {
-            // Annotation
-            match = annotation$Rule();
+         switch(buffer.getChar(index)) {
+            case '@': {
+               // Annotation
+               match = annotation$Rule();
+               break;
+            }
+            case 'f': {
+               // Final
+               match = final$Rule();
+               break;
+            }
+            default: {
+               match = false;
+            }
          }
       } while(match);
       if (! currentRuleIsAtomic) {
@@ -3627,9 +4272,14 @@ public class JavaParser implements Parser {
       if (parameterDeclaration$RuleMemoStart == index) {
          if (parameterDeclaration$RuleMemoStart <= parameterDeclaration$RuleMemoEnd) {
             index = parameterDeclaration$RuleMemoEnd;
-            if (! currentRuleIsAtomic && parameterDeclaration$RuleMemoFirstNode != null) {
-               lastNode.setSibling(parameterDeclaration$RuleMemoFirstNode);
-               currentNode = parameterDeclaration$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (parameterDeclaration$RuleMemoStart == parameterDeclaration$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.PARAMETER_DECLARATION, parameterDeclaration$RuleMemoStart, parameterDeclaration$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(parameterDeclaration$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(parameterDeclaration$RuleMemoFirstNode);
+                  currentNode = parameterDeclaration$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -3746,18 +4396,148 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (LocalVariableDeclarationStatement | ClassDeclaration | EnumDeclaration | Statement)
-      // LocalVariableDeclarationStatement
-      match = localVariableDeclarationStatement$Rule();
-      if (! match) {
-         // ClassDeclaration
-         match = classDeclaration$Rule();
-         if (! match) {
-            // EnumDeclaration
-            match = enumDeclaration$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case ';':
+         case '{':
+         case '~': {
+            // Statement
+            match = statement$Rule();
+            break;
+         }
+         case '@': {
+            // LocalVariableDeclarationStatement
+            match = localVariableDeclarationStatement$Rule();
+            if (! match) {
+               // ClassDeclaration
+               match = classDeclaration$Rule();
+               if (! match) {
+                  // EnumDeclaration
+                  match = enumDeclaration$Rule();
+               }
+            }
+            break;
+         }
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'b':
+         case 'd':
+         case '$':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'o':
+         case 'q':
+         case 'r':
+         case 'u':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // LocalVariableDeclarationStatement
+            match = localVariableDeclarationStatement$Rule();
             if (! match) {
                // Statement
                match = statement$Rule();
             }
+            break;
+         }
+         case 'p':
+         case 'a':
+         case 's':
+         case 't':
+         case 'f':
+         case 'v':
+         case 'n': {
+            // LocalVariableDeclarationStatement
+            match = localVariableDeclarationStatement$Rule();
+            if (! match) {
+               // ClassDeclaration
+               match = classDeclaration$Rule();
+               if (! match) {
+                  // EnumDeclaration
+                  match = enumDeclaration$Rule();
+                  if (! match) {
+                     // Statement
+                     match = statement$Rule();
+                  }
+               }
+            }
+            break;
+         }
+         case 'c': {
+            // LocalVariableDeclarationStatement
+            match = localVariableDeclarationStatement$Rule();
+            if (! match) {
+               // ClassDeclaration
+               match = classDeclaration$Rule();
+               if (! match) {
+                  // Statement
+                  match = statement$Rule();
+               }
+            }
+            break;
+         }
+         case 'e': {
+            // LocalVariableDeclarationStatement
+            match = localVariableDeclarationStatement$Rule();
+            if (! match) {
+               // EnumDeclaration
+               match = enumDeclaration$Rule();
+               if (! match) {
+                  // Statement
+                  match = statement$Rule();
+               }
+            }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -3782,70 +4562,235 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (Block | AssertStatement | IfStatement | ForStatement | ForIterableStatement | WhileStatement | DoWhileStatement | TryCatchStatement | SwitchStatement | SynchronizedStatement | ReturnStatement | ThrowStatement | BreakStatement | ContinueStatement | IdentifiedStatement | StatementExpression | Semicolon)
-      // Block
-      match = block$Rule();
-      if (! match) {
-         // AssertStatement
-         match = assertStatement$Rule();
-         if (! match) {
-            // IfStatement
-            match = ifStatement$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case '~': {
+            // StatementExpression
+            match = statementExpression$Rule();
+            break;
+         }
+         case 'r': {
+            // ReturnStatement
+            match = returnStatement$Rule();
             if (! match) {
-               // ForStatement
-               match = forStatement$Rule();
+               // IdentifiedStatement
+               match = identifiedStatement$Rule();
                if (! match) {
-                  // ForIterableStatement
-                  match = forIterableStatement$Rule();
+                  // StatementExpression
+                  match = statementExpression$Rule();
+               }
+            }
+            break;
+         }
+         case 's': {
+            // SwitchStatement
+            match = switchStatement$Rule();
+            if (! match) {
+               // SynchronizedStatement
+               match = synchronizedStatement$Rule();
+               if (! match) {
+                  // IdentifiedStatement
+                  match = identifiedStatement$Rule();
                   if (! match) {
-                     // WhileStatement
-                     match = whileStatement$Rule();
-                     if (! match) {
-                        // DoWhileStatement
-                        match = doWhileStatement$Rule();
-                        if (! match) {
-                           // TryCatchStatement
-                           match = tryCatchStatement$Rule();
-                           if (! match) {
-                              // SwitchStatement
-                              match = switchStatement$Rule();
-                              if (! match) {
-                                 // SynchronizedStatement
-                                 match = synchronizedStatement$Rule();
-                                 if (! match) {
-                                    // ReturnStatement
-                                    match = returnStatement$Rule();
-                                    if (! match) {
-                                       // ThrowStatement
-                                       match = throwStatement$Rule();
-                                       if (! match) {
-                                          // BreakStatement
-                                          match = breakStatement$Rule();
-                                          if (! match) {
-                                             // ContinueStatement
-                                             match = continueStatement$Rule();
-                                             if (! match) {
-                                                // IdentifiedStatement
-                                                match = identifiedStatement$Rule();
-                                                if (! match) {
-                                                   // StatementExpression
-                                                   match = statementExpression$Rule();
-                                                   if (! match) {
-                                                      // Semicolon
-                                                      match = semicolon$Rule();
-                                                   }
-                                                }
-                                             }
-                                          }
-                                       }
-                                    }
-                                 }
-                              }
-                           }
-                        }
-                     }
+                     // StatementExpression
+                     match = statementExpression$Rule();
                   }
                }
             }
+            break;
+         }
+         case 't': {
+            // TryCatchStatement
+            match = tryCatchStatement$Rule();
+            if (! match) {
+               // ThrowStatement
+               match = throwStatement$Rule();
+               if (! match) {
+                  // IdentifiedStatement
+                  match = identifiedStatement$Rule();
+                  if (! match) {
+                     // StatementExpression
+                     match = statementExpression$Rule();
+                  }
+               }
+            }
+            break;
+         }
+         case 'w': {
+            // WhileStatement
+            match = whileStatement$Rule();
+            if (! match) {
+               // IdentifiedStatement
+               match = identifiedStatement$Rule();
+               if (! match) {
+                  // StatementExpression
+                  match = statementExpression$Rule();
+               }
+            }
+            break;
+         }
+         case ';': {
+            // Semicolon
+            match = semicolon$Rule();
+            break;
+         }
+         case '{': {
+            // Block
+            match = block$Rule();
+            break;
+         }
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case '$':
+         case 'e':
+         case 'g':
+         case 'h':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'u':
+         case 'v':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // IdentifiedStatement
+            match = identifiedStatement$Rule();
+            if (! match) {
+               // StatementExpression
+               match = statementExpression$Rule();
+            }
+            break;
+         }
+         case 'a': {
+            // AssertStatement
+            match = assertStatement$Rule();
+            if (! match) {
+               // IdentifiedStatement
+               match = identifiedStatement$Rule();
+               if (! match) {
+                  // StatementExpression
+                  match = statementExpression$Rule();
+               }
+            }
+            break;
+         }
+         case 'b': {
+            // BreakStatement
+            match = breakStatement$Rule();
+            if (! match) {
+               // IdentifiedStatement
+               match = identifiedStatement$Rule();
+               if (! match) {
+                  // StatementExpression
+                  match = statementExpression$Rule();
+               }
+            }
+            break;
+         }
+         case 'c': {
+            // ContinueStatement
+            match = continueStatement$Rule();
+            if (! match) {
+               // IdentifiedStatement
+               match = identifiedStatement$Rule();
+               if (! match) {
+                  // StatementExpression
+                  match = statementExpression$Rule();
+               }
+            }
+            break;
+         }
+         case 'd': {
+            // DoWhileStatement
+            match = doWhileStatement$Rule();
+            if (! match) {
+               // IdentifiedStatement
+               match = identifiedStatement$Rule();
+               if (! match) {
+                  // StatementExpression
+                  match = statementExpression$Rule();
+               }
+            }
+            break;
+         }
+         case 'f': {
+            // ForStatement
+            match = forStatement$Rule();
+            if (! match) {
+               // ForIterableStatement
+               match = forIterableStatement$Rule();
+               if (! match) {
+                  // IdentifiedStatement
+                  match = identifiedStatement$Rule();
+                  if (! match) {
+                     // StatementExpression
+                     match = statementExpression$Rule();
+                  }
+               }
+            }
+            break;
+         }
+         case 'i': {
+            // IfStatement
+            match = ifStatement$Rule();
+            if (! match) {
+               // IdentifiedStatement
+               match = identifiedStatement$Rule();
+               if (! match) {
+                  // StatementExpression
+                  match = statementExpression$Rule();
+               }
+            }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -4808,11 +5753,90 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (AssignmentExpression | ConditionalExpression)
-      // AssignmentExpression
-      match = assignmentExpression$Rule();
-      if (! match) {
-         // ConditionalExpression
-         match = conditionalExpression$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '~': {
+            // AssignmentExpression
+            match = assignmentExpression$Rule();
+            if (! match) {
+               // ConditionalExpression
+               match = conditionalExpression$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -4836,11 +5860,99 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (ForInitVariables | ForInitExpressions)
-      // ForInitVariables
-      match = forInitVariables$Rule();
-      if (! match) {
-         // ForInitExpressions
-         match = forInitExpressions$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case '~': {
+            // ForInitExpressions
+            match = forInitExpressions$Rule();
+            break;
+         }
+         case '@': {
+            // ForInitVariables
+            match = forInitVariables$Rule();
+            break;
+         }
+         case '$':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // ForInitVariables
+            match = forInitVariables$Rule();
+            if (! match) {
+               // ForInitExpressions
+               match = forInitExpressions$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -5421,9 +6533,14 @@ public class JavaParser implements Parser {
       if (conditionalExpression$RuleMemoStart == index) {
          if (conditionalExpression$RuleMemoStart <= conditionalExpression$RuleMemoEnd) {
             index = conditionalExpression$RuleMemoEnd;
-            if (! currentRuleIsAtomic && conditionalExpression$RuleMemoFirstNode != null) {
-               lastNode.setSibling(conditionalExpression$RuleMemoFirstNode);
-               currentNode = conditionalExpression$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (conditionalExpression$RuleMemoStart == conditionalExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CONDITIONAL_EXPRESSION, conditionalExpression$RuleMemoStart, conditionalExpression$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(conditionalExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(conditionalExpression$RuleMemoFirstNode);
+                  currentNode = conditionalExpression$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -5432,11 +6549,90 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (TernaryExpression | ConditionalOrExpression)
-      // TernaryExpression
-      match = ternaryExpression$Rule();
-      if (! match) {
-         // ConditionalOrExpression
-         match = conditionalOrExpression$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '~': {
+            // TernaryExpression
+            match = ternaryExpression$Rule();
+            if (! match) {
+               // ConditionalOrExpression
+               match = conditionalOrExpression$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          conditionalExpression$RuleMemoStart = startIndex;
@@ -5470,9 +6666,14 @@ public class JavaParser implements Parser {
       if (assignmentOperator$RuleMemoStart == index) {
          if (assignmentOperator$RuleMemoStart <= assignmentOperator$RuleMemoEnd) {
             index = assignmentOperator$RuleMemoEnd;
-            if (! currentRuleIsAtomic && assignmentOperator$RuleMemoFirstNode != null) {
-               lastNode.setSibling(assignmentOperator$RuleMemoFirstNode);
-               currentNode = assignmentOperator$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (assignmentOperator$RuleMemoStart == assignmentOperator$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ASSIGNMENT_OPERATOR, assignmentOperator$RuleMemoStart, assignmentOperator$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(assignmentOperator$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(assignmentOperator$RuleMemoFirstNode);
+                  currentNode = assignmentOperator$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -5484,102 +6685,117 @@ public class JavaParser implements Parser {
       // ('=' | '+=' | '-=' | '*=' | '/=' | '&=' | '|=' | '^=' | '%=' | '<<=' | '>>=' | '>>>=')
       int startIndex_1 = index;
       switch(buffer.getChar(index)) {
-         case '&':
+         case '+': {
             ++index;
             // '='
             if (match = buffer.matchChar(index, '=')) {
                ++index;
             }
             break;
-         case '%':
+         }
+         case '|': {
             ++index;
             // '='
             if (match = buffer.matchChar(index, '=')) {
                ++index;
             }
             break;
-         case '/':
-            ++index;
-            // '='
-            if (match = buffer.matchChar(index, '=')) {
-               ++index;
-            }
-            break;
-         case '^':
-            ++index;
-            // '='
-            if (match = buffer.matchChar(index, '=')) {
-               ++index;
-            }
-            break;
-         case '>':
-            ++index;
-            // ('>>=' | '>=')
-            if (buffer.matchChar(index, '>')) {
-               ++index;
-               // ('>=' | '=')
-               switch(buffer.getChar(index)) {
-                  case '>':
-                     ++index;
-                     // '='
-                     if (match = buffer.matchChar(index, '=')) {
-                        ++index;
-                     }
-                     break;
-                  case '=':
-                     ++index;
-                     // <EMPTY>
-                     match = true;
-                     break;
-                  default:
-                     match = false;
-               }
-            } else {
-               match = false;
-            }
-            break;
-         case '=':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '-':
-            ++index;
-            // '='
-            if (match = buffer.matchChar(index, '=')) {
-               ++index;
-            }
-            break;
-         case '|':
-            ++index;
-            // '='
-            if (match = buffer.matchChar(index, '=')) {
-               ++index;
-            }
-            break;
-         case '<':
+         }
+         case '<': {
             ++index;
             // '<='
             if (match = stringTest("<=", 2)) {
                index += 2;
             }
             break;
-         case '+':
+         }
+         case '=': {
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         }
+         case '-': {
             ++index;
             // '='
             if (match = buffer.matchChar(index, '=')) {
                ++index;
             }
             break;
-         case '*':
+         }
+         case '^': {
             ++index;
             // '='
             if (match = buffer.matchChar(index, '=')) {
                ++index;
             }
             break;
-         default:
+         }
+         case '>': {
+            ++index;
+            // ('>>=' | '>=')
+            if (buffer.matchChar(index, '>')) {
+               ++index;
+               // ('>=' | '=')
+               switch(buffer.getChar(index)) {
+                  case '=': {
+                     ++index;
+                     // <EMPTY>
+                     match = true;
+                     break;
+                  }
+                  case '>': {
+                     ++index;
+                     // '='
+                     if (match = buffer.matchChar(index, '=')) {
+                        ++index;
+                     }
+                     break;
+                  }
+                  default: {
+                     match = false;
+                  }
+               }
+            } else {
+               match = false;
+            }
+            break;
+         }
+         case '/': {
+            ++index;
+            // '='
+            if (match = buffer.matchChar(index, '=')) {
+               ++index;
+            }
+            break;
+         }
+         case '%': {
+            ++index;
+            // '='
+            if (match = buffer.matchChar(index, '=')) {
+               ++index;
+            }
+            break;
+         }
+         case '&': {
+            ++index;
+            // '='
+            if (match = buffer.matchChar(index, '=')) {
+               ++index;
+            }
+            break;
+         }
+         case '*': {
+            ++index;
+            // '='
+            if (match = buffer.matchChar(index, '=')) {
+               ++index;
+            }
+            break;
+         }
+         default: {
             match = false;
+         }
       }
       if (! match) {
          index = startIndex_1;
@@ -5671,9 +6887,14 @@ public class JavaParser implements Parser {
       if (conditionalOrExpression$RuleMemoStart == index) {
          if (conditionalOrExpression$RuleMemoStart <= conditionalOrExpression$RuleMemoEnd) {
             index = conditionalOrExpression$RuleMemoEnd;
-            if (! currentRuleIsAtomic && conditionalOrExpression$RuleMemoFirstNode != null) {
-               lastNode.setSibling(conditionalOrExpression$RuleMemoFirstNode);
-               currentNode = conditionalOrExpression$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (conditionalOrExpression$RuleMemoStart == conditionalOrExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CONDITIONAL_OR_EXPRESSION, conditionalOrExpression$RuleMemoStart, conditionalOrExpression$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(conditionalOrExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(conditionalOrExpression$RuleMemoFirstNode);
+                  currentNode = conditionalOrExpression$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -5682,11 +6903,90 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (OrExpression | ConditionalAndExpression)
-      // OrExpression
-      match = orExpression$Rule();
-      if (! match) {
-         // ConditionalAndExpression
-         match = conditionalAndExpression$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '~': {
+            // OrExpression
+            match = orExpression$Rule();
+            if (! match) {
+               // ConditionalAndExpression
+               match = conditionalAndExpression$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          conditionalOrExpression$RuleMemoStart = startIndex;
@@ -5756,9 +7056,14 @@ public class JavaParser implements Parser {
       if (conditionalAndExpression$RuleMemoStart == index) {
          if (conditionalAndExpression$RuleMemoStart <= conditionalAndExpression$RuleMemoEnd) {
             index = conditionalAndExpression$RuleMemoEnd;
-            if (! currentRuleIsAtomic && conditionalAndExpression$RuleMemoFirstNode != null) {
-               lastNode.setSibling(conditionalAndExpression$RuleMemoFirstNode);
-               currentNode = conditionalAndExpression$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (conditionalAndExpression$RuleMemoStart == conditionalAndExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CONDITIONAL_AND_EXPRESSION, conditionalAndExpression$RuleMemoStart, conditionalAndExpression$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(conditionalAndExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(conditionalAndExpression$RuleMemoFirstNode);
+                  currentNode = conditionalAndExpression$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -5767,11 +7072,90 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (AndExpression | OptionalBitOrExpression)
-      // AndExpression
-      match = andExpression$Rule();
-      if (! match) {
-         // OptionalBitOrExpression
-         match = optionalBitOrExpression$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '~': {
+            // AndExpression
+            match = andExpression$Rule();
+            if (! match) {
+               // OptionalBitOrExpression
+               match = optionalBitOrExpression$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          conditionalAndExpression$RuleMemoStart = startIndex;
@@ -5841,9 +7225,14 @@ public class JavaParser implements Parser {
       if (optionalBitOrExpression$RuleMemoStart == index) {
          if (optionalBitOrExpression$RuleMemoStart <= optionalBitOrExpression$RuleMemoEnd) {
             index = optionalBitOrExpression$RuleMemoEnd;
-            if (! currentRuleIsAtomic && optionalBitOrExpression$RuleMemoFirstNode != null) {
-               lastNode.setSibling(optionalBitOrExpression$RuleMemoFirstNode);
-               currentNode = optionalBitOrExpression$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (optionalBitOrExpression$RuleMemoStart == optionalBitOrExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.OPTIONAL_BIT_OR_EXPRESSION, optionalBitOrExpression$RuleMemoStart, optionalBitOrExpression$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(optionalBitOrExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(optionalBitOrExpression$RuleMemoFirstNode);
+                  currentNode = optionalBitOrExpression$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -5852,11 +7241,90 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (BitOrExpression | OptionalBitXOrExpression)
-      // BitOrExpression
-      match = bitOrExpression$Rule();
-      if (! match) {
-         // OptionalBitXOrExpression
-         match = optionalBitXOrExpression$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '~': {
+            // BitOrExpression
+            match = bitOrExpression$Rule();
+            if (! match) {
+               // OptionalBitXOrExpression
+               match = optionalBitXOrExpression$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          optionalBitOrExpression$RuleMemoStart = startIndex;
@@ -5926,9 +7394,14 @@ public class JavaParser implements Parser {
       if (optionalBitXOrExpression$RuleMemoStart == index) {
          if (optionalBitXOrExpression$RuleMemoStart <= optionalBitXOrExpression$RuleMemoEnd) {
             index = optionalBitXOrExpression$RuleMemoEnd;
-            if (! currentRuleIsAtomic && optionalBitXOrExpression$RuleMemoFirstNode != null) {
-               lastNode.setSibling(optionalBitXOrExpression$RuleMemoFirstNode);
-               currentNode = optionalBitXOrExpression$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (optionalBitXOrExpression$RuleMemoStart == optionalBitXOrExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.OPTIONAL_BIT_XOR_EXPRESSION, optionalBitXOrExpression$RuleMemoStart, optionalBitXOrExpression$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(optionalBitXOrExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(optionalBitXOrExpression$RuleMemoFirstNode);
+                  currentNode = optionalBitXOrExpression$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -5937,11 +7410,90 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (BitXOrExpression | OptionalBitAndExpression)
-      // BitXOrExpression
-      match = bitXOrExpression$Rule();
-      if (! match) {
-         // OptionalBitAndExpression
-         match = optionalBitAndExpression$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '~': {
+            // BitXOrExpression
+            match = bitXOrExpression$Rule();
+            if (! match) {
+               // OptionalBitAndExpression
+               match = optionalBitAndExpression$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          optionalBitXOrExpression$RuleMemoStart = startIndex;
@@ -6011,9 +7563,14 @@ public class JavaParser implements Parser {
       if (optionalBitAndExpression$RuleMemoStart == index) {
          if (optionalBitAndExpression$RuleMemoStart <= optionalBitAndExpression$RuleMemoEnd) {
             index = optionalBitAndExpression$RuleMemoEnd;
-            if (! currentRuleIsAtomic && optionalBitAndExpression$RuleMemoFirstNode != null) {
-               lastNode.setSibling(optionalBitAndExpression$RuleMemoFirstNode);
-               currentNode = optionalBitAndExpression$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (optionalBitAndExpression$RuleMemoStart == optionalBitAndExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.OPTIONAL_BIT_AND_EXPRESSION, optionalBitAndExpression$RuleMemoStart, optionalBitAndExpression$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(optionalBitAndExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(optionalBitAndExpression$RuleMemoFirstNode);
+                  currentNode = optionalBitAndExpression$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -6022,11 +7579,90 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (BitAndExpression | OptionalRelationalExpression)
-      // BitAndExpression
-      match = bitAndExpression$Rule();
-      if (! match) {
-         // OptionalRelationalExpression
-         match = optionalRelationalExpression$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '~': {
+            // BitAndExpression
+            match = bitAndExpression$Rule();
+            if (! match) {
+               // OptionalRelationalExpression
+               match = optionalRelationalExpression$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          optionalBitAndExpression$RuleMemoStart = startIndex;
@@ -6096,9 +7732,14 @@ public class JavaParser implements Parser {
       if (optionalRelationalExpression$RuleMemoStart == index) {
          if (optionalRelationalExpression$RuleMemoStart <= optionalRelationalExpression$RuleMemoEnd) {
             index = optionalRelationalExpression$RuleMemoEnd;
-            if (! currentRuleIsAtomic && optionalRelationalExpression$RuleMemoFirstNode != null) {
-               lastNode.setSibling(optionalRelationalExpression$RuleMemoFirstNode);
-               currentNode = optionalRelationalExpression$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (optionalRelationalExpression$RuleMemoStart == optionalRelationalExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.OPTIONAL_RELATIONAL_EXPRESSION, optionalRelationalExpression$RuleMemoStart, optionalRelationalExpression$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(optionalRelationalExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(optionalRelationalExpression$RuleMemoFirstNode);
+                  currentNode = optionalRelationalExpression$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -6107,11 +7748,90 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (RelationalExpression | OptionalInstanceOfExpression)
-      // RelationalExpression
-      match = relationalExpression$Rule();
-      if (! match) {
-         // OptionalInstanceOfExpression
-         match = optionalInstanceOfExpression$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '~': {
+            // RelationalExpression
+            match = relationalExpression$Rule();
+            if (! match) {
+               // OptionalInstanceOfExpression
+               match = optionalInstanceOfExpression$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          optionalRelationalExpression$RuleMemoStart = startIndex;
@@ -6151,14 +7871,7 @@ public class JavaParser implements Parser {
          // ('==' | '!=' | '<=' | '>=' | '<' | '>')
          int startIndex_1 = index;
          switch(buffer.getChar(index)) {
-            case '!':
-               ++index;
-               // '='
-               if (match = buffer.matchChar(index, '=')) {
-                  ++index;
-               }
-               break;
-            case '>':
+            case '<': {
                ++index;
                // ('=' | <EMPTY>)
                if (buffer.matchChar(index, '=')) {
@@ -6169,14 +7882,16 @@ public class JavaParser implements Parser {
                   match = true;
                }
                break;
-            case '=':
+            }
+            case '=': {
                ++index;
                // '='
                if (match = buffer.matchChar(index, '=')) {
                   ++index;
                }
                break;
-            case '<':
+            }
+            case '>': {
                ++index;
                // ('=' | <EMPTY>)
                if (buffer.matchChar(index, '=')) {
@@ -6187,8 +7902,18 @@ public class JavaParser implements Parser {
                   match = true;
                }
                break;
-            default:
+            }
+            case '!': {
+               ++index;
+               // '='
+               if (match = buffer.matchChar(index, '=')) {
+                  ++index;
+               }
+               break;
+            }
+            default: {
                match = false;
+            }
          }
          if (! match) {
             index = startIndex_1;
@@ -6228,9 +7953,14 @@ public class JavaParser implements Parser {
       if (optionalInstanceOfExpression$RuleMemoStart == index) {
          if (optionalInstanceOfExpression$RuleMemoStart <= optionalInstanceOfExpression$RuleMemoEnd) {
             index = optionalInstanceOfExpression$RuleMemoEnd;
-            if (! currentRuleIsAtomic && optionalInstanceOfExpression$RuleMemoFirstNode != null) {
-               lastNode.setSibling(optionalInstanceOfExpression$RuleMemoFirstNode);
-               currentNode = optionalInstanceOfExpression$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (optionalInstanceOfExpression$RuleMemoStart == optionalInstanceOfExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.OPTIONAL_INSTANCE_OF_EXPRESSION, optionalInstanceOfExpression$RuleMemoStart, optionalInstanceOfExpression$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(optionalInstanceOfExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(optionalInstanceOfExpression$RuleMemoFirstNode);
+                  currentNode = optionalInstanceOfExpression$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -6239,11 +7969,90 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (InstanceOfExpression | OptionalAdditiveExpression)
-      // InstanceOfExpression
-      match = instanceOfExpression$Rule();
-      if (! match) {
-         // OptionalAdditiveExpression
-         match = optionalAdditiveExpression$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '~': {
+            // InstanceOfExpression
+            match = instanceOfExpression$Rule();
+            if (! match) {
+               // OptionalAdditiveExpression
+               match = optionalAdditiveExpression$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          optionalInstanceOfExpression$RuleMemoStart = startIndex;
@@ -6317,9 +8126,14 @@ public class JavaParser implements Parser {
       if (optionalAdditiveExpression$RuleMemoStart == index) {
          if (optionalAdditiveExpression$RuleMemoStart <= optionalAdditiveExpression$RuleMemoEnd) {
             index = optionalAdditiveExpression$RuleMemoEnd;
-            if (! currentRuleIsAtomic && optionalAdditiveExpression$RuleMemoFirstNode != null) {
-               lastNode.setSibling(optionalAdditiveExpression$RuleMemoFirstNode);
-               currentNode = optionalAdditiveExpression$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (optionalAdditiveExpression$RuleMemoStart == optionalAdditiveExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.OPTIONAL_ADDITIVE_EXPRESSION, optionalAdditiveExpression$RuleMemoStart, optionalAdditiveExpression$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(optionalAdditiveExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(optionalAdditiveExpression$RuleMemoFirstNode);
+                  currentNode = optionalAdditiveExpression$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -6328,11 +8142,90 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (AdditiveExpression | OptionalMultiplicativeExpression)
-      // AdditiveExpression
-      match = additiveExpression$Rule();
-      if (! match) {
-         // OptionalMultiplicativeExpression
-         match = optionalMultiplicativeExpression$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '~': {
+            // AdditiveExpression
+            match = additiveExpression$Rule();
+            if (! match) {
+               // OptionalMultiplicativeExpression
+               match = optionalMultiplicativeExpression$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          optionalAdditiveExpression$RuleMemoStart = startIndex;
@@ -6366,9 +8259,14 @@ public class JavaParser implements Parser {
       if (referenceType$RuleMemoStart == index) {
          if (referenceType$RuleMemoStart <= referenceType$RuleMemoEnd) {
             index = referenceType$RuleMemoEnd;
-            if (! currentRuleIsAtomic && referenceType$RuleMemoFirstNode != null) {
-               lastNode.setSibling(referenceType$RuleMemoFirstNode);
-               currentNode = referenceType$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (referenceType$RuleMemoStart == referenceType$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.REFERENCE_TYPE, referenceType$RuleMemoStart, referenceType$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(referenceType$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(referenceType$RuleMemoFirstNode);
+                  currentNode = referenceType$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -6377,14 +8275,83 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (BasicTypeArray | QualifiedClassNameArray | QualifiedClassName)
-      // BasicTypeArray
-      match = basicTypeArray$Rule();
-      if (! match) {
-         // QualifiedClassNameArray
-         match = qualifiedClassNameArray$Rule();
-         if (! match) {
-            // QualifiedClassName
-            match = qualifiedClassName$Rule();
+      switch(buffer.getChar(index)) {
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case '$':
+         case 'e':
+         case 'g':
+         case 'h':
+         case 'j':
+         case 'k':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // QualifiedClassNameArray
+            match = qualifiedClassNameArray$Rule();
+            if (! match) {
+               // QualifiedClassName
+               match = qualifiedClassName$Rule();
+            }
+            break;
+         }
+         case 'b':
+         case 'c':
+         case 's':
+         case 'd':
+         case 'f':
+         case 'i':
+         case 'l': {
+            // BasicTypeArray
+            match = basicTypeArray$Rule();
+            if (! match) {
+               // QualifiedClassNameArray
+               match = qualifiedClassNameArray$Rule();
+               if (! match) {
+                  // QualifiedClassName
+                  match = qualifiedClassName$Rule();
+               }
+            }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -6425,18 +8392,21 @@ public class JavaParser implements Parser {
          // ('+' | '-')
          int startIndex_1 = index;
          switch(buffer.getChar(index)) {
-            case '-':
+            case '+': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            case '+':
+            }
+            case '-': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            default:
+            }
+            default: {
                match = false;
+            }
          }
          if (! match) {
             index = startIndex_1;
@@ -6476,9 +8446,14 @@ public class JavaParser implements Parser {
       if (optionalMultiplicativeExpression$RuleMemoStart == index) {
          if (optionalMultiplicativeExpression$RuleMemoStart <= optionalMultiplicativeExpression$RuleMemoEnd) {
             index = optionalMultiplicativeExpression$RuleMemoEnd;
-            if (! currentRuleIsAtomic && optionalMultiplicativeExpression$RuleMemoFirstNode != null) {
-               lastNode.setSibling(optionalMultiplicativeExpression$RuleMemoFirstNode);
-               currentNode = optionalMultiplicativeExpression$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (optionalMultiplicativeExpression$RuleMemoStart == optionalMultiplicativeExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.OPTIONAL_MULTIPLICATIVE_EXPRESSION, optionalMultiplicativeExpression$RuleMemoStart, optionalMultiplicativeExpression$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(optionalMultiplicativeExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(optionalMultiplicativeExpression$RuleMemoFirstNode);
+                  currentNode = optionalMultiplicativeExpression$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -6487,11 +8462,90 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (MultiplicativeExpression | OptionalShiftExpression)
-      // MultiplicativeExpression
-      match = multiplicativeExpression$Rule();
-      if (! match) {
-         // OptionalShiftExpression
-         match = optionalShiftExpression$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '~': {
+            // MultiplicativeExpression
+            match = multiplicativeExpression$Rule();
+            if (! match) {
+               // OptionalShiftExpression
+               match = optionalShiftExpression$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          optionalMultiplicativeExpression$RuleMemoStart = startIndex;
@@ -6531,23 +8585,27 @@ public class JavaParser implements Parser {
          // ('*' | '/' | '%')
          int startIndex_1 = index;
          switch(buffer.getChar(index)) {
-            case '%':
+            case '/': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            case '/':
+            }
+            case '%': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            case '*':
+            }
+            case '*': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            default:
+            }
+            default: {
                match = false;
+            }
          }
          if (! match) {
             index = startIndex_1;
@@ -6587,9 +8645,14 @@ public class JavaParser implements Parser {
       if (optionalShiftExpression$RuleMemoStart == index) {
          if (optionalShiftExpression$RuleMemoStart <= optionalShiftExpression$RuleMemoEnd) {
             index = optionalShiftExpression$RuleMemoEnd;
-            if (! currentRuleIsAtomic && optionalShiftExpression$RuleMemoFirstNode != null) {
-               lastNode.setSibling(optionalShiftExpression$RuleMemoFirstNode);
-               currentNode = optionalShiftExpression$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (optionalShiftExpression$RuleMemoStart == optionalShiftExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.OPTIONAL_SHIFT_EXPRESSION, optionalShiftExpression$RuleMemoStart, optionalShiftExpression$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(optionalShiftExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(optionalShiftExpression$RuleMemoFirstNode);
+                  currentNode = optionalShiftExpression$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -6598,11 +8661,90 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (ShiftExpression | UnaryExpression)
-      // ShiftExpression
-      match = shiftExpression$Rule();
-      if (! match) {
-         // UnaryExpression
-         match = unaryExpression$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '~': {
+            // ShiftExpression
+            match = shiftExpression$Rule();
+            if (! match) {
+               // UnaryExpression
+               match = unaryExpression$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          optionalShiftExpression$RuleMemoStart = startIndex;
@@ -6642,7 +8784,15 @@ public class JavaParser implements Parser {
          // ('<<' | '>>>' | '>>')
          int startIndex_1 = index;
          switch(buffer.getChar(index)) {
-            case '>':
+            case '<': {
+               ++index;
+               // '<'
+               if (match = buffer.matchChar(index, '<')) {
+                  ++index;
+               }
+               break;
+            }
+            case '>': {
                ++index;
                // ('>>' | '>')
                if (buffer.matchChar(index, '>')) {
@@ -6659,15 +8809,10 @@ public class JavaParser implements Parser {
                   match = false;
                }
                break;
-            case '<':
-               ++index;
-               // '<'
-               if (match = buffer.matchChar(index, '<')) {
-                  ++index;
-               }
-               break;
-            default:
+            }
+            default: {
                match = false;
+            }
          }
          if (! match) {
             index = startIndex_1;
@@ -6707,9 +8852,14 @@ public class JavaParser implements Parser {
       if (unaryExpression$RuleMemoStart == index) {
          if (unaryExpression$RuleMemoStart <= unaryExpression$RuleMemoEnd) {
             index = unaryExpression$RuleMemoEnd;
-            if (! currentRuleIsAtomic && unaryExpression$RuleMemoFirstNode != null) {
-               lastNode.setSibling(unaryExpression$RuleMemoFirstNode);
-               currentNode = unaryExpression$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (unaryExpression$RuleMemoStart == unaryExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.UNARY_EXPRESSION, unaryExpression$RuleMemoStart, unaryExpression$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(unaryExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(unaryExpression$RuleMemoFirstNode);
+                  currentNode = unaryExpression$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -6718,18 +8868,105 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (PrefixedExpression | CastExpression | PostfixedExpression | Primary)
-      // PrefixedExpression
-      match = prefixedExpression$Rule();
-      if (! match) {
-         // CastExpression
-         match = castExpression$Rule();
-         if (! match) {
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '+':
+         case '-':
+         case '~': {
+            // PrefixedExpression
+            match = prefixedExpression$Rule();
+            break;
+         }
+         case '\"':
+         case '$':
+         case '\'':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
             // PostfixedExpression
             match = postfixedExpression$Rule();
             if (! match) {
                // Primary
                match = primary$Rule();
             }
+            break;
+         }
+         case '(': {
+            // CastExpression
+            match = castExpression$Rule();
+            if (! match) {
+               // PostfixedExpression
+               match = postfixedExpression$Rule();
+               if (! match) {
+                  // Primary
+                  match = primary$Rule();
+               }
+            }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -6878,28 +9115,7 @@ public class JavaParser implements Parser {
       startIndex = index;
       // ('++' | '--' | '!' | '~' | '+' | '-')
       switch(buffer.getChar(index)) {
-         case '!':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '~':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '-':
-            ++index;
-            // ('-' | <EMPTY>)
-            if (buffer.matchChar(index, '-')) {
-               ++index;
-               // <EMPTY>
-               match = true;
-            } else {
-               match = true;
-            }
-            break;
-         case '+':
+         case '+': {
             ++index;
             // ('+' | <EMPTY>)
             if (buffer.matchChar(index, '+')) {
@@ -6910,8 +9126,34 @@ public class JavaParser implements Parser {
                match = true;
             }
             break;
-         default:
+         }
+         case '-': {
+            ++index;
+            // ('-' | <EMPTY>)
+            if (buffer.matchChar(index, '-')) {
+               ++index;
+               // <EMPTY>
+               match = true;
+            } else {
+               match = true;
+            }
+            break;
+         }
+         case '~': {
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         }
+         case '!': {
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         }
+         default: {
             match = false;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
@@ -6939,22 +9181,25 @@ public class JavaParser implements Parser {
       // ('++' | '--')
       int startIndex_1 = index;
       switch(buffer.getChar(index)) {
-         case '-':
-            ++index;
-            // '-'
-            if (match = buffer.matchChar(index, '-')) {
-               ++index;
-            }
-            break;
-         case '+':
+         case '+': {
             ++index;
             // '+'
             if (match = buffer.matchChar(index, '+')) {
                ++index;
             }
             break;
-         default:
+         }
+         case '-': {
+            ++index;
+            // '-'
+            if (match = buffer.matchChar(index, '-')) {
+               ++index;
+            }
+            break;
+         }
+         default: {
             match = false;
+         }
       }
       if (! match) {
          index = startIndex_1;
@@ -6989,9 +9234,14 @@ public class JavaParser implements Parser {
       if (primary$RuleMemoStart == index) {
          if (primary$RuleMemoStart <= primary$RuleMemoEnd) {
             index = primary$RuleMemoEnd;
-            if (! currentRuleIsAtomic && primary$RuleMemoFirstNode != null) {
-               lastNode.setSibling(primary$RuleMemoFirstNode);
-               currentNode = primary$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (primary$RuleMemoStart == primary$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.PRIMARY, primary$RuleMemoStart, primary$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(primary$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(primary$RuleMemoFirstNode);
+                  currentNode = primary$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -7000,14 +9250,89 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (QualifiedExpression | ArrayAccess | Atomic)
-      // QualifiedExpression
-      match = qualifiedExpression$Rule();
-      if (! match) {
-         // ArrayAccess
-         match = arrayAccess$Rule();
-         if (! match) {
-            // Atomic
-            match = atomic$Rule();
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // QualifiedExpression
+            match = qualifiedExpression$Rule();
+            if (! match) {
+               // ArrayAccess
+               match = arrayAccess$Rule();
+               if (! match) {
+                  // Atomic
+                  match = atomic$Rule();
+               }
+            }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -7042,11 +9367,86 @@ public class JavaParser implements Parser {
       startIndex = index;
       // ((ArrayAccess | Atomic) ('.' OptionalSpacing NonWildcardTypeArguments? (ArrayAccess | Atomic))+)
       // (ArrayAccess | Atomic)
-      // ArrayAccess
-      match = arrayAccess$Rule();
-      if (! match) {
-         // Atomic
-         match = atomic$Rule();
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // ArrayAccess
+            match = arrayAccess$Rule();
+            if (! match) {
+               // Atomic
+               match = atomic$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          // ('.' OptionalSpacing NonWildcardTypeArguments? (ArrayAccess | Atomic))+
@@ -7062,17 +9462,88 @@ public class JavaParser implements Parser {
                // NonWildcardTypeArguments?
                // NonWildcardTypeArguments
                nonWildcardTypeArguments$Rule();
+               match = true;
                // (ArrayAccess | Atomic)
-               // ArrayAccess
-               match = arrayAccess$Rule();
-               if (! match) {
-                  // Atomic
-                  match = atomic$Rule();
-               }
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
+               switch(buffer.getChar(index)) {
+                  case '\"':
+                  case '$':
+                  case '\'':
+                  case '(':
+                  case '.':
+                  case '0':
+                  case '1':
+                  case '2':
+                  case '3':
+                  case '4':
+                  case '5':
+                  case '6':
+                  case '7':
+                  case '8':
+                  case '9':
+                  case 'A':
+                  case 'B':
+                  case 'C':
+                  case 'D':
+                  case 'E':
+                  case 'F':
+                  case 'G':
+                  case 'H':
+                  case 'I':
+                  case 'J':
+                  case 'K':
+                  case 'L':
+                  case 'M':
+                  case 'N':
+                  case 'O':
+                  case 'P':
+                  case 'Q':
+                  case 'R':
+                  case 'S':
+                  case 'T':
+                  case 'U':
+                  case 'V':
+                  case 'W':
+                  case 'X':
+                  case 'Y':
+                  case 'Z':
+                  case '_':
+                  case 'a':
+                  case 'b':
+                  case 'c':
+                  case 'd':
+                  case 'e':
+                  case 'f':
+                  case 'g':
+                  case 'h':
+                  case 'i':
+                  case 'j':
+                  case 'k':
+                  case 'l':
+                  case 'm':
+                  case 'n':
+                  case 'o':
+                  case 'p':
+                  case 'q':
+                  case 'r':
+                  case 's':
+                  case 't':
+                  case 'u':
+                  case 'v':
+                  case 'w':
+                  case 'x':
+                  case 'y':
+                  case 'z': {
+                     // ArrayAccess
+                     match = arrayAccess$Rule();
+                     if (! match) {
+                        // Atomic
+                        match = atomic$Rule();
+                     }
+                     break;
+                  }
+                  default: {
+                     match = false;
+                  }
                }
             } else {
                index = lastIndex_1;
@@ -7093,17 +9564,88 @@ public class JavaParser implements Parser {
                      // NonWildcardTypeArguments?
                      // NonWildcardTypeArguments
                      nonWildcardTypeArguments$Rule();
+                     match = true;
                      // (ArrayAccess | Atomic)
-                     // ArrayAccess
-                     match = arrayAccess$Rule();
-                     if (! match) {
-                        // Atomic
-                        match = atomic$Rule();
-                     }
-                     if (! match) {
-                        index = lastIndex_2;
-                        lastNode_2.setSibling(null);
-                        currentNode = lastNode_2;
+                     switch(buffer.getChar(index)) {
+                        case '\"':
+                        case '$':
+                        case '\'':
+                        case '(':
+                        case '.':
+                        case '0':
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                        case '8':
+                        case '9':
+                        case 'A':
+                        case 'B':
+                        case 'C':
+                        case 'D':
+                        case 'E':
+                        case 'F':
+                        case 'G':
+                        case 'H':
+                        case 'I':
+                        case 'J':
+                        case 'K':
+                        case 'L':
+                        case 'M':
+                        case 'N':
+                        case 'O':
+                        case 'P':
+                        case 'Q':
+                        case 'R':
+                        case 'S':
+                        case 'T':
+                        case 'U':
+                        case 'V':
+                        case 'W':
+                        case 'X':
+                        case 'Y':
+                        case 'Z':
+                        case '_':
+                        case 'a':
+                        case 'b':
+                        case 'c':
+                        case 'd':
+                        case 'e':
+                        case 'f':
+                        case 'g':
+                        case 'h':
+                        case 'i':
+                        case 'j':
+                        case 'k':
+                        case 'l':
+                        case 'm':
+                        case 'n':
+                        case 'o':
+                        case 'p':
+                        case 'q':
+                        case 'r':
+                        case 's':
+                        case 't':
+                        case 'u':
+                        case 'v':
+                        case 'w':
+                        case 'x':
+                        case 'y':
+                        case 'z': {
+                           // ArrayAccess
+                           match = arrayAccess$Rule();
+                           if (! match) {
+                              // Atomic
+                              match = atomic$Rule();
+                           }
+                           break;
+                        }
+                        default: {
+                           match = false;
+                        }
                      }
                   } else {
                      index = lastIndex_2;
@@ -7165,9 +9707,14 @@ public class JavaParser implements Parser {
       if (atomic$RuleMemoStart == index) {
          if (atomic$RuleMemoStart <= atomic$RuleMemoEnd) {
             index = atomic$RuleMemoEnd;
-            if (! currentRuleIsAtomic && atomic$RuleMemoFirstNode != null) {
-               lastNode.setSibling(atomic$RuleMemoFirstNode);
-               currentNode = atomic$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (atomic$RuleMemoStart == atomic$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ATOMIC, atomic$RuleMemoStart, atomic$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(atomic$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(atomic$RuleMemoFirstNode);
+                  currentNode = atomic$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -7176,58 +9723,225 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (ParExpression | ClassTypeReference | Literal | BasicTypeClassReference | VoidClassReference | ThisMethodCall | This | SuperMethodCall | SuperConstructorCall | SuperFieldAccess | ClassCreator | ArrayCreator | MethodCall | Identifier)
-      // ParExpression
-      match = parExpression$Rule();
-      if (! match) {
-         // ClassTypeReference
-         match = classTypeReference$Rule();
-         if (! match) {
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case '\'':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9': {
             // Literal
             match = literal$Rule();
+            break;
+         }
+         case 'n': {
+            // ClassTypeReference
+            match = classTypeReference$Rule();
+            if (! match) {
+               // Literal
+               match = literal$Rule();
+               if (! match) {
+                  // ClassCreator
+                  match = classCreator$Rule();
+                  if (! match) {
+                     // ArrayCreator
+                     match = arrayCreator$Rule();
+                     if (! match) {
+                        // MethodCall
+                        match = methodCall$Rule();
+                        if (! match) {
+                           // Identifier
+                           match = identifier$Rule();
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         }
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case '$':
+         case 'e':
+         case 'g':
+         case 'h':
+         case 'j':
+         case 'k':
+         case 'm':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 'u':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // ClassTypeReference
+            match = classTypeReference$Rule();
+            if (! match) {
+               // MethodCall
+               match = methodCall$Rule();
+               if (! match) {
+                  // Identifier
+                  match = identifier$Rule();
+               }
+            }
+            break;
+         }
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'i':
+         case 'l': {
+            // ClassTypeReference
+            match = classTypeReference$Rule();
             if (! match) {
                // BasicTypeClassReference
                match = basicTypeClassReference$Rule();
                if (! match) {
-                  // VoidClassReference
-                  match = voidClassReference$Rule();
+                  // MethodCall
+                  match = methodCall$Rule();
                   if (! match) {
-                     // ThisMethodCall
-                     match = thisMethodCall$Rule();
+                     // Identifier
+                     match = identifier$Rule();
+                  }
+               }
+            }
+            break;
+         }
+         case 's': {
+            // ClassTypeReference
+            match = classTypeReference$Rule();
+            if (! match) {
+               // BasicTypeClassReference
+               match = basicTypeClassReference$Rule();
+               if (! match) {
+                  // SuperMethodCall
+                  match = superMethodCall$Rule();
+                  if (! match) {
+                     // SuperConstructorCall
+                     match = superConstructorCall$Rule();
                      if (! match) {
-                        // This
-                        match = this$Rule();
+                        // SuperFieldAccess
+                        match = superFieldAccess$Rule();
                         if (! match) {
-                           // SuperMethodCall
-                           match = superMethodCall$Rule();
+                           // MethodCall
+                           match = methodCall$Rule();
                            if (! match) {
-                              // SuperConstructorCall
-                              match = superConstructorCall$Rule();
-                              if (! match) {
-                                 // SuperFieldAccess
-                                 match = superFieldAccess$Rule();
-                                 if (! match) {
-                                    // ClassCreator
-                                    match = classCreator$Rule();
-                                    if (! match) {
-                                       // ArrayCreator
-                                       match = arrayCreator$Rule();
-                                       if (! match) {
-                                          // MethodCall
-                                          match = methodCall$Rule();
-                                          if (! match) {
-                                             // Identifier
-                                             match = identifier$Rule();
-                                          }
-                                       }
-                                    }
-                                 }
-                              }
+                              // Identifier
+                              match = identifier$Rule();
                            }
                         }
                      }
                   }
                }
             }
+            break;
+         }
+         case 't': {
+            // ClassTypeReference
+            match = classTypeReference$Rule();
+            if (! match) {
+               // Literal
+               match = literal$Rule();
+               if (! match) {
+                  // ThisMethodCall
+                  match = thisMethodCall$Rule();
+                  if (! match) {
+                     // This
+                     match = this$Rule();
+                     if (! match) {
+                        // MethodCall
+                        match = methodCall$Rule();
+                        if (! match) {
+                           // Identifier
+                           match = identifier$Rule();
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         }
+         case 'f': {
+            // ClassTypeReference
+            match = classTypeReference$Rule();
+            if (! match) {
+               // Literal
+               match = literal$Rule();
+               if (! match) {
+                  // BasicTypeClassReference
+                  match = basicTypeClassReference$Rule();
+                  if (! match) {
+                     // MethodCall
+                     match = methodCall$Rule();
+                     if (! match) {
+                        // Identifier
+                        match = identifier$Rule();
+                     }
+                  }
+               }
+            }
+            break;
+         }
+         case 'v': {
+            // ClassTypeReference
+            match = classTypeReference$Rule();
+            if (! match) {
+               // VoidClassReference
+               match = voidClassReference$Rule();
+               if (! match) {
+                  // MethodCall
+                  match = methodCall$Rule();
+                  if (! match) {
+                     // Identifier
+                     match = identifier$Rule();
+                  }
+               }
+            }
+            break;
+         }
+         case '(': {
+            // ParExpression
+            match = parExpression$Rule();
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -7310,34 +10024,61 @@ public class JavaParser implements Parser {
       startIndex = index;
       // ((FloatLiteral | LongLiteral | IntegerLiteral | CharLiteral | StringLiteral | True | False | Null) OptionalSpacing)
       // (FloatLiteral | LongLiteral | IntegerLiteral | CharLiteral | StringLiteral | True | False | Null)
-      // FloatLiteral
-      match = floatLiteral$Rule();
-      if (! match) {
-         // LongLiteral
-         match = longLiteral$Rule();
-         if (! match) {
-            // IntegerLiteral
-            match = integerLiteral$Rule();
+      switch(buffer.getChar(index)) {
+         case '.': {
+            // FloatLiteral
+            match = floatLiteral$Rule();
+            break;
+         }
+         case 'n': {
+            // Null
+            match = null$Rule();
+            break;
+         }
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9': {
+            // FloatLiteral
+            match = floatLiteral$Rule();
             if (! match) {
-               // CharLiteral
-               match = charLiteral$Rule();
+               // LongLiteral
+               match = longLiteral$Rule();
                if (! match) {
-                  // StringLiteral
-                  match = stringLiteral$Rule();
-                  if (! match) {
-                     // True
-                     match = true$Rule();
-                     if (! match) {
-                        // False
-                        match = false$Rule();
-                        if (! match) {
-                           // Null
-                           match = null$Rule();
-                        }
-                     }
-                  }
+                  // IntegerLiteral
+                  match = integerLiteral$Rule();
                }
             }
+            break;
+         }
+         case '\"': {
+            // StringLiteral
+            match = stringLiteral$Rule();
+            break;
+         }
+         case 't': {
+            // True
+            match = true$Rule();
+            break;
+         }
+         case 'f': {
+            // False
+            match = false$Rule();
+            break;
+         }
+         case '\'': {
+            // CharLiteral
+            match = charLiteral$Rule();
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -7495,9 +10236,14 @@ public class JavaParser implements Parser {
       if (this$RuleMemoStart == index) {
          if (this$RuleMemoStart <= this$RuleMemoEnd) {
             index = this$RuleMemoEnd;
-            if (! currentRuleIsAtomic && this$RuleMemoFirstNode != null) {
-               lastNode.setSibling(this$RuleMemoFirstNode);
-               currentNode = this$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (this$RuleMemoStart == this$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.THIS, this$RuleMemoStart, this$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(this$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(this$RuleMemoFirstNode);
+                  currentNode = this$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -7548,9 +10294,14 @@ public class JavaParser implements Parser {
       if (super$RuleMemoStart == index) {
          if (super$RuleMemoStart <= super$RuleMemoEnd) {
             index = super$RuleMemoEnd;
-            if (! currentRuleIsAtomic && super$RuleMemoFirstNode != null) {
-               lastNode.setSibling(super$RuleMemoFirstNode);
-               currentNode = super$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (super$RuleMemoStart == super$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.SUPER, super$RuleMemoStart, super$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(super$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(super$RuleMemoFirstNode);
+                  currentNode = super$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -7705,9 +10456,14 @@ public class JavaParser implements Parser {
       if (new$RuleMemoStart == index) {
          if (new$RuleMemoStart <= new$RuleMemoEnd) {
             index = new$RuleMemoEnd;
-            if (! currentRuleIsAtomic && new$RuleMemoFirstNode != null) {
-               lastNode.setSibling(new$RuleMemoFirstNode);
-               currentNode = new$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (new$RuleMemoStart == new$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.NEW, new$RuleMemoStart, new$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(new$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(new$RuleMemoFirstNode);
+                  currentNode = new$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -7795,11 +10551,19 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (InitializedArrayCreator | EmptyArrayCreator)
-      // InitializedArrayCreator
-      match = initializedArrayCreator$Rule();
-      if (! match) {
-         // EmptyArrayCreator
-         match = emptyArrayCreator$Rule();
+      switch(buffer.getChar(index)) {
+         case 'n': {
+            // InitializedArrayCreator
+            match = initializedArrayCreator$Rule();
+            if (! match) {
+               // EmptyArrayCreator
+               match = emptyArrayCreator$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -7824,9 +10588,14 @@ public class JavaParser implements Parser {
       if (methodCall$RuleMemoStart == index) {
          if (methodCall$RuleMemoStart <= methodCall$RuleMemoEnd) {
             index = methodCall$RuleMemoEnd;
-            if (! currentRuleIsAtomic && methodCall$RuleMemoFirstNode != null) {
-               lastNode.setSibling(methodCall$RuleMemoFirstNode);
-               currentNode = methodCall$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (methodCall$RuleMemoStart == methodCall$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.METHOD_CALL, methodCall$RuleMemoStart, methodCall$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(methodCall$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(methodCall$RuleMemoFirstNode);
+                  currentNode = methodCall$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -7873,9 +10642,14 @@ public class JavaParser implements Parser {
       if (arrayIndex$RuleMemoStart == index) {
          if (arrayIndex$RuleMemoStart <= arrayIndex$RuleMemoEnd) {
             index = arrayIndex$RuleMemoEnd;
-            if (! currentRuleIsAtomic && arrayIndex$RuleMemoFirstNode != null) {
-               lastNode.setSibling(arrayIndex$RuleMemoFirstNode);
-               currentNode = arrayIndex$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (arrayIndex$RuleMemoStart == arrayIndex$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ARRAY_INDEX, arrayIndex$RuleMemoStart, arrayIndex$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(arrayIndex$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(arrayIndex$RuleMemoFirstNode);
+                  currentNode = arrayIndex$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -7965,9 +10739,14 @@ public class JavaParser implements Parser {
       if (basicType$RuleMemoStart == index) {
          if (basicType$RuleMemoStart <= basicType$RuleMemoEnd) {
             index = basicType$RuleMemoEnd;
-            if (! currentRuleIsAtomic && basicType$RuleMemoFirstNode != null) {
-               lastNode.setSibling(basicType$RuleMemoFirstNode);
-               currentNode = basicType$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (basicType$RuleMemoStart == basicType$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.BASIC_TYPE, basicType$RuleMemoStart, basicType$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(basicType$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(basicType$RuleMemoFirstNode);
+                  currentNode = basicType$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -8020,72 +10799,83 @@ public class JavaParser implements Parser {
       startIndex = index;
       // ('byte' | 'short' | 'char' | 'int' | 'long' | 'float' | 'double' | 'boolean')
       switch(buffer.getChar(index)) {
-         case 'f':
-            ++index;
-            // 'loat'
-            if (match = stringTest("loat", 4)) {
-               index += 4;
-            }
-            break;
-         case 'd':
-            ++index;
-            // 'ouble'
-            if (match = stringTest("ouble", 5)) {
-               index += 5;
-            }
-            break;
-         case 's':
-            ++index;
-            // 'hort'
-            if (match = stringTest("hort", 4)) {
-               index += 4;
-            }
-            break;
-         case 'c':
-            ++index;
-            // 'har'
-            if (match = stringTest("har", 3)) {
-               index += 3;
-            }
-            break;
-         case 'b':
-            ++index;
-            // ('oolean' | 'yte')
-            switch(buffer.getChar(index)) {
-               case 'o':
-                  ++index;
-                  // 'olean'
-                  if (match = stringTest("olean", 5)) {
-                     index += 5;
-                  }
-                  break;
-               case 'y':
-                  ++index;
-                  // 'te'
-                  if (match = stringTest("te", 2)) {
-                     index += 2;
-                  }
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'l':
+         case 'l': {
             ++index;
             // 'ong'
             if (match = stringTest("ong", 3)) {
                index += 3;
             }
             break;
-         case 'i':
+         }
+         case 'b': {
+            ++index;
+            // ('oolean' | 'yte')
+            switch(buffer.getChar(index)) {
+               case 'o': {
+                  ++index;
+                  // 'olean'
+                  if (match = stringTest("olean", 5)) {
+                     index += 5;
+                  }
+                  break;
+               }
+               case 'y': {
+                  ++index;
+                  // 'te'
+                  if (match = stringTest("te", 2)) {
+                     index += 2;
+                  }
+                  break;
+               }
+               default: {
+                  match = false;
+               }
+            }
+            break;
+         }
+         case 's': {
+            ++index;
+            // 'hort'
+            if (match = stringTest("hort", 4)) {
+               index += 4;
+            }
+            break;
+         }
+         case 'c': {
+            ++index;
+            // 'har'
+            if (match = stringTest("har", 3)) {
+               index += 3;
+            }
+            break;
+         }
+         case 'd': {
+            ++index;
+            // 'ouble'
+            if (match = stringTest("ouble", 5)) {
+               index += 5;
+            }
+            break;
+         }
+         case 'f': {
+            ++index;
+            // 'loat'
+            if (match = stringTest("loat", 4)) {
+               index += 4;
+            }
+            break;
+         }
+         case 'i': {
             ++index;
             // 'nt'
             if (match = stringTest("nt", 2)) {
                index += 2;
             }
             break;
-         default:
+         }
+         default: {
             match = false;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
@@ -8318,11 +11108,76 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (QualifiedClassName | BasicType)
-      // QualifiedClassName
-      match = qualifiedClassName$Rule();
-      if (! match) {
-         // BasicType
-         match = basicType$Rule();
+      switch(buffer.getChar(index)) {
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case '$':
+         case 'e':
+         case 'g':
+         case 'h':
+         case 'j':
+         case 'k':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // QualifiedClassName
+            match = qualifiedClassName$Rule();
+            break;
+         }
+         case 'b':
+         case 'c':
+         case 's':
+         case 'd':
+         case 'f':
+         case 'i':
+         case 'l': {
+            // QualifiedClassName
+            match = qualifiedClassName$Rule();
+            if (! match) {
+               // BasicType
+               match = basicType$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -8495,11 +11350,72 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (TypedName | Identifier)
-      // TypedName
-      match = typedName$Rule();
-      if (! match) {
-         // Identifier
-         match = identifier$Rule();
+      switch(buffer.getChar(index)) {
+         case '$':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // TypedName
+            match = typedName$Rule();
+            if (! match) {
+               // Identifier
+               match = identifier$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -8524,11 +11440,76 @@ public class JavaParser implements Parser {
       startIndex = index;
       // ((BasicType | QualifiedClassName) Dim+)
       // (BasicType | QualifiedClassName)
-      // BasicType
-      match = basicType$Rule();
-      if (! match) {
-         // QualifiedClassName
-         match = qualifiedClassName$Rule();
+      switch(buffer.getChar(index)) {
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case '$':
+         case 'e':
+         case 'g':
+         case 'h':
+         case 'j':
+         case 'k':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // QualifiedClassName
+            match = qualifiedClassName$Rule();
+            break;
+         }
+         case 'b':
+         case 'c':
+         case 's':
+         case 'd':
+         case 'f':
+         case 'i':
+         case 'l': {
+            // BasicType
+            match = basicType$Rule();
+            if (! match) {
+               // QualifiedClassName
+               match = qualifiedClassName$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          // Dim+
@@ -8636,11 +11617,72 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (TypedClassName | Identifier)
-      // TypedClassName
-      match = typedClassName$Rule();
-      if (! match) {
-         // Identifier
-         match = identifier$Rule();
+      switch(buffer.getChar(index)) {
+         case '$':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // TypedClassName
+            match = typedClassName$Rule();
+            if (! match) {
+               // Identifier
+               match = identifier$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -8756,11 +11798,73 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (ReferenceType | QueryType)
-      // ReferenceType
-      match = referenceType$Rule();
-      if (! match) {
-         // QueryType
-         match = queryType$Rule();
+      switch(buffer.getChar(index)) {
+         case '?': {
+            // QueryType
+            match = queryType$Rule();
+            break;
+         }
+         case '$':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // ReferenceType
+            match = referenceType$Rule();
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -8800,22 +11904,25 @@ public class JavaParser implements Parser {
             // ('extends' | 'super')
             int startIndex_3 = index;
             switch(buffer.getChar(index)) {
-               case 'e':
-                  ++index;
-                  // 'xtends'
-                  if (match = stringTest("xtends", 6)) {
-                     index += 6;
-                  }
-                  break;
-               case 's':
+               case 's': {
                   ++index;
                   // 'uper'
                   if (match = stringTest("uper", 4)) {
                      index += 4;
                   }
                   break;
-               default:
+               }
+               case 'e': {
+                  ++index;
+                  // 'xtends'
+                  if (match = stringTest("xtends", 6)) {
+                     index += 6;
+                  }
+                  break;
+               }
+               default: {
                   match = false;
+               }
             }
             if (! match) {
                index = startIndex_3;
@@ -9007,30 +12114,137 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (AnnotationMethod | AnnotationsConstants | ClassDeclaration | EnumDeclaration | InterfaceDeclaration | AnnotationDeclaration | Semicolon)
-      // AnnotationMethod
-      match = annotationMethod$Rule();
-      if (! match) {
-         // AnnotationsConstants
-         match = annotationsConstants$Rule();
-         if (! match) {
-            // ClassDeclaration
-            match = classDeclaration$Rule();
+      switch(buffer.getChar(index)) {
+         case ';': {
+            // Semicolon
+            match = semicolon$Rule();
+            break;
+         }
+         case '@':
+         case 'p':
+         case 'a':
+         case 's':
+         case 't':
+         case 'f':
+         case 'v':
+         case 'n': {
+            // AnnotationMethod
+            match = annotationMethod$Rule();
             if (! match) {
-               // EnumDeclaration
-               match = enumDeclaration$Rule();
+               // AnnotationsConstants
+               match = annotationsConstants$Rule();
                if (! match) {
-                  // InterfaceDeclaration
-                  match = interfaceDeclaration$Rule();
+                  // ClassDeclaration
+                  match = classDeclaration$Rule();
                   if (! match) {
-                     // AnnotationDeclaration
-                     match = annotationDeclaration$Rule();
+                     // EnumDeclaration
+                     match = enumDeclaration$Rule();
                      if (! match) {
-                        // Semicolon
-                        match = semicolon$Rule();
+                        // InterfaceDeclaration
+                        match = interfaceDeclaration$Rule();
+                        if (! match) {
+                           // AnnotationDeclaration
+                           match = annotationDeclaration$Rule();
+                        }
                      }
                   }
                }
             }
+            break;
+         }
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'b':
+         case 'd':
+         case '$':
+         case 'g':
+         case 'h':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'o':
+         case 'q':
+         case 'r':
+         case 'u':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // AnnotationMethod
+            match = annotationMethod$Rule();
+            if (! match) {
+               // AnnotationsConstants
+               match = annotationsConstants$Rule();
+            }
+            break;
+         }
+         case 'c': {
+            // AnnotationMethod
+            match = annotationMethod$Rule();
+            if (! match) {
+               // AnnotationsConstants
+               match = annotationsConstants$Rule();
+               if (! match) {
+                  // ClassDeclaration
+                  match = classDeclaration$Rule();
+               }
+            }
+            break;
+         }
+         case 'e': {
+            // AnnotationMethod
+            match = annotationMethod$Rule();
+            if (! match) {
+               // AnnotationsConstants
+               match = annotationsConstants$Rule();
+               if (! match) {
+                  // EnumDeclaration
+                  match = enumDeclaration$Rule();
+               }
+            }
+            break;
+         }
+         case 'i': {
+            // AnnotationMethod
+            match = annotationMethod$Rule();
+            if (! match) {
+               // AnnotationsConstants
+               match = annotationsConstants$Rule();
+               if (! match) {
+                  // InterfaceDeclaration
+                  match = interfaceDeclaration$Rule();
+               }
+            }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -9182,14 +12396,95 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (ConditionalExpression | Annotation | ElementValueArrayInitializer)
-      // ConditionalExpression
-      match = conditionalExpression$Rule();
-      if (! match) {
-         // Annotation
-         match = annotation$Rule();
-         if (! match) {
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '~': {
+            // ConditionalExpression
+            match = conditionalExpression$Rule();
+            break;
+         }
+         case '{': {
             // ElementValueArrayInitializer
             match = elementValueArrayInitializer$Rule();
+            break;
+         }
+         case '@': {
+            // Annotation
+            match = annotation$Rule();
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -9214,11 +12509,19 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (NormalAnnotationRest | SingleElementAnnotationRest)
-      // NormalAnnotationRest
-      match = normalAnnotationRest$Rule();
-      if (! match) {
-         // SingleElementAnnotationRest
-         match = singleElementAnnotationRest$Rule();
+      switch(buffer.getChar(index)) {
+         case '(': {
+            // NormalAnnotationRest
+            match = normalAnnotationRest$Rule();
+            if (! match) {
+               // SingleElementAnnotationRest
+               match = singleElementAnnotationRest$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -9546,9 +12849,14 @@ public class JavaParser implements Parser {
       if (spacing$RuleMemoStart == index) {
          if (spacing$RuleMemoStart <= spacing$RuleMemoEnd) {
             index = spacing$RuleMemoEnd;
-            if (! currentRuleIsAtomic && spacing$RuleMemoFirstNode != null) {
-               lastNode.setSibling(spacing$RuleMemoFirstNode);
-               currentNode = spacing$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (spacing$RuleMemoStart == spacing$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.SPACING, spacing$RuleMemoStart, spacing$RuleMemoEnd, false, false);
+                  lastNode.setSibling(currentNode);
+               } else if(spacing$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(spacing$RuleMemoFirstNode);
+                  currentNode = spacing$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -9558,35 +12866,77 @@ public class JavaParser implements Parser {
       startIndex = index;
       // (BlockComment | LineComment | NewLine | Spaces)+
       // (BlockComment | LineComment | NewLine | Spaces)
-      // BlockComment
-      match = blockComment$Rule();
-      if (! match) {
-         // LineComment
-         match = lineComment$Rule();
-         if (! match) {
+      switch(buffer.getChar(index)) {
+         case ' ':
+         case '\t':
+         case '\f': {
+            // Spaces
+            match = spaces$Rule();
+            break;
+         }
+         case '\r': {
             // NewLine
             match = newLine$Rule();
             if (! match) {
                // Spaces
                match = spaces$Rule();
             }
+            break;
          }
-      }
-      if (match) {
-         do {
-            // (BlockComment | LineComment | NewLine | Spaces)
+         case '/': {
             // BlockComment
             match = blockComment$Rule();
             if (! match) {
                // LineComment
                match = lineComment$Rule();
-               if (! match) {
+            }
+            break;
+         }
+         case '\n': {
+            // NewLine
+            match = newLine$Rule();
+            break;
+         }
+         default: {
+            match = false;
+         }
+      }
+      if (match) {
+         do {
+            // (BlockComment | LineComment | NewLine | Spaces)
+            switch(buffer.getChar(index)) {
+               case ' ':
+               case '\t':
+               case '\f': {
+                  // Spaces
+                  match = spaces$Rule();
+                  break;
+               }
+               case '\r': {
                   // NewLine
                   match = newLine$Rule();
                   if (! match) {
                      // Spaces
                      match = spaces$Rule();
                   }
+                  break;
+               }
+               case '/': {
+                  // BlockComment
+                  match = blockComment$Rule();
+                  if (! match) {
+                     // LineComment
+                     match = lineComment$Rule();
+                  }
+                  break;
+               }
+               case '\n': {
+                  // NewLine
+                  match = newLine$Rule();
+                  break;
+               }
+               default: {
+                  match = false;
                }
             }
          } while(match);
@@ -9624,9 +12974,14 @@ public class JavaParser implements Parser {
       if (optionalSpacing$RuleMemoStart == index) {
          if (optionalSpacing$RuleMemoStart <= optionalSpacing$RuleMemoEnd) {
             index = optionalSpacing$RuleMemoEnd;
-            if (! currentRuleIsAtomic && optionalSpacing$RuleMemoFirstNode != null) {
-               lastNode.setSibling(optionalSpacing$RuleMemoFirstNode);
-               currentNode = optionalSpacing$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               if (optionalSpacing$RuleMemoStart == optionalSpacing$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.SPACING, optionalSpacing$RuleMemoStart, optionalSpacing$RuleMemoEnd, false, false);
+                  lastNode.setSibling(currentNode);
+               } else if(optionalSpacing$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(optionalSpacing$RuleMemoFirstNode);
+                  currentNode = optionalSpacing$RuleMemoLastNode;
+               }
             }
             return true;
          } else {
@@ -9637,18 +12992,39 @@ public class JavaParser implements Parser {
       // (BlockComment | LineComment | NewLine | Spaces)*
       do {
          // (BlockComment | LineComment | NewLine | Spaces)
-         // BlockComment
-         match = blockComment$Rule();
-         if (! match) {
-            // LineComment
-            match = lineComment$Rule();
-            if (! match) {
+         switch(buffer.getChar(index)) {
+            case ' ':
+            case '\t':
+            case '\f': {
+               // Spaces
+               match = spaces$Rule();
+               break;
+            }
+            case '\r': {
                // NewLine
                match = newLine$Rule();
                if (! match) {
                   // Spaces
                   match = spaces$Rule();
                }
+               break;
+            }
+            case '/': {
+               // BlockComment
+               match = blockComment$Rule();
+               if (! match) {
+                  // LineComment
+                  match = lineComment$Rule();
+               }
+               break;
+            }
+            case '\n': {
+               // NewLine
+               match = newLine$Rule();
+               break;
+            }
+            default: {
+               match = false;
             }
          }
       } while(match);
@@ -9677,55 +13053,65 @@ public class JavaParser implements Parser {
       // (' ' | '\r' | '\t' | '\f')+
       // (' ' | '\r' | '\t' | '\f')
       switch(buffer.getChar(index)) {
-         case ' ':
+         case '\f': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         case '\r':
+         }
+         case '\r': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         case '\f':
+         }
+         case ' ': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         case '\t':
+         }
+         case '\t': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         default:
+         }
+         default: {
             match = false;
+         }
       }
       if (match) {
          do {
             // (' ' | '\r' | '\t' | '\f')
             switch(buffer.getChar(index)) {
-               case ' ':
+               case '\f': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\r':
+               }
+               case '\r': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\f':
+               }
+               case ' ': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\t':
+               }
+               case '\t': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
          } while(match);
          match = true;
@@ -9806,20 +13192,23 @@ public class JavaParser implements Parser {
       startIndex = index;
       // ('\n' | '\r\n')
       switch(buffer.getChar(index)) {
-         case '\r':
+         case '\r': {
             ++index;
             // '\n'
             if (match = buffer.matchChar(index, '\n')) {
                ++index;
             }
             break;
-         case '\n':
+         }
+         case '\n': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         default:
+         }
+         default: {
             match = false;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
@@ -9899,11 +13288,33 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (HexFloat | DecimalFloat)
-      // HexFloat
-      match = hexFloat$Rule();
-      if (! match) {
-         // DecimalFloat
-         match = decimalFloat$Rule();
+      switch(buffer.getChar(index)) {
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case '.': {
+            // DecimalFloat
+            match = decimalFloat$Rule();
+            break;
+         }
+         case '0': {
+            // HexFloat
+            match = hexFloat$Rule();
+            if (! match) {
+               // DecimalFloat
+               match = decimalFloat$Rule();
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -9934,18 +13345,21 @@ public class JavaParser implements Parser {
       if (match) {
          // ('l' | 'L')
          switch(buffer.getChar(index)) {
-            case 'l':
+            case 'l': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            case 'L':
+            }
+            case 'L': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            default:
+            }
+            default: {
                match = false;
+            }
          }
       }
       if (match) {
@@ -9973,6 +13387,15 @@ public class JavaParser implements Parser {
       if (integerLiteral$RuleMemoStart == index) {
          if (integerLiteral$RuleMemoStart <= integerLiteral$RuleMemoEnd) {
             index = integerLiteral$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (integerLiteral$RuleMemoStart == integerLiteral$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.INTEGER_LITERAL, integerLiteral$RuleMemoStart, integerLiteral$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(integerLiteral$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(integerLiteral$RuleMemoFirstNode);
+                  currentNode = integerLiteral$RuleMemoLastNode;
+               }
+            }
             return true;
          } else {
             return false;
@@ -9981,42 +13404,34 @@ public class JavaParser implements Parser {
       currentRuleIsAtomic = true;
       startIndex = index;
       // (HexNumeral | OctalNumeral | DecimalNumeral)
-      // ('0' ('x' | 'X') HexDigit+)
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // '0'
-      match = charMatcher('0');
-      if (match) {
-         // ('x' | 'X')
-         switch(buffer.getChar(index)) {
-            case 'x':
-               ++index;
-               // <EMPTY>
-               match = true;
-               break;
-            case 'X':
-               ++index;
-               // <EMPTY>
-               match = true;
-               break;
-            default:
-               match = false;
-         }
-         if (match) {
-            // HexDigit+
-            // ('a'-'f' | 'A'-'F' | '0'-'9')
-            // 'a'-'f'
-            match = charRangeMatcher('a', 'f');
-            if (! match) {
-               // 'A'-'F'
-               match = charRangeMatcher('A', 'F');
-               if (! match) {
-                  // '0'-'9'
-                  match = charRangeMatcher('0', '9');
-               }
-            }
+      switch(buffer.getChar(index)) {
+         case '0': {
+            // ('0' ('x' | 'X') HexDigit+)
+            Node lastNode_1 = currentNode;
+            int lastIndex_1 = index;
+            // '0'
+            match = charMatcher('0');
             if (match) {
-               do {
+               // ('x' | 'X')
+               switch(buffer.getChar(index)) {
+                  case 'x': {
+                     ++index;
+                     // <EMPTY>
+                     match = true;
+                     break;
+                  }
+                  case 'X': {
+                     ++index;
+                     // <EMPTY>
+                     match = true;
+                     break;
+                  }
+                  default: {
+                     match = false;
+                  }
+               }
+               if (match) {
+                  // HexDigit+
                   // ('a'-'f' | 'A'-'F' | '0'-'9')
                   // 'a'-'f'
                   match = charRangeMatcher('a', 'f');
@@ -10028,50 +13443,99 @@ public class JavaParser implements Parser {
                         match = charRangeMatcher('0', '9');
                      }
                   }
-               } while(match);
-               match = true;
+                  if (match) {
+                     do {
+                        // ('a'-'f' | 'A'-'F' | '0'-'9')
+                        // 'a'-'f'
+                        match = charRangeMatcher('a', 'f');
+                        if (! match) {
+                           // 'A'-'F'
+                           match = charRangeMatcher('A', 'F');
+                           if (! match) {
+                              // '0'-'9'
+                              match = charRangeMatcher('0', '9');
+                           }
+                        }
+                     } while(match);
+                     match = true;
+                  }
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
+               } else {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+               }
             }
             if (! match) {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-               currentNode = lastNode_1;
-            }
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-         }
-      }
-      if (! match) {
-         // ('0' '0'-'7'+)
-         Node lastNode_2 = currentNode;
-         int lastIndex_2 = index;
-         // '0'
-         match = charMatcher('0');
-         if (match) {
-            // '0'-'7'+
-            // '0'-'7'
-            match = charRangeMatcher('0', '7');
-            if (match) {
-               do {
+               // ('0' '0'-'7'+)
+               Node lastNode_2 = currentNode;
+               int lastIndex_2 = index;
+               // '0'
+               match = charMatcher('0');
+               if (match) {
+                  // '0'-'7'+
                   // '0'-'7'
                   match = charRangeMatcher('0', '7');
-               } while(match);
-               match = true;
+                  if (match) {
+                     do {
+                        // '0'-'7'
+                        match = charRangeMatcher('0', '7');
+                     } while(match);
+                     match = true;
+                  }
+                  if (! match) {
+                     index = lastIndex_2;
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
+                  }
+               }
+               if (! match) {
+                  // ('0' | ('1'-'9' Digit*))
+                  // '0'
+                  match = charMatcher('0');
+                  if (! match) {
+                     // ('1'-'9' Digit*)
+                     Node lastNode_3 = currentNode;
+                     int lastIndex_3 = index;
+                     // '1'-'9'
+                     match = charRangeMatcher('1', '9');
+                     if (match) {
+                        // Digit*
+                        do {
+                           // '0'-'9'
+                           match = charRangeMatcher('0', '9');
+                        } while(match);
+                        match = true;
+                        if (! match) {
+                           index = lastIndex_3;
+                           lastNode_3.setSibling(null);
+                           currentNode = lastNode_3;
+                        }
+                     }
+                  }
+               }
             }
-            if (! match) {
-               index = lastIndex_2;
-               lastNode_2.setSibling(null);
-               currentNode = lastNode_2;
-            }
+            break;
          }
-         if (! match) {
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9': {
             // ('0' | ('1'-'9' Digit*))
             // '0'
             match = charMatcher('0');
             if (! match) {
                // ('1'-'9' Digit*)
-               Node lastNode_3 = currentNode;
-               int lastIndex_3 = index;
+               Node lastNode_4 = currentNode;
+               int lastIndex_4 = index;
                // '1'-'9'
                match = charRangeMatcher('1', '9');
                if (match) {
@@ -10081,23 +13545,37 @@ public class JavaParser implements Parser {
                      match = charRangeMatcher('0', '9');
                   } while(match);
                   match = true;
+                  if (! match) {
+                     index = lastIndex_4;
+                     lastNode_4.setSibling(null);
+                     currentNode = lastNode_4;
+                  }
                }
             }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          integerLiteral$RuleMemoStart = startIndex;
          integerLiteral$RuleMemoEnd = index;
-         if (! currentRuleIsAtomic) {
+         if (currentRuleIsAtomic) {
+            integerLiteral$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.INTEGER_LITERAL, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            integerLiteral$RuleMemoFirstNode = currentNode;
+            integerLiteral$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
          integerLiteral$RuleMemoStart = startIndex;
          integerLiteral$RuleMemoEnd = -1;
+         integerLiteral$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -10127,48 +13605,57 @@ public class JavaParser implements Parser {
             // (('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\') | OctalEscape | UnicodeEscape)
             // ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\')
             switch(buffer.getChar(index)) {
-               case '\'':
+               case '\\': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case 'f':
+               }
+               case 'n': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case 't':
+               }
+               case 'b': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case 'b':
+               }
+               case 'r': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case 'r':
+               }
+               case '\"': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\"':
+               }
+               case 't': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case 'n':
+               }
+               case 'f': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\\':
+               }
+               case '\'': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             if (! match) {
                // (('0'-'3' '0'-'7' '0'-'7') | ('0'-'7' '0'-'7') | '0'-'7')
@@ -10451,18 +13938,21 @@ public class JavaParser implements Parser {
             // (''' | '\')
             int startIndex_8 = index;
             switch(buffer.getChar(index)) {
-               case '\'':
+               case '\\': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\\':
+               }
+               case '\'': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             index = startIndex_8;
             match = ! match;
@@ -10521,48 +14011,57 @@ public class JavaParser implements Parser {
                // (('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\') | OctalEscape | UnicodeEscape)
                // ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\')
                switch(buffer.getChar(index)) {
-                  case '\'':
+                  case '\\': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case 'f':
+                  }
+                  case 'n': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case 't':
+                  }
+                  case 'b': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case 'b':
+                  }
+                  case 'r': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case 'r':
+                  }
+                  case '\"': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case '\"':
+                  }
+                  case 't': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case 'n':
+                  }
+                  case 'f': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case '\\':
+                  }
+                  case '\'': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  default:
+                  }
+                  default: {
                      match = false;
+                  }
                }
                if (! match) {
                   // (('0'-'3' '0'-'7' '0'-'7') | ('0'-'7' '0'-'7') | '0'-'7')
@@ -10845,28 +14344,33 @@ public class JavaParser implements Parser {
                // ('\r' | '\n' | '"' | '\')
                int startIndex_8 = index;
                switch(buffer.getChar(index)) {
-                  case '\"':
+                  case '\\': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case '\r':
+                  }
+                  case '\r': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case '\\':
+                  }
+                  case '\"': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case '\n':
+                  }
+                  case '\n': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  default:
+                  }
+                  default: {
                      match = false;
+                  }
                }
                index = startIndex_8;
                match = ! match;
@@ -11014,18 +14518,21 @@ public class JavaParser implements Parser {
          ++index;
          // ('x' | 'X')
          switch(buffer.getChar(index)) {
-            case 'x':
+            case 'x': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            case 'X':
+            }
+            case 'X': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            default:
+            }
+            default: {
                match = false;
+            }
          }
       } else {
          match = false;
@@ -11098,18 +14605,21 @@ public class JavaParser implements Parser {
          if (match) {
             // ('x' | 'X')
             switch(buffer.getChar(index)) {
-               case 'x':
+               case 'x': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case 'X':
+               }
+               case 'X': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             if (match) {
                // HexDigit+
@@ -11161,35 +14671,41 @@ public class JavaParser implements Parser {
          // (('p' | 'P') ('+' | '-')? Digit+)
          // ('p' | 'P')
          switch(buffer.getChar(index)) {
-            case 'p':
+            case 'p': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            case 'P':
+            }
+            case 'P': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            default:
+            }
+            default: {
                match = false;
+            }
          }
          if (match) {
             // ('+' | '-')?
             // ('+' | '-')
             switch(buffer.getChar(index)) {
-               case '-':
+               case '+': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '+':
+               }
+               case '-': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             // Digit+
             // '0'-'9'
@@ -11206,28 +14722,33 @@ public class JavaParser implements Parser {
             // ('f' | 'F' | 'd' | 'D')?
             // ('f' | 'F' | 'd' | 'D')
             switch(buffer.getChar(index)) {
-               case 'f':
+               case 'd': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case 'F':
+               }
+               case 'D': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case 'd':
+               }
+               case 'f': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case 'D':
+               }
+               case 'F': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             match = true;
          }
@@ -11286,34 +14807,40 @@ public class JavaParser implements Parser {
             int lastIndex_2 = index;
             // ('e' | 'E')
             switch(buffer.getChar(index)) {
-               case 'e':
+               case 'e': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case 'E':
+               }
+               case 'E': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             // ('+' | '-')?
             // ('+' | '-')
             switch(buffer.getChar(index)) {
-               case '-':
+               case '+': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '+':
+               }
+               case '-': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             // Digit+
             // '0'-'9'
@@ -11334,28 +14861,33 @@ public class JavaParser implements Parser {
             // ('f' | 'F' | 'd' | 'D')?
             // ('f' | 'F' | 'd' | 'D')
             switch(buffer.getChar(index)) {
-               case 'f':
+               case 'd': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case 'F':
+               }
+               case 'D': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case 'd':
+               }
+               case 'f': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case 'D':
+               }
+               case 'F': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             match = true;
          } else {
@@ -11387,35 +14919,41 @@ public class JavaParser implements Parser {
                int lastIndex_4 = index;
                // ('e' | 'E')
                switch(buffer.getChar(index)) {
-                  case 'e':
+                  case 'e': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case 'E':
+                  }
+                  case 'E': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  default:
+                  }
+                  default: {
                      match = false;
+                  }
                }
                if (match) {
                   // ('+' | '-')?
                   // ('+' | '-')
                   switch(buffer.getChar(index)) {
-                     case '-':
+                     case '+': {
                         ++index;
                         // <EMPTY>
                         match = true;
                         break;
-                     case '+':
+                     }
+                     case '-': {
                         ++index;
                         // <EMPTY>
                         match = true;
                         break;
-                     default:
+                     }
+                     default: {
                         match = false;
+                     }
                   }
                   // Digit+
                   // '0'-'9'
@@ -11437,28 +14975,33 @@ public class JavaParser implements Parser {
                // ('f' | 'F' | 'd' | 'D')?
                // ('f' | 'F' | 'd' | 'D')
                switch(buffer.getChar(index)) {
-                  case 'f':
+                  case 'd': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case 'F':
+                  }
+                  case 'D': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case 'd':
+                  }
+                  case 'f': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case 'D':
+                  }
+                  case 'F': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  default:
+                  }
+                  default: {
                      match = false;
+                  }
                }
                match = true;
             } else {
@@ -11486,35 +15029,41 @@ public class JavaParser implements Parser {
                int lastIndex_6 = index;
                // ('e' | 'E')
                switch(buffer.getChar(index)) {
-                  case 'e':
+                  case 'e': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case 'E':
+                  }
+                  case 'E': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  default:
+                  }
+                  default: {
                      match = false;
+                  }
                }
                if (match) {
                   // ('+' | '-')?
                   // ('+' | '-')
                   switch(buffer.getChar(index)) {
-                     case '-':
+                     case '+': {
                         ++index;
                         // <EMPTY>
                         match = true;
                         break;
-                     case '+':
+                     }
+                     case '-': {
                         ++index;
                         // <EMPTY>
                         match = true;
                         break;
-                     default:
+                     }
+                     default: {
                         match = false;
+                     }
                   }
                   // Digit+
                   // '0'-'9'
@@ -11536,28 +15085,33 @@ public class JavaParser implements Parser {
                   // ('f' | 'F' | 'd' | 'D')?
                   // ('f' | 'F' | 'd' | 'D')
                   switch(buffer.getChar(index)) {
-                     case 'f':
+                     case 'd': {
                         ++index;
                         // <EMPTY>
                         match = true;
                         break;
-                     case 'F':
+                     }
+                     case 'D': {
                         ++index;
                         // <EMPTY>
                         match = true;
                         break;
-                     case 'd':
+                     }
+                     case 'f': {
                         ++index;
                         // <EMPTY>
                         match = true;
                         break;
-                     case 'D':
+                     }
+                     case 'F': {
                         ++index;
                         // <EMPTY>
                         match = true;
                         break;
-                     default:
+                     }
+                     default: {
                         match = false;
+                     }
                   }
                   match = true;
                } else {
@@ -11586,35 +15140,41 @@ public class JavaParser implements Parser {
                   int lastIndex_8 = index;
                   // ('e' | 'E')
                   switch(buffer.getChar(index)) {
-                     case 'e':
+                     case 'e': {
                         ++index;
                         // <EMPTY>
                         match = true;
                         break;
-                     case 'E':
+                     }
+                     case 'E': {
                         ++index;
                         // <EMPTY>
                         match = true;
                         break;
-                     default:
+                     }
+                     default: {
                         match = false;
+                     }
                   }
                   if (match) {
                      // ('+' | '-')?
                      // ('+' | '-')
                      switch(buffer.getChar(index)) {
-                        case '-':
+                        case '+': {
                            ++index;
                            // <EMPTY>
                            match = true;
                            break;
-                        case '+':
+                        }
+                        case '-': {
                            ++index;
                            // <EMPTY>
                            match = true;
                            break;
-                        default:
+                        }
+                        default: {
                            match = false;
+                        }
                      }
                      // Digit+
                      // '0'-'9'
@@ -11635,28 +15195,33 @@ public class JavaParser implements Parser {
                   match = true;
                   // ('f' | 'F' | 'd' | 'D')
                   switch(buffer.getChar(index)) {
-                     case 'f':
+                     case 'd': {
                         ++index;
                         // <EMPTY>
                         match = true;
                         break;
-                     case 'F':
+                     }
+                     case 'D': {
                         ++index;
                         // <EMPTY>
                         match = true;
                         break;
-                     case 'd':
+                     }
+                     case 'f': {
                         ++index;
                         // <EMPTY>
                         match = true;
                         break;
-                     case 'D':
+                     }
+                     case 'F': {
                         ++index;
                         // <EMPTY>
                         match = true;
                         break;
-                     default:
+                     }
+                     default: {
                         match = false;
+                     }
                   }
                }
             }

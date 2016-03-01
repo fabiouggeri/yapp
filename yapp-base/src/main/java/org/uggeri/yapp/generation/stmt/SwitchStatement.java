@@ -7,6 +7,7 @@
 package org.uggeri.yapp.generation.stmt;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public interface SwitchStatement extends Statement {
    
-   public SwitchOption switchOption(final Object... literalValues);
+   public SwitchOption switchOption(final Set<?> literalValues);
    
    public List<SwitchOption> listOptions();
    

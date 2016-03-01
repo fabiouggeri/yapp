@@ -34,11 +34,11 @@ import org.uggeri.yapp.generation.stmt.Expression;
  */
 public class JavaDoubleExpressionOperator extends JavaExpression implements DoubleOperandExpression {
  
-   private Expression leftExpression;
+   private final Expression leftExpression;
    
-   private Operator operator;
+   private final Operator operator;
    
-   private Expression rightExpression;
+   private final Expression rightExpression;
 
    public JavaDoubleExpressionOperator(Expression leftExpression, Operator operator, Expression rightExpression) {
       this.leftExpression = leftExpression;

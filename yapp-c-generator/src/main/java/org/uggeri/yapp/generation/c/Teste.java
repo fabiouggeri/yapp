@@ -32,8 +32,8 @@ public class Teste {
          GrammarLoader gr;
          Grammar g;
          gr = new GrammarLoader();
-         g = gr.loadGrammar(new File("d:\\Users\\fabio_uggeri\\Sicredi\\sistemas\\externos\\yapp\\yapp-java-runtime\\src\\main\\java\\br\\com\\sicredi\\yapp\\runtime\\java\\test\\Java.gy"));
-         options = new CParserGenerationOptions(new File("d:\\Users\\fabio_uggeri\\Sicredi\\sistemas\\externos\\yapp\\yapp-c-runtime\\yapp-c-runtime-lib\\src\\test\\c"));
+         g = gr.loadGrammar(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test\\Java.gy"));
+         options = new CParserGenerationOptions(new File("E:\\desenvolvimento\\yapp\\yapp-c-runtime\\yapp-c-runtime-lib\\src\\test\\c"));
          options.setGenerateTraceCode(false);
          options.setProfile(false);
          options.setCatchMismatches(false);

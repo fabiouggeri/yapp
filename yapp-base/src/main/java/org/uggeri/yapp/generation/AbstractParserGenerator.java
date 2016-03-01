@@ -55,6 +55,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -441,7 +442,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
 
    protected boolean isMemoizeRule(NonTerminalRule rule) {
       return getOptions().getMemoizeMode().equals(MemoizeMode.ALL)
-         || (rule.getOptions().containsKey(NonTerminalOption.MEMOIZE) && !getOptions().getMemoizeMode().equals(MemoizeMode.NONE));
+              || (rule.getOptions().containsKey(NonTerminalOption.MEMOIZE) && !getOptions().getMemoizeMode().equals(MemoizeMode.NONE));
    }
 
    private void generateRulesFunctions(Grammar grammar, Set<String> created) throws ParserGenerationException {
@@ -650,13 +651,13 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       setValue(indexVar, parserVar.member(memoVarEnd(rule)));
       if (!rule.getRule().isTest()) {
          ifStmt(not(currentRuleIsAtomicVar));
-            ifStmt(parserVar.member(memoVarStart(rule)).equal(parserVar.member(memoVarEnd(rule))));
-               setValue(currentNodeVar, createNodeFunCall(ruleReference(grammar, rule), parserVar.member(memoVarStart(rule)), parserVar.member(memoVarEnd(rule)), !syntaxOnly, skipNode));
-               setSibling(lastNodeVar, currentNodeVar);
-            elseIfStmt(parserVar.member(memoVarFirstNode(rule)).diff(null));
-               setSibling(lastNodeVar, parserVar.member(memoVarFirstNode(rule)));
-               setValue(currentNodeVar, parserVar.member(memoVarLastNode(rule)));
-            endIf();
+         ifStmt(parserVar.member(memoVarStart(rule)).equal(parserVar.member(memoVarEnd(rule))));
+         setValue(currentNodeVar, createNodeFunCall(ruleReference(grammar, rule), parserVar.member(memoVarStart(rule)), parserVar.member(memoVarEnd(rule)), !syntaxOnly, skipNode));
+         setSibling(lastNodeVar, currentNodeVar);
+         elseIfStmt(parserVar.member(memoVarFirstNode(rule)).diff(null));
+         setSibling(lastNodeVar, parserVar.member(memoVarFirstNode(rule)));
+         setValue(currentNodeVar, parserVar.member(memoVarLastNode(rule)));
+         endIf();
          endIf();
       }
       traceCodeExitRule(true);
@@ -894,8 +895,11 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
          } else {
             multipleStartOptions(groupRules);
          }
+      } else if (canGroupOrNonTerminals(rule)) {
+         final LiteralRulesGroup groupRules = groupRulesByFirstChar(rule.getRules());
+         groupRules.groupCommons();
+         switchByFirstChar(groupRules);
       } else {
-         //final LiteralRulesGroup groupRules = groupRulesByFirstChar(rule.getRules());
          final Iterator<GrammarRule> it = rule.getRules().iterator();
          if (it.hasNext()) {
             appendOrRule(it);
@@ -904,26 +908,73 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       restoreIndex = oldRestoreIndex;
    }
 
-   protected LiteralRulesGroup groupRulesByFirstChar(List<GrammarRule> rules) {
+   private boolean canGroupOrNonTerminals(OrRule rule) {
+      for (GrammarRule r : rule.getRules()) {
+         if (!(r instanceof NonTerminalRule)) {
+            return false;
+         }
+      }
+      return true;
+   }
+
+   private void switchByFirstChar(final LiteralRulesGroup groupRules) {
+      final SwitchStatement switchStatement;
+      Iterator<GrammarRule> it;
+
+      switchStatement = getStatements().peek().switchStatement(bufferVar.member(funCall(bufferGetCharFunctionName(), indexVar)));
+      for (Map.Entry<CharSet, List<GrammarRule>> entry : groupRules.groupedRules.entrySet()) {
+         if (!entry.getKey().isEmpty()) {
+            it = entry.getValue().iterator();
+            getStatements().push(switchStatement.switchOption(entry.getKey().characters));
+            if (it.hasNext()) {
+               appendOrRule(it);
+            }
+            breakCommand();
+            getStatements().pop();
+         }
+      }
+      List<GrammarRule> defaultRules = groupRules.groupedRules.get(new CharSet());
+      if (defaultRules != null && !defaultRules.isEmpty()) {
+         getStatements().push(switchStatement.switchOption(null));
+         it = defaultRules.iterator();
+         if (it.hasNext()) {
+            appendOrRule(it);
+         }
+         getStatements().pop();
+      } else {
+         switchStatement.switchOption(null).setValue(matchVar, groupRules.acceptEmpty);
+      }
+   }
+
+   private LiteralRulesGroup groupRulesByFirstChar(List<GrammarRule> rules) {
       final LiteralRulesGroup rulesGroup = new LiteralRulesGroup();
-      boolean defaultMatch = false;
+      final List<GrammarRule> anyCharRules = new ArrayList<GrammarRule>();
 
       for (GrammarRule r : rules) {
          Set<Character> charSet;
          FirstCharsVisitor visitor = new FirstCharsVisitor();
          r.visit(options, visitor);
          charSet = visitor.getCharSet();
-         for (char c : charSet) {
-            final CharPooler cp = new CharPooler(c, false);
-            List<GrammarRule> rulesList = rulesGroup.groupedRules.get(cp);
-            if (rulesList == null) {
-               rulesList = new ArrayList<GrammarRule>();
-               rulesGroup.groupedRules.put(cp, rulesList);
+         if (charSet.size() == 1 && charSet.contains('\0')) {
+            anyCharRules.add(r);
+         } else {
+            for (char c : charSet) {
+               final CharSet cp = new CharSet(c);
+               List<GrammarRule> rulesList = rulesGroup.groupedRules.get(cp);
+               if (rulesList == null) {
+                  rulesList = new ArrayList<GrammarRule>();
+                  rulesGroup.groupedRules.put(cp, rulesList);
+               }
+               rulesList.add(r);
             }
-            rulesList.add(r);
          }
       }
-      rulesGroup.acceptEmpty = defaultMatch;
+      if (!anyCharRules.isEmpty()) {
+         for (Entry<CharSet, List<GrammarRule>> entry : rulesGroup.groupedRules.entrySet()) {
+            entry.getValue().addAll(anyCharRules);
+         }
+         rulesGroup.groupedRules.put(new CharSet(), anyCharRules);
+      }
       return rulesGroup;
    }
 
@@ -939,19 +990,14 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       lastSwitchCommand = switchCommand;
       switchCommand = true;
       switchStatement = getStatements().peek().switchStatement(bufferVar.member(funCall(bufferGetCharFunctionName(), indexVar)));
-      for (Map.Entry<CharPooler, List<GrammarRule>> entry : groupRules.groupedRules.entrySet()) {
-         if (entry.getKey().sensitiveCase) {
-            getStatements().push(switchStatement.switchOption(entry.getKey().character));
-         } else {
-            getStatements().push(switchStatement.switchOption(Character.toLowerCase(entry.getKey().character),
-               Character.toUpperCase(entry.getKey().character)));
-         }
+      for (Map.Entry<CharSet, List<GrammarRule>> entry : groupRules.groupedRules.entrySet()) {
+         getStatements().push(switchStatement.switchOption(entry.getKey().characters));
          stmt(indexVar.preInc());
          continueLiteralMatchBlock(entry, groupRules.acceptEmpty);
          breakCommand();
          getStatements().pop();
       }
-      switchStatement.switchOption((Object[]) null).setValue(matchVar, groupRules.acceptEmpty);
+      switchStatement.switchOption(null).setValue(matchVar, groupRules.acceptEmpty);
       switchCommand = lastSwitchCommand;
       finishLiteralMatchBlock(auxStartIndexVar);
    }
@@ -963,14 +1009,18 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       } else {
          auxStartIndexVar = null;
       }
-      for (Map.Entry<CharPooler, List<GrammarRule>> entry : groupRules.groupedRules.entrySet()) {
+      for (Map.Entry<CharSet, List<GrammarRule>> entry : groupRules.groupedRules.entrySet()) {
          final boolean lastSwitchCommand = switchCommand;
+         Expression condition = null;
          switchCommand = true;
-         if (entry.getKey().sensitiveCase) {
-            ifStmt(bufferVar.member(funCall(bufferMatchCharFunctionName(), indexVar, entry.getKey().character)));
-         } else {
-            ifStmt(bufferVar.member(funCall(bufferMatchIgnoreCaseCharFunctionName(), indexVar, entry.getKey().character)));
+         for (char c : entry.getKey().characters) {
+            if (condition == null) {
+               condition = bufferVar.member(funCall(bufferMatchCharFunctionName(), indexVar, c));
+            } else {
+               condition = condition.or(bufferVar.member(funCall(bufferMatchCharFunctionName(), indexVar, c)));
+            }
          }
+         ifStmt(condition);
          stmt(indexVar.preInc());
          continueLiteralMatchBlock(entry, groupRules.acceptEmpty);
          elseStmt();
@@ -1002,7 +1052,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       }
    }
 
-   private void continueLiteralMatchBlock(Map.Entry<CharPooler, List<GrammarRule>> entry, boolean containsEmpty) {
+   private void continueLiteralMatchBlock(Map.Entry<CharSet, List<GrammarRule>> entry, boolean containsEmpty) {
       if (entry.getValue().size() > 2) {
          new OrRule(entry.getValue()).visit(getOptions(), this);
       } else if (entry.getValue().size() == 2) {
@@ -1360,7 +1410,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       return 0;
    }
 
-   private List<GrammarRule> getGroupOfChar(final LiteralRulesGroup rulesGroup, final CharPooler charPooler) {
+   private List<GrammarRule> getGroupOfChar(final LiteralRulesGroup rulesGroup, final CharSet charPooler) {
       List<GrammarRule> rulesList = rulesGroup.groupedRules.get(charPooler);
       if (rulesList == null) {
          rulesList = new ArrayList<GrammarRule>();
@@ -1376,15 +1426,16 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       for (GrammarRule r : rules) {
          List<GrammarRule> groupedRules;
          if (r instanceof CharRule) {
-            final CharPooler charPooler = new CharPooler(((CharRule) r).getCharacter());
+            final CharSet charPooler = new CharSet(((CharRule) r).getCharacter());
             groupedRules = getGroupOfChar(rulesGroup, charPooler);
             groupedRules.add(new EmptyRule());
          } else if (r instanceof IgnoreCaseCharRule) {
-            final CharPooler charPooler = new CharPooler(((IgnoreCaseCharRule) r).getCharacter(), false);
+            final CharSet charPooler = new CharSet(Character.toLowerCase(((IgnoreCaseCharRule) r).getCharacter()),
+                    Character.toUpperCase(((IgnoreCaseCharRule) r).getCharacter()));
             groupedRules = getGroupOfChar(rulesGroup, charPooler);
             groupedRules.add(new EmptyRule());
          } else if (r instanceof StringRule) {
-            final CharPooler charPooler = new CharPooler(((StringRule) r).getText().charAt(0));
+            final CharSet charPooler = new CharSet(((StringRule) r).getText().charAt(0));
             groupedRules = getGroupOfChar(rulesGroup, charPooler);
             if (((StringRule) r).getText().length() > 2) {
                groupedRules.add(new StringRule(((StringRule) r).getText().substring(1)));
@@ -1395,7 +1446,9 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
             }
 
          } else if (r instanceof IgnoreCaseStringRule) {
-            final CharPooler charPooler = new CharPooler(((IgnoreCaseStringRule) r).getText().charAt(0), false);
+
+            final CharSet charPooler = new CharSet(Character.toLowerCase(((IgnoreCaseStringRule) r).getText().charAt(0)),
+                    Character.toUpperCase(((IgnoreCaseStringRule) r).getText().charAt(0)));
             groupedRules = getGroupOfChar(rulesGroup, charPooler);
             if (((IgnoreCaseStringRule) r).getText().length() > 2) {
                groupedRules.add(new IgnoreCaseStringRule(((IgnoreCaseStringRule) r).getText().substring(1)));
@@ -1802,38 +1855,20 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       return 0;
    }
 
-   protected static class CharPooler {
+   private static class CharSet {
 
-      public final char character;
+      public final Set<Character> characters = new HashSet<Character>();
 
-      public final boolean sensitiveCase;
-
-      public CharPooler(final char character, boolean sensitiveCase) {
-         this.character = character;
-         this.sensitiveCase = sensitiveCase || !Character.isLetter(character);
-      }
-
-      public CharPooler(char character) {
-         this(character, true);
-      }
-
-      public char getCharacter() {
-         return character;
-      }
-
-      public boolean isSensitiveCase() {
-         return sensitiveCase;
+      public CharSet(final char... chars) {
+         for (char c : chars) {
+            characters.add(c);
+         }
       }
 
       @Override
       public boolean equals(Object other) {
-         if (other instanceof CharPooler) {
-            if (sensitiveCase) {
-               return ((CharPooler) other).sensitiveCase && ((CharPooler) other).character == character;
-            } else {
-               return !((CharPooler) other).sensitiveCase
-                  && Character.toLowerCase(((CharPooler) other).character) == Character.toLowerCase(character);
-            }
+         if (other instanceof CharSet) {
+            return characters.equals(((CharSet) other).characters);
          }
          return false;
       }
@@ -1841,20 +1876,52 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       @Override
       public int hashCode() {
          int hash = 7;
-         hash = 79 * hash + this.character;
-         hash = 79 * hash + (this.sensitiveCase ? 1 : 0);
+         hash = 67 * hash + (this.characters != null ? this.characters.hashCode() : 0);
          return hash;
+      }
+
+      @Override
+      public String toString() {
+         final StringBuilder sb = new StringBuilder();
+         for (Character c : characters) {
+            if (sb.length() > 0) {
+               sb.append(", ");
+            }
+            sb.append(c);
+         }
+         return sb.toString();
+      }
+
+      private boolean isEmpty() {
+         return characters.isEmpty();
       }
    }
 
-   protected static class LiteralRulesGroup {
+   private static class LiteralRulesGroup {
 
-      public Map<CharPooler, List<GrammarRule>> groupedRules = new HashMap<CharPooler, List<GrammarRule>>();
+      public Map<CharSet, List<GrammarRule>> groupedRules = new HashMap<CharSet, List<GrammarRule>>();
 
       public boolean acceptEmpty = false;
 
       public boolean hasMultipleOptions() {
          return groupedRules.size() > 1;
+      }
+
+      public void groupCommons() {
+         final Map<CharSet, List<GrammarRule>> commonRules = new HashMap<CharSet, List<GrammarRule>>();
+         for (Entry<CharSet, List<GrammarRule>> source : groupedRules.entrySet()) {
+            boolean found = false;
+            for (Entry<CharSet, List<GrammarRule>> target : commonRules.entrySet()) {
+               if (source.getValue().equals(target.getValue())) {
+                  target.getKey().characters.addAll(source.getKey().characters);
+                  found = true;
+               }
+            }
+            if (!found) {
+               commonRules.put(source.getKey(), source.getValue());
+            }
+         }
+         groupedRules = commonRules;
       }
    }
 

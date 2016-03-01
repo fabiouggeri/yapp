@@ -1230,6 +1230,58 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitUnknownIdentifier(node);
       }
    },
+   BEGIN_PRODUCER {
+      @Override
+      public String getLabel() {
+         return "BeginProducer";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterBeginProducer(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitBeginProducer(node);
+      }
+   },
+   END_PRODUCER {
+      @Override
+      public String getLabel() {
+         return "EndProducer";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterEndProducer(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitEndProducer(node);
+      }
+   },
    BEGIN_TRANSACTION {
       @Override
       public String getLabel() {
@@ -3128,6 +3180,32 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitQOutCommand(node);
       }
    },
+   MENU_TO_CMD {
+      @Override
+      public String getLabel() {
+         return "MenuToCmd";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterMenuToCmd(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitMenuToCmd(node);
+      }
+   },
    IGNORE_LINE {
       @Override
       public String getLabel() {
@@ -3297,7 +3375,7 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public boolean isSkiped() {
-         return false;
+         return true;
       }
 
       @Override
@@ -3308,32 +3386,6 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
          visitor.exitAssignmentOperator(node);
-      }
-   },
-   EQUAL_OPERATOR {
-      @Override
-      public String getLabel() {
-         return "EqualOperator";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return true;
-      }
-
-      @Override
-      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterEqualOperator(node);
-      }
-
-      @Override
-      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitEqualOperator(node);
       }
    },
    INITIALIZE_VARIABLE {
@@ -3934,10 +3986,10 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitCondition(node);
       }
    },
-   END_IF_KEYWORD {
+   IF_END {
       @Override
       public String getLabel() {
-         return "EndIfKeyword";
+         return "IfEnd";
       }
 
       @Override
@@ -3952,12 +4004,12 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterEndIfKeyword(node);
+         visitor.enterIfEnd(node);
       }
 
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitEndIfKeyword(node);
+         visitor.exitIfEnd(node);
       }
    },
    END_KEYWORD {
@@ -4012,10 +4064,10 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitDoWhileBegin(node);
       }
    },
-   END_DO_KEYWORD {
+   DO_WHILE_END {
       @Override
       public String getLabel() {
-         return "EndDoKeyword";
+         return "DoWhileEnd";
       }
 
       @Override
@@ -4030,12 +4082,12 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterEndDoKeyword(node);
+         visitor.enterDoWhileEnd(node);
       }
 
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitEndDoKeyword(node);
+         visitor.exitDoWhileEnd(node);
       }
    },
    FOR_NEXT_BEGIN {
@@ -4064,10 +4116,10 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitForNextBegin(node);
       }
    },
-   END_FOR_KEYWORD {
+   FOR_NEXT_END {
       @Override
       public String getLabel() {
-         return "EndForKeyword";
+         return "ForNextEnd";
       }
 
       @Override
@@ -4082,12 +4134,12 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterEndForKeyword(node);
+         visitor.enterForNextEnd(node);
       }
 
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitEndForKeyword(node);
+         visitor.exitForNextEnd(node);
       }
    },
    BEGIN_SEQUENCE_BEGIN {
@@ -4142,10 +4194,10 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitDoCaseBegin(node);
       }
    },
-   END_CASE_KEYWORD {
+   DO_CASE_END {
       @Override
       public String getLabel() {
-         return "EndCaseKeyword";
+         return "DoCaseEnd";
       }
 
       @Override
@@ -4160,12 +4212,12 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterEndCaseKeyword(node);
+         visitor.enterDoCaseEnd(node);
       }
 
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitEndCaseKeyword(node);
+         visitor.exitDoCaseEnd(node);
       }
    },
    FOR_EACH_BEGIN {
@@ -4246,10 +4298,10 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitSwitchBegin(node);
       }
    },
-   END_SWITCH_KEYWORD {
+   SWITCH_END {
       @Override
       public String getLabel() {
-         return "EndSwitchKeyword";
+         return "SwitchEnd";
       }
 
       @Override
@@ -4264,12 +4316,12 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterEndSwitchKeyword(node);
+         visitor.enterSwitchEnd(node);
       }
 
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitEndSwitchKeyword(node);
+         visitor.exitSwitchEnd(node);
       }
    },
    TRY_CATCH_BEGIN {
@@ -4298,10 +4350,10 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitTryCatchBegin(node);
       }
    },
-   END_TRY_KEYWORD {
+   TRY_CATCH_END {
       @Override
       public String getLabel() {
-         return "EndTryKeyword";
+         return "TryCatchEnd";
       }
 
       @Override
@@ -4316,12 +4368,12 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterEndTryKeyword(node);
+         visitor.enterTryCatchEnd(node);
       }
 
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitEndTryKeyword(node);
+         visitor.exitTryCatchEnd(node);
       }
    },
    FINALLY_BLOCK_BEGIN {
@@ -5416,10 +5468,10 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitWithCodeBlock(node);
       }
    },
-   END_SEQUENCE_KEYWORD {
+   BEGIN_SEQUENCE_END {
       @Override
       public String getLabel() {
-         return "EndSequenceKeyword";
+         return "BeginSequenceEnd";
       }
 
       @Override
@@ -5434,12 +5486,12 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterEndSequenceKeyword(node);
+         visitor.enterBeginSequenceEnd(node);
       }
 
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitEndSequenceKeyword(node);
+         visitor.exitBeginSequenceEnd(node);
       }
    },
    USING_SPEC {
@@ -6235,7 +6287,7 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public boolean isSkiped() {
-         return false;
+         return true;
       }
 
       @Override
@@ -6352,10 +6404,10 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitConditionalExpression(node);
       }
    },
-   RELATIONAL_OPERATOR {
+   COMPARISON_OPERATOR {
       @Override
       public String getLabel() {
-         return "RelationalOperator";
+         return "ComparisonOperator";
       }
 
       @Override
@@ -6365,23 +6417,23 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public boolean isSkiped() {
-         return false;
+         return true;
       }
 
       @Override
       public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterRelationalOperator(node);
+         visitor.enterComparisonOperator(node);
       }
 
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitRelationalOperator(node);
+         visitor.exitComparisonOperator(node);
       }
    },
-   RELATIONAL_EXPRESSION {
+   COMPARISON_EXPRESSION {
       @Override
       public String getLabel() {
-         return "RelationalExpression";
+         return "ComparisonExpression";
       }
 
       @Override
@@ -6396,12 +6448,12 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterRelationalExpression(node);
+         visitor.enterComparisonExpression(node);
       }
 
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitRelationalExpression(node);
+         visitor.exitComparisonExpression(node);
       }
    },
    MATH_OPERATOR {
@@ -6534,58 +6586,6 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitPrimaryExpression(node);
       }
    },
-   PLUS_SIGN {
-      @Override
-      public String getLabel() {
-         return "PlusSign";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return true;
-      }
-
-      @Override
-      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterPlusSign(node);
-      }
-
-      @Override
-      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitPlusSign(node);
-      }
-   },
-   MINUS_SIGN {
-      @Override
-      public String getLabel() {
-         return "MinusSign";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return true;
-      }
-
-      @Override
-      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterMinusSign(node);
-      }
-
-      @Override
-      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitMinusSign(node);
-      }
-   },
    PREFIX_OPERATOR {
       @Override
       public String getLabel() {
@@ -6625,7 +6625,7 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public boolean isSkiped() {
-         return false;
+         return true;
       }
 
       @Override
@@ -6768,84 +6768,6 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitLeftValue(node);
       }
    },
-   NOT_OPERATOR {
-      @Override
-      public String getLabel() {
-         return "NotOperator";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return false;
-      }
-
-      @Override
-      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterNotOperator(node);
-      }
-
-      @Override
-      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitNotOperator(node);
-      }
-   },
-   GREATER_OPERATOR {
-      @Override
-      public String getLabel() {
-         return "GreaterOperator";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return true;
-      }
-
-      @Override
-      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterGreaterOperator(node);
-      }
-
-      @Override
-      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitGreaterOperator(node);
-      }
-   },
-   LESS_OPERATOR {
-      @Override
-      public String getLabel() {
-         return "LessOperator";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return true;
-      }
-
-      @Override
-      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterLessOperator(node);
-      }
-
-      @Override
-      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitLessOperator(node);
-      }
-   },
    DUMP {
       @Override
       public String getLabel() {
@@ -6948,6 +6870,32 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
          visitor.exitParametersDeclaration(node);
+      }
+   },
+   FUNCTION_MODIFIERS {
+      @Override
+      public String getLabel() {
+         return "FunctionModifiers";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return true;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterFunctionModifiers(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitFunctionModifiers(node);
       }
    },
    FUNCTION_MODIFIER {
@@ -7442,32 +7390,6 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
          visitor.exitTestNoAlpha(node);
-      }
-   },
-   OPTIONAL_SPACING {
-      @Override
-      public String getLabel() {
-         return "OptionalSpacing";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return false;
-      }
-
-      @Override
-      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterOptionalSpacing(node);
-      }
-
-      @Override
-      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitOptionalSpacing(node);
       }
    };
 

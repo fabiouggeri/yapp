@@ -195,6 +195,14 @@ public class HarbourUnprocessedParser implements Parser {
    private int unknownIdentifier$RuleMemoEnd;
    private Node unknownIdentifier$RuleMemoFirstNode;
    private Node unknownIdentifier$RuleMemoLastNode;
+   private int beginProducer$RuleMemoStart = -1;
+   private int beginProducer$RuleMemoEnd;
+   private Node beginProducer$RuleMemoFirstNode;
+   private Node beginProducer$RuleMemoLastNode;
+   private int endProducer$RuleMemoStart = -1;
+   private int endProducer$RuleMemoEnd;
+   private Node endProducer$RuleMemoFirstNode;
+   private Node endProducer$RuleMemoLastNode;
    private int beginTransaction$RuleMemoStart = -1;
    private int beginTransaction$RuleMemoEnd;
    private Node beginTransaction$RuleMemoFirstNode;
@@ -451,6 +459,10 @@ public class HarbourUnprocessedParser implements Parser {
    private int qOutCommand$RuleMemoEnd;
    private Node qOutCommand$RuleMemoFirstNode;
    private Node qOutCommand$RuleMemoLastNode;
+   private int menuToCmd$RuleMemoStart = -1;
+   private int menuToCmd$RuleMemoEnd;
+   private Node menuToCmd$RuleMemoFirstNode;
+   private Node menuToCmd$RuleMemoLastNode;
    private int ignoreLine$RuleMemoStart = -1;
    private int ignoreLine$RuleMemoEnd;
    private Node ignoreLine$RuleMemoFirstNode;
@@ -471,10 +483,6 @@ public class HarbourUnprocessedParser implements Parser {
    private int assignmentOperator$RuleMemoEnd;
    private Node assignmentOperator$RuleMemoFirstNode;
    private Node assignmentOperator$RuleMemoLastNode;
-   private int equalOperator$RuleMemoStart = -1;
-   private int equalOperator$RuleMemoEnd;
-   private Node equalOperator$RuleMemoFirstNode;
-   private Node equalOperator$RuleMemoLastNode;
    private int expressionAsType$RuleMemoStart = -1;
    private int expressionAsType$RuleMemoEnd;
    private Node expressionAsType$RuleMemoFirstNode;
@@ -551,10 +559,10 @@ public class HarbourUnprocessedParser implements Parser {
    private int condition$RuleMemoEnd;
    private Node condition$RuleMemoFirstNode;
    private Node condition$RuleMemoLastNode;
-   private int endIfKeyword$RuleMemoStart = -1;
-   private int endIfKeyword$RuleMemoEnd;
-   private Node endIfKeyword$RuleMemoFirstNode;
-   private Node endIfKeyword$RuleMemoLastNode;
+   private int ifEnd$RuleMemoStart = -1;
+   private int ifEnd$RuleMemoEnd;
+   private Node ifEnd$RuleMemoFirstNode;
+   private Node ifEnd$RuleMemoLastNode;
    private int endKeyword$RuleMemoStart = -1;
    private int endKeyword$RuleMemoEnd;
    private Node endKeyword$RuleMemoFirstNode;
@@ -563,18 +571,18 @@ public class HarbourUnprocessedParser implements Parser {
    private int doWhileBegin$RuleMemoEnd;
    private Node doWhileBegin$RuleMemoFirstNode;
    private Node doWhileBegin$RuleMemoLastNode;
-   private int endDoKeyword$RuleMemoStart = -1;
-   private int endDoKeyword$RuleMemoEnd;
-   private Node endDoKeyword$RuleMemoFirstNode;
-   private Node endDoKeyword$RuleMemoLastNode;
+   private int doWhileEnd$RuleMemoStart = -1;
+   private int doWhileEnd$RuleMemoEnd;
+   private Node doWhileEnd$RuleMemoFirstNode;
+   private Node doWhileEnd$RuleMemoLastNode;
    private int forNextBegin$RuleMemoStart = -1;
    private int forNextBegin$RuleMemoEnd;
    private Node forNextBegin$RuleMemoFirstNode;
    private Node forNextBegin$RuleMemoLastNode;
-   private int endForKeyword$RuleMemoStart = -1;
-   private int endForKeyword$RuleMemoEnd;
-   private Node endForKeyword$RuleMemoFirstNode;
-   private Node endForKeyword$RuleMemoLastNode;
+   private int forNextEnd$RuleMemoStart = -1;
+   private int forNextEnd$RuleMemoEnd;
+   private Node forNextEnd$RuleMemoFirstNode;
+   private Node forNextEnd$RuleMemoLastNode;
    private int beginSequenceBegin$RuleMemoStart = -1;
    private int beginSequenceBegin$RuleMemoEnd;
    private Node beginSequenceBegin$RuleMemoFirstNode;
@@ -583,10 +591,10 @@ public class HarbourUnprocessedParser implements Parser {
    private int doCaseBegin$RuleMemoEnd;
    private Node doCaseBegin$RuleMemoFirstNode;
    private Node doCaseBegin$RuleMemoLastNode;
-   private int endCaseKeyword$RuleMemoStart = -1;
-   private int endCaseKeyword$RuleMemoEnd;
-   private Node endCaseKeyword$RuleMemoFirstNode;
-   private Node endCaseKeyword$RuleMemoLastNode;
+   private int doCaseEnd$RuleMemoStart = -1;
+   private int doCaseEnd$RuleMemoEnd;
+   private Node doCaseEnd$RuleMemoFirstNode;
+   private Node doCaseEnd$RuleMemoLastNode;
    private int forEachBegin$RuleMemoStart = -1;
    private int forEachBegin$RuleMemoEnd;
    private Node forEachBegin$RuleMemoFirstNode;
@@ -599,18 +607,18 @@ public class HarbourUnprocessedParser implements Parser {
    private int switchBegin$RuleMemoEnd;
    private Node switchBegin$RuleMemoFirstNode;
    private Node switchBegin$RuleMemoLastNode;
-   private int endSwitchKeyword$RuleMemoStart = -1;
-   private int endSwitchKeyword$RuleMemoEnd;
-   private Node endSwitchKeyword$RuleMemoFirstNode;
-   private Node endSwitchKeyword$RuleMemoLastNode;
+   private int switchEnd$RuleMemoStart = -1;
+   private int switchEnd$RuleMemoEnd;
+   private Node switchEnd$RuleMemoFirstNode;
+   private Node switchEnd$RuleMemoLastNode;
    private int tryCatchBegin$RuleMemoStart = -1;
    private int tryCatchBegin$RuleMemoEnd;
    private Node tryCatchBegin$RuleMemoFirstNode;
    private Node tryCatchBegin$RuleMemoLastNode;
-   private int endTryKeyword$RuleMemoStart = -1;
-   private int endTryKeyword$RuleMemoEnd;
-   private Node endTryKeyword$RuleMemoFirstNode;
-   private Node endTryKeyword$RuleMemoLastNode;
+   private int tryCatchEnd$RuleMemoStart = -1;
+   private int tryCatchEnd$RuleMemoEnd;
+   private Node tryCatchEnd$RuleMemoFirstNode;
+   private Node tryCatchEnd$RuleMemoLastNode;
    private int finallyBlockBegin$RuleMemoStart = -1;
    private int finallyBlockBegin$RuleMemoEnd;
    private Node finallyBlockBegin$RuleMemoFirstNode;
@@ -735,10 +743,10 @@ public class HarbourUnprocessedParser implements Parser {
    private int codeBlockLiteral$RuleMemoEnd;
    private Node codeBlockLiteral$RuleMemoFirstNode;
    private Node codeBlockLiteral$RuleMemoLastNode;
-   private int endSequenceKeyword$RuleMemoStart = -1;
-   private int endSequenceKeyword$RuleMemoEnd;
-   private Node endSequenceKeyword$RuleMemoFirstNode;
-   private Node endSequenceKeyword$RuleMemoLastNode;
+   private int beginSequenceEnd$RuleMemoStart = -1;
+   private int beginSequenceEnd$RuleMemoEnd;
+   private Node beginSequenceEnd$RuleMemoFirstNode;
+   private Node beginSequenceEnd$RuleMemoLastNode;
    private int recoverBegin$RuleMemoStart = -1;
    private int recoverBegin$RuleMemoEnd;
    private Node recoverBegin$RuleMemoFirstNode;
@@ -839,10 +847,10 @@ public class HarbourUnprocessedParser implements Parser {
    private int conditionalExpression$RuleMemoEnd;
    private Node conditionalExpression$RuleMemoFirstNode;
    private Node conditionalExpression$RuleMemoLastNode;
-   private int relationalExpression$RuleMemoStart = -1;
-   private int relationalExpression$RuleMemoEnd;
-   private Node relationalExpression$RuleMemoFirstNode;
-   private Node relationalExpression$RuleMemoLastNode;
+   private int comparisonExpression$RuleMemoStart = -1;
+   private int comparisonExpression$RuleMemoEnd;
+   private Node comparisonExpression$RuleMemoFirstNode;
+   private Node comparisonExpression$RuleMemoLastNode;
    private int mathExpression$RuleMemoStart = -1;
    private int mathExpression$RuleMemoEnd;
    private Node mathExpression$RuleMemoFirstNode;
@@ -859,14 +867,6 @@ public class HarbourUnprocessedParser implements Parser {
    private int primaryExpression$RuleMemoEnd;
    private Node primaryExpression$RuleMemoFirstNode;
    private Node primaryExpression$RuleMemoLastNode;
-   private int plusSign$RuleMemoStart = -1;
-   private int plusSign$RuleMemoEnd;
-   private Node plusSign$RuleMemoFirstNode;
-   private Node plusSign$RuleMemoLastNode;
-   private int minusSign$RuleMemoStart = -1;
-   private int minusSign$RuleMemoEnd;
-   private Node minusSign$RuleMemoFirstNode;
-   private Node minusSign$RuleMemoLastNode;
    private int atomicExpression$RuleMemoStart = -1;
    private int atomicExpression$RuleMemoEnd;
    private Node atomicExpression$RuleMemoFirstNode;
@@ -887,18 +887,6 @@ public class HarbourUnprocessedParser implements Parser {
    private int leftValue$RuleMemoEnd;
    private Node leftValue$RuleMemoFirstNode;
    private Node leftValue$RuleMemoLastNode;
-   private int notOperator$RuleMemoStart = -1;
-   private int notOperator$RuleMemoEnd;
-   private Node notOperator$RuleMemoFirstNode;
-   private Node notOperator$RuleMemoLastNode;
-   private int greaterOperator$RuleMemoStart = -1;
-   private int greaterOperator$RuleMemoEnd;
-   private Node greaterOperator$RuleMemoFirstNode;
-   private Node greaterOperator$RuleMemoLastNode;
-   private int lessOperator$RuleMemoStart = -1;
-   private int lessOperator$RuleMemoEnd;
-   private Node lessOperator$RuleMemoFirstNode;
-   private Node lessOperator$RuleMemoLastNode;
    private int parameterDeclaration$RuleMemoStart = -1;
    private int parameterDeclaration$RuleMemoEnd;
    private Node parameterDeclaration$RuleMemoFirstNode;
@@ -1281,39 +1269,153 @@ public class HarbourUnprocessedParser implements Parser {
          match = optionalSpacing$Rule();
          if (match) {
             // ((Statement EndStmt) | (IgnoreLine EndStmt) | EndStmt)
-            // (Statement EndStmt)
-            Node lastNode_2 = currentNode;
-            int lastIndex_2 = index;
-            // Statement
-            match = statement$Rule();
-            if (match) {
-               // EndStmt
-               match = endStmt$Rule();
-               if (! match) {
-                  index = lastIndex_2;
-                  lastNode_2.setSibling(null);
-                  currentNode = lastNode_2;
-               }
-            }
-            if (! match) {
-               // (IgnoreLine EndStmt)
-               Node lastNode_3 = currentNode;
-               int lastIndex_3 = index;
-               // IgnoreLine
-               match = ignoreLine$Rule();
-               if (match) {
+            switch(buffer.getChar(index)) {
+               case '!':
+               case '\"':
+               case '#':
+               case '&':
+               case '\'':
+               case '(':
+               case '*':
+               case '+':
+               case '-':
+               case '.':
+               case '0':
+               case '1':
+               case '2':
+               case '3':
+               case '4':
+               case '5':
+               case '6':
+               case '7':
+               case '8':
+               case '9':
+               case ':':
+               case '?':
+               case '@':
+               case 'A':
+               case 'B':
+               case 'C':
+               case 'D':
+               case 'E':
+               case 'F':
+               case 'G':
+               case 'H':
+               case 'I':
+               case 'J':
+               case 'K':
+               case 'L':
+               case 'M':
+               case 'N':
+               case 'O':
+               case 'P':
+               case 'Q':
+               case 'R':
+               case 'S':
+               case 'T':
+               case 'U':
+               case 'V':
+               case 'W':
+               case 'X':
+               case 'Y':
+               case 'Z':
+               case '[':
+               case '_':
+               case 'a':
+               case 'b':
+               case 'c':
+               case 'd':
+               case 'e':
+               case 'f':
+               case 'g':
+               case 'h':
+               case 'i':
+               case 'j':
+               case 'k':
+               case 'l':
+               case 'm':
+               case 'n':
+               case 'o':
+               case 'p':
+               case 'q':
+               case 'r':
+               case 's':
+               case 't':
+               case 'u':
+               case 'v':
+               case 'w':
+               case 'x':
+               case 'y':
+               case 'z':
+               case '{':
+                  // (Statement EndStmt)
+                  Node lastNode_2 = currentNode;
+                  int lastIndex_2 = index;
+                  // Statement
+                  match = statement$Rule();
+                  if (match) {
+                     // EndStmt
+                     match = endStmt$Rule();
+                     if (! match) {
+                        index = lastIndex_2;
+                        lastNode_2.setSibling(null);
+                        currentNode = lastNode_2;
+                     }
+                  }
+                  if (! match) {
+                     // (IgnoreLine EndStmt)
+                     Node lastNode_3 = currentNode;
+                     int lastIndex_3 = index;
+                     // IgnoreLine
+                     match = ignoreLine$Rule();
+                     if (match) {
+                        // EndStmt
+                        match = endStmt$Rule();
+                        if (! match) {
+                           index = lastIndex_3;
+                           lastNode_3.setSibling(null);
+                           currentNode = lastNode_3;
+                        }
+                     }
+                  }
+                  break;
+               case '\n':
+               case ';':
+               case '\r':
                   // EndStmt
                   match = endStmt$Rule();
                   if (! match) {
-                     index = lastIndex_3;
-                     lastNode_3.setSibling(null);
-                     currentNode = lastNode_3;
+                     // (IgnoreLine EndStmt)
+                     Node lastNode_4 = currentNode;
+                     int lastIndex_4 = index;
+                     // IgnoreLine
+                     match = ignoreLine$Rule();
+                     if (match) {
+                        // EndStmt
+                        match = endStmt$Rule();
+                        if (! match) {
+                           index = lastIndex_4;
+                           lastNode_4.setSibling(null);
+                           currentNode = lastNode_4;
+                        }
+                     }
                   }
-               }
-               if (! match) {
-                  // EndStmt
-                  match = endStmt$Rule();
-               }
+                  break;
+               default:
+                  // (IgnoreLine EndStmt)
+                  Node lastNode_5 = currentNode;
+                  int lastIndex_5 = index;
+                  // IgnoreLine
+                  match = ignoreLine$Rule();
+                  if (match) {
+                     // EndStmt
+                     match = endStmt$Rule();
+                     if (! match) {
+                        index = lastIndex_5;
+                        lastNode_5.setSibling(null);
+                        currentNode = lastNode_5;
+                     }
+                  }
             }
             if (! match) {
                index = lastIndex_1;
@@ -1327,11 +1429,95 @@ public class HarbourUnprocessedParser implements Parser {
       if (match) {
          // (Statement | IgnoreLine)?
          // (Statement | IgnoreLine)
-         // Statement
-         match = statement$Rule();
-         if (! match) {
-            // IgnoreLine
-            match = ignoreLine$Rule();
+         switch(buffer.getChar(index)) {
+            case '!':
+            case '\"':
+            case '#':
+            case '&':
+            case '\'':
+            case '(':
+            case '*':
+            case '+':
+            case '-':
+            case '.':
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+            case ':':
+            case '?':
+            case '@':
+            case 'A':
+            case 'B':
+            case 'C':
+            case 'D':
+            case 'E':
+            case 'F':
+            case 'G':
+            case 'H':
+            case 'I':
+            case 'J':
+            case 'K':
+            case 'L':
+            case 'M':
+            case 'N':
+            case 'O':
+            case 'P':
+            case 'Q':
+            case 'R':
+            case 'S':
+            case 'T':
+            case 'U':
+            case 'V':
+            case 'W':
+            case 'X':
+            case 'Y':
+            case 'Z':
+            case '[':
+            case '_':
+            case 'a':
+            case 'b':
+            case 'c':
+            case 'd':
+            case 'e':
+            case 'f':
+            case 'g':
+            case 'h':
+            case 'i':
+            case 'j':
+            case 'k':
+            case 'l':
+            case 'm':
+            case 'n':
+            case 'o':
+            case 'p':
+            case 'q':
+            case 'r':
+            case 's':
+            case 't':
+            case 'u':
+            case 'v':
+            case 'w':
+            case 'x':
+            case 'y':
+            case 'z':
+            case '{':
+               // Statement
+               match = statement$Rule();
+               if (! match) {
+                  // IgnoreLine
+                  match = ignoreLine$Rule();
+               }
+               break;
+            default:
+               // IgnoreLine
+               match = ignoreLine$Rule();
          }
          match = true;
       }
@@ -1350,7 +1536,7 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //Statement : (Spacing | LocalVariablesDeclaration | FunctionDeclaration | ProcedureDeclaration | MethodDefinition | StaticVariablesDeclaration | FieldsDeclaration | CreateClass | ClassBodyStmt | EndClass | ClassDeclaration | OldStyleParametersDeclaration | DeclareStatement | IfInLine | IfBegin | ElseIfBegin | ElseBegin | EndIfKeyword | DoWhileBegin | EndDoKeyword | ForNextBegin | EndForKeyword | BeginSequenceBegin | RecoverBegin | AlwaysBegin | EndSequenceKeyword | DoCaseBegin | DoCaseOptionBegin | OtherwiseBegin | EndCaseKeyword | ForEachBegin | ForEachEnd | SwitchBegin | SwitchOptionBegin | SwitchDefaultBegin | EndSwitchKeyword | TryCatchBegin | CatchBlockBegin | FinallyBlockBegin | EndTryKeyword | EndKeyword | Return | Break | ClassMemberDeclaration | MemvarDeclaration | ExitStmt | LoopStmt | PublicVariableDeclaration | PrivateVariableDeclaration | External | Announce | Request | Throw | StatementAssignmentExpression | SelfExpression | PrefixedExpression | PostfixedExpression | AliasedExpression | AliasedMacro | QualifiedExpression | BeginTransaction | CommitTransaction | RollbackTransaction | UseAs | UseArea | MacroFunctionCall | KeywordsFunctionCall | SimpleFunctionCall | KeyboardCall | Macro | ParenthesesExpressionList | AloneLineComment | Directive | OldStyleCommands)
+   //Statement : (LocalVariablesDeclaration | FunctionDeclaration | ProcedureDeclaration | MethodDefinition | StaticVariablesDeclaration | FieldsDeclaration | CreateClass | ClassBodyStmt | EndClass | ClassDeclaration | OldStyleParametersDeclaration | DeclareStatement | IfInLine | IfBegin | ElseIfBegin | ElseBegin | IfEnd | DoWhileBegin | DoWhileEnd | ForNextBegin | ForNextEnd | BeginSequenceBegin | RecoverBegin | AlwaysBegin | BeginSequenceEnd | DoCaseBegin | DoCaseOptionBegin | OtherwiseBegin | DoCaseEnd | ForEachBegin | ForEachEnd | SwitchBegin | SwitchOptionBegin | SwitchDefaultBegin | SwitchEnd | TryCatchBegin | CatchBlockBegin | FinallyBlockBegin | TryCatchEnd | EndKeyword | Return | Break | ClassMemberDeclaration | MemvarDeclaration | ExitStmt | LoopStmt | PublicVariableDeclaration | PrivateVariableDeclaration | External | Announce | Request | Throw | StatementAssignmentExpression | SelfExpression | PrefixedExpression | PostfixedExpression | AliasedExpression | AliasedMacro | QualifiedExpression | BeginTransaction | CommitTransaction | BeginProducer | EndProducer | RollbackTransaction | UseAs | UseArea | MacroFunctionCall | KeywordsFunctionCall | SimpleFunctionCall | KeyboardCall | Macro | ParenthesesExpressionList | AloneLineComment | Directive | OldStyleCommands)
    protected boolean statement$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -1373,273 +1559,403 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       startIndex = index;
-      // (Spacing | LocalVariablesDeclaration | FunctionDeclaration | ProcedureDeclaration | MethodDefinition | StaticVariablesDeclaration | FieldsDeclaration | CreateClass | ClassBodyStmt | EndClass | ClassDeclaration | OldStyleParametersDeclaration | DeclareStatement | IfInLine | IfBegin | ElseIfBegin | ElseBegin | EndIfKeyword | DoWhileBegin | EndDoKeyword | ForNextBegin | EndForKeyword | BeginSequenceBegin | RecoverBegin | AlwaysBegin | EndSequenceKeyword | DoCaseBegin | DoCaseOptionBegin | OtherwiseBegin | EndCaseKeyword | ForEachBegin | ForEachEnd | SwitchBegin | SwitchOptionBegin | SwitchDefaultBegin | EndSwitchKeyword | TryCatchBegin | CatchBlockBegin | FinallyBlockBegin | EndTryKeyword | EndKeyword | Return | Break | ClassMemberDeclaration | MemvarDeclaration | ExitStmt | LoopStmt | PublicVariableDeclaration | PrivateVariableDeclaration | External | Announce | Request | Throw | StatementAssignmentExpression | SelfExpression | PrefixedExpression | PostfixedExpression | AliasedExpression | AliasedMacro | QualifiedExpression | BeginTransaction | CommitTransaction | RollbackTransaction | UseAs | UseArea | MacroFunctionCall | KeywordsFunctionCall | SimpleFunctionCall | KeyboardCall | Macro | ParenthesesExpressionList | AloneLineComment | Directive | OldStyleCommands)
-      // Spacing
-      match = spacing$Rule();
-      if (! match) {
-         // LocalVariablesDeclaration
-         match = localVariablesDeclaration$Rule();
-         if (! match) {
+      // (LocalVariablesDeclaration | FunctionDeclaration | ProcedureDeclaration | MethodDefinition | StaticVariablesDeclaration | FieldsDeclaration | CreateClass | ClassBodyStmt | EndClass | ClassDeclaration | OldStyleParametersDeclaration | DeclareStatement | IfInLine | IfBegin | ElseIfBegin | ElseBegin | IfEnd | DoWhileBegin | DoWhileEnd | ForNextBegin | ForNextEnd | BeginSequenceBegin | RecoverBegin | AlwaysBegin | BeginSequenceEnd | DoCaseBegin | DoCaseOptionBegin | OtherwiseBegin | DoCaseEnd | ForEachBegin | ForEachEnd | SwitchBegin | SwitchOptionBegin | SwitchDefaultBegin | SwitchEnd | TryCatchBegin | CatchBlockBegin | FinallyBlockBegin | TryCatchEnd | EndKeyword | Return | Break | ClassMemberDeclaration | MemvarDeclaration | ExitStmt | LoopStmt | PublicVariableDeclaration | PrivateVariableDeclaration | External | Announce | Request | Throw | StatementAssignmentExpression | SelfExpression | PrefixedExpression | PostfixedExpression | AliasedExpression | AliasedMacro | QualifiedExpression | BeginTransaction | CommitTransaction | BeginProducer | EndProducer | RollbackTransaction | UseAs | UseArea | MacroFunctionCall | KeywordsFunctionCall | SimpleFunctionCall | KeyboardCall | Macro | ParenthesesExpressionList | AloneLineComment | Directive | OldStyleCommands)
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '+':
+         case '-':
+            // PrefixedExpression
+            match = prefixedExpression$Rule();
+            break;
+         case '.':
+            // StatementAssignmentExpression
+            match = statementAssignmentExpression$Rule();
+            if (! match) {
+               // PrefixedExpression
+               match = prefixedExpression$Rule();
+               if (! match) {
+                  // PostfixedExpression
+                  match = postfixedExpression$Rule();
+                  if (! match) {
+                     // QualifiedExpression
+                     match = qualifiedExpression$Rule();
+                  }
+               }
+            }
+            break;
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '&':
+         case '7':
+         case '8':
+         case '9':
+            // StatementAssignmentExpression
+            match = statementAssignmentExpression$Rule();
+            if (! match) {
+               // PostfixedExpression
+               match = postfixedExpression$Rule();
+               if (! match) {
+                  // AliasedExpression
+                  match = aliasedExpression$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                     if (! match) {
+                        // QualifiedExpression
+                        match = qualifiedExpression$Rule();
+                        if (! match) {
+                           // MacroFunctionCall
+                           match = macroFunctionCall$Rule();
+                           if (! match) {
+                              // Macro
+                              match = macro$Rule();
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case ':':
+            // StatementAssignmentExpression
+            match = statementAssignmentExpression$Rule();
+            if (! match) {
+               // SelfExpression
+               match = selfExpression$Rule();
+               if (! match) {
+                  // PostfixedExpression
+                  match = postfixedExpression$Rule();
+                  if (! match) {
+                     // QualifiedExpression
+                     match = qualifiedExpression$Rule();
+                  }
+               }
+            }
+            break;
+         case '@':
+         case '?':
+            // OldStyleCommands
+            match = oldStyleCommands$Rule();
+            break;
+         case 'A':
+         case 'a':
+            // ClassBodyStmt
+            match = classBodyStmt$Rule();
+            if (! match) {
+               // AlwaysBegin
+               match = alwaysBegin$Rule();
+               if (! match) {
+                  // Announce
+                  match = announce$Rule();
+                  if (! match) {
+                     // StatementAssignmentExpression
+                     match = statementAssignmentExpression$Rule();
+                     if (! match) {
+                        // PostfixedExpression
+                        match = postfixedExpression$Rule();
+                        if (! match) {
+                           // AliasedExpression
+                           match = aliasedExpression$Rule();
+                           if (! match) {
+                              // AliasedMacro
+                              match = aliasedMacro$Rule();
+                              if (! match) {
+                                 // QualifiedExpression
+                                 match = qualifiedExpression$Rule();
+                                 if (! match) {
+                                    // MacroFunctionCall
+                                    match = macroFunctionCall$Rule();
+                                    if (! match) {
+                                       // SimpleFunctionCall
+                                       match = simpleFunctionCall$Rule();
+                                       if (! match) {
+                                          // Macro
+                                          match = macro$Rule();
+                                          if (! match) {
+                                             // OldStyleCommands
+                                             match = oldStyleCommands$Rule();
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'B':
+         case 'b':
+            // BeginSequenceBegin
+            match = beginSequenceBegin$Rule();
+            if (! match) {
+               // Break
+               match = break$Rule();
+               if (! match) {
+                  // StatementAssignmentExpression
+                  match = statementAssignmentExpression$Rule();
+                  if (! match) {
+                     // PostfixedExpression
+                     match = postfixedExpression$Rule();
+                     if (! match) {
+                        // AliasedExpression
+                        match = aliasedExpression$Rule();
+                        if (! match) {
+                           // AliasedMacro
+                           match = aliasedMacro$Rule();
+                           if (! match) {
+                              // QualifiedExpression
+                              match = qualifiedExpression$Rule();
+                              if (! match) {
+                                 // BeginTransaction
+                                 match = beginTransaction$Rule();
+                                 if (! match) {
+                                    // BeginProducer
+                                    match = beginProducer$Rule();
+                                    if (! match) {
+                                       // MacroFunctionCall
+                                       match = macroFunctionCall$Rule();
+                                       if (! match) {
+                                          // KeywordsFunctionCall
+                                          match = keywordsFunctionCall$Rule();
+                                          if (! match) {
+                                             // SimpleFunctionCall
+                                             match = simpleFunctionCall$Rule();
+                                             if (! match) {
+                                                // Macro
+                                                match = macro$Rule();
+                                             }
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'C':
+         case 'c':
+            // MethodDefinition
+            match = methodDefinition$Rule();
+            if (! match) {
+               // CreateClass
+               match = createClass$Rule();
+               if (! match) {
+                  // ClassBodyStmt
+                  match = classBodyStmt$Rule();
+                  if (! match) {
+                     // DoCaseOptionBegin
+                     match = doCaseOptionBegin$Rule();
+                     if (! match) {
+                        // SwitchOptionBegin
+                        match = switchOptionBegin$Rule();
+                        if (! match) {
+                           // CatchBlockBegin
+                           match = catchBlockBegin$Rule();
+                           if (! match) {
+                              // StatementAssignmentExpression
+                              match = statementAssignmentExpression$Rule();
+                              if (! match) {
+                                 // PostfixedExpression
+                                 match = postfixedExpression$Rule();
+                                 if (! match) {
+                                    // AliasedExpression
+                                    match = aliasedExpression$Rule();
+                                    if (! match) {
+                                       // AliasedMacro
+                                       match = aliasedMacro$Rule();
+                                       if (! match) {
+                                          // QualifiedExpression
+                                          match = qualifiedExpression$Rule();
+                                          if (! match) {
+                                             // CommitTransaction
+                                             match = commitTransaction$Rule();
+                                             if (! match) {
+                                                // MacroFunctionCall
+                                                match = macroFunctionCall$Rule();
+                                                if (! match) {
+                                                   // KeywordsFunctionCall
+                                                   match = keywordsFunctionCall$Rule();
+                                                   if (! match) {
+                                                      // SimpleFunctionCall
+                                                      match = simpleFunctionCall$Rule();
+                                                      if (! match) {
+                                                         // Macro
+                                                         match = macro$Rule();
+                                                         if (! match) {
+                                                            // OldStyleCommands
+                                                            match = oldStyleCommands$Rule();
+                                                         }
+                                                      }
+                                                   }
+                                                }
+                                             }
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'D':
+         case 'd':
+            // ClassBodyStmt
+            match = classBodyStmt$Rule();
+            if (! match) {
+               // DeclareStatement
+               match = declareStatement$Rule();
+               if (! match) {
+                  // DoWhileBegin
+                  match = doWhileBegin$Rule();
+                  if (! match) {
+                     // DoCaseBegin
+                     match = doCaseBegin$Rule();
+                     if (! match) {
+                        // SwitchDefaultBegin
+                        match = switchDefaultBegin$Rule();
+                        if (! match) {
+                           // StatementAssignmentExpression
+                           match = statementAssignmentExpression$Rule();
+                           if (! match) {
+                              // PostfixedExpression
+                              match = postfixedExpression$Rule();
+                              if (! match) {
+                                 // AliasedExpression
+                                 match = aliasedExpression$Rule();
+                                 if (! match) {
+                                    // AliasedMacro
+                                    match = aliasedMacro$Rule();
+                                    if (! match) {
+                                       // QualifiedExpression
+                                       match = qualifiedExpression$Rule();
+                                       if (! match) {
+                                          // MacroFunctionCall
+                                          match = macroFunctionCall$Rule();
+                                          if (! match) {
+                                             // KeywordsFunctionCall
+                                             match = keywordsFunctionCall$Rule();
+                                             if (! match) {
+                                                // SimpleFunctionCall
+                                                match = simpleFunctionCall$Rule();
+                                                if (! match) {
+                                                   // Macro
+                                                   match = macro$Rule();
+                                                   if (! match) {
+                                                      // OldStyleCommands
+                                                      match = oldStyleCommands$Rule();
+                                                   }
+                                                }
+                                             }
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'E':
+         case 'e':
             // FunctionDeclaration
             match = functionDeclaration$Rule();
             if (! match) {
                // ProcedureDeclaration
                match = procedureDeclaration$Rule();
                if (! match) {
-                  // MethodDefinition
-                  match = methodDefinition$Rule();
+                  // ClassBodyStmt
+                  match = classBodyStmt$Rule();
                   if (! match) {
-                     // StaticVariablesDeclaration
-                     match = staticVariablesDeclaration$Rule();
+                     // EndClass
+                     match = endClass$Rule();
                      if (! match) {
-                        // FieldsDeclaration
-                        match = fieldsDeclaration$Rule();
+                        // ElseIfBegin
+                        match = elseIfBegin$Rule();
                         if (! match) {
-                           // CreateClass
-                           match = createClass$Rule();
+                           // ElseBegin
+                           match = elseBegin$Rule();
                            if (! match) {
-                              // ClassBodyStmt
-                              match = classBodyStmt$Rule();
+                              // IfEnd
+                              match = ifEnd$Rule();
                               if (! match) {
-                                 // EndClass
-                                 match = endClass$Rule();
+                                 // DoWhileEnd
+                                 match = doWhileEnd$Rule();
                                  if (! match) {
-                                    // ClassDeclaration
-                                    match = classDeclaration$Rule();
+                                    // ForNextEnd
+                                    match = forNextEnd$Rule();
                                     if (! match) {
-                                       // OldStyleParametersDeclaration
-                                       match = oldStyleParametersDeclaration$Rule();
+                                       // BeginSequenceEnd
+                                       match = beginSequenceEnd$Rule();
                                        if (! match) {
-                                          // DeclareStatement
-                                          match = declareStatement$Rule();
+                                          // DoCaseEnd
+                                          match = doCaseEnd$Rule();
                                           if (! match) {
-                                             // IfInLine
-                                             match = ifInLine$Rule();
+                                             // SwitchEnd
+                                             match = switchEnd$Rule();
                                              if (! match) {
-                                                // IfBegin
-                                                match = ifBegin$Rule();
+                                                // TryCatchEnd
+                                                match = tryCatchEnd$Rule();
                                                 if (! match) {
-                                                   // ElseIfBegin
-                                                   match = elseIfBegin$Rule();
+                                                   // EndKeyword
+                                                   match = endKeyword$Rule();
                                                    if (! match) {
-                                                      // ElseBegin
-                                                      match = elseBegin$Rule();
+                                                      // ExitStmt
+                                                      match = exitStmt$Rule();
                                                       if (! match) {
-                                                         // EndIfKeyword
-                                                         match = endIfKeyword$Rule();
+                                                         // External
+                                                         match = external$Rule();
                                                          if (! match) {
-                                                            // DoWhileBegin
-                                                            match = doWhileBegin$Rule();
+                                                            // StatementAssignmentExpression
+                                                            match = statementAssignmentExpression$Rule();
                                                             if (! match) {
-                                                               // EndDoKeyword
-                                                               match = endDoKeyword$Rule();
+                                                               // PostfixedExpression
+                                                               match = postfixedExpression$Rule();
                                                                if (! match) {
-                                                                  // ForNextBegin
-                                                                  match = forNextBegin$Rule();
+                                                                  // AliasedExpression
+                                                                  match = aliasedExpression$Rule();
                                                                   if (! match) {
-                                                                     // EndForKeyword
-                                                                     match = endForKeyword$Rule();
+                                                                     // AliasedMacro
+                                                                     match = aliasedMacro$Rule();
                                                                      if (! match) {
-                                                                        // BeginSequenceBegin
-                                                                        match = beginSequenceBegin$Rule();
+                                                                        // QualifiedExpression
+                                                                        match = qualifiedExpression$Rule();
                                                                         if (! match) {
-                                                                           // RecoverBegin
-                                                                           match = recoverBegin$Rule();
+                                                                           // EndProducer
+                                                                           match = endProducer$Rule();
                                                                            if (! match) {
-                                                                              // AlwaysBegin
-                                                                              match = alwaysBegin$Rule();
+                                                                              // MacroFunctionCall
+                                                                              match = macroFunctionCall$Rule();
                                                                               if (! match) {
-                                                                                 // EndSequenceKeyword
-                                                                                 match = endSequenceKeyword$Rule();
+                                                                                 // KeywordsFunctionCall
+                                                                                 match = keywordsFunctionCall$Rule();
                                                                                  if (! match) {
-                                                                                    // DoCaseBegin
-                                                                                    match = doCaseBegin$Rule();
+                                                                                    // SimpleFunctionCall
+                                                                                    match = simpleFunctionCall$Rule();
                                                                                     if (! match) {
-                                                                                       // DoCaseOptionBegin
-                                                                                       match = doCaseOptionBegin$Rule();
+                                                                                       // Macro
+                                                                                       match = macro$Rule();
                                                                                        if (! match) {
-                                                                                          // OtherwiseBegin
-                                                                                          match = otherwiseBegin$Rule();
-                                                                                          if (! match) {
-                                                                                             // EndCaseKeyword
-                                                                                             match = endCaseKeyword$Rule();
-                                                                                             if (! match) {
-                                                                                                // ForEachBegin
-                                                                                                match = forEachBegin$Rule();
-                                                                                                if (! match) {
-                                                                                                   // ForEachEnd
-                                                                                                   match = forEachEnd$Rule();
-                                                                                                   if (! match) {
-                                                                                                      // SwitchBegin
-                                                                                                      match = switchBegin$Rule();
-                                                                                                      if (! match) {
-                                                                                                         // SwitchOptionBegin
-                                                                                                         match = switchOptionBegin$Rule();
-                                                                                                         if (! match) {
-                                                                                                            // SwitchDefaultBegin
-                                                                                                            match = switchDefaultBegin$Rule();
-                                                                                                            if (! match) {
-                                                                                                               // EndSwitchKeyword
-                                                                                                               match = endSwitchKeyword$Rule();
-                                                                                                               if (! match) {
-                                                                                                                  // TryCatchBegin
-                                                                                                                  match = tryCatchBegin$Rule();
-                                                                                                                  if (! match) {
-                                                                                                                     // CatchBlockBegin
-                                                                                                                     match = catchBlockBegin$Rule();
-                                                                                                                     if (! match) {
-                                                                                                                        // FinallyBlockBegin
-                                                                                                                        match = finallyBlockBegin$Rule();
-                                                                                                                        if (! match) {
-                                                                                                                           // EndTryKeyword
-                                                                                                                           match = endTryKeyword$Rule();
-                                                                                                                           if (! match) {
-                                                                                                                              // EndKeyword
-                                                                                                                              match = endKeyword$Rule();
-                                                                                                                              if (! match) {
-                                                                                                                                 // Return
-                                                                                                                                 match = return$Rule();
-                                                                                                                                 if (! match) {
-                                                                                                                                    // Break
-                                                                                                                                    match = break$Rule();
-                                                                                                                                    if (! match) {
-                                                                                                                                       // ClassMemberDeclaration
-                                                                                                                                       match = classMemberDeclaration$Rule();
-                                                                                                                                       if (! match) {
-                                                                                                                                          // MemvarDeclaration
-                                                                                                                                          match = memvarDeclaration$Rule();
-                                                                                                                                          if (! match) {
-                                                                                                                                             // ExitStmt
-                                                                                                                                             match = exitStmt$Rule();
-                                                                                                                                             if (! match) {
-                                                                                                                                                // LoopStmt
-                                                                                                                                                match = loopStmt$Rule();
-                                                                                                                                                if (! match) {
-                                                                                                                                                   // PublicVariableDeclaration
-                                                                                                                                                   match = publicVariableDeclaration$Rule();
-                                                                                                                                                   if (! match) {
-                                                                                                                                                      // PrivateVariableDeclaration
-                                                                                                                                                      match = privateVariableDeclaration$Rule();
-                                                                                                                                                      if (! match) {
-                                                                                                                                                         // External
-                                                                                                                                                         match = external$Rule();
-                                                                                                                                                         if (! match) {
-                                                                                                                                                            // Announce
-                                                                                                                                                            match = announce$Rule();
-                                                                                                                                                            if (! match) {
-                                                                                                                                                               // Request
-                                                                                                                                                               match = request$Rule();
-                                                                                                                                                               if (! match) {
-                                                                                                                                                                  // Throw
-                                                                                                                                                                  match = throw$Rule();
-                                                                                                                                                                  if (! match) {
-                                                                                                                                                                     // StatementAssignmentExpression
-                                                                                                                                                                     match = statementAssignmentExpression$Rule();
-                                                                                                                                                                     if (! match) {
-                                                                                                                                                                        // SelfExpression
-                                                                                                                                                                        match = selfExpression$Rule();
-                                                                                                                                                                        if (! match) {
-                                                                                                                                                                           // PrefixedExpression
-                                                                                                                                                                           match = prefixedExpression$Rule();
-                                                                                                                                                                           if (! match) {
-                                                                                                                                                                              // PostfixedExpression
-                                                                                                                                                                              match = postfixedExpression$Rule();
-                                                                                                                                                                              if (! match) {
-                                                                                                                                                                                 // AliasedExpression
-                                                                                                                                                                                 match = aliasedExpression$Rule();
-                                                                                                                                                                                 if (! match) {
-                                                                                                                                                                                    // AliasedMacro
-                                                                                                                                                                                    match = aliasedMacro$Rule();
-                                                                                                                                                                                    if (! match) {
-                                                                                                                                                                                       // QualifiedExpression
-                                                                                                                                                                                       match = qualifiedExpression$Rule();
-                                                                                                                                                                                       if (! match) {
-                                                                                                                                                                                          // BeginTransaction
-                                                                                                                                                                                          match = beginTransaction$Rule();
-                                                                                                                                                                                          if (! match) {
-                                                                                                                                                                                             // CommitTransaction
-                                                                                                                                                                                             match = commitTransaction$Rule();
-                                                                                                                                                                                             if (! match) {
-                                                                                                                                                                                                // RollbackTransaction
-                                                                                                                                                                                                match = rollbackTransaction$Rule();
-                                                                                                                                                                                                if (! match) {
-                                                                                                                                                                                                   // UseAs
-                                                                                                                                                                                                   match = useAs$Rule();
-                                                                                                                                                                                                   if (! match) {
-                                                                                                                                                                                                      // UseArea
-                                                                                                                                                                                                      match = useArea$Rule();
-                                                                                                                                                                                                      if (! match) {
-                                                                                                                                                                                                         // MacroFunctionCall
-                                                                                                                                                                                                         match = macroFunctionCall$Rule();
-                                                                                                                                                                                                         if (! match) {
-                                                                                                                                                                                                            // KeywordsFunctionCall
-                                                                                                                                                                                                            match = keywordsFunctionCall$Rule();
-                                                                                                                                                                                                            if (! match) {
-                                                                                                                                                                                                               // SimpleFunctionCall
-                                                                                                                                                                                                               match = simpleFunctionCall$Rule();
-                                                                                                                                                                                                               if (! match) {
-                                                                                                                                                                                                                  // KeyboardCall
-                                                                                                                                                                                                                  match = keyboardCall$Rule();
-                                                                                                                                                                                                                  if (! match) {
-                                                                                                                                                                                                                     // Macro
-                                                                                                                                                                                                                     match = macro$Rule();
-                                                                                                                                                                                                                     if (! match) {
-                                                                                                                                                                                                                        // ParenthesesExpressionList
-                                                                                                                                                                                                                        match = parenthesesExpressionList$Rule();
-                                                                                                                                                                                                                        if (! match) {
-                                                                                                                                                                                                                           // AloneLineComment
-                                                                                                                                                                                                                           match = aloneLineComment$Rule();
-                                                                                                                                                                                                                           if (! match) {
-                                                                                                                                                                                                                              // Directive
-                                                                                                                                                                                                                              match = directive$Rule();
-                                                                                                                                                                                                                              if (! match) {
-                                                                                                                                                                                                                                 // OldStyleCommands
-                                                                                                                                                                                                                                 match = oldStyleCommands$Rule();
-                                                                                                                                                                                                                              }
-                                                                                                                                                                                                                           }
-                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                     }
-                                                                                                                                                                                                                  }
-                                                                                                                                                                                                               }
-                                                                                                                                                                                                            }
-                                                                                                                                                                                                         }
-                                                                                                                                                                                                      }
-                                                                                                                                                                                                   }
-                                                                                                                                                                                                }
-                                                                                                                                                                                             }
-                                                                                                                                                                                          }
-                                                                                                                                                                                       }
-                                                                                                                                                                                    }
-                                                                                                                                                                                 }
-                                                                                                                                                                              }
-                                                                                                                                                                           }
-                                                                                                                                                                        }
-                                                                                                                                                                     }
-                                                                                                                                                                  }
-                                                                                                                                                               }
-                                                                                                                                                            }
-                                                                                                                                                         }
-                                                                                                                                                      }
-                                                                                                                                                   }
-                                                                                                                                                }
-                                                                                                                                             }
-                                                                                                                                          }
-                                                                                                                                       }
-                                                                                                                                    }
-                                                                                                                                 }
-                                                                                                                              }
-                                                                                                                           }
-                                                                                                                        }
-                                                                                                                     }
-                                                                                                                  }
-                                                                                                               }
-                                                                                                            }
-                                                                                                         }
-                                                                                                      }
-                                                                                                   }
-                                                                                                }
-                                                                                             }
-                                                                                          }
+                                                                                          // OldStyleCommands
+                                                                                          match = oldStyleCommands$Rule();
                                                                                        }
                                                                                     }
                                                                                  }
@@ -1666,7 +1982,897 @@ public class HarbourUnprocessedParser implements Parser {
                   }
                }
             }
-         }
+            break;
+         case 'F':
+         case 'f':
+            // FunctionDeclaration
+            match = functionDeclaration$Rule();
+            if (! match) {
+               // FieldsDeclaration
+               match = fieldsDeclaration$Rule();
+               if (! match) {
+                  // ForNextBegin
+                  match = forNextBegin$Rule();
+                  if (! match) {
+                     // ForEachBegin
+                     match = forEachBegin$Rule();
+                     if (! match) {
+                        // FinallyBlockBegin
+                        match = finallyBlockBegin$Rule();
+                        if (! match) {
+                           // StatementAssignmentExpression
+                           match = statementAssignmentExpression$Rule();
+                           if (! match) {
+                              // PostfixedExpression
+                              match = postfixedExpression$Rule();
+                              if (! match) {
+                                 // AliasedExpression
+                                 match = aliasedExpression$Rule();
+                                 if (! match) {
+                                    // AliasedMacro
+                                    match = aliasedMacro$Rule();
+                                    if (! match) {
+                                       // QualifiedExpression
+                                       match = qualifiedExpression$Rule();
+                                       if (! match) {
+                                          // MacroFunctionCall
+                                          match = macroFunctionCall$Rule();
+                                          if (! match) {
+                                             // KeywordsFunctionCall
+                                             match = keywordsFunctionCall$Rule();
+                                             if (! match) {
+                                                // SimpleFunctionCall
+                                                match = simpleFunctionCall$Rule();
+                                                if (! match) {
+                                                   // Macro
+                                                   match = macro$Rule();
+                                                   if (! match) {
+                                                      // OldStyleCommands
+                                                      match = oldStyleCommands$Rule();
+                                                   }
+                                                }
+                                             }
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'Q':
+         case 'q':
+         case 'G':
+         case 'g':
+         case 'J':
+         case 'Z':
+         case 'j':
+         case 'z':
+            // StatementAssignmentExpression
+            match = statementAssignmentExpression$Rule();
+            if (! match) {
+               // PostfixedExpression
+               match = postfixedExpression$Rule();
+               if (! match) {
+                  // AliasedExpression
+                  match = aliasedExpression$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                     if (! match) {
+                        // QualifiedExpression
+                        match = qualifiedExpression$Rule();
+                        if (! match) {
+                           // MacroFunctionCall
+                           match = macroFunctionCall$Rule();
+                           if (! match) {
+                              // SimpleFunctionCall
+                              match = simpleFunctionCall$Rule();
+                              if (! match) {
+                                 // Macro
+                                 match = macro$Rule();
+                                 if (! match) {
+                                    // OldStyleCommands
+                                    match = oldStyleCommands$Rule();
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'V':
+         case 'v':
+         case 'H':
+         case 'h':
+            // ClassBodyStmt
+            match = classBodyStmt$Rule();
+            if (! match) {
+               // StatementAssignmentExpression
+               match = statementAssignmentExpression$Rule();
+               if (! match) {
+                  // PostfixedExpression
+                  match = postfixedExpression$Rule();
+                  if (! match) {
+                     // AliasedExpression
+                     match = aliasedExpression$Rule();
+                     if (! match) {
+                        // AliasedMacro
+                        match = aliasedMacro$Rule();
+                        if (! match) {
+                           // QualifiedExpression
+                           match = qualifiedExpression$Rule();
+                           if (! match) {
+                              // MacroFunctionCall
+                              match = macroFunctionCall$Rule();
+                              if (! match) {
+                                 // SimpleFunctionCall
+                                 match = simpleFunctionCall$Rule();
+                                 if (! match) {
+                                    // Macro
+                                    match = macro$Rule();
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'I':
+         case 'i':
+            // FunctionDeclaration
+            match = functionDeclaration$Rule();
+            if (! match) {
+               // ProcedureDeclaration
+               match = procedureDeclaration$Rule();
+               if (! match) {
+                  // IfInLine
+                  match = ifInLine$Rule();
+                  if (! match) {
+                     // IfBegin
+                     match = ifBegin$Rule();
+                     if (! match) {
+                        // StatementAssignmentExpression
+                        match = statementAssignmentExpression$Rule();
+                        if (! match) {
+                           // PostfixedExpression
+                           match = postfixedExpression$Rule();
+                           if (! match) {
+                              // AliasedExpression
+                              match = aliasedExpression$Rule();
+                              if (! match) {
+                                 // AliasedMacro
+                                 match = aliasedMacro$Rule();
+                                 if (! match) {
+                                    // QualifiedExpression
+                                    match = qualifiedExpression$Rule();
+                                    if (! match) {
+                                       // MacroFunctionCall
+                                       match = macroFunctionCall$Rule();
+                                       if (! match) {
+                                          // KeywordsFunctionCall
+                                          match = keywordsFunctionCall$Rule();
+                                          if (! match) {
+                                             // SimpleFunctionCall
+                                             match = simpleFunctionCall$Rule();
+                                             if (! match) {
+                                                // Macro
+                                                match = macro$Rule();
+                                                if (! match) {
+                                                   // OldStyleCommands
+                                                   match = oldStyleCommands$Rule();
+                                                }
+                                             }
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'K':
+         case 'k':
+            // StatementAssignmentExpression
+            match = statementAssignmentExpression$Rule();
+            if (! match) {
+               // PostfixedExpression
+               match = postfixedExpression$Rule();
+               if (! match) {
+                  // AliasedExpression
+                  match = aliasedExpression$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                     if (! match) {
+                        // QualifiedExpression
+                        match = qualifiedExpression$Rule();
+                        if (! match) {
+                           // MacroFunctionCall
+                           match = macroFunctionCall$Rule();
+                           if (! match) {
+                              // SimpleFunctionCall
+                              match = simpleFunctionCall$Rule();
+                              if (! match) {
+                                 // KeyboardCall
+                                 match = keyboardCall$Rule();
+                                 if (! match) {
+                                    // Macro
+                                    match = macro$Rule();
+                                    if (! match) {
+                                       // OldStyleCommands
+                                       match = oldStyleCommands$Rule();
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'L':
+         case 'l':
+            // LocalVariablesDeclaration
+            match = localVariablesDeclaration$Rule();
+            if (! match) {
+               // LoopStmt
+               match = loopStmt$Rule();
+               if (! match) {
+                  // StatementAssignmentExpression
+                  match = statementAssignmentExpression$Rule();
+                  if (! match) {
+                     // PostfixedExpression
+                     match = postfixedExpression$Rule();
+                     if (! match) {
+                        // AliasedExpression
+                        match = aliasedExpression$Rule();
+                        if (! match) {
+                           // AliasedMacro
+                           match = aliasedMacro$Rule();
+                           if (! match) {
+                              // QualifiedExpression
+                              match = qualifiedExpression$Rule();
+                              if (! match) {
+                                 // MacroFunctionCall
+                                 match = macroFunctionCall$Rule();
+                                 if (! match) {
+                                    // KeywordsFunctionCall
+                                    match = keywordsFunctionCall$Rule();
+                                    if (! match) {
+                                       // SimpleFunctionCall
+                                       match = simpleFunctionCall$Rule();
+                                       if (! match) {
+                                          // Macro
+                                          match = macro$Rule();
+                                          if (! match) {
+                                             // OldStyleCommands
+                                             match = oldStyleCommands$Rule();
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'M':
+         case 'm':
+            // MethodDefinition
+            match = methodDefinition$Rule();
+            if (! match) {
+               // ClassBodyStmt
+               match = classBodyStmt$Rule();
+               if (! match) {
+                  // MemvarDeclaration
+                  match = memvarDeclaration$Rule();
+                  if (! match) {
+                     // StatementAssignmentExpression
+                     match = statementAssignmentExpression$Rule();
+                     if (! match) {
+                        // PostfixedExpression
+                        match = postfixedExpression$Rule();
+                        if (! match) {
+                           // AliasedExpression
+                           match = aliasedExpression$Rule();
+                           if (! match) {
+                              // AliasedMacro
+                              match = aliasedMacro$Rule();
+                              if (! match) {
+                                 // QualifiedExpression
+                                 match = qualifiedExpression$Rule();
+                                 if (! match) {
+                                    // MacroFunctionCall
+                                    match = macroFunctionCall$Rule();
+                                    if (! match) {
+                                       // SimpleFunctionCall
+                                       match = simpleFunctionCall$Rule();
+                                       if (! match) {
+                                          // Macro
+                                          match = macro$Rule();
+                                          if (! match) {
+                                             // OldStyleCommands
+                                             match = oldStyleCommands$Rule();
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'N':
+         case 'n':
+            // ForNextEnd
+            match = forNextEnd$Rule();
+            if (! match) {
+               // ForEachEnd
+               match = forEachEnd$Rule();
+               if (! match) {
+                  // StatementAssignmentExpression
+                  match = statementAssignmentExpression$Rule();
+                  if (! match) {
+                     // PostfixedExpression
+                     match = postfixedExpression$Rule();
+                     if (! match) {
+                        // AliasedExpression
+                        match = aliasedExpression$Rule();
+                        if (! match) {
+                           // AliasedMacro
+                           match = aliasedMacro$Rule();
+                           if (! match) {
+                              // QualifiedExpression
+                              match = qualifiedExpression$Rule();
+                              if (! match) {
+                                 // MacroFunctionCall
+                                 match = macroFunctionCall$Rule();
+                                 if (! match) {
+                                    // SimpleFunctionCall
+                                    match = simpleFunctionCall$Rule();
+                                    if (! match) {
+                                       // Macro
+                                       match = macro$Rule();
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'O':
+         case 'o':
+            // OtherwiseBegin
+            match = otherwiseBegin$Rule();
+            if (! match) {
+               // StatementAssignmentExpression
+               match = statementAssignmentExpression$Rule();
+               if (! match) {
+                  // PostfixedExpression
+                  match = postfixedExpression$Rule();
+                  if (! match) {
+                     // AliasedExpression
+                     match = aliasedExpression$Rule();
+                     if (! match) {
+                        // AliasedMacro
+                        match = aliasedMacro$Rule();
+                        if (! match) {
+                           // QualifiedExpression
+                           match = qualifiedExpression$Rule();
+                           if (! match) {
+                              // MacroFunctionCall
+                              match = macroFunctionCall$Rule();
+                              if (! match) {
+                                 // KeywordsFunctionCall
+                                 match = keywordsFunctionCall$Rule();
+                                 if (! match) {
+                                    // SimpleFunctionCall
+                                    match = simpleFunctionCall$Rule();
+                                    if (! match) {
+                                       // Macro
+                                       match = macro$Rule();
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'P':
+         case 'p':
+            // ProcedureDeclaration
+            match = procedureDeclaration$Rule();
+            if (! match) {
+               // ClassBodyStmt
+               match = classBodyStmt$Rule();
+               if (! match) {
+                  // OldStyleParametersDeclaration
+                  match = oldStyleParametersDeclaration$Rule();
+                  if (! match) {
+                     // PublicVariableDeclaration
+                     match = publicVariableDeclaration$Rule();
+                     if (! match) {
+                        // PrivateVariableDeclaration
+                        match = privateVariableDeclaration$Rule();
+                        if (! match) {
+                           // StatementAssignmentExpression
+                           match = statementAssignmentExpression$Rule();
+                           if (! match) {
+                              // PostfixedExpression
+                              match = postfixedExpression$Rule();
+                              if (! match) {
+                                 // AliasedExpression
+                                 match = aliasedExpression$Rule();
+                                 if (! match) {
+                                    // AliasedMacro
+                                    match = aliasedMacro$Rule();
+                                    if (! match) {
+                                       // QualifiedExpression
+                                       match = qualifiedExpression$Rule();
+                                       if (! match) {
+                                          // MacroFunctionCall
+                                          match = macroFunctionCall$Rule();
+                                          if (! match) {
+                                             // KeywordsFunctionCall
+                                             match = keywordsFunctionCall$Rule();
+                                             if (! match) {
+                                                // SimpleFunctionCall
+                                                match = simpleFunctionCall$Rule();
+                                                if (! match) {
+                                                   // Macro
+                                                   match = macro$Rule();
+                                                   if (! match) {
+                                                      // OldStyleCommands
+                                                      match = oldStyleCommands$Rule();
+                                                   }
+                                                }
+                                             }
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'R':
+         case 'r':
+            // RecoverBegin
+            match = recoverBegin$Rule();
+            if (! match) {
+               // Return
+               match = return$Rule();
+               if (! match) {
+                  // Request
+                  match = request$Rule();
+                  if (! match) {
+                     // StatementAssignmentExpression
+                     match = statementAssignmentExpression$Rule();
+                     if (! match) {
+                        // PostfixedExpression
+                        match = postfixedExpression$Rule();
+                        if (! match) {
+                           // AliasedExpression
+                           match = aliasedExpression$Rule();
+                           if (! match) {
+                              // AliasedMacro
+                              match = aliasedMacro$Rule();
+                              if (! match) {
+                                 // QualifiedExpression
+                                 match = qualifiedExpression$Rule();
+                                 if (! match) {
+                                    // RollbackTransaction
+                                    match = rollbackTransaction$Rule();
+                                    if (! match) {
+                                       // MacroFunctionCall
+                                       match = macroFunctionCall$Rule();
+                                       if (! match) {
+                                          // KeywordsFunctionCall
+                                          match = keywordsFunctionCall$Rule();
+                                          if (! match) {
+                                             // SimpleFunctionCall
+                                             match = simpleFunctionCall$Rule();
+                                             if (! match) {
+                                                // Macro
+                                                match = macro$Rule();
+                                                if (! match) {
+                                                   // OldStyleCommands
+                                                   match = oldStyleCommands$Rule();
+                                                }
+                                             }
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'S':
+         case 's':
+            // FunctionDeclaration
+            match = functionDeclaration$Rule();
+            if (! match) {
+               // ProcedureDeclaration
+               match = procedureDeclaration$Rule();
+               if (! match) {
+                  // StaticVariablesDeclaration
+                  match = staticVariablesDeclaration$Rule();
+                  if (! match) {
+                     // SwitchBegin
+                     match = switchBegin$Rule();
+                     if (! match) {
+                        // StatementAssignmentExpression
+                        match = statementAssignmentExpression$Rule();
+                        if (! match) {
+                           // PostfixedExpression
+                           match = postfixedExpression$Rule();
+                           if (! match) {
+                              // AliasedExpression
+                              match = aliasedExpression$Rule();
+                              if (! match) {
+                                 // AliasedMacro
+                                 match = aliasedMacro$Rule();
+                                 if (! match) {
+                                    // QualifiedExpression
+                                    match = qualifiedExpression$Rule();
+                                    if (! match) {
+                                       // MacroFunctionCall
+                                       match = macroFunctionCall$Rule();
+                                       if (! match) {
+                                          // KeywordsFunctionCall
+                                          match = keywordsFunctionCall$Rule();
+                                          if (! match) {
+                                             // SimpleFunctionCall
+                                             match = simpleFunctionCall$Rule();
+                                             if (! match) {
+                                                // Macro
+                                                match = macro$Rule();
+                                                if (! match) {
+                                                   // OldStyleCommands
+                                                   match = oldStyleCommands$Rule();
+                                                }
+                                             }
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'T':
+         case 't':
+            // TryCatchBegin
+            match = tryCatchBegin$Rule();
+            if (! match) {
+               // Throw
+               match = throw$Rule();
+               if (! match) {
+                  // StatementAssignmentExpression
+                  match = statementAssignmentExpression$Rule();
+                  if (! match) {
+                     // PostfixedExpression
+                     match = postfixedExpression$Rule();
+                     if (! match) {
+                        // AliasedExpression
+                        match = aliasedExpression$Rule();
+                        if (! match) {
+                           // AliasedMacro
+                           match = aliasedMacro$Rule();
+                           if (! match) {
+                              // QualifiedExpression
+                              match = qualifiedExpression$Rule();
+                              if (! match) {
+                                 // MacroFunctionCall
+                                 match = macroFunctionCall$Rule();
+                                 if (! match) {
+                                    // KeywordsFunctionCall
+                                    match = keywordsFunctionCall$Rule();
+                                    if (! match) {
+                                       // SimpleFunctionCall
+                                       match = simpleFunctionCall$Rule();
+                                       if (! match) {
+                                          // Macro
+                                          match = macro$Rule();
+                                          if (! match) {
+                                             // OldStyleCommands
+                                             match = oldStyleCommands$Rule();
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'U':
+         case 'u':
+            // StatementAssignmentExpression
+            match = statementAssignmentExpression$Rule();
+            if (! match) {
+               // PostfixedExpression
+               match = postfixedExpression$Rule();
+               if (! match) {
+                  // AliasedExpression
+                  match = aliasedExpression$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                     if (! match) {
+                        // QualifiedExpression
+                        match = qualifiedExpression$Rule();
+                        if (! match) {
+                           // UseAs
+                           match = useAs$Rule();
+                           if (! match) {
+                              // UseArea
+                              match = useArea$Rule();
+                              if (! match) {
+                                 // MacroFunctionCall
+                                 match = macroFunctionCall$Rule();
+                                 if (! match) {
+                                    // SimpleFunctionCall
+                                    match = simpleFunctionCall$Rule();
+                                    if (! match) {
+                                       // Macro
+                                       match = macro$Rule();
+                                       if (! match) {
+                                          // OldStyleCommands
+                                          match = oldStyleCommands$Rule();
+                                       }
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'W':
+         case 'w':
+            // DoWhileBegin
+            match = doWhileBegin$Rule();
+            if (! match) {
+               // StatementAssignmentExpression
+               match = statementAssignmentExpression$Rule();
+               if (! match) {
+                  // PostfixedExpression
+                  match = postfixedExpression$Rule();
+                  if (! match) {
+                     // AliasedExpression
+                     match = aliasedExpression$Rule();
+                     if (! match) {
+                        // AliasedMacro
+                        match = aliasedMacro$Rule();
+                        if (! match) {
+                           // QualifiedExpression
+                           match = qualifiedExpression$Rule();
+                           if (! match) {
+                              // MacroFunctionCall
+                              match = macroFunctionCall$Rule();
+                              if (! match) {
+                                 // SimpleFunctionCall
+                                 match = simpleFunctionCall$Rule();
+                                 if (! match) {
+                                    // Macro
+                                    match = macro$Rule();
+                                    if (! match) {
+                                       // OldStyleCommands
+                                       match = oldStyleCommands$Rule();
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'X':
+         case 'x':
+            // StatementAssignmentExpression
+            match = statementAssignmentExpression$Rule();
+            if (! match) {
+               // PostfixedExpression
+               match = postfixedExpression$Rule();
+               if (! match) {
+                  // AliasedExpression
+                  match = aliasedExpression$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                     if (! match) {
+                        // QualifiedExpression
+                        match = qualifiedExpression$Rule();
+                        if (! match) {
+                           // MacroFunctionCall
+                           match = macroFunctionCall$Rule();
+                           if (! match) {
+                              // KeywordsFunctionCall
+                              match = keywordsFunctionCall$Rule();
+                              if (! match) {
+                                 // SimpleFunctionCall
+                                 match = simpleFunctionCall$Rule();
+                                 if (! match) {
+                                    // Macro
+                                    match = macro$Rule();
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'Y':
+         case 'y':
+            // StatementAssignmentExpression
+            match = statementAssignmentExpression$Rule();
+            if (! match) {
+               // PostfixedExpression
+               match = postfixedExpression$Rule();
+               if (! match) {
+                  // AliasedExpression
+                  match = aliasedExpression$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                     if (! match) {
+                        // QualifiedExpression
+                        match = qualifiedExpression$Rule();
+                        if (! match) {
+                           // MacroFunctionCall
+                           match = macroFunctionCall$Rule();
+                           if (! match) {
+                              // SimpleFunctionCall
+                              match = simpleFunctionCall$Rule();
+                              if (! match) {
+                                 // Macro
+                                 match = macro$Rule();
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case '\"':
+         case '\'':
+         case '[':
+         case '{':
+            // StatementAssignmentExpression
+            match = statementAssignmentExpression$Rule();
+            if (! match) {
+               // PostfixedExpression
+               match = postfixedExpression$Rule();
+               if (! match) {
+                  // QualifiedExpression
+                  match = qualifiedExpression$Rule();
+               }
+            }
+            break;
+         case '_':
+            // ClassDeclaration
+            match = classDeclaration$Rule();
+            if (! match) {
+               // ClassMemberDeclaration
+               match = classMemberDeclaration$Rule();
+               if (! match) {
+                  // StatementAssignmentExpression
+                  match = statementAssignmentExpression$Rule();
+                  if (! match) {
+                     // PostfixedExpression
+                     match = postfixedExpression$Rule();
+                     if (! match) {
+                        // AliasedExpression
+                        match = aliasedExpression$Rule();
+                        if (! match) {
+                           // AliasedMacro
+                           match = aliasedMacro$Rule();
+                           if (! match) {
+                              // QualifiedExpression
+                              match = qualifiedExpression$Rule();
+                              if (! match) {
+                                 // MacroFunctionCall
+                                 match = macroFunctionCall$Rule();
+                                 if (! match) {
+                                    // SimpleFunctionCall
+                                    match = simpleFunctionCall$Rule();
+                                    if (! match) {
+                                       // Macro
+                                       match = macro$Rule();
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case '#':
+            // Directive
+            match = directive$Rule();
+            break;
+         case '(':
+            // StatementAssignmentExpression
+            match = statementAssignmentExpression$Rule();
+            if (! match) {
+               // PostfixedExpression
+               match = postfixedExpression$Rule();
+               if (! match) {
+                  // AliasedExpression
+                  match = aliasedExpression$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                     if (! match) {
+                        // QualifiedExpression
+                        match = qualifiedExpression$Rule();
+                        if (! match) {
+                           // ParenthesesExpressionList
+                           match = parenthesesExpressionList$Rule();
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case '*':
+            // AloneLineComment
+            match = aloneLineComment$Rule();
+            break;
+         default:
+            match = false;
       }
       if (match) {
          statement$RuleMemoStart = startIndex;
@@ -1718,19 +2924,19 @@ public class HarbourUnprocessedParser implements Parser {
       // (("local" | "loca") TestNoAlpha OptionalSpacing VariableDeclarationList)
       // ("local" | "loca")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'l')) {
+      if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
          ++index;
          // ("ocal" | "oca")
-         if (buffer.matchIgnoreCaseChar(index, 'o')) {
+         if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
             ++index;
             // ("cal" | "ca")
-            if (buffer.matchIgnoreCaseChar(index, 'c')) {
+            if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                ++index;
                // ("al" | "a")
-               if (buffer.matchIgnoreCaseChar(index, 'a')) {
+               if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                   ++index;
                   // ("l" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'l')) {
+                  if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                      ++index;
                      // <EMPTY>
                      match = true;
@@ -1791,7 +2997,7 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //FunctionDeclaration : (FunctionModifier? ("function" | "functio" | "functi" | "funct" | "func") TestNoAlpha OptionalSpacing Identifier ParParametersDeclaration?)
+   //FunctionDeclaration : (FunctionModifier ("function" | "functio" | "functi" | "funct" | "func") TestNoAlpha OptionalSpacing Identifier ParParametersDeclaration?)
    protected boolean functionDeclaration$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -1814,39 +3020,41 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       startIndex = index;
-      // (FunctionModifier? ("function" | "functio" | "functi" | "funct" | "func") TestNoAlpha OptionalSpacing Identifier ParParametersDeclaration?)
-      // FunctionModifier?
+      // (FunctionModifier ("function" | "functio" | "functi" | "funct" | "func") TestNoAlpha OptionalSpacing Identifier ParParametersDeclaration?)
       // FunctionModifier
-      functionModifier$Rule();
-      match = true;
-      // ("function" | "functio" | "functi" | "funct" | "func")
-      int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'f')) {
-         ++index;
-         // ("unction" | "unctio" | "uncti" | "unct" | "unc")
-         if (buffer.matchIgnoreCaseChar(index, 'u')) {
+      match = functionModifier$Rule();
+      if (match) {
+         // ("function" | "functio" | "functi" | "funct" | "func")
+         int startIndex_1 = index;
+         if (buffer.matchChar(index, 'f') || buffer.matchChar(index, 'F')) {
             ++index;
-            // ("nction" | "nctio" | "ncti" | "nct" | "nc")
-            if (buffer.matchIgnoreCaseChar(index, 'n')) {
+            // ("unction" | "unctio" | "uncti" | "unct" | "unc")
+            if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
                ++index;
-               // ("ction" | "ctio" | "cti" | "ct" | "c")
-               if (buffer.matchIgnoreCaseChar(index, 'c')) {
+               // ("nction" | "nctio" | "ncti" | "nct" | "nc")
+               if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                   ++index;
-                  // ("tion" | "tio" | "ti" | "t" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 't')) {
+                  // ("ction" | "ctio" | "cti" | "ct" | "c")
+                  if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                      ++index;
-                     // ("ion" | "io" | "i" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'i')) {
+                     // ("tion" | "tio" | "ti" | "t" | <EMPTY>)
+                     if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                         ++index;
-                        // ("on" | "o" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'o')) {
+                        // ("ion" | "io" | "i" | <EMPTY>)
+                        if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                            ++index;
-                           // "n"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'n')) {
+                           // ("on" | "o" | <EMPTY>)
+                           if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
                               ++index;
+                              // "n"
+                              if (match = buffer.matchIgnoreCaseChar(index, 'n')) {
+                                 ++index;
+                              }
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -1854,7 +3062,7 @@ public class HarbourUnprocessedParser implements Parser {
                         match = true;
                      }
                   } else {
-                     match = true;
+                     match = false;
                   }
                } else {
                   match = false;
@@ -1865,29 +3073,27 @@ public class HarbourUnprocessedParser implements Parser {
          } else {
             match = false;
          }
-      } else {
-         match = false;
-      }
-      if (! match) {
-         index = startIndex_1;
-      } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
-         currentNode = currentNode.getSibling();
-      }
-      if (match) {
-         // TestNoAlpha
-         match = testNoAlpha$Rule();
+         if (! match) {
+            index = startIndex_1;
+         } else if(! currentRuleIsAtomic) {
+            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+            currentNode = currentNode.getSibling();
+         }
          if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
+            // TestNoAlpha
+            match = testNoAlpha$Rule();
             if (match) {
-               // Identifier
-               match = identifier$Rule();
+               // OptionalSpacing
+               match = optionalSpacing$Rule();
                if (match) {
-                  // ParParametersDeclaration?
-                  // ParParametersDeclaration
-                  parParametersDeclaration$Rule();
-                  match = true;
+                  // Identifier
+                  match = identifier$Rule();
+                  if (match) {
+                     // ParParametersDeclaration?
+                     // ParParametersDeclaration
+                     parParametersDeclaration$Rule();
+                     match = true;
+                  }
                }
             }
          }
@@ -1916,7 +3122,7 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //ProcedureDeclaration : (FunctionModifier? ("procedure" | "procedur" | "procedu" | "proced" | "proce" | "proc") TestNoAlpha OptionalSpacing Identifier ParParametersDeclaration?)
+   //ProcedureDeclaration : (FunctionModifier ("procedure" | "procedur" | "procedu" | "proced" | "proce" | "proc") TestNoAlpha OptionalSpacing Identifier ParParametersDeclaration?)
    protected boolean procedureDeclaration$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -1939,42 +3145,44 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       startIndex = index;
-      // (FunctionModifier? ("procedure" | "procedur" | "procedu" | "proced" | "proce" | "proc") TestNoAlpha OptionalSpacing Identifier ParParametersDeclaration?)
-      // FunctionModifier?
+      // (FunctionModifier ("procedure" | "procedur" | "procedu" | "proced" | "proce" | "proc") TestNoAlpha OptionalSpacing Identifier ParParametersDeclaration?)
       // FunctionModifier
-      functionModifier$Rule();
-      match = true;
-      // ("procedure" | "procedur" | "procedu" | "proced" | "proce" | "proc")
-      int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'p')) {
-         ++index;
-         // ("rocedure" | "rocedur" | "rocedu" | "roced" | "roce" | "roc")
-         if (buffer.matchIgnoreCaseChar(index, 'r')) {
+      match = functionModifier$Rule();
+      if (match) {
+         // ("procedure" | "procedur" | "procedu" | "proced" | "proce" | "proc")
+         int startIndex_1 = index;
+         if (buffer.matchChar(index, 'p') || buffer.matchChar(index, 'P')) {
             ++index;
-            // ("ocedure" | "ocedur" | "ocedu" | "oced" | "oce" | "oc")
-            if (buffer.matchIgnoreCaseChar(index, 'o')) {
+            // ("rocedure" | "rocedur" | "rocedu" | "roced" | "roce" | "roc")
+            if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                ++index;
-               // ("cedure" | "cedur" | "cedu" | "ced" | "ce" | "c")
-               if (buffer.matchIgnoreCaseChar(index, 'c')) {
+               // ("ocedure" | "ocedur" | "ocedu" | "oced" | "oce" | "oc")
+               if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
                   ++index;
-                  // ("edure" | "edur" | "edu" | "ed" | "e" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                  // ("cedure" | "cedur" | "cedu" | "ced" | "ce" | "c")
+                  if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                      ++index;
-                     // ("dure" | "dur" | "du" | "d" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'd')) {
+                     // ("edure" | "edur" | "edu" | "ed" | "e" | <EMPTY>)
+                     if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                         ++index;
-                        // ("ure" | "ur" | "u" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'u')) {
+                        // ("dure" | "dur" | "du" | "d" | <EMPTY>)
+                        if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
                            ++index;
-                           // ("re" | "r" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'r')) {
+                           // ("ure" | "ur" | "u" | <EMPTY>)
+                           if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
                               ++index;
-                              // "e"
-                              if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                              // ("re" | "r" | <EMPTY>)
+                              if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                                  ++index;
+                                 // "e"
+                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                    ++index;
+                                 }
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
                               }
-                              // <EMPTY>
-                              match = true;
                            } else {
                               match = true;
                            }
@@ -1985,7 +3193,7 @@ public class HarbourUnprocessedParser implements Parser {
                         match = true;
                      }
                   } else {
-                     match = true;
+                     match = false;
                   }
                } else {
                   match = false;
@@ -1996,29 +3204,27 @@ public class HarbourUnprocessedParser implements Parser {
          } else {
             match = false;
          }
-      } else {
-         match = false;
-      }
-      if (! match) {
-         index = startIndex_1;
-      } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
-         currentNode = currentNode.getSibling();
-      }
-      if (match) {
-         // TestNoAlpha
-         match = testNoAlpha$Rule();
+         if (! match) {
+            index = startIndex_1;
+         } else if(! currentRuleIsAtomic) {
+            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+            currentNode = currentNode.getSibling();
+         }
          if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
+            // TestNoAlpha
+            match = testNoAlpha$Rule();
             if (match) {
-               // Identifier
-               match = identifier$Rule();
+               // OptionalSpacing
+               match = optionalSpacing$Rule();
                if (match) {
-                  // ParParametersDeclaration?
-                  // ParParametersDeclaration
-                  parParametersDeclaration$Rule();
-                  match = true;
+                  // Identifier
+                  match = identifier$Rule();
+                  if (match) {
+                     // ParParametersDeclaration?
+                     // ParParametersDeclaration
+                     parParametersDeclaration$Rule();
+                     match = true;
+                  }
                }
             }
          }
@@ -2445,15 +3651,55 @@ public class HarbourUnprocessedParser implements Parser {
       }
       startIndex = index;
       // (SectionScope | MethodMember | FieldMember)
-      // SectionScope
-      match = sectionScope$Rule();
-      if (! match) {
-         // MethodMember
-         match = methodMember$Rule();
-         if (! match) {
+      switch(buffer.getChar(index)) {
+         case 'm':
+         case 'M':
+            // MethodMember
+            match = methodMember$Rule();
+            break;
+         case 'p':
+         case 'P':
+            // SectionScope
+            match = sectionScope$Rule();
+            if (! match) {
+               // MethodMember
+               match = methodMember$Rule();
+            }
+            break;
+         case 'a':
+         case 'A':
+         case 'c':
+         case 'C':
+            // MethodMember
+            match = methodMember$Rule();
+            if (! match) {
+               // FieldMember
+               match = fieldMember$Rule();
+            }
+            break;
+         case 'd':
+         case 'D':
             // FieldMember
             match = fieldMember$Rule();
-         }
+            break;
+         case 'e':
+         case 'E':
+         case 'h':
+         case 'H':
+            // SectionScope
+            match = sectionScope$Rule();
+            break;
+         case 'v':
+         case 'V':
+            // SectionScope
+            match = sectionScope$Rule();
+            if (! match) {
+               // FieldMember
+               match = fieldMember$Rule();
+            }
+            break;
+         default:
+            match = false;
       }
       if (match) {
          classBodyStmt$RuleMemoStart = startIndex;
@@ -2572,48 +3818,12 @@ public class HarbourUnprocessedParser implements Parser {
                index += 6;
             }
             break;
-         case 'e':
-         case 'E':
+         case 'h':
+         case 'H':
             ++index;
-            // ("xported" | "xport")
-            if (buffer.matchIgnoreCaseChar(index, 'x')) {
-               ++index;
-               // ("ported" | "port")
-               if (buffer.matchIgnoreCaseChar(index, 'p')) {
-                  ++index;
-                  // ("orted" | "ort")
-                  if (buffer.matchIgnoreCaseChar(index, 'o')) {
-                     ++index;
-                     // ("rted" | "rt")
-                     if (buffer.matchIgnoreCaseChar(index, 'r')) {
-                        ++index;
-                        // ("ted" | "t")
-                        if (buffer.matchIgnoreCaseChar(index, 't')) {
-                           ++index;
-                           // ("ed" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                              ++index;
-                              // "d"
-                              if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
-                                 ++index;
-                              }
-                           } else {
-                              match = true;
-                           }
-                        } else {
-                           match = false;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-               } else {
-                  match = false;
-               }
-            } else {
-               match = false;
+            // "idden"
+            if (match = ignoreCaseStringTest("idden", 5)) {
+               index += 5;
             }
             break;
          case 'p':
@@ -2621,17 +3831,42 @@ public class HarbourUnprocessedParser implements Parser {
             ++index;
             // ("rotected" | "ublished" | "rivate" | "ublic")
             switch(buffer.getChar(index)) {
+               case 'r':
+               case 'R':
+                  ++index;
+                  // ("otected" | "ivate")
+                  switch(buffer.getChar(index)) {
+                     case 'o':
+                     case 'O':
+                        ++index;
+                        // "tected"
+                        if (match = ignoreCaseStringTest("tected", 6)) {
+                           index += 6;
+                        }
+                        break;
+                     case 'i':
+                     case 'I':
+                        ++index;
+                        // "vate"
+                        if (match = ignoreCaseStringTest("vate", 4)) {
+                           index += 4;
+                        }
+                        break;
+                     default:
+                        match = false;
+                  }
+                  break;
                case 'u':
                case 'U':
                   ++index;
                   // ("blished" | "blic")
-                  if (buffer.matchIgnoreCaseChar(index, 'b')) {
+                  if (buffer.matchChar(index, 'b') || buffer.matchChar(index, 'B')) {
                      ++index;
                      // ("lished" | "lic")
-                     if (buffer.matchIgnoreCaseChar(index, 'l')) {
+                     if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                         ++index;
                         // ("ished" | "ic")
-                        if (buffer.matchIgnoreCaseChar(index, 'i')) {
+                        if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                            ++index;
                            // ("shed" | "c")
                            switch(buffer.getChar(index)) {
@@ -2662,41 +3897,52 @@ public class HarbourUnprocessedParser implements Parser {
                      match = false;
                   }
                   break;
-               case 'r':
-               case 'R':
-                  ++index;
-                  // ("otected" | "ivate")
-                  switch(buffer.getChar(index)) {
-                     case 'o':
-                     case 'O':
-                        ++index;
-                        // "tected"
-                        if (match = ignoreCaseStringTest("tected", 6)) {
-                           index += 6;
-                        }
-                        break;
-                     case 'i':
-                     case 'I':
-                        ++index;
-                        // "vate"
-                        if (match = ignoreCaseStringTest("vate", 4)) {
-                           index += 4;
-                        }
-                        break;
-                     default:
-                        match = false;
-                  }
-                  break;
                default:
                   match = false;
             }
             break;
-         case 'h':
-         case 'H':
+         case 'e':
+         case 'E':
             ++index;
-            // "idden"
-            if (match = ignoreCaseStringTest("idden", 5)) {
-               index += 5;
+            // ("xported" | "xport")
+            if (buffer.matchChar(index, 'x') || buffer.matchChar(index, 'X')) {
+               ++index;
+               // ("ported" | "port")
+               if (buffer.matchChar(index, 'p') || buffer.matchChar(index, 'P')) {
+                  ++index;
+                  // ("orted" | "ort")
+                  if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
+                     ++index;
+                     // ("rted" | "rt")
+                     if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
+                        ++index;
+                        // ("ted" | "t")
+                        if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
+                           ++index;
+                           // ("ed" | <EMPTY>)
+                           if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                              ++index;
+                              // "d"
+                              if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
+                                 ++index;
+                              }
+                           } else {
+                              match = true;
+                           }
+                        } else {
+                           match = false;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+               } else {
+                  match = false;
+               }
+            } else {
+               match = false;
             }
             break;
          default:
@@ -2768,6 +4014,22 @@ public class HarbourUnprocessedParser implements Parser {
       // ("method" | "classmethod" | "constructor" | "procedure" | "assign")
       int startIndex_1 = index;
       switch(buffer.getChar(index)) {
+         case 'p':
+         case 'P':
+            ++index;
+            // "rocedure"
+            if (match = ignoreCaseStringTest("rocedure", 8)) {
+               index += 8;
+            }
+            break;
+         case 'a':
+         case 'A':
+            ++index;
+            // "ssign"
+            if (match = ignoreCaseStringTest("ssign", 5)) {
+               index += 5;
+            }
+            break;
          case 'c':
          case 'C':
             ++index;
@@ -2791,22 +4053,6 @@ public class HarbourUnprocessedParser implements Parser {
                   break;
                default:
                   match = false;
-            }
-            break;
-         case 'a':
-         case 'A':
-            ++index;
-            // "ssign"
-            if (match = ignoreCaseStringTest("ssign", 5)) {
-               index += 5;
-            }
-            break;
-         case 'p':
-         case 'P':
-            ++index;
-            // "rocedure"
-            if (match = ignoreCaseStringTest("rocedure", 8)) {
-               index += 8;
             }
             break;
          case 'm':
@@ -2938,12 +4184,12 @@ public class HarbourUnprocessedParser implements Parser {
                index += 2;
             }
             break;
-         case 'd':
-         case 'D':
+         case 'a':
+         case 'A':
             ++index;
-            // "ata"
-            if (match = ignoreCaseStringTest("ata", 3)) {
-               index += 3;
+            // "ccess"
+            if (match = ignoreCaseStringTest("ccess", 5)) {
+               index += 5;
             }
             break;
          case 'c':
@@ -2954,12 +4200,12 @@ public class HarbourUnprocessedParser implements Parser {
                index += 7;
             }
             break;
-         case 'a':
-         case 'A':
+         case 'd':
+         case 'D':
             ++index;
-            // "ccess"
-            if (match = ignoreCaseStringTest("ccess", 5)) {
-               index += 5;
+            // "ata"
+            if (match = ignoreCaseStringTest("ata", 3)) {
+               index += 3;
             }
             break;
          default:
@@ -3249,17 +4495,17 @@ public class HarbourUnprocessedParser implements Parser {
          // ('(' | '->')
          int startIndex_2 = index;
          switch(buffer.getChar(index)) {
-            case '(':
-               ++index;
-               // <EMPTY>
-               match = true;
-               break;
             case '-':
                ++index;
                // '>'
                if (match = buffer.matchChar(index, '>')) {
                   ++index;
                }
+               break;
+            case '(':
+               ++index;
+               // <EMPTY>
+               match = true;
                break;
             default:
                match = false;
@@ -3321,19 +4567,19 @@ public class HarbourUnprocessedParser implements Parser {
       // (("static" | "stati" | "stat") TestNoAlpha OptionalSpacing VariableDeclarationList)
       // ("static" | "stati" | "stat")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 's')) {
+      if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
          ++index;
          // ("tatic" | "tati" | "tat")
-         if (buffer.matchIgnoreCaseChar(index, 't')) {
+         if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
             ++index;
             // ("atic" | "ati" | "at")
-            if (buffer.matchIgnoreCaseChar(index, 'a')) {
+            if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                ++index;
                // ("tic" | "ti" | "t")
-               if (buffer.matchIgnoreCaseChar(index, 't')) {
+               if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                   ++index;
                   // ("ic" | "i" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'i')) {
+                  if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                      ++index;
                      // "c"
                      if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
@@ -3424,19 +4670,19 @@ public class HarbourUnprocessedParser implements Parser {
       // (("field" | "fiel") TestNoAlpha OptionalSpacing IdentifierList InTable?)
       // ("field" | "fiel")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'f')) {
+      if (buffer.matchChar(index, 'f') || buffer.matchChar(index, 'F')) {
          ++index;
          // ("ield" | "iel")
-         if (buffer.matchIgnoreCaseChar(index, 'i')) {
+         if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
             ++index;
             // ("eld" | "el")
-            if (buffer.matchIgnoreCaseChar(index, 'e')) {
+            if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                ++index;
                // ("ld" | "l")
-               if (buffer.matchIgnoreCaseChar(index, 'l')) {
+               if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                   ++index;
                   // ("d" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'd')) {
+                  if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
                      ++index;
                      // <EMPTY>
                      match = true;
@@ -3591,31 +4837,31 @@ public class HarbourUnprocessedParser implements Parser {
       // (("parameters" | "parameter" | "paramete" | "paramet" | "parame" | "param" | "para") TestNoAlpha OptionalSpacing ParametersDeclarationList)
       // ("parameters" | "parameter" | "paramete" | "paramet" | "parame" | "param" | "para")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'p')) {
+      if (buffer.matchChar(index, 'p') || buffer.matchChar(index, 'P')) {
          ++index;
          // ("arameters" | "arameter" | "aramete" | "aramet" | "arame" | "aram" | "ara")
-         if (buffer.matchIgnoreCaseChar(index, 'a')) {
+         if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
             ++index;
             // ("rameters" | "rameter" | "ramete" | "ramet" | "rame" | "ram" | "ra")
-            if (buffer.matchIgnoreCaseChar(index, 'r')) {
+            if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                ++index;
                // ("ameters" | "ameter" | "amete" | "amet" | "ame" | "am" | "a")
-               if (buffer.matchIgnoreCaseChar(index, 'a')) {
+               if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                   ++index;
                   // ("meters" | "meter" | "mete" | "met" | "me" | "m" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'm')) {
+                  if (buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M')) {
                      ++index;
                      // ("eters" | "eter" | "ete" | "et" | "e" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                     if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                         ++index;
                         // ("ters" | "ter" | "te" | "t" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 't')) {
+                        if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                            ++index;
                            // ("ers" | "er" | "e" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                           if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                               ++index;
                               // ("rs" | "r" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'r')) {
+                              if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                                  ++index;
                                  // "s"
                                  if (match = buffer.matchIgnoreCaseChar(index, 's')) {
@@ -3718,22 +4964,22 @@ public class HarbourUnprocessedParser implements Parser {
       // (("declare" | "declar" | "decla" | "decl") TestNoAlpha OptionalSpacing IgnoreRestOfLine)
       // ("declare" | "declar" | "decla" | "decl")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'd')) {
+      if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
          ++index;
          // ("eclare" | "eclar" | "ecla" | "ecl")
-         if (buffer.matchIgnoreCaseChar(index, 'e')) {
+         if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
             ++index;
             // ("clare" | "clar" | "cla" | "cl")
-            if (buffer.matchIgnoreCaseChar(index, 'c')) {
+            if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                ++index;
                // ("lare" | "lar" | "la" | "l")
-               if (buffer.matchIgnoreCaseChar(index, 'l')) {
+               if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                   ++index;
                   // ("are" | "ar" | "a" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                  if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                      ++index;
                      // ("re" | "r" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'r')) {
+                     if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                         ++index;
                         // "e"
                         if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
@@ -3941,53 +5187,57 @@ public class HarbourUnprocessedParser implements Parser {
       }
       startIndex = index;
       // (IncludeDirective | DefineDirective | TranslateDirective | XTranslateDirective | XCommandDirective | CommandDirective | IfDefDirective | IfDirective | IfNDefDirective | ElseDirective | EndIfDirective | PragmaDirective | UndefDirective | StdoutDirective | ErrorDirective | LineDirective)
-      // IncludeDirective
-      match = includeDirective$Rule();
-      if (! match) {
-         // DefineDirective
-         match = defineDirective$Rule();
-         if (! match) {
-            // TranslateDirective
-            match = translateDirective$Rule();
+      switch(buffer.getChar(index)) {
+         case '#':
+            // IncludeDirective
+            match = includeDirective$Rule();
             if (! match) {
-               // XTranslateDirective
-               match = xTranslateDirective$Rule();
+               // DefineDirective
+               match = defineDirective$Rule();
                if (! match) {
-                  // XCommandDirective
-                  match = xCommandDirective$Rule();
+                  // TranslateDirective
+                  match = translateDirective$Rule();
                   if (! match) {
-                     // CommandDirective
-                     match = commandDirective$Rule();
+                     // XTranslateDirective
+                     match = xTranslateDirective$Rule();
                      if (! match) {
-                        // IfDefDirective
-                        match = ifDefDirective$Rule();
+                        // XCommandDirective
+                        match = xCommandDirective$Rule();
                         if (! match) {
-                           // IfDirective
-                           match = ifDirective$Rule();
+                           // CommandDirective
+                           match = commandDirective$Rule();
                            if (! match) {
-                              // IfNDefDirective
-                              match = ifNDefDirective$Rule();
+                              // IfDefDirective
+                              match = ifDefDirective$Rule();
                               if (! match) {
-                                 // ElseDirective
-                                 match = elseDirective$Rule();
+                                 // IfDirective
+                                 match = ifDirective$Rule();
                                  if (! match) {
-                                    // EndIfDirective
-                                    match = endIfDirective$Rule();
+                                    // IfNDefDirective
+                                    match = ifNDefDirective$Rule();
                                     if (! match) {
-                                       // PragmaDirective
-                                       match = pragmaDirective$Rule();
+                                       // ElseDirective
+                                       match = elseDirective$Rule();
                                        if (! match) {
-                                          // UndefDirective
-                                          match = undefDirective$Rule();
+                                          // EndIfDirective
+                                          match = endIfDirective$Rule();
                                           if (! match) {
-                                             // StdoutDirective
-                                             match = stdoutDirective$Rule();
+                                             // PragmaDirective
+                                             match = pragmaDirective$Rule();
                                              if (! match) {
-                                                // ErrorDirective
-                                                match = errorDirective$Rule();
+                                                // UndefDirective
+                                                match = undefDirective$Rule();
                                                 if (! match) {
-                                                   // LineDirective
-                                                   match = lineDirective$Rule();
+                                                   // StdoutDirective
+                                                   match = stdoutDirective$Rule();
+                                                   if (! match) {
+                                                      // ErrorDirective
+                                                      match = errorDirective$Rule();
+                                                      if (! match) {
+                                                         // LineDirective
+                                                         match = lineDirective$Rule();
+                                                      }
+                                                   }
                                                 }
                                              }
                                           }
@@ -4001,7 +5251,9 @@ public class HarbourUnprocessedParser implements Parser {
                   }
                }
             }
-         }
+            break;
+         default:
+            match = false;
       }
       if (match) {
          directive$RuleMemoStart = startIndex;
@@ -5219,59 +6471,212 @@ public class HarbourUnprocessedParser implements Parser {
       }
       startIndex = index;
       // (AnyIdentifier | Spacing | Separator | StringLiteral | LogicalLiteral | NumberLiteral | TimeLiteral | DateTimeLiteral | (';' OptionalSpacing) | BlockComment | LineComment)
-      // AnyIdentifier
-      match = anyIdentifier$Rule();
-      if (! match) {
-         // Spacing
-         match = spacing$Rule();
-         if (! match) {
+      switch(buffer.getChar(index)) {
+         case '@':
+         case '!':
+         case '#':
+         case '$':
+         case '%':
+         case '(':
+         case ')':
+         case '*':
+         case '+':
+         case ',':
+         case '-':
+         case ':':
+         case '<':
+         case '\\':
+         case '|':
+         case '=':
+         case ']':
+         case '}':
+         case '>':
+         case '^':
+         case '~':
+         case '?':
+            // Separator
+            match = separator$Rule();
+            break;
+         case '.':
+            // Separator
+            match = separator$Rule();
+            if (! match) {
+               // LogicalLiteral
+               match = logicalLiteral$Rule();
+               if (! match) {
+                  // NumberLiteral
+                  match = numberLiteral$Rule();
+               }
+            }
+            break;
+         case '/':
+            // Spacing
+            match = spacing$Rule();
+            if (! match) {
+               // Separator
+               match = separator$Rule();
+               if (! match) {
+                  // BlockComment
+                  match = blockComment$Rule();
+                  if (! match) {
+                     // LineComment
+                     match = lineComment$Rule();
+                  }
+               }
+            }
+            break;
+         case '0':
+            // NumberLiteral
+            match = numberLiteral$Rule();
+            if (! match) {
+               // TimeLiteral
+               match = timeLiteral$Rule();
+               if (! match) {
+                  // DateTimeLiteral
+                  match = dateTimeLiteral$Rule();
+               }
+            }
+            break;
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+            // NumberLiteral
+            match = numberLiteral$Rule();
+            if (! match) {
+               // TimeLiteral
+               match = timeLiteral$Rule();
+            }
+            break;
+         case ';':
+            // Spacing
+            match = spacing$Rule();
+            if (! match) {
+               // (';' OptionalSpacing)
+               // ';'
+               match = charMatcher(';');
+               if (match) {
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
+               }
+            }
+            break;
+         case '[':
             // Separator
             match = separator$Rule();
             if (! match) {
                // StringLiteral
                match = stringLiteral$Rule();
+            }
+            break;
+         case '{':
+            // Separator
+            match = separator$Rule();
+            if (! match) {
+               // DateTimeLiteral
+               match = dateTimeLiteral$Rule();
+            }
+            break;
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+            // AnyIdentifier
+            match = anyIdentifier$Rule();
+            break;
+         case '\"':
+         case '\'':
+            // StringLiteral
+            match = stringLiteral$Rule();
+            break;
+         case 'D':
+         case 'd':
+            // AnyIdentifier
+            match = anyIdentifier$Rule();
+            if (! match) {
+               // DateTimeLiteral
+               match = dateTimeLiteral$Rule();
+            }
+            break;
+         case 'E':
+         case 'e':
+            // AnyIdentifier
+            match = anyIdentifier$Rule();
+            if (! match) {
+               // StringLiteral
+               match = stringLiteral$Rule();
+            }
+            break;
+         case '&':
+            // Spacing
+            match = spacing$Rule();
+            if (! match) {
+               // Separator
+               match = separator$Rule();
                if (! match) {
-                  // LogicalLiteral
-                  match = logicalLiteral$Rule();
-                  if (! match) {
-                     // NumberLiteral
-                     match = numberLiteral$Rule();
-                     if (! match) {
-                        // TimeLiteral
-                        match = timeLiteral$Rule();
-                        if (! match) {
-                           // DateTimeLiteral
-                           match = dateTimeLiteral$Rule();
-                           if (! match) {
-                              // (';' OptionalSpacing)
-                              Node lastNode_1 = currentNode;
-                              int lastIndex_1 = index;
-                              // ';'
-                              match = charMatcher(';');
-                              if (match) {
-                                 // OptionalSpacing
-                                 match = optionalSpacing$Rule();
-                                 if (! match) {
-                                    index = lastIndex_1;
-                                    lastNode_1.setSibling(null);
-                                    currentNode = lastNode_1;
-                                 }
-                              }
-                              if (! match) {
-                                 // BlockComment
-                                 match = blockComment$Rule();
-                                 if (! match) {
-                                    // LineComment
-                                    match = lineComment$Rule();
-                                 }
-                              }
-                           }
-                        }
-                     }
-                  }
+                  // LineComment
+                  match = lineComment$Rule();
                }
             }
-         }
+            break;
+         case ' ':
+         case '\t':
+         case '\f':
+            // Spacing
+            match = spacing$Rule();
+            break;
+         default:
+            match = false;
       }
       if (match) {
          anyToken$RuleMemoStart = startIndex;
@@ -5324,22 +6729,12 @@ public class HarbourUnprocessedParser implements Parser {
       // (',' | '[' | ']' | '(' | ')' | '=' | '>' | '<' | ':' | '.' | '@' | '|' | '+' | '-' | '*' | '/' | '%' | '^' | '~' | '&' | '!' | '$' | '\' | '{' | '}' | '?' | '#')
       int startIndex_1 = index;
       switch(buffer.getChar(index)) {
-         case '(':
+         case '+':
             ++index;
             // <EMPTY>
             match = true;
             break;
-         case '$':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '>':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '~':
+         case ',':
             ++index;
             // <EMPTY>
             match = true;
@@ -5349,62 +6744,7 @@ public class HarbourUnprocessedParser implements Parser {
             // <EMPTY>
             match = true;
             break;
-         case '\\':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case ':':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case ')':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '%':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '!':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '?':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
          case '.':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case ']':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '{':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '*':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '&':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '@':
             ++index;
             // <EMPTY>
             match = true;
@@ -5414,7 +6754,12 @@ public class HarbourUnprocessedParser implements Parser {
             // <EMPTY>
             match = true;
             break;
-         case '^':
+         case ':':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         case '{':
             ++index;
             // <EMPTY>
             match = true;
@@ -5429,16 +6774,6 @@ public class HarbourUnprocessedParser implements Parser {
             // <EMPTY>
             match = true;
             break;
-         case '+':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '#':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
          case '=':
             ++index;
             // <EMPTY>
@@ -5449,12 +6784,82 @@ public class HarbourUnprocessedParser implements Parser {
             // <EMPTY>
             match = true;
             break;
-         case ',':
+         case '>':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         case '~':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         case '?':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         case '@':
             ++index;
             // <EMPTY>
             match = true;
             break;
          case '[':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         case '\\':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         case ']':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         case '^':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         case '!':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         case '#':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         case '$':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         case '%':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         case '&':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         case '(':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         case ')':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         case '*':
             ++index;
             // <EMPTY>
             match = true;
@@ -5522,19 +6927,125 @@ public class HarbourUnprocessedParser implements Parser {
       // (AnySimpleFunctionCall | UnknownIdentifier | PrimaryExpression | Separator)*
       do {
          // (AnySimpleFunctionCall | UnknownIdentifier | PrimaryExpression | Separator)
-         // AnySimpleFunctionCall
-         match = anySimpleFunctionCall$Rule();
-         if (! match) {
-            // UnknownIdentifier
-            match = unknownIdentifier$Rule();
-            if (! match) {
+         switch(buffer.getChar(index)) {
+            case '!':
+            case '&':
+            case '(':
+            case ':':
+            case '+':
+            case '[':
+            case '{':
+            case '-':
+            case '.':
                // PrimaryExpression
                match = primaryExpression$Rule();
                if (! match) {
                   // Separator
                   match = separator$Rule();
                }
-            }
+               break;
+            case '@':
+            case '#':
+            case '$':
+            case '%':
+            case ')':
+            case '*':
+            case ',':
+            case '/':
+            case '<':
+            case '\\':
+            case '|':
+            case '=':
+            case ']':
+            case '}':
+            case '>':
+            case '^':
+            case '~':
+            case '?':
+               // Separator
+               match = separator$Rule();
+               break;
+            case '0':
+            case '1':
+            case '2':
+            case '\"':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '\'':
+            case '8':
+            case '9':
+               // PrimaryExpression
+               match = primaryExpression$Rule();
+               break;
+            case 'A':
+            case 'B':
+            case 'C':
+            case 'D':
+            case 'E':
+            case 'F':
+            case 'G':
+            case 'H':
+            case 'I':
+            case 'J':
+            case 'K':
+            case 'L':
+            case 'M':
+            case 'N':
+            case 'O':
+            case 'P':
+            case 'Q':
+            case 'R':
+            case 'S':
+            case 'T':
+            case 'U':
+            case 'V':
+            case 'W':
+            case 'X':
+            case 'Y':
+            case 'Z':
+            case '_':
+            case 'a':
+            case 'b':
+            case 'c':
+            case 'd':
+            case 'e':
+            case 'f':
+            case 'g':
+            case 'h':
+            case 'i':
+            case 'j':
+            case 'k':
+            case 'l':
+            case 'm':
+            case 'n':
+            case 'o':
+            case 'p':
+            case 'q':
+            case 'r':
+            case 's':
+            case 't':
+            case 'u':
+            case 'v':
+            case 'w':
+            case 'x':
+            case 'y':
+            case 'z':
+               // AnySimpleFunctionCall
+               match = anySimpleFunctionCall$Rule();
+               if (! match) {
+                  // UnknownIdentifier
+                  match = unknownIdentifier$Rule();
+                  if (! match) {
+                     // PrimaryExpression
+                     match = primaryExpression$Rule();
+                  }
+               }
+               break;
+            default:
+               match = false;
          }
       } while(match);
       cmdComplementation$RuleMemoStart = startIndex;
@@ -5623,17 +7134,17 @@ public class HarbourUnprocessedParser implements Parser {
          // ('(' | '->')
          int startIndex_2 = index;
          switch(buffer.getChar(index)) {
-            case '(':
-               ++index;
-               // <EMPTY>
-               match = true;
-               break;
             case '-':
                ++index;
                // '>'
                if (match = buffer.matchChar(index, '>')) {
                   ++index;
                }
+               break;
+            case '(':
+               ++index;
+               // <EMPTY>
+               match = true;
                break;
             default:
                match = false;
@@ -5662,6 +7173,201 @@ public class HarbourUnprocessedParser implements Parser {
          }
          return true;
       } else {
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //BeginProducer : ("begin" TestNoAlpha OptionalSpacing "producer" TestNoAlpha OptionalSpacing ("transaction" TestNoAlpha OptionalSpacing IntegerNumber)? ("wait" TestNoAlpha OptionalSpacing)?)
+   protected boolean beginProducer$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      if (beginProducer$RuleMemoStart == index) {
+         if (beginProducer$RuleMemoStart <= beginProducer$RuleMemoEnd) {
+            index = beginProducer$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (beginProducer$RuleMemoStart == beginProducer$RuleMemoEnd) {
+                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.BEGIN_PRODUCER, beginProducer$RuleMemoStart, beginProducer$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(beginProducer$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(beginProducer$RuleMemoFirstNode);
+                  currentNode = beginProducer$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
+      startIndex = index;
+      // ("begin" TestNoAlpha OptionalSpacing "producer" TestNoAlpha OptionalSpacing ("transaction" TestNoAlpha OptionalSpacing IntegerNumber)? ("wait" TestNoAlpha OptionalSpacing)?)
+      // "begin"
+      match = ignoreCaseStringMatcher("begin", 5);
+      if (match) {
+         // TestNoAlpha
+         match = testNoAlpha$Rule();
+         if (match) {
+            // OptionalSpacing
+            match = optionalSpacing$Rule();
+            if (match) {
+               // "producer"
+               match = ignoreCaseStringMatcher("producer", 8);
+               if (match) {
+                  // TestNoAlpha
+                  match = testNoAlpha$Rule();
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                     if (match) {
+                        // ("transaction" TestNoAlpha OptionalSpacing IntegerNumber)?
+                        // ("transaction" TestNoAlpha OptionalSpacing IntegerNumber)
+                        Node lastNode_1 = currentNode;
+                        int lastIndex_1 = index;
+                        // "transaction"
+                        match = ignoreCaseStringMatcher("transaction", 11);
+                        if (match) {
+                           // TestNoAlpha
+                           match = testNoAlpha$Rule();
+                           if (match) {
+                              // OptionalSpacing
+                              match = optionalSpacing$Rule();
+                              if (match) {
+                                 // IntegerNumber
+                                 match = integerNumber$Rule();
+                                 if (! match) {
+                                    index = lastIndex_1;
+                                    lastNode_1.setSibling(null);
+                                    currentNode = lastNode_1;
+                                 }
+                              } else {
+                                 index = lastIndex_1;
+                                 lastNode_1.setSibling(null);
+                              }
+                           } else {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                           }
+                        }
+                        match = true;
+                        // ("wait" TestNoAlpha OptionalSpacing)?
+                        // ("wait" TestNoAlpha OptionalSpacing)
+                        Node lastNode_2 = currentNode;
+                        int lastIndex_2 = index;
+                        // "wait"
+                        match = ignoreCaseStringMatcher("wait", 4);
+                        if (match) {
+                           // TestNoAlpha
+                           match = testNoAlpha$Rule();
+                           if (match) {
+                              // OptionalSpacing
+                              match = optionalSpacing$Rule();
+                              if (! match) {
+                                 index = lastIndex_2;
+                                 lastNode_2.setSibling(null);
+                                 currentNode = lastNode_2;
+                              }
+                           } else {
+                              index = lastIndex_2;
+                              lastNode_2.setSibling(null);
+                           }
+                        }
+                        match = true;
+                     }
+                  }
+               }
+            }
+         }
+      }
+      if (match) {
+         beginProducer$RuleMemoStart = startIndex;
+         beginProducer$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            beginProducer$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.BEGIN_PRODUCER, startIndex, index, true, false);
+            currentNode.setFirstChild(lastNode.getSibling());
+            lastNode.setSibling(currentNode);
+            beginProducer$RuleMemoFirstNode = currentNode;
+            beginProducer$RuleMemoLastNode = currentNode;
+         }
+         return true;
+      } else {
+         beginProducer$RuleMemoStart = startIndex;
+         beginProducer$RuleMemoEnd = -1;
+         beginProducer$RuleMemoFirstNode = null;
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //EndProducer : ("end" TestNoAlpha OptionalSpacing "producer" TestNoAlpha OptionalSpacing)
+   protected boolean endProducer$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      if (endProducer$RuleMemoStart == index) {
+         if (endProducer$RuleMemoStart <= endProducer$RuleMemoEnd) {
+            index = endProducer$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (endProducer$RuleMemoStart == endProducer$RuleMemoEnd) {
+                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_PRODUCER, endProducer$RuleMemoStart, endProducer$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(endProducer$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(endProducer$RuleMemoFirstNode);
+                  currentNode = endProducer$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
+      startIndex = index;
+      // ("end" TestNoAlpha OptionalSpacing "producer" TestNoAlpha OptionalSpacing)
+      // "end"
+      match = ignoreCaseStringMatcher("end", 3);
+      if (match) {
+         // TestNoAlpha
+         match = testNoAlpha$Rule();
+         if (match) {
+            // OptionalSpacing
+            match = optionalSpacing$Rule();
+            if (match) {
+               // "producer"
+               match = ignoreCaseStringMatcher("producer", 8);
+               if (match) {
+                  // TestNoAlpha
+                  match = testNoAlpha$Rule();
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                  }
+               }
+            }
+         }
+      }
+      if (match) {
+         endProducer$RuleMemoStart = startIndex;
+         endProducer$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            endProducer$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_PRODUCER, startIndex, index, true, false);
+            currentNode.setFirstChild(lastNode.getSibling());
+            lastNode.setSibling(currentNode);
+            endProducer$RuleMemoFirstNode = currentNode;
+            endProducer$RuleMemoLastNode = currentNode;
+         }
+         return true;
+      } else {
+         endProducer$RuleMemoStart = startIndex;
+         endProducer$RuleMemoEnd = -1;
+         endProducer$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -6263,53 +7969,183 @@ public class HarbourUnprocessedParser implements Parser {
       // (("new" TestNoAlpha OptionalSpacing) | ("shared" TestNoAlpha OptionalSpacing) | ("exclusive" TestNoAlpha OptionalSpacing) | ("readonly" TestNoAlpha OptionalSpacing) | UseAsPrecision | ("scrollable" TestNoAlpha OptionalSpacing) | ("permanent" TestNoAlpha OptionalSpacing) | ("overwrite" TestNoAlpha OptionalSpacing) | ("c1logical" TestNoAlpha OptionalSpacing))*
       do {
          // (("new" TestNoAlpha OptionalSpacing) | ("shared" TestNoAlpha OptionalSpacing) | ("exclusive" TestNoAlpha OptionalSpacing) | ("readonly" TestNoAlpha OptionalSpacing) | UseAsPrecision | ("scrollable" TestNoAlpha OptionalSpacing) | ("permanent" TestNoAlpha OptionalSpacing) | ("overwrite" TestNoAlpha OptionalSpacing) | ("c1logical" TestNoAlpha OptionalSpacing))
-         // ("new" TestNoAlpha OptionalSpacing)
-         Node lastNode_1 = currentNode;
-         int lastIndex_1 = index;
-         // "new"
-         match = ignoreCaseStringMatcher("new", 3);
-         if (match) {
-            // TestNoAlpha
-            match = testNoAlpha$Rule();
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
-            } else {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-            }
-         }
-         if (! match) {
-            // ("shared" TestNoAlpha OptionalSpacing)
-            Node lastNode_2 = currentNode;
-            int lastIndex_2 = index;
-            // "shared"
-            match = ignoreCaseStringMatcher("shared", 6);
-            if (match) {
-               // TestNoAlpha
-               match = testNoAlpha$Rule();
+         switch(buffer.getChar(index)) {
+            case 'n':
+            case 'N':
+               // ("new" TestNoAlpha OptionalSpacing)
+               Node lastNode_1 = currentNode;
+               int lastIndex_1 = index;
+               // "new"
+               match = ignoreCaseStringMatcher("new", 3);
                if (match) {
-                  // OptionalSpacing
-                  match = optionalSpacing$Rule();
-                  if (! match) {
+                  // TestNoAlpha
+                  match = testNoAlpha$Rule();
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
+                  } else {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                  }
+               }
+               break;
+            case 'o':
+            case 'O':
+               // ("overwrite" TestNoAlpha OptionalSpacing)
+               Node lastNode_2 = currentNode;
+               int lastIndex_2 = index;
+               // "overwrite"
+               match = ignoreCaseStringMatcher("overwrite", 9);
+               if (match) {
+                  // TestNoAlpha
+                  match = testNoAlpha$Rule();
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                     if (! match) {
+                        index = lastIndex_2;
+                        lastNode_2.setSibling(null);
+                        currentNode = lastNode_2;
+                     }
+                  } else {
                      index = lastIndex_2;
                      lastNode_2.setSibling(null);
-                     currentNode = lastNode_2;
                   }
-               } else {
-                  index = lastIndex_2;
-                  lastNode_2.setSibling(null);
                }
-            }
-            if (! match) {
+               break;
+            case 'p':
+            case 'P':
+               // UseAsPrecision
+               match = useAsPrecision$Rule();
+               if (! match) {
+                  // ("permanent" TestNoAlpha OptionalSpacing)
+                  Node lastNode_3 = currentNode;
+                  int lastIndex_3 = index;
+                  // "permanent"
+                  match = ignoreCaseStringMatcher("permanent", 9);
+                  if (match) {
+                     // TestNoAlpha
+                     match = testNoAlpha$Rule();
+                     if (match) {
+                        // OptionalSpacing
+                        match = optionalSpacing$Rule();
+                        if (! match) {
+                           index = lastIndex_3;
+                           lastNode_3.setSibling(null);
+                           currentNode = lastNode_3;
+                        }
+                     } else {
+                        index = lastIndex_3;
+                        lastNode_3.setSibling(null);
+                     }
+                  }
+               }
+               break;
+            case 'r':
+            case 'R':
+               // ("readonly" TestNoAlpha OptionalSpacing)
+               Node lastNode_4 = currentNode;
+               int lastIndex_4 = index;
+               // "readonly"
+               match = ignoreCaseStringMatcher("readonly", 8);
+               if (match) {
+                  // TestNoAlpha
+                  match = testNoAlpha$Rule();
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                     if (! match) {
+                        index = lastIndex_4;
+                        lastNode_4.setSibling(null);
+                        currentNode = lastNode_4;
+                     }
+                  } else {
+                     index = lastIndex_4;
+                     lastNode_4.setSibling(null);
+                  }
+               }
+               break;
+            case 's':
+            case 'S':
+               // ("shared" TestNoAlpha OptionalSpacing)
+               Node lastNode_5 = currentNode;
+               int lastIndex_5 = index;
+               // "shared"
+               match = ignoreCaseStringMatcher("shared", 6);
+               if (match) {
+                  // TestNoAlpha
+                  match = testNoAlpha$Rule();
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                     if (! match) {
+                        index = lastIndex_5;
+                        lastNode_5.setSibling(null);
+                        currentNode = lastNode_5;
+                     }
+                  } else {
+                     index = lastIndex_5;
+                     lastNode_5.setSibling(null);
+                  }
+               }
+               if (! match) {
+                  // ("scrollable" TestNoAlpha OptionalSpacing)
+                  Node lastNode_6 = currentNode;
+                  int lastIndex_6 = index;
+                  // "scrollable"
+                  match = ignoreCaseStringMatcher("scrollable", 10);
+                  if (match) {
+                     // TestNoAlpha
+                     match = testNoAlpha$Rule();
+                     if (match) {
+                        // OptionalSpacing
+                        match = optionalSpacing$Rule();
+                        if (! match) {
+                           index = lastIndex_6;
+                           lastNode_6.setSibling(null);
+                           currentNode = lastNode_6;
+                        }
+                     } else {
+                        index = lastIndex_6;
+                        lastNode_6.setSibling(null);
+                     }
+                  }
+               }
+               break;
+            case 'c':
+            case 'C':
+               // ("c1logical" TestNoAlpha OptionalSpacing)
+               Node lastNode_7 = currentNode;
+               int lastIndex_7 = index;
+               // "c1logical"
+               match = ignoreCaseStringMatcher("c1logical", 9);
+               if (match) {
+                  // TestNoAlpha
+                  match = testNoAlpha$Rule();
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                     if (! match) {
+                        index = lastIndex_7;
+                        lastNode_7.setSibling(null);
+                        currentNode = lastNode_7;
+                     }
+                  } else {
+                     index = lastIndex_7;
+                     lastNode_7.setSibling(null);
+                  }
+               }
+               break;
+            case 'e':
+            case 'E':
                // ("exclusive" TestNoAlpha OptionalSpacing)
-               Node lastNode_3 = currentNode;
-               int lastIndex_3 = index;
+               Node lastNode_8 = currentNode;
+               int lastIndex_8 = index;
                // "exclusive"
                match = ignoreCaseStringMatcher("exclusive", 9);
                if (match) {
@@ -6319,135 +8155,18 @@ public class HarbourUnprocessedParser implements Parser {
                      // OptionalSpacing
                      match = optionalSpacing$Rule();
                      if (! match) {
-                        index = lastIndex_3;
-                        lastNode_3.setSibling(null);
-                        currentNode = lastNode_3;
+                        index = lastIndex_8;
+                        lastNode_8.setSibling(null);
+                        currentNode = lastNode_8;
                      }
                   } else {
-                     index = lastIndex_3;
-                     lastNode_3.setSibling(null);
+                     index = lastIndex_8;
+                     lastNode_8.setSibling(null);
                   }
                }
-               if (! match) {
-                  // ("readonly" TestNoAlpha OptionalSpacing)
-                  Node lastNode_4 = currentNode;
-                  int lastIndex_4 = index;
-                  // "readonly"
-                  match = ignoreCaseStringMatcher("readonly", 8);
-                  if (match) {
-                     // TestNoAlpha
-                     match = testNoAlpha$Rule();
-                     if (match) {
-                        // OptionalSpacing
-                        match = optionalSpacing$Rule();
-                        if (! match) {
-                           index = lastIndex_4;
-                           lastNode_4.setSibling(null);
-                           currentNode = lastNode_4;
-                        }
-                     } else {
-                        index = lastIndex_4;
-                        lastNode_4.setSibling(null);
-                     }
-                  }
-                  if (! match) {
-                     // UseAsPrecision
-                     match = useAsPrecision$Rule();
-                     if (! match) {
-                        // ("scrollable" TestNoAlpha OptionalSpacing)
-                        Node lastNode_5 = currentNode;
-                        int lastIndex_5 = index;
-                        // "scrollable"
-                        match = ignoreCaseStringMatcher("scrollable", 10);
-                        if (match) {
-                           // TestNoAlpha
-                           match = testNoAlpha$Rule();
-                           if (match) {
-                              // OptionalSpacing
-                              match = optionalSpacing$Rule();
-                              if (! match) {
-                                 index = lastIndex_5;
-                                 lastNode_5.setSibling(null);
-                                 currentNode = lastNode_5;
-                              }
-                           } else {
-                              index = lastIndex_5;
-                              lastNode_5.setSibling(null);
-                           }
-                        }
-                        if (! match) {
-                           // ("permanent" TestNoAlpha OptionalSpacing)
-                           Node lastNode_6 = currentNode;
-                           int lastIndex_6 = index;
-                           // "permanent"
-                           match = ignoreCaseStringMatcher("permanent", 9);
-                           if (match) {
-                              // TestNoAlpha
-                              match = testNoAlpha$Rule();
-                              if (match) {
-                                 // OptionalSpacing
-                                 match = optionalSpacing$Rule();
-                                 if (! match) {
-                                    index = lastIndex_6;
-                                    lastNode_6.setSibling(null);
-                                    currentNode = lastNode_6;
-                                 }
-                              } else {
-                                 index = lastIndex_6;
-                                 lastNode_6.setSibling(null);
-                              }
-                           }
-                           if (! match) {
-                              // ("overwrite" TestNoAlpha OptionalSpacing)
-                              Node lastNode_7 = currentNode;
-                              int lastIndex_7 = index;
-                              // "overwrite"
-                              match = ignoreCaseStringMatcher("overwrite", 9);
-                              if (match) {
-                                 // TestNoAlpha
-                                 match = testNoAlpha$Rule();
-                                 if (match) {
-                                    // OptionalSpacing
-                                    match = optionalSpacing$Rule();
-                                    if (! match) {
-                                       index = lastIndex_7;
-                                       lastNode_7.setSibling(null);
-                                       currentNode = lastNode_7;
-                                    }
-                                 } else {
-                                    index = lastIndex_7;
-                                    lastNode_7.setSibling(null);
-                                 }
-                              }
-                              if (! match) {
-                                 // ("c1logical" TestNoAlpha OptionalSpacing)
-                                 Node lastNode_8 = currentNode;
-                                 int lastIndex_8 = index;
-                                 // "c1logical"
-                                 match = ignoreCaseStringMatcher("c1logical", 9);
-                                 if (match) {
-                                    // TestNoAlpha
-                                    match = testNoAlpha$Rule();
-                                    if (match) {
-                                       // OptionalSpacing
-                                       match = optionalSpacing$Rule();
-                                       if (! match) {
-                                          index = lastIndex_8;
-                                          lastNode_8.setSibling(null);
-                                          currentNode = lastNode_8;
-                                       }
-                                    } else {
-                                       index = lastIndex_8;
-                                       lastNode_8.setSibling(null);
-                                    }
-                                 }
-                              }
-                           }
-                        }
-                     }
-                  }
-               }
-            }
+               break;
+            default:
+               match = false;
          }
       } while(match);
       if (! currentRuleIsAtomic) {
@@ -6674,50 +8393,57 @@ public class HarbourUnprocessedParser implements Parser {
       // (("new" TestNoAlpha OptionalSpacing) | ("exclusive" TestNoAlpha OptionalSpacing) | ("shared" TestNoAlpha OptionalSpacing) | ("readonly" TestNoAlpha OptionalSpacing) | UseCodepage)*
       do {
          // (("new" TestNoAlpha OptionalSpacing) | ("exclusive" TestNoAlpha OptionalSpacing) | ("shared" TestNoAlpha OptionalSpacing) | ("readonly" TestNoAlpha OptionalSpacing) | UseCodepage)
-         // ("new" TestNoAlpha OptionalSpacing)
-         Node lastNode_1 = currentNode;
-         int lastIndex_1 = index;
-         // "new"
-         match = ignoreCaseStringMatcher("new", 3);
-         if (match) {
-            // TestNoAlpha
-            match = testNoAlpha$Rule();
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
-            } else {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-            }
-         }
-         if (! match) {
-            // ("exclusive" TestNoAlpha OptionalSpacing)
-            Node lastNode_2 = currentNode;
-            int lastIndex_2 = index;
-            // "exclusive"
-            match = ignoreCaseStringMatcher("exclusive", 9);
-            if (match) {
-               // TestNoAlpha
-               match = testNoAlpha$Rule();
+         switch(buffer.getChar(index)) {
+            case 'n':
+            case 'N':
+               // ("new" TestNoAlpha OptionalSpacing)
+               Node lastNode_1 = currentNode;
+               int lastIndex_1 = index;
+               // "new"
+               match = ignoreCaseStringMatcher("new", 3);
                if (match) {
-                  // OptionalSpacing
-                  match = optionalSpacing$Rule();
-                  if (! match) {
+                  // TestNoAlpha
+                  match = testNoAlpha$Rule();
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
+                  } else {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                  }
+               }
+               break;
+            case 'r':
+            case 'R':
+               // ("readonly" TestNoAlpha OptionalSpacing)
+               Node lastNode_2 = currentNode;
+               int lastIndex_2 = index;
+               // "readonly"
+               match = ignoreCaseStringMatcher("readonly", 8);
+               if (match) {
+                  // TestNoAlpha
+                  match = testNoAlpha$Rule();
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                     if (! match) {
+                        index = lastIndex_2;
+                        lastNode_2.setSibling(null);
+                        currentNode = lastNode_2;
+                     }
+                  } else {
                      index = lastIndex_2;
                      lastNode_2.setSibling(null);
-                     currentNode = lastNode_2;
                   }
-               } else {
-                  index = lastIndex_2;
-                  lastNode_2.setSibling(null);
                }
-            }
-            if (! match) {
+               break;
+            case 's':
+            case 'S':
                // ("shared" TestNoAlpha OptionalSpacing)
                Node lastNode_3 = currentNode;
                int lastIndex_3 = index;
@@ -6739,34 +8465,38 @@ public class HarbourUnprocessedParser implements Parser {
                      lastNode_3.setSibling(null);
                   }
                }
-               if (! match) {
-                  // ("readonly" TestNoAlpha OptionalSpacing)
-                  Node lastNode_4 = currentNode;
-                  int lastIndex_4 = index;
-                  // "readonly"
-                  match = ignoreCaseStringMatcher("readonly", 8);
+               break;
+            case 'c':
+            case 'C':
+               // UseCodepage
+               match = useCodepage$Rule();
+               break;
+            case 'e':
+            case 'E':
+               // ("exclusive" TestNoAlpha OptionalSpacing)
+               Node lastNode_4 = currentNode;
+               int lastIndex_4 = index;
+               // "exclusive"
+               match = ignoreCaseStringMatcher("exclusive", 9);
+               if (match) {
+                  // TestNoAlpha
+                  match = testNoAlpha$Rule();
                   if (match) {
-                     // TestNoAlpha
-                     match = testNoAlpha$Rule();
-                     if (match) {
-                        // OptionalSpacing
-                        match = optionalSpacing$Rule();
-                        if (! match) {
-                           index = lastIndex_4;
-                           lastNode_4.setSibling(null);
-                           currentNode = lastNode_4;
-                        }
-                     } else {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                     if (! match) {
                         index = lastIndex_4;
                         lastNode_4.setSibling(null);
+                        currentNode = lastNode_4;
                      }
-                  }
-                  if (! match) {
-                     // UseCodepage
-                     match = useCodepage$Rule();
+                  } else {
+                     index = lastIndex_4;
+                     lastNode_4.setSibling(null);
                   }
                }
-            }
+               break;
+            default:
+               match = false;
          }
       } while(match);
       if (! currentRuleIsAtomic) {
@@ -6845,7 +8575,7 @@ public class HarbourUnprocessedParser implements Parser {
       return true;
    }
 
-   //OldStyleCommands : (ArrobaGetSay | SetCmd | ReadCmd | ClearCmd | ClsCmd | KeyboardCmd | WaitCmd | AcceptCmd | InputCmd | ReleaseCmd | RestoreCmd | SaveCmd | JoinCmd | EjectCmd | EraseCmd | DeleteCmd | RenameCmd | CopyCmd | DirCmd | TypeCmd | RequestCmd | CancelCmd | QuitCmd | RunCmd | OutCmd | CloseCmd | SelectCmd | AppendCmd | PackCmd | ZapCmd | UnlockCmd | CommitCmd | GotoCmd | GoCmd | SkipCmd | FindCmd | ContinueCmd | SeekCmd | LocateCmd | ReplaceCmd | RecallCmd | CreateCmd | SortCmd | TotalCmd | UpdateCmd | CountCmd | SumCmd | AverageCmd | ListCmd | DisplayCmd | ReportCmd | LabelCmd | IndexOnCmd | ReindexCmd | QOutCommand)
+   //OldStyleCommands : (ArrobaGetSay | SetCmd | ReadCmd | ClearCmd | ClsCmd | KeyboardCmd | WaitCmd | AcceptCmd | InputCmd | ReleaseCmd | RestoreCmd | SaveCmd | JoinCmd | EjectCmd | EraseCmd | DeleteCmd | RenameCmd | CopyCmd | DirCmd | TypeCmd | RequestCmd | CancelCmd | QuitCmd | RunCmd | OutCmd | CloseCmd | SelectCmd | AppendCmd | PackCmd | ZapCmd | UnlockCmd | CommitCmd | GotoCmd | GoCmd | SkipCmd | FindCmd | ContinueCmd | SeekCmd | LocateCmd | ReplaceCmd | RecallCmd | CreateCmd | SortCmd | TotalCmd | UpdateCmd | CountCmd | SumCmd | AverageCmd | ListCmd | DisplayCmd | ReportCmd | LabelCmd | IndexOnCmd | ReindexCmd | QOutCommand | MenuToCmd)
    protected boolean oldStyleCommands$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -6868,214 +8598,76 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       startIndex = index;
-      // (ArrobaGetSay | SetCmd | ReadCmd | ClearCmd | ClsCmd | KeyboardCmd | WaitCmd | AcceptCmd | InputCmd | ReleaseCmd | RestoreCmd | SaveCmd | JoinCmd | EjectCmd | EraseCmd | DeleteCmd | RenameCmd | CopyCmd | DirCmd | TypeCmd | RequestCmd | CancelCmd | QuitCmd | RunCmd | OutCmd | CloseCmd | SelectCmd | AppendCmd | PackCmd | ZapCmd | UnlockCmd | CommitCmd | GotoCmd | GoCmd | SkipCmd | FindCmd | ContinueCmd | SeekCmd | LocateCmd | ReplaceCmd | RecallCmd | CreateCmd | SortCmd | TotalCmd | UpdateCmd | CountCmd | SumCmd | AverageCmd | ListCmd | DisplayCmd | ReportCmd | LabelCmd | IndexOnCmd | ReindexCmd | QOutCommand)
-      // ArrobaGetSay
-      match = arrobaGetSay$Rule();
-      if (! match) {
-         // SetCmd
-         match = setCmd$Rule();
-         if (! match) {
+      // (ArrobaGetSay | SetCmd | ReadCmd | ClearCmd | ClsCmd | KeyboardCmd | WaitCmd | AcceptCmd | InputCmd | ReleaseCmd | RestoreCmd | SaveCmd | JoinCmd | EjectCmd | EraseCmd | DeleteCmd | RenameCmd | CopyCmd | DirCmd | TypeCmd | RequestCmd | CancelCmd | QuitCmd | RunCmd | OutCmd | CloseCmd | SelectCmd | AppendCmd | PackCmd | ZapCmd | UnlockCmd | CommitCmd | GotoCmd | GoCmd | SkipCmd | FindCmd | ContinueCmd | SeekCmd | LocateCmd | ReplaceCmd | RecallCmd | CreateCmd | SortCmd | TotalCmd | UpdateCmd | CountCmd | SumCmd | AverageCmd | ListCmd | DisplayCmd | ReportCmd | LabelCmd | IndexOnCmd | ReindexCmd | QOutCommand | MenuToCmd)
+      switch(buffer.getChar(index)) {
+         case 'k':
+         case 'K':
+            // KeyboardCmd
+            match = keyboardCmd$Rule();
+            break;
+         case 'l':
+         case 'L':
+            // LocateCmd
+            match = locateCmd$Rule();
+            if (! match) {
+               // ListCmd
+               match = listCmd$Rule();
+               if (! match) {
+                  // LabelCmd
+                  match = labelCmd$Rule();
+               }
+            }
+            break;
+         case 'm':
+         case 'M':
+            // MenuToCmd
+            match = menuToCmd$Rule();
+            break;
+         case 'p':
+         case 'P':
+            // PackCmd
+            match = packCmd$Rule();
+            break;
+         case 'q':
+         case 'Q':
+            // QuitCmd
+            match = quitCmd$Rule();
+            if (! match) {
+               // OutCmd
+               match = outCmd$Rule();
+            }
+            break;
+         case 'r':
+         case 'R':
             // ReadCmd
             match = readCmd$Rule();
             if (! match) {
-               // ClearCmd
-               match = clearCmd$Rule();
+               // ReleaseCmd
+               match = releaseCmd$Rule();
                if (! match) {
-                  // ClsCmd
-                  match = clsCmd$Rule();
+                  // RestoreCmd
+                  match = restoreCmd$Rule();
                   if (! match) {
-                     // KeyboardCmd
-                     match = keyboardCmd$Rule();
+                     // RenameCmd
+                     match = renameCmd$Rule();
                      if (! match) {
-                        // WaitCmd
-                        match = waitCmd$Rule();
+                        // RequestCmd
+                        match = requestCmd$Rule();
                         if (! match) {
-                           // AcceptCmd
-                           match = acceptCmd$Rule();
+                           // RunCmd
+                           match = runCmd$Rule();
                            if (! match) {
-                              // InputCmd
-                              match = inputCmd$Rule();
+                              // ReplaceCmd
+                              match = replaceCmd$Rule();
                               if (! match) {
-                                 // ReleaseCmd
-                                 match = releaseCmd$Rule();
+                                 // RecallCmd
+                                 match = recallCmd$Rule();
                                  if (! match) {
-                                    // RestoreCmd
-                                    match = restoreCmd$Rule();
+                                    // ReportCmd
+                                    match = reportCmd$Rule();
                                     if (! match) {
-                                       // SaveCmd
-                                       match = saveCmd$Rule();
-                                       if (! match) {
-                                          // JoinCmd
-                                          match = joinCmd$Rule();
-                                          if (! match) {
-                                             // EjectCmd
-                                             match = ejectCmd$Rule();
-                                             if (! match) {
-                                                // EraseCmd
-                                                match = eraseCmd$Rule();
-                                                if (! match) {
-                                                   // DeleteCmd
-                                                   match = deleteCmd$Rule();
-                                                   if (! match) {
-                                                      // RenameCmd
-                                                      match = renameCmd$Rule();
-                                                      if (! match) {
-                                                         // CopyCmd
-                                                         match = copyCmd$Rule();
-                                                         if (! match) {
-                                                            // DirCmd
-                                                            match = dirCmd$Rule();
-                                                            if (! match) {
-                                                               // TypeCmd
-                                                               match = typeCmd$Rule();
-                                                               if (! match) {
-                                                                  // RequestCmd
-                                                                  match = requestCmd$Rule();
-                                                                  if (! match) {
-                                                                     // CancelCmd
-                                                                     match = cancelCmd$Rule();
-                                                                     if (! match) {
-                                                                        // QuitCmd
-                                                                        match = quitCmd$Rule();
-                                                                        if (! match) {
-                                                                           // RunCmd
-                                                                           match = runCmd$Rule();
-                                                                           if (! match) {
-                                                                              // OutCmd
-                                                                              match = outCmd$Rule();
-                                                                              if (! match) {
-                                                                                 // CloseCmd
-                                                                                 match = closeCmd$Rule();
-                                                                                 if (! match) {
-                                                                                    // SelectCmd
-                                                                                    match = selectCmd$Rule();
-                                                                                    if (! match) {
-                                                                                       // AppendCmd
-                                                                                       match = appendCmd$Rule();
-                                                                                       if (! match) {
-                                                                                          // PackCmd
-                                                                                          match = packCmd$Rule();
-                                                                                          if (! match) {
-                                                                                             // ZapCmd
-                                                                                             match = zapCmd$Rule();
-                                                                                             if (! match) {
-                                                                                                // UnlockCmd
-                                                                                                match = unlockCmd$Rule();
-                                                                                                if (! match) {
-                                                                                                   // CommitCmd
-                                                                                                   match = commitCmd$Rule();
-                                                                                                   if (! match) {
-                                                                                                      // GotoCmd
-                                                                                                      match = gotoCmd$Rule();
-                                                                                                      if (! match) {
-                                                                                                         // GoCmd
-                                                                                                         match = goCmd$Rule();
-                                                                                                         if (! match) {
-                                                                                                            // SkipCmd
-                                                                                                            match = skipCmd$Rule();
-                                                                                                            if (! match) {
-                                                                                                               // FindCmd
-                                                                                                               match = findCmd$Rule();
-                                                                                                               if (! match) {
-                                                                                                                  // ContinueCmd
-                                                                                                                  match = continueCmd$Rule();
-                                                                                                                  if (! match) {
-                                                                                                                     // SeekCmd
-                                                                                                                     match = seekCmd$Rule();
-                                                                                                                     if (! match) {
-                                                                                                                        // LocateCmd
-                                                                                                                        match = locateCmd$Rule();
-                                                                                                                        if (! match) {
-                                                                                                                           // ReplaceCmd
-                                                                                                                           match = replaceCmd$Rule();
-                                                                                                                           if (! match) {
-                                                                                                                              // RecallCmd
-                                                                                                                              match = recallCmd$Rule();
-                                                                                                                              if (! match) {
-                                                                                                                                 // CreateCmd
-                                                                                                                                 match = createCmd$Rule();
-                                                                                                                                 if (! match) {
-                                                                                                                                    // SortCmd
-                                                                                                                                    match = sortCmd$Rule();
-                                                                                                                                    if (! match) {
-                                                                                                                                       // TotalCmd
-                                                                                                                                       match = totalCmd$Rule();
-                                                                                                                                       if (! match) {
-                                                                                                                                          // UpdateCmd
-                                                                                                                                          match = updateCmd$Rule();
-                                                                                                                                          if (! match) {
-                                                                                                                                             // CountCmd
-                                                                                                                                             match = countCmd$Rule();
-                                                                                                                                             if (! match) {
-                                                                                                                                                // SumCmd
-                                                                                                                                                match = sumCmd$Rule();
-                                                                                                                                                if (! match) {
-                                                                                                                                                   // AverageCmd
-                                                                                                                                                   match = averageCmd$Rule();
-                                                                                                                                                   if (! match) {
-                                                                                                                                                      // ListCmd
-                                                                                                                                                      match = listCmd$Rule();
-                                                                                                                                                      if (! match) {
-                                                                                                                                                         // DisplayCmd
-                                                                                                                                                         match = displayCmd$Rule();
-                                                                                                                                                         if (! match) {
-                                                                                                                                                            // ReportCmd
-                                                                                                                                                            match = reportCmd$Rule();
-                                                                                                                                                            if (! match) {
-                                                                                                                                                               // LabelCmd
-                                                                                                                                                               match = labelCmd$Rule();
-                                                                                                                                                               if (! match) {
-                                                                                                                                                                  // IndexOnCmd
-                                                                                                                                                                  match = indexOnCmd$Rule();
-                                                                                                                                                                  if (! match) {
-                                                                                                                                                                     // ReindexCmd
-                                                                                                                                                                     match = reindexCmd$Rule();
-                                                                                                                                                                     if (! match) {
-                                                                                                                                                                        // QOutCommand
-                                                                                                                                                                        match = qOutCommand$Rule();
-                                                                                                                                                                     }
-                                                                                                                                                                  }
-                                                                                                                                                               }
-                                                                                                                                                            }
-                                                                                                                                                         }
-                                                                                                                                                      }
-                                                                                                                                                   }
-                                                                                                                                                }
-                                                                                                                                             }
-                                                                                                                                          }
-                                                                                                                                       }
-                                                                                                                                    }
-                                                                                                                                 }
-                                                                                                                              }
-                                                                                                                           }
-                                                                                                                        }
-                                                                                                                     }
-                                                                                                                  }
-                                                                                                               }
-                                                                                                            }
-                                                                                                         }
-                                                                                                      }
-                                                                                                   }
-                                                                                                }
-                                                                                             }
-                                                                                          }
-                                                                                       }
-                                                                                    }
-                                                                                 }
-                                                                              }
-                                                                           }
-                                                                        }
-                                                                     }
-                                                                  }
-                                                               }
-                                                            }
-                                                         }
-                                                      }
-                                                   }
-                                                }
-                                             }
-                                          }
-                                       }
+                                       // ReindexCmd
+                                       match = reindexCmd$Rule();
                                     }
                                  }
                               }
@@ -7085,7 +8677,178 @@ public class HarbourUnprocessedParser implements Parser {
                   }
                }
             }
-         }
+            break;
+         case 's':
+         case 'S':
+            // SetCmd
+            match = setCmd$Rule();
+            if (! match) {
+               // SaveCmd
+               match = saveCmd$Rule();
+               if (! match) {
+                  // SelectCmd
+                  match = selectCmd$Rule();
+                  if (! match) {
+                     // SkipCmd
+                     match = skipCmd$Rule();
+                     if (! match) {
+                        // SeekCmd
+                        match = seekCmd$Rule();
+                        if (! match) {
+                           // SortCmd
+                           match = sortCmd$Rule();
+                           if (! match) {
+                              // SumCmd
+                              match = sumCmd$Rule();
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 't':
+         case 'T':
+            // TypeCmd
+            match = typeCmd$Rule();
+            if (! match) {
+               // TotalCmd
+               match = totalCmd$Rule();
+            }
+            break;
+         case 'u':
+         case 'U':
+            // UnlockCmd
+            match = unlockCmd$Rule();
+            if (! match) {
+               // UpdateCmd
+               match = updateCmd$Rule();
+            }
+            break;
+         case 'w':
+         case 'W':
+            // WaitCmd
+            match = waitCmd$Rule();
+            break;
+         case 'z':
+         case 'Z':
+            // ZapCmd
+            match = zapCmd$Rule();
+            break;
+         case '?':
+            // QOutCommand
+            match = qOutCommand$Rule();
+            break;
+         case '@':
+            // ArrobaGetSay
+            match = arrobaGetSay$Rule();
+            break;
+         case 'A':
+         case 'a':
+            // AcceptCmd
+            match = acceptCmd$Rule();
+            if (! match) {
+               // AppendCmd
+               match = appendCmd$Rule();
+               if (! match) {
+                  // AverageCmd
+                  match = averageCmd$Rule();
+               }
+            }
+            break;
+         case 'C':
+         case 'c':
+            // ClearCmd
+            match = clearCmd$Rule();
+            if (! match) {
+               // ClsCmd
+               match = clsCmd$Rule();
+               if (! match) {
+                  // CopyCmd
+                  match = copyCmd$Rule();
+                  if (! match) {
+                     // CancelCmd
+                     match = cancelCmd$Rule();
+                     if (! match) {
+                        // CloseCmd
+                        match = closeCmd$Rule();
+                        if (! match) {
+                           // CommitCmd
+                           match = commitCmd$Rule();
+                           if (! match) {
+                              // ContinueCmd
+                              match = continueCmd$Rule();
+                              if (! match) {
+                                 // CreateCmd
+                                 match = createCmd$Rule();
+                                 if (! match) {
+                                    // CountCmd
+                                    match = countCmd$Rule();
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'D':
+         case 'd':
+            // DeleteCmd
+            match = deleteCmd$Rule();
+            if (! match) {
+               // DirCmd
+               match = dirCmd$Rule();
+               if (! match) {
+                  // DisplayCmd
+                  match = displayCmd$Rule();
+               }
+            }
+            break;
+         case 'E':
+         case 'e':
+            // EjectCmd
+            match = ejectCmd$Rule();
+            if (! match) {
+               // EraseCmd
+               match = eraseCmd$Rule();
+               if (! match) {
+                  // RunCmd
+                  match = runCmd$Rule();
+               }
+            }
+            break;
+         case 'F':
+         case 'f':
+            // FindCmd
+            match = findCmd$Rule();
+            break;
+         case 'G':
+         case 'g':
+            // GotoCmd
+            match = gotoCmd$Rule();
+            if (! match) {
+               // GoCmd
+               match = goCmd$Rule();
+            }
+            break;
+         case 'I':
+         case 'i':
+            // InputCmd
+            match = inputCmd$Rule();
+            if (! match) {
+               // IndexOnCmd
+               match = indexOnCmd$Rule();
+            }
+            break;
+         case 'J':
+         case 'j':
+            // JoinCmd
+            match = joinCmd$Rule();
+            break;
+         default:
+            match = false;
       }
       if (match) {
          oldStyleCommands$RuleMemoStart = startIndex;
@@ -8549,20 +10312,20 @@ public class HarbourUnprocessedParser implements Parser {
       // ("run" | "exclamation")
       int startIndex_1 = index;
       switch(buffer.getChar(index)) {
-         case 'e':
-         case 'E':
-            ++index;
-            // "xclamation"
-            if (match = ignoreCaseStringTest("xclamation", 10)) {
-               index += 10;
-            }
-            break;
          case 'r':
          case 'R':
             ++index;
             // "un"
             if (match = ignoreCaseStringTest("un", 2)) {
                index += 2;
+            }
+            break;
+         case 'e':
+         case 'E':
+            ++index;
+            // "xclamation"
+            if (match = ignoreCaseStringTest("xclamation", 10)) {
+               index += 10;
             }
             break;
          default:
@@ -10544,6 +12307,80 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
+   //MenuToCmd : ("menu" TestNoAlpha OptionalSpacing "to" TestNoAlpha OptionalSpacing LeftValue)
+   protected boolean menuToCmd$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      if (menuToCmd$RuleMemoStart == index) {
+         if (menuToCmd$RuleMemoStart <= menuToCmd$RuleMemoEnd) {
+            index = menuToCmd$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (menuToCmd$RuleMemoStart == menuToCmd$RuleMemoEnd) {
+                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.MENU_TO_CMD, menuToCmd$RuleMemoStart, menuToCmd$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(menuToCmd$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(menuToCmd$RuleMemoFirstNode);
+                  currentNode = menuToCmd$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
+      startIndex = index;
+      // ("menu" TestNoAlpha OptionalSpacing "to" TestNoAlpha OptionalSpacing LeftValue)
+      // "menu"
+      match = ignoreCaseStringMatcher("menu", 4);
+      if (match) {
+         // TestNoAlpha
+         match = testNoAlpha$Rule();
+         if (match) {
+            // OptionalSpacing
+            match = optionalSpacing$Rule();
+            if (match) {
+               // "to"
+               match = ignoreCaseStringMatcher("to", 2);
+               if (match) {
+                  // TestNoAlpha
+                  match = testNoAlpha$Rule();
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                     if (match) {
+                        // LeftValue
+                        match = leftValue$Rule();
+                     }
+                  }
+               }
+            }
+         }
+      }
+      if (match) {
+         menuToCmd$RuleMemoStart = startIndex;
+         menuToCmd$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            menuToCmd$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.MENU_TO_CMD, startIndex, index, true, false);
+            currentNode.setFirstChild(lastNode.getSibling());
+            lastNode.setSibling(currentNode);
+            menuToCmd$RuleMemoFirstNode = currentNode;
+            menuToCmd$RuleMemoLastNode = currentNode;
+         }
+         return true;
+      } else {
+         menuToCmd$RuleMemoStart = startIndex;
+         menuToCmd$RuleMemoEnd = -1;
+         menuToCmd$RuleMemoFirstNode = null;
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
    //IgnoreLine : ((('\n' OptionalSpacing) | ('\r' OptionalSpacing) | <EOI>)! . OptionalSpacing)+
    protected boolean ignoreLine$Rule() {
       Node lastNode = currentNode;
@@ -10886,7 +12723,7 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //VariableDefinition : (AnyIdentifier OptionalArrayDimension AsType InitializeVariable?)
+   //VariableDefinition : (AnyIdentifier OptionalArrayDimension AsType InitializeVariable)
    protected boolean variableDefinition$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -10909,7 +12746,7 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       startIndex = index;
-      // (AnyIdentifier OptionalArrayDimension AsType InitializeVariable?)
+      // (AnyIdentifier OptionalArrayDimension AsType InitializeVariable)
       // AnyIdentifier
       match = anyIdentifier$Rule();
       if (match) {
@@ -10919,10 +12756,8 @@ public class HarbourUnprocessedParser implements Parser {
             // AsType
             match = asType$Rule();
             if (match) {
-               // InitializeVariable?
                // InitializeVariable
-               initializeVariable$Rule();
-               match = true;
+               match = initializeVariable$Rule();
             }
          }
       }
@@ -10969,7 +12804,7 @@ public class HarbourUnprocessedParser implements Parser {
       return true;
    }
 
-   //AssignmentOperator : ((':=' OptionalSpacing) | EqualOperator)
+   //AssignmentOperator : (AssignmentOperatorOnly OptionalSpacing)
    protected boolean assignmentOperator$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -10979,7 +12814,7 @@ public class HarbourUnprocessedParser implements Parser {
             index = assignmentOperator$RuleMemoEnd;
             if (! currentRuleIsAtomic) {
                if (assignmentOperator$RuleMemoStart == assignmentOperator$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.ASSIGNMENT_OPERATOR, assignmentOperator$RuleMemoStart, assignmentOperator$RuleMemoEnd, true, false);
+                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.ASSIGNMENT_OPERATOR, assignmentOperator$RuleMemoStart, assignmentOperator$RuleMemoEnd, true, true);
                   lastNode.setSibling(currentNode);
                } else if(assignmentOperator$RuleMemoFirstNode != null) {
                   lastNode.setSibling(assignmentOperator$RuleMemoFirstNode);
@@ -10992,24 +12827,12 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       startIndex = index;
-      // ((':=' OptionalSpacing) | EqualOperator)
-      // (':=' OptionalSpacing)
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // ':='
-      match = stringMatcher(":=", 2);
+      // (AssignmentOperatorOnly OptionalSpacing)
+      // AssignmentOperatorOnly
+      match = assignmentOperatorOnly$Rule();
       if (match) {
          // OptionalSpacing
          match = optionalSpacing$Rule();
-         if (! match) {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-         }
-      }
-      if (! match) {
-         // EqualOperator
-         match = equalOperator$Rule();
       }
       if (match) {
          assignmentOperator$RuleMemoStart = startIndex;
@@ -11017,7 +12840,7 @@ public class HarbourUnprocessedParser implements Parser {
          if (currentRuleIsAtomic) {
             assignmentOperator$RuleMemoFirstNode = null;
          } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.ASSIGNMENT_OPERATOR, startIndex, index, true, false);
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.ASSIGNMENT_OPERATOR, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
             assignmentOperator$RuleMemoFirstNode = currentNode;
@@ -11035,74 +12858,52 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //EqualOperator : ('=' ('>' | '=')! OptionalSpacing)
-   protected boolean equalOperator$Rule() {
+   //AssignmentOperatorOnly : (':=' | EqualOperator)
+   protected boolean assignmentOperatorOnly$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
-      if (equalOperator$RuleMemoStart == index) {
-         if (equalOperator$RuleMemoStart <= equalOperator$RuleMemoEnd) {
-            index = equalOperator$RuleMemoEnd;
-            if (! currentRuleIsAtomic) {
-               if (equalOperator$RuleMemoStart == equalOperator$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.EQUAL_OPERATOR, equalOperator$RuleMemoStart, equalOperator$RuleMemoEnd, true, true);
-                  lastNode.setSibling(currentNode);
-               } else if(equalOperator$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(equalOperator$RuleMemoFirstNode);
-                  currentNode = equalOperator$RuleMemoLastNode;
-               }
-            }
-            return true;
-         } else {
-            return false;
-         }
-      }
+      boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      currentRuleIsAtomic = true;
       startIndex = index;
-      // ('=' ('>' | '=')! OptionalSpacing)
-      // '='
-      match = charMatcher('=');
-      if (match) {
-         // ('>' | '=')!
-         // ('>' | '=')
-         int startIndex_1 = index;
-         switch(buffer.getChar(index)) {
-            case '>':
-               ++index;
-               // <EMPTY>
-               match = true;
-               break;
-            case '=':
-               ++index;
-               // <EMPTY>
-               match = true;
-               break;
-            default:
-               match = false;
-         }
-         index = startIndex_1;
-         match = ! match;
+      // (':=' | EqualOperator)
+      // ':='
+      match = stringMatcher(":=", 2);
+      if (! match) {
+         // ('=' ('>' | '=')!)
+         // '='
+         match = charMatcher('=');
          if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
+            // ('>' | '=')!
+            // ('>' | '=')
+            int startIndex_1 = index;
+            switch(buffer.getChar(index)) {
+               case '=':
+                  ++index;
+                  // <EMPTY>
+                  match = true;
+                  break;
+               case '>':
+                  ++index;
+                  // <EMPTY>
+                  match = true;
+                  break;
+               default:
+                  match = false;
+            }
+            index = startIndex_1;
+            match = ! match;
          }
       }
       if (match) {
-         equalOperator$RuleMemoStart = startIndex;
-         equalOperator$RuleMemoEnd = index;
-         if (currentRuleIsAtomic) {
-            equalOperator$RuleMemoFirstNode = null;
-         } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.EQUAL_OPERATOR, startIndex, index, true, true);
-            currentNode.setFirstChild(lastNode.getSibling());
+         currentRuleIsAtomic = lastRuleIsAtomic;
+         if (! currentRuleIsAtomic) {
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.ASSIGNMENT_OPERATOR, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
-            equalOperator$RuleMemoFirstNode = currentNode;
-            equalOperator$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
-         equalOperator$RuleMemoStart = startIndex;
-         equalOperator$RuleMemoEnd = -1;
-         equalOperator$RuleMemoFirstNode = null;
+         currentRuleIsAtomic = lastRuleIsAtomic;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11110,35 +12911,36 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //InitializeVariable : (AssignmentOperator ExpressionAsType)
+   //InitializeVariable : (AssignmentOperator ExpressionAsType)?
    protected boolean initializeVariable$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
       startIndex = index;
+      // (AssignmentOperator ExpressionAsType)?
       // (AssignmentOperator ExpressionAsType)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // AssignmentOperator
       match = assignmentOperator$Rule();
       if (match) {
          // ExpressionAsType
          match = expressionAsType$Rule();
-      }
-      if (match) {
-         if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.INITIALIZE_VARIABLE, startIndex, index, true, false);
-            currentNode.setFirstChild(lastNode.getSibling());
-            lastNode.setSibling(currentNode);
+         if (! match) {
+            index = lastIndex_1;
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
          }
-         return true;
-      } else {
-         index = startIndex;
-         lastNode.setSibling(null);
-         currentNode = lastNode;
-         return false;
       }
+      if (! currentRuleIsAtomic) {
+         currentNode = new NodeImpl(HarbourUnprocessedRuleType.INITIALIZE_VARIABLE, startIndex, index, true, false);
+         currentNode.setFirstChild(lastNode.getSibling());
+         lastNode.setSibling(currentNode);
+      }
+      return true;
    }
 
-   //ExpressionAsType : (Expression AsType?)
+   //ExpressionAsType : (Expression AsType)
    protected boolean expressionAsType$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -11161,14 +12963,12 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       startIndex = index;
-      // (Expression AsType?)
+      // (Expression AsType)
       // Expression
       match = expression$Rule();
       if (match) {
-         // AsType?
          // AsType
-         asType$Rule();
-         match = true;
+         match = asType$Rule();
       }
       if (match) {
          expressionAsType$RuleMemoStart = startIndex;
@@ -11585,19 +13385,19 @@ public class HarbourUnprocessedParser implements Parser {
       // (("memvar" | "memva" | "memv") TestNoAlpha OptionalSpacing IdentifierList)
       // ("memvar" | "memva" | "memv")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'm')) {
+      if (buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M')) {
          ++index;
          // ("emvar" | "emva" | "emv")
-         if (buffer.matchIgnoreCaseChar(index, 'e')) {
+         if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
             ++index;
             // ("mvar" | "mva" | "mv")
-            if (buffer.matchIgnoreCaseChar(index, 'm')) {
+            if (buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M')) {
                ++index;
                // ("var" | "va" | "v")
-               if (buffer.matchIgnoreCaseChar(index, 'v')) {
+               if (buffer.matchChar(index, 'v') || buffer.matchChar(index, 'V')) {
                   ++index;
                   // ("ar" | "a" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                  if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                      ++index;
                      // "r"
                      if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
@@ -11686,15 +13486,87 @@ public class HarbourUnprocessedParser implements Parser {
       }
       startIndex = index;
       // (ParenthesesExpressionList | Macro | AnyIdentifier)
-      // ParenthesesExpressionList
-      match = parenthesesExpressionList$Rule();
-      if (! match) {
-         // Macro
-         match = macro$Rule();
-         if (! match) {
-            // AnyIdentifier
-            match = anyIdentifier$Rule();
-         }
+      switch(buffer.getChar(index)) {
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '&':
+         case '7':
+         case '8':
+         case '9':
+            // Macro
+            match = macro$Rule();
+            break;
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+            // Macro
+            match = macro$Rule();
+            if (! match) {
+               // AnyIdentifier
+               match = anyIdentifier$Rule();
+            }
+            break;
+         case '(':
+            // ParenthesesExpressionList
+            match = parenthesesExpressionList$Rule();
+            break;
+         default:
+            match = false;
       }
       if (match) {
          aliasIdentifier$RuleMemoStart = startIndex;
@@ -11807,11 +13679,83 @@ public class HarbourUnprocessedParser implements Parser {
       }
       startIndex = index;
       // (MacroVar | MacroExpression)
-      // MacroVar
-      match = macroVar$Rule();
-      if (! match) {
-         // MacroExpression
-         match = macroExpression$Rule();
+      switch(buffer.getChar(index)) {
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+            // MacroVar
+            match = macroVar$Rule();
+            break;
+         case '&':
+            // MacroVar
+            match = macroVar$Rule();
+            if (! match) {
+               // MacroExpression
+               match = macroExpression$Rule();
+            }
+            break;
+         default:
+            match = false;
       }
       if (match) {
          macro$RuleMemoStart = startIndex;
@@ -12150,23 +14094,100 @@ public class HarbourUnprocessedParser implements Parser {
          match = optionalSpacing$Rule();
          if (match) {
             // (('...' OptionalSpacing) | OptionalParametersList)
-            // ('...' OptionalSpacing)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
-            // '...'
-            match = stringMatcher("...", 3);
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
-            }
-            if (! match) {
-               // OptionalParametersList
-               match = optionalParametersList$Rule();
+            switch(buffer.getChar(index)) {
+               case '!':
+               case '\"':
+               case '&':
+               case '\'':
+               case '(':
+               case '+':
+               case ',':
+               case '-':
+               case '0':
+               case '1':
+               case '2':
+               case '3':
+               case '4':
+               case '5':
+               case '6':
+               case '7':
+               case '8':
+               case '9':
+               case ':':
+               case '@':
+               case 'A':
+               case 'B':
+               case 'C':
+               case 'D':
+               case 'E':
+               case 'F':
+               case 'G':
+               case 'H':
+               case 'I':
+               case 'J':
+               case 'K':
+               case 'L':
+               case 'M':
+               case 'N':
+               case 'O':
+               case 'P':
+               case 'Q':
+               case 'R':
+               case 'S':
+               case 'T':
+               case 'U':
+               case 'V':
+               case 'W':
+               case 'X':
+               case 'Y':
+               case 'Z':
+               case '[':
+               case '_':
+               case 'a':
+               case 'b':
+               case 'c':
+               case 'd':
+               case 'e':
+               case 'f':
+               case 'g':
+               case 'h':
+               case 'i':
+               case 'j':
+               case 'k':
+               case 'l':
+               case 'm':
+               case 'n':
+               case 'o':
+               case 'p':
+               case 'q':
+               case 'r':
+               case 's':
+               case 't':
+               case 'u':
+               case 'v':
+               case 'w':
+               case 'x':
+               case 'y':
+               case 'z':
+               case '{':
+                  // OptionalParametersList
+                  match = optionalParametersList$Rule();
+                  break;
+               case '.':
+                  // ('...' OptionalSpacing)
+                  // '...'
+                  match = stringMatcher("...", 3);
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                  }
+                  if (! match) {
+                     // OptionalParametersList
+                     match = optionalParametersList$Rule();
+                  }
+                  break;
+               default:
+                  match = false;
             }
             if (match) {
                // ')'
@@ -12456,7 +14477,7 @@ public class HarbourUnprocessedParser implements Parser {
       // (IIFKeyword '(' OptionalSpacing Condition ',' OptionalSpacing Parameter? ',' OptionalSpacing Parameter? ')' OptionalSpacing)
       // ("iif" | "if")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'i')) {
+      if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
          ++index;
          // ("if" | "f")
          switch(buffer.getChar(index)) {
@@ -12663,21 +14684,21 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //EndIfKeyword : (("endif" | "endi") IgnoreRestOfLine)
-   protected boolean endIfKeyword$Rule() {
+   //IfEnd : (("endif" | "endi") IgnoreRestOfLine)
+   protected boolean ifEnd$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
-      if (endIfKeyword$RuleMemoStart == index) {
-         if (endIfKeyword$RuleMemoStart <= endIfKeyword$RuleMemoEnd) {
-            index = endIfKeyword$RuleMemoEnd;
+      if (ifEnd$RuleMemoStart == index) {
+         if (ifEnd$RuleMemoStart <= ifEnd$RuleMemoEnd) {
+            index = ifEnd$RuleMemoEnd;
             if (! currentRuleIsAtomic) {
-               if (endIfKeyword$RuleMemoStart == endIfKeyword$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_IF_KEYWORD, endIfKeyword$RuleMemoStart, endIfKeyword$RuleMemoEnd, true, false);
+               if (ifEnd$RuleMemoStart == ifEnd$RuleMemoEnd) {
+                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.IF_END, ifEnd$RuleMemoStart, ifEnd$RuleMemoEnd, true, false);
                   lastNode.setSibling(currentNode);
-               } else if(endIfKeyword$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(endIfKeyword$RuleMemoFirstNode);
-                  currentNode = endIfKeyword$RuleMemoLastNode;
+               } else if(ifEnd$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(ifEnd$RuleMemoFirstNode);
+                  currentNode = ifEnd$RuleMemoLastNode;
                }
             }
             return true;
@@ -12689,19 +14710,19 @@ public class HarbourUnprocessedParser implements Parser {
       // (("endif" | "endi") IgnoreRestOfLine)
       // ("endif" | "endi")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'e')) {
+      if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
          ++index;
          // ("ndif" | "ndi")
-         if (buffer.matchIgnoreCaseChar(index, 'n')) {
+         if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
             ++index;
             // ("dif" | "di")
-            if (buffer.matchIgnoreCaseChar(index, 'd')) {
+            if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
                ++index;
                // ("if" | "i")
-               if (buffer.matchIgnoreCaseChar(index, 'i')) {
+               if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                   ++index;
                   // ("f" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'f')) {
+                  if (buffer.matchChar(index, 'f') || buffer.matchChar(index, 'F')) {
                      ++index;
                      // <EMPTY>
                      match = true;
@@ -12731,22 +14752,22 @@ public class HarbourUnprocessedParser implements Parser {
          match = ignoreRestOfLine$Rule();
       }
       if (match) {
-         endIfKeyword$RuleMemoStart = startIndex;
-         endIfKeyword$RuleMemoEnd = index;
+         ifEnd$RuleMemoStart = startIndex;
+         ifEnd$RuleMemoEnd = index;
          if (currentRuleIsAtomic) {
-            endIfKeyword$RuleMemoFirstNode = null;
+            ifEnd$RuleMemoFirstNode = null;
          } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_IF_KEYWORD, startIndex, index, true, false);
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.IF_END, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
-            endIfKeyword$RuleMemoFirstNode = currentNode;
-            endIfKeyword$RuleMemoLastNode = currentNode;
+            ifEnd$RuleMemoFirstNode = currentNode;
+            ifEnd$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
-         endIfKeyword$RuleMemoStart = startIndex;
-         endIfKeyword$RuleMemoEnd = -1;
-         endIfKeyword$RuleMemoFirstNode = null;
+         ifEnd$RuleMemoStart = startIndex;
+         ifEnd$RuleMemoEnd = -1;
+         ifEnd$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -12857,19 +14878,19 @@ public class HarbourUnprocessedParser implements Parser {
       match = true;
       // ("while" | "whil")
       int startIndex_2 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'w')) {
+      if (buffer.matchChar(index, 'w') || buffer.matchChar(index, 'W')) {
          ++index;
          // ("hile" | "hil")
-         if (buffer.matchIgnoreCaseChar(index, 'h')) {
+         if (buffer.matchChar(index, 'h') || buffer.matchChar(index, 'H')) {
             ++index;
             // ("ile" | "il")
-            if (buffer.matchIgnoreCaseChar(index, 'i')) {
+            if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                ++index;
                // ("le" | "l")
-               if (buffer.matchIgnoreCaseChar(index, 'l')) {
+               if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                   ++index;
                   // ("e" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                  if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                      ++index;
                      // <EMPTY>
                      match = true;
@@ -12930,21 +14951,21 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //EndDoKeyword : (("end" TestNoAlpha OptionalSpacing "do" TestNoAlpha OptionalSpacing) | (("enddo" | "endd") TestNoAlpha OptionalSpacing))
-   protected boolean endDoKeyword$Rule() {
+   //DoWhileEnd : (("end" TestNoAlpha OptionalSpacing "do" TestNoAlpha OptionalSpacing) | (("enddo" | "endd") TestNoAlpha OptionalSpacing))
+   protected boolean doWhileEnd$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
-      if (endDoKeyword$RuleMemoStart == index) {
-         if (endDoKeyword$RuleMemoStart <= endDoKeyword$RuleMemoEnd) {
-            index = endDoKeyword$RuleMemoEnd;
+      if (doWhileEnd$RuleMemoStart == index) {
+         if (doWhileEnd$RuleMemoStart <= doWhileEnd$RuleMemoEnd) {
+            index = doWhileEnd$RuleMemoEnd;
             if (! currentRuleIsAtomic) {
-               if (endDoKeyword$RuleMemoStart == endDoKeyword$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_DO_KEYWORD, endDoKeyword$RuleMemoStart, endDoKeyword$RuleMemoEnd, true, false);
+               if (doWhileEnd$RuleMemoStart == doWhileEnd$RuleMemoEnd) {
+                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.DO_WHILE_END, doWhileEnd$RuleMemoStart, doWhileEnd$RuleMemoEnd, true, false);
                   lastNode.setSibling(currentNode);
-               } else if(endDoKeyword$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(endDoKeyword$RuleMemoFirstNode);
-                  currentNode = endDoKeyword$RuleMemoLastNode;
+               } else if(doWhileEnd$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(doWhileEnd$RuleMemoFirstNode);
+                  currentNode = doWhileEnd$RuleMemoLastNode;
                }
             }
             return true;
@@ -12954,72 +14975,60 @@ public class HarbourUnprocessedParser implements Parser {
       }
       startIndex = index;
       // (("end" TestNoAlpha OptionalSpacing "do" TestNoAlpha OptionalSpacing) | (("enddo" | "endd") TestNoAlpha OptionalSpacing))
-      // ("end" TestNoAlpha OptionalSpacing "do" TestNoAlpha OptionalSpacing)
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // "end"
-      match = ignoreCaseStringMatcher("end", 3);
-      if (match) {
-         // TestNoAlpha
-         match = testNoAlpha$Rule();
-         if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
+      switch(buffer.getChar(index)) {
+         case 'e':
+         case 'E':
+            // ("end" TestNoAlpha OptionalSpacing "do" TestNoAlpha OptionalSpacing)
+            // "end"
+            match = ignoreCaseStringMatcher("end", 3);
             if (match) {
-               // "do"
-               match = ignoreCaseStringMatcher("do", 2);
+               // TestNoAlpha
+               match = testNoAlpha$Rule();
                if (match) {
-                  // TestNoAlpha
-                  match = testNoAlpha$Rule();
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
                   if (match) {
-                     // OptionalSpacing
-                     match = optionalSpacing$Rule();
-                     if (! match) {
-                        index = lastIndex_1;
-                        lastNode_1.setSibling(null);
-                        currentNode = lastNode_1;
+                     // "do"
+                     match = ignoreCaseStringMatcher("do", 2);
+                     if (match) {
+                        // TestNoAlpha
+                        match = testNoAlpha$Rule();
+                        if (match) {
+                           // OptionalSpacing
+                           match = optionalSpacing$Rule();
+                        }
                      }
-                  } else {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
                   }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
-            } else {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
             }
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-         }
-      }
-      if (! match) {
-         // (("enddo" | "endd") TestNoAlpha OptionalSpacing)
-         Node lastNode_2 = currentNode;
-         int lastIndex_2 = index;
-         // ("enddo" | "endd")
-         int startIndex_3 = index;
-         if (buffer.matchIgnoreCaseChar(index, 'e')) {
-            ++index;
-            // ("nddo" | "ndd")
-            if (buffer.matchIgnoreCaseChar(index, 'n')) {
-               ++index;
-               // ("ddo" | "dd")
-               if (buffer.matchIgnoreCaseChar(index, 'd')) {
+            if (! match) {
+               // (("enddo" | "endd") TestNoAlpha OptionalSpacing)
+               // ("enddo" | "endd")
+               int startIndex_1 = index;
+               if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                   ++index;
-                  // ("do" | "d")
-                  if (buffer.matchIgnoreCaseChar(index, 'd')) {
+                  // ("nddo" | "ndd")
+                  if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                      ++index;
-                     // ("o" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'o')) {
+                     // ("ddo" | "dd")
+                     if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
                         ++index;
-                        // <EMPTY>
-                        match = true;
+                        // ("do" | "d")
+                        if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
+                           ++index;
+                           // ("o" | <EMPTY>)
+                           if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
+                              ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
+                           }
+                        } else {
+                           match = false;
+                        }
                      } else {
-                        match = true;
+                        match = false;
                      }
                   } else {
                      match = false;
@@ -13027,52 +15036,42 @@ public class HarbourUnprocessedParser implements Parser {
                } else {
                   match = false;
                }
-            } else {
-               match = false;
-            }
-         } else {
-            match = false;
-         }
-         if (! match) {
-            index = startIndex_3;
-         } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_3, index, false, false));
-            currentNode = currentNode.getSibling();
-         }
-         if (match) {
-            // TestNoAlpha
-            match = testNoAlpha$Rule();
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
                if (! match) {
-                  index = lastIndex_2;
-                  lastNode_2.setSibling(null);
-                  currentNode = lastNode_2;
+                  index = startIndex_1;
+               } else if(! currentRuleIsAtomic) {
+                  currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+                  currentNode = currentNode.getSibling();
                }
-            } else {
-               index = lastIndex_2;
-               lastNode_2.setSibling(null);
+               if (match) {
+                  // TestNoAlpha
+                  match = testNoAlpha$Rule();
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                  }
+               }
             }
-         }
+            break;
+         default:
+            match = false;
       }
       if (match) {
-         endDoKeyword$RuleMemoStart = startIndex;
-         endDoKeyword$RuleMemoEnd = index;
+         doWhileEnd$RuleMemoStart = startIndex;
+         doWhileEnd$RuleMemoEnd = index;
          if (currentRuleIsAtomic) {
-            endDoKeyword$RuleMemoFirstNode = null;
+            doWhileEnd$RuleMemoFirstNode = null;
          } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_DO_KEYWORD, startIndex, index, true, false);
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.DO_WHILE_END, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
-            endDoKeyword$RuleMemoFirstNode = currentNode;
-            endDoKeyword$RuleMemoLastNode = currentNode;
+            doWhileEnd$RuleMemoFirstNode = currentNode;
+            doWhileEnd$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
-         endDoKeyword$RuleMemoStart = startIndex;
-         endDoKeyword$RuleMemoEnd = -1;
-         endDoKeyword$RuleMemoFirstNode = null;
+         doWhileEnd$RuleMemoStart = startIndex;
+         doWhileEnd$RuleMemoEnd = -1;
+         doWhileEnd$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -13162,21 +15161,21 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //EndForKeyword : ((("end" "for") | "next" | "endfor" | "endfo" | "endf") IgnoreRestOfLine)
-   protected boolean endForKeyword$Rule() {
+   //ForNextEnd : ((("end" "for") | "next" | "endfor" | "endfo" | "endf") IgnoreRestOfLine)
+   protected boolean forNextEnd$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
-      if (endForKeyword$RuleMemoStart == index) {
-         if (endForKeyword$RuleMemoStart <= endForKeyword$RuleMemoEnd) {
-            index = endForKeyword$RuleMemoEnd;
+      if (forNextEnd$RuleMemoStart == index) {
+         if (forNextEnd$RuleMemoStart <= forNextEnd$RuleMemoEnd) {
+            index = forNextEnd$RuleMemoEnd;
             if (! currentRuleIsAtomic) {
-               if (endForKeyword$RuleMemoStart == endForKeyword$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_FOR_KEYWORD, endForKeyword$RuleMemoStart, endForKeyword$RuleMemoEnd, true, false);
+               if (forNextEnd$RuleMemoStart == forNextEnd$RuleMemoEnd) {
+                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.FOR_NEXT_END, forNextEnd$RuleMemoStart, forNextEnd$RuleMemoEnd, true, false);
                   lastNode.setSibling(currentNode);
-               } else if(endForKeyword$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(endForKeyword$RuleMemoFirstNode);
-                  currentNode = endForKeyword$RuleMemoLastNode;
+               } else if(forNextEnd$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(forNextEnd$RuleMemoFirstNode);
+                  currentNode = forNextEnd$RuleMemoLastNode;
                }
             }
             return true;
@@ -13188,18 +15187,11 @@ public class HarbourUnprocessedParser implements Parser {
       // ((("end" "for") | "next" | "endfor" | "endfo" | "endf") IgnoreRestOfLine)
       // (("end" "for") | "next" | "endfor" | "endfo" | "endf")
       // ("end" "for")
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
       // "end"
       match = ignoreCaseStringMatcher("end", 3);
       if (match) {
          // "for"
          match = ignoreCaseStringMatcher("for", 3);
-         if (! match) {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-         }
       }
       if (! match) {
          // "next"
@@ -13222,22 +15214,22 @@ public class HarbourUnprocessedParser implements Parser {
          match = ignoreRestOfLine$Rule();
       }
       if (match) {
-         endForKeyword$RuleMemoStart = startIndex;
-         endForKeyword$RuleMemoEnd = index;
+         forNextEnd$RuleMemoStart = startIndex;
+         forNextEnd$RuleMemoEnd = index;
          if (currentRuleIsAtomic) {
-            endForKeyword$RuleMemoFirstNode = null;
+            forNextEnd$RuleMemoFirstNode = null;
          } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_FOR_KEYWORD, startIndex, index, true, false);
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.FOR_NEXT_END, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
-            endForKeyword$RuleMemoFirstNode = currentNode;
-            endForKeyword$RuleMemoLastNode = currentNode;
+            forNextEnd$RuleMemoFirstNode = currentNode;
+            forNextEnd$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
-         endForKeyword$RuleMemoStart = startIndex;
-         endForKeyword$RuleMemoEnd = -1;
-         endForKeyword$RuleMemoFirstNode = null;
+         forNextEnd$RuleMemoStart = startIndex;
+         forNextEnd$RuleMemoEnd = -1;
+         forNextEnd$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -13369,21 +15361,21 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //EndCaseKeyword : (("end" TestNoAlpha OptionalSpacing "case" TestNoAlpha OptionalSpacing) | (("endcase" | "endcas" | "endca" | "endc") TestNoAlpha OptionalSpacing))
-   protected boolean endCaseKeyword$Rule() {
+   //DoCaseEnd : (("end" TestNoAlpha OptionalSpacing "case" TestNoAlpha OptionalSpacing) | (("endcase" | "endcas" | "endca" | "endc") TestNoAlpha OptionalSpacing))
+   protected boolean doCaseEnd$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
-      if (endCaseKeyword$RuleMemoStart == index) {
-         if (endCaseKeyword$RuleMemoStart <= endCaseKeyword$RuleMemoEnd) {
-            index = endCaseKeyword$RuleMemoEnd;
+      if (doCaseEnd$RuleMemoStart == index) {
+         if (doCaseEnd$RuleMemoStart <= doCaseEnd$RuleMemoEnd) {
+            index = doCaseEnd$RuleMemoEnd;
             if (! currentRuleIsAtomic) {
-               if (endCaseKeyword$RuleMemoStart == endCaseKeyword$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_CASE_KEYWORD, endCaseKeyword$RuleMemoStart, endCaseKeyword$RuleMemoEnd, true, false);
+               if (doCaseEnd$RuleMemoStart == doCaseEnd$RuleMemoEnd) {
+                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.DO_CASE_END, doCaseEnd$RuleMemoStart, doCaseEnd$RuleMemoEnd, true, false);
                   lastNode.setSibling(currentNode);
-               } else if(endCaseKeyword$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(endCaseKeyword$RuleMemoFirstNode);
-                  currentNode = endCaseKeyword$RuleMemoLastNode;
+               } else if(doCaseEnd$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(doCaseEnd$RuleMemoFirstNode);
+                  currentNode = doCaseEnd$RuleMemoLastNode;
                }
             }
             return true;
@@ -13393,82 +15385,70 @@ public class HarbourUnprocessedParser implements Parser {
       }
       startIndex = index;
       // (("end" TestNoAlpha OptionalSpacing "case" TestNoAlpha OptionalSpacing) | (("endcase" | "endcas" | "endca" | "endc") TestNoAlpha OptionalSpacing))
-      // ("end" TestNoAlpha OptionalSpacing "case" TestNoAlpha OptionalSpacing)
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // "end"
-      match = ignoreCaseStringMatcher("end", 3);
-      if (match) {
-         // TestNoAlpha
-         match = testNoAlpha$Rule();
-         if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
+      switch(buffer.getChar(index)) {
+         case 'e':
+         case 'E':
+            // ("end" TestNoAlpha OptionalSpacing "case" TestNoAlpha OptionalSpacing)
+            // "end"
+            match = ignoreCaseStringMatcher("end", 3);
             if (match) {
-               // "case"
-               match = ignoreCaseStringMatcher("case", 4);
+               // TestNoAlpha
+               match = testNoAlpha$Rule();
                if (match) {
-                  // TestNoAlpha
-                  match = testNoAlpha$Rule();
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
                   if (match) {
-                     // OptionalSpacing
-                     match = optionalSpacing$Rule();
-                     if (! match) {
-                        index = lastIndex_1;
-                        lastNode_1.setSibling(null);
-                        currentNode = lastNode_1;
+                     // "case"
+                     match = ignoreCaseStringMatcher("case", 4);
+                     if (match) {
+                        // TestNoAlpha
+                        match = testNoAlpha$Rule();
+                        if (match) {
+                           // OptionalSpacing
+                           match = optionalSpacing$Rule();
+                        }
                      }
-                  } else {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
                   }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
-            } else {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
             }
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-         }
-      }
-      if (! match) {
-         // (("endcase" | "endcas" | "endca" | "endc") TestNoAlpha OptionalSpacing)
-         Node lastNode_2 = currentNode;
-         int lastIndex_2 = index;
-         // ("endcase" | "endcas" | "endca" | "endc")
-         int startIndex_3 = index;
-         if (buffer.matchIgnoreCaseChar(index, 'e')) {
-            ++index;
-            // ("ndcase" | "ndcas" | "ndca" | "ndc")
-            if (buffer.matchIgnoreCaseChar(index, 'n')) {
-               ++index;
-               // ("dcase" | "dcas" | "dca" | "dc")
-               if (buffer.matchIgnoreCaseChar(index, 'd')) {
+            if (! match) {
+               // (("endcase" | "endcas" | "endca" | "endc") TestNoAlpha OptionalSpacing)
+               // ("endcase" | "endcas" | "endca" | "endc")
+               int startIndex_1 = index;
+               if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                   ++index;
-                  // ("case" | "cas" | "ca" | "c")
-                  if (buffer.matchIgnoreCaseChar(index, 'c')) {
+                  // ("ndcase" | "ndcas" | "ndca" | "ndc")
+                  if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                      ++index;
-                     // ("ase" | "as" | "a" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                     // ("dcase" | "dcas" | "dca" | "dc")
+                     if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
                         ++index;
-                        // ("se" | "s" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 's')) {
+                        // ("case" | "cas" | "ca" | "c")
+                        if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                            ++index;
-                           // "e"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                           // ("ase" | "as" | "a" | <EMPTY>)
+                           if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                               ++index;
+                              // ("se" | "s" | <EMPTY>)
+                              if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
+                                 ++index;
+                                 // "e"
+                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                    ++index;
+                                 }
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
+                              }
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
-                           match = true;
+                           match = false;
                         }
                      } else {
-                        match = true;
+                        match = false;
                      }
                   } else {
                      match = false;
@@ -13476,52 +15456,42 @@ public class HarbourUnprocessedParser implements Parser {
                } else {
                   match = false;
                }
-            } else {
-               match = false;
-            }
-         } else {
-            match = false;
-         }
-         if (! match) {
-            index = startIndex_3;
-         } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_3, index, false, false));
-            currentNode = currentNode.getSibling();
-         }
-         if (match) {
-            // TestNoAlpha
-            match = testNoAlpha$Rule();
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
                if (! match) {
-                  index = lastIndex_2;
-                  lastNode_2.setSibling(null);
-                  currentNode = lastNode_2;
+                  index = startIndex_1;
+               } else if(! currentRuleIsAtomic) {
+                  currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+                  currentNode = currentNode.getSibling();
                }
-            } else {
-               index = lastIndex_2;
-               lastNode_2.setSibling(null);
+               if (match) {
+                  // TestNoAlpha
+                  match = testNoAlpha$Rule();
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                  }
+               }
             }
-         }
+            break;
+         default:
+            match = false;
       }
       if (match) {
-         endCaseKeyword$RuleMemoStart = startIndex;
-         endCaseKeyword$RuleMemoEnd = index;
+         doCaseEnd$RuleMemoStart = startIndex;
+         doCaseEnd$RuleMemoEnd = index;
          if (currentRuleIsAtomic) {
-            endCaseKeyword$RuleMemoFirstNode = null;
+            doCaseEnd$RuleMemoFirstNode = null;
          } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_CASE_KEYWORD, startIndex, index, true, false);
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.DO_CASE_END, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
-            endCaseKeyword$RuleMemoFirstNode = currentNode;
-            endCaseKeyword$RuleMemoLastNode = currentNode;
+            doCaseEnd$RuleMemoFirstNode = currentNode;
+            doCaseEnd$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
-         endCaseKeyword$RuleMemoStart = startIndex;
-         endCaseKeyword$RuleMemoEnd = -1;
-         endCaseKeyword$RuleMemoFirstNode = null;
+         doCaseEnd$RuleMemoStart = startIndex;
+         doCaseEnd$RuleMemoEnd = -1;
+         doCaseEnd$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -13703,19 +15673,19 @@ public class HarbourUnprocessedParser implements Parser {
       // (("switch" | "switc" | "swit") TestNoAlpha OptionalSpacing Expression)
       // ("switch" | "switc" | "swit")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 's')) {
+      if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
          ++index;
          // ("witch" | "witc" | "wit")
-         if (buffer.matchIgnoreCaseChar(index, 'w')) {
+         if (buffer.matchChar(index, 'w') || buffer.matchChar(index, 'W')) {
             ++index;
             // ("itch" | "itc" | "it")
-            if (buffer.matchIgnoreCaseChar(index, 'i')) {
+            if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                ++index;
                // ("tch" | "tc" | "t")
-               if (buffer.matchIgnoreCaseChar(index, 't')) {
+               if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                   ++index;
                   // ("ch" | "c" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'c')) {
+                  if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                      ++index;
                      // "h"
                      if (match = buffer.matchIgnoreCaseChar(index, 'h')) {
@@ -13780,21 +15750,21 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //EndSwitchKeyword : ("end" TestNoAlpha OptionalSpacing "switch" TestNoAlpha OptionalSpacing)
-   protected boolean endSwitchKeyword$Rule() {
+   //SwitchEnd : ("end" TestNoAlpha OptionalSpacing "switch" TestNoAlpha OptionalSpacing)
+   protected boolean switchEnd$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
-      if (endSwitchKeyword$RuleMemoStart == index) {
-         if (endSwitchKeyword$RuleMemoStart <= endSwitchKeyword$RuleMemoEnd) {
-            index = endSwitchKeyword$RuleMemoEnd;
+      if (switchEnd$RuleMemoStart == index) {
+         if (switchEnd$RuleMemoStart <= switchEnd$RuleMemoEnd) {
+            index = switchEnd$RuleMemoEnd;
             if (! currentRuleIsAtomic) {
-               if (endSwitchKeyword$RuleMemoStart == endSwitchKeyword$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_SWITCH_KEYWORD, endSwitchKeyword$RuleMemoStart, endSwitchKeyword$RuleMemoEnd, true, false);
+               if (switchEnd$RuleMemoStart == switchEnd$RuleMemoEnd) {
+                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.SWITCH_END, switchEnd$RuleMemoStart, switchEnd$RuleMemoEnd, true, false);
                   lastNode.setSibling(currentNode);
-               } else if(endSwitchKeyword$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(endSwitchKeyword$RuleMemoFirstNode);
-                  currentNode = endSwitchKeyword$RuleMemoLastNode;
+               } else if(switchEnd$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(switchEnd$RuleMemoFirstNode);
+                  currentNode = switchEnd$RuleMemoLastNode;
                }
             }
             return true;
@@ -13827,22 +15797,22 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       if (match) {
-         endSwitchKeyword$RuleMemoStart = startIndex;
-         endSwitchKeyword$RuleMemoEnd = index;
+         switchEnd$RuleMemoStart = startIndex;
+         switchEnd$RuleMemoEnd = index;
          if (currentRuleIsAtomic) {
-            endSwitchKeyword$RuleMemoFirstNode = null;
+            switchEnd$RuleMemoFirstNode = null;
          } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_SWITCH_KEYWORD, startIndex, index, true, false);
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.SWITCH_END, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
-            endSwitchKeyword$RuleMemoFirstNode = currentNode;
-            endSwitchKeyword$RuleMemoLastNode = currentNode;
+            switchEnd$RuleMemoFirstNode = currentNode;
+            switchEnd$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
-         endSwitchKeyword$RuleMemoStart = startIndex;
-         endSwitchKeyword$RuleMemoEnd = -1;
-         endSwitchKeyword$RuleMemoFirstNode = null;
+         switchEnd$RuleMemoStart = startIndex;
+         switchEnd$RuleMemoEnd = -1;
+         switchEnd$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -13908,21 +15878,21 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //EndTryKeyword : ("end" TestNoAlpha OptionalSpacing "try" TestNoAlpha OptionalSpacing)
-   protected boolean endTryKeyword$Rule() {
+   //TryCatchEnd : ("end" TestNoAlpha OptionalSpacing "try" TestNoAlpha OptionalSpacing)
+   protected boolean tryCatchEnd$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
-      if (endTryKeyword$RuleMemoStart == index) {
-         if (endTryKeyword$RuleMemoStart <= endTryKeyword$RuleMemoEnd) {
-            index = endTryKeyword$RuleMemoEnd;
+      if (tryCatchEnd$RuleMemoStart == index) {
+         if (tryCatchEnd$RuleMemoStart <= tryCatchEnd$RuleMemoEnd) {
+            index = tryCatchEnd$RuleMemoEnd;
             if (! currentRuleIsAtomic) {
-               if (endTryKeyword$RuleMemoStart == endTryKeyword$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_TRY_KEYWORD, endTryKeyword$RuleMemoStart, endTryKeyword$RuleMemoEnd, true, false);
+               if (tryCatchEnd$RuleMemoStart == tryCatchEnd$RuleMemoEnd) {
+                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.TRY_CATCH_END, tryCatchEnd$RuleMemoStart, tryCatchEnd$RuleMemoEnd, true, false);
                   lastNode.setSibling(currentNode);
-               } else if(endTryKeyword$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(endTryKeyword$RuleMemoFirstNode);
-                  currentNode = endTryKeyword$RuleMemoLastNode;
+               } else if(tryCatchEnd$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(tryCatchEnd$RuleMemoFirstNode);
+                  currentNode = tryCatchEnd$RuleMemoLastNode;
                }
             }
             return true;
@@ -13955,22 +15925,22 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       if (match) {
-         endTryKeyword$RuleMemoStart = startIndex;
-         endTryKeyword$RuleMemoEnd = index;
+         tryCatchEnd$RuleMemoStart = startIndex;
+         tryCatchEnd$RuleMemoEnd = index;
          if (currentRuleIsAtomic) {
-            endTryKeyword$RuleMemoFirstNode = null;
+            tryCatchEnd$RuleMemoFirstNode = null;
          } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_TRY_KEYWORD, startIndex, index, true, false);
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.TRY_CATCH_END, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
-            endTryKeyword$RuleMemoFirstNode = currentNode;
-            endTryKeyword$RuleMemoLastNode = currentNode;
+            tryCatchEnd$RuleMemoFirstNode = currentNode;
+            tryCatchEnd$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
-         endTryKeyword$RuleMemoStart = startIndex;
-         endTryKeyword$RuleMemoEnd = -1;
-         endTryKeyword$RuleMemoFirstNode = null;
+         tryCatchEnd$RuleMemoStart = startIndex;
+         tryCatchEnd$RuleMemoEnd = -1;
+         tryCatchEnd$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -14062,19 +16032,19 @@ public class HarbourUnprocessedParser implements Parser {
       // (("return" | "retur" | "retu") TestNoAlpha OptionalSpacing ExpressionAsType?)
       // ("return" | "retur" | "retu")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'r')) {
+      if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
          ++index;
          // ("eturn" | "etur" | "etu")
-         if (buffer.matchIgnoreCaseChar(index, 'e')) {
+         if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
             ++index;
             // ("turn" | "tur" | "tu")
-            if (buffer.matchIgnoreCaseChar(index, 't')) {
+            if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                ++index;
                // ("urn" | "ur" | "u")
-               if (buffer.matchIgnoreCaseChar(index, 'u')) {
+               if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
                   ++index;
                   // ("rn" | "r" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'r')) {
+                  if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                      ++index;
                      // "n"
                      if (match = buffer.matchIgnoreCaseChar(index, 'n')) {
@@ -14167,19 +16137,19 @@ public class HarbourUnprocessedParser implements Parser {
       // (("break" | "brea") TestNoAlpha OptionalSpacing Expression?)
       // ("break" | "brea")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'b')) {
+      if (buffer.matchChar(index, 'b') || buffer.matchChar(index, 'B')) {
          ++index;
          // ("reak" | "rea")
-         if (buffer.matchIgnoreCaseChar(index, 'r')) {
+         if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
             ++index;
             // ("eak" | "ea")
-            if (buffer.matchIgnoreCaseChar(index, 'e')) {
+            if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                ++index;
                // ("ak" | "a")
-               if (buffer.matchIgnoreCaseChar(index, 'a')) {
+               if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                   ++index;
                   // ("k" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'k')) {
+                  if (buffer.matchChar(index, 'k') || buffer.matchChar(index, 'K')) {
                      ++index;
                      // <EMPTY>
                      match = true;
@@ -14276,11 +16246,69 @@ public class HarbourUnprocessedParser implements Parser {
             match = optionalSpacing$Rule();
             if (match) {
                // (MethodDeclaration | AttributeListDeclaration)
-               // MethodDeclaration
-               match = methodDeclaration$Rule();
-               if (! match) {
-                  // AttributeListDeclaration
-                  match = attributeListDeclaration$Rule();
+               switch(buffer.getChar(index)) {
+                  case '{':
+                     // AttributeListDeclaration
+                     match = attributeListDeclaration$Rule();
+                     break;
+                  case 'A':
+                  case 'B':
+                  case 'C':
+                  case 'D':
+                  case 'E':
+                  case 'F':
+                  case 'G':
+                  case 'H':
+                  case 'I':
+                  case 'J':
+                  case 'K':
+                  case 'L':
+                  case 'M':
+                  case 'N':
+                  case 'O':
+                  case 'P':
+                  case 'Q':
+                  case 'R':
+                  case 'S':
+                  case 'T':
+                  case 'U':
+                  case 'V':
+                  case 'W':
+                  case 'X':
+                  case 'Y':
+                  case 'Z':
+                  case '_':
+                  case 'a':
+                  case 'b':
+                  case 'c':
+                  case 'd':
+                  case 'e':
+                  case 'f':
+                  case 'g':
+                  case 'h':
+                  case 'i':
+                  case 'j':
+                  case 'k':
+                  case 'l':
+                  case 'm':
+                  case 'n':
+                  case 'o':
+                  case 'p':
+                  case 'q':
+                  case 'r':
+                  case 's':
+                  case 't':
+                  case 'u':
+                  case 'v':
+                  case 'w':
+                  case 'x':
+                  case 'y':
+                  case 'z':
+                     // MethodDeclaration
+                     match = methodDeclaration$Rule();
+                     break;
+                  default:
+                     match = false;
                }
             }
          }
@@ -14335,19 +16363,19 @@ public class HarbourUnprocessedParser implements Parser {
       // (("public" | "publi" | "publ") TestNoAlpha OptionalSpacing VariableDeclarationList)
       // ("public" | "publi" | "publ")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'p')) {
+      if (buffer.matchChar(index, 'p') || buffer.matchChar(index, 'P')) {
          ++index;
          // ("ublic" | "ubli" | "ubl")
-         if (buffer.matchIgnoreCaseChar(index, 'u')) {
+         if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
             ++index;
             // ("blic" | "bli" | "bl")
-            if (buffer.matchIgnoreCaseChar(index, 'b')) {
+            if (buffer.matchChar(index, 'b') || buffer.matchChar(index, 'B')) {
                ++index;
                // ("lic" | "li" | "l")
-               if (buffer.matchIgnoreCaseChar(index, 'l')) {
+               if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                   ++index;
                   // ("ic" | "i" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'i')) {
+                  if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                      ++index;
                      // "c"
                      if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
@@ -14438,22 +16466,22 @@ public class HarbourUnprocessedParser implements Parser {
       // (("private" | "privat" | "priva" | "priv") TestNoAlpha OptionalSpacing VariableDeclarationList)
       // ("private" | "privat" | "priva" | "priv")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'p')) {
+      if (buffer.matchChar(index, 'p') || buffer.matchChar(index, 'P')) {
          ++index;
          // ("rivate" | "rivat" | "riva" | "riv")
-         if (buffer.matchIgnoreCaseChar(index, 'r')) {
+         if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
             ++index;
             // ("ivate" | "ivat" | "iva" | "iv")
-            if (buffer.matchIgnoreCaseChar(index, 'i')) {
+            if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                ++index;
                // ("vate" | "vat" | "va" | "v")
-               if (buffer.matchIgnoreCaseChar(index, 'v')) {
+               if (buffer.matchChar(index, 'v') || buffer.matchChar(index, 'V')) {
                   ++index;
                   // ("ate" | "at" | "a" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                  if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                      ++index;
                      // ("te" | "t" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 't')) {
+                     if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                         ++index;
                         // "e"
                         if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
@@ -14547,25 +16575,25 @@ public class HarbourUnprocessedParser implements Parser {
       // (("external" | "externa" | "extern" | "exter" | "exte") TestNoAlpha OptionalSpacing IdentifierList)
       // ("external" | "externa" | "extern" | "exter" | "exte")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'e')) {
+      if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
          ++index;
          // ("xternal" | "xterna" | "xtern" | "xter" | "xte")
-         if (buffer.matchIgnoreCaseChar(index, 'x')) {
+         if (buffer.matchChar(index, 'x') || buffer.matchChar(index, 'X')) {
             ++index;
             // ("ternal" | "terna" | "tern" | "ter" | "te")
-            if (buffer.matchIgnoreCaseChar(index, 't')) {
+            if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                ++index;
                // ("ernal" | "erna" | "ern" | "er" | "e")
-               if (buffer.matchIgnoreCaseChar(index, 'e')) {
+               if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                   ++index;
                   // ("rnal" | "rna" | "rn" | "r" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'r')) {
+                  if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                      ++index;
                      // ("nal" | "na" | "n" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'n')) {
+                     if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                         ++index;
                         // ("al" | "a" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                        if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                            ++index;
                            // "l"
                            if (match = buffer.matchIgnoreCaseChar(index, 'l')) {
@@ -14662,25 +16690,25 @@ public class HarbourUnprocessedParser implements Parser {
       // (("announce" | "announc" | "announ" | "annou" | "anno") TestNoAlpha OptionalSpacing Identifier)
       // ("announce" | "announc" | "announ" | "annou" | "anno")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'a')) {
+      if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
          ++index;
          // ("nnounce" | "nnounc" | "nnoun" | "nnou" | "nno")
-         if (buffer.matchIgnoreCaseChar(index, 'n')) {
+         if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
             ++index;
             // ("nounce" | "nounc" | "noun" | "nou" | "no")
-            if (buffer.matchIgnoreCaseChar(index, 'n')) {
+            if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                ++index;
                // ("ounce" | "ounc" | "oun" | "ou" | "o")
-               if (buffer.matchIgnoreCaseChar(index, 'o')) {
+               if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
                   ++index;
                   // ("unce" | "unc" | "un" | "u" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'u')) {
+                  if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
                      ++index;
                      // ("nce" | "nc" | "n" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'n')) {
+                     if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                         ++index;
                         // ("ce" | "c" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'c')) {
+                        if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                            ++index;
                            // "e"
                            if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
@@ -14777,22 +16805,22 @@ public class HarbourUnprocessedParser implements Parser {
       // (("request" | "reques" | "reque" | "requ") TestNoAlpha OptionalSpacing IdentifierList)
       // ("request" | "reques" | "reque" | "requ")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'r')) {
+      if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
          ++index;
          // ("equest" | "eques" | "eque" | "equ")
-         if (buffer.matchIgnoreCaseChar(index, 'e')) {
+         if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
             ++index;
             // ("quest" | "ques" | "que" | "qu")
-            if (buffer.matchIgnoreCaseChar(index, 'q')) {
+            if (buffer.matchChar(index, 'q') || buffer.matchChar(index, 'Q')) {
                ++index;
                // ("uest" | "ues" | "ue" | "u")
-               if (buffer.matchIgnoreCaseChar(index, 'u')) {
+               if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
                   ++index;
                   // ("est" | "es" | "e" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                  if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                      ++index;
                      // ("st" | "s" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 's')) {
+                     if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                         ++index;
                         // "t"
                         if (match = buffer.matchIgnoreCaseChar(index, 't')) {
@@ -14969,11 +16997,90 @@ public class HarbourUnprocessedParser implements Parser {
          match = assignOperator$Rule();
          if (match) {
             // (ValueByReference | Expression)
-            // ValueByReference
-            match = valueByReference$Rule();
-            if (! match) {
-               // Expression
-               match = expression$Rule();
+            switch(buffer.getChar(index)) {
+               case '!':
+               case '\"':
+               case '&':
+               case '\'':
+               case '(':
+               case '+':
+               case '-':
+               case '.':
+               case '0':
+               case '1':
+               case '2':
+               case '3':
+               case '4':
+               case '5':
+               case '6':
+               case '7':
+               case '8':
+               case '9':
+               case ':':
+               case 'A':
+               case 'B':
+               case 'C':
+               case 'D':
+               case 'E':
+               case 'F':
+               case 'G':
+               case 'H':
+               case 'I':
+               case 'J':
+               case 'K':
+               case 'L':
+               case 'M':
+               case 'N':
+               case 'O':
+               case 'P':
+               case 'Q':
+               case 'R':
+               case 'S':
+               case 'T':
+               case 'U':
+               case 'V':
+               case 'W':
+               case 'X':
+               case 'Y':
+               case 'Z':
+               case '[':
+               case '_':
+               case 'a':
+               case 'b':
+               case 'c':
+               case 'd':
+               case 'e':
+               case 'f':
+               case 'g':
+               case 'h':
+               case 'i':
+               case 'j':
+               case 'k':
+               case 'l':
+               case 'm':
+               case 'n':
+               case 'o':
+               case 'p':
+               case 'q':
+               case 'r':
+               case 's':
+               case 't':
+               case 'u':
+               case 'v':
+               case 'w':
+               case 'x':
+               case 'y':
+               case 'z':
+               case '{':
+                  // Expression
+                  match = expression$Rule();
+                  break;
+               case '@':
+                  // ValueByReference
+                  match = valueByReference$Rule();
+                  break;
+               default:
+                  match = false;
             }
          }
       }
@@ -15228,19 +17335,103 @@ public class HarbourUnprocessedParser implements Parser {
       boolean match;
       startIndex = index;
       // (ArrayAccess | MacroFunctionCall | AnySimpleFunctionCall | AnyIdentifier)
-      // ArrayAccess
-      match = arrayAccess$Rule();
-      if (! match) {
-         // MacroFunctionCall
-         match = macroFunctionCall$Rule();
-         if (! match) {
-            // AnySimpleFunctionCall
-            match = anySimpleFunctionCall$Rule();
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case '\'':
+         case '(':
+         case '[':
+         case '{':
+            // ArrayAccess
+            match = arrayAccess$Rule();
+            break;
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '&':
+         case '7':
+         case '8':
+         case '9':
+            // ArrayAccess
+            match = arrayAccess$Rule();
             if (! match) {
-               // AnyIdentifier
-               match = anyIdentifier$Rule();
+               // MacroFunctionCall
+               match = macroFunctionCall$Rule();
             }
-         }
+            break;
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+            // ArrayAccess
+            match = arrayAccess$Rule();
+            if (! match) {
+               // MacroFunctionCall
+               match = macroFunctionCall$Rule();
+               if (! match) {
+                  // AnySimpleFunctionCall
+                  match = anySimpleFunctionCall$Rule();
+                  if (! match) {
+                     // AnyIdentifier
+                     match = anyIdentifier$Rule();
+                  }
+               }
+            }
+            break;
+         default:
+            match = false;
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -15290,23 +17481,47 @@ public class HarbourUnprocessedParser implements Parser {
             ++index;
             // ("unction" | "unctio" | "uncti" | "ield" | "unct" | "iel" | "unc")
             switch(buffer.getChar(index)) {
+               case 'i':
+               case 'I':
+                  ++index;
+                  // ("eld" | "el")
+                  if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                     ++index;
+                     // ("ld" | "l")
+                     if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
+                        ++index;
+                        // ("d" | <EMPTY>)
+                        if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
+                           ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+                  break;
                case 'u':
                case 'U':
                   ++index;
                   // ("nction" | "nctio" | "ncti" | "nct" | "nc")
-                  if (buffer.matchIgnoreCaseChar(index, 'n')) {
+                  if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                      ++index;
                      // ("ction" | "ctio" | "cti" | "ct" | "c")
-                     if (buffer.matchIgnoreCaseChar(index, 'c')) {
+                     if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                         ++index;
                         // ("tion" | "tio" | "ti" | "t" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 't')) {
+                        if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                            ++index;
                            // ("ion" | "io" | "i" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'i')) {
+                           if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                               ++index;
                               // ("on" | "o" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'o')) {
+                              if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
                                  ++index;
                                  // "n"
                                  if (match = buffer.matchIgnoreCaseChar(index, 'n')) {
@@ -15330,275 +17545,8 @@ public class HarbourUnprocessedParser implements Parser {
                      match = false;
                   }
                   break;
-               case 'i':
-               case 'I':
-                  ++index;
-                  // ("eld" | "el")
-                  if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                     ++index;
-                     // ("ld" | "l")
-                     if (buffer.matchIgnoreCaseChar(index, 'l')) {
-                        ++index;
-                        // ("d" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'd')) {
-                           ++index;
-                           // <EMPTY>
-                           match = true;
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-                  break;
                default:
                   match = false;
-            }
-            break;
-         case 'd':
-         case 'D':
-            ++index;
-            // ("eclare" | "efault" | "eclar" | "efine" | "ecla" | "efin" | "ecl" | "efi" | "o")
-            switch(buffer.getChar(index)) {
-               case 'e':
-               case 'E':
-                  ++index;
-                  // ("clare" | "fault" | "clar" | "fine" | "cla" | "fin" | "cl" | "fi")
-                  switch(buffer.getChar(index)) {
-                     case 'f':
-                     case 'F':
-                        ++index;
-                        // ("ault" | "ine" | "in" | "i")
-                        switch(buffer.getChar(index)) {
-                           case 'a':
-                           case 'A':
-                              ++index;
-                              // "ult"
-                              if (match = ignoreCaseStringTest("ult", 3)) {
-                                 index += 3;
-                              }
-                              break;
-                           case 'i':
-                           case 'I':
-                              ++index;
-                              // ("ne" | "n" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'n')) {
-                                 ++index;
-                                 // "e"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
-                                    ++index;
-                                 }
-                                 // <EMPTY>
-                                 match = true;
-                              } else {
-                                 match = true;
-                              }
-                              break;
-                           default:
-                              match = false;
-                        }
-                        break;
-                     case 'c':
-                     case 'C':
-                        ++index;
-                        // ("lare" | "lar" | "la" | "l")
-                        if (buffer.matchIgnoreCaseChar(index, 'l')) {
-                           ++index;
-                           // ("are" | "ar" | "a" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'a')) {
-                              ++index;
-                              // ("re" | "r" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'r')) {
-                                 ++index;
-                                 // "e"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
-                                    ++index;
-                                 }
-                                 // <EMPTY>
-                                 match = true;
-                              } else {
-                                 match = true;
-                              }
-                           } else {
-                              match = true;
-                           }
-                        } else {
-                           match = false;
-                        }
-                        break;
-                     default:
-                        match = false;
-                  }
-                  break;
-               case 'o':
-               case 'O':
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 's':
-         case 'S':
-            ++index;
-            // ("equence" | "equenc" | "equen" | "eque" | "equ" | "tep")
-            switch(buffer.getChar(index)) {
-               case 'e':
-               case 'E':
-                  ++index;
-                  // ("quence" | "quenc" | "quen" | "que" | "qu")
-                  if (buffer.matchIgnoreCaseChar(index, 'q')) {
-                     ++index;
-                     // ("uence" | "uenc" | "uen" | "ue" | "u")
-                     if (buffer.matchIgnoreCaseChar(index, 'u')) {
-                        ++index;
-                        // ("ence" | "enc" | "en" | "e" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                           ++index;
-                           // ("nce" | "nc" | "n" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'n')) {
-                              ++index;
-                              // ("ce" | "c" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'c')) {
-                                 ++index;
-                                 // "e"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
-                                    ++index;
-                                 }
-                                 // <EMPTY>
-                                 match = true;
-                              } else {
-                                 match = true;
-                              }
-                           } else {
-                              match = true;
-                           }
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-                  break;
-               case 't':
-               case 'T':
-                  ++index;
-                  // "ep"
-                  if (match = ignoreCaseStringTest("ep", 2)) {
-                     index += 2;
-                  }
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'b':
-         case 'B':
-            ++index;
-            // ("egin" | "reak" | "rea")
-            switch(buffer.getChar(index)) {
-               case 'e':
-               case 'E':
-                  ++index;
-                  // "gin"
-                  if (match = ignoreCaseStringTest("gin", 3)) {
-                     index += 3;
-                  }
-                  break;
-               case 'r':
-               case 'R':
-                  ++index;
-                  // ("eak" | "ea")
-                  if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                     ++index;
-                     // ("ak" | "a")
-                     if (buffer.matchIgnoreCaseChar(index, 'a')) {
-                        ++index;
-                        // ("k" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'k')) {
-                           ++index;
-                           // <EMPTY>
-                           match = true;
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'o':
-         case 'O':
-            ++index;
-            // ("therwise" | "therwis" | "therwi" | "therw" | "ther" | "the")
-            if (buffer.matchIgnoreCaseChar(index, 't')) {
-               ++index;
-               // ("herwise" | "herwis" | "herwi" | "herw" | "her" | "he")
-               if (buffer.matchIgnoreCaseChar(index, 'h')) {
-                  ++index;
-                  // ("erwise" | "erwis" | "erwi" | "erw" | "er" | "e")
-                  if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                     ++index;
-                     // ("rwise" | "rwis" | "rwi" | "rw" | "r" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'r')) {
-                        ++index;
-                        // ("wise" | "wis" | "wi" | "w" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'w')) {
-                           ++index;
-                           // ("ise" | "is" | "i" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'i')) {
-                              ++index;
-                              // ("se" | "s" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 's')) {
-                                 ++index;
-                                 // "e"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
-                                    ++index;
-                                 }
-                                 // <EMPTY>
-                                 match = true;
-                              } else {
-                                 match = true;
-                              }
-                           } else {
-                              match = true;
-                           }
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = true;
-                     }
-                  } else {
-                     match = false;
-                  }
-               } else {
-                  match = false;
-               }
-            } else {
-               match = false;
-            }
-            break;
-         case 'i':
-         case 'I':
-            ++index;
-            // "nit"
-            if (match = ignoreCaseStringTest("nit", 3)) {
-               index += 3;
             }
             break;
          case 'x':
@@ -15606,29 +17554,69 @@ public class HarbourUnprocessedParser implements Parser {
             ++index;
             // ("translate" | "translat" | "transla" | "command" | "transl" | "comman" | "trans" | "comma" | "tran" | "comm" | "tra" | "com")
             switch(buffer.getChar(index)) {
+               case 'c':
+               case 'C':
+                  ++index;
+                  // ("ommand" | "omman" | "omma" | "omm" | "om")
+                  if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
+                     ++index;
+                     // ("mmand" | "mman" | "mma" | "mm" | "m")
+                     if (buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M')) {
+                        ++index;
+                        // ("mand" | "man" | "ma" | "m" | <EMPTY>)
+                        if (buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M')) {
+                           ++index;
+                           // ("and" | "an" | "a" | <EMPTY>)
+                           if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+                              ++index;
+                              // ("nd" | "n" | <EMPTY>)
+                              if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
+                                 ++index;
+                                 // "d"
+                                 if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
+                                    ++index;
+                                 }
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
+                              }
+                           } else {
+                              match = true;
+                           }
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+                  break;
                case 't':
                case 'T':
                   ++index;
                   // ("ranslate" | "ranslat" | "ransla" | "ransl" | "rans" | "ran" | "ra")
-                  if (buffer.matchIgnoreCaseChar(index, 'r')) {
+                  if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                      ++index;
                      // ("anslate" | "anslat" | "ansla" | "ansl" | "ans" | "an" | "a")
-                     if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                     if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                         ++index;
                         // ("nslate" | "nslat" | "nsla" | "nsl" | "ns" | "n" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'n')) {
+                        if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                            ++index;
                            // ("slate" | "slat" | "sla" | "sl" | "s" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 's')) {
+                           if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                               ++index;
                               // ("late" | "lat" | "la" | "l" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'l')) {
+                              if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                                  ++index;
                                  // ("ate" | "at" | "a" | <EMPTY>)
-                                 if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                                 if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                                     ++index;
                                     // ("te" | "t" | <EMPTY>)
-                                    if (buffer.matchIgnoreCaseChar(index, 't')) {
+                                    if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                                        ++index;
                                        // "e"
                                        if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
@@ -15658,30 +17646,492 @@ public class HarbourUnprocessedParser implements Parser {
                      match = false;
                   }
                   break;
-               case 'c':
-               case 'C':
+               default:
+                  match = false;
+            }
+            break;
+         case 'i':
+         case 'I':
+            ++index;
+            // "nit"
+            if (match = ignoreCaseStringTest("nit", 3)) {
+               index += 3;
+            }
+            break;
+         case 'l':
+         case 'L':
+            ++index;
+            // "oop"
+            if (match = ignoreCaseStringTest("oop", 3)) {
+               index += 3;
+            }
+            break;
+         case 'o':
+         case 'O':
+            ++index;
+            // ("therwise" | "therwis" | "therwi" | "therw" | "ther" | "the")
+            if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
+               ++index;
+               // ("herwise" | "herwis" | "herwi" | "herw" | "her" | "he")
+               if (buffer.matchChar(index, 'h') || buffer.matchChar(index, 'H')) {
                   ++index;
-                  // ("ommand" | "omman" | "omma" | "omm" | "om")
-                  if (buffer.matchIgnoreCaseChar(index, 'o')) {
+                  // ("erwise" | "erwis" | "erwi" | "erw" | "er" | "e")
+                  if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                      ++index;
-                     // ("mmand" | "mman" | "mma" | "mm" | "m")
-                     if (buffer.matchIgnoreCaseChar(index, 'm')) {
+                     // ("rwise" | "rwis" | "rwi" | "rw" | "r" | <EMPTY>)
+                     if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                         ++index;
-                        // ("mand" | "man" | "ma" | "m" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'm')) {
+                        // ("wise" | "wis" | "wi" | "w" | <EMPTY>)
+                        if (buffer.matchChar(index, 'w') || buffer.matchChar(index, 'W')) {
                            ++index;
-                           // ("and" | "an" | "a" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                           // ("ise" | "is" | "i" | <EMPTY>)
+                           if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                               ++index;
-                              // ("nd" | "n" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'n')) {
+                              // ("se" | "s" | <EMPTY>)
+                              if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                                  ++index;
-                                 // "d"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
+                                 // "e"
+                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
                                     ++index;
                                  }
                                  // <EMPTY>
                                  match = true;
+                              } else {
+                                 match = true;
+                              }
+                           } else {
+                              match = true;
+                           }
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = true;
+                     }
+                  } else {
+                     match = false;
+                  }
+               } else {
+                  match = false;
+               }
+            } else {
+               match = false;
+            }
+            break;
+         case 'p':
+         case 'P':
+            ++index;
+            // ("rocedure" | "rocedur" | "rocedu" | "roced" | "ublic" | "roce" | "ubli" | "roc" | "ubl")
+            switch(buffer.getChar(index)) {
+               case 'r':
+               case 'R':
+                  ++index;
+                  // ("ocedure" | "ocedur" | "ocedu" | "oced" | "oce" | "oc")
+                  if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
+                     ++index;
+                     // ("cedure" | "cedur" | "cedu" | "ced" | "ce" | "c")
+                     if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
+                        ++index;
+                        // ("edure" | "edur" | "edu" | "ed" | "e" | <EMPTY>)
+                        if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                           ++index;
+                           // ("dure" | "dur" | "du" | "d" | <EMPTY>)
+                           if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
+                              ++index;
+                              // ("ure" | "ur" | "u" | <EMPTY>)
+                              if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
+                                 ++index;
+                                 // ("re" | "r" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
+                                    ++index;
+                                    // "e"
+                                    if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                       ++index;
+                                    }
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
+                                 }
+                              } else {
+                                 match = true;
+                              }
+                           } else {
+                              match = true;
+                           }
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+                  break;
+               case 'u':
+               case 'U':
+                  ++index;
+                  // ("blic" | "bli" | "bl")
+                  if (buffer.matchChar(index, 'b') || buffer.matchChar(index, 'B')) {
+                     ++index;
+                     // ("lic" | "li" | "l")
+                     if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
+                        ++index;
+                        // ("ic" | "i" | <EMPTY>)
+                        if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
+                           ++index;
+                           // "c"
+                           if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
+                              ++index;
+                           }
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+                  break;
+               default:
+                  match = false;
+            }
+            break;
+         case 'b':
+         case 'B':
+            ++index;
+            // ("egin" | "reak" | "rea")
+            switch(buffer.getChar(index)) {
+               case 'r':
+               case 'R':
+                  ++index;
+                  // ("eak" | "ea")
+                  if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                     ++index;
+                     // ("ak" | "a")
+                     if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+                        ++index;
+                        // ("k" | <EMPTY>)
+                        if (buffer.matchChar(index, 'k') || buffer.matchChar(index, 'K')) {
+                           ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+                  break;
+               case 'e':
+               case 'E':
+                  ++index;
+                  // "gin"
+                  if (match = ignoreCaseStringTest("gin", 3)) {
+                     index += 3;
+                  }
+                  break;
+               default:
+                  match = false;
+            }
+            break;
+         case 'r':
+         case 'R':
+            ++index;
+            // ("ecover" | "ecove" | "ecov" | "eco")
+            if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+               ++index;
+               // ("cover" | "cove" | "cov" | "co")
+               if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
+                  ++index;
+                  // ("over" | "ove" | "ov" | "o")
+                  if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
+                     ++index;
+                     // ("ver" | "ve" | "v" | <EMPTY>)
+                     if (buffer.matchChar(index, 'v') || buffer.matchChar(index, 'V')) {
+                        ++index;
+                        // ("er" | "e" | <EMPTY>)
+                        if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                           ++index;
+                           // "r"
+                           if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
+                              ++index;
+                           }
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = true;
+                     }
+                  } else {
+                     match = false;
+                  }
+               } else {
+                  match = false;
+               }
+            } else {
+               match = false;
+            }
+            break;
+         case 'c':
+         case 'C':
+            ++index;
+            // ("ommand" | "omman" | "lass" | "omma" | "las" | "omm")
+            switch(buffer.getChar(index)) {
+               case 'o':
+               case 'O':
+                  ++index;
+                  // ("mmand" | "mman" | "mma" | "mm")
+                  if (buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M')) {
+                     ++index;
+                     // ("mand" | "man" | "ma" | "m")
+                     if (buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M')) {
+                        ++index;
+                        // ("and" | "an" | "a" | <EMPTY>)
+                        if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+                           ++index;
+                           // ("nd" | "n" | <EMPTY>)
+                           if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
+                              ++index;
+                              // "d"
+                              if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
+                                 ++index;
+                              }
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
+                           }
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+                  break;
+               case 'l':
+               case 'L':
+                  ++index;
+                  // ("ass" | "as")
+                  if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+                     ++index;
+                     // ("ss" | "s")
+                     if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
+                        ++index;
+                        // ("s" | <EMPTY>)
+                        if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
+                           ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+                  break;
+               default:
+                  match = false;
+            }
+            break;
+         case 's':
+         case 'S':
+            ++index;
+            // ("equence" | "equenc" | "equen" | "eque" | "equ" | "tep")
+            switch(buffer.getChar(index)) {
+               case 't':
+               case 'T':
+                  ++index;
+                  // "ep"
+                  if (match = ignoreCaseStringTest("ep", 2)) {
+                     index += 2;
+                  }
+                  break;
+               case 'e':
+               case 'E':
+                  ++index;
+                  // ("quence" | "quenc" | "quen" | "que" | "qu")
+                  if (buffer.matchChar(index, 'q') || buffer.matchChar(index, 'Q')) {
+                     ++index;
+                     // ("uence" | "uenc" | "uen" | "ue" | "u")
+                     if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
+                        ++index;
+                        // ("ence" | "enc" | "en" | "e" | <EMPTY>)
+                        if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                           ++index;
+                           // ("nce" | "nc" | "n" | <EMPTY>)
+                           if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
+                              ++index;
+                              // ("ce" | "c" | <EMPTY>)
+                              if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
+                                 ++index;
+                                 // "e"
+                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                    ++index;
+                                 }
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
+                              }
+                           } else {
+                              match = true;
+                           }
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+                  break;
+               default:
+                  match = false;
+            }
+            break;
+         case 'd':
+         case 'D':
+            ++index;
+            // ("eclare" | "efault" | "eclar" | "efine" | "ecla" | "efin" | "ecl" | "efi" | "o")
+            switch(buffer.getChar(index)) {
+               case 'o':
+               case 'O':
+                  ++index;
+                  // <EMPTY>
+                  match = true;
+                  break;
+               case 'e':
+               case 'E':
+                  ++index;
+                  // ("clare" | "fault" | "clar" | "fine" | "cla" | "fin" | "cl" | "fi")
+                  switch(buffer.getChar(index)) {
+                     case 'f':
+                     case 'F':
+                        ++index;
+                        // ("ault" | "ine" | "in" | "i")
+                        switch(buffer.getChar(index)) {
+                           case 'a':
+                           case 'A':
+                              ++index;
+                              // "ult"
+                              if (match = ignoreCaseStringTest("ult", 3)) {
+                                 index += 3;
+                              }
+                              break;
+                           case 'i':
+                           case 'I':
+                              ++index;
+                              // ("ne" | "n" | <EMPTY>)
+                              if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
+                                 ++index;
+                                 // "e"
+                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                    ++index;
+                                 }
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
+                              }
+                              break;
+                           default:
+                              match = false;
+                        }
+                        break;
+                     case 'c':
+                     case 'C':
+                        ++index;
+                        // ("lare" | "lar" | "la" | "l")
+                        if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
+                           ++index;
+                           // ("are" | "ar" | "a" | <EMPTY>)
+                           if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+                              ++index;
+                              // ("re" | "r" | <EMPTY>)
+                              if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
+                                 ++index;
+                                 // "e"
+                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                    ++index;
+                                 }
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
+                              }
+                           } else {
+                              match = true;
+                           }
+                        } else {
+                           match = false;
+                        }
+                        break;
+                     default:
+                        match = false;
+                  }
+                  break;
+               default:
+                  match = false;
+            }
+            break;
+         case 't':
+         case 'T':
+            ++index;
+            // ("ranslate" | "ranslat" | "ransla" | "ransl" | "rans" | "ran" | "o")
+            switch(buffer.getChar(index)) {
+               case 'o':
+               case 'O':
+                  ++index;
+                  // <EMPTY>
+                  match = true;
+                  break;
+               case 'r':
+               case 'R':
+                  ++index;
+                  // ("anslate" | "anslat" | "ansla" | "ansl" | "ans" | "an")
+                  if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+                     ++index;
+                     // ("nslate" | "nslat" | "nsla" | "nsl" | "ns" | "n")
+                     if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
+                        ++index;
+                        // ("slate" | "slat" | "sla" | "sl" | "s" | <EMPTY>)
+                        if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
+                           ++index;
+                           // ("late" | "lat" | "la" | "l" | <EMPTY>)
+                           if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
+                              ++index;
+                              // ("ate" | "at" | "a" | <EMPTY>)
+                              if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+                                 ++index;
+                                 // ("te" | "t" | <EMPTY>)
+                                 if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
+                                    ++index;
+                                    // "e"
+                                    if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                       ++index;
+                                    }
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
+                                 }
                               } else {
                                  match = true;
                               }
@@ -15707,41 +18157,33 @@ public class HarbourUnprocessedParser implements Parser {
             ++index;
             // ("xternal" | "xterna" | "xtern" | "xter" | "lse" | "ach" | "xit" | "xte")
             switch(buffer.getChar(index)) {
-               case 'a':
-               case 'A':
-                  ++index;
-                  // "ch"
-                  if (match = ignoreCaseStringTest("ch", 2)) {
-                     index += 2;
-                  }
-                  break;
-               case 'l':
-               case 'L':
-                  ++index;
-                  // "se"
-                  if (match = ignoreCaseStringTest("se", 2)) {
-                     index += 2;
-                  }
-                  break;
                case 'x':
                case 'X':
                   ++index;
                   // ("ternal" | "terna" | "tern" | "ter" | "it" | "te")
                   switch(buffer.getChar(index)) {
+                     case 'i':
+                     case 'I':
+                        ++index;
+                        // "t"
+                        if (match = buffer.matchIgnoreCaseChar(index, 't')) {
+                           ++index;
+                        }
+                        break;
                      case 't':
                      case 'T':
                         ++index;
                         // ("ernal" | "erna" | "ern" | "er" | "e")
-                        if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                        if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                            ++index;
                            // ("rnal" | "rna" | "rn" | "r" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'r')) {
+                           if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                               ++index;
                               // ("nal" | "na" | "n" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'n')) {
+                              if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                                  ++index;
                                  // ("al" | "a" | <EMPTY>)
-                                 if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                                 if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                                     ++index;
                                     // "l"
                                     if (match = buffer.matchIgnoreCaseChar(index, 'l')) {
@@ -15762,279 +18204,28 @@ public class HarbourUnprocessedParser implements Parser {
                            match = false;
                         }
                         break;
-                     case 'i':
-                     case 'I':
-                        ++index;
-                        // "t"
-                        if (match = buffer.matchIgnoreCaseChar(index, 't')) {
-                           ++index;
-                        }
-                        break;
                      default:
                         match = false;
                   }
                   break;
-               default:
-                  match = false;
-            }
-            break;
-         case 't':
-         case 'T':
-            ++index;
-            // ("ranslate" | "ranslat" | "ransla" | "ransl" | "rans" | "ran" | "o")
-            switch(buffer.getChar(index)) {
-               case 'r':
-               case 'R':
+               case 'a':
+               case 'A':
                   ++index;
-                  // ("anslate" | "anslat" | "ansla" | "ansl" | "ans" | "an")
-                  if (buffer.matchIgnoreCaseChar(index, 'a')) {
-                     ++index;
-                     // ("nslate" | "nslat" | "nsla" | "nsl" | "ns" | "n")
-                     if (buffer.matchIgnoreCaseChar(index, 'n')) {
-                        ++index;
-                        // ("slate" | "slat" | "sla" | "sl" | "s" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 's')) {
-                           ++index;
-                           // ("late" | "lat" | "la" | "l" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'l')) {
-                              ++index;
-                              // ("ate" | "at" | "a" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'a')) {
-                                 ++index;
-                                 // ("te" | "t" | <EMPTY>)
-                                 if (buffer.matchIgnoreCaseChar(index, 't')) {
-                                    ++index;
-                                    // "e"
-                                    if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
-                                       ++index;
-                                    }
-                                    // <EMPTY>
-                                    match = true;
-                                 } else {
-                                    match = true;
-                                 }
-                              } else {
-                                 match = true;
-                              }
-                           } else {
-                              match = true;
-                           }
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-                  break;
-               case 'o':
-               case 'O':
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'c':
-         case 'C':
-            ++index;
-            // ("ommand" | "omman" | "lass" | "omma" | "las" | "omm")
-            switch(buffer.getChar(index)) {
-               case 'o':
-               case 'O':
-                  ++index;
-                  // ("mmand" | "mman" | "mma" | "mm")
-                  if (buffer.matchIgnoreCaseChar(index, 'm')) {
-                     ++index;
-                     // ("mand" | "man" | "ma" | "m")
-                     if (buffer.matchIgnoreCaseChar(index, 'm')) {
-                        ++index;
-                        // ("and" | "an" | "a" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'a')) {
-                           ++index;
-                           // ("nd" | "n" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'n')) {
-                              ++index;
-                              // "d"
-                              if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
-                                 ++index;
-                              }
-                              // <EMPTY>
-                              match = true;
-                           } else {
-                              match = true;
-                           }
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
+                  // "ch"
+                  if (match = ignoreCaseStringTest("ch", 2)) {
+                     index += 2;
                   }
                   break;
                case 'l':
                case 'L':
                   ++index;
-                  // ("ass" | "as")
-                  if (buffer.matchIgnoreCaseChar(index, 'a')) {
-                     ++index;
-                     // ("ss" | "s")
-                     if (buffer.matchIgnoreCaseChar(index, 's')) {
-                        ++index;
-                        // ("s" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 's')) {
-                           ++index;
-                           // <EMPTY>
-                           match = true;
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
+                  // "se"
+                  if (match = ignoreCaseStringTest("se", 2)) {
+                     index += 2;
                   }
                   break;
                default:
                   match = false;
-            }
-            break;
-         case 'r':
-         case 'R':
-            ++index;
-            // ("ecover" | "ecove" | "ecov" | "eco")
-            if (buffer.matchIgnoreCaseChar(index, 'e')) {
-               ++index;
-               // ("cover" | "cove" | "cov" | "co")
-               if (buffer.matchIgnoreCaseChar(index, 'c')) {
-                  ++index;
-                  // ("over" | "ove" | "ov" | "o")
-                  if (buffer.matchIgnoreCaseChar(index, 'o')) {
-                     ++index;
-                     // ("ver" | "ve" | "v" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'v')) {
-                        ++index;
-                        // ("er" | "e" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                           ++index;
-                           // "r"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
-                              ++index;
-                           }
-                           // <EMPTY>
-                           match = true;
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = true;
-                     }
-                  } else {
-                     match = false;
-                  }
-               } else {
-                  match = false;
-               }
-            } else {
-               match = false;
-            }
-            break;
-         case 'p':
-         case 'P':
-            ++index;
-            // ("rocedure" | "rocedur" | "rocedu" | "roced" | "ublic" | "roce" | "ubli" | "roc" | "ubl")
-            switch(buffer.getChar(index)) {
-               case 'u':
-               case 'U':
-                  ++index;
-                  // ("blic" | "bli" | "bl")
-                  if (buffer.matchIgnoreCaseChar(index, 'b')) {
-                     ++index;
-                     // ("lic" | "li" | "l")
-                     if (buffer.matchIgnoreCaseChar(index, 'l')) {
-                        ++index;
-                        // ("ic" | "i" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'i')) {
-                           ++index;
-                           // "c"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
-                              ++index;
-                           }
-                           // <EMPTY>
-                           match = true;
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-                  break;
-               case 'r':
-               case 'R':
-                  ++index;
-                  // ("ocedure" | "ocedur" | "ocedu" | "oced" | "oce" | "oc")
-                  if (buffer.matchIgnoreCaseChar(index, 'o')) {
-                     ++index;
-                     // ("cedure" | "cedur" | "cedu" | "ced" | "ce" | "c")
-                     if (buffer.matchIgnoreCaseChar(index, 'c')) {
-                        ++index;
-                        // ("edure" | "edur" | "edu" | "ed" | "e" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                           ++index;
-                           // ("dure" | "dur" | "du" | "d" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'd')) {
-                              ++index;
-                              // ("ure" | "ur" | "u" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'u')) {
-                                 ++index;
-                                 // ("re" | "r" | <EMPTY>)
-                                 if (buffer.matchIgnoreCaseChar(index, 'r')) {
-                                    ++index;
-                                    // "e"
-                                    if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
-                                       ++index;
-                                    }
-                                    // <EMPTY>
-                                    match = true;
-                                 } else {
-                                    match = true;
-                                 }
-                              } else {
-                                 match = true;
-                              }
-                           } else {
-                              match = true;
-                           }
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'l':
-         case 'L':
-            ++index;
-            // "oop"
-            if (match = ignoreCaseStringTest("oop", 3)) {
-               index += 3;
             }
             break;
          default:
@@ -16599,19 +18790,92 @@ public class HarbourUnprocessedParser implements Parser {
          match = optionalSpacing$Rule();
          if (match) {
             // (FunctionReference | AliasedField | QualifiedVariable | Variable)
-            // FunctionReference
-            match = functionReference$Rule();
-            if (! match) {
-               // AliasedField
-               match = aliasedField$Rule();
-               if (! match) {
-                  // QualifiedVariable
-                  match = qualifiedVariable$Rule();
+            switch(buffer.getChar(index)) {
+               case '0':
+               case '1':
+               case '2':
+               case '3':
+               case '4':
+               case '5':
+               case '6':
+               case '&':
+               case '7':
+               case '8':
+               case '(':
+               case '9':
+                  // AliasedField
+                  match = aliasedField$Rule();
+                  break;
+               case 'A':
+               case 'B':
+               case 'C':
+               case 'D':
+               case 'E':
+               case 'F':
+               case 'G':
+               case 'H':
+               case 'I':
+               case 'J':
+               case 'K':
+               case 'L':
+               case 'M':
+               case 'N':
+               case 'O':
+               case 'P':
+               case 'Q':
+               case 'R':
+               case 'S':
+               case 'T':
+               case 'U':
+               case 'V':
+               case 'W':
+               case 'X':
+               case 'Y':
+               case 'Z':
+               case '_':
+               case 'a':
+               case 'b':
+               case 'c':
+               case 'd':
+               case 'e':
+               case 'f':
+               case 'g':
+               case 'h':
+               case 'i':
+               case 'j':
+               case 'k':
+               case 'l':
+               case 'm':
+               case 'n':
+               case 'o':
+               case 'p':
+               case 'q':
+               case 'r':
+               case 's':
+               case 't':
+               case 'u':
+               case 'v':
+               case 'w':
+               case 'x':
+               case 'y':
+               case 'z':
+                  // FunctionReference
+                  match = functionReference$Rule();
                   if (! match) {
-                     // Variable
-                     match = variable$Rule();
+                     // AliasedField
+                     match = aliasedField$Rule();
+                     if (! match) {
+                        // QualifiedVariable
+                        match = qualifiedVariable$Rule();
+                        if (! match) {
+                           // Variable
+                           match = variable$Rule();
+                        }
+                     }
                   }
-               }
+                  break;
+               default:
+                  match = false;
             }
          }
       }
@@ -16910,7 +19174,7 @@ public class HarbourUnprocessedParser implements Parser {
       return true;
    }
 
-   //ElseIfBegin : ("elseif" TestNoAlpha OptionalSpacing Condition)
+   //ElseIfBegin : (("elseif" | "elsei") TestNoAlpha OptionalSpacing Condition)
    protected boolean elseIfBegin$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -16933,9 +19197,52 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       startIndex = index;
-      // ("elseif" TestNoAlpha OptionalSpacing Condition)
-      // "elseif"
-      match = ignoreCaseStringMatcher("elseif", 6);
+      // (("elseif" | "elsei") TestNoAlpha OptionalSpacing Condition)
+      // ("elseif" | "elsei")
+      int startIndex_1 = index;
+      if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+         ++index;
+         // ("lseif" | "lsei")
+         if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
+            ++index;
+            // ("seif" | "sei")
+            if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
+               ++index;
+               // ("eif" | "ei")
+               if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                  ++index;
+                  // ("if" | "i")
+                  if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
+                     ++index;
+                     // ("f" | <EMPTY>)
+                     if (buffer.matchChar(index, 'f') || buffer.matchChar(index, 'F')) {
+                        ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
+                     }
+                  } else {
+                     match = false;
+                  }
+               } else {
+                  match = false;
+               }
+            } else {
+               match = false;
+            }
+         } else {
+            match = false;
+         }
+      } else {
+         match = false;
+      }
+      if (! match) {
+         index = startIndex_1;
+      } else if(! currentRuleIsAtomic) {
+         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode = currentNode.getSibling();
+      }
       if (match) {
          // TestNoAlpha
          match = testNoAlpha$Rule();
@@ -17056,28 +19363,28 @@ public class HarbourUnprocessedParser implements Parser {
       // (("otherwise" | "otherwis" | "otherwi" | "otherw" | "other" | "othe") TestNoAlpha OptionalSpacing)
       // ("otherwise" | "otherwis" | "otherwi" | "otherw" | "other" | "othe")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'o')) {
+      if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
          ++index;
          // ("therwise" | "therwis" | "therwi" | "therw" | "ther" | "the")
-         if (buffer.matchIgnoreCaseChar(index, 't')) {
+         if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
             ++index;
             // ("herwise" | "herwis" | "herwi" | "herw" | "her" | "he")
-            if (buffer.matchIgnoreCaseChar(index, 'h')) {
+            if (buffer.matchChar(index, 'h') || buffer.matchChar(index, 'H')) {
                ++index;
                // ("erwise" | "erwis" | "erwi" | "erw" | "er" | "e")
-               if (buffer.matchIgnoreCaseChar(index, 'e')) {
+               if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                   ++index;
                   // ("rwise" | "rwis" | "rwi" | "rw" | "r" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'r')) {
+                  if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                      ++index;
                      // ("wise" | "wis" | "wi" | "w" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'w')) {
+                     if (buffer.matchChar(index, 'w') || buffer.matchChar(index, 'W')) {
                         ++index;
                         // ("ise" | "is" | "i" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'i')) {
+                        if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                            ++index;
                            // ("se" | "s" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 's')) {
+                           if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                               ++index;
                               // "e"
                               if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
@@ -17270,19 +19577,99 @@ public class HarbourUnprocessedParser implements Parser {
       startIndex = index;
       // ((AliasedField | Macro | QualifiedVariable | Variable) AssignmentOperator Expression)
       // (AliasedField | Macro | QualifiedVariable | Variable)
-      // AliasedField
-      match = aliasedField$Rule();
-      if (! match) {
-         // Macro
-         match = macro$Rule();
-         if (! match) {
-            // QualifiedVariable
-            match = qualifiedVariable$Rule();
+      switch(buffer.getChar(index)) {
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '&':
+         case '7':
+         case '8':
+         case '9':
+            // AliasedField
+            match = aliasedField$Rule();
             if (! match) {
-               // Variable
-               match = variable$Rule();
+               // Macro
+               match = macro$Rule();
             }
-         }
+            break;
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+            // AliasedField
+            match = aliasedField$Rule();
+            if (! match) {
+               // Macro
+               match = macro$Rule();
+               if (! match) {
+                  // QualifiedVariable
+                  match = qualifiedVariable$Rule();
+                  if (! match) {
+                     // Variable
+                     match = variable$Rule();
+                  }
+               }
+            }
+            break;
+         case '(':
+            // AliasedField
+            match = aliasedField$Rule();
+            break;
+         default:
+            match = false;
       }
       if (match) {
          // AssignmentOperator
@@ -17307,15 +19694,52 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //BeginSequenceKeyword : ("begin" TestNoAlpha OptionalSpacing ("sequence" | "sequenc" | "sequen" | "seque" | "sequ") TestNoAlpha OptionalSpacing)
+   //BeginSequenceKeyword : (("begin" | "begi") TestNoAlpha OptionalSpacing ("sequence" | "sequenc" | "sequen" | "seque" | "sequ") TestNoAlpha OptionalSpacing)
    protected boolean beginSequenceKeyword$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
       startIndex = index;
-      // ("begin" TestNoAlpha OptionalSpacing ("sequence" | "sequenc" | "sequen" | "seque" | "sequ") TestNoAlpha OptionalSpacing)
-      // "begin"
-      match = ignoreCaseStringMatcher("begin", 5);
+      // (("begin" | "begi") TestNoAlpha OptionalSpacing ("sequence" | "sequenc" | "sequen" | "seque" | "sequ") TestNoAlpha OptionalSpacing)
+      // ("begin" | "begi")
+      int startIndex_1 = index;
+      if (buffer.matchChar(index, 'b') || buffer.matchChar(index, 'B')) {
+         ++index;
+         // ("egin" | "egi")
+         if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+            ++index;
+            // ("gin" | "gi")
+            if (buffer.matchChar(index, 'g') || buffer.matchChar(index, 'G')) {
+               ++index;
+               // ("in" | "i")
+               if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
+                  ++index;
+                  // ("n" | <EMPTY>)
+                  if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
+                     ++index;
+                     // <EMPTY>
+                     match = true;
+                  } else {
+                     match = true;
+                  }
+               } else {
+                  match = false;
+               }
+            } else {
+               match = false;
+            }
+         } else {
+            match = false;
+         }
+      } else {
+         match = false;
+      }
+      if (! match) {
+         index = startIndex_1;
+      } else if(! currentRuleIsAtomic) {
+         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode = currentNode.getSibling();
+      }
       if (match) {
          // TestNoAlpha
          match = testNoAlpha$Rule();
@@ -17324,26 +19748,26 @@ public class HarbourUnprocessedParser implements Parser {
             match = optionalSpacing$Rule();
             if (match) {
                // ("sequence" | "sequenc" | "sequen" | "seque" | "sequ")
-               int startIndex_1 = index;
-               if (buffer.matchIgnoreCaseChar(index, 's')) {
+               int startIndex_2 = index;
+               if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                   ++index;
                   // ("equence" | "equenc" | "equen" | "eque" | "equ")
-                  if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                  if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                      ++index;
                      // ("quence" | "quenc" | "quen" | "que" | "qu")
-                     if (buffer.matchIgnoreCaseChar(index, 'q')) {
+                     if (buffer.matchChar(index, 'q') || buffer.matchChar(index, 'Q')) {
                         ++index;
                         // ("uence" | "uenc" | "uen" | "ue" | "u")
-                        if (buffer.matchIgnoreCaseChar(index, 'u')) {
+                        if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
                            ++index;
                            // ("ence" | "enc" | "en" | "e" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                           if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                               ++index;
                               // ("nce" | "nc" | "n" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'n')) {
+                              if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                                  ++index;
                                  // ("ce" | "c" | <EMPTY>)
-                                 if (buffer.matchIgnoreCaseChar(index, 'c')) {
+                                 if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                                     ++index;
                                     // "e"
                                     if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
@@ -17373,9 +19797,9 @@ public class HarbourUnprocessedParser implements Parser {
                   match = false;
                }
                if (! match) {
-                  index = startIndex_1;
+                  index = startIndex_2;
                } else if(! currentRuleIsAtomic) {
-                  currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+                  currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_2, index, false, false));
                   currentNode = currentNode.getSibling();
                }
                if (match) {
@@ -17511,21 +19935,21 @@ public class HarbourUnprocessedParser implements Parser {
       return true;
    }
 
-   //EndSequenceKeyword : (("end" TestNoAlpha OptionalSpacing ("sequence" | "sequenc" | "sequen" | "seque" | "sequ") TestNoAlpha OptionalSpacing) | (("endsequence" | "endsequenc" | "endsequen" | "endseque" | "endsequ" | "endseq" | "endse" | "ends") TestNoAlpha OptionalSpacing))
-   protected boolean endSequenceKeyword$Rule() {
+   //BeginSequenceEnd : (("end" TestNoAlpha OptionalSpacing ("sequence" | "sequenc" | "sequen" | "seque" | "sequ") TestNoAlpha OptionalSpacing) | (("endsequence" | "endsequenc" | "endsequen" | "endseque" | "endsequ" | "endseq" | "endse" | "ends") TestNoAlpha OptionalSpacing))
+   protected boolean beginSequenceEnd$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
-      if (endSequenceKeyword$RuleMemoStart == index) {
-         if (endSequenceKeyword$RuleMemoStart <= endSequenceKeyword$RuleMemoEnd) {
-            index = endSequenceKeyword$RuleMemoEnd;
+      if (beginSequenceEnd$RuleMemoStart == index) {
+         if (beginSequenceEnd$RuleMemoStart <= beginSequenceEnd$RuleMemoEnd) {
+            index = beginSequenceEnd$RuleMemoEnd;
             if (! currentRuleIsAtomic) {
-               if (endSequenceKeyword$RuleMemoStart == endSequenceKeyword$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_SEQUENCE_KEYWORD, endSequenceKeyword$RuleMemoStart, endSequenceKeyword$RuleMemoEnd, true, false);
+               if (beginSequenceEnd$RuleMemoStart == beginSequenceEnd$RuleMemoEnd) {
+                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.BEGIN_SEQUENCE_END, beginSequenceEnd$RuleMemoStart, beginSequenceEnd$RuleMemoEnd, true, false);
                   lastNode.setSibling(currentNode);
-               } else if(endSequenceKeyword$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(endSequenceKeyword$RuleMemoFirstNode);
-                  currentNode = endSequenceKeyword$RuleMemoLastNode;
+               } else if(beginSequenceEnd$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(beginSequenceEnd$RuleMemoFirstNode);
+                  currentNode = beginSequenceEnd$RuleMemoLastNode;
                }
             }
             return true;
@@ -17535,46 +19959,133 @@ public class HarbourUnprocessedParser implements Parser {
       }
       startIndex = index;
       // (("end" TestNoAlpha OptionalSpacing ("sequence" | "sequenc" | "sequen" | "seque" | "sequ") TestNoAlpha OptionalSpacing) | (("endsequence" | "endsequenc" | "endsequen" | "endseque" | "endsequ" | "endseq" | "endse" | "ends") TestNoAlpha OptionalSpacing))
-      // ("end" TestNoAlpha OptionalSpacing ("sequence" | "sequenc" | "sequen" | "seque" | "sequ") TestNoAlpha OptionalSpacing)
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // "end"
-      match = ignoreCaseStringMatcher("end", 3);
-      if (match) {
-         // TestNoAlpha
-         match = testNoAlpha$Rule();
-         if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
+      switch(buffer.getChar(index)) {
+         case 'e':
+         case 'E':
+            // ("end" TestNoAlpha OptionalSpacing ("sequence" | "sequenc" | "sequen" | "seque" | "sequ") TestNoAlpha OptionalSpacing)
+            // "end"
+            match = ignoreCaseStringMatcher("end", 3);
             if (match) {
-               // ("sequence" | "sequenc" | "sequen" | "seque" | "sequ")
-               int startIndex_2 = index;
-               if (buffer.matchIgnoreCaseChar(index, 's')) {
-                  ++index;
-                  // ("equence" | "equenc" | "equen" | "eque" | "equ")
-                  if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                     ++index;
-                     // ("quence" | "quenc" | "quen" | "que" | "qu")
-                     if (buffer.matchIgnoreCaseChar(index, 'q')) {
+               // TestNoAlpha
+               match = testNoAlpha$Rule();
+               if (match) {
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
+                  if (match) {
+                     // ("sequence" | "sequenc" | "sequen" | "seque" | "sequ")
+                     int startIndex_1 = index;
+                     if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                         ++index;
-                        // ("uence" | "uenc" | "uen" | "ue" | "u")
-                        if (buffer.matchIgnoreCaseChar(index, 'u')) {
+                        // ("equence" | "equenc" | "equen" | "eque" | "equ")
+                        if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                            ++index;
-                           // ("ence" | "enc" | "en" | "e" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                           // ("quence" | "quenc" | "quen" | "que" | "qu")
+                           if (buffer.matchChar(index, 'q') || buffer.matchChar(index, 'Q')) {
                               ++index;
-                              // ("nce" | "nc" | "n" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'n')) {
+                              // ("uence" | "uenc" | "uen" | "ue" | "u")
+                              if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
                                  ++index;
-                                 // ("ce" | "c" | <EMPTY>)
-                                 if (buffer.matchIgnoreCaseChar(index, 'c')) {
+                                 // ("ence" | "enc" | "en" | "e" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                     ++index;
-                                    // "e"
-                                    if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                    // ("nce" | "nc" | "n" | <EMPTY>)
+                                    if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                                        ++index;
+                                       // ("ce" | "c" | <EMPTY>)
+                                       if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
+                                          ++index;
+                                          // "e"
+                                          if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                             ++index;
+                                          }
+                                          // <EMPTY>
+                                          match = true;
+                                       } else {
+                                          match = true;
+                                       }
+                                    } else {
+                                       match = true;
                                     }
-                                    // <EMPTY>
+                                 } else {
                                     match = true;
+                                 }
+                              } else {
+                                 match = false;
+                              }
+                           } else {
+                              match = false;
+                           }
+                        } else {
+                           match = false;
+                        }
+                     } else {
+                        match = false;
+                     }
+                     if (! match) {
+                        index = startIndex_1;
+                     } else if(! currentRuleIsAtomic) {
+                        currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+                        currentNode = currentNode.getSibling();
+                     }
+                     if (match) {
+                        // TestNoAlpha
+                        match = testNoAlpha$Rule();
+                        if (match) {
+                           // OptionalSpacing
+                           match = optionalSpacing$Rule();
+                        }
+                     }
+                  }
+               }
+            }
+            if (! match) {
+               // (("endsequence" | "endsequenc" | "endsequen" | "endseque" | "endsequ" | "endseq" | "endse" | "ends") TestNoAlpha OptionalSpacing)
+               // ("endsequence" | "endsequenc" | "endsequen" | "endseque" | "endsequ" | "endseq" | "endse" | "ends")
+               int startIndex_2 = index;
+               if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                  ++index;
+                  // ("ndsequence" | "ndsequenc" | "ndsequen" | "ndseque" | "ndsequ" | "ndseq" | "ndse" | "nds")
+                  if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
+                     ++index;
+                     // ("dsequence" | "dsequenc" | "dsequen" | "dseque" | "dsequ" | "dseq" | "dse" | "ds")
+                     if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
+                        ++index;
+                        // ("sequence" | "sequenc" | "sequen" | "seque" | "sequ" | "seq" | "se" | "s")
+                        if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
+                           ++index;
+                           // ("equence" | "equenc" | "equen" | "eque" | "equ" | "eq" | "e" | <EMPTY>)
+                           if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                              ++index;
+                              // ("quence" | "quenc" | "quen" | "que" | "qu" | "q" | <EMPTY>)
+                              if (buffer.matchChar(index, 'q') || buffer.matchChar(index, 'Q')) {
+                                 ++index;
+                                 // ("uence" | "uenc" | "uen" | "ue" | "u" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
+                                    ++index;
+                                    // ("ence" | "enc" | "en" | "e" | <EMPTY>)
+                                    if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                                       ++index;
+                                       // ("nce" | "nc" | "n" | <EMPTY>)
+                                       if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
+                                          ++index;
+                                          // ("ce" | "c" | <EMPTY>)
+                                          if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
+                                             ++index;
+                                             // "e"
+                                             if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                                ++index;
+                                             }
+                                             // <EMPTY>
+                                             match = true;
+                                          } else {
+                                             match = true;
+                                          }
+                                       } else {
+                                          match = true;
+                                       }
+                                    } else {
+                                       match = true;
+                                    }
                                  } else {
                                     match = true;
                                  }
@@ -17608,139 +20119,30 @@ public class HarbourUnprocessedParser implements Parser {
                   if (match) {
                      // OptionalSpacing
                      match = optionalSpacing$Rule();
-                     if (! match) {
-                        index = lastIndex_1;
-                        lastNode_1.setSibling(null);
-                        currentNode = lastNode_1;
-                     }
-                  } else {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
                   }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
-            } else {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
             }
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-         }
-      }
-      if (! match) {
-         // (("endsequence" | "endsequenc" | "endsequen" | "endseque" | "endsequ" | "endseq" | "endse" | "ends") TestNoAlpha OptionalSpacing)
-         Node lastNode_3 = currentNode;
-         int lastIndex_3 = index;
-         // ("endsequence" | "endsequenc" | "endsequen" | "endseque" | "endsequ" | "endseq" | "endse" | "ends")
-         int startIndex_4 = index;
-         if (buffer.matchIgnoreCaseChar(index, 'e')) {
-            ++index;
-            // ("ndsequence" | "ndsequenc" | "ndsequen" | "ndseque" | "ndsequ" | "ndseq" | "ndse" | "nds")
-            if (buffer.matchIgnoreCaseChar(index, 'n')) {
-               ++index;
-               // ("dsequence" | "dsequenc" | "dsequen" | "dseque" | "dsequ" | "dseq" | "dse" | "ds")
-               if (buffer.matchIgnoreCaseChar(index, 'd')) {
-                  ++index;
-                  // ("sequence" | "sequenc" | "sequen" | "seque" | "sequ" | "seq" | "se" | "s")
-                  if (buffer.matchIgnoreCaseChar(index, 's')) {
-                     ++index;
-                     // ("equence" | "equenc" | "equen" | "eque" | "equ" | "eq" | "e" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                        ++index;
-                        // ("quence" | "quenc" | "quen" | "que" | "qu" | "q" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'q')) {
-                           ++index;
-                           // ("uence" | "uenc" | "uen" | "ue" | "u" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'u')) {
-                              ++index;
-                              // ("ence" | "enc" | "en" | "e" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                                 ++index;
-                                 // ("nce" | "nc" | "n" | <EMPTY>)
-                                 if (buffer.matchIgnoreCaseChar(index, 'n')) {
-                                    ++index;
-                                    // ("ce" | "c" | <EMPTY>)
-                                    if (buffer.matchIgnoreCaseChar(index, 'c')) {
-                                       ++index;
-                                       // "e"
-                                       if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
-                                          ++index;
-                                       }
-                                       // <EMPTY>
-                                       match = true;
-                                    } else {
-                                       match = true;
-                                    }
-                                 } else {
-                                    match = true;
-                                 }
-                              } else {
-                                 match = true;
-                              }
-                           } else {
-                              match = true;
-                           }
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = true;
-                     }
-                  } else {
-                     match = false;
-                  }
-               } else {
-                  match = false;
-               }
-            } else {
-               match = false;
-            }
-         } else {
+            break;
+         default:
             match = false;
-         }
-         if (! match) {
-            index = startIndex_4;
-         } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_4, index, false, false));
-            currentNode = currentNode.getSibling();
-         }
-         if (match) {
-            // TestNoAlpha
-            match = testNoAlpha$Rule();
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
-               if (! match) {
-                  index = lastIndex_3;
-                  lastNode_3.setSibling(null);
-                  currentNode = lastNode_3;
-               }
-            } else {
-               index = lastIndex_3;
-               lastNode_3.setSibling(null);
-            }
-         }
       }
       if (match) {
-         endSequenceKeyword$RuleMemoStart = startIndex;
-         endSequenceKeyword$RuleMemoEnd = index;
+         beginSequenceEnd$RuleMemoStart = startIndex;
+         beginSequenceEnd$RuleMemoEnd = index;
          if (currentRuleIsAtomic) {
-            endSequenceKeyword$RuleMemoFirstNode = null;
+            beginSequenceEnd$RuleMemoFirstNode = null;
          } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.END_SEQUENCE_KEYWORD, startIndex, index, true, false);
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.BEGIN_SEQUENCE_END, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
-            endSequenceKeyword$RuleMemoFirstNode = currentNode;
-            endSequenceKeyword$RuleMemoLastNode = currentNode;
+            beginSequenceEnd$RuleMemoFirstNode = currentNode;
+            beginSequenceEnd$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
-         endSequenceKeyword$RuleMemoStart = startIndex;
-         endSequenceKeyword$RuleMemoEnd = -1;
-         endSequenceKeyword$RuleMemoFirstNode = null;
+         beginSequenceEnd$RuleMemoStart = startIndex;
+         beginSequenceEnd$RuleMemoEnd = -1;
+         beginSequenceEnd$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -17757,19 +20159,19 @@ public class HarbourUnprocessedParser implements Parser {
       // (("using" | "usin") TestNoAlpha OptionalSpacing Variable)
       // ("using" | "usin")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'u')) {
+      if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
          ++index;
          // ("sing" | "sin")
-         if (buffer.matchIgnoreCaseChar(index, 's')) {
+         if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
             ++index;
             // ("ing" | "in")
-            if (buffer.matchIgnoreCaseChar(index, 'i')) {
+            if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                ++index;
                // ("ng" | "n")
-               if (buffer.matchIgnoreCaseChar(index, 'n')) {
+               if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                   ++index;
                   // ("g" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'g')) {
+                  if (buffer.matchChar(index, 'g') || buffer.matchChar(index, 'G')) {
                      ++index;
                      // <EMPTY>
                      match = true;
@@ -17864,22 +20266,22 @@ public class HarbourUnprocessedParser implements Parser {
       // (("recover" | "recove" | "recov" | "reco") TestNoAlpha OptionalSpacing UsingIdentifier)
       // ("recover" | "recove" | "recov" | "reco")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'r')) {
+      if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
          ++index;
          // ("ecover" | "ecove" | "ecov" | "eco")
-         if (buffer.matchIgnoreCaseChar(index, 'e')) {
+         if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
             ++index;
             // ("cover" | "cove" | "cov" | "co")
-            if (buffer.matchIgnoreCaseChar(index, 'c')) {
+            if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                ++index;
                // ("over" | "ove" | "ov" | "o")
-               if (buffer.matchIgnoreCaseChar(index, 'o')) {
+               if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
                   ++index;
                   // ("ver" | "ve" | "v" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'v')) {
+                  if (buffer.matchChar(index, 'v') || buffer.matchChar(index, 'V')) {
                      ++index;
                      // ("er" | "e" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                     if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                         ++index;
                         // "r"
                         if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
@@ -17973,19 +20375,19 @@ public class HarbourUnprocessedParser implements Parser {
       // (("always" | "alway" | "alwa") TestNoAlpha OptionalSpacing)
       // ("always" | "alway" | "alwa")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'a')) {
+      if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
          ++index;
          // ("lways" | "lway" | "lwa")
-         if (buffer.matchIgnoreCaseChar(index, 'l')) {
+         if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
             ++index;
             // ("ways" | "way" | "wa")
-            if (buffer.matchIgnoreCaseChar(index, 'w')) {
+            if (buffer.matchChar(index, 'w') || buffer.matchChar(index, 'W')) {
                ++index;
                // ("ays" | "ay" | "a")
-               if (buffer.matchIgnoreCaseChar(index, 'a')) {
+               if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                   ++index;
                   // ("ys" | "y" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'y')) {
+                  if (buffer.matchChar(index, 'y') || buffer.matchChar(index, 'Y')) {
                      ++index;
                      // "s"
                      if (match = buffer.matchIgnoreCaseChar(index, 's')) {
@@ -18136,19 +20538,42 @@ public class HarbourUnprocessedParser implements Parser {
       }
       startIndex = index;
       // (ParenthesesSwitchConstant | LogicalLiteral | StringLiteral | NumberLiteral)
-      // ParenthesesSwitchConstant
-      match = parenthesesSwitchConstant$Rule();
-      if (! match) {
-         // LogicalLiteral
-         match = logicalLiteral$Rule();
-         if (! match) {
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case 'e':
+         case 'E':
+         case '\'':
+         case '[':
             // StringLiteral
             match = stringLiteral$Rule();
+            break;
+         case '.':
+            // LogicalLiteral
+            match = logicalLiteral$Rule();
             if (! match) {
                // NumberLiteral
                match = numberLiteral$Rule();
             }
-         }
+            break;
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+            // NumberLiteral
+            match = numberLiteral$Rule();
+            break;
+         case '(':
+            // ParenthesesSwitchConstant
+            match = parenthesesSwitchConstant$Rule();
+            break;
+         default:
+            match = false;
       }
       if (match) {
          switchConstant$RuleMemoStart = startIndex;
@@ -18249,14 +20674,6 @@ public class HarbourUnprocessedParser implements Parser {
                   ++index;
                }
                break;
-            case 't':
-            case 'T':
-               ++index;
-               // "."
-               if (match = buffer.matchIgnoreCaseChar(index, '.')) {
-                  ++index;
-               }
-               break;
             case 'n':
             case 'N':
                ++index;
@@ -18267,6 +20684,14 @@ public class HarbourUnprocessedParser implements Parser {
                break;
             case 'y':
             case 'Y':
+               ++index;
+               // "."
+               if (match = buffer.matchIgnoreCaseChar(index, '.')) {
+                  ++index;
+               }
+               break;
+            case 't':
+            case 'T':
                ++index;
                // "."
                if (match = buffer.matchIgnoreCaseChar(index, '.')) {
@@ -18852,23 +21277,95 @@ public class HarbourUnprocessedParser implements Parser {
       boolean match;
       startIndex = index;
       // (('=>' OptionalSpacing) | HashItems)
-      // ('=>' OptionalSpacing)
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // '=>'
-      match = stringMatcher("=>", 2);
-      if (match) {
-         // OptionalSpacing
-         match = optionalSpacing$Rule();
-         if (! match) {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-         }
-      }
-      if (! match) {
-         // HashItems
-         match = hashItems$Rule();
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '&':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case ':':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '[':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '{':
+            // HashItems
+            match = hashItems$Rule();
+            break;
+         case '=':
+            // ('=>' OptionalSpacing)
+            // '=>'
+            match = stringMatcher("=>", 2);
+            if (match) {
+               // OptionalSpacing
+               match = optionalSpacing$Rule();
+            }
+            break;
+         default:
+            match = false;
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -19061,35 +21558,71 @@ public class HarbourUnprocessedParser implements Parser {
       }
       startIndex = index;
       // (StringLiteral | NumberLiteral | LogicalLiteral | ArrayLiteral | CodeBlockLiteral | HashLiteral | NilValue | DateTimeLiteral)
-      // StringLiteral
-      match = stringLiteral$Rule();
-      if (! match) {
-         // NumberLiteral
-         match = numberLiteral$Rule();
-         if (! match) {
-            // LogicalLiteral
-            match = logicalLiteral$Rule();
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case 'e':
+         case 'E':
+         case '\'':
+         case '[':
+            // StringLiteral
+            match = stringLiteral$Rule();
+            break;
+         case '{':
+            // ArrayLiteral
+            match = arrayLiteral$Rule();
             if (! match) {
-               // ArrayLiteral
-               match = arrayLiteral$Rule();
+               // CodeBlockLiteral
+               match = codeBlockLiteral$Rule();
                if (! match) {
-                  // CodeBlockLiteral
-                  match = codeBlockLiteral$Rule();
+                  // HashLiteral
+                  match = hashLiteral$Rule();
                   if (! match) {
-                     // HashLiteral
-                     match = hashLiteral$Rule();
-                     if (! match) {
-                        // NilValue
-                        match = nilValue$Rule();
-                        if (! match) {
-                           // DateTimeLiteral
-                           match = dateTimeLiteral$Rule();
-                        }
-                     }
+                     // DateTimeLiteral
+                     match = dateTimeLiteral$Rule();
                   }
                }
             }
-         }
+            break;
+         case '.':
+            // NumberLiteral
+            match = numberLiteral$Rule();
+            if (! match) {
+               // LogicalLiteral
+               match = logicalLiteral$Rule();
+            }
+            break;
+         case 'n':
+         case 'N':
+            // NilValue
+            match = nilValue$Rule();
+            break;
+         case '0':
+            // NumberLiteral
+            match = numberLiteral$Rule();
+            if (! match) {
+               // DateTimeLiteral
+               match = dateTimeLiteral$Rule();
+            }
+            break;
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+            // NumberLiteral
+            match = numberLiteral$Rule();
+            break;
+         case 'd':
+         case 'D':
+            // DateTimeLiteral
+            match = dateTimeLiteral$Rule();
+            break;
+         default:
+            match = false;
       }
       if (match) {
          literal$RuleMemoStart = startIndex;
@@ -19178,17 +21711,108 @@ public class HarbourUnprocessedParser implements Parser {
       currentRuleIsAtomic = true;
       startIndex = index;
       // (('0d' Digit Digit Digit Digit Digit Digit Digit Digit) | ("d" (('"' DatePattern ("T"? TimePattern)? '"') | (''' DatePattern ("T"? TimePattern)? ''') | ('[' DatePattern ("T"? TimePattern)? ']'))) | ('{' '^' (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)? TimePattern? OptionalSpacing '}'))
-      // ('0d' Digit Digit Digit Digit Digit Digit Digit Digit)
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // '0d'
-      match = stringMatcher("0d", 2);
-      if (match) {
-         // '0'-'9'
-         match = charRangeMatcher('0', '9');
-         if (match) {
-            // '0'-'9'
-            match = charRangeMatcher('0', '9');
+      switch(buffer.getChar(index)) {
+         case '{':
+            // ('{' '^' (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)? TimePattern? OptionalSpacing '}')
+            // '{'
+            match = charMatcher('{');
+            if (match) {
+               // '^'
+               match = charMatcher('^');
+               if (match) {
+                  // (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)?
+                  // (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)
+                  Node lastNode_1 = currentNode;
+                  int lastIndex_1 = index;
+                  // IntegerNumber
+                  match = integerNumber$Rule();
+                  if (match) {
+                     // ('-' | '/')
+                     switch(buffer.getChar(index)) {
+                        case '-':
+                           ++index;
+                           // <EMPTY>
+                           match = true;
+                           break;
+                        case '/':
+                           ++index;
+                           // <EMPTY>
+                           match = true;
+                           break;
+                        default:
+                           match = false;
+                     }
+                     if (match) {
+                        // IntegerNumber
+                        match = integerNumber$Rule();
+                        if (match) {
+                           // ('-' | '/')
+                           switch(buffer.getChar(index)) {
+                              case '-':
+                                 ++index;
+                                 // <EMPTY>
+                                 match = true;
+                                 break;
+                              case '/':
+                                 ++index;
+                                 // <EMPTY>
+                                 match = true;
+                                 break;
+                              default:
+                                 match = false;
+                           }
+                           if (match) {
+                              // IntegerNumber
+                              match = integerNumber$Rule();
+                              if (match) {
+                                 // ','?
+                                 // ','
+                                 match = charMatcher(',');
+                                 match = true;
+                                 if (! match) {
+                                    index = lastIndex_1;
+                                    lastNode_1.setSibling(null);
+                                    currentNode = lastNode_1;
+                                 }
+                              } else {
+                                 index = lastIndex_1;
+                                 lastNode_1.setSibling(null);
+                              }
+                           } else {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                           }
+                        } else {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                        }
+                     } else {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                     }
+                  }
+                  match = true;
+                  if (match) {
+                     // TimePattern?
+                     // TimePattern
+                     match = timePattern$Rule();
+                     match = true;
+                     if (match) {
+                        // OptionalSpacing
+                        match = optionalSpacing$Rule();
+                        if (match) {
+                           // '}'
+                           match = charMatcher('}');
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case '0':
+            // ('0d' Digit Digit Digit Digit Digit Digit Digit Digit)
+            // '0d'
+            match = stringMatcher("0d", 2);
             if (match) {
                // '0'-'9'
                match = charRangeMatcher('0', '9');
@@ -19207,262 +21831,135 @@ public class HarbourUnprocessedParser implements Parser {
                            if (match) {
                               // '0'-'9'
                               match = charRangeMatcher('0', '9');
-                              if (! match) {
-                                 index = lastIndex_1;
-                                 lastNode_1.setSibling(null);
-                                 currentNode = lastNode_1;
+                              if (match) {
+                                 // '0'-'9'
+                                 match = charRangeMatcher('0', '9');
+                                 if (match) {
+                                    // '0'-'9'
+                                    match = charRangeMatcher('0', '9');
+                                 }
                               }
-                           } else {
-                              index = lastIndex_1;
-                              lastNode_1.setSibling(null);
                            }
-                        } else {
-                           index = lastIndex_1;
-                           lastNode_1.setSibling(null);
                         }
-                     } else {
-                        index = lastIndex_1;
-                        lastNode_1.setSibling(null);
                      }
-                  } else {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
                   }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
-            } else {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
             }
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-         }
-      }
-      if (! match) {
-         // ("d" (('"' DatePattern ("T"? TimePattern)? '"') | (''' DatePattern ("T"? TimePattern)? ''') | ('[' DatePattern ("T"? TimePattern)? ']')))
-         Node lastNode_2 = currentNode;
-         int lastIndex_2 = index;
-         // "d"
-         match = ignoreCaseCharMatcher('d');
-         if (match) {
-            // (('"' DatePattern ("T"? TimePattern)? '"') | (''' DatePattern ("T"? TimePattern)? ''') | ('[' DatePattern ("T"? TimePattern)? ']'))
-            // ('"' DatePattern ("T"? TimePattern)? '"')
-            Node lastNode_3 = currentNode;
-            int lastIndex_3 = index;
-            // '"'
-            match = charMatcher('\"');
+            break;
+         case 'd':
+         case 'D':
+            // ("d" (('"' DatePattern ("T"? TimePattern)? '"') | (''' DatePattern ("T"? TimePattern)? ''') | ('[' DatePattern ("T"? TimePattern)? ']')))
+            // "d"
+            match = ignoreCaseCharMatcher('d');
             if (match) {
-               // DatePattern
-               match = datePattern$Rule();
-               if (match) {
-                  // ("T"? TimePattern)?
-                  // ("T"? TimePattern)
-                  Node lastNode_4 = currentNode;
-                  int lastIndex_4 = index;
-                  // "T"?
-                  // "T"
-                  ignoreCaseCharMatcher('T');
-                  // TimePattern
-                  match = timePattern$Rule();
-                  if (! match) {
-                     index = lastIndex_4;
-                     lastNode_4.setSibling(null);
-                     currentNode = lastNode_4;
-                  }
-                  // '"'
-                  match = charMatcher('\"');
-                  if (! match) {
-                     index = lastIndex_3;
-                     lastNode_3.setSibling(null);
-                     currentNode = lastNode_3;
-                  }
-               } else {
-                  index = lastIndex_3;
-                  lastNode_3.setSibling(null);
-               }
-            }
-            if (! match) {
-               // (''' DatePattern ("T"? TimePattern)? ''')
-               Node lastNode_5 = currentNode;
-               int lastIndex_5 = index;
-               // '''
-               match = charMatcher('\'');
-               if (match) {
-                  // DatePattern
-                  match = datePattern$Rule();
-                  if (match) {
-                     // ("T"? TimePattern)?
-                     // ("T"? TimePattern)
-                     Node lastNode_6 = currentNode;
-                     int lastIndex_6 = index;
-                     // "T"?
-                     // "T"
-                     ignoreCaseCharMatcher('T');
-                     // TimePattern
-                     match = timePattern$Rule();
-                     if (! match) {
-                        index = lastIndex_6;
-                        lastNode_6.setSibling(null);
-                        currentNode = lastNode_6;
+               // (('"' DatePattern ("T"? TimePattern)? '"') | (''' DatePattern ("T"? TimePattern)? ''') | ('[' DatePattern ("T"? TimePattern)? ']'))
+               switch(buffer.getChar(index)) {
+                  case '[':
+                     // ('[' DatePattern ("T"? TimePattern)? ']')
+                     // '['
+                     match = charMatcher('[');
+                     if (match) {
+                        // DatePattern
+                        match = datePattern$Rule();
+                        if (match) {
+                           // ("T"? TimePattern)?
+                           // ("T"? TimePattern)
+                           Node lastNode_2 = currentNode;
+                           int lastIndex_2 = index;
+                           // "T"?
+                           // "T"
+                           match = ignoreCaseCharMatcher('T');
+                           match = true;
+                           if (match) {
+                              // TimePattern
+                              match = timePattern$Rule();
+                              if (! match) {
+                                 index = lastIndex_2;
+                                 lastNode_2.setSibling(null);
+                                 currentNode = lastNode_2;
+                              }
+                           }
+                           match = true;
+                           if (match) {
+                              // ']'
+                              match = charMatcher(']');
+                           }
+                        }
                      }
+                     break;
+                  case '\"':
+                     // ('"' DatePattern ("T"? TimePattern)? '"')
+                     // '"'
+                     match = charMatcher('\"');
+                     if (match) {
+                        // DatePattern
+                        match = datePattern$Rule();
+                        if (match) {
+                           // ("T"? TimePattern)?
+                           // ("T"? TimePattern)
+                           Node lastNode_3 = currentNode;
+                           int lastIndex_3 = index;
+                           // "T"?
+                           // "T"
+                           match = ignoreCaseCharMatcher('T');
+                           match = true;
+                           if (match) {
+                              // TimePattern
+                              match = timePattern$Rule();
+                              if (! match) {
+                                 index = lastIndex_3;
+                                 lastNode_3.setSibling(null);
+                                 currentNode = lastNode_3;
+                              }
+                           }
+                           match = true;
+                           if (match) {
+                              // '"'
+                              match = charMatcher('\"');
+                           }
+                        }
+                     }
+                     break;
+                  case '\'':
+                     // (''' DatePattern ("T"? TimePattern)? ''')
                      // '''
                      match = charMatcher('\'');
-                     if (! match) {
-                        index = lastIndex_5;
-                        lastNode_5.setSibling(null);
-                        currentNode = lastNode_5;
-                     }
-                  } else {
-                     index = lastIndex_5;
-                     lastNode_5.setSibling(null);
-                  }
-               }
-               if (! match) {
-                  // ('[' DatePattern ("T"? TimePattern)? ']')
-                  Node lastNode_7 = currentNode;
-                  int lastIndex_7 = index;
-                  // '['
-                  match = charMatcher('[');
-                  if (match) {
-                     // DatePattern
-                     match = datePattern$Rule();
                      if (match) {
-                        // ("T"? TimePattern)?
-                        // ("T"? TimePattern)
-                        Node lastNode_8 = currentNode;
-                        int lastIndex_8 = index;
-                        // "T"?
-                        // "T"
-                        ignoreCaseCharMatcher('T');
-                        // TimePattern
-                        match = timePattern$Rule();
-                        if (! match) {
-                           index = lastIndex_8;
-                           lastNode_8.setSibling(null);
-                           currentNode = lastNode_8;
-                        }
-                        // ']'
-                        match = charMatcher(']');
-                        if (! match) {
-                           index = lastIndex_7;
-                           lastNode_7.setSibling(null);
-                           currentNode = lastNode_7;
-                        }
-                     } else {
-                        index = lastIndex_7;
-                        lastNode_7.setSibling(null);
-                     }
-                  }
-               }
-            }
-            if (! match) {
-               index = lastIndex_2;
-               lastNode_2.setSibling(null);
-               currentNode = lastNode_2;
-            }
-         }
-         if (! match) {
-            // ('{' '^' (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)? TimePattern? OptionalSpacing '}')
-            Node lastNode_9 = currentNode;
-            int lastIndex_9 = index;
-            // '{'
-            match = charMatcher('{');
-            if (match) {
-               // '^'
-               match = charMatcher('^');
-               if (match) {
-                  // (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)?
-                  // (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)
-                  Node lastNode_10 = currentNode;
-                  int lastIndex_10 = index;
-                  // IntegerNumber
-                  match = integerNumber$Rule();
-                  if (match) {
-                     // ('-' | '/')
-                     switch(buffer.getChar(index)) {
-                        case '/':
-                           ++index;
-                           // <EMPTY>
-                           match = true;
-                           break;
-                        case '-':
-                           ++index;
-                           // <EMPTY>
-                           match = true;
-                           break;
-                        default:
-                           match = false;
-                     }
-                     if (match) {
-                        // IntegerNumber
-                        match = integerNumber$Rule();
+                        // DatePattern
+                        match = datePattern$Rule();
                         if (match) {
-                           // ('-' | '/')
-                           switch(buffer.getChar(index)) {
-                              case '/':
-                                 ++index;
-                                 // <EMPTY>
-                                 match = true;
-                                 break;
-                              case '-':
-                                 ++index;
-                                 // <EMPTY>
-                                 match = true;
-                                 break;
-                              default:
-                                 match = false;
-                           }
+                           // ("T"? TimePattern)?
+                           // ("T"? TimePattern)
+                           Node lastNode_4 = currentNode;
+                           int lastIndex_4 = index;
+                           // "T"?
+                           // "T"
+                           match = ignoreCaseCharMatcher('T');
+                           match = true;
                            if (match) {
-                              // IntegerNumber
-                              match = integerNumber$Rule();
-                              if (match) {
-                                 // ','?
-                                 // ','
-                                 charMatcher(',');
-                                 match = true;
-                              } else {
-                                 index = lastIndex_10;
-                                 lastNode_10.setSibling(null);
+                              // TimePattern
+                              match = timePattern$Rule();
+                              if (! match) {
+                                 index = lastIndex_4;
+                                 lastNode_4.setSibling(null);
+                                 currentNode = lastNode_4;
                               }
-                           } else {
-                              index = lastIndex_10;
-                              lastNode_10.setSibling(null);
                            }
-                        } else {
-                           index = lastIndex_10;
-                           lastNode_10.setSibling(null);
+                           match = true;
+                           if (match) {
+                              // '''
+                              match = charMatcher('\'');
+                           }
                         }
-                     } else {
-                        index = lastIndex_10;
-                        lastNode_10.setSibling(null);
                      }
-                  }
-                  // TimePattern?
-                  // TimePattern
-                  timePattern$Rule();
-                  // OptionalSpacing
-                  match = optionalSpacing$Rule();
-                  if (match) {
-                     // '}'
-                     match = charMatcher('}');
-                     if (! match) {
-                        index = lastIndex_9;
-                        lastNode_9.setSibling(null);
-                        currentNode = lastNode_9;
-                     }
-                  } else {
-                     index = lastIndex_9;
-                     lastNode_9.setSibling(null);
-                  }
-               } else {
-                  index = lastIndex_9;
-                  lastNode_9.setSibling(null);
+                     break;
+                  default:
+                     match = false;
                }
             }
-         }
+            break;
+         default:
+            match = false;
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
@@ -19674,16 +22171,16 @@ public class HarbourUnprocessedParser implements Parser {
          // ("AM" | "PM")?
          // ("AM" | "PM")
          switch(buffer.getChar(index)) {
-            case 'a':
-            case 'A':
+            case 'p':
+            case 'P':
                ++index;
                // "M"
                if (match = buffer.matchIgnoreCaseChar(index, 'M')) {
                   ++index;
                }
                break;
-            case 'p':
-            case 'P':
+            case 'a':
+            case 'A':
                ++index;
                // "M"
                if (match = buffer.matchIgnoreCaseChar(index, 'M')) {
@@ -19751,7 +22248,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (match) {
          // ('-' | '/' | '.')
          switch(buffer.getChar(index)) {
-            case '/':
+            case '-':
                ++index;
                // <EMPTY>
                match = true;
@@ -19761,7 +22258,7 @@ public class HarbourUnprocessedParser implements Parser {
                // <EMPTY>
                match = true;
                break;
-            case '-':
+            case '/':
                ++index;
                // <EMPTY>
                match = true;
@@ -19775,7 +22272,7 @@ public class HarbourUnprocessedParser implements Parser {
             if (match) {
                // ('-' | '/' | '.')
                switch(buffer.getChar(index)) {
-                  case '/':
+                  case '-':
                      ++index;
                      // <EMPTY>
                      match = true;
@@ -19785,7 +22282,7 @@ public class HarbourUnprocessedParser implements Parser {
                      // <EMPTY>
                      match = true;
                      break;
-                  case '-':
+                  case '/':
                      ++index;
                      // <EMPTY>
                      match = true;
@@ -19832,49 +22329,35 @@ public class HarbourUnprocessedParser implements Parser {
       boolean match;
       startIndex = index;
       // ((',' OptionalSpacing) | (']' OptionalSpacing '[' OptionalSpacing))
-      // (',' OptionalSpacing)
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // ','
-      match = charMatcher(',');
-      if (match) {
-         // OptionalSpacing
-         match = optionalSpacing$Rule();
-         if (! match) {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-         }
-      }
-      if (! match) {
-         // (']' OptionalSpacing '[' OptionalSpacing)
-         Node lastNode_2 = currentNode;
-         int lastIndex_2 = index;
-         // ']'
-         match = charMatcher(']');
-         if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
+      switch(buffer.getChar(index)) {
+         case ',':
+            // (',' OptionalSpacing)
+            // ','
+            match = charMatcher(',');
             if (match) {
-               // '['
-               match = charMatcher('[');
-               if (match) {
-                  // OptionalSpacing
-                  match = optionalSpacing$Rule();
-                  if (! match) {
-                     index = lastIndex_2;
-                     lastNode_2.setSibling(null);
-                     currentNode = lastNode_2;
-                  }
-               } else {
-                  index = lastIndex_2;
-                  lastNode_2.setSibling(null);
-               }
-            } else {
-               index = lastIndex_2;
-               lastNode_2.setSibling(null);
+               // OptionalSpacing
+               match = optionalSpacing$Rule();
             }
-         }
+            break;
+         case ']':
+            // (']' OptionalSpacing '[' OptionalSpacing)
+            // ']'
+            match = charMatcher(']');
+            if (match) {
+               // OptionalSpacing
+               match = optionalSpacing$Rule();
+               if (match) {
+                  // '['
+                  match = charMatcher('[');
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                  }
+               }
+            }
+            break;
+         default:
+            match = false;
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -20055,7 +22538,7 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //AssignOperator : ((':=' OptionalSpacing) | ('+=' OptionalSpacing) | ('-=' OptionalSpacing) | ('*=' OptionalSpacing) | ('/=' OptionalSpacing) | ('%=' OptionalSpacing) | ('^=' OptionalSpacing) | EqualOperator)
+   //AssignOperator : (AssignOperatorOnly OptionalSpacing)
    protected boolean assignOperator$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -20065,7 +22548,7 @@ public class HarbourUnprocessedParser implements Parser {
             index = assignOperator$RuleMemoEnd;
             if (! currentRuleIsAtomic) {
                if (assignOperator$RuleMemoStart == assignOperator$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.ASSIGN_OPERATOR, assignOperator$RuleMemoStart, assignOperator$RuleMemoEnd, true, false);
+                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.ASSIGN_OPERATOR, assignOperator$RuleMemoStart, assignOperator$RuleMemoEnd, true, true);
                   lastNode.setSibling(currentNode);
                } else if(assignOperator$RuleMemoFirstNode != null) {
                   lastNode.setSibling(assignOperator$RuleMemoFirstNode);
@@ -20078,120 +22561,12 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       startIndex = index;
-      // ((':=' OptionalSpacing) | ('+=' OptionalSpacing) | ('-=' OptionalSpacing) | ('*=' OptionalSpacing) | ('/=' OptionalSpacing) | ('%=' OptionalSpacing) | ('^=' OptionalSpacing) | EqualOperator)
-      // (':=' OptionalSpacing)
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // ':='
-      match = stringMatcher(":=", 2);
+      // (AssignOperatorOnly OptionalSpacing)
+      // AssignOperatorOnly
+      match = assignOperatorOnly$Rule();
       if (match) {
          // OptionalSpacing
          match = optionalSpacing$Rule();
-         if (! match) {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-         }
-      }
-      if (! match) {
-         // ('+=' OptionalSpacing)
-         Node lastNode_2 = currentNode;
-         int lastIndex_2 = index;
-         // '+='
-         match = stringMatcher("+=", 2);
-         if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
-            if (! match) {
-               index = lastIndex_2;
-               lastNode_2.setSibling(null);
-               currentNode = lastNode_2;
-            }
-         }
-         if (! match) {
-            // ('-=' OptionalSpacing)
-            Node lastNode_3 = currentNode;
-            int lastIndex_3 = index;
-            // '-='
-            match = stringMatcher("-=", 2);
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
-               if (! match) {
-                  index = lastIndex_3;
-                  lastNode_3.setSibling(null);
-                  currentNode = lastNode_3;
-               }
-            }
-            if (! match) {
-               // ('*=' OptionalSpacing)
-               Node lastNode_4 = currentNode;
-               int lastIndex_4 = index;
-               // '*='
-               match = stringMatcher("*=", 2);
-               if (match) {
-                  // OptionalSpacing
-                  match = optionalSpacing$Rule();
-                  if (! match) {
-                     index = lastIndex_4;
-                     lastNode_4.setSibling(null);
-                     currentNode = lastNode_4;
-                  }
-               }
-               if (! match) {
-                  // ('/=' OptionalSpacing)
-                  Node lastNode_5 = currentNode;
-                  int lastIndex_5 = index;
-                  // '/='
-                  match = stringMatcher("/=", 2);
-                  if (match) {
-                     // OptionalSpacing
-                     match = optionalSpacing$Rule();
-                     if (! match) {
-                        index = lastIndex_5;
-                        lastNode_5.setSibling(null);
-                        currentNode = lastNode_5;
-                     }
-                  }
-                  if (! match) {
-                     // ('%=' OptionalSpacing)
-                     Node lastNode_6 = currentNode;
-                     int lastIndex_6 = index;
-                     // '%='
-                     match = stringMatcher("%=", 2);
-                     if (match) {
-                        // OptionalSpacing
-                        match = optionalSpacing$Rule();
-                        if (! match) {
-                           index = lastIndex_6;
-                           lastNode_6.setSibling(null);
-                           currentNode = lastNode_6;
-                        }
-                     }
-                     if (! match) {
-                        // ('^=' OptionalSpacing)
-                        Node lastNode_7 = currentNode;
-                        int lastIndex_7 = index;
-                        // '^='
-                        match = stringMatcher("^=", 2);
-                        if (match) {
-                           // OptionalSpacing
-                           match = optionalSpacing$Rule();
-                           if (! match) {
-                              index = lastIndex_7;
-                              lastNode_7.setSibling(null);
-                              currentNode = lastNode_7;
-                           }
-                        }
-                        if (! match) {
-                           // EqualOperator
-                           match = equalOperator$Rule();
-                        }
-                     }
-                  }
-               }
-            }
-         }
       }
       if (match) {
          assignOperator$RuleMemoStart = startIndex;
@@ -20199,7 +22574,7 @@ public class HarbourUnprocessedParser implements Parser {
          if (currentRuleIsAtomic) {
             assignOperator$RuleMemoFirstNode = null;
          } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.ASSIGN_OPERATOR, startIndex, index, true, false);
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.ASSIGN_OPERATOR, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
             assignOperator$RuleMemoFirstNode = currentNode;
@@ -20217,7 +22592,84 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //Expression : (AssignmentExpression | MathExpression | RelationalExpression | ConditionalExpression | PrefixedExpression | PostfixedExpression | PrimaryExpression)
+   //AssignOperatorOnly : (':=' | '+=' | '-=' | '*=' | '/=' | '%=' | '^=' | EqualOperator)
+   protected boolean assignOperatorOnly$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      currentRuleIsAtomic = true;
+      startIndex = index;
+      // (':=' | '+=' | '-=' | '*=' | '/=' | '%=' | '^=' | EqualOperator)
+      // ':='
+      match = stringMatcher(":=", 2);
+      if (! match) {
+         // '+='
+         match = stringMatcher("+=", 2);
+         if (! match) {
+            // '-='
+            match = stringMatcher("-=", 2);
+            if (! match) {
+               // '*='
+               match = stringMatcher("*=", 2);
+               if (! match) {
+                  // '/='
+                  match = stringMatcher("/=", 2);
+                  if (! match) {
+                     // '%='
+                     match = stringMatcher("%=", 2);
+                     if (! match) {
+                        // '^='
+                        match = stringMatcher("^=", 2);
+                        if (! match) {
+                           // ('=' ('>' | '=')!)
+                           // '='
+                           match = charMatcher('=');
+                           if (match) {
+                              // ('>' | '=')!
+                              // ('>' | '=')
+                              int startIndex_1 = index;
+                              switch(buffer.getChar(index)) {
+                                 case '=':
+                                    ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                    break;
+                                 case '>':
+                                    ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                    break;
+                                 default:
+                                    match = false;
+                              }
+                              index = startIndex_1;
+                              match = ! match;
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+      if (match) {
+         currentRuleIsAtomic = lastRuleIsAtomic;
+         if (! currentRuleIsAtomic) {
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.ASSIGN_OPERATOR, startIndex, index, true, false);
+            lastNode.setSibling(currentNode);
+         }
+         return true;
+      } else {
+         currentRuleIsAtomic = lastRuleIsAtomic;
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //Expression : (AssignmentExpression | MathExpression | ComparisonExpression | ConditionalExpression | PrimaryExpression)
    protected boolean expression$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -20240,24 +22692,108 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       startIndex = index;
-      // (AssignmentExpression | MathExpression | RelationalExpression | ConditionalExpression | PrefixedExpression | PostfixedExpression | PrimaryExpression)
-      // AssignmentExpression
-      match = assignmentExpression$Rule();
-      if (! match) {
-         // MathExpression
-         match = mathExpression$Rule();
-         if (! match) {
-            // RelationalExpression
-            match = relationalExpression$Rule();
+      // (AssignmentExpression | MathExpression | ComparisonExpression | ConditionalExpression | PrimaryExpression)
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '+':
+         case '-':
+            // MathExpression
+            match = mathExpression$Rule();
             if (! match) {
-               // ConditionalExpression
-               match = conditionalExpression$Rule();
+               // ComparisonExpression
+               match = comparisonExpression$Rule();
                if (! match) {
-                  // PrefixedExpression
-                  match = prefixedExpression$Rule();
+                  // ConditionalExpression
+                  match = conditionalExpression$Rule();
                   if (! match) {
-                     // PostfixedExpression
-                     match = postfixedExpression$Rule();
+                     // PrimaryExpression
+                     match = primaryExpression$Rule();
+                  }
+               }
+            }
+            break;
+         case '\"':
+         case '&':
+         case '\'':
+         case '(':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case ':':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '[':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '{':
+            // AssignmentExpression
+            match = assignmentExpression$Rule();
+            if (! match) {
+               // MathExpression
+               match = mathExpression$Rule();
+               if (! match) {
+                  // ComparisonExpression
+                  match = comparisonExpression$Rule();
+                  if (! match) {
+                     // ConditionalExpression
+                     match = conditionalExpression$Rule();
                      if (! match) {
                         // PrimaryExpression
                         match = primaryExpression$Rule();
@@ -20265,7 +22801,9 @@ public class HarbourUnprocessedParser implements Parser {
                   }
                }
             }
-         }
+            break;
+         default:
+            match = false;
       }
       if (match) {
          expression$RuleMemoStart = startIndex;
@@ -20322,11 +22860,90 @@ public class HarbourUnprocessedParser implements Parser {
          match = assignOperator$Rule();
          if (match) {
             // (ValueByReference | Expression)
-            // ValueByReference
-            match = valueByReference$Rule();
-            if (! match) {
-               // Expression
-               match = expression$Rule();
+            switch(buffer.getChar(index)) {
+               case '!':
+               case '\"':
+               case '&':
+               case '\'':
+               case '(':
+               case '+':
+               case '-':
+               case '.':
+               case '0':
+               case '1':
+               case '2':
+               case '3':
+               case '4':
+               case '5':
+               case '6':
+               case '7':
+               case '8':
+               case '9':
+               case ':':
+               case 'A':
+               case 'B':
+               case 'C':
+               case 'D':
+               case 'E':
+               case 'F':
+               case 'G':
+               case 'H':
+               case 'I':
+               case 'J':
+               case 'K':
+               case 'L':
+               case 'M':
+               case 'N':
+               case 'O':
+               case 'P':
+               case 'Q':
+               case 'R':
+               case 'S':
+               case 'T':
+               case 'U':
+               case 'V':
+               case 'W':
+               case 'X':
+               case 'Y':
+               case 'Z':
+               case '[':
+               case '_':
+               case 'a':
+               case 'b':
+               case 'c':
+               case 'd':
+               case 'e':
+               case 'f':
+               case 'g':
+               case 'h':
+               case 'i':
+               case 'j':
+               case 'k':
+               case 'l':
+               case 'm':
+               case 'n':
+               case 'o':
+               case 'p':
+               case 'q':
+               case 'r':
+               case 's':
+               case 't':
+               case 'u':
+               case 'v':
+               case 'w':
+               case 'x':
+               case 'y':
+               case 'z':
+               case '{':
+                  // Expression
+                  match = expression$Rule();
+                  break;
+               case '@':
+                  // ValueByReference
+                  match = valueByReference$Rule();
+                  break;
+               default:
+                  match = false;
             }
          }
       }
@@ -20354,47 +22971,15 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //ConditionOperator : ((".and." | ".or.") OptionalSpacing)
+   //ConditionOperator : (ConditionOperatorOnly OptionalSpacing)
    protected boolean conditionOperator$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
       startIndex = index;
-      // ((".and." | ".or.") OptionalSpacing)
-      // (".and." | ".or.")
-      int startIndex_1 = index;
-      if (buffer.matchChar(index, '.')) {
-         ++index;
-         // ("and." | "or.")
-         switch(buffer.getChar(index)) {
-            case 'a':
-            case 'A':
-               ++index;
-               // "nd."
-               if (match = ignoreCaseStringTest("nd.", 3)) {
-                  index += 3;
-               }
-               break;
-            case 'o':
-            case 'O':
-               ++index;
-               // "r."
-               if (match = ignoreCaseStringTest("r.", 2)) {
-                  index += 2;
-               }
-               break;
-            default:
-               match = false;
-         }
-      } else {
-         match = false;
-      }
-      if (! match) {
-         index = startIndex_1;
-      } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
-         currentNode = currentNode.getSibling();
-      }
+      // (ConditionOperatorOnly OptionalSpacing)
+      // ConditionOperatorOnly
+      match = conditionOperatorOnly$Rule();
       if (match) {
          // OptionalSpacing
          match = optionalSpacing$Rule();
@@ -20407,6 +22992,57 @@ public class HarbourUnprocessedParser implements Parser {
          }
          return true;
       } else {
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //ConditionOperatorOnly : (".and." | ".or.")
+   protected boolean conditionOperatorOnly$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      currentRuleIsAtomic = true;
+      startIndex = index;
+      // (".and." | ".or.")
+      if (buffer.matchChar(index, '.')) {
+         ++index;
+         // ("and." | "or.")
+         switch(buffer.getChar(index)) {
+            case 'o':
+            case 'O':
+               ++index;
+               // "r."
+               if (match = ignoreCaseStringTest("r.", 2)) {
+                  index += 2;
+               }
+               break;
+            case 'a':
+            case 'A':
+               ++index;
+               // "nd."
+               if (match = ignoreCaseStringTest("nd.", 3)) {
+                  index += 3;
+               }
+               break;
+            default:
+               match = false;
+         }
+      } else {
+         match = false;
+      }
+      if (match) {
+         currentRuleIsAtomic = lastRuleIsAtomic;
+         if (! currentRuleIsAtomic) {
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.CONDITION_OPERATOR, startIndex, index, true, false);
+            lastNode.setSibling(currentNode);
+         }
+         return true;
+      } else {
+         currentRuleIsAtomic = lastRuleIsAtomic;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -20472,161 +23108,22 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //RelationalOperator : (('>=' OptionalSpacing) | ('<=' OptionalSpacing) | ('<>' OptionalSpacing) | ('#' OptionalSpacing) | ('!=' OptionalSpacing) | GreaterOperator | LessOperator | ('==' OptionalSpacing) | ('$' OptionalSpacing) | ("in" TestNoAlpha OptionalSpacing) | EqualOperator)
-   protected boolean relationalOperator$Rule() {
+   //ComparisonOperator : (ComparisonOperatorOnly OptionalSpacing)
+   protected boolean comparisonOperator$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
       startIndex = index;
-      // (('>=' OptionalSpacing) | ('<=' OptionalSpacing) | ('<>' OptionalSpacing) | ('#' OptionalSpacing) | ('!=' OptionalSpacing) | GreaterOperator | LessOperator | ('==' OptionalSpacing) | ('$' OptionalSpacing) | ("in" TestNoAlpha OptionalSpacing) | EqualOperator)
-      // ('>=' OptionalSpacing)
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // '>='
-      match = stringMatcher(">=", 2);
+      // (ComparisonOperatorOnly OptionalSpacing)
+      // ComparisonOperatorOnly
+      match = comparisonOperatorOnly$Rule();
       if (match) {
          // OptionalSpacing
          match = optionalSpacing$Rule();
-         if (! match) {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-         }
-      }
-      if (! match) {
-         // ('<=' OptionalSpacing)
-         Node lastNode_2 = currentNode;
-         int lastIndex_2 = index;
-         // '<='
-         match = stringMatcher("<=", 2);
-         if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
-            if (! match) {
-               index = lastIndex_2;
-               lastNode_2.setSibling(null);
-               currentNode = lastNode_2;
-            }
-         }
-         if (! match) {
-            // ('<>' OptionalSpacing)
-            Node lastNode_3 = currentNode;
-            int lastIndex_3 = index;
-            // '<>'
-            match = stringMatcher("<>", 2);
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
-               if (! match) {
-                  index = lastIndex_3;
-                  lastNode_3.setSibling(null);
-                  currentNode = lastNode_3;
-               }
-            }
-            if (! match) {
-               // ('#' OptionalSpacing)
-               Node lastNode_4 = currentNode;
-               int lastIndex_4 = index;
-               // '#'
-               match = charMatcher('#');
-               if (match) {
-                  // OptionalSpacing
-                  match = optionalSpacing$Rule();
-                  if (! match) {
-                     index = lastIndex_4;
-                     lastNode_4.setSibling(null);
-                     currentNode = lastNode_4;
-                  }
-               }
-               if (! match) {
-                  // ('!=' OptionalSpacing)
-                  Node lastNode_5 = currentNode;
-                  int lastIndex_5 = index;
-                  // '!='
-                  match = stringMatcher("!=", 2);
-                  if (match) {
-                     // OptionalSpacing
-                     match = optionalSpacing$Rule();
-                     if (! match) {
-                        index = lastIndex_5;
-                        lastNode_5.setSibling(null);
-                        currentNode = lastNode_5;
-                     }
-                  }
-                  if (! match) {
-                     // GreaterOperator
-                     match = greaterOperator$Rule();
-                     if (! match) {
-                        // LessOperator
-                        match = lessOperator$Rule();
-                        if (! match) {
-                           // ('==' OptionalSpacing)
-                           Node lastNode_6 = currentNode;
-                           int lastIndex_6 = index;
-                           // '=='
-                           match = stringMatcher("==", 2);
-                           if (match) {
-                              // OptionalSpacing
-                              match = optionalSpacing$Rule();
-                              if (! match) {
-                                 index = lastIndex_6;
-                                 lastNode_6.setSibling(null);
-                                 currentNode = lastNode_6;
-                              }
-                           }
-                           if (! match) {
-                              // ('$' OptionalSpacing)
-                              Node lastNode_7 = currentNode;
-                              int lastIndex_7 = index;
-                              // '$'
-                              match = charMatcher('$');
-                              if (match) {
-                                 // OptionalSpacing
-                                 match = optionalSpacing$Rule();
-                                 if (! match) {
-                                    index = lastIndex_7;
-                                    lastNode_7.setSibling(null);
-                                    currentNode = lastNode_7;
-                                 }
-                              }
-                              if (! match) {
-                                 // ("in" TestNoAlpha OptionalSpacing)
-                                 Node lastNode_8 = currentNode;
-                                 int lastIndex_8 = index;
-                                 // "in"
-                                 match = ignoreCaseStringMatcher("in", 2);
-                                 if (match) {
-                                    // TestNoAlpha
-                                    match = testNoAlpha$Rule();
-                                    if (match) {
-                                       // OptionalSpacing
-                                       match = optionalSpacing$Rule();
-                                       if (! match) {
-                                          index = lastIndex_8;
-                                          lastNode_8.setSibling(null);
-                                          currentNode = lastNode_8;
-                                       }
-                                    } else {
-                                       index = lastIndex_8;
-                                       lastNode_8.setSibling(null);
-                                    }
-                                 }
-                                 if (! match) {
-                                    // EqualOperator
-                                    match = equalOperator$Rule();
-                                 }
-                              }
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-         }
       }
       if (match) {
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.RELATIONAL_OPERATOR, startIndex, index, true, false);
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.COMPARISON_OPERATOR, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
          }
@@ -20639,21 +23136,139 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //RelationalExpression : (PrimaryExpression RelationalOperator Expression)
-   protected boolean relationalExpression$Rule() {
+   //ComparisonOperatorOnly : ('>=' | '<=' | '<>' | '#' | '!=' | GreaterOperator | LessOperator | '==' | '$' | "in" | EqualOperator)
+   protected boolean comparisonOperatorOnly$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
-      if (relationalExpression$RuleMemoStart == index) {
-         if (relationalExpression$RuleMemoStart <= relationalExpression$RuleMemoEnd) {
-            index = relationalExpression$RuleMemoEnd;
+      boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      currentRuleIsAtomic = true;
+      startIndex = index;
+      // ('>=' | '<=' | '<>' | '#' | '!=' | GreaterOperator | LessOperator | '==' | '$' | "in" | EqualOperator)
+      // '>='
+      match = stringMatcher(">=", 2);
+      if (! match) {
+         // '<='
+         match = stringMatcher("<=", 2);
+         if (! match) {
+            // '<>'
+            match = stringMatcher("<>", 2);
+            if (! match) {
+               // '#'
+               match = charMatcher('#');
+               if (! match) {
+                  // '!='
+                  match = stringMatcher("!=", 2);
+                  if (! match) {
+                     // ('>' '='!)
+                     // '>'
+                     match = charMatcher('>');
+                     if (match) {
+                        // '='!
+                        // '='
+                        match = buffer.matchChar(index, '=');
+                        match = ! match;
+                     }
+                     if (! match) {
+                        // ('<' ('=' | '>')!)
+                        // '<'
+                        match = charMatcher('<');
+                        if (match) {
+                           // ('=' | '>')!
+                           // ('=' | '>')
+                           int startIndex_1 = index;
+                           switch(buffer.getChar(index)) {
+                              case '=':
+                                 ++index;
+                                 // <EMPTY>
+                                 match = true;
+                                 break;
+                              case '>':
+                                 ++index;
+                                 // <EMPTY>
+                                 match = true;
+                                 break;
+                              default:
+                                 match = false;
+                           }
+                           index = startIndex_1;
+                           match = ! match;
+                        }
+                        if (! match) {
+                           // '=='
+                           match = stringMatcher("==", 2);
+                           if (! match) {
+                              // '$'
+                              match = charMatcher('$');
+                              if (! match) {
+                                 // "in"
+                                 match = ignoreCaseStringMatcher("in", 2);
+                                 if (! match) {
+                                    // ('=' ('>' | '=')!)
+                                    // '='
+                                    match = charMatcher('=');
+                                    if (match) {
+                                       // ('>' | '=')!
+                                       // ('>' | '=')
+                                       int startIndex_2 = index;
+                                       switch(buffer.getChar(index)) {
+                                          case '=':
+                                             ++index;
+                                             // <EMPTY>
+                                             match = true;
+                                             break;
+                                          case '>':
+                                             ++index;
+                                             // <EMPTY>
+                                             match = true;
+                                             break;
+                                          default:
+                                             match = false;
+                                       }
+                                       index = startIndex_2;
+                                       match = ! match;
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+      if (match) {
+         currentRuleIsAtomic = lastRuleIsAtomic;
+         if (! currentRuleIsAtomic) {
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.COMPARISON_OPERATOR, startIndex, index, true, false);
+            lastNode.setSibling(currentNode);
+         }
+         return true;
+      } else {
+         currentRuleIsAtomic = lastRuleIsAtomic;
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //ComparisonExpression : (PrimaryExpression ComparisonOperator Expression)
+   protected boolean comparisonExpression$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      if (comparisonExpression$RuleMemoStart == index) {
+         if (comparisonExpression$RuleMemoStart <= comparisonExpression$RuleMemoEnd) {
+            index = comparisonExpression$RuleMemoEnd;
             if (! currentRuleIsAtomic) {
-               if (relationalExpression$RuleMemoStart == relationalExpression$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.RELATIONAL_EXPRESSION, relationalExpression$RuleMemoStart, relationalExpression$RuleMemoEnd, true, false);
+               if (comparisonExpression$RuleMemoStart == comparisonExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.COMPARISON_EXPRESSION, comparisonExpression$RuleMemoStart, comparisonExpression$RuleMemoEnd, true, false);
                   lastNode.setSibling(currentNode);
-               } else if(relationalExpression$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(relationalExpression$RuleMemoFirstNode);
-                  currentNode = relationalExpression$RuleMemoLastNode;
+               } else if(comparisonExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(comparisonExpression$RuleMemoFirstNode);
+                  currentNode = comparisonExpression$RuleMemoLastNode;
                }
             }
             return true;
@@ -20662,34 +23277,34 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       startIndex = index;
-      // (PrimaryExpression RelationalOperator Expression)
+      // (PrimaryExpression ComparisonOperator Expression)
       // PrimaryExpression
       match = primaryExpression$Rule();
       if (match) {
-         // RelationalOperator
-         match = relationalOperator$Rule();
+         // ComparisonOperator
+         match = comparisonOperator$Rule();
          if (match) {
             // Expression
             match = expression$Rule();
          }
       }
       if (match) {
-         relationalExpression$RuleMemoStart = startIndex;
-         relationalExpression$RuleMemoEnd = index;
+         comparisonExpression$RuleMemoStart = startIndex;
+         comparisonExpression$RuleMemoEnd = index;
          if (currentRuleIsAtomic) {
-            relationalExpression$RuleMemoFirstNode = null;
+            comparisonExpression$RuleMemoFirstNode = null;
          } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.RELATIONAL_EXPRESSION, startIndex, index, true, false);
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.COMPARISON_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
-            relationalExpression$RuleMemoFirstNode = currentNode;
-            relationalExpression$RuleMemoLastNode = currentNode;
+            comparisonExpression$RuleMemoFirstNode = currentNode;
+            comparisonExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
-         relationalExpression$RuleMemoStart = startIndex;
-         relationalExpression$RuleMemoEnd = -1;
-         relationalExpression$RuleMemoFirstNode = null;
+         comparisonExpression$RuleMemoStart = startIndex;
+         comparisonExpression$RuleMemoEnd = -1;
+         comparisonExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -20697,178 +23312,18 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //MathOperator : (PlusSign | MinusSign | ('**' OptionalSpacing) | ('*' OptionalSpacing) | ('/' OptionalSpacing) | ('%' OptionalSpacing) | ('^^' OptionalSpacing) | ('^' OptionalSpacing) | ('|' OptionalSpacing) | ('&' OptionalSpacing) | ('<<' OptionalSpacing) | ('>>' OptionalSpacing))
+   //MathOperator : (MathOperatorOnly OptionalSpacing)
    protected boolean mathOperator$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
       startIndex = index;
-      // (PlusSign | MinusSign | ('**' OptionalSpacing) | ('*' OptionalSpacing) | ('/' OptionalSpacing) | ('%' OptionalSpacing) | ('^^' OptionalSpacing) | ('^' OptionalSpacing) | ('|' OptionalSpacing) | ('&' OptionalSpacing) | ('<<' OptionalSpacing) | ('>>' OptionalSpacing))
-      // PlusSign
-      match = plusSign$Rule();
-      if (! match) {
-         // MinusSign
-         match = minusSign$Rule();
-         if (! match) {
-            // ('**' OptionalSpacing)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
-            // '**'
-            match = stringMatcher("**", 2);
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
-            }
-            if (! match) {
-               // ('*' OptionalSpacing)
-               Node lastNode_2 = currentNode;
-               int lastIndex_2 = index;
-               // '*'
-               match = charMatcher('*');
-               if (match) {
-                  // OptionalSpacing
-                  match = optionalSpacing$Rule();
-                  if (! match) {
-                     index = lastIndex_2;
-                     lastNode_2.setSibling(null);
-                     currentNode = lastNode_2;
-                  }
-               }
-               if (! match) {
-                  // ('/' OptionalSpacing)
-                  Node lastNode_3 = currentNode;
-                  int lastIndex_3 = index;
-                  // '/'
-                  match = charMatcher('/');
-                  if (match) {
-                     // OptionalSpacing
-                     match = optionalSpacing$Rule();
-                     if (! match) {
-                        index = lastIndex_3;
-                        lastNode_3.setSibling(null);
-                        currentNode = lastNode_3;
-                     }
-                  }
-                  if (! match) {
-                     // ('%' OptionalSpacing)
-                     Node lastNode_4 = currentNode;
-                     int lastIndex_4 = index;
-                     // '%'
-                     match = charMatcher('%');
-                     if (match) {
-                        // OptionalSpacing
-                        match = optionalSpacing$Rule();
-                        if (! match) {
-                           index = lastIndex_4;
-                           lastNode_4.setSibling(null);
-                           currentNode = lastNode_4;
-                        }
-                     }
-                     if (! match) {
-                        // ('^^' OptionalSpacing)
-                        Node lastNode_5 = currentNode;
-                        int lastIndex_5 = index;
-                        // '^^'
-                        match = stringMatcher("^^", 2);
-                        if (match) {
-                           // OptionalSpacing
-                           match = optionalSpacing$Rule();
-                           if (! match) {
-                              index = lastIndex_5;
-                              lastNode_5.setSibling(null);
-                              currentNode = lastNode_5;
-                           }
-                        }
-                        if (! match) {
-                           // ('^' OptionalSpacing)
-                           Node lastNode_6 = currentNode;
-                           int lastIndex_6 = index;
-                           // '^'
-                           match = charMatcher('^');
-                           if (match) {
-                              // OptionalSpacing
-                              match = optionalSpacing$Rule();
-                              if (! match) {
-                                 index = lastIndex_6;
-                                 lastNode_6.setSibling(null);
-                                 currentNode = lastNode_6;
-                              }
-                           }
-                           if (! match) {
-                              // ('|' OptionalSpacing)
-                              Node lastNode_7 = currentNode;
-                              int lastIndex_7 = index;
-                              // '|'
-                              match = charMatcher('|');
-                              if (match) {
-                                 // OptionalSpacing
-                                 match = optionalSpacing$Rule();
-                                 if (! match) {
-                                    index = lastIndex_7;
-                                    lastNode_7.setSibling(null);
-                                    currentNode = lastNode_7;
-                                 }
-                              }
-                              if (! match) {
-                                 // ('&' OptionalSpacing)
-                                 Node lastNode_8 = currentNode;
-                                 int lastIndex_8 = index;
-                                 // '&'
-                                 match = charMatcher('&');
-                                 if (match) {
-                                    // OptionalSpacing
-                                    match = optionalSpacing$Rule();
-                                    if (! match) {
-                                       index = lastIndex_8;
-                                       lastNode_8.setSibling(null);
-                                       currentNode = lastNode_8;
-                                    }
-                                 }
-                                 if (! match) {
-                                    // ('<<' OptionalSpacing)
-                                    Node lastNode_9 = currentNode;
-                                    int lastIndex_9 = index;
-                                    // '<<'
-                                    match = stringMatcher("<<", 2);
-                                    if (match) {
-                                       // OptionalSpacing
-                                       match = optionalSpacing$Rule();
-                                       if (! match) {
-                                          index = lastIndex_9;
-                                          lastNode_9.setSibling(null);
-                                          currentNode = lastNode_9;
-                                       }
-                                    }
-                                    if (! match) {
-                                       // ('>>' OptionalSpacing)
-                                       Node lastNode_10 = currentNode;
-                                       int lastIndex_10 = index;
-                                       // '>>'
-                                       match = stringMatcher(">>", 2);
-                                       if (match) {
-                                          // OptionalSpacing
-                                          match = optionalSpacing$Rule();
-                                          if (! match) {
-                                             index = lastIndex_10;
-                                             lastNode_10.setSibling(null);
-                                             currentNode = lastNode_10;
-                                          }
-                                       }
-                                    }
-                                 }
-                              }
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-         }
+      // (MathOperatorOnly OptionalSpacing)
+      // MathOperatorOnly
+      match = mathOperatorOnly$Rule();
+      if (match) {
+         // OptionalSpacing
+         match = optionalSpacing$Rule();
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -20878,6 +23333,91 @@ public class HarbourUnprocessedParser implements Parser {
          }
          return true;
       } else {
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //MathOperatorOnly : (PlusSign | MinusSign | '**' | '*' | '/' | '%' | '^^' | '^' | '|' | '&' | '<<' | '>>')
+   protected boolean mathOperatorOnly$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      currentRuleIsAtomic = true;
+      startIndex = index;
+      // (PlusSign | MinusSign | '**' | '*' | '/' | '%' | '^^' | '^' | '|' | '&' | '<<' | '>>')
+      // ('+' '+'!)
+      // '+'
+      match = charMatcher('+');
+      if (match) {
+         // '+'!
+         // '+'
+         match = buffer.matchChar(index, '+');
+         match = ! match;
+      }
+      if (! match) {
+         // ('-' '-'!)
+         // '-'
+         match = charMatcher('-');
+         if (match) {
+            // '-'!
+            // '-'
+            match = buffer.matchChar(index, '-');
+            match = ! match;
+         }
+         if (! match) {
+            // '**'
+            match = stringMatcher("**", 2);
+            if (! match) {
+               // '*'
+               match = charMatcher('*');
+               if (! match) {
+                  // '/'
+                  match = charMatcher('/');
+                  if (! match) {
+                     // '%'
+                     match = charMatcher('%');
+                     if (! match) {
+                        // '^^'
+                        match = stringMatcher("^^", 2);
+                        if (! match) {
+                           // '^'
+                           match = charMatcher('^');
+                           if (! match) {
+                              // '|'
+                              match = charMatcher('|');
+                              if (! match) {
+                                 // '&'
+                                 match = charMatcher('&');
+                                 if (! match) {
+                                    // '<<'
+                                    match = stringMatcher("<<", 2);
+                                    if (! match) {
+                                       // '>>'
+                                       match = stringMatcher(">>", 2);
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+      if (match) {
+         currentRuleIsAtomic = lastRuleIsAtomic;
+         if (! currentRuleIsAtomic) {
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.MATH_OPERATOR, startIndex, index, true, false);
+            lastNode.setSibling(currentNode);
+         }
+         return true;
+      } else {
+         currentRuleIsAtomic = lastRuleIsAtomic;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -20997,7 +23537,7 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //PostfixedExpression : (PrimaryExpression PostfixOperator+)
+   //PostfixedExpression : ((QualifiedExpression | AtomicExpression) PostfixOperator+)
    protected boolean postfixedExpression$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -21020,9 +23560,90 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       startIndex = index;
-      // (PrimaryExpression PostfixOperator+)
-      // PrimaryExpression
-      match = primaryExpression$Rule();
+      // ((QualifiedExpression | AtomicExpression) PostfixOperator+)
+      // (QualifiedExpression | AtomicExpression)
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case '&':
+         case '\'':
+         case '(':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case ':':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '[':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '{':
+            // QualifiedExpression
+            match = qualifiedExpression$Rule();
+            if (! match) {
+               // AtomicExpression
+               match = atomicExpression$Rule();
+            }
+            break;
+         default:
+            match = false;
+      }
       if (match) {
          // PostfixOperator+
          // PostfixOperator
@@ -21059,7 +23680,7 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //PrimaryExpression : (QualifiedExpression | AtomicExpression)
+   //PrimaryExpression : (PrefixedExpression | PostfixedExpression | QualifiedExpression | AtomicExpression)
    protected boolean primaryExpression$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -21082,12 +23703,113 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       startIndex = index;
-      // (QualifiedExpression | AtomicExpression)
-      // QualifiedExpression
-      match = qualifiedExpression$Rule();
-      if (! match) {
-         // AtomicExpression
-         match = atomicExpression$Rule();
+      // (PrefixedExpression | PostfixedExpression | QualifiedExpression | AtomicExpression)
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '+':
+         case '-':
+            // PrefixedExpression
+            match = prefixedExpression$Rule();
+            break;
+         case '.':
+            // PrefixedExpression
+            match = prefixedExpression$Rule();
+            if (! match) {
+               // PostfixedExpression
+               match = postfixedExpression$Rule();
+               if (! match) {
+                  // QualifiedExpression
+                  match = qualifiedExpression$Rule();
+                  if (! match) {
+                     // AtomicExpression
+                     match = atomicExpression$Rule();
+                  }
+               }
+            }
+            break;
+         case '\"':
+         case '&':
+         case '\'':
+         case '(':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case ':':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '[':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '{':
+            // PostfixedExpression
+            match = postfixedExpression$Rule();
+            if (! match) {
+               // QualifiedExpression
+               match = qualifiedExpression$Rule();
+               if (! match) {
+                  // AtomicExpression
+                  match = atomicExpression$Rule();
+               }
+            }
+            break;
+         default:
+            match = false;
       }
       if (match) {
          primaryExpression$RuleMemoStart = startIndex;
@@ -21113,174 +23835,18 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //PlusSign : ('+' '+'! OptionalSpacing)
-   protected boolean plusSign$Rule() {
-      Node lastNode = currentNode;
-      int startIndex;
-      boolean match;
-      if (plusSign$RuleMemoStart == index) {
-         if (plusSign$RuleMemoStart <= plusSign$RuleMemoEnd) {
-            index = plusSign$RuleMemoEnd;
-            if (! currentRuleIsAtomic) {
-               if (plusSign$RuleMemoStart == plusSign$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.PLUS_SIGN, plusSign$RuleMemoStart, plusSign$RuleMemoEnd, true, true);
-                  lastNode.setSibling(currentNode);
-               } else if(plusSign$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(plusSign$RuleMemoFirstNode);
-                  currentNode = plusSign$RuleMemoLastNode;
-               }
-            }
-            return true;
-         } else {
-            return false;
-         }
-      }
-      startIndex = index;
-      // ('+' '+'! OptionalSpacing)
-      // '+'
-      match = charMatcher('+');
-      if (match) {
-         // '+'!
-         // '+'
-         match = buffer.matchChar(index, '+');
-         match = ! match;
-         if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
-         }
-      }
-      if (match) {
-         plusSign$RuleMemoStart = startIndex;
-         plusSign$RuleMemoEnd = index;
-         if (currentRuleIsAtomic) {
-            plusSign$RuleMemoFirstNode = null;
-         } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.PLUS_SIGN, startIndex, index, true, true);
-            currentNode.setFirstChild(lastNode.getSibling());
-            lastNode.setSibling(currentNode);
-            plusSign$RuleMemoFirstNode = currentNode;
-            plusSign$RuleMemoLastNode = currentNode;
-         }
-         return true;
-      } else {
-         plusSign$RuleMemoStart = startIndex;
-         plusSign$RuleMemoEnd = -1;
-         plusSign$RuleMemoFirstNode = null;
-         index = startIndex;
-         lastNode.setSibling(null);
-         currentNode = lastNode;
-         return false;
-      }
-   }
-
-   //MinusSign : ('-' '-'! OptionalSpacing)
-   protected boolean minusSign$Rule() {
-      Node lastNode = currentNode;
-      int startIndex;
-      boolean match;
-      if (minusSign$RuleMemoStart == index) {
-         if (minusSign$RuleMemoStart <= minusSign$RuleMemoEnd) {
-            index = minusSign$RuleMemoEnd;
-            if (! currentRuleIsAtomic) {
-               if (minusSign$RuleMemoStart == minusSign$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.MINUS_SIGN, minusSign$RuleMemoStart, minusSign$RuleMemoEnd, true, true);
-                  lastNode.setSibling(currentNode);
-               } else if(minusSign$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(minusSign$RuleMemoFirstNode);
-                  currentNode = minusSign$RuleMemoLastNode;
-               }
-            }
-            return true;
-         } else {
-            return false;
-         }
-      }
-      startIndex = index;
-      // ('-' '-'! OptionalSpacing)
-      // '-'
-      match = charMatcher('-');
-      if (match) {
-         // '-'!
-         // '-'
-         match = buffer.matchChar(index, '-');
-         match = ! match;
-         if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
-         }
-      }
-      if (match) {
-         minusSign$RuleMemoStart = startIndex;
-         minusSign$RuleMemoEnd = index;
-         if (currentRuleIsAtomic) {
-            minusSign$RuleMemoFirstNode = null;
-         } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.MINUS_SIGN, startIndex, index, true, true);
-            currentNode.setFirstChild(lastNode.getSibling());
-            lastNode.setSibling(currentNode);
-            minusSign$RuleMemoFirstNode = currentNode;
-            minusSign$RuleMemoLastNode = currentNode;
-         }
-         return true;
-      } else {
-         minusSign$RuleMemoStart = startIndex;
-         minusSign$RuleMemoEnd = -1;
-         minusSign$RuleMemoFirstNode = null;
-         index = startIndex;
-         lastNode.setSibling(null);
-         currentNode = lastNode;
-         return false;
-      }
-   }
-
-   //PrefixOperator : (('++' OptionalSpacing) | ('--' OptionalSpacing) | NotOperator | PlusSign | MinusSign)
+   //PrefixOperator : (PrefixOperatorOnly OptionalSpacing)
    protected boolean prefixOperator$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
       startIndex = index;
-      // (('++' OptionalSpacing) | ('--' OptionalSpacing) | NotOperator | PlusSign | MinusSign)
-      // ('++' OptionalSpacing)
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // '++'
-      match = stringMatcher("++", 2);
+      // (PrefixOperatorOnly OptionalSpacing)
+      // PrefixOperatorOnly
+      match = prefixOperatorOnly$Rule();
       if (match) {
          // OptionalSpacing
          match = optionalSpacing$Rule();
-         if (! match) {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-         }
-      }
-      if (! match) {
-         // ('--' OptionalSpacing)
-         Node lastNode_2 = currentNode;
-         int lastIndex_2 = index;
-         // '--'
-         match = stringMatcher("--", 2);
-         if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
-            if (! match) {
-               index = lastIndex_2;
-               lastNode_2.setSibling(null);
-               currentNode = lastNode_2;
-            }
-         }
-         if (! match) {
-            // NotOperator
-            match = notOperator$Rule();
-            if (! match) {
-               // PlusSign
-               match = plusSign$Rule();
-               if (! match) {
-                  // MinusSign
-                  match = minusSign$Rule();
-               }
-            }
-         }
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -21297,23 +23863,113 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //PostfixOperator : (('++' | '--') OptionalSpacing)
+   //PrefixOperatorOnly : ('++' | '--' | NotOperator | PlusSign | MinusSign)
+   protected boolean prefixOperatorOnly$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      currentRuleIsAtomic = true;
+      startIndex = index;
+      // ('++' | '--' | NotOperator | PlusSign | MinusSign)
+      // '++'
+      match = stringMatcher("++", 2);
+      if (! match) {
+         // '--'
+         match = stringMatcher("--", 2);
+         if (! match) {
+            // (".not." | ('!' '='!))
+            // ".not."
+            match = ignoreCaseStringMatcher(".not.", 5);
+            if (! match) {
+               // ('!' '='!)
+               // '!'
+               match = charMatcher('!');
+               if (match) {
+                  // '='!
+                  // '='
+                  match = buffer.matchChar(index, '=');
+                  match = ! match;
+               }
+            }
+            if (! match) {
+               // ('+' '+'!)
+               // '+'
+               match = charMatcher('+');
+               if (match) {
+                  // '+'!
+                  // '+'
+                  match = buffer.matchChar(index, '+');
+                  match = ! match;
+               }
+               if (! match) {
+                  // ('-' '-'!)
+                  // '-'
+                  match = charMatcher('-');
+                  if (match) {
+                     // '-'!
+                     // '-'
+                     match = buffer.matchChar(index, '-');
+                     match = ! match;
+                  }
+               }
+            }
+         }
+      }
+      if (match) {
+         currentRuleIsAtomic = lastRuleIsAtomic;
+         if (! currentRuleIsAtomic) {
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.PREFIX_OPERATOR, startIndex, index, true, false);
+            lastNode.setSibling(currentNode);
+         }
+         return true;
+      } else {
+         currentRuleIsAtomic = lastRuleIsAtomic;
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //PostfixOperator : (PostfixOperatorOnly OptionalSpacing)
    protected boolean postfixOperator$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
       startIndex = index;
-      // (('++' | '--') OptionalSpacing)
+      // (PostfixOperatorOnly OptionalSpacing)
+      // PostfixOperatorOnly
+      match = postfixOperatorOnly$Rule();
+      if (match) {
+         // OptionalSpacing
+         match = optionalSpacing$Rule();
+      }
+      if (match) {
+         if (! currentRuleIsAtomic) {
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.POSTFIX_OPERATOR, startIndex, index, true, true);
+            currentNode.setFirstChild(lastNode.getSibling());
+            lastNode.setSibling(currentNode);
+         }
+         return true;
+      } else {
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //PostfixOperatorOnly : ('++' | '--')
+   protected boolean postfixOperatorOnly$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      currentRuleIsAtomic = true;
+      startIndex = index;
       // ('++' | '--')
-      int startIndex_1 = index;
       switch(buffer.getChar(index)) {
-         case '-':
-            ++index;
-            // '-'
-            if (match = buffer.matchChar(index, '-')) {
-               ++index;
-            }
-            break;
          case '+':
             ++index;
             // '+'
@@ -21321,27 +23977,25 @@ public class HarbourUnprocessedParser implements Parser {
                ++index;
             }
             break;
+         case '-':
+            ++index;
+            // '-'
+            if (match = buffer.matchChar(index, '-')) {
+               ++index;
+            }
+            break;
          default:
             match = false;
       }
-      if (! match) {
-         index = startIndex_1;
-      } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
-         currentNode = currentNode.getSibling();
-      }
       if (match) {
-         // OptionalSpacing
-         match = optionalSpacing$Rule();
-      }
-      if (match) {
+         currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
             currentNode = new NodeImpl(HarbourUnprocessedRuleType.POSTFIX_OPERATOR, startIndex, index, true, false);
-            currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
          }
          return true;
       } else {
+         currentRuleIsAtomic = lastRuleIsAtomic;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -21373,23 +24027,303 @@ public class HarbourUnprocessedParser implements Parser {
       }
       startIndex = index;
       // (SelfExpression | ArrayAccess | AliasedExpression | AliasedField | AliasedMacro | Literal | IfInLine | MacroFunctionCall | AnySimpleFunctionCall | Macro | ParenthesesExpressionList | KeyboardCall | ClearTypehead | Variable)
-      // SelfExpression
-      match = selfExpression$Rule();
-      if (! match) {
-         // ArrayAccess
-         match = arrayAccess$Rule();
-         if (! match) {
-            // AliasedExpression
-            match = aliasedExpression$Rule();
+      switch(buffer.getChar(index)) {
+         case 'K':
+         case 'k':
+            // ArrayAccess
+            match = arrayAccess$Rule();
             if (! match) {
-               // AliasedField
-               match = aliasedField$Rule();
+               // AliasedExpression
+               match = aliasedExpression$Rule();
                if (! match) {
-                  // AliasedMacro
-                  match = aliasedMacro$Rule();
+                  // AliasedField
+                  match = aliasedField$Rule();
                   if (! match) {
-                     // Literal
-                     match = literal$Rule();
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                     if (! match) {
+                        // MacroFunctionCall
+                        match = macroFunctionCall$Rule();
+                        if (! match) {
+                           // AnySimpleFunctionCall
+                           match = anySimpleFunctionCall$Rule();
+                           if (! match) {
+                              // Macro
+                              match = macro$Rule();
+                              if (! match) {
+                                 // KeyboardCall
+                                 match = keyboardCall$Rule();
+                                 if (! match) {
+                                    // Variable
+                                    match = variable$Rule();
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case '\"':
+         case '\'':
+         case '[':
+         case '{':
+            // ArrayAccess
+            match = arrayAccess$Rule();
+            if (! match) {
+               // Literal
+               match = literal$Rule();
+            }
+            break;
+         case '.':
+            // Literal
+            match = literal$Rule();
+            break;
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+            // ArrayAccess
+            match = arrayAccess$Rule();
+            if (! match) {
+               // AliasedExpression
+               match = aliasedExpression$Rule();
+               if (! match) {
+                  // AliasedField
+                  match = aliasedField$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                     if (! match) {
+                        // Literal
+                        match = literal$Rule();
+                        if (! match) {
+                           // MacroFunctionCall
+                           match = macroFunctionCall$Rule();
+                           if (! match) {
+                              // Macro
+                              match = macro$Rule();
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'A':
+         case 'B':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'J':
+         case 'L':
+         case 'M':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'j':
+         case 'l':
+         case 'm':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+            // ArrayAccess
+            match = arrayAccess$Rule();
+            if (! match) {
+               // AliasedExpression
+               match = aliasedExpression$Rule();
+               if (! match) {
+                  // AliasedField
+                  match = aliasedField$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                     if (! match) {
+                        // MacroFunctionCall
+                        match = macroFunctionCall$Rule();
+                        if (! match) {
+                           // AnySimpleFunctionCall
+                           match = anySimpleFunctionCall$Rule();
+                           if (! match) {
+                              // Macro
+                              match = macro$Rule();
+                              if (! match) {
+                                 // Variable
+                                 match = variable$Rule();
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'C':
+         case 'c':
+            // ArrayAccess
+            match = arrayAccess$Rule();
+            if (! match) {
+               // AliasedExpression
+               match = aliasedExpression$Rule();
+               if (! match) {
+                  // AliasedField
+                  match = aliasedField$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                     if (! match) {
+                        // MacroFunctionCall
+                        match = macroFunctionCall$Rule();
+                        if (! match) {
+                           // AnySimpleFunctionCall
+                           match = anySimpleFunctionCall$Rule();
+                           if (! match) {
+                              // Macro
+                              match = macro$Rule();
+                              if (! match) {
+                                 // ClearTypehead
+                                 match = clearTypehead$Rule();
+                                 if (! match) {
+                                    // Variable
+                                    match = variable$Rule();
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'D':
+         case 'd':
+         case 'E':
+         case 'e':
+         case 'N':
+         case 'n':
+            // ArrayAccess
+            match = arrayAccess$Rule();
+            if (! match) {
+               // AliasedExpression
+               match = aliasedExpression$Rule();
+               if (! match) {
+                  // AliasedField
+                  match = aliasedField$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                     if (! match) {
+                        // Literal
+                        match = literal$Rule();
+                        if (! match) {
+                           // MacroFunctionCall
+                           match = macroFunctionCall$Rule();
+                           if (! match) {
+                              // AnySimpleFunctionCall
+                              match = anySimpleFunctionCall$Rule();
+                              if (! match) {
+                                 // Macro
+                                 match = macro$Rule();
+                                 if (! match) {
+                                    // Variable
+                                    match = variable$Rule();
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case '&':
+            // ArrayAccess
+            match = arrayAccess$Rule();
+            if (! match) {
+               // AliasedExpression
+               match = aliasedExpression$Rule();
+               if (! match) {
+                  // AliasedField
+                  match = aliasedField$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                     if (! match) {
+                        // MacroFunctionCall
+                        match = macroFunctionCall$Rule();
+                        if (! match) {
+                           // Macro
+                           match = macro$Rule();
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case '(':
+            // ArrayAccess
+            match = arrayAccess$Rule();
+            if (! match) {
+               // AliasedExpression
+               match = aliasedExpression$Rule();
+               if (! match) {
+                  // AliasedField
+                  match = aliasedField$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                     if (! match) {
+                        // ParenthesesExpressionList
+                        match = parenthesesExpressionList$Rule();
+                     }
+                  }
+               }
+            }
+            break;
+         case 'I':
+         case 'i':
+            // ArrayAccess
+            match = arrayAccess$Rule();
+            if (! match) {
+               // AliasedExpression
+               match = aliasedExpression$Rule();
+               if (! match) {
+                  // AliasedField
+                  match = aliasedField$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
                      if (! match) {
                         // IfInLine
                         match = ifInLine$Rule();
@@ -21403,20 +24337,8 @@ public class HarbourUnprocessedParser implements Parser {
                                  // Macro
                                  match = macro$Rule();
                                  if (! match) {
-                                    // ParenthesesExpressionList
-                                    match = parenthesesExpressionList$Rule();
-                                    if (! match) {
-                                       // KeyboardCall
-                                       match = keyboardCall$Rule();
-                                       if (! match) {
-                                          // ClearTypehead
-                                          match = clearTypehead$Rule();
-                                          if (! match) {
-                                             // Variable
-                                             match = variable$Rule();
-                                          }
-                                       }
-                                    }
+                                    // Variable
+                                    match = variable$Rule();
                                  }
                               }
                            }
@@ -21425,7 +24347,13 @@ public class HarbourUnprocessedParser implements Parser {
                   }
                }
             }
-         }
+            break;
+         case ':':
+            // SelfExpression
+            match = selfExpression$Rule();
+            break;
+         default:
+            match = false;
       }
       if (match) {
          atomicExpression$RuleMemoStart = startIndex;
@@ -21608,12 +24536,129 @@ public class HarbourUnprocessedParser implements Parser {
       startIndex = index;
       // ((ArrayLiteral | HashLiteral | StringLiteral | AliasedExpression | AliasedField | AliasedMacro | IfInLine | MacroFunctionCall | AnySimpleFunctionCall | Macro | Variable) ArrayIndex)
       // (ArrayLiteral | HashLiteral | StringLiteral | AliasedExpression | AliasedField | AliasedMacro | IfInLine | MacroFunctionCall | AnySimpleFunctionCall | Macro | Variable)
-      // ArrayLiteral
-      match = arrayLiteral$Rule();
-      if (! match) {
-         // HashLiteral
-         match = hashLiteral$Rule();
-         if (! match) {
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case '\'':
+         case '[':
+            // StringLiteral
+            match = stringLiteral$Rule();
+            break;
+         case '{':
+            // ArrayLiteral
+            match = arrayLiteral$Rule();
+            if (! match) {
+               // HashLiteral
+               match = hashLiteral$Rule();
+            }
+            break;
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '&':
+         case '7':
+         case '8':
+         case '9':
+            // AliasedExpression
+            match = aliasedExpression$Rule();
+            if (! match) {
+               // AliasedField
+               match = aliasedField$Rule();
+               if (! match) {
+                  // AliasedMacro
+                  match = aliasedMacro$Rule();
+                  if (! match) {
+                     // MacroFunctionCall
+                     match = macroFunctionCall$Rule();
+                     if (! match) {
+                        // Macro
+                        match = macro$Rule();
+                     }
+                  }
+               }
+            }
+            break;
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+            // AliasedExpression
+            match = aliasedExpression$Rule();
+            if (! match) {
+               // AliasedField
+               match = aliasedField$Rule();
+               if (! match) {
+                  // AliasedMacro
+                  match = aliasedMacro$Rule();
+                  if (! match) {
+                     // MacroFunctionCall
+                     match = macroFunctionCall$Rule();
+                     if (! match) {
+                        // AnySimpleFunctionCall
+                        match = anySimpleFunctionCall$Rule();
+                        if (! match) {
+                           // Macro
+                           match = macro$Rule();
+                           if (! match) {
+                              // Variable
+                              match = variable$Rule();
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case 'E':
+         case 'e':
             // StringLiteral
             match = stringLiteral$Rule();
             if (! match) {
@@ -21626,21 +24671,17 @@ public class HarbourUnprocessedParser implements Parser {
                      // AliasedMacro
                      match = aliasedMacro$Rule();
                      if (! match) {
-                        // IfInLine
-                        match = ifInLine$Rule();
+                        // MacroFunctionCall
+                        match = macroFunctionCall$Rule();
                         if (! match) {
-                           // MacroFunctionCall
-                           match = macroFunctionCall$Rule();
+                           // AnySimpleFunctionCall
+                           match = anySimpleFunctionCall$Rule();
                            if (! match) {
-                              // AnySimpleFunctionCall
-                              match = anySimpleFunctionCall$Rule();
+                              // Macro
+                              match = macro$Rule();
                               if (! match) {
-                                 // Macro
-                                 match = macro$Rule();
-                                 if (! match) {
-                                    // Variable
-                                    match = variable$Rule();
-                                 }
+                                 // Variable
+                                 match = variable$Rule();
                               }
                            }
                         }
@@ -21648,7 +24689,54 @@ public class HarbourUnprocessedParser implements Parser {
                   }
                }
             }
-         }
+            break;
+         case '(':
+            // AliasedExpression
+            match = aliasedExpression$Rule();
+            if (! match) {
+               // AliasedField
+               match = aliasedField$Rule();
+               if (! match) {
+                  // AliasedMacro
+                  match = aliasedMacro$Rule();
+               }
+            }
+            break;
+         case 'I':
+         case 'i':
+            // AliasedExpression
+            match = aliasedExpression$Rule();
+            if (! match) {
+               // AliasedField
+               match = aliasedField$Rule();
+               if (! match) {
+                  // AliasedMacro
+                  match = aliasedMacro$Rule();
+                  if (! match) {
+                     // IfInLine
+                     match = ifInLine$Rule();
+                     if (! match) {
+                        // MacroFunctionCall
+                        match = macroFunctionCall$Rule();
+                        if (! match) {
+                           // AnySimpleFunctionCall
+                           match = anySimpleFunctionCall$Rule();
+                           if (! match) {
+                              // Macro
+                              match = macro$Rule();
+                              if (! match) {
+                                 // Variable
+                                 match = variable$Rule();
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         default:
+            match = false;
       }
       if (match) {
          // ArrayIndex
@@ -21702,31 +24790,154 @@ public class HarbourUnprocessedParser implements Parser {
       }
       startIndex = index;
       // (SelfExpression | QualifiedExpression | ArrayAccess | AliasedField | AliasedMacro | Macro | Variable)
-      // SelfExpression
-      match = selfExpression$Rule();
-      if (! match) {
-         // QualifiedExpression
-         match = qualifiedExpression$Rule();
-         if (! match) {
-            // ArrayAccess
-            match = arrayAccess$Rule();
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case '\'':
+         case '[':
+         case '{':
+            // QualifiedExpression
+            match = qualifiedExpression$Rule();
             if (! match) {
-               // AliasedField
-               match = aliasedField$Rule();
+               // ArrayAccess
+               match = arrayAccess$Rule();
+            }
+            break;
+         case '.':
+            // QualifiedExpression
+            match = qualifiedExpression$Rule();
+            break;
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '&':
+         case '7':
+         case '8':
+         case '9':
+            // QualifiedExpression
+            match = qualifiedExpression$Rule();
+            if (! match) {
+               // ArrayAccess
+               match = arrayAccess$Rule();
                if (! match) {
-                  // AliasedMacro
-                  match = aliasedMacro$Rule();
+                  // AliasedField
+                  match = aliasedField$Rule();
                   if (! match) {
-                     // Macro
-                     match = macro$Rule();
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
                      if (! match) {
-                        // Variable
-                        match = variable$Rule();
+                        // Macro
+                        match = macro$Rule();
                      }
                   }
                }
             }
-         }
+            break;
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+            // QualifiedExpression
+            match = qualifiedExpression$Rule();
+            if (! match) {
+               // ArrayAccess
+               match = arrayAccess$Rule();
+               if (! match) {
+                  // AliasedField
+                  match = aliasedField$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                     if (! match) {
+                        // Macro
+                        match = macro$Rule();
+                        if (! match) {
+                           // Variable
+                           match = variable$Rule();
+                        }
+                     }
+                  }
+               }
+            }
+            break;
+         case '(':
+            // QualifiedExpression
+            match = qualifiedExpression$Rule();
+            if (! match) {
+               // ArrayAccess
+               match = arrayAccess$Rule();
+               if (! match) {
+                  // AliasedField
+                  match = aliasedField$Rule();
+                  if (! match) {
+                     // AliasedMacro
+                     match = aliasedMacro$Rule();
+                  }
+               }
+            }
+            break;
+         case ':':
+            // SelfExpression
+            match = selfExpression$Rule();
+            if (! match) {
+               // QualifiedExpression
+               match = qualifiedExpression$Rule();
+            }
+            break;
+         default:
+            match = false;
       }
       if (match) {
          leftValue$RuleMemoStart = startIndex;
@@ -21745,214 +24956,6 @@ public class HarbourUnprocessedParser implements Parser {
          leftValue$RuleMemoStart = startIndex;
          leftValue$RuleMemoEnd = -1;
          leftValue$RuleMemoFirstNode = null;
-         index = startIndex;
-         lastNode.setSibling(null);
-         currentNode = lastNode;
-         return false;
-      }
-   }
-
-   //NotOperator : ((".not." | ('!' '='!)) OptionalSpacing)
-   protected boolean notOperator$Rule() {
-      Node lastNode = currentNode;
-      int startIndex;
-      boolean match;
-      if (notOperator$RuleMemoStart == index) {
-         if (notOperator$RuleMemoStart <= notOperator$RuleMemoEnd) {
-            index = notOperator$RuleMemoEnd;
-            if (! currentRuleIsAtomic) {
-               if (notOperator$RuleMemoStart == notOperator$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.NOT_OPERATOR, notOperator$RuleMemoStart, notOperator$RuleMemoEnd, true, false);
-                  lastNode.setSibling(currentNode);
-               } else if(notOperator$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(notOperator$RuleMemoFirstNode);
-                  currentNode = notOperator$RuleMemoLastNode;
-               }
-            }
-            return true;
-         } else {
-            return false;
-         }
-      }
-      startIndex = index;
-      // ((".not." | ('!' '='!)) OptionalSpacing)
-      // (".not." | ('!' '='!))
-      // ".not."
-      match = ignoreCaseStringMatcher(".not.", 5);
-      if (! match) {
-         // ('!' '='!)
-         Node lastNode_1 = currentNode;
-         int lastIndex_1 = index;
-         // '!'
-         match = charMatcher('!');
-         if (match) {
-            // '='!
-            // '='
-            match = buffer.matchChar(index, '=');
-            match = ! match;
-            if (! match) {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-               currentNode = lastNode_1;
-            }
-         }
-      }
-      if (match) {
-         // OptionalSpacing
-         match = optionalSpacing$Rule();
-      }
-      if (match) {
-         notOperator$RuleMemoStart = startIndex;
-         notOperator$RuleMemoEnd = index;
-         if (currentRuleIsAtomic) {
-            notOperator$RuleMemoFirstNode = null;
-         } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.NOT_OPERATOR, startIndex, index, true, false);
-            currentNode.setFirstChild(lastNode.getSibling());
-            lastNode.setSibling(currentNode);
-            notOperator$RuleMemoFirstNode = currentNode;
-            notOperator$RuleMemoLastNode = currentNode;
-         }
-         return true;
-      } else {
-         notOperator$RuleMemoStart = startIndex;
-         notOperator$RuleMemoEnd = -1;
-         notOperator$RuleMemoFirstNode = null;
-         index = startIndex;
-         lastNode.setSibling(null);
-         currentNode = lastNode;
-         return false;
-      }
-   }
-
-   //GreaterOperator : ('>' '='! OptionalSpacing)
-   protected boolean greaterOperator$Rule() {
-      Node lastNode = currentNode;
-      int startIndex;
-      boolean match;
-      if (greaterOperator$RuleMemoStart == index) {
-         if (greaterOperator$RuleMemoStart <= greaterOperator$RuleMemoEnd) {
-            index = greaterOperator$RuleMemoEnd;
-            if (! currentRuleIsAtomic) {
-               if (greaterOperator$RuleMemoStart == greaterOperator$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.GREATER_OPERATOR, greaterOperator$RuleMemoStart, greaterOperator$RuleMemoEnd, true, true);
-                  lastNode.setSibling(currentNode);
-               } else if(greaterOperator$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(greaterOperator$RuleMemoFirstNode);
-                  currentNode = greaterOperator$RuleMemoLastNode;
-               }
-            }
-            return true;
-         } else {
-            return false;
-         }
-      }
-      startIndex = index;
-      // ('>' '='! OptionalSpacing)
-      // '>'
-      match = charMatcher('>');
-      if (match) {
-         // '='!
-         // '='
-         match = buffer.matchChar(index, '=');
-         match = ! match;
-         if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
-         }
-      }
-      if (match) {
-         greaterOperator$RuleMemoStart = startIndex;
-         greaterOperator$RuleMemoEnd = index;
-         if (currentRuleIsAtomic) {
-            greaterOperator$RuleMemoFirstNode = null;
-         } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.GREATER_OPERATOR, startIndex, index, true, true);
-            currentNode.setFirstChild(lastNode.getSibling());
-            lastNode.setSibling(currentNode);
-            greaterOperator$RuleMemoFirstNode = currentNode;
-            greaterOperator$RuleMemoLastNode = currentNode;
-         }
-         return true;
-      } else {
-         greaterOperator$RuleMemoStart = startIndex;
-         greaterOperator$RuleMemoEnd = -1;
-         greaterOperator$RuleMemoFirstNode = null;
-         index = startIndex;
-         lastNode.setSibling(null);
-         currentNode = lastNode;
-         return false;
-      }
-   }
-
-   //LessOperator : ('<' ('=' | '>')! OptionalSpacing)
-   protected boolean lessOperator$Rule() {
-      Node lastNode = currentNode;
-      int startIndex;
-      boolean match;
-      if (lessOperator$RuleMemoStart == index) {
-         if (lessOperator$RuleMemoStart <= lessOperator$RuleMemoEnd) {
-            index = lessOperator$RuleMemoEnd;
-            if (! currentRuleIsAtomic) {
-               if (lessOperator$RuleMemoStart == lessOperator$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.LESS_OPERATOR, lessOperator$RuleMemoStart, lessOperator$RuleMemoEnd, true, true);
-                  lastNode.setSibling(currentNode);
-               } else if(lessOperator$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(lessOperator$RuleMemoFirstNode);
-                  currentNode = lessOperator$RuleMemoLastNode;
-               }
-            }
-            return true;
-         } else {
-            return false;
-         }
-      }
-      startIndex = index;
-      // ('<' ('=' | '>')! OptionalSpacing)
-      // '<'
-      match = charMatcher('<');
-      if (match) {
-         // ('=' | '>')!
-         // ('=' | '>')
-         int startIndex_1 = index;
-         switch(buffer.getChar(index)) {
-            case '>':
-               ++index;
-               // <EMPTY>
-               match = true;
-               break;
-            case '=':
-               ++index;
-               // <EMPTY>
-               match = true;
-               break;
-            default:
-               match = false;
-         }
-         index = startIndex_1;
-         match = ! match;
-         if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
-         }
-      }
-      if (match) {
-         lessOperator$RuleMemoStart = startIndex;
-         lessOperator$RuleMemoEnd = index;
-         if (currentRuleIsAtomic) {
-            lessOperator$RuleMemoFirstNode = null;
-         } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.LESS_OPERATOR, startIndex, index, true, true);
-            currentNode.setFirstChild(lastNode.getSibling());
-            lastNode.setSibling(currentNode);
-            lessOperator$RuleMemoFirstNode = currentNode;
-            lessOperator$RuleMemoLastNode = currentNode;
-         }
-         return true;
-      } else {
-         lessOperator$RuleMemoStart = startIndex;
-         lessOperator$RuleMemoEnd = -1;
-         lessOperator$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -22131,18 +25134,11 @@ public class HarbourUnprocessedParser implements Parser {
       match = parametersDeclarationList$Rule();
       if (! match) {
          // ('...' OptionalSpacing)
-         Node lastNode_1 = currentNode;
-         int lastIndex_1 = index;
          // '...'
          match = stringMatcher("...", 3);
          if (match) {
             // OptionalSpacing
             match = optionalSpacing$Rule();
-            if (! match) {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-               currentNode = lastNode_1;
-            }
          }
          if (! match) {
             // ')'&
@@ -22165,7 +25161,99 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //FunctionModifier : (("static" | "stati" | "stat" | "init" | "exit") TestNoAlpha OptionalSpacing)
+   //FunctionModifiers : (("static" | "stati" | "stat" | "init" | "exit") TestNoAlpha OptionalSpacing)
+   protected boolean functionModifiers$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      startIndex = index;
+      // (("static" | "stati" | "stat" | "init" | "exit") TestNoAlpha OptionalSpacing)
+      // ("static" | "stati" | "stat" | "init" | "exit")
+      int startIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case 'i':
+         case 'I':
+            ++index;
+            // "nit"
+            if (match = ignoreCaseStringTest("nit", 3)) {
+               index += 3;
+            }
+            break;
+         case 's':
+         case 'S':
+            ++index;
+            // ("tatic" | "tati" | "tat")
+            if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
+               ++index;
+               // ("atic" | "ati" | "at")
+               if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+                  ++index;
+                  // ("tic" | "ti" | "t")
+                  if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
+                     ++index;
+                     // ("ic" | "i" | <EMPTY>)
+                     if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
+                        ++index;
+                        // "c"
+                        if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
+                           ++index;
+                        }
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
+                     }
+                  } else {
+                     match = false;
+                  }
+               } else {
+                  match = false;
+               }
+            } else {
+               match = false;
+            }
+            break;
+         case 'e':
+         case 'E':
+            ++index;
+            // "xit"
+            if (match = ignoreCaseStringTest("xit", 3)) {
+               index += 3;
+            }
+            break;
+         default:
+            match = false;
+      }
+      if (! match) {
+         index = startIndex_1;
+      } else if(! currentRuleIsAtomic) {
+         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode = currentNode.getSibling();
+      }
+      if (match) {
+         // TestNoAlpha
+         match = testNoAlpha$Rule();
+         if (match) {
+            // OptionalSpacing
+            match = optionalSpacing$Rule();
+         }
+      }
+      if (match) {
+         if (! currentRuleIsAtomic) {
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.FUNCTION_MODIFIERS, startIndex, index, true, true);
+            currentNode.setFirstChild(lastNode.getSibling());
+            lastNode.setSibling(currentNode);
+         }
+         return true;
+      } else {
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //FunctionModifier : FunctionModifiers?
    protected boolean functionModifier$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -22188,99 +25276,21 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       startIndex = index;
-      // (("static" | "stati" | "stat" | "init" | "exit") TestNoAlpha OptionalSpacing)
-      // ("static" | "stati" | "stat" | "init" | "exit")
-      int startIndex_1 = index;
-      switch(buffer.getChar(index)) {
-         case 'e':
-         case 'E':
-            ++index;
-            // "xit"
-            if (match = ignoreCaseStringTest("xit", 3)) {
-               index += 3;
-            }
-            break;
-         case 's':
-         case 'S':
-            ++index;
-            // ("tatic" | "tati" | "tat")
-            if (buffer.matchIgnoreCaseChar(index, 't')) {
-               ++index;
-               // ("atic" | "ati" | "at")
-               if (buffer.matchIgnoreCaseChar(index, 'a')) {
-                  ++index;
-                  // ("tic" | "ti" | "t")
-                  if (buffer.matchIgnoreCaseChar(index, 't')) {
-                     ++index;
-                     // ("ic" | "i" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'i')) {
-                        ++index;
-                        // "c"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
-                           ++index;
-                        }
-                        // <EMPTY>
-                        match = true;
-                     } else {
-                        match = true;
-                     }
-                  } else {
-                     match = false;
-                  }
-               } else {
-                  match = false;
-               }
-            } else {
-               match = false;
-            }
-            break;
-         case 'i':
-         case 'I':
-            ++index;
-            // "nit"
-            if (match = ignoreCaseStringTest("nit", 3)) {
-               index += 3;
-            }
-            break;
-         default:
-            match = false;
-      }
-      if (! match) {
-         index = startIndex_1;
-      } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
-         currentNode = currentNode.getSibling();
-      }
-      if (match) {
-         // TestNoAlpha
-         match = testNoAlpha$Rule();
-         if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
-         }
-      }
-      if (match) {
-         functionModifier$RuleMemoStart = startIndex;
-         functionModifier$RuleMemoEnd = index;
-         if (currentRuleIsAtomic) {
-            functionModifier$RuleMemoFirstNode = null;
-         } else {
-            currentNode = new NodeImpl(HarbourUnprocessedRuleType.FUNCTION_MODIFIER, startIndex, index, true, false);
-            currentNode.setFirstChild(lastNode.getSibling());
-            lastNode.setSibling(currentNode);
-            functionModifier$RuleMemoFirstNode = currentNode;
-            functionModifier$RuleMemoLastNode = currentNode;
-         }
-         return true;
-      } else {
-         functionModifier$RuleMemoStart = startIndex;
-         functionModifier$RuleMemoEnd = -1;
+      // FunctionModifiers?
+      // FunctionModifiers
+      functionModifiers$Rule();
+      functionModifier$RuleMemoStart = startIndex;
+      functionModifier$RuleMemoEnd = index;
+      if (currentRuleIsAtomic) {
          functionModifier$RuleMemoFirstNode = null;
-         index = startIndex;
-         lastNode.setSibling(null);
-         currentNode = lastNode;
-         return false;
+      } else {
+         currentNode = new NodeImpl(HarbourUnprocessedRuleType.FUNCTION_MODIFIER, startIndex, index, true, false);
+         currentNode.setFirstChild(lastNode.getSibling());
+         lastNode.setSibling(currentNode);
+         functionModifier$RuleMemoFirstNode = currentNode;
+         functionModifier$RuleMemoLastNode = currentNode;
       }
+      return true;
    }
 
    //StringLiteral : (StringPattern OptionalSpacing)
@@ -22346,118 +25356,20 @@ public class HarbourUnprocessedParser implements Parser {
       currentRuleIsAtomic = true;
       startIndex = index;
       // (('"' (('\n' | '"')! .)* '"') | (''' (('\n' | ''')! .)* ''') | ('[' (('\n' | ']')! .)* ']') | ("e" '"' (('\' '\n'! .) | (('\n' | '"')! .))* '"'))
-      // ('"' (('\n' | '"')! .)* '"')
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // '"'
-      match = charMatcher('\"');
-      if (match) {
-         // (('\n' | '"')! .)*
-         do {
-            // (('\n' | '"')! .)
-            Node lastNode_2 = currentNode;
-            int lastIndex_2 = index;
-            // ('\n' | '"')!
-            // ('\n' | '"')
-            int startIndex_3 = index;
-            switch(buffer.getChar(index)) {
-               case '\"':
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               case '\n':
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               default:
-                  match = false;
-            }
-            index = startIndex_3;
-            match = ! match;
-            if (match) {
-               // .
-               match = anyCharMatcher();
-               if (! match) {
-                  index = lastIndex_2;
-                  lastNode_2.setSibling(null);
-                  currentNode = lastNode_2;
-               }
-            }
-         } while(match);
-         // '"'
-         match = charMatcher('\"');
-         if (! match) {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-         }
-      }
-      if (! match) {
-         // (''' (('\n' | ''')! .)* ''')
-         Node lastNode_4 = currentNode;
-         int lastIndex_4 = index;
-         // '''
-         match = charMatcher('\'');
-         if (match) {
-            // (('\n' | ''')! .)*
-            do {
-               // (('\n' | ''')! .)
-               Node lastNode_5 = currentNode;
-               int lastIndex_5 = index;
-               // ('\n' | ''')!
-               // ('\n' | ''')
-               int startIndex_6 = index;
-               switch(buffer.getChar(index)) {
-                  case '\'':
-                     ++index;
-                     // <EMPTY>
-                     match = true;
-                     break;
-                  case '\n':
-                     ++index;
-                     // <EMPTY>
-                     match = true;
-                     break;
-                  default:
-                     match = false;
-               }
-               index = startIndex_6;
-               match = ! match;
-               if (match) {
-                  // .
-                  match = anyCharMatcher();
-                  if (! match) {
-                     index = lastIndex_5;
-                     lastNode_5.setSibling(null);
-                     currentNode = lastNode_5;
-                  }
-               }
-            } while(match);
-            // '''
-            match = charMatcher('\'');
-            if (! match) {
-               index = lastIndex_4;
-               lastNode_4.setSibling(null);
-               currentNode = lastNode_4;
-            }
-         }
-         if (! match) {
+      switch(buffer.getChar(index)) {
+         case '[':
             // ('[' (('\n' | ']')! .)* ']')
-            Node lastNode_7 = currentNode;
-            int lastIndex_7 = index;
             // '['
             match = charMatcher('[');
             if (match) {
                // (('\n' | ']')! .)*
                do {
                   // (('\n' | ']')! .)
-                  Node lastNode_8 = currentNode;
-                  int lastIndex_8 = index;
+                  Node lastNode_1 = currentNode;
+                  int lastIndex_1 = index;
                   // ('\n' | ']')!
                   // ('\n' | ']')
-                  int startIndex_9 = index;
+                  int startIndex_2 = index;
                   switch(buffer.getChar(index)) {
                      case ']':
                         ++index;
@@ -22472,69 +25384,149 @@ public class HarbourUnprocessedParser implements Parser {
                      default:
                         match = false;
                   }
-                  index = startIndex_9;
+                  index = startIndex_2;
                   match = ! match;
                   if (match) {
                      // .
                      match = anyCharMatcher();
                      if (! match) {
-                        index = lastIndex_8;
-                        lastNode_8.setSibling(null);
-                        currentNode = lastNode_8;
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
                      }
                   }
                } while(match);
-               // ']'
-               match = charMatcher(']');
-               if (! match) {
-                  index = lastIndex_7;
-                  lastNode_7.setSibling(null);
-                  currentNode = lastNode_7;
+               match = true;
+               if (match) {
+                  // ']'
+                  match = charMatcher(']');
                }
             }
-            if (! match) {
-               // ("e" '"' (('\' '\n'! .) | (('\n' | '"')! .))* '"')
-               Node lastNode_10 = currentNode;
-               int lastIndex_10 = index;
-               // "e"
-               match = ignoreCaseCharMatcher('e');
+            break;
+         case '\"':
+            // ('"' (('\n' | '"')! .)* '"')
+            // '"'
+            match = charMatcher('\"');
+            if (match) {
+               // (('\n' | '"')! .)*
+               do {
+                  // (('\n' | '"')! .)
+                  Node lastNode_3 = currentNode;
+                  int lastIndex_3 = index;
+                  // ('\n' | '"')!
+                  // ('\n' | '"')
+                  int startIndex_4 = index;
+                  switch(buffer.getChar(index)) {
+                     case '\"':
+                        ++index;
+                        // <EMPTY>
+                        match = true;
+                        break;
+                     case '\n':
+                        ++index;
+                        // <EMPTY>
+                        match = true;
+                        break;
+                     default:
+                        match = false;
+                  }
+                  index = startIndex_4;
+                  match = ! match;
+                  if (match) {
+                     // .
+                     match = anyCharMatcher();
+                     if (! match) {
+                        index = lastIndex_3;
+                        lastNode_3.setSibling(null);
+                        currentNode = lastNode_3;
+                     }
+                  }
+               } while(match);
+               match = true;
                if (match) {
                   // '"'
                   match = charMatcher('\"');
-                  if (match) {
-                     // (('\' '\n'! .) | (('\n' | '"')! .))*
-                     do {
-                        // (('\' '\n'! .) | (('\n' | '"')! .))
-                        // ('\' '\n'! .)
-                        Node lastNode_11 = currentNode;
-                        int lastIndex_11 = index;
-                        // '\'
-                        match = charMatcher('\\');
-                        if (match) {
-                           // '\n'!
-                           // '\n'
-                           match = buffer.matchChar(index, '\n');
-                           match = ! match;
+               }
+            }
+            break;
+         case 'e':
+         case 'E':
+            // ("e" '"' (('\' '\n'! .) | (('\n' | '"')! .))* '"')
+            // "e"
+            match = ignoreCaseCharMatcher('e');
+            if (match) {
+               // '"'
+               match = charMatcher('\"');
+               if (match) {
+                  // (('\' '\n'! .) | (('\n' | '"')! .))*
+                  do {
+                     // (('\' '\n'! .) | (('\n' | '"')! .))
+                     switch(buffer.getChar(index)) {
+                        case '\\':
+                           // ('\' '\n'! .)
+                           Node lastNode_5 = currentNode;
+                           int lastIndex_5 = index;
+                           // '\'
+                           match = charMatcher('\\');
                            if (match) {
-                              // .
-                              match = anyCharMatcher();
-                              if (! match) {
-                                 index = lastIndex_11;
-                                 lastNode_11.setSibling(null);
-                                 currentNode = lastNode_11;
+                              // '\n'!
+                              // '\n'
+                              match = buffer.matchChar(index, '\n');
+                              match = ! match;
+                              if (match) {
+                                 // .
+                                 match = anyCharMatcher();
+                                 if (! match) {
+                                    index = lastIndex_5;
+                                    lastNode_5.setSibling(null);
+                                    currentNode = lastNode_5;
+                                 }
+                              } else {
+                                 index = lastIndex_5;
+                                 lastNode_5.setSibling(null);
                               }
-                           } else {
-                              index = lastIndex_11;
-                              lastNode_11.setSibling(null);
                            }
-                        }
-                        if (! match) {
+                           if (! match) {
+                              // (('\n' | '"')! .)
+                              Node lastNode_6 = currentNode;
+                              int lastIndex_6 = index;
+                              // ('\n' | '"')!
+                              // ('\n' | '"')
+                              int startIndex_7 = index;
+                              switch(buffer.getChar(index)) {
+                                 case '\"':
+                                    ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                    break;
+                                 case '\n':
+                                    ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                    break;
+                                 default:
+                                    match = false;
+                              }
+                              index = startIndex_7;
+                              match = ! match;
+                              if (match) {
+                                 // .
+                                 match = anyCharMatcher();
+                                 if (! match) {
+                                    index = lastIndex_6;
+                                    lastNode_6.setSibling(null);
+                                    currentNode = lastNode_6;
+                                 }
+                              }
+                           }
+                           break;
+                        default:
                            // (('\n' | '"')! .)
-                           Node lastNode_12 = currentNode;
-                           int lastIndex_12 = index;
+                           Node lastNode_8 = currentNode;
+                           int lastIndex_8 = index;
                            // ('\n' | '"')!
                            // ('\n' | '"')
-                           int startIndex_13 = index;
+                           int startIndex_9 = index;
                            switch(buffer.getChar(index)) {
                               case '\"':
                                  ++index;
@@ -22549,33 +25541,75 @@ public class HarbourUnprocessedParser implements Parser {
                               default:
                                  match = false;
                            }
-                           index = startIndex_13;
+                           index = startIndex_9;
                            match = ! match;
                            if (match) {
                               // .
                               match = anyCharMatcher();
                               if (! match) {
-                                 index = lastIndex_12;
-                                 lastNode_12.setSibling(null);
-                                 currentNode = lastNode_12;
+                                 index = lastIndex_8;
+                                 lastNode_8.setSibling(null);
+                                 currentNode = lastNode_8;
                               }
                            }
-                        }
-                     } while(match);
+                     }
+                  } while(match);
+                  match = true;
+                  if (match) {
                      // '"'
                      match = charMatcher('\"');
+                  }
+               }
+            }
+            break;
+         case '\'':
+            // (''' (('\n' | ''')! .)* ''')
+            // '''
+            match = charMatcher('\'');
+            if (match) {
+               // (('\n' | ''')! .)*
+               do {
+                  // (('\n' | ''')! .)
+                  Node lastNode_10 = currentNode;
+                  int lastIndex_10 = index;
+                  // ('\n' | ''')!
+                  // ('\n' | ''')
+                  int startIndex_11 = index;
+                  switch(buffer.getChar(index)) {
+                     case '\'':
+                        ++index;
+                        // <EMPTY>
+                        match = true;
+                        break;
+                     case '\n':
+                        ++index;
+                        // <EMPTY>
+                        match = true;
+                        break;
+                     default:
+                        match = false;
+                  }
+                  index = startIndex_11;
+                  match = ! match;
+                  if (match) {
+                     // .
+                     match = anyCharMatcher();
                      if (! match) {
                         index = lastIndex_10;
                         lastNode_10.setSibling(null);
                         currentNode = lastNode_10;
                      }
-                  } else {
-                     index = lastIndex_10;
-                     lastNode_10.setSibling(null);
                   }
+               } while(match);
+               match = true;
+               if (match) {
+                  // '''
+                  match = charMatcher('\'');
                }
             }
-         }
+            break;
+         default:
+            match = false;
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
@@ -22626,7 +25660,7 @@ public class HarbourUnprocessedParser implements Parser {
             // ('?' | '&' | '_' | '~')
             int startIndex_1 = index;
             switch(buffer.getChar(index)) {
-               case '&':
+               case '~':
                   ++index;
                   // <EMPTY>
                   match = true;
@@ -22641,7 +25675,7 @@ public class HarbourUnprocessedParser implements Parser {
                   // <EMPTY>
                   match = true;
                   break;
-               case '~':
+               case '&':
                   ++index;
                   // <EMPTY>
                   match = true;
@@ -22692,76 +25726,64 @@ public class HarbourUnprocessedParser implements Parser {
       currentRuleIsAtomic = true;
       startIndex = index;
       // ((IntegerNumber '.' IntegerNumber) | (IntegerNumber '.' Letter!) | IntegerNumber | ('.' IntegerNumber))
-      // (IntegerNumber '.' IntegerNumber)
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // IntegerNumber
-      match = integerNumber$Rule();
-      if (match) {
-         // '.'
-         match = charMatcher('.');
-         if (match) {
-            // IntegerNumber
-            match = integerNumber$Rule();
-            if (! match) {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-               currentNode = lastNode_1;
-            }
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-         }
-      }
-      if (! match) {
-         // (IntegerNumber '.' Letter!)
-         Node lastNode_2 = currentNode;
-         int lastIndex_2 = index;
-         // IntegerNumber
-         match = integerNumber$Rule();
-         if (match) {
+      switch(buffer.getChar(index)) {
+         case '.':
+            // ('.' IntegerNumber)
             // '.'
             match = charMatcher('.');
             if (match) {
-               // Letter!
-               // ('a'-'z' | 'A'-'Z')
-               // 'a'-'z'
-               match = buffer.matchCharRange(index, 'a', 'z');
-               if (! match) {
-                  // 'A'-'Z'
-                  match = buffer.matchCharRange(index, 'A', 'Z');
-               }
-               match = ! match;
-               if (! match) {
-                  index = lastIndex_2;
-                  lastNode_2.setSibling(null);
-                  currentNode = lastNode_2;
-               }
-            } else {
-               index = lastIndex_2;
-               lastNode_2.setSibling(null);
+               // IntegerNumber
+               match = integerNumber$Rule();
             }
-         }
-         if (! match) {
+            break;
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+            // (IntegerNumber '.' IntegerNumber)
             // IntegerNumber
             match = integerNumber$Rule();
-            if (! match) {
-               // ('.' IntegerNumber)
-               Node lastNode_3 = currentNode;
-               int lastIndex_3 = index;
+            if (match) {
                // '.'
                match = charMatcher('.');
                if (match) {
                   // IntegerNumber
                   match = integerNumber$Rule();
-                  if (! match) {
-                     index = lastIndex_3;
-                     lastNode_3.setSibling(null);
-                     currentNode = lastNode_3;
-                  }
                }
             }
-         }
+            if (! match) {
+               // (IntegerNumber '.' Letter!)
+               // IntegerNumber
+               match = integerNumber$Rule();
+               if (match) {
+                  // '.'
+                  match = charMatcher('.');
+                  if (match) {
+                     // Letter!
+                     // ('a'-'z' | 'A'-'Z')
+                     // 'a'-'z'
+                     match = buffer.matchCharRange(index, 'a', 'z');
+                     if (! match) {
+                        // 'A'-'Z'
+                        match = buffer.matchCharRange(index, 'A', 'Z');
+                     }
+                     match = ! match;
+                  }
+               }
+               if (! match) {
+                  // IntegerNumber
+                  match = integerNumber$Rule();
+               }
+            }
+            break;
+         default:
+            match = false;
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
@@ -22839,36 +25861,39 @@ public class HarbourUnprocessedParser implements Parser {
       }
       startIndex = index;
       // ((("character" | "characte" | "charact" | "charac" | "chara" | "char") TestNoAlpha OptionalSpacing) | (("numeric" | "numeri" | "numer" | "nume") TestNoAlpha OptionalSpacing) | ("date" TestNoAlpha OptionalSpacing) | (("logical" | "logica" | "logic" | "logi") TestNoAlpha OptionalSpacing) | StringLiteral | (("object" | "objec" | "obje") TestNoAlpha OptionalSpacing) | (("codeblock" | "codebloc" | "codeblo" | "codebl" | "codeb" | "code") TestNoAlpha OptionalSpacing) | ("hash" TestNoAlpha OptionalSpacing) | Array | Class)
-      // (("character" | "characte" | "charact" | "charac" | "chara" | "char") TestNoAlpha OptionalSpacing)
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // ("character" | "characte" | "charact" | "charac" | "chara" | "char")
-      int startIndex_2 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'c')) {
-         ++index;
-         // ("haracter" | "haracte" | "haract" | "harac" | "hara" | "har")
-         if (buffer.matchIgnoreCaseChar(index, 'h')) {
-            ++index;
-            // ("aracter" | "aracte" | "aract" | "arac" | "ara" | "ar")
-            if (buffer.matchIgnoreCaseChar(index, 'a')) {
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case 'e':
+         case 'E':
+         case '\'':
+         case '[':
+            // StringLiteral
+            match = stringLiteral$Rule();
+            break;
+         case 'l':
+         case 'L':
+            // (("logical" | "logica" | "logic" | "logi") TestNoAlpha OptionalSpacing)
+            // ("logical" | "logica" | "logic" | "logi")
+            int startIndex_1 = index;
+            if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                ++index;
-               // ("racter" | "racte" | "ract" | "rac" | "ra" | "r")
-               if (buffer.matchIgnoreCaseChar(index, 'r')) {
+               // ("ogical" | "ogica" | "ogic" | "ogi")
+               if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
                   ++index;
-                  // ("acter" | "acte" | "act" | "ac" | "a" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                  // ("gical" | "gica" | "gic" | "gi")
+                  if (buffer.matchChar(index, 'g') || buffer.matchChar(index, 'G')) {
                      ++index;
-                     // ("cter" | "cte" | "ct" | "c" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'c')) {
+                     // ("ical" | "ica" | "ic" | "i")
+                     if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                         ++index;
-                        // ("ter" | "te" | "t" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 't')) {
+                        // ("cal" | "ca" | "c" | <EMPTY>)
+                        if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                            ++index;
-                           // ("er" | "e" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                           // ("al" | "a" | <EMPTY>)
+                           if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                               ++index;
-                              // "r"
-                              if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
+                              // "l"
+                              if (match = buffer.matchIgnoreCaseChar(index, 'l')) {
                                  ++index;
                               }
                               // <EMPTY>
@@ -22880,79 +25905,7 @@ public class HarbourUnprocessedParser implements Parser {
                            match = true;
                         }
                      } else {
-                        match = true;
-                     }
-                  } else {
-                     match = true;
-                  }
-               } else {
-                  match = false;
-               }
-            } else {
-               match = false;
-            }
-         } else {
-            match = false;
-         }
-      } else {
-         match = false;
-      }
-      if (! match) {
-         index = startIndex_2;
-      } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_2, index, false, false));
-         currentNode = currentNode.getSibling();
-      }
-      if (match) {
-         // TestNoAlpha
-         match = testNoAlpha$Rule();
-         if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
-            if (! match) {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-               currentNode = lastNode_1;
-            }
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-         }
-      }
-      if (! match) {
-         // (("numeric" | "numeri" | "numer" | "nume") TestNoAlpha OptionalSpacing)
-         Node lastNode_3 = currentNode;
-         int lastIndex_3 = index;
-         // ("numeric" | "numeri" | "numer" | "nume")
-         int startIndex_4 = index;
-         if (buffer.matchIgnoreCaseChar(index, 'n')) {
-            ++index;
-            // ("umeric" | "umeri" | "umer" | "ume")
-            if (buffer.matchIgnoreCaseChar(index, 'u')) {
-               ++index;
-               // ("meric" | "meri" | "mer" | "me")
-               if (buffer.matchIgnoreCaseChar(index, 'm')) {
-                  ++index;
-                  // ("eric" | "eri" | "er" | "e")
-                  if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                     ++index;
-                     // ("ric" | "ri" | "r" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'r')) {
-                        ++index;
-                        // ("ic" | "i" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'i')) {
-                           ++index;
-                           // "c"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
-                              ++index;
-                           }
-                           // <EMPTY>
-                           match = true;
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = true;
+                        match = false;
                      }
                   } else {
                      match = false;
@@ -22963,82 +25916,253 @@ public class HarbourUnprocessedParser implements Parser {
             } else {
                match = false;
             }
-         } else {
-            match = false;
-         }
-         if (! match) {
-            index = startIndex_4;
-         } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_4, index, false, false));
-            currentNode = currentNode.getSibling();
-         }
-         if (match) {
-            // TestNoAlpha
-            match = testNoAlpha$Rule();
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
-               if (! match) {
-                  index = lastIndex_3;
-                  lastNode_3.setSibling(null);
-                  currentNode = lastNode_3;
-               }
-            } else {
-               index = lastIndex_3;
-               lastNode_3.setSibling(null);
+            if (! match) {
+               index = startIndex_1;
+            } else if(! currentRuleIsAtomic) {
+               currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+               currentNode = currentNode.getSibling();
             }
-         }
-         if (! match) {
-            // ("date" TestNoAlpha OptionalSpacing)
-            Node lastNode_5 = currentNode;
-            int lastIndex_5 = index;
-            // "date"
-            match = ignoreCaseStringMatcher("date", 4);
             if (match) {
                // TestNoAlpha
                match = testNoAlpha$Rule();
                if (match) {
                   // OptionalSpacing
                   match = optionalSpacing$Rule();
-                  if (! match) {
-                     index = lastIndex_5;
-                     lastNode_5.setSibling(null);
-                     currentNode = lastNode_5;
+               }
+            }
+            break;
+         case 'n':
+         case 'N':
+            // (("numeric" | "numeri" | "numer" | "nume") TestNoAlpha OptionalSpacing)
+            // ("numeric" | "numeri" | "numer" | "nume")
+            int startIndex_2 = index;
+            if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
+               ++index;
+               // ("umeric" | "umeri" | "umer" | "ume")
+               if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
+                  ++index;
+                  // ("meric" | "meri" | "mer" | "me")
+                  if (buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M')) {
+                     ++index;
+                     // ("eric" | "eri" | "er" | "e")
+                     if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                        ++index;
+                        // ("ric" | "ri" | "r" | <EMPTY>)
+                        if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
+                           ++index;
+                           // ("ic" | "i" | <EMPTY>)
+                           if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
+                              ++index;
+                              // "c"
+                              if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
+                                 ++index;
+                              }
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
+                           }
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
                   }
                } else {
-                  index = lastIndex_5;
-                  lastNode_5.setSibling(null);
+                  match = false;
+               }
+            } else {
+               match = false;
+            }
+            if (! match) {
+               index = startIndex_2;
+            } else if(! currentRuleIsAtomic) {
+               currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_2, index, false, false));
+               currentNode = currentNode.getSibling();
+            }
+            if (match) {
+               // TestNoAlpha
+               match = testNoAlpha$Rule();
+               if (match) {
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
+               }
+            }
+            break;
+         case 'o':
+         case 'O':
+            // (("object" | "objec" | "obje") TestNoAlpha OptionalSpacing)
+            // ("object" | "objec" | "obje")
+            int startIndex_3 = index;
+            if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
+               ++index;
+               // ("bject" | "bjec" | "bje")
+               if (buffer.matchChar(index, 'b') || buffer.matchChar(index, 'B')) {
+                  ++index;
+                  // ("ject" | "jec" | "je")
+                  if (buffer.matchChar(index, 'j') || buffer.matchChar(index, 'J')) {
+                     ++index;
+                     // ("ect" | "ec" | "e")
+                     if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                        ++index;
+                        // ("ct" | "c" | <EMPTY>)
+                        if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
+                           ++index;
+                           // "t"
+                           if (match = buffer.matchIgnoreCaseChar(index, 't')) {
+                              ++index;
+                           }
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+               } else {
+                  match = false;
+               }
+            } else {
+               match = false;
+            }
+            if (! match) {
+               index = startIndex_3;
+            } else if(! currentRuleIsAtomic) {
+               currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_3, index, false, false));
+               currentNode = currentNode.getSibling();
+            }
+            if (match) {
+               // TestNoAlpha
+               match = testNoAlpha$Rule();
+               if (match) {
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
+               }
+            }
+            break;
+         case 'a':
+         case 'A':
+            // Array
+            match = array$Rule();
+            break;
+         case 'c':
+         case 'C':
+            // (("character" | "characte" | "charact" | "charac" | "chara" | "char") TestNoAlpha OptionalSpacing)
+            // ("character" | "characte" | "charact" | "charac" | "chara" | "char")
+            int startIndex_4 = index;
+            if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
+               ++index;
+               // ("haracter" | "haracte" | "haract" | "harac" | "hara" | "har")
+               if (buffer.matchChar(index, 'h') || buffer.matchChar(index, 'H')) {
+                  ++index;
+                  // ("aracter" | "aracte" | "aract" | "arac" | "ara" | "ar")
+                  if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+                     ++index;
+                     // ("racter" | "racte" | "ract" | "rac" | "ra" | "r")
+                     if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
+                        ++index;
+                        // ("acter" | "acte" | "act" | "ac" | "a" | <EMPTY>)
+                        if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+                           ++index;
+                           // ("cter" | "cte" | "ct" | "c" | <EMPTY>)
+                           if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
+                              ++index;
+                              // ("ter" | "te" | "t" | <EMPTY>)
+                              if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
+                                 ++index;
+                                 // ("er" | "e" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                                    ++index;
+                                    // "r"
+                                    if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
+                                       ++index;
+                                    }
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
+                                 }
+                              } else {
+                                 match = true;
+                              }
+                           } else {
+                              match = true;
+                           }
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+               } else {
+                  match = false;
+               }
+            } else {
+               match = false;
+            }
+            if (! match) {
+               index = startIndex_4;
+            } else if(! currentRuleIsAtomic) {
+               currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_4, index, false, false));
+               currentNode = currentNode.getSibling();
+            }
+            if (match) {
+               // TestNoAlpha
+               match = testNoAlpha$Rule();
+               if (match) {
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
                }
             }
             if (! match) {
-               // (("logical" | "logica" | "logic" | "logi") TestNoAlpha OptionalSpacing)
-               Node lastNode_6 = currentNode;
-               int lastIndex_6 = index;
-               // ("logical" | "logica" | "logic" | "logi")
-               int startIndex_7 = index;
-               if (buffer.matchIgnoreCaseChar(index, 'l')) {
+               // (("codeblock" | "codebloc" | "codeblo" | "codebl" | "codeb" | "code") TestNoAlpha OptionalSpacing)
+               // ("codeblock" | "codebloc" | "codeblo" | "codebl" | "codeb" | "code")
+               int startIndex_5 = index;
+               if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                   ++index;
-                  // ("ogical" | "ogica" | "ogic" | "ogi")
-                  if (buffer.matchIgnoreCaseChar(index, 'o')) {
+                  // ("odeblock" | "odebloc" | "odeblo" | "odebl" | "odeb" | "ode")
+                  if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
                      ++index;
-                     // ("gical" | "gica" | "gic" | "gi")
-                     if (buffer.matchIgnoreCaseChar(index, 'g')) {
+                     // ("deblock" | "debloc" | "deblo" | "debl" | "deb" | "de")
+                     if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
                         ++index;
-                        // ("ical" | "ica" | "ic" | "i")
-                        if (buffer.matchIgnoreCaseChar(index, 'i')) {
+                        // ("eblock" | "ebloc" | "eblo" | "ebl" | "eb" | "e")
+                        if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                            ++index;
-                           // ("cal" | "ca" | "c" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'c')) {
+                           // ("block" | "bloc" | "blo" | "bl" | "b" | <EMPTY>)
+                           if (buffer.matchChar(index, 'b') || buffer.matchChar(index, 'B')) {
                               ++index;
-                              // ("al" | "a" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                              // ("lock" | "loc" | "lo" | "l" | <EMPTY>)
+                              if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                                  ++index;
-                                 // "l"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'l')) {
+                                 // ("ock" | "oc" | "o" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
                                     ++index;
+                                    // ("ck" | "c" | <EMPTY>)
+                                    if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
+                                       ++index;
+                                       // "k"
+                                       if (match = buffer.matchIgnoreCaseChar(index, 'k')) {
+                                          ++index;
+                                       }
+                                       // <EMPTY>
+                                       match = true;
+                                    } else {
+                                       match = true;
+                                    }
+                                 } else {
+                                    match = true;
                                  }
-                                 // <EMPTY>
-                                 match = true;
                               } else {
                                  match = true;
                               }
@@ -23058,9 +26182,9 @@ public class HarbourUnprocessedParser implements Parser {
                   match = false;
                }
                if (! match) {
-                  index = startIndex_7;
+                  index = startIndex_5;
                } else if(! currentRuleIsAtomic) {
-                  currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_7, index, false, false));
+                  currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_5, index, false, false));
                   currentNode = currentNode.getSibling();
                }
                if (match) {
@@ -23069,199 +26193,44 @@ public class HarbourUnprocessedParser implements Parser {
                   if (match) {
                      // OptionalSpacing
                      match = optionalSpacing$Rule();
-                     if (! match) {
-                        index = lastIndex_6;
-                        lastNode_6.setSibling(null);
-                        currentNode = lastNode_6;
-                     }
-                  } else {
-                     index = lastIndex_6;
-                     lastNode_6.setSibling(null);
                   }
                }
                if (! match) {
-                  // StringLiteral
-                  match = stringLiteral$Rule();
-                  if (! match) {
-                     // (("object" | "objec" | "obje") TestNoAlpha OptionalSpacing)
-                     Node lastNode_8 = currentNode;
-                     int lastIndex_8 = index;
-                     // ("object" | "objec" | "obje")
-                     int startIndex_9 = index;
-                     if (buffer.matchIgnoreCaseChar(index, 'o')) {
-                        ++index;
-                        // ("bject" | "bjec" | "bje")
-                        if (buffer.matchIgnoreCaseChar(index, 'b')) {
-                           ++index;
-                           // ("ject" | "jec" | "je")
-                           if (buffer.matchIgnoreCaseChar(index, 'j')) {
-                              ++index;
-                              // ("ect" | "ec" | "e")
-                              if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                                 ++index;
-                                 // ("ct" | "c" | <EMPTY>)
-                                 if (buffer.matchIgnoreCaseChar(index, 'c')) {
-                                    ++index;
-                                    // "t"
-                                    if (match = buffer.matchIgnoreCaseChar(index, 't')) {
-                                       ++index;
-                                    }
-                                    // <EMPTY>
-                                    match = true;
-                                 } else {
-                                    match = true;
-                                 }
-                              } else {
-                                 match = false;
-                              }
-                           } else {
-                              match = false;
-                           }
-                        } else {
-                           match = false;
-                        }
-                     } else {
-                        match = false;
-                     }
-                     if (! match) {
-                        index = startIndex_9;
-                     } else if(! currentRuleIsAtomic) {
-                        currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_9, index, false, false));
-                        currentNode = currentNode.getSibling();
-                     }
-                     if (match) {
-                        // TestNoAlpha
-                        match = testNoAlpha$Rule();
-                        if (match) {
-                           // OptionalSpacing
-                           match = optionalSpacing$Rule();
-                           if (! match) {
-                              index = lastIndex_8;
-                              lastNode_8.setSibling(null);
-                              currentNode = lastNode_8;
-                           }
-                        } else {
-                           index = lastIndex_8;
-                           lastNode_8.setSibling(null);
-                        }
-                     }
-                     if (! match) {
-                        // (("codeblock" | "codebloc" | "codeblo" | "codebl" | "codeb" | "code") TestNoAlpha OptionalSpacing)
-                        Node lastNode_10 = currentNode;
-                        int lastIndex_10 = index;
-                        // ("codeblock" | "codebloc" | "codeblo" | "codebl" | "codeb" | "code")
-                        int startIndex_11 = index;
-                        if (buffer.matchIgnoreCaseChar(index, 'c')) {
-                           ++index;
-                           // ("odeblock" | "odebloc" | "odeblo" | "odebl" | "odeb" | "ode")
-                           if (buffer.matchIgnoreCaseChar(index, 'o')) {
-                              ++index;
-                              // ("deblock" | "debloc" | "deblo" | "debl" | "deb" | "de")
-                              if (buffer.matchIgnoreCaseChar(index, 'd')) {
-                                 ++index;
-                                 // ("eblock" | "ebloc" | "eblo" | "ebl" | "eb" | "e")
-                                 if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                                    ++index;
-                                    // ("block" | "bloc" | "blo" | "bl" | "b" | <EMPTY>)
-                                    if (buffer.matchIgnoreCaseChar(index, 'b')) {
-                                       ++index;
-                                       // ("lock" | "loc" | "lo" | "l" | <EMPTY>)
-                                       if (buffer.matchIgnoreCaseChar(index, 'l')) {
-                                          ++index;
-                                          // ("ock" | "oc" | "o" | <EMPTY>)
-                                          if (buffer.matchIgnoreCaseChar(index, 'o')) {
-                                             ++index;
-                                             // ("ck" | "c" | <EMPTY>)
-                                             if (buffer.matchIgnoreCaseChar(index, 'c')) {
-                                                ++index;
-                                                // "k"
-                                                if (match = buffer.matchIgnoreCaseChar(index, 'k')) {
-                                                   ++index;
-                                                }
-                                                // <EMPTY>
-                                                match = true;
-                                             } else {
-                                                match = true;
-                                             }
-                                          } else {
-                                             match = true;
-                                          }
-                                       } else {
-                                          match = true;
-                                       }
-                                    } else {
-                                       match = true;
-                                    }
-                                 } else {
-                                    match = false;
-                                 }
-                              } else {
-                                 match = false;
-                              }
-                           } else {
-                              match = false;
-                           }
-                        } else {
-                           match = false;
-                        }
-                        if (! match) {
-                           index = startIndex_11;
-                        } else if(! currentRuleIsAtomic) {
-                           currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_11, index, false, false));
-                           currentNode = currentNode.getSibling();
-                        }
-                        if (match) {
-                           // TestNoAlpha
-                           match = testNoAlpha$Rule();
-                           if (match) {
-                              // OptionalSpacing
-                              match = optionalSpacing$Rule();
-                              if (! match) {
-                                 index = lastIndex_10;
-                                 lastNode_10.setSibling(null);
-                                 currentNode = lastNode_10;
-                              }
-                           } else {
-                              index = lastIndex_10;
-                              lastNode_10.setSibling(null);
-                           }
-                        }
-                        if (! match) {
-                           // ("hash" TestNoAlpha OptionalSpacing)
-                           Node lastNode_12 = currentNode;
-                           int lastIndex_12 = index;
-                           // "hash"
-                           match = ignoreCaseStringMatcher("hash", 4);
-                           if (match) {
-                              // TestNoAlpha
-                              match = testNoAlpha$Rule();
-                              if (match) {
-                                 // OptionalSpacing
-                                 match = optionalSpacing$Rule();
-                                 if (! match) {
-                                    index = lastIndex_12;
-                                    lastNode_12.setSibling(null);
-                                    currentNode = lastNode_12;
-                                 }
-                              } else {
-                                 index = lastIndex_12;
-                                 lastNode_12.setSibling(null);
-                              }
-                           }
-                           if (! match) {
-                              // Array
-                              match = array$Rule();
-                              if (! match) {
-                                 // Class
-                                 match = class$Rule();
-                              }
-                           }
-                        }
-                     }
-                  }
+                  // Class
+                  match = class$Rule();
                }
             }
-         }
+            break;
+         case 'd':
+         case 'D':
+            // ("date" TestNoAlpha OptionalSpacing)
+            // "date"
+            match = ignoreCaseStringMatcher("date", 4);
+            if (match) {
+               // TestNoAlpha
+               match = testNoAlpha$Rule();
+               if (match) {
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
+               }
+            }
+            break;
+         case 'h':
+         case 'H':
+            // ("hash" TestNoAlpha OptionalSpacing)
+            // "hash"
+            match = ignoreCaseStringMatcher("hash", 4);
+            if (match) {
+               // TestNoAlpha
+               match = testNoAlpha$Rule();
+               if (match) {
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
+               }
+            }
+            break;
+         default:
+            match = false;
       }
       if (match) {
          dataType$RuleMemoStart = startIndex;
@@ -23330,19 +26299,19 @@ public class HarbourUnprocessedParser implements Parser {
       // (("array" | "arra") TestNoAlpha OptionalSpacing ArrayType)
       // ("array" | "arra")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'a')) {
+      if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
          ++index;
          // ("rray" | "rra")
-         if (buffer.matchIgnoreCaseChar(index, 'r')) {
+         if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
             ++index;
             // ("ray" | "ra")
-            if (buffer.matchIgnoreCaseChar(index, 'r')) {
+            if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                ++index;
                // ("ay" | "a")
-               if (buffer.matchIgnoreCaseChar(index, 'a')) {
+               if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                   ++index;
                   // ("y" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'y')) {
+                  if (buffer.matchChar(index, 'y') || buffer.matchChar(index, 'Y')) {
                      ++index;
                      // <EMPTY>
                      match = true;
@@ -23429,19 +26398,19 @@ public class HarbourUnprocessedParser implements Parser {
       // (("class" | "clas") TestNoAlpha OptionalSpacing Identifier)
       // ("class" | "clas")
       int startIndex_1 = index;
-      if (buffer.matchIgnoreCaseChar(index, 'c')) {
+      if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
          ++index;
          // ("lass" | "las")
-         if (buffer.matchIgnoreCaseChar(index, 'l')) {
+         if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
             ++index;
             // ("ass" | "as")
-            if (buffer.matchIgnoreCaseChar(index, 'a')) {
+            if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                ++index;
                // ("ss" | "s")
-               if (buffer.matchIgnoreCaseChar(index, 's')) {
+               if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                   ++index;
                   // ("s" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 's')) {
+                  if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                      ++index;
                      // <EMPTY>
                      match = true;
@@ -23650,58 +26619,60 @@ public class HarbourUnprocessedParser implements Parser {
       // ("announce" | "announc" | "announ" | "annou" | "anno" | "begin" | "begi" | "break" | "brea" | "case" | "catch" | "catc" | "default" | "defaul" | "defau" | "defa" | "each" | "else" | "elseif" | "end" | "endcase" | "endcas" | "endca" | "endc" | "enddo" | "endd" | "endif" | "endi" | "endsequence" | "endsequenc" | "endsequen" | "endseque" | "endsequ" | "endseq" | "endse" | "ends" | "exit" | "extern" | "exter" | "exte" | "field" | "fiel" | "for" | "function" | "functio" | "functi" | "funct" | "func" | "in" | "if" | "iif" | "init" | "local" | "loca" | "loop" | "memvar" | "memva" | "memv" | "next" | "nil" | "otherwise" | "otherwis" | "otherwi" | "otherw" | "other" | "othe" | "parameters" | "parameter" | "paramete" | "paramet" | "parame" | "param" | "para" | "procedure" | "procedur" | "procedu" | "proced" | "proce" | "proc" | "public" | "publi" | "publ" | "recover" | "recove" | "recov" | "reco" | "return" | "retur" | "retu" | "self" | "sequence" | "sequenc" | "sequen" | "seque" | "sequ" | "static" | "stati" | "stat" | "switch" | "switc" | "swit" | "try" | "using" | "usin" | "while" | "whil")
       int startIndex_2 = index;
       switch(buffer.getChar(index)) {
-         case 'w':
-         case 'W':
-            ++index;
-            // ("hile" | "hil")
-            if (buffer.matchIgnoreCaseChar(index, 'h')) {
-               ++index;
-               // ("ile" | "il")
-               if (buffer.matchIgnoreCaseChar(index, 'i')) {
-                  ++index;
-                  // ("le" | "l")
-                  if (buffer.matchIgnoreCaseChar(index, 'l')) {
-                     ++index;
-                     // ("e" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                        ++index;
-                        // <EMPTY>
-                        match = true;
-                     } else {
-                        match = true;
-                     }
-                  } else {
-                     match = false;
-                  }
-               } else {
-                  match = false;
-               }
-            } else {
-               match = false;
-            }
-            break;
          case 'f':
          case 'F':
             ++index;
             // ("unction" | "unctio" | "uncti" | "ield" | "unct" | "iel" | "unc" | "or")
             switch(buffer.getChar(index)) {
+               case 'o':
+               case 'O':
+                  ++index;
+                  // "r"
+                  if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
+                     ++index;
+                  }
+                  break;
+               case 'i':
+               case 'I':
+                  ++index;
+                  // ("eld" | "el")
+                  if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                     ++index;
+                     // ("ld" | "l")
+                     if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
+                        ++index;
+                        // ("d" | <EMPTY>)
+                        if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
+                           ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+                  break;
                case 'u':
                case 'U':
                   ++index;
                   // ("nction" | "nctio" | "ncti" | "nct" | "nc")
-                  if (buffer.matchIgnoreCaseChar(index, 'n')) {
+                  if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                      ++index;
                      // ("ction" | "ctio" | "cti" | "ct" | "c")
-                     if (buffer.matchIgnoreCaseChar(index, 'c')) {
+                     if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                         ++index;
                         // ("tion" | "tio" | "ti" | "t" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 't')) {
+                        if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                            ++index;
                            // ("ion" | "io" | "i" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'i')) {
+                           if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                               ++index;
                               // ("on" | "o" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'o')) {
+                              if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
                                  ++index;
                                  // "n"
                                  if (match = buffer.matchIgnoreCaseChar(index, 'n')) {
@@ -23725,25 +26696,450 @@ public class HarbourUnprocessedParser implements Parser {
                      match = false;
                   }
                   break;
-               case 'o':
-               case 'O':
+               default:
+                  match = false;
+            }
+            break;
+         case 'w':
+         case 'W':
+            ++index;
+            // ("hile" | "hil")
+            if (buffer.matchChar(index, 'h') || buffer.matchChar(index, 'H')) {
+               ++index;
+               // ("ile" | "il")
+               if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                   ++index;
-                  // "r"
-                  if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
+                  // ("le" | "l")
+                  if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                      ++index;
+                     // ("e" | <EMPTY>)
+                     if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                        ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
+                     }
+                  } else {
+                     match = false;
                   }
+               } else {
+                  match = false;
+               }
+            } else {
+               match = false;
+            }
+            break;
+         case 'i':
+         case 'I':
+            ++index;
+            // ("nit" | "if" | "n" | "f")
+            switch(buffer.getChar(index)) {
+               case 'n':
+               case 'N':
+                  ++index;
+                  // ("it" | <EMPTY>)
+                  if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
+                     ++index;
+                     // "t"
+                     if (match = buffer.matchIgnoreCaseChar(index, 't')) {
+                        ++index;
+                     }
+                  } else {
+                     match = true;
+                  }
+                  break;
+               case 'f':
+               case 'F':
+                  ++index;
+                  // <EMPTY>
+                  match = true;
                   break;
                case 'i':
                case 'I':
                   ++index;
-                  // ("eld" | "el")
-                  if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                  // "f"
+                  if (match = buffer.matchIgnoreCaseChar(index, 'f')) {
                      ++index;
-                     // ("ld" | "l")
-                     if (buffer.matchIgnoreCaseChar(index, 'l')) {
+                  }
+                  break;
+               default:
+                  match = false;
+            }
+            break;
+         case 'l':
+         case 'L':
+            ++index;
+            // ("ocal" | "oca" | "oop")
+            if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
+               ++index;
+               // ("cal" | "ca" | "op")
+               switch(buffer.getChar(index)) {
+                  case 'o':
+                  case 'O':
+                     ++index;
+                     // "p"
+                     if (match = buffer.matchIgnoreCaseChar(index, 'p')) {
                         ++index;
-                        // ("d" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'd')) {
+                     }
+                     break;
+                  case 'c':
+                  case 'C':
+                     ++index;
+                     // ("al" | "a")
+                     if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+                        ++index;
+                        // ("l" | <EMPTY>)
+                        if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
+                           ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                     break;
+                  default:
+                     match = false;
+               }
+            } else {
+               match = false;
+            }
+            break;
+         case 'm':
+         case 'M':
+            ++index;
+            // ("emvar" | "emva" | "emv")
+            if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+               ++index;
+               // ("mvar" | "mva" | "mv")
+               if (buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M')) {
+                  ++index;
+                  // ("var" | "va" | "v")
+                  if (buffer.matchChar(index, 'v') || buffer.matchChar(index, 'V')) {
+                     ++index;
+                     // ("ar" | "a" | <EMPTY>)
+                     if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+                        ++index;
+                        // "r"
+                        if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
+                           ++index;
+                        }
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
+                     }
+                  } else {
+                     match = false;
+                  }
+               } else {
+                  match = false;
+               }
+            } else {
+               match = false;
+            }
+            break;
+         case 'n':
+         case 'N':
+            ++index;
+            // ("ext" | "il")
+            switch(buffer.getChar(index)) {
+               case 'i':
+               case 'I':
+                  ++index;
+                  // "l"
+                  if (match = buffer.matchIgnoreCaseChar(index, 'l')) {
+                     ++index;
+                  }
+                  break;
+               case 'e':
+               case 'E':
+                  ++index;
+                  // "xt"
+                  if (match = ignoreCaseStringTest("xt", 2)) {
+                     index += 2;
+                  }
+                  break;
+               default:
+                  match = false;
+            }
+            break;
+         case 'o':
+         case 'O':
+            ++index;
+            // ("therwise" | "therwis" | "therwi" | "therw" | "ther" | "the")
+            if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
+               ++index;
+               // ("herwise" | "herwis" | "herwi" | "herw" | "her" | "he")
+               if (buffer.matchChar(index, 'h') || buffer.matchChar(index, 'H')) {
+                  ++index;
+                  // ("erwise" | "erwis" | "erwi" | "erw" | "er" | "e")
+                  if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                     ++index;
+                     // ("rwise" | "rwis" | "rwi" | "rw" | "r" | <EMPTY>)
+                     if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
+                        ++index;
+                        // ("wise" | "wis" | "wi" | "w" | <EMPTY>)
+                        if (buffer.matchChar(index, 'w') || buffer.matchChar(index, 'W')) {
+                           ++index;
+                           // ("ise" | "is" | "i" | <EMPTY>)
+                           if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
+                              ++index;
+                              // ("se" | "s" | <EMPTY>)
+                              if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
+                                 ++index;
+                                 // "e"
+                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                    ++index;
+                                 }
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
+                              }
+                           } else {
+                              match = true;
+                           }
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = true;
+                     }
+                  } else {
+                     match = false;
+                  }
+               } else {
+                  match = false;
+               }
+            } else {
+               match = false;
+            }
+            break;
+         case 'p':
+         case 'P':
+            ++index;
+            // ("arameters" | "arameter" | "rocedure" | "aramete" | "rocedur" | "aramet" | "rocedu" | "arame" | "roced" | "ublic" | "aram" | "roce" | "ubli" | "ara" | "roc" | "ubl")
+            switch(buffer.getChar(index)) {
+               case 'a':
+               case 'A':
+                  ++index;
+                  // ("rameters" | "rameter" | "ramete" | "ramet" | "rame" | "ram" | "ra")
+                  if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
+                     ++index;
+                     // ("ameters" | "ameter" | "amete" | "amet" | "ame" | "am" | "a")
+                     if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+                        ++index;
+                        // ("meters" | "meter" | "mete" | "met" | "me" | "m" | <EMPTY>)
+                        if (buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M')) {
+                           ++index;
+                           // ("eters" | "eter" | "ete" | "et" | "e" | <EMPTY>)
+                           if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                              ++index;
+                              // ("ters" | "ter" | "te" | "t" | <EMPTY>)
+                              if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
+                                 ++index;
+                                 // ("ers" | "er" | "e" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                                    ++index;
+                                    // ("rs" | "r" | <EMPTY>)
+                                    if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
+                                       ++index;
+                                       // "s"
+                                       if (match = buffer.matchIgnoreCaseChar(index, 's')) {
+                                          ++index;
+                                       }
+                                       // <EMPTY>
+                                       match = true;
+                                    } else {
+                                       match = true;
+                                    }
+                                 } else {
+                                    match = true;
+                                 }
+                              } else {
+                                 match = true;
+                              }
+                           } else {
+                              match = true;
+                           }
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+                  break;
+               case 'r':
+               case 'R':
+                  ++index;
+                  // ("ocedure" | "ocedur" | "ocedu" | "oced" | "oce" | "oc")
+                  if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
+                     ++index;
+                     // ("cedure" | "cedur" | "cedu" | "ced" | "ce" | "c")
+                     if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
+                        ++index;
+                        // ("edure" | "edur" | "edu" | "ed" | "e" | <EMPTY>)
+                        if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                           ++index;
+                           // ("dure" | "dur" | "du" | "d" | <EMPTY>)
+                           if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
+                              ++index;
+                              // ("ure" | "ur" | "u" | <EMPTY>)
+                              if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
+                                 ++index;
+                                 // ("re" | "r" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
+                                    ++index;
+                                    // "e"
+                                    if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                       ++index;
+                                    }
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
+                                 }
+                              } else {
+                                 match = true;
+                              }
+                           } else {
+                              match = true;
+                           }
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+                  break;
+               case 'u':
+               case 'U':
+                  ++index;
+                  // ("blic" | "bli" | "bl")
+                  if (buffer.matchChar(index, 'b') || buffer.matchChar(index, 'B')) {
+                     ++index;
+                     // ("lic" | "li" | "l")
+                     if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
+                        ++index;
+                        // ("ic" | "i" | <EMPTY>)
+                        if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
+                           ++index;
+                           // "c"
+                           if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
+                              ++index;
+                           }
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+                  break;
+               default:
+                  match = false;
+            }
+            break;
+         case 'a':
+         case 'A':
+            ++index;
+            // ("nnounce" | "nnounc" | "nnoun" | "nnou" | "nno")
+            if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
+               ++index;
+               // ("nounce" | "nounc" | "noun" | "nou" | "no")
+               if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
+                  ++index;
+                  // ("ounce" | "ounc" | "oun" | "ou" | "o")
+                  if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
+                     ++index;
+                     // ("unce" | "unc" | "un" | "u" | <EMPTY>)
+                     if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
+                        ++index;
+                        // ("nce" | "nc" | "n" | <EMPTY>)
+                        if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
+                           ++index;
+                           // ("ce" | "c" | <EMPTY>)
+                           if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
+                              ++index;
+                              // "e"
+                              if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                 ++index;
+                              }
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
+                           }
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = true;
+                     }
+                  } else {
+                     match = false;
+                  }
+               } else {
+                  match = false;
+               }
+            } else {
+               match = false;
+            }
+            break;
+         case 'b':
+         case 'B':
+            ++index;
+            // ("egin" | "reak" | "egi" | "rea")
+            switch(buffer.getChar(index)) {
+               case 'r':
+               case 'R':
+                  ++index;
+                  // ("eak" | "ea")
+                  if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                     ++index;
+                     // ("ak" | "a")
+                     if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+                        ++index;
+                        // ("k" | <EMPTY>)
+                        if (buffer.matchChar(index, 'k') || buffer.matchChar(index, 'K')) {
+                           ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+                  break;
+               case 'e':
+               case 'E':
+                  ++index;
+                  // ("gin" | "gi")
+                  if (buffer.matchChar(index, 'g') || buffer.matchChar(index, 'G')) {
+                     ++index;
+                     // ("in" | "i")
+                     if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
+                        ++index;
+                        // ("n" | <EMPTY>)
+                        if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                            ++index;
                            // <EMPTY>
                            match = true;
@@ -23761,56 +27157,53 @@ public class HarbourUnprocessedParser implements Parser {
                   match = false;
             }
             break;
-         case 'u':
-         case 'U':
+         case 'r':
+         case 'R':
             ++index;
-            // ("sing" | "sin")
-            if (buffer.matchIgnoreCaseChar(index, 's')) {
+            // ("ecover" | "ecove" | "eturn" | "ecov" | "etur" | "eco" | "etu")
+            if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                ++index;
-               // ("ing" | "in")
-               if (buffer.matchIgnoreCaseChar(index, 'i')) {
-                  ++index;
-                  // ("ng" | "n")
-                  if (buffer.matchIgnoreCaseChar(index, 'n')) {
+               // ("cover" | "cove" | "turn" | "cov" | "tur" | "co" | "tu")
+               switch(buffer.getChar(index)) {
+                  case 'c':
+                  case 'C':
                      ++index;
-                     // ("g" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'g')) {
+                     // ("over" | "ove" | "ov" | "o")
+                     if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
                         ++index;
-                        // <EMPTY>
-                        match = true;
-                     } else {
-                        match = true;
-                     }
-                  } else {
-                     match = false;
-                  }
-               } else {
-                  match = false;
-               }
-            } else {
-               match = false;
-            }
-            break;
-         case 'd':
-         case 'D':
-            ++index;
-            // ("efault" | "efaul" | "efau" | "efa")
-            if (buffer.matchIgnoreCaseChar(index, 'e')) {
-               ++index;
-               // ("fault" | "faul" | "fau" | "fa")
-               if (buffer.matchIgnoreCaseChar(index, 'f')) {
-                  ++index;
-                  // ("ault" | "aul" | "au" | "a")
-                  if (buffer.matchIgnoreCaseChar(index, 'a')) {
-                     ++index;
-                     // ("ult" | "ul" | "u" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'u')) {
-                        ++index;
-                        // ("lt" | "l" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'l')) {
+                        // ("ver" | "ve" | "v" | <EMPTY>)
+                        if (buffer.matchChar(index, 'v') || buffer.matchChar(index, 'V')) {
                            ++index;
-                           // "t"
-                           if (match = buffer.matchIgnoreCaseChar(index, 't')) {
+                           // ("er" | "e" | <EMPTY>)
+                           if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                              ++index;
+                              // "r"
+                              if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
+                                 ++index;
+                              }
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
+                           }
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                     break;
+                  case 't':
+                  case 'T':
+                     ++index;
+                     // ("urn" | "ur" | "u")
+                     if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
+                        ++index;
+                        // ("rn" | "r" | <EMPTY>)
+                        if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
+                           ++index;
+                           // "n"
+                           if (match = buffer.matchIgnoreCaseChar(index, 'n')) {
                               ++index;
                            }
                            // <EMPTY>
@@ -23819,13 +27212,52 @@ public class HarbourUnprocessedParser implements Parser {
                            match = true;
                         }
                      } else {
-                        match = true;
+                        match = false;
                      }
-                  } else {
+                     break;
+                  default:
                      match = false;
-                  }
-               } else {
-                  match = false;
+               }
+            } else {
+               match = false;
+            }
+            break;
+         case 'c':
+         case 'C':
+            ++index;
+            // ("atch" | "ase" | "atc")
+            if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+               ++index;
+               // ("tch" | "se" | "tc")
+               switch(buffer.getChar(index)) {
+                  case 's':
+                  case 'S':
+                     ++index;
+                     // "e"
+                     if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                        ++index;
+                     }
+                     break;
+                  case 't':
+                  case 'T':
+                     ++index;
+                     // ("ch" | "c")
+                     if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
+                        ++index;
+                        // ("h" | <EMPTY>)
+                        if (buffer.matchChar(index, 'h') || buffer.matchChar(index, 'H')) {
+                           ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                     break;
+                  default:
+                     match = false;
                }
             } else {
                match = false;
@@ -23840,16 +27272,44 @@ public class HarbourUnprocessedParser implements Parser {
                case 'W':
                   ++index;
                   // ("itch" | "itc" | "it")
-                  if (buffer.matchIgnoreCaseChar(index, 'i')) {
+                  if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                      ++index;
                      // ("tch" | "tc" | "t")
-                     if (buffer.matchIgnoreCaseChar(index, 't')) {
+                     if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                         ++index;
                         // ("ch" | "c" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'c')) {
+                        if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                            ++index;
                            // "h"
                            if (match = buffer.matchIgnoreCaseChar(index, 'h')) {
+                              ++index;
+                           }
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
+                  }
+                  break;
+               case 't':
+               case 'T':
+                  ++index;
+                  // ("atic" | "ati" | "at")
+                  if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
+                     ++index;
+                     // ("tic" | "ti" | "t")
+                     if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
+                        ++index;
+                        // ("ic" | "i" | <EMPTY>)
+                        if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
+                           ++index;
+                           // "c"
+                           if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
                               ++index;
                            }
                            // <EMPTY>
@@ -23873,16 +27333,16 @@ public class HarbourUnprocessedParser implements Parser {
                      case 'Q':
                         ++index;
                         // ("uence" | "uenc" | "uen" | "ue" | "u")
-                        if (buffer.matchIgnoreCaseChar(index, 'u')) {
+                        if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
                            ++index;
                            // ("ence" | "enc" | "en" | "e" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                           if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                               ++index;
                               // ("nce" | "nc" | "n" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'n')) {
+                              if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                                  ++index;
                                  // ("ce" | "c" | <EMPTY>)
-                                 if (buffer.matchIgnoreCaseChar(index, 'c')) {
+                                 if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                                     ++index;
                                     // "e"
                                     if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
@@ -23915,131 +27375,34 @@ public class HarbourUnprocessedParser implements Parser {
                         match = false;
                   }
                   break;
-               case 't':
-               case 'T':
-                  ++index;
-                  // ("atic" | "ati" | "at")
-                  if (buffer.matchIgnoreCaseChar(index, 'a')) {
-                     ++index;
-                     // ("tic" | "ti" | "t")
-                     if (buffer.matchIgnoreCaseChar(index, 't')) {
-                        ++index;
-                        // ("ic" | "i" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'i')) {
-                           ++index;
-                           // "c"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
-                              ++index;
-                           }
-                           // <EMPTY>
-                           match = true;
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-                  break;
                default:
                   match = false;
             }
             break;
-         case 'b':
-         case 'B':
+         case 'd':
+         case 'D':
             ++index;
-            // ("egin" | "reak" | "egi" | "rea")
-            switch(buffer.getChar(index)) {
-               case 'e':
-               case 'E':
-                  ++index;
-                  // ("gin" | "gi")
-                  if (buffer.matchIgnoreCaseChar(index, 'g')) {
-                     ++index;
-                     // ("in" | "i")
-                     if (buffer.matchIgnoreCaseChar(index, 'i')) {
-                        ++index;
-                        // ("n" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'n')) {
-                           ++index;
-                           // <EMPTY>
-                           match = true;
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-                  break;
-               case 'r':
-               case 'R':
-                  ++index;
-                  // ("eak" | "ea")
-                  if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                     ++index;
-                     // ("ak" | "a")
-                     if (buffer.matchIgnoreCaseChar(index, 'a')) {
-                        ++index;
-                        // ("k" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'k')) {
-                           ++index;
-                           // <EMPTY>
-                           match = true;
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'o':
-         case 'O':
-            ++index;
-            // ("therwise" | "therwis" | "therwi" | "therw" | "ther" | "the")
-            if (buffer.matchIgnoreCaseChar(index, 't')) {
+            // ("efault" | "efaul" | "efau" | "efa")
+            if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                ++index;
-               // ("herwise" | "herwis" | "herwi" | "herw" | "her" | "he")
-               if (buffer.matchIgnoreCaseChar(index, 'h')) {
+               // ("fault" | "faul" | "fau" | "fa")
+               if (buffer.matchChar(index, 'f') || buffer.matchChar(index, 'F')) {
                   ++index;
-                  // ("erwise" | "erwis" | "erwi" | "erw" | "er" | "e")
-                  if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                  // ("ault" | "aul" | "au" | "a")
+                  if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                      ++index;
-                     // ("rwise" | "rwis" | "rwi" | "rw" | "r" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'r')) {
+                     // ("ult" | "ul" | "u" | <EMPTY>)
+                     if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
                         ++index;
-                        // ("wise" | "wis" | "wi" | "w" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'w')) {
+                        // ("lt" | "l" | <EMPTY>)
+                        if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                            ++index;
-                           // ("ise" | "is" | "i" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'i')) {
+                           // "t"
+                           if (match = buffer.matchIgnoreCaseChar(index, 't')) {
                               ++index;
-                              // ("se" | "s" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 's')) {
-                                 ++index;
-                                 // "e"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
-                                    ++index;
-                                 }
-                                 // <EMPTY>
-                                 match = true;
-                              } else {
-                                 match = true;
-                              }
-                           } else {
-                              match = true;
                            }
+                           // <EMPTY>
+                           match = true;
                         } else {
                            match = true;
                         }
@@ -24056,75 +27419,12 @@ public class HarbourUnprocessedParser implements Parser {
                match = false;
             }
             break;
-         case 'm':
-         case 'M':
+         case 't':
+         case 'T':
             ++index;
-            // ("emvar" | "emva" | "emv")
-            if (buffer.matchIgnoreCaseChar(index, 'e')) {
-               ++index;
-               // ("mvar" | "mva" | "mv")
-               if (buffer.matchIgnoreCaseChar(index, 'm')) {
-                  ++index;
-                  // ("var" | "va" | "v")
-                  if (buffer.matchIgnoreCaseChar(index, 'v')) {
-                     ++index;
-                     // ("ar" | "a" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'a')) {
-                        ++index;
-                        // "r"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
-                           ++index;
-                        }
-                        // <EMPTY>
-                        match = true;
-                     } else {
-                        match = true;
-                     }
-                  } else {
-                     match = false;
-                  }
-               } else {
-                  match = false;
-               }
-            } else {
-               match = false;
-            }
-            break;
-         case 'i':
-         case 'I':
-            ++index;
-            // ("nit" | "if" | "n" | "f")
-            switch(buffer.getChar(index)) {
-               case 'f':
-               case 'F':
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               case 'n':
-               case 'N':
-                  ++index;
-                  // ("it" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'i')) {
-                     ++index;
-                     // "t"
-                     if (match = buffer.matchIgnoreCaseChar(index, 't')) {
-                        ++index;
-                     }
-                  } else {
-                     match = true;
-                  }
-                  break;
-               case 'i':
-               case 'I':
-                  ++index;
-                  // "f"
-                  if (match = buffer.matchIgnoreCaseChar(index, 'f')) {
-                     ++index;
-                  }
-                  break;
-               default:
-                  match = false;
+            // "ry"
+            if (match = ignoreCaseStringTest("ry", 2)) {
+               index += 2;
             }
             break;
          case 'e':
@@ -24132,27 +27432,19 @@ public class HarbourUnprocessedParser implements Parser {
             ++index;
             // ("ndsequence" | "ndsequenc" | "ndsequen" | "ndseque" | "ndcase" | "ndsequ" | "lseif" | "ndcas" | "ndseq" | "xtern" | "ndca" | "nddo" | "ndif" | "ndse" | "xter" | "ach" | "lse" | "ndc" | "ndd" | "ndi" | "nds" | "xit" | "xte" | "nd")
             switch(buffer.getChar(index)) {
-               case 'a':
-               case 'A':
-                  ++index;
-                  // "ch"
-                  if (match = ignoreCaseStringTest("ch", 2)) {
-                     index += 2;
-                  }
-                  break;
                case 'n':
                case 'N':
                   ++index;
                   // ("dsequence" | "dsequenc" | "dsequen" | "dseque" | "dcase" | "dsequ" | "dcas" | "dseq" | "dca" | "ddo" | "dif" | "dse" | "dc" | "dd" | "di" | "ds" | "d")
-                  if (buffer.matchIgnoreCaseChar(index, 'd')) {
+                  if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
                      ++index;
                      // ("sequence" | "sequenc" | "sequen" | "seque" | "case" | "sequ" | "cas" | "seq" | "ca" | "do" | "if" | "se" | "c" | "d" | "i" | "s" | <EMPTY>)
                      switch(buffer.getChar(index)) {
-                        case 'd':
-                        case 'D':
+                        case 'i':
+                        case 'I':
                            ++index;
-                           // "o"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'o')) {
+                           // "f"
+                           if (match = buffer.matchIgnoreCaseChar(index, 'f')) {
                               ++index;
                            }
                            // <EMPTY>
@@ -24162,22 +27454,22 @@ public class HarbourUnprocessedParser implements Parser {
                         case 'S':
                            ++index;
                            // ("equence" | "equenc" | "equen" | "eque" | "equ" | "eq" | "e" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                           if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                               ++index;
                               // ("quence" | "quenc" | "quen" | "que" | "qu" | "q" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'q')) {
+                              if (buffer.matchChar(index, 'q') || buffer.matchChar(index, 'Q')) {
                                  ++index;
                                  // ("uence" | "uenc" | "uen" | "ue" | "u" | <EMPTY>)
-                                 if (buffer.matchIgnoreCaseChar(index, 'u')) {
+                                 if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
                                     ++index;
                                     // ("ence" | "enc" | "en" | "e" | <EMPTY>)
-                                    if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                                    if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                        ++index;
                                        // ("nce" | "nc" | "n" | <EMPTY>)
-                                       if (buffer.matchIgnoreCaseChar(index, 'n')) {
+                                       if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                                           ++index;
                                           // ("ce" | "c" | <EMPTY>)
-                                          if (buffer.matchIgnoreCaseChar(index, 'c')) {
+                                          if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                                              ++index;
                                              // "e"
                                              if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
@@ -24208,10 +27500,10 @@ public class HarbourUnprocessedParser implements Parser {
                         case 'C':
                            ++index;
                            // ("ase" | "as" | "a" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                           if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                               ++index;
                               // ("se" | "s" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 's')) {
+                              if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                                  ++index;
                                  // "e"
                                  if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
@@ -24226,11 +27518,11 @@ public class HarbourUnprocessedParser implements Parser {
                               match = true;
                            }
                            break;
-                        case 'i':
-                        case 'I':
+                        case 'd':
+                        case 'D':
                            ++index;
-                           // "f"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'f')) {
+                           // "o"
+                           if (match = buffer.matchIgnoreCaseChar(index, 'o')) {
                               ++index;
                            }
                            // <EMPTY>
@@ -24243,45 +27535,27 @@ public class HarbourUnprocessedParser implements Parser {
                      match = false;
                   }
                   break;
-               case 'l':
-               case 'L':
-                  ++index;
-                  // ("seif" | "se")
-                  if (buffer.matchIgnoreCaseChar(index, 's')) {
-                     ++index;
-                     // ("eif" | "e")
-                     if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                        ++index;
-                        // ("if" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'i')) {
-                           ++index;
-                           // "f"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'f')) {
-                              ++index;
-                           }
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-                  break;
                case 'x':
                case 'X':
                   ++index;
                   // ("tern" | "ter" | "it" | "te")
                   switch(buffer.getChar(index)) {
+                     case 'i':
+                     case 'I':
+                        ++index;
+                        // "t"
+                        if (match = buffer.matchIgnoreCaseChar(index, 't')) {
+                           ++index;
+                        }
+                        break;
                      case 't':
                      case 'T':
                         ++index;
                         // ("ern" | "er" | "e")
-                        if (buffer.matchIgnoreCaseChar(index, 'e')) {
+                        if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                            ++index;
                            // ("rn" | "r" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'r')) {
+                           if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                               ++index;
                               // "n"
                               if (match = buffer.matchIgnoreCaseChar(index, 'n')) {
@@ -24296,169 +27570,65 @@ public class HarbourUnprocessedParser implements Parser {
                            match = false;
                         }
                         break;
-                     case 'i':
-                     case 'I':
-                        ++index;
-                        // "t"
-                        if (match = buffer.matchIgnoreCaseChar(index, 't')) {
-                           ++index;
-                        }
-                        break;
                      default:
                         match = false;
+                  }
+                  break;
+               case 'a':
+               case 'A':
+                  ++index;
+                  // "ch"
+                  if (match = ignoreCaseStringTest("ch", 2)) {
+                     index += 2;
+                  }
+                  break;
+               case 'l':
+               case 'L':
+                  ++index;
+                  // ("seif" | "se")
+                  if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
+                     ++index;
+                     // ("eif" | "e")
+                     if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
+                        ++index;
+                        // ("if" | <EMPTY>)
+                        if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
+                           ++index;
+                           // "f"
+                           if (match = buffer.matchIgnoreCaseChar(index, 'f')) {
+                              ++index;
+                           }
+                        } else {
+                           match = true;
+                        }
+                     } else {
+                        match = false;
+                     }
+                  } else {
+                     match = false;
                   }
                   break;
                default:
                   match = false;
             }
             break;
-         case 't':
-         case 'T':
+         case 'u':
+         case 'U':
             ++index;
-            // "ry"
-            if (match = ignoreCaseStringTest("ry", 2)) {
-               index += 2;
-            }
-            break;
-         case 'c':
-         case 'C':
-            ++index;
-            // ("atch" | "ase" | "atc")
-            if (buffer.matchIgnoreCaseChar(index, 'a')) {
+            // ("sing" | "sin")
+            if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                ++index;
-               // ("tch" | "se" | "tc")
-               switch(buffer.getChar(index)) {
-                  case 't':
-                  case 'T':
-                     ++index;
-                     // ("ch" | "c")
-                     if (buffer.matchIgnoreCaseChar(index, 'c')) {
-                        ++index;
-                        // ("h" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'h')) {
-                           ++index;
-                           // <EMPTY>
-                           match = true;
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                     break;
-                  case 's':
-                  case 'S':
-                     ++index;
-                     // "e"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
-                        ++index;
-                     }
-                     break;
-                  default:
-                     match = false;
-               }
-            } else {
-               match = false;
-            }
-            break;
-         case 'r':
-         case 'R':
-            ++index;
-            // ("ecover" | "ecove" | "eturn" | "ecov" | "etur" | "eco" | "etu")
-            if (buffer.matchIgnoreCaseChar(index, 'e')) {
-               ++index;
-               // ("cover" | "cove" | "turn" | "cov" | "tur" | "co" | "tu")
-               switch(buffer.getChar(index)) {
-                  case 't':
-                  case 'T':
-                     ++index;
-                     // ("urn" | "ur" | "u")
-                     if (buffer.matchIgnoreCaseChar(index, 'u')) {
-                        ++index;
-                        // ("rn" | "r" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'r')) {
-                           ++index;
-                           // "n"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'n')) {
-                              ++index;
-                           }
-                           // <EMPTY>
-                           match = true;
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                     break;
-                  case 'c':
-                  case 'C':
-                     ++index;
-                     // ("over" | "ove" | "ov" | "o")
-                     if (buffer.matchIgnoreCaseChar(index, 'o')) {
-                        ++index;
-                        // ("ver" | "ve" | "v" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'v')) {
-                           ++index;
-                           // ("er" | "e" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                              ++index;
-                              // "r"
-                              if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
-                                 ++index;
-                              }
-                              // <EMPTY>
-                              match = true;
-                           } else {
-                              match = true;
-                           }
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                     break;
-                  default:
-                     match = false;
-               }
-            } else {
-               match = false;
-            }
-            break;
-         case 'a':
-         case 'A':
-            ++index;
-            // ("nnounce" | "nnounc" | "nnoun" | "nnou" | "nno")
-            if (buffer.matchIgnoreCaseChar(index, 'n')) {
-               ++index;
-               // ("nounce" | "nounc" | "noun" | "nou" | "no")
-               if (buffer.matchIgnoreCaseChar(index, 'n')) {
+               // ("ing" | "in")
+               if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                   ++index;
-                  // ("ounce" | "ounc" | "oun" | "ou" | "o")
-                  if (buffer.matchIgnoreCaseChar(index, 'o')) {
+                  // ("ng" | "n")
+                  if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                      ++index;
-                     // ("unce" | "unc" | "un" | "u" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'u')) {
+                     // ("g" | <EMPTY>)
+                     if (buffer.matchChar(index, 'g') || buffer.matchChar(index, 'G')) {
                         ++index;
-                        // ("nce" | "nc" | "n" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'n')) {
-                           ++index;
-                           // ("ce" | "c" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'c')) {
-                              ++index;
-                              // "e"
-                              if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
-                                 ++index;
-                              }
-                              // <EMPTY>
-                              match = true;
-                           } else {
-                              match = true;
-                           }
-                        } else {
-                           match = true;
-                        }
+                        // <EMPTY>
+                        match = true;
                      } else {
                         match = true;
                      }
@@ -24467,207 +27637,6 @@ public class HarbourUnprocessedParser implements Parser {
                   }
                } else {
                   match = false;
-               }
-            } else {
-               match = false;
-            }
-            break;
-         case 'p':
-         case 'P':
-            ++index;
-            // ("arameters" | "arameter" | "rocedure" | "aramete" | "rocedur" | "aramet" | "rocedu" | "arame" | "roced" | "ublic" | "aram" | "roce" | "ubli" | "ara" | "roc" | "ubl")
-            switch(buffer.getChar(index)) {
-               case 'u':
-               case 'U':
-                  ++index;
-                  // ("blic" | "bli" | "bl")
-                  if (buffer.matchIgnoreCaseChar(index, 'b')) {
-                     ++index;
-                     // ("lic" | "li" | "l")
-                     if (buffer.matchIgnoreCaseChar(index, 'l')) {
-                        ++index;
-                        // ("ic" | "i" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'i')) {
-                           ++index;
-                           // "c"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
-                              ++index;
-                           }
-                           // <EMPTY>
-                           match = true;
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-                  break;
-               case 'r':
-               case 'R':
-                  ++index;
-                  // ("ocedure" | "ocedur" | "ocedu" | "oced" | "oce" | "oc")
-                  if (buffer.matchIgnoreCaseChar(index, 'o')) {
-                     ++index;
-                     // ("cedure" | "cedur" | "cedu" | "ced" | "ce" | "c")
-                     if (buffer.matchIgnoreCaseChar(index, 'c')) {
-                        ++index;
-                        // ("edure" | "edur" | "edu" | "ed" | "e" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                           ++index;
-                           // ("dure" | "dur" | "du" | "d" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'd')) {
-                              ++index;
-                              // ("ure" | "ur" | "u" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 'u')) {
-                                 ++index;
-                                 // ("re" | "r" | <EMPTY>)
-                                 if (buffer.matchIgnoreCaseChar(index, 'r')) {
-                                    ++index;
-                                    // "e"
-                                    if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
-                                       ++index;
-                                    }
-                                    // <EMPTY>
-                                    match = true;
-                                 } else {
-                                    match = true;
-                                 }
-                              } else {
-                                 match = true;
-                              }
-                           } else {
-                              match = true;
-                           }
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-                  break;
-               case 'a':
-               case 'A':
-                  ++index;
-                  // ("rameters" | "rameter" | "ramete" | "ramet" | "rame" | "ram" | "ra")
-                  if (buffer.matchIgnoreCaseChar(index, 'r')) {
-                     ++index;
-                     // ("ameters" | "ameter" | "amete" | "amet" | "ame" | "am" | "a")
-                     if (buffer.matchIgnoreCaseChar(index, 'a')) {
-                        ++index;
-                        // ("meters" | "meter" | "mete" | "met" | "me" | "m" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'm')) {
-                           ++index;
-                           // ("eters" | "eter" | "ete" | "et" | "e" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                              ++index;
-                              // ("ters" | "ter" | "te" | "t" | <EMPTY>)
-                              if (buffer.matchIgnoreCaseChar(index, 't')) {
-                                 ++index;
-                                 // ("ers" | "er" | "e" | <EMPTY>)
-                                 if (buffer.matchIgnoreCaseChar(index, 'e')) {
-                                    ++index;
-                                    // ("rs" | "r" | <EMPTY>)
-                                    if (buffer.matchIgnoreCaseChar(index, 'r')) {
-                                       ++index;
-                                       // "s"
-                                       if (match = buffer.matchIgnoreCaseChar(index, 's')) {
-                                          ++index;
-                                       }
-                                       // <EMPTY>
-                                       match = true;
-                                    } else {
-                                       match = true;
-                                    }
-                                 } else {
-                                    match = true;
-                                 }
-                              } else {
-                                 match = true;
-                              }
-                           } else {
-                              match = true;
-                           }
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                  } else {
-                     match = false;
-                  }
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'n':
-         case 'N':
-            ++index;
-            // ("ext" | "il")
-            switch(buffer.getChar(index)) {
-               case 'e':
-               case 'E':
-                  ++index;
-                  // "xt"
-                  if (match = ignoreCaseStringTest("xt", 2)) {
-                     index += 2;
-                  }
-                  break;
-               case 'i':
-               case 'I':
-                  ++index;
-                  // "l"
-                  if (match = buffer.matchIgnoreCaseChar(index, 'l')) {
-                     ++index;
-                  }
-                  break;
-               default:
-                  match = false;
-            }
-            break;
-         case 'l':
-         case 'L':
-            ++index;
-            // ("ocal" | "oca" | "oop")
-            if (buffer.matchIgnoreCaseChar(index, 'o')) {
-               ++index;
-               // ("cal" | "ca" | "op")
-               switch(buffer.getChar(index)) {
-                  case 'c':
-                  case 'C':
-                     ++index;
-                     // ("al" | "a")
-                     if (buffer.matchIgnoreCaseChar(index, 'a')) {
-                        ++index;
-                        // ("l" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'l')) {
-                           ++index;
-                           // <EMPTY>
-                           match = true;
-                        } else {
-                           match = true;
-                        }
-                     } else {
-                        match = false;
-                     }
-                     break;
-                  case 'o':
-                  case 'O':
-                     ++index;
-                     // "p"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'p')) {
-                        ++index;
-                     }
-                     break;
-                  default:
-                     match = false;
                }
             } else {
                match = false;
@@ -24834,12 +27803,12 @@ public class HarbourUnprocessedParser implements Parser {
       // (' ' | '\t' | '\f')+
       // (' ' | '\t' | '\f')
       switch(buffer.getChar(index)) {
-         case ' ':
+         case '\f':
             ++index;
             // <EMPTY>
             match = true;
             break;
-         case '\f':
+         case ' ':
             ++index;
             // <EMPTY>
             match = true;
@@ -24856,12 +27825,12 @@ public class HarbourUnprocessedParser implements Parser {
          do {
             // (' ' | '\t' | '\f')
             switch(buffer.getChar(index)) {
-               case ' ':
+               case '\f':
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\f':
+               case ' ':
                   ++index;
                   // <EMPTY>
                   match = true;
@@ -24930,17 +27899,17 @@ public class HarbourUnprocessedParser implements Parser {
       // (('//' | '&&') (('\n' | '\r' | <EOI>)! .)*)
       // ('//' | '&&')
       switch(buffer.getChar(index)) {
-         case '&':
-            ++index;
-            // '&'
-            if (match = buffer.matchChar(index, '&')) {
-               ++index;
-            }
-            break;
          case '/':
             ++index;
             // '/'
             if (match = buffer.matchChar(index, '/')) {
+               ++index;
+            }
+            break;
+         case '&':
+            ++index;
+            // '&'
+            if (match = buffer.matchChar(index, '&')) {
                ++index;
             }
             break;
@@ -25190,17 +28159,17 @@ public class HarbourUnprocessedParser implements Parser {
       startIndex = index;
       // ('\n' | '\r\n' | ';')
       switch(buffer.getChar(index)) {
+         case ';':
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
          case '\r':
             ++index;
             // '\n'
             if (match = buffer.matchChar(index, '\n')) {
                ++index;
             }
-            break;
-         case ';':
-            ++index;
-            // <EMPTY>
-            match = true;
             break;
          case '\n':
             ++index;
@@ -25260,36 +28229,60 @@ public class HarbourUnprocessedParser implements Parser {
       startIndex = index;
       // (Whitespace | LineComment | BlockComment | ContinueNL)+
       // (Whitespace | LineComment | BlockComment | ContinueNL)
-      // Whitespace
-      match = whitespace$Rule();
-      if (! match) {
-         // LineComment
-         match = lineComment$Rule();
-         if (! match) {
-            // BlockComment
-            match = blockComment$Rule();
+      switch(buffer.getChar(index)) {
+         case ';':
+            // ContinueNL
+            match = continueNL$Rule();
+            break;
+         case ' ':
+         case '\t':
+         case '\f':
+            // Whitespace
+            match = whitespace$Rule();
+            break;
+         case '/':
+            // LineComment
+            match = lineComment$Rule();
             if (! match) {
-               // ContinueNL
-               match = continueNL$Rule();
+               // BlockComment
+               match = blockComment$Rule();
             }
-         }
+            break;
+         case '&':
+            // LineComment
+            match = lineComment$Rule();
+            break;
+         default:
+            match = false;
       }
       if (match) {
          do {
             // (Whitespace | LineComment | BlockComment | ContinueNL)
-            // Whitespace
-            match = whitespace$Rule();
-            if (! match) {
-               // LineComment
-               match = lineComment$Rule();
-               if (! match) {
-                  // BlockComment
-                  match = blockComment$Rule();
+            switch(buffer.getChar(index)) {
+               case ';':
+                  // ContinueNL
+                  match = continueNL$Rule();
+                  break;
+               case ' ':
+               case '\t':
+               case '\f':
+                  // Whitespace
+                  match = whitespace$Rule();
+                  break;
+               case '/':
+                  // LineComment
+                  match = lineComment$Rule();
                   if (! match) {
-                     // ContinueNL
-                     match = continueNL$Rule();
+                     // BlockComment
+                     match = blockComment$Rule();
                   }
-               }
+                  break;
+               case '&':
+                  // LineComment
+                  match = lineComment$Rule();
+                  break;
+               default:
+                  match = false;
             }
          } while(match);
          match = true;
@@ -25351,15 +28344,27 @@ public class HarbourUnprocessedParser implements Parser {
             // (Whitespace | LineComment | BlockComment)*
             do {
                // (Whitespace | LineComment | BlockComment)
-               // Whitespace
-               match = whitespace$Rule();
-               if (! match) {
-                  // LineComment
-                  match = lineComment$Rule();
-                  if (! match) {
-                     // BlockComment
-                     match = blockComment$Rule();
-                  }
+               switch(buffer.getChar(index)) {
+                  case ' ':
+                  case '\t':
+                  case '\f':
+                     // Whitespace
+                     match = whitespace$Rule();
+                     break;
+                  case '/':
+                     // LineComment
+                     match = lineComment$Rule();
+                     if (! match) {
+                        // BlockComment
+                        match = blockComment$Rule();
+                     }
+                     break;
+                  case '&':
+                     // LineComment
+                     match = lineComment$Rule();
+                     break;
+                  default:
+                     match = false;
                }
             } while(match);
             match = true;
@@ -25448,7 +28453,7 @@ public class HarbourUnprocessedParser implements Parser {
             index = optionalSpacing$RuleMemoEnd;
             if (! currentRuleIsAtomic) {
                if (optionalSpacing$RuleMemoStart == optionalSpacing$RuleMemoEnd) {
-                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.OPTIONAL_SPACING, optionalSpacing$RuleMemoStart, optionalSpacing$RuleMemoEnd, false, false);
+                  currentNode = new NodeImpl(HarbourUnprocessedRuleType.SPACING, optionalSpacing$RuleMemoStart, optionalSpacing$RuleMemoEnd, false, false);
                   lastNode.setSibling(currentNode);
                } else if(optionalSpacing$RuleMemoFirstNode != null) {
                   lastNode.setSibling(optionalSpacing$RuleMemoFirstNode);
@@ -25464,19 +28469,31 @@ public class HarbourUnprocessedParser implements Parser {
       // (Whitespace | LineComment | BlockComment | ContinueNL)*
       do {
          // (Whitespace | LineComment | BlockComment | ContinueNL)
-         // Whitespace
-         match = whitespace$Rule();
-         if (! match) {
-            // LineComment
-            match = lineComment$Rule();
-            if (! match) {
-               // BlockComment
-               match = blockComment$Rule();
+         switch(buffer.getChar(index)) {
+            case ';':
+               // ContinueNL
+               match = continueNL$Rule();
+               break;
+            case ' ':
+            case '\t':
+            case '\f':
+               // Whitespace
+               match = whitespace$Rule();
+               break;
+            case '/':
+               // LineComment
+               match = lineComment$Rule();
                if (! match) {
-                  // ContinueNL
-                  match = continueNL$Rule();
+                  // BlockComment
+                  match = blockComment$Rule();
                }
-            }
+               break;
+            case '&':
+               // LineComment
+               match = lineComment$Rule();
+               break;
+            default:
+               match = false;
          }
       } while(match);
       optionalSpacing$RuleMemoStart = startIndex;
@@ -25484,7 +28501,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (currentRuleIsAtomic) {
          optionalSpacing$RuleMemoFirstNode = null;
       } else {
-         currentNode = new NodeImpl(HarbourUnprocessedRuleType.OPTIONAL_SPACING, startIndex, index, false, false);
+         currentNode = new NodeImpl(HarbourUnprocessedRuleType.SPACING, startIndex, index, false, false);
          currentNode.setFirstChild(lastNode.getSibling());
          lastNode.setSibling(currentNode);
          optionalSpacing$RuleMemoFirstNode = currentNode;

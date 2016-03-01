@@ -40,7 +40,7 @@ public class IgnoreCaseCharRule extends TerminalRule {
 
    @Override
    public boolean equals(Object obj) {
-      if (obj instanceof CharRule) {
+      if (obj instanceof IgnoreCaseCharRule) {
          return Character.toLowerCase(((IgnoreCaseCharRule)obj).character) == Character.toLowerCase(character);
       }
       return false;

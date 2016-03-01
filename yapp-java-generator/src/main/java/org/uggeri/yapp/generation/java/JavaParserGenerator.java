@@ -148,16 +148,16 @@ public class JavaParserGenerator extends AbstractParserGenerator {
 
    private void appendImports() {
       if (getOptions().isGenerateSingleFileSource()) {
-         getOutput().append("import br.com.sicredi.yapp.runtime.java.node.NodeVisitor;\n");
+         getOutput().append("import org.uggeri.yapp.runtime.java.node.NodeVisitor;\n");
       }
-      getOutput().append("import br.com.sicredi.yapp.runtime.java.parser.Parser;\n");
-      getOutput().append("import br.com.sicredi.yapp.runtime.java.parser.Rule;\n");
-      getOutput().append("import br.com.sicredi.yapp.runtime.java.parser.RuleProfile;\n");
-      getOutput().append("import br.com.sicredi.yapp.runtime.java.buffer.InputBuffer;\n");
-      getOutput().append("import br.com.sicredi.yapp.runtime.java.node.Node;\n");
-      getOutput().append("import br.com.sicredi.yapp.runtime.java.node.NodeImpl;\n");
-      getOutput().append("import br.com.sicredi.yapp.runtime.java.parser.ParserError;\n");
-      getOutput().append("import br.com.sicredi.yapp.runtime.java.trace.TraceParser;\n");
+      getOutput().append("import org.uggeri.yapp.runtime.java.parser.Parser;\n");
+      getOutput().append("import org.uggeri.yapp.runtime.java.parser.Rule;\n");
+      getOutput().append("import org.uggeri.yapp.runtime.java.parser.RuleProfile;\n");
+      getOutput().append("import org.uggeri.yapp.runtime.java.buffer.InputBuffer;\n");
+      getOutput().append("import org.uggeri.yapp.runtime.java.node.Node;\n");
+      getOutput().append("import org.uggeri.yapp.runtime.java.node.NodeImpl;\n");
+      getOutput().append("import org.uggeri.yapp.runtime.java.parser.ParserError;\n");
+      getOutput().append("import org.uggeri.yapp.runtime.java.trace.TraceParser;\n");
       getOutput().append("import java.util.Collections;\n");
       getOutput().append("import java.util.Collection;\n");
       getOutput().append("import java.util.Arrays;\n");
@@ -166,8 +166,8 @@ public class JavaParserGenerator extends AbstractParserGenerator {
       }
       getOutput().append("import java.util.Map;\n");
       if (getOptions().isCatchMismatches()) {
-         getOutput().append("import br.com.sicredi.yapp.runtime.java.util.NodeLink;\n");
-         getOutput().append("import br.com.sicredi.yapp.runtime.java.util.ResizableList;\n");
+         getOutput().append("import org.uggeri.yapp.runtime.java.util.NodeLink;\n");
+         getOutput().append("import org.uggeri.yapp.runtime.java.util.ResizableList;\n");
       }
    }
 
@@ -258,8 +258,8 @@ public class JavaParserGenerator extends AbstractParserGenerator {
          appendSourceHeaderComment();
          getOutput().append("package ").append(getOptions().getPackageName()).append(";\n");
          getOutput().append('\n');
-         getOutput().append("import br.com.sicredi.yapp.runtime.java.node.Node;\n");
-         getOutput().append("import br.com.sicredi.yapp.runtime.java.node.NodeVisitor;\n");
+         getOutput().append("import org.uggeri.yapp.runtime.java.node.Node;\n");
+         getOutput().append("import org.uggeri.yapp.runtime.java.node.NodeVisitor;\n");
          getOutput().append('\n');
          getOutput().append("public abstract class ").append(visitorClassName(grammar)).append(" implements NodeVisitor {");
          generateGrammarVisitorMethods(grammar, new HashSet<String>(), 3);
@@ -334,8 +334,8 @@ public class JavaParserGenerator extends AbstractParserGenerator {
          appendSourceHeaderComment();
          getOutput().append("package ").append(getOptions().getPackageName()).append(";\n");
          getOutput().append('\n');
-         getOutput().append("import br.com.sicredi.yapp.runtime.java.node.Node;\n");
-         getOutput().append("import br.com.sicredi.yapp.runtime.java.parser.Rule;\n");
+         getOutput().append("import org.uggeri.yapp.runtime.java.node.Node;\n");
+         getOutput().append("import org.uggeri.yapp.runtime.java.parser.Rule;\n");
          getOutput().append('\n');
          getOutput().append("public enum ").append(rulesEnumName(grammar)).append(" implements Rule<").append(visitorClassName(grammar)).append("> {");
          generateGrammarEnums(grammar, true, new HashSet<String>(), 3);

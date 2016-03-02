@@ -61,10 +61,12 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author fabio TODO: verificar recursao a esquerda -> OK - Testar melhor TODO: verificar possibilidade de reordenar regras de
- * acordo com a possibilidade de consumo de cadeias mais longas TODO: Gerar erro em regras opcoes redundantes de literais. ex.: ("e"
- * | "E"), ('end' | 'endif' | 'end') TODO: Agrupar regras OR que comecam com literais. Ex.: ('AAA' S)|('BBB' S)|R => (('AAA'|'BBB')
- * S) | R TODO: Tratar erros de sintaxe para tentar prosseguir com o parser. Ex.: "incluir" terminais esperados e nao encontrados,
+ * @author fabio 
+ * TODO: verificar recursao a esquerda -> OK - Testar melhor 
+ * TODO: verificar possibilidade de reordenar regras de acordo com a possibilidade de consumo de cadeias mais longas 
+ * TODO: Gerar erro em regras opcoes redundantes de literais. ex.: ("e" | "E"), ('end' | 'endif' | 'end') 
+ * TODO: Agrupar regras OR que comecam com literais. Ex.: ('AAA' S)|('BBB' S)|R => (('AAA'|'BBB') S) | R 
+ * TODO: Tratar erros de sintaxe para tentar prosseguir com o parser. Ex.: "incluir" terminais esperados e nao encontrados,
  * remover terminais nao esperados
  */
 public abstract class AbstractParserGenerator implements ParserGenerator, GrammarRuleVisitor {
@@ -121,7 +123,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
 
    private final Deque<BlockStatement> statements = new LinkedList<BlockStatement>();
 
-   private List<SourceFile> sourceFiles = new ArrayList<SourceFile>();
+   private final List<SourceFile> sourceFiles = new ArrayList<SourceFile>();
 
    private StringBuilder output = new StringBuilder(32768);
 

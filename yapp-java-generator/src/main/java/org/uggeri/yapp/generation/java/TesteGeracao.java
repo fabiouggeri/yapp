@@ -87,7 +87,7 @@ public class TesteGeracao {
          options.setProfile(false);
          options.setCatchMismatches(false);
          //options.setMemoizeMode(MemoizeMode.ALL);
-         options.setMemoizeMode(MemoizeMode.EXPLICIT);
+         options.setMemoizeMode(MemoizeMode.AUTO);
          //options.setGenerateSingleFileSource(true);
          pg = new JavaParserGenerator(g, options);
          //pg.validate();

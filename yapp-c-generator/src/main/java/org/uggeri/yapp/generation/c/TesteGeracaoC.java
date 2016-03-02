@@ -19,10 +19,10 @@ import java.io.File;
  *
  * @author fabio
  */
-public class Teste {
+public class TesteGeracaoC {
 
    public static void main(String[] args) {
-      new Teste().testeGeracaoC();
+      new TesteGeracaoC().testeGeracaoC();
    }
 
    private void testeGeracaoC() {
@@ -38,7 +38,7 @@ public class Teste {
          options.setProfile(false);
          options.setCatchMismatches(false);
          //options.setMemoizeMode(MemoizeMode.ALL);
-         options.setMemoizeMode(MemoizeMode.EXPLICIT);
+         options.setMemoizeMode(MemoizeMode.AUTO);
          //options.setGenerateSingleFileSource(true);
          pg = new CParserGenerator(g, options);
          pg.generateParser();

@@ -27,18 +27,50 @@ public class JavaParser implements Parser {
 
    private Node currentNode = new NodeImpl(null, 0, 0, false, false);
 
+   private int annotations$RuleMemoStart = -1;
+   private int annotations$RuleMemoEnd;
+   private Node annotations$RuleMemoFirstNode;
+   private Node annotations$RuleMemoLastNode;
    private int annotation$RuleMemoStart = -1;
    private int annotation$RuleMemoEnd;
    private Node annotation$RuleMemoFirstNode;
    private Node annotation$RuleMemoLastNode;
+   private int qualifiedIdentifier$RuleMemoStart = -1;
+   private int qualifiedIdentifier$RuleMemoEnd;
+   private Node qualifiedIdentifier$RuleMemoFirstNode;
+   private Node qualifiedIdentifier$RuleMemoLastNode;
    private int modifiers$RuleMemoStart = -1;
    private int modifiers$RuleMemoEnd;
    private Node modifiers$RuleMemoFirstNode;
    private Node modifiers$RuleMemoLastNode;
+   private int classDeclaration$RuleMemoStart = -1;
+   private int classDeclaration$RuleMemoEnd;
+   private Node classDeclaration$RuleMemoFirstNode;
+   private Node classDeclaration$RuleMemoLastNode;
+   private int enumDeclaration$RuleMemoStart = -1;
+   private int enumDeclaration$RuleMemoEnd;
+   private Node enumDeclaration$RuleMemoFirstNode;
+   private Node enumDeclaration$RuleMemoLastNode;
+   private int interfaceDeclaration$RuleMemoStart = -1;
+   private int interfaceDeclaration$RuleMemoEnd;
+   private Node interfaceDeclaration$RuleMemoFirstNode;
+   private Node interfaceDeclaration$RuleMemoLastNode;
+   private int annotationDeclaration$RuleMemoStart = -1;
+   private int annotationDeclaration$RuleMemoEnd;
+   private Node annotationDeclaration$RuleMemoFirstNode;
+   private Node annotationDeclaration$RuleMemoLastNode;
    private int qualifiedClassName$RuleMemoStart = -1;
    private int qualifiedClassName$RuleMemoEnd;
    private Node qualifiedClassName$RuleMemoFirstNode;
    private Node qualifiedClassName$RuleMemoLastNode;
+   private int implements$RuleMemoStart = -1;
+   private int implements$RuleMemoEnd;
+   private Node implements$RuleMemoFirstNode;
+   private Node implements$RuleMemoLastNode;
+   private int classTypeList$RuleMemoStart = -1;
+   private int classTypeList$RuleMemoEnd;
+   private Node classTypeList$RuleMemoFirstNode;
+   private Node classTypeList$RuleMemoLastNode;
    private int identifier$RuleMemoStart = -1;
    private int identifier$RuleMemoEnd;
    private Node identifier$RuleMemoFirstNode;
@@ -47,54 +79,270 @@ public class JavaParser implements Parser {
    private int typeParameters$RuleMemoEnd;
    private Node typeParameters$RuleMemoFirstNode;
    private Node typeParameters$RuleMemoLastNode;
+   private int classBody$RuleMemoStart = -1;
+   private int classBody$RuleMemoEnd;
+   private Node classBody$RuleMemoFirstNode;
+   private Node classBody$RuleMemoLastNode;
+   private int classBodyDeclaration$RuleMemoStart = -1;
+   private int classBodyDeclaration$RuleMemoEnd;
+   private Node classBodyDeclaration$RuleMemoFirstNode;
+   private Node classBodyDeclaration$RuleMemoLastNode;
+   private int staticBlock$RuleMemoStart = -1;
+   private int staticBlock$RuleMemoEnd;
+   private Node staticBlock$RuleMemoFirstNode;
+   private Node staticBlock$RuleMemoLastNode;
+   private int block$RuleMemoStart = -1;
+   private int block$RuleMemoEnd;
+   private Node block$RuleMemoFirstNode;
+   private Node block$RuleMemoLastNode;
+   private int methodDeclaration$RuleMemoStart = -1;
+   private int methodDeclaration$RuleMemoEnd;
+   private Node methodDeclaration$RuleMemoFirstNode;
+   private Node methodDeclaration$RuleMemoLastNode;
+   private int constructorDeclaration$RuleMemoStart = -1;
+   private int constructorDeclaration$RuleMemoEnd;
+   private Node constructorDeclaration$RuleMemoFirstNode;
+   private Node constructorDeclaration$RuleMemoLastNode;
+   private int fieldsDeclarations$RuleMemoStart = -1;
+   private int fieldsDeclarations$RuleMemoEnd;
+   private Node fieldsDeclarations$RuleMemoFirstNode;
+   private Node fieldsDeclarations$RuleMemoLastNode;
    private int type$RuleMemoStart = -1;
    private int type$RuleMemoEnd;
    private Node type$RuleMemoFirstNode;
    private Node type$RuleMemoLastNode;
+   private int variableDeclarations$RuleMemoStart = -1;
+   private int variableDeclarations$RuleMemoEnd;
+   private Node variableDeclarations$RuleMemoFirstNode;
+   private Node variableDeclarations$RuleMemoLastNode;
+   private int throws$RuleMemoStart = -1;
+   private int throws$RuleMemoEnd;
+   private Node throws$RuleMemoFirstNode;
+   private Node throws$RuleMemoLastNode;
+   private int emptyBody$RuleMemoStart = -1;
+   private int emptyBody$RuleMemoEnd;
+   private Node emptyBody$RuleMemoFirstNode;
+   private Node emptyBody$RuleMemoLastNode;
+   private int methodSignature$RuleMemoStart = -1;
+   private int methodSignature$RuleMemoEnd;
+   private Node methodSignature$RuleMemoFirstNode;
+   private Node methodSignature$RuleMemoLastNode;
+   private int parametersDeclarations$RuleMemoStart = -1;
+   private int parametersDeclarations$RuleMemoEnd;
+   private Node parametersDeclarations$RuleMemoFirstNode;
+   private Node parametersDeclarations$RuleMemoLastNode;
    private int dimensions$RuleMemoStart = -1;
    private int dimensions$RuleMemoEnd;
    private Node dimensions$RuleMemoFirstNode;
    private Node dimensions$RuleMemoLastNode;
+   private int interfaceMethod$RuleMemoStart = -1;
+   private int interfaceMethod$RuleMemoEnd;
+   private Node interfaceMethod$RuleMemoFirstNode;
+   private Node interfaceMethod$RuleMemoLastNode;
+   private int constantsDeclarations$RuleMemoStart = -1;
+   private int constantsDeclarations$RuleMemoEnd;
+   private Node constantsDeclarations$RuleMemoFirstNode;
+   private Node constantsDeclarations$RuleMemoLastNode;
+   private int constantDeclaration$RuleMemoStart = -1;
+   private int constantDeclaration$RuleMemoEnd;
+   private Node constantDeclaration$RuleMemoFirstNode;
+   private Node constantDeclaration$RuleMemoLastNode;
+   private int variableInitializer$RuleMemoStart = -1;
+   private int variableInitializer$RuleMemoEnd;
+   private Node variableInitializer$RuleMemoFirstNode;
+   private Node variableInitializer$RuleMemoLastNode;
+   private int enumConstant$RuleMemoStart = -1;
+   private int enumConstant$RuleMemoEnd;
+   private Node enumConstant$RuleMemoFirstNode;
+   private Node enumConstant$RuleMemoLastNode;
+   private int arguments$RuleMemoStart = -1;
+   private int arguments$RuleMemoEnd;
+   private Node arguments$RuleMemoFirstNode;
+   private Node arguments$RuleMemoLastNode;
+   private int final$RuleMemoStart = -1;
+   private int final$RuleMemoEnd;
+   private Node final$RuleMemoFirstNode;
+   private Node final$RuleMemoLastNode;
+   private int variableModifiers$RuleMemoStart = -1;
+   private int variableModifiers$RuleMemoEnd;
+   private Node variableModifiers$RuleMemoFirstNode;
+   private Node variableModifiers$RuleMemoLastNode;
+   private int localVariableDeclarationStatement$RuleMemoStart = -1;
+   private int localVariableDeclarationStatement$RuleMemoEnd;
+   private Node localVariableDeclarationStatement$RuleMemoFirstNode;
+   private Node localVariableDeclarationStatement$RuleMemoLastNode;
+   private int variableDeclaration$RuleMemoStart = -1;
+   private int variableDeclaration$RuleMemoEnd;
+   private Node variableDeclaration$RuleMemoFirstNode;
+   private Node variableDeclaration$RuleMemoLastNode;
+   private int parametersDeclarationList$RuleMemoStart = -1;
+   private int parametersDeclarationList$RuleMemoEnd;
+   private Node parametersDeclarationList$RuleMemoFirstNode;
+   private Node parametersDeclarationList$RuleMemoLastNode;
    private int parameterDeclaration$RuleMemoStart = -1;
    private int parameterDeclaration$RuleMemoEnd;
    private Node parameterDeclaration$RuleMemoFirstNode;
    private Node parameterDeclaration$RuleMemoLastNode;
+   private int parameterVariableDeclaration$RuleMemoStart = -1;
+   private int parameterVariableDeclaration$RuleMemoEnd;
+   private Node parameterVariableDeclaration$RuleMemoFirstNode;
+   private Node parameterVariableDeclaration$RuleMemoLastNode;
+   private int blockStatements$RuleMemoStart = -1;
+   private int blockStatements$RuleMemoEnd;
+   private Node blockStatements$RuleMemoFirstNode;
+   private Node blockStatements$RuleMemoLastNode;
+   private int statement$RuleMemoStart = -1;
+   private int statement$RuleMemoEnd;
+   private Node statement$RuleMemoFirstNode;
+   private Node statement$RuleMemoLastNode;
+   private int assertStatement$RuleMemoStart = -1;
+   private int assertStatement$RuleMemoEnd;
+   private Node assertStatement$RuleMemoFirstNode;
+   private Node assertStatement$RuleMemoLastNode;
+   private int ifStatement$RuleMemoStart = -1;
+   private int ifStatement$RuleMemoEnd;
+   private Node ifStatement$RuleMemoFirstNode;
+   private Node ifStatement$RuleMemoLastNode;
+   private int forStatement$RuleMemoStart = -1;
+   private int forStatement$RuleMemoEnd;
+   private Node forStatement$RuleMemoFirstNode;
+   private Node forStatement$RuleMemoLastNode;
+   private int forIterableStatement$RuleMemoStart = -1;
+   private int forIterableStatement$RuleMemoEnd;
+   private Node forIterableStatement$RuleMemoFirstNode;
+   private Node forIterableStatement$RuleMemoLastNode;
+   private int whileStatement$RuleMemoStart = -1;
+   private int whileStatement$RuleMemoEnd;
+   private Node whileStatement$RuleMemoFirstNode;
+   private Node whileStatement$RuleMemoLastNode;
+   private int doWhileStatement$RuleMemoStart = -1;
+   private int doWhileStatement$RuleMemoEnd;
+   private Node doWhileStatement$RuleMemoFirstNode;
+   private Node doWhileStatement$RuleMemoLastNode;
+   private int tryCatchStatement$RuleMemoStart = -1;
+   private int tryCatchStatement$RuleMemoEnd;
+   private Node tryCatchStatement$RuleMemoFirstNode;
+   private Node tryCatchStatement$RuleMemoLastNode;
+   private int resource$RuleMemoStart = -1;
+   private int resource$RuleMemoEnd;
+   private Node resource$RuleMemoFirstNode;
+   private Node resource$RuleMemoLastNode;
+   private int switchStatement$RuleMemoStart = -1;
+   private int switchStatement$RuleMemoEnd;
+   private Node switchStatement$RuleMemoFirstNode;
+   private Node switchStatement$RuleMemoLastNode;
+   private int synchronizedStatement$RuleMemoStart = -1;
+   private int synchronizedStatement$RuleMemoEnd;
+   private Node synchronizedStatement$RuleMemoFirstNode;
+   private Node synchronizedStatement$RuleMemoLastNode;
+   private int returnStatement$RuleMemoStart = -1;
+   private int returnStatement$RuleMemoEnd;
+   private Node returnStatement$RuleMemoFirstNode;
+   private Node returnStatement$RuleMemoLastNode;
+   private int throwStatement$RuleMemoStart = -1;
+   private int throwStatement$RuleMemoEnd;
+   private Node throwStatement$RuleMemoFirstNode;
+   private Node throwStatement$RuleMemoLastNode;
+   private int breakStatement$RuleMemoStart = -1;
+   private int breakStatement$RuleMemoEnd;
+   private Node breakStatement$RuleMemoFirstNode;
+   private Node breakStatement$RuleMemoLastNode;
+   private int continueStatement$RuleMemoStart = -1;
+   private int continueStatement$RuleMemoEnd;
+   private Node continueStatement$RuleMemoFirstNode;
+   private Node continueStatement$RuleMemoLastNode;
+   private int identifiedStatement$RuleMemoStart = -1;
+   private int identifiedStatement$RuleMemoEnd;
+   private Node identifiedStatement$RuleMemoFirstNode;
+   private Node identifiedStatement$RuleMemoLastNode;
+   private int statementExpression$RuleMemoStart = -1;
+   private int statementExpression$RuleMemoEnd;
+   private Node statementExpression$RuleMemoFirstNode;
+   private Node statementExpression$RuleMemoLastNode;
+   private int parExpression$RuleMemoStart = -1;
+   private int parExpression$RuleMemoEnd;
+   private Node parExpression$RuleMemoFirstNode;
+   private Node parExpression$RuleMemoLastNode;
+   private int expression$RuleMemoStart = -1;
+   private int expression$RuleMemoEnd;
+   private Node expression$RuleMemoFirstNode;
+   private Node expression$RuleMemoLastNode;
+   private int forInitVariables$RuleMemoStart = -1;
+   private int forInitVariables$RuleMemoEnd;
+   private Node forInitVariables$RuleMemoFirstNode;
+   private Node forInitVariables$RuleMemoLastNode;
+   private int forInitExpressions$RuleMemoStart = -1;
+   private int forInitExpressions$RuleMemoEnd;
+   private Node forInitExpressions$RuleMemoFirstNode;
+   private Node forInitExpressions$RuleMemoLastNode;
+   private int assignmentExpression$RuleMemoStart = -1;
+   private int assignmentExpression$RuleMemoEnd;
+   private Node assignmentExpression$RuleMemoFirstNode;
+   private Node assignmentExpression$RuleMemoLastNode;
    private int conditionalExpression$RuleMemoStart = -1;
    private int conditionalExpression$RuleMemoEnd;
    private Node conditionalExpression$RuleMemoFirstNode;
    private Node conditionalExpression$RuleMemoLastNode;
-   private int assignmentOperator$RuleMemoStart = -1;
-   private int assignmentOperator$RuleMemoEnd;
-   private Node assignmentOperator$RuleMemoFirstNode;
-   private Node assignmentOperator$RuleMemoLastNode;
+   private int ternaryExpression$RuleMemoStart = -1;
+   private int ternaryExpression$RuleMemoEnd;
+   private Node ternaryExpression$RuleMemoFirstNode;
+   private Node ternaryExpression$RuleMemoLastNode;
    private int conditionalOrExpression$RuleMemoStart = -1;
    private int conditionalOrExpression$RuleMemoEnd;
    private Node conditionalOrExpression$RuleMemoFirstNode;
    private Node conditionalOrExpression$RuleMemoLastNode;
+   private int orExpression$RuleMemoStart = -1;
+   private int orExpression$RuleMemoEnd;
+   private Node orExpression$RuleMemoFirstNode;
+   private Node orExpression$RuleMemoLastNode;
    private int conditionalAndExpression$RuleMemoStart = -1;
    private int conditionalAndExpression$RuleMemoEnd;
    private Node conditionalAndExpression$RuleMemoFirstNode;
    private Node conditionalAndExpression$RuleMemoLastNode;
+   private int andExpression$RuleMemoStart = -1;
+   private int andExpression$RuleMemoEnd;
+   private Node andExpression$RuleMemoFirstNode;
+   private Node andExpression$RuleMemoLastNode;
    private int optionalBitOrExpression$RuleMemoStart = -1;
    private int optionalBitOrExpression$RuleMemoEnd;
    private Node optionalBitOrExpression$RuleMemoFirstNode;
    private Node optionalBitOrExpression$RuleMemoLastNode;
+   private int bitOrExpression$RuleMemoStart = -1;
+   private int bitOrExpression$RuleMemoEnd;
+   private Node bitOrExpression$RuleMemoFirstNode;
+   private Node bitOrExpression$RuleMemoLastNode;
    private int optionalBitXOrExpression$RuleMemoStart = -1;
    private int optionalBitXOrExpression$RuleMemoEnd;
    private Node optionalBitXOrExpression$RuleMemoFirstNode;
    private Node optionalBitXOrExpression$RuleMemoLastNode;
+   private int bitXOrExpression$RuleMemoStart = -1;
+   private int bitXOrExpression$RuleMemoEnd;
+   private Node bitXOrExpression$RuleMemoFirstNode;
+   private Node bitXOrExpression$RuleMemoLastNode;
    private int optionalBitAndExpression$RuleMemoStart = -1;
    private int optionalBitAndExpression$RuleMemoEnd;
    private Node optionalBitAndExpression$RuleMemoFirstNode;
    private Node optionalBitAndExpression$RuleMemoLastNode;
+   private int bitAndExpression$RuleMemoStart = -1;
+   private int bitAndExpression$RuleMemoEnd;
+   private Node bitAndExpression$RuleMemoFirstNode;
+   private Node bitAndExpression$RuleMemoLastNode;
    private int optionalRelationalExpression$RuleMemoStart = -1;
    private int optionalRelationalExpression$RuleMemoEnd;
    private Node optionalRelationalExpression$RuleMemoFirstNode;
    private Node optionalRelationalExpression$RuleMemoLastNode;
+   private int relationalExpression$RuleMemoStart = -1;
+   private int relationalExpression$RuleMemoEnd;
+   private Node relationalExpression$RuleMemoFirstNode;
+   private Node relationalExpression$RuleMemoLastNode;
    private int optionalInstanceOfExpression$RuleMemoStart = -1;
    private int optionalInstanceOfExpression$RuleMemoEnd;
    private Node optionalInstanceOfExpression$RuleMemoFirstNode;
    private Node optionalInstanceOfExpression$RuleMemoLastNode;
+   private int instanceOfExpression$RuleMemoStart = -1;
+   private int instanceOfExpression$RuleMemoEnd;
+   private Node instanceOfExpression$RuleMemoFirstNode;
+   private Node instanceOfExpression$RuleMemoLastNode;
    private int optionalAdditiveExpression$RuleMemoStart = -1;
    private int optionalAdditiveExpression$RuleMemoEnd;
    private Node optionalAdditiveExpression$RuleMemoFirstNode;
@@ -103,26 +351,78 @@ public class JavaParser implements Parser {
    private int referenceType$RuleMemoEnd;
    private Node referenceType$RuleMemoFirstNode;
    private Node referenceType$RuleMemoLastNode;
+   private int additiveExpression$RuleMemoStart = -1;
+   private int additiveExpression$RuleMemoEnd;
+   private Node additiveExpression$RuleMemoFirstNode;
+   private Node additiveExpression$RuleMemoLastNode;
    private int optionalMultiplicativeExpression$RuleMemoStart = -1;
    private int optionalMultiplicativeExpression$RuleMemoEnd;
    private Node optionalMultiplicativeExpression$RuleMemoFirstNode;
    private Node optionalMultiplicativeExpression$RuleMemoLastNode;
+   private int multiplicativeExpression$RuleMemoStart = -1;
+   private int multiplicativeExpression$RuleMemoEnd;
+   private Node multiplicativeExpression$RuleMemoFirstNode;
+   private Node multiplicativeExpression$RuleMemoLastNode;
    private int optionalShiftExpression$RuleMemoStart = -1;
    private int optionalShiftExpression$RuleMemoEnd;
    private Node optionalShiftExpression$RuleMemoFirstNode;
    private Node optionalShiftExpression$RuleMemoLastNode;
+   private int shiftExpression$RuleMemoStart = -1;
+   private int shiftExpression$RuleMemoEnd;
+   private Node shiftExpression$RuleMemoFirstNode;
+   private Node shiftExpression$RuleMemoLastNode;
    private int unaryExpression$RuleMemoStart = -1;
    private int unaryExpression$RuleMemoEnd;
    private Node unaryExpression$RuleMemoFirstNode;
    private Node unaryExpression$RuleMemoLastNode;
+   private int prefixedExpression$RuleMemoStart = -1;
+   private int prefixedExpression$RuleMemoEnd;
+   private Node prefixedExpression$RuleMemoFirstNode;
+   private Node prefixedExpression$RuleMemoLastNode;
+   private int castExpression$RuleMemoStart = -1;
+   private int castExpression$RuleMemoEnd;
+   private Node castExpression$RuleMemoFirstNode;
+   private Node castExpression$RuleMemoLastNode;
+   private int postfixedExpression$RuleMemoStart = -1;
+   private int postfixedExpression$RuleMemoEnd;
+   private Node postfixedExpression$RuleMemoFirstNode;
+   private Node postfixedExpression$RuleMemoLastNode;
    private int primary$RuleMemoStart = -1;
    private int primary$RuleMemoEnd;
    private Node primary$RuleMemoFirstNode;
    private Node primary$RuleMemoLastNode;
+   private int qualifiedExpression$RuleMemoStart = -1;
+   private int qualifiedExpression$RuleMemoEnd;
+   private Node qualifiedExpression$RuleMemoFirstNode;
+   private Node qualifiedExpression$RuleMemoLastNode;
+   private int arrayAccess$RuleMemoStart = -1;
+   private int arrayAccess$RuleMemoEnd;
+   private Node arrayAccess$RuleMemoFirstNode;
+   private Node arrayAccess$RuleMemoLastNode;
    private int atomic$RuleMemoStart = -1;
    private int atomic$RuleMemoEnd;
    private Node atomic$RuleMemoFirstNode;
    private Node atomic$RuleMemoLastNode;
+   private int classTypeReference$RuleMemoStart = -1;
+   private int classTypeReference$RuleMemoEnd;
+   private Node classTypeReference$RuleMemoFirstNode;
+   private Node classTypeReference$RuleMemoLastNode;
+   private int literal$RuleMemoStart = -1;
+   private int literal$RuleMemoEnd;
+   private Node literal$RuleMemoFirstNode;
+   private Node literal$RuleMemoLastNode;
+   private int basicTypeClassReference$RuleMemoStart = -1;
+   private int basicTypeClassReference$RuleMemoEnd;
+   private Node basicTypeClassReference$RuleMemoFirstNode;
+   private Node basicTypeClassReference$RuleMemoLastNode;
+   private int voidClassReference$RuleMemoStart = -1;
+   private int voidClassReference$RuleMemoEnd;
+   private Node voidClassReference$RuleMemoFirstNode;
+   private Node voidClassReference$RuleMemoLastNode;
+   private int thisMethodCall$RuleMemoStart = -1;
+   private int thisMethodCall$RuleMemoEnd;
+   private Node thisMethodCall$RuleMemoFirstNode;
+   private Node thisMethodCall$RuleMemoLastNode;
    private int this$RuleMemoStart = -1;
    private int this$RuleMemoEnd;
    private Node this$RuleMemoFirstNode;
@@ -131,34 +431,202 @@ public class JavaParser implements Parser {
    private int super$RuleMemoEnd;
    private Node super$RuleMemoFirstNode;
    private Node super$RuleMemoLastNode;
+   private int superMethodCall$RuleMemoStart = -1;
+   private int superMethodCall$RuleMemoEnd;
+   private Node superMethodCall$RuleMemoFirstNode;
+   private Node superMethodCall$RuleMemoLastNode;
+   private int superConstructorCall$RuleMemoStart = -1;
+   private int superConstructorCall$RuleMemoEnd;
+   private Node superConstructorCall$RuleMemoFirstNode;
+   private Node superConstructorCall$RuleMemoLastNode;
+   private int superFieldAccess$RuleMemoStart = -1;
+   private int superFieldAccess$RuleMemoEnd;
+   private Node superFieldAccess$RuleMemoFirstNode;
+   private Node superFieldAccess$RuleMemoLastNode;
    private int new$RuleMemoStart = -1;
    private int new$RuleMemoEnd;
    private Node new$RuleMemoFirstNode;
    private Node new$RuleMemoLastNode;
+   private int classCreator$RuleMemoStart = -1;
+   private int classCreator$RuleMemoEnd;
+   private Node classCreator$RuleMemoFirstNode;
+   private Node classCreator$RuleMemoLastNode;
+   private int arrayCreator$RuleMemoStart = -1;
+   private int arrayCreator$RuleMemoEnd;
+   private Node arrayCreator$RuleMemoFirstNode;
+   private Node arrayCreator$RuleMemoLastNode;
    private int methodCall$RuleMemoStart = -1;
    private int methodCall$RuleMemoEnd;
    private Node methodCall$RuleMemoFirstNode;
    private Node methodCall$RuleMemoLastNode;
-   private int arrayIndex$RuleMemoStart = -1;
-   private int arrayIndex$RuleMemoEnd;
-   private Node arrayIndex$RuleMemoFirstNode;
-   private Node arrayIndex$RuleMemoLastNode;
+   private int dimExpr$RuleMemoStart = -1;
+   private int dimExpr$RuleMemoEnd;
+   private Node dimExpr$RuleMemoFirstNode;
+   private Node dimExpr$RuleMemoLastNode;
    private int basicType$RuleMemoStart = -1;
    private int basicType$RuleMemoEnd;
    private Node basicType$RuleMemoFirstNode;
    private Node basicType$RuleMemoLastNode;
-   private int spacing$RuleMemoStart = -1;
-   private int spacing$RuleMemoEnd;
-   private Node spacing$RuleMemoFirstNode;
-   private Node spacing$RuleMemoLastNode;
+   private int nonWildcardTypeArguments$RuleMemoStart = -1;
+   private int nonWildcardTypeArguments$RuleMemoEnd;
+   private Node nonWildcardTypeArguments$RuleMemoFirstNode;
+   private Node nonWildcardTypeArguments$RuleMemoLastNode;
+   private int initializedArrayCreator$RuleMemoStart = -1;
+   private int initializedArrayCreator$RuleMemoEnd;
+   private Node initializedArrayCreator$RuleMemoFirstNode;
+   private Node initializedArrayCreator$RuleMemoLastNode;
+   private int emptyArrayCreator$RuleMemoStart = -1;
+   private int emptyArrayCreator$RuleMemoEnd;
+   private Node emptyArrayCreator$RuleMemoFirstNode;
+   private Node emptyArrayCreator$RuleMemoLastNode;
+   private int arrayType$RuleMemoStart = -1;
+   private int arrayType$RuleMemoEnd;
+   private Node arrayType$RuleMemoFirstNode;
+   private Node arrayType$RuleMemoLastNode;
+   private int dim$RuleMemoStart = -1;
+   private int dim$RuleMemoEnd;
+   private Node dim$RuleMemoFirstNode;
+   private Node dim$RuleMemoLastNode;
+   private int arrayInitializer$RuleMemoStart = -1;
+   private int arrayInitializer$RuleMemoEnd;
+   private Node arrayInitializer$RuleMemoFirstNode;
+   private Node arrayInitializer$RuleMemoLastNode;
+   private int typedName$RuleMemoStart = -1;
+   private int typedName$RuleMemoEnd;
+   private Node typedName$RuleMemoFirstNode;
+   private Node typedName$RuleMemoLastNode;
+   private int typeName$RuleMemoStart = -1;
+   private int typeName$RuleMemoEnd;
+   private Node typeName$RuleMemoFirstNode;
+   private Node typeName$RuleMemoLastNode;
+   private int array$RuleMemoStart = -1;
+   private int array$RuleMemoEnd;
+   private Node array$RuleMemoFirstNode;
+   private Node array$RuleMemoLastNode;
+   private int basicTypeArray$RuleMemoStart = -1;
+   private int basicTypeArray$RuleMemoEnd;
+   private Node basicTypeArray$RuleMemoFirstNode;
+   private Node basicTypeArray$RuleMemoLastNode;
+   private int qualifiedClassNameArray$RuleMemoStart = -1;
+   private int qualifiedClassNameArray$RuleMemoEnd;
+   private Node qualifiedClassNameArray$RuleMemoFirstNode;
+   private Node qualifiedClassNameArray$RuleMemoLastNode;
+   private int className$RuleMemoStart = -1;
+   private int className$RuleMemoEnd;
+   private Node className$RuleMemoFirstNode;
+   private Node className$RuleMemoLastNode;
+   private int typedClassName$RuleMemoStart = -1;
+   private int typedClassName$RuleMemoEnd;
+   private Node typedClassName$RuleMemoFirstNode;
+   private Node typedClassName$RuleMemoLastNode;
+   private int typeArgument$RuleMemoStart = -1;
+   private int typeArgument$RuleMemoEnd;
+   private Node typeArgument$RuleMemoFirstNode;
+   private Node typeArgument$RuleMemoLastNode;
+   private int queryType$RuleMemoStart = -1;
+   private int queryType$RuleMemoEnd;
+   private Node queryType$RuleMemoFirstNode;
+   private Node queryType$RuleMemoLastNode;
+   private int typeParameter$RuleMemoStart = -1;
+   private int typeParameter$RuleMemoEnd;
+   private Node typeParameter$RuleMemoFirstNode;
+   private Node typeParameter$RuleMemoLastNode;
+   private int annotationMethod$RuleMemoStart = -1;
+   private int annotationMethod$RuleMemoEnd;
+   private Node annotationMethod$RuleMemoFirstNode;
+   private Node annotationMethod$RuleMemoLastNode;
+   private int annotationsConstants$RuleMemoStart = -1;
+   private int annotationsConstants$RuleMemoEnd;
+   private Node annotationsConstants$RuleMemoFirstNode;
+   private Node annotationsConstants$RuleMemoLastNode;
+   private int elementValue$RuleMemoStart = -1;
+   private int elementValue$RuleMemoEnd;
+   private Node elementValue$RuleMemoFirstNode;
+   private Node elementValue$RuleMemoLastNode;
+   private int normalAnnotationRest$RuleMemoStart = -1;
+   private int normalAnnotationRest$RuleMemoEnd;
+   private Node normalAnnotationRest$RuleMemoFirstNode;
+   private Node normalAnnotationRest$RuleMemoLastNode;
+   private int singleElementAnnotationRest$RuleMemoStart = -1;
+   private int singleElementAnnotationRest$RuleMemoEnd;
+   private Node singleElementAnnotationRest$RuleMemoFirstNode;
+   private Node singleElementAnnotationRest$RuleMemoLastNode;
+   private int elementValuePair$RuleMemoStart = -1;
+   private int elementValuePair$RuleMemoEnd;
+   private Node elementValuePair$RuleMemoFirstNode;
+   private Node elementValuePair$RuleMemoLastNode;
+   private int elementValueArrayInitializer$RuleMemoStart = -1;
+   private int elementValueArrayInitializer$RuleMemoEnd;
+   private Node elementValueArrayInitializer$RuleMemoFirstNode;
+   private Node elementValueArrayInitializer$RuleMemoLastNode;
+   private int testNoAlpha$RuleMemoStart = -1;
+   private int testNoAlpha$RuleMemoEnd;
+   private Node testNoAlpha$RuleMemoFirstNode;
+   private Node testNoAlpha$RuleMemoLastNode;
    private int optionalSpacing$RuleMemoStart = -1;
    private int optionalSpacing$RuleMemoEnd;
    private Node optionalSpacing$RuleMemoFirstNode;
    private Node optionalSpacing$RuleMemoLastNode;
+   private int spaces$RuleMemoStart = -1;
+   private int spaces$RuleMemoEnd;
+   private Node spaces$RuleMemoFirstNode;
+   private Node spaces$RuleMemoLastNode;
+   private int blockComment$RuleMemoStart = -1;
+   private int blockComment$RuleMemoEnd;
+   private Node blockComment$RuleMemoFirstNode;
+   private Node blockComment$RuleMemoLastNode;
+   private int newLine$RuleMemoStart = -1;
+   private int newLine$RuleMemoEnd;
+   private Node newLine$RuleMemoFirstNode;
+   private Node newLine$RuleMemoLastNode;
+   private int lineComment$RuleMemoStart = -1;
+   private int lineComment$RuleMemoEnd;
+   private Node lineComment$RuleMemoFirstNode;
+   private Node lineComment$RuleMemoLastNode;
+   private int floatLiteral$RuleMemoStart = -1;
+   private int floatLiteral$RuleMemoEnd;
+   private Node floatLiteral$RuleMemoFirstNode;
+   private Node floatLiteral$RuleMemoLastNode;
+   private int longLiteral$RuleMemoStart = -1;
+   private int longLiteral$RuleMemoEnd;
+   private Node longLiteral$RuleMemoFirstNode;
+   private Node longLiteral$RuleMemoLastNode;
    private int integerLiteral$RuleMemoStart = -1;
    private int integerLiteral$RuleMemoEnd;
    private Node integerLiteral$RuleMemoFirstNode;
    private Node integerLiteral$RuleMemoLastNode;
+   private int charLiteral$RuleMemoStart = -1;
+   private int charLiteral$RuleMemoEnd;
+   private Node charLiteral$RuleMemoFirstNode;
+   private Node charLiteral$RuleMemoLastNode;
+   private int stringLiteral$RuleMemoStart = -1;
+   private int stringLiteral$RuleMemoEnd;
+   private Node stringLiteral$RuleMemoFirstNode;
+   private Node stringLiteral$RuleMemoLastNode;
+   private int true$RuleMemoStart = -1;
+   private int true$RuleMemoEnd;
+   private Node true$RuleMemoFirstNode;
+   private Node true$RuleMemoLastNode;
+   private int false$RuleMemoStart = -1;
+   private int false$RuleMemoEnd;
+   private Node false$RuleMemoFirstNode;
+   private Node false$RuleMemoLastNode;
+   private int null$RuleMemoStart = -1;
+   private int null$RuleMemoEnd;
+   private Node null$RuleMemoFirstNode;
+   private Node null$RuleMemoLastNode;
+   private int hexFloat$RuleMemoStart = -1;
+   private int hexFloat$RuleMemoEnd;
+   private Node hexFloat$RuleMemoFirstNode;
+   private Node hexFloat$RuleMemoLastNode;
+   private int decimalFloat$RuleMemoStart = -1;
+   private int decimalFloat$RuleMemoEnd;
+   private Node decimalFloat$RuleMemoFirstNode;
+   private Node decimalFloat$RuleMemoLastNode;
+   private int semicolon$RuleMemoStart = -1;
+   private int semicolon$RuleMemoEnd;
+   private Node semicolon$RuleMemoFirstNode;
+   private Node semicolon$RuleMemoLastNode;
 
    private int[] newArrayInt(final int size) {
       final int[] array = new int[size];
@@ -642,16 +1110,39 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (annotations$RuleMemoStart == index) {
+         if (annotations$RuleMemoStart <= annotations$RuleMemoEnd) {
+            index = annotations$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (annotations$RuleMemoStart == annotations$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ANNOTATIONS, annotations$RuleMemoStart, annotations$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(annotations$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(annotations$RuleMemoFirstNode);
+                  currentNode = annotations$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // Annotation*
       do {
          // Annotation
          match = annotation$Rule();
       } while(match);
-      if (! currentRuleIsAtomic) {
+      annotations$RuleMemoStart = startIndex;
+      annotations$RuleMemoEnd = index;
+      if (currentRuleIsAtomic) {
+         annotations$RuleMemoFirstNode = null;
+      } else {
          currentNode = new NodeImpl(JavaRuleType.ANNOTATIONS, startIndex, index, true, false);
          currentNode.setFirstChild(lastNode.getSibling());
          lastNode.setSibling(currentNode);
+         annotations$RuleMemoFirstNode = currentNode;
+         annotations$RuleMemoLastNode = currentNode;
       }
       return true;
    }
@@ -731,6 +1222,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (qualifiedIdentifier$RuleMemoStart == index) {
+         if (qualifiedIdentifier$RuleMemoStart <= qualifiedIdentifier$RuleMemoEnd) {
+            index = qualifiedIdentifier$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (qualifiedIdentifier$RuleMemoStart == qualifiedIdentifier$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.QUALIFIED_IDENTIFIER, qualifiedIdentifier$RuleMemoStart, qualifiedIdentifier$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(qualifiedIdentifier$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(qualifiedIdentifier$RuleMemoFirstNode);
+                  currentNode = qualifiedIdentifier$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Identifier ('.' OptionalSpacing Identifier)*)
       // Identifier
@@ -763,13 +1271,22 @@ public class JavaParser implements Parser {
          match = true;
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         qualifiedIdentifier$RuleMemoStart = startIndex;
+         qualifiedIdentifier$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            qualifiedIdentifier$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.QUALIFIED_IDENTIFIER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            qualifiedIdentifier$RuleMemoFirstNode = currentNode;
+            qualifiedIdentifier$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         qualifiedIdentifier$RuleMemoStart = startIndex;
+         qualifiedIdentifier$RuleMemoEnd = -1;
+         qualifiedIdentifier$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1137,6 +1654,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (classDeclaration$RuleMemoStart == index) {
+         if (classDeclaration$RuleMemoStart <= classDeclaration$RuleMemoEnd) {
+            index = classDeclaration$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (classDeclaration$RuleMemoStart == classDeclaration$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CLASS_DECLARATION, classDeclaration$RuleMemoStart, classDeclaration$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(classDeclaration$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(classDeclaration$RuleMemoFirstNode);
+                  currentNode = classDeclaration$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Modifiers 'class' TestNoAlpha OptionalSpacing Identifier TypeParameters? Extends? Implements? ClassBody)
       // Modifiers
@@ -1171,13 +1705,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         classDeclaration$RuleMemoStart = startIndex;
+         classDeclaration$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            classDeclaration$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.CLASS_DECLARATION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            classDeclaration$RuleMemoFirstNode = currentNode;
+            classDeclaration$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         classDeclaration$RuleMemoStart = startIndex;
+         classDeclaration$RuleMemoEnd = -1;
+         classDeclaration$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1190,6 +1733,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (enumDeclaration$RuleMemoStart == index) {
+         if (enumDeclaration$RuleMemoStart <= enumDeclaration$RuleMemoEnd) {
+            index = enumDeclaration$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (enumDeclaration$RuleMemoStart == enumDeclaration$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ENUM_DECLARATION, enumDeclaration$RuleMemoStart, enumDeclaration$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(enumDeclaration$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(enumDeclaration$RuleMemoFirstNode);
+                  currentNode = enumDeclaration$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Modifiers 'enum' TestNoAlpha OptionalSpacing Identifier Implements? EnumBody)
       // Modifiers
@@ -1218,13 +1778,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         enumDeclaration$RuleMemoStart = startIndex;
+         enumDeclaration$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            enumDeclaration$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ENUM_DECLARATION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            enumDeclaration$RuleMemoFirstNode = currentNode;
+            enumDeclaration$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         enumDeclaration$RuleMemoStart = startIndex;
+         enumDeclaration$RuleMemoEnd = -1;
+         enumDeclaration$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1237,6 +1806,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (interfaceDeclaration$RuleMemoStart == index) {
+         if (interfaceDeclaration$RuleMemoStart <= interfaceDeclaration$RuleMemoEnd) {
+            index = interfaceDeclaration$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (interfaceDeclaration$RuleMemoStart == interfaceDeclaration$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.INTERFACE_DECLARATION, interfaceDeclaration$RuleMemoStart, interfaceDeclaration$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(interfaceDeclaration$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(interfaceDeclaration$RuleMemoFirstNode);
+                  currentNode = interfaceDeclaration$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Modifiers 'interface' TestNoAlpha OptionalSpacing Identifier TypeParameters? ExtendsInterfaces? InterfaceBody)
       // Modifiers
@@ -1268,13 +1854,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         interfaceDeclaration$RuleMemoStart = startIndex;
+         interfaceDeclaration$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            interfaceDeclaration$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.INTERFACE_DECLARATION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            interfaceDeclaration$RuleMemoFirstNode = currentNode;
+            interfaceDeclaration$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         interfaceDeclaration$RuleMemoStart = startIndex;
+         interfaceDeclaration$RuleMemoEnd = -1;
+         interfaceDeclaration$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1287,6 +1882,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (annotationDeclaration$RuleMemoStart == index) {
+         if (annotationDeclaration$RuleMemoStart <= annotationDeclaration$RuleMemoEnd) {
+            index = annotationDeclaration$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (annotationDeclaration$RuleMemoStart == annotationDeclaration$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ANNOTATION_DECLARATION, annotationDeclaration$RuleMemoStart, annotationDeclaration$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(annotationDeclaration$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(annotationDeclaration$RuleMemoFirstNode);
+                  currentNode = annotationDeclaration$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Modifiers '@' OptionalSpacing 'interface' TestNoAlpha OptionalSpacing Identifier AnnotationTypeBody)
       // Modifiers
@@ -1320,13 +1932,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         annotationDeclaration$RuleMemoStart = startIndex;
+         annotationDeclaration$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            annotationDeclaration$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ANNOTATION_DECLARATION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            annotationDeclaration$RuleMemoFirstNode = currentNode;
+            annotationDeclaration$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         annotationDeclaration$RuleMemoStart = startIndex;
+         annotationDeclaration$RuleMemoEnd = -1;
+         annotationDeclaration$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1452,6 +2073,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (implements$RuleMemoStart == index) {
+         if (implements$RuleMemoStart <= implements$RuleMemoEnd) {
+            index = implements$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (implements$RuleMemoStart == implements$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.IMPLEMENTS, implements$RuleMemoStart, implements$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(implements$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(implements$RuleMemoFirstNode);
+                  currentNode = implements$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('implements' TestNoAlpha OptionalSpacing ClassTypeList)
       // 'implements'
@@ -1469,13 +2107,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         implements$RuleMemoStart = startIndex;
+         implements$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            implements$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.IMPLEMENTS, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            implements$RuleMemoFirstNode = currentNode;
+            implements$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         implements$RuleMemoStart = startIndex;
+         implements$RuleMemoEnd = -1;
+         implements$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1488,6 +2135,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (classTypeList$RuleMemoStart == index) {
+         if (classTypeList$RuleMemoStart <= classTypeList$RuleMemoEnd) {
+            index = classTypeList$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (classTypeList$RuleMemoStart == classTypeList$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CLASS_TYPE_LIST, classTypeList$RuleMemoStart, classTypeList$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(classTypeList$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(classTypeList$RuleMemoFirstNode);
+                  currentNode = classTypeList$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (QualifiedClassName (',' OptionalSpacing QualifiedClassName)*)
       // QualifiedClassName
@@ -1520,13 +2184,22 @@ public class JavaParser implements Parser {
          match = true;
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         classTypeList$RuleMemoStart = startIndex;
+         classTypeList$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            classTypeList$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.CLASS_TYPE_LIST, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            classTypeList$RuleMemoFirstNode = currentNode;
+            classTypeList$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         classTypeList$RuleMemoStart = startIndex;
+         classTypeList$RuleMemoEnd = -1;
+         classTypeList$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -2411,6 +3084,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (classBody$RuleMemoStart == index) {
+         if (classBody$RuleMemoStart <= classBody$RuleMemoEnd) {
+            index = classBody$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (classBody$RuleMemoStart == classBody$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CLASS_BODY, classBody$RuleMemoStart, classBody$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(classBody$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(classBody$RuleMemoFirstNode);
+                  currentNode = classBody$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('{' OptionalSpacing ClassBodyDeclaration* '}' OptionalSpacing)
       // '{'
@@ -2433,13 +3123,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         classBody$RuleMemoStart = startIndex;
+         classBody$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            classBody$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.CLASS_BODY, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            classBody$RuleMemoFirstNode = currentNode;
+            classBody$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         classBody$RuleMemoStart = startIndex;
+         classBody$RuleMemoEnd = -1;
+         classBody$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -2452,6 +3151,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (classBodyDeclaration$RuleMemoStart == index) {
+         if (classBodyDeclaration$RuleMemoStart <= classBodyDeclaration$RuleMemoEnd) {
+            index = classBodyDeclaration$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (classBodyDeclaration$RuleMemoStart == classBodyDeclaration$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CLASS_BODY_DECLARATION, classBodyDeclaration$RuleMemoStart, classBodyDeclaration$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(classBodyDeclaration$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(classBodyDeclaration$RuleMemoFirstNode);
+                  currentNode = classBodyDeclaration$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Semicolon | StaticBlock | MethodDeclaration | ConstructorDeclaration | FieldsDeclarations | InterfaceDeclaration | ClassDeclaration | EnumDeclaration | AnnotationDeclaration)
       switch(buffer.getChar(index)) {
@@ -2654,13 +3370,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         classBodyDeclaration$RuleMemoStart = startIndex;
+         classBodyDeclaration$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            classBodyDeclaration$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.CLASS_BODY_DECLARATION, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            classBodyDeclaration$RuleMemoFirstNode = currentNode;
+            classBodyDeclaration$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         classBodyDeclaration$RuleMemoStart = startIndex;
+         classBodyDeclaration$RuleMemoEnd = -1;
+         classBodyDeclaration$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -2673,6 +3398,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (staticBlock$RuleMemoStart == index) {
+         if (staticBlock$RuleMemoStart <= staticBlock$RuleMemoEnd) {
+            index = staticBlock$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (staticBlock$RuleMemoStart == staticBlock$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.STATIC_BLOCK, staticBlock$RuleMemoStart, staticBlock$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(staticBlock$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(staticBlock$RuleMemoFirstNode);
+                  currentNode = staticBlock$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (('static' TestNoAlpha OptionalSpacing)? Block)
       // ('static' TestNoAlpha OptionalSpacing)?
@@ -2700,13 +3442,22 @@ public class JavaParser implements Parser {
       // Block
       match = block$Rule();
       if (match) {
-         if (! currentRuleIsAtomic) {
+         staticBlock$RuleMemoStart = startIndex;
+         staticBlock$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            staticBlock$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.STATIC_BLOCK, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            staticBlock$RuleMemoFirstNode = currentNode;
+            staticBlock$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         staticBlock$RuleMemoStart = startIndex;
+         staticBlock$RuleMemoEnd = -1;
+         staticBlock$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -2719,6 +3470,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (block$RuleMemoStart == index) {
+         if (block$RuleMemoStart <= block$RuleMemoEnd) {
+            index = block$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (block$RuleMemoStart == block$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.BLOCK, block$RuleMemoStart, block$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(block$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(block$RuleMemoFirstNode);
+                  currentNode = block$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('{' OptionalSpacing BlockStatements '}' OptionalSpacing)
       // '{'
@@ -2740,13 +3508,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         block$RuleMemoStart = startIndex;
+         block$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            block$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.BLOCK, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            block$RuleMemoFirstNode = currentNode;
+            block$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         block$RuleMemoStart = startIndex;
+         block$RuleMemoEnd = -1;
+         block$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -2759,6 +3536,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (methodDeclaration$RuleMemoStart == index) {
+         if (methodDeclaration$RuleMemoStart <= methodDeclaration$RuleMemoEnd) {
+            index = methodDeclaration$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (methodDeclaration$RuleMemoStart == methodDeclaration$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.METHOD_DECLARATION, methodDeclaration$RuleMemoStart, methodDeclaration$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(methodDeclaration$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(methodDeclaration$RuleMemoFirstNode);
+                  currentNode = methodDeclaration$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Modifiers MethodSignature (Block | EmptyBody))
       // Modifiers
@@ -2786,13 +3580,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         methodDeclaration$RuleMemoStart = startIndex;
+         methodDeclaration$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            methodDeclaration$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.METHOD_DECLARATION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            methodDeclaration$RuleMemoFirstNode = currentNode;
+            methodDeclaration$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         methodDeclaration$RuleMemoStart = startIndex;
+         methodDeclaration$RuleMemoEnd = -1;
+         methodDeclaration$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -2805,6 +3608,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (constructorDeclaration$RuleMemoStart == index) {
+         if (constructorDeclaration$RuleMemoStart <= constructorDeclaration$RuleMemoEnd) {
+            index = constructorDeclaration$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (constructorDeclaration$RuleMemoStart == constructorDeclaration$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CONSTRUCTOR_DECLARATION, constructorDeclaration$RuleMemoStart, constructorDeclaration$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(constructorDeclaration$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(constructorDeclaration$RuleMemoFirstNode);
+                  currentNode = constructorDeclaration$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Modifiers TypeParameters? Identifier ParametersDeclarations Throws? Block)
       // Modifiers
@@ -2828,13 +3648,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         constructorDeclaration$RuleMemoStart = startIndex;
+         constructorDeclaration$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            constructorDeclaration$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.CONSTRUCTOR_DECLARATION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            constructorDeclaration$RuleMemoFirstNode = currentNode;
+            constructorDeclaration$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         constructorDeclaration$RuleMemoStart = startIndex;
+         constructorDeclaration$RuleMemoEnd = -1;
+         constructorDeclaration$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -2847,6 +3676,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (fieldsDeclarations$RuleMemoStart == index) {
+         if (fieldsDeclarations$RuleMemoStart <= fieldsDeclarations$RuleMemoEnd) {
+            index = fieldsDeclarations$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (fieldsDeclarations$RuleMemoStart == fieldsDeclarations$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.FIELDS_DECLARATIONS, fieldsDeclarations$RuleMemoStart, fieldsDeclarations$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(fieldsDeclarations$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(fieldsDeclarations$RuleMemoFirstNode);
+                  currentNode = fieldsDeclarations$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Modifiers Type VariableDeclarations Semicolon)
       // Modifiers
@@ -2864,13 +3710,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         fieldsDeclarations$RuleMemoStart = startIndex;
+         fieldsDeclarations$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            fieldsDeclarations$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.FIELDS_DECLARATIONS, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            fieldsDeclarations$RuleMemoFirstNode = currentNode;
+            fieldsDeclarations$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         fieldsDeclarations$RuleMemoStart = startIndex;
+         fieldsDeclarations$RuleMemoEnd = -1;
+         fieldsDeclarations$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3010,6 +3865,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (variableDeclarations$RuleMemoStart == index) {
+         if (variableDeclarations$RuleMemoStart <= variableDeclarations$RuleMemoEnd) {
+            index = variableDeclarations$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (variableDeclarations$RuleMemoStart == variableDeclarations$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.VARIABLE_DECLARATIONS, variableDeclarations$RuleMemoStart, variableDeclarations$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(variableDeclarations$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(variableDeclarations$RuleMemoFirstNode);
+                  currentNode = variableDeclarations$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (VariableDeclaration (',' OptionalSpacing VariableDeclaration)*)
       // VariableDeclaration
@@ -3042,13 +3914,22 @@ public class JavaParser implements Parser {
          match = true;
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         variableDeclarations$RuleMemoStart = startIndex;
+         variableDeclarations$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            variableDeclarations$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.VARIABLE_DECLARATIONS, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            variableDeclarations$RuleMemoFirstNode = currentNode;
+            variableDeclarations$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         variableDeclarations$RuleMemoStart = startIndex;
+         variableDeclarations$RuleMemoEnd = -1;
+         variableDeclarations$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3061,6 +3942,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (throws$RuleMemoStart == index) {
+         if (throws$RuleMemoStart <= throws$RuleMemoEnd) {
+            index = throws$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (throws$RuleMemoStart == throws$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.THROWS, throws$RuleMemoStart, throws$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(throws$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(throws$RuleMemoFirstNode);
+                  currentNode = throws$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('throws' TestNoAlpha OptionalSpacing ClassTypeList)
       // 'throws'
@@ -3078,13 +3976,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         throws$RuleMemoStart = startIndex;
+         throws$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            throws$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.THROWS, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            throws$RuleMemoFirstNode = currentNode;
+            throws$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         throws$RuleMemoStart = startIndex;
+         throws$RuleMemoEnd = -1;
+         throws$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3097,17 +4004,43 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (emptyBody$RuleMemoStart == index) {
+         if (emptyBody$RuleMemoStart <= emptyBody$RuleMemoEnd) {
+            index = emptyBody$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (emptyBody$RuleMemoStart == emptyBody$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.EMPTY_BODY, emptyBody$RuleMemoStart, emptyBody$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(emptyBody$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(emptyBody$RuleMemoFirstNode);
+                  currentNode = emptyBody$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // Semicolon
       match = semicolon$Rule();
       if (match) {
-         if (! currentRuleIsAtomic) {
+         emptyBody$RuleMemoStart = startIndex;
+         emptyBody$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            emptyBody$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.EMPTY_BODY, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            emptyBody$RuleMemoFirstNode = currentNode;
+            emptyBody$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         emptyBody$RuleMemoStart = startIndex;
+         emptyBody$RuleMemoEnd = -1;
+         emptyBody$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3167,6 +4100,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (methodSignature$RuleMemoStart == index) {
+         if (methodSignature$RuleMemoStart <= methodSignature$RuleMemoEnd) {
+            index = methodSignature$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (methodSignature$RuleMemoStart == methodSignature$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.METHOD_SIGNATURE, methodSignature$RuleMemoStart, methodSignature$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(methodSignature$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(methodSignature$RuleMemoFirstNode);
+                  currentNode = methodSignature$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (TypeParameters? ReturnType Identifier ParametersDeclarations Dimensions Throws?)
       // TypeParameters?
@@ -3193,13 +4143,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         methodSignature$RuleMemoStart = startIndex;
+         methodSignature$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            methodSignature$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.METHOD_SIGNATURE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            methodSignature$RuleMemoFirstNode = currentNode;
+            methodSignature$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         methodSignature$RuleMemoStart = startIndex;
+         methodSignature$RuleMemoEnd = -1;
+         methodSignature$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3212,6 +4171,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (parametersDeclarations$RuleMemoStart == index) {
+         if (parametersDeclarations$RuleMemoStart <= parametersDeclarations$RuleMemoEnd) {
+            index = parametersDeclarations$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (parametersDeclarations$RuleMemoStart == parametersDeclarations$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.PARAMETERS_DECLARATIONS, parametersDeclarations$RuleMemoStart, parametersDeclarations$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(parametersDeclarations$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(parametersDeclarations$RuleMemoFirstNode);
+                  currentNode = parametersDeclarations$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('(' OptionalSpacing ParametersDeclarationList? ')' OptionalSpacing)
       // '('
@@ -3232,13 +4208,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         parametersDeclarations$RuleMemoStart = startIndex;
+         parametersDeclarations$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            parametersDeclarations$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.PARAMETERS_DECLARATIONS, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            parametersDeclarations$RuleMemoFirstNode = currentNode;
+            parametersDeclarations$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         parametersDeclarations$RuleMemoStart = startIndex;
+         parametersDeclarations$RuleMemoEnd = -1;
+         parametersDeclarations$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3530,6 +4515,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (interfaceMethod$RuleMemoStart == index) {
+         if (interfaceMethod$RuleMemoStart <= interfaceMethod$RuleMemoEnd) {
+            index = interfaceMethod$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (interfaceMethod$RuleMemoStart == interfaceMethod$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.INTERFACE_METHOD, interfaceMethod$RuleMemoStart, interfaceMethod$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(interfaceMethod$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(interfaceMethod$RuleMemoFirstNode);
+                  currentNode = interfaceMethod$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Modifiers MethodSignature Semicolon)
       // Modifiers
@@ -3543,13 +4545,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         interfaceMethod$RuleMemoStart = startIndex;
+         interfaceMethod$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            interfaceMethod$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.INTERFACE_METHOD, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            interfaceMethod$RuleMemoFirstNode = currentNode;
+            interfaceMethod$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         interfaceMethod$RuleMemoStart = startIndex;
+         interfaceMethod$RuleMemoEnd = -1;
+         interfaceMethod$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3562,6 +4573,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (constantsDeclarations$RuleMemoStart == index) {
+         if (constantsDeclarations$RuleMemoStart <= constantsDeclarations$RuleMemoEnd) {
+            index = constantsDeclarations$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (constantsDeclarations$RuleMemoStart == constantsDeclarations$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CONSTANTS_DECLARATIONS, constantsDeclarations$RuleMemoStart, constantsDeclarations$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(constantsDeclarations$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(constantsDeclarations$RuleMemoFirstNode);
+                  currentNode = constantsDeclarations$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Modifiers Type ConstantsDeclarationsList Semicolon)
       // Modifiers
@@ -3579,13 +4607,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         constantsDeclarations$RuleMemoStart = startIndex;
+         constantsDeclarations$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            constantsDeclarations$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.CONSTANTS_DECLARATIONS, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            constantsDeclarations$RuleMemoFirstNode = currentNode;
+            constantsDeclarations$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         constantsDeclarations$RuleMemoStart = startIndex;
+         constantsDeclarations$RuleMemoEnd = -1;
+         constantsDeclarations$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3649,6 +4686,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (constantDeclaration$RuleMemoStart == index) {
+         if (constantDeclaration$RuleMemoStart <= constantDeclaration$RuleMemoEnd) {
+            index = constantDeclaration$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (constantDeclaration$RuleMemoStart == constantDeclaration$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CONSTANT_DECLARATION, constantDeclaration$RuleMemoStart, constantDeclaration$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(constantDeclaration$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(constantDeclaration$RuleMemoFirstNode);
+                  currentNode = constantDeclaration$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Identifier Dimensions '=' OptionalSpacing VariableInitializer)
       // Identifier
@@ -3670,13 +4724,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         constantDeclaration$RuleMemoStart = startIndex;
+         constantDeclaration$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            constantDeclaration$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.CONSTANT_DECLARATION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            constantDeclaration$RuleMemoFirstNode = currentNode;
+            constantDeclaration$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         constantDeclaration$RuleMemoStart = startIndex;
+         constantDeclaration$RuleMemoEnd = -1;
+         constantDeclaration$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3689,6 +4752,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (variableInitializer$RuleMemoStart == index) {
+         if (variableInitializer$RuleMemoStart <= variableInitializer$RuleMemoEnd) {
+            index = variableInitializer$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (variableInitializer$RuleMemoStart == variableInitializer$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.VARIABLE_INITIALIZER, variableInitializer$RuleMemoStart, variableInitializer$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(variableInitializer$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(variableInitializer$RuleMemoFirstNode);
+                  currentNode = variableInitializer$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (ArrayInitializer | Expression)
       switch(buffer.getChar(index)) {
@@ -3778,13 +4858,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         variableInitializer$RuleMemoStart = startIndex;
+         variableInitializer$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            variableInitializer$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.VARIABLE_INITIALIZER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            variableInitializer$RuleMemoFirstNode = currentNode;
+            variableInitializer$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         variableInitializer$RuleMemoStart = startIndex;
+         variableInitializer$RuleMemoEnd = -1;
+         variableInitializer$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3938,6 +5027,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (enumConstant$RuleMemoStart == index) {
+         if (enumConstant$RuleMemoStart <= enumConstant$RuleMemoEnd) {
+            index = enumConstant$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (enumConstant$RuleMemoStart == enumConstant$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ENUM_CONSTANT, enumConstant$RuleMemoStart, enumConstant$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(enumConstant$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(enumConstant$RuleMemoFirstNode);
+                  currentNode = enumConstant$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Annotations Identifier Arguments? ClassBody?)
       // Annotations
@@ -3956,13 +5062,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         enumConstant$RuleMemoStart = startIndex;
+         enumConstant$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            enumConstant$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ENUM_CONSTANT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            enumConstant$RuleMemoFirstNode = currentNode;
+            enumConstant$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         enumConstant$RuleMemoStart = startIndex;
+         enumConstant$RuleMemoEnd = -1;
+         enumConstant$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3975,6 +5090,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (arguments$RuleMemoStart == index) {
+         if (arguments$RuleMemoStart <= arguments$RuleMemoEnd) {
+            index = arguments$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (arguments$RuleMemoStart == arguments$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ARGUMENTS, arguments$RuleMemoStart, arguments$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(arguments$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(arguments$RuleMemoFirstNode);
+                  currentNode = arguments$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('(' OptionalSpacing (Expression (',' OptionalSpacing Expression)*)? ')' OptionalSpacing)
       // '('
@@ -4025,13 +5157,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         arguments$RuleMemoStart = startIndex;
+         arguments$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            arguments$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ARGUMENTS, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            arguments$RuleMemoFirstNode = currentNode;
+            arguments$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         arguments$RuleMemoStart = startIndex;
+         arguments$RuleMemoEnd = -1;
+         arguments$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4044,6 +5185,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (final$RuleMemoStart == index) {
+         if (final$RuleMemoStart <= final$RuleMemoEnd) {
+            index = final$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (final$RuleMemoStart == final$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.FINAL, final$RuleMemoStart, final$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(final$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(final$RuleMemoFirstNode);
+                  currentNode = final$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('final' TestNoAlpha OptionalSpacing)
       // 'final'
@@ -4057,13 +5215,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         final$RuleMemoStart = startIndex;
+         final$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            final$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.FINAL, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            final$RuleMemoFirstNode = currentNode;
+            final$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         final$RuleMemoStart = startIndex;
+         final$RuleMemoEnd = -1;
+         final$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4076,6 +5243,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (variableModifiers$RuleMemoStart == index) {
+         if (variableModifiers$RuleMemoStart <= variableModifiers$RuleMemoEnd) {
+            index = variableModifiers$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (variableModifiers$RuleMemoStart == variableModifiers$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.VARIABLE_MODIFIERS, variableModifiers$RuleMemoStart, variableModifiers$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(variableModifiers$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(variableModifiers$RuleMemoFirstNode);
+                  currentNode = variableModifiers$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Final | Annotation)*
       do {
@@ -4096,10 +5280,16 @@ public class JavaParser implements Parser {
             }
          }
       } while(match);
-      if (! currentRuleIsAtomic) {
+      variableModifiers$RuleMemoStart = startIndex;
+      variableModifiers$RuleMemoEnd = index;
+      if (currentRuleIsAtomic) {
+         variableModifiers$RuleMemoFirstNode = null;
+      } else {
          currentNode = new NodeImpl(JavaRuleType.VARIABLE_MODIFIERS, startIndex, index, true, false);
          currentNode.setFirstChild(lastNode.getSibling());
          lastNode.setSibling(currentNode);
+         variableModifiers$RuleMemoFirstNode = currentNode;
+         variableModifiers$RuleMemoLastNode = currentNode;
       }
       return true;
    }
@@ -4109,6 +5299,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (localVariableDeclarationStatement$RuleMemoStart == index) {
+         if (localVariableDeclarationStatement$RuleMemoStart <= localVariableDeclarationStatement$RuleMemoEnd) {
+            index = localVariableDeclarationStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (localVariableDeclarationStatement$RuleMemoStart == localVariableDeclarationStatement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.LOCAL_VARIABLE_DECLARATION_STATEMENT, localVariableDeclarationStatement$RuleMemoStart, localVariableDeclarationStatement$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(localVariableDeclarationStatement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(localVariableDeclarationStatement$RuleMemoFirstNode);
+                  currentNode = localVariableDeclarationStatement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (VariableModifiers Type VariableDeclarations Semicolon)
       // VariableModifiers
@@ -4126,13 +5333,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         localVariableDeclarationStatement$RuleMemoStart = startIndex;
+         localVariableDeclarationStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            localVariableDeclarationStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.LOCAL_VARIABLE_DECLARATION_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            localVariableDeclarationStatement$RuleMemoFirstNode = currentNode;
+            localVariableDeclarationStatement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         localVariableDeclarationStatement$RuleMemoStart = startIndex;
+         localVariableDeclarationStatement$RuleMemoEnd = -1;
+         localVariableDeclarationStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4145,6 +5361,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (variableDeclaration$RuleMemoStart == index) {
+         if (variableDeclaration$RuleMemoStart <= variableDeclaration$RuleMemoEnd) {
+            index = variableDeclaration$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (variableDeclaration$RuleMemoStart == variableDeclaration$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.VARIABLE_DECLARATION, variableDeclaration$RuleMemoStart, variableDeclaration$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(variableDeclaration$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(variableDeclaration$RuleMemoFirstNode);
+                  currentNode = variableDeclaration$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Identifier Dimensions VariableInitialization?)
       // Identifier
@@ -4160,13 +5393,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         variableDeclaration$RuleMemoStart = startIndex;
+         variableDeclaration$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            variableDeclaration$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.VARIABLE_DECLARATION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            variableDeclaration$RuleMemoFirstNode = currentNode;
+            variableDeclaration$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         variableDeclaration$RuleMemoStart = startIndex;
+         variableDeclaration$RuleMemoEnd = -1;
+         variableDeclaration$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4211,6 +5453,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (parametersDeclarationList$RuleMemoStart == index) {
+         if (parametersDeclarationList$RuleMemoStart <= parametersDeclarationList$RuleMemoEnd) {
+            index = parametersDeclarationList$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (parametersDeclarationList$RuleMemoStart == parametersDeclarationList$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.PARAMETERS_DECLARATION_LIST, parametersDeclarationList$RuleMemoStart, parametersDeclarationList$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(parametersDeclarationList$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(parametersDeclarationList$RuleMemoFirstNode);
+                  currentNode = parametersDeclarationList$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ((ParameterDeclaration ',' OptionalSpacing ParametersDeclarationList) | ParameterDeclaration | ParameterVariableDeclaration)
       // (ParameterDeclaration ',' OptionalSpacing ParametersDeclarationList)
@@ -4250,13 +5509,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         parametersDeclarationList$RuleMemoStart = startIndex;
+         parametersDeclarationList$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            parametersDeclarationList$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.PARAMETERS_DECLARATION_LIST, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            parametersDeclarationList$RuleMemoFirstNode = currentNode;
+            parametersDeclarationList$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         parametersDeclarationList$RuleMemoStart = startIndex;
+         parametersDeclarationList$RuleMemoEnd = -1;
+         parametersDeclarationList$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4331,6 +5599,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (parameterVariableDeclaration$RuleMemoStart == index) {
+         if (parameterVariableDeclaration$RuleMemoStart <= parameterVariableDeclaration$RuleMemoEnd) {
+            index = parameterVariableDeclaration$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (parameterVariableDeclaration$RuleMemoStart == parameterVariableDeclaration$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.PARAMETER_VARIABLE_DECLARATION, parameterVariableDeclaration$RuleMemoStart, parameterVariableDeclaration$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(parameterVariableDeclaration$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(parameterVariableDeclaration$RuleMemoFirstNode);
+                  currentNode = parameterVariableDeclaration$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (VariableModifiers Type '...' OptionalSpacing Identifier Dimensions)
       // VariableModifiers
@@ -4356,13 +5641,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         parameterVariableDeclaration$RuleMemoStart = startIndex;
+         parameterVariableDeclaration$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            parameterVariableDeclaration$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.PARAMETER_VARIABLE_DECLARATION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            parameterVariableDeclaration$RuleMemoFirstNode = currentNode;
+            parameterVariableDeclaration$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         parameterVariableDeclaration$RuleMemoStart = startIndex;
+         parameterVariableDeclaration$RuleMemoEnd = -1;
+         parameterVariableDeclaration$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4375,16 +5669,39 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (blockStatements$RuleMemoStart == index) {
+         if (blockStatements$RuleMemoStart <= blockStatements$RuleMemoEnd) {
+            index = blockStatements$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (blockStatements$RuleMemoStart == blockStatements$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.BLOCK_STATEMENTS, blockStatements$RuleMemoStart, blockStatements$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(blockStatements$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(blockStatements$RuleMemoFirstNode);
+                  currentNode = blockStatements$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // BlockStatement*
       do {
          // BlockStatement
          match = blockStatement$Rule();
       } while(match);
-      if (! currentRuleIsAtomic) {
+      blockStatements$RuleMemoStart = startIndex;
+      blockStatements$RuleMemoEnd = index;
+      if (currentRuleIsAtomic) {
+         blockStatements$RuleMemoFirstNode = null;
+      } else {
          currentNode = new NodeImpl(JavaRuleType.BLOCK_STATEMENTS, startIndex, index, true, true);
          currentNode.setFirstChild(lastNode.getSibling());
          lastNode.setSibling(currentNode);
+         blockStatements$RuleMemoFirstNode = currentNode;
+         blockStatements$RuleMemoLastNode = currentNode;
       }
       return true;
    }
@@ -4560,6 +5877,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (statement$RuleMemoStart == index) {
+         if (statement$RuleMemoStart <= statement$RuleMemoEnd) {
+            index = statement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (statement$RuleMemoStart == statement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.STATEMENT, statement$RuleMemoStart, statement$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(statement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(statement$RuleMemoFirstNode);
+                  currentNode = statement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Block | AssertStatement | IfStatement | ForStatement | ForIterableStatement | WhileStatement | DoWhileStatement | TryCatchStatement | SwitchStatement | SynchronizedStatement | ReturnStatement | ThrowStatement | BreakStatement | ContinueStatement | IdentifiedStatement | StatementExpression | Semicolon)
       switch(buffer.getChar(index)) {
@@ -4794,13 +6128,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         statement$RuleMemoStart = startIndex;
+         statement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            statement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.STATEMENT, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            statement$RuleMemoFirstNode = currentNode;
+            statement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         statement$RuleMemoStart = startIndex;
+         statement$RuleMemoEnd = -1;
+         statement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4813,6 +6156,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (assertStatement$RuleMemoStart == index) {
+         if (assertStatement$RuleMemoStart <= assertStatement$RuleMemoEnd) {
+            index = assertStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (assertStatement$RuleMemoStart == assertStatement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ASSERT_STATEMENT, assertStatement$RuleMemoStart, assertStatement$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(assertStatement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(assertStatement$RuleMemoFirstNode);
+                  currentNode = assertStatement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('assert' TestNoAlpha OptionalSpacing Expression (':' OptionalSpacing Expression)? Semicolon)
       // 'assert'
@@ -4856,13 +6216,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         assertStatement$RuleMemoStart = startIndex;
+         assertStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            assertStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ASSERT_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            assertStatement$RuleMemoFirstNode = currentNode;
+            assertStatement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         assertStatement$RuleMemoStart = startIndex;
+         assertStatement$RuleMemoEnd = -1;
+         assertStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4875,6 +6244,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (ifStatement$RuleMemoStart == index) {
+         if (ifStatement$RuleMemoStart <= ifStatement$RuleMemoEnd) {
+            index = ifStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (ifStatement$RuleMemoStart == ifStatement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.IF_STATEMENT, ifStatement$RuleMemoStart, ifStatement$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(ifStatement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(ifStatement$RuleMemoFirstNode);
+                  currentNode = ifStatement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('if' TestNoAlpha OptionalSpacing ParExpression Statement ElseStatement?)
       // 'if'
@@ -4902,13 +6288,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         ifStatement$RuleMemoStart = startIndex;
+         ifStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            ifStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.IF_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            ifStatement$RuleMemoFirstNode = currentNode;
+            ifStatement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         ifStatement$RuleMemoStart = startIndex;
+         ifStatement$RuleMemoEnd = -1;
+         ifStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4921,6 +6316,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (forStatement$RuleMemoStart == index) {
+         if (forStatement$RuleMemoStart <= forStatement$RuleMemoEnd) {
+            index = forStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (forStatement$RuleMemoStart == forStatement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.FOR_STATEMENT, forStatement$RuleMemoStart, forStatement$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(forStatement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(forStatement$RuleMemoFirstNode);
+                  currentNode = forStatement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('for' TestNoAlpha OptionalSpacing '(' OptionalSpacing ForInit? Semicolon Expression? Semicolon ForUpdate? ')' OptionalSpacing Statement)
       // 'for'
@@ -4971,13 +6383,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         forStatement$RuleMemoStart = startIndex;
+         forStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            forStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.FOR_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            forStatement$RuleMemoFirstNode = currentNode;
+            forStatement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         forStatement$RuleMemoStart = startIndex;
+         forStatement$RuleMemoEnd = -1;
+         forStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4990,6 +6411,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (forIterableStatement$RuleMemoStart == index) {
+         if (forIterableStatement$RuleMemoStart <= forIterableStatement$RuleMemoEnd) {
+            index = forIterableStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (forIterableStatement$RuleMemoStart == forIterableStatement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.FOR_ITERABLE_STATEMENT, forIterableStatement$RuleMemoStart, forIterableStatement$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(forIterableStatement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(forIterableStatement$RuleMemoFirstNode);
+                  currentNode = forIterableStatement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('for' TestNoAlpha OptionalSpacing '(' OptionalSpacing ParameterDeclaration ':' OptionalSpacing Expression ')' OptionalSpacing Statement)
       // 'for'
@@ -5039,13 +6477,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         forIterableStatement$RuleMemoStart = startIndex;
+         forIterableStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            forIterableStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.FOR_ITERABLE_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            forIterableStatement$RuleMemoFirstNode = currentNode;
+            forIterableStatement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         forIterableStatement$RuleMemoStart = startIndex;
+         forIterableStatement$RuleMemoEnd = -1;
+         forIterableStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5058,6 +6505,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (whileStatement$RuleMemoStart == index) {
+         if (whileStatement$RuleMemoStart <= whileStatement$RuleMemoEnd) {
+            index = whileStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (whileStatement$RuleMemoStart == whileStatement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.WHILE_STATEMENT, whileStatement$RuleMemoStart, whileStatement$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(whileStatement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(whileStatement$RuleMemoFirstNode);
+                  currentNode = whileStatement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('while' TestNoAlpha OptionalSpacing ParExpression Statement)
       // 'while'
@@ -5079,13 +6543,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         whileStatement$RuleMemoStart = startIndex;
+         whileStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            whileStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.WHILE_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            whileStatement$RuleMemoFirstNode = currentNode;
+            whileStatement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         whileStatement$RuleMemoStart = startIndex;
+         whileStatement$RuleMemoEnd = -1;
+         whileStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5098,6 +6571,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (doWhileStatement$RuleMemoStart == index) {
+         if (doWhileStatement$RuleMemoStart <= doWhileStatement$RuleMemoEnd) {
+            index = doWhileStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (doWhileStatement$RuleMemoStart == doWhileStatement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.DO_WHILE_STATEMENT, doWhileStatement$RuleMemoStart, doWhileStatement$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(doWhileStatement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(doWhileStatement$RuleMemoFirstNode);
+                  currentNode = doWhileStatement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('do' TestNoAlpha OptionalSpacing Statement 'while' TestNoAlpha OptionalSpacing ParExpression Semicolon)
       // 'do'
@@ -5135,13 +6625,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         doWhileStatement$RuleMemoStart = startIndex;
+         doWhileStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            doWhileStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.DO_WHILE_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            doWhileStatement$RuleMemoFirstNode = currentNode;
+            doWhileStatement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         doWhileStatement$RuleMemoStart = startIndex;
+         doWhileStatement$RuleMemoEnd = -1;
+         doWhileStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5154,6 +6653,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (tryCatchStatement$RuleMemoStart == index) {
+         if (tryCatchStatement$RuleMemoStart <= tryCatchStatement$RuleMemoEnd) {
+            index = tryCatchStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (tryCatchStatement$RuleMemoStart == tryCatchStatement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.TRY_CATCH_STATEMENT, tryCatchStatement$RuleMemoStart, tryCatchStatement$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(tryCatchStatement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(tryCatchStatement$RuleMemoFirstNode);
+                  currentNode = tryCatchStatement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('try' TestNoAlpha OptionalSpacing ResourceSpecification? Block Catch* Finally?)
       // 'try'
@@ -5185,13 +6701,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         tryCatchStatement$RuleMemoStart = startIndex;
+         tryCatchStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            tryCatchStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.TRY_CATCH_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            tryCatchStatement$RuleMemoFirstNode = currentNode;
+            tryCatchStatement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         tryCatchStatement$RuleMemoStart = startIndex;
+         tryCatchStatement$RuleMemoEnd = -1;
+         tryCatchStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5310,6 +6835,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (resource$RuleMemoStart == index) {
+         if (resource$RuleMemoStart <= resource$RuleMemoEnd) {
+            index = resource$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (resource$RuleMemoStart == resource$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.RESOURCE, resource$RuleMemoStart, resource$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(resource$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(resource$RuleMemoFirstNode);
+                  currentNode = resource$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (VariableModifiers QualifiedClassName Identifier Dimensions '=' OptionalSpacing Expression)
       // VariableModifiers
@@ -5339,13 +6881,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         resource$RuleMemoStart = startIndex;
+         resource$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            resource$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.RESOURCE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            resource$RuleMemoFirstNode = currentNode;
+            resource$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         resource$RuleMemoStart = startIndex;
+         resource$RuleMemoEnd = -1;
+         resource$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5358,6 +6909,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (switchStatement$RuleMemoStart == index) {
+         if (switchStatement$RuleMemoStart <= switchStatement$RuleMemoEnd) {
+            index = switchStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (switchStatement$RuleMemoStart == switchStatement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.SWITCH_STATEMENT, switchStatement$RuleMemoStart, switchStatement$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(switchStatement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(switchStatement$RuleMemoFirstNode);
+                  currentNode = switchStatement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('switch' TestNoAlpha OptionalSpacing ParExpression '{' OptionalSpacing SwitchBlockStatementGroups '}' OptionalSpacing)
       // 'switch'
@@ -5395,13 +6963,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         switchStatement$RuleMemoStart = startIndex;
+         switchStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            switchStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.SWITCH_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            switchStatement$RuleMemoFirstNode = currentNode;
+            switchStatement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         switchStatement$RuleMemoStart = startIndex;
+         switchStatement$RuleMemoEnd = -1;
+         switchStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5414,6 +6991,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (synchronizedStatement$RuleMemoStart == index) {
+         if (synchronizedStatement$RuleMemoStart <= synchronizedStatement$RuleMemoEnd) {
+            index = synchronizedStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (synchronizedStatement$RuleMemoStart == synchronizedStatement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.SYNCHRONIZED_STATEMENT, synchronizedStatement$RuleMemoStart, synchronizedStatement$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(synchronizedStatement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(synchronizedStatement$RuleMemoFirstNode);
+                  currentNode = synchronizedStatement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('synchronized' TestNoAlpha OptionalSpacing ParExpression Block)
       // 'synchronized'
@@ -5435,13 +7029,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         synchronizedStatement$RuleMemoStart = startIndex;
+         synchronizedStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            synchronizedStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.SYNCHRONIZED_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            synchronizedStatement$RuleMemoFirstNode = currentNode;
+            synchronizedStatement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         synchronizedStatement$RuleMemoStart = startIndex;
+         synchronizedStatement$RuleMemoEnd = -1;
+         synchronizedStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5454,6 +7057,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (returnStatement$RuleMemoStart == index) {
+         if (returnStatement$RuleMemoStart <= returnStatement$RuleMemoEnd) {
+            index = returnStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (returnStatement$RuleMemoStart == returnStatement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.RETURN_STATEMENT, returnStatement$RuleMemoStart, returnStatement$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(returnStatement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(returnStatement$RuleMemoFirstNode);
+                  currentNode = returnStatement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('return' TestNoAlpha OptionalSpacing Expression? Semicolon)
       // 'return'
@@ -5474,13 +7094,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         returnStatement$RuleMemoStart = startIndex;
+         returnStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            returnStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.RETURN_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            returnStatement$RuleMemoFirstNode = currentNode;
+            returnStatement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         returnStatement$RuleMemoStart = startIndex;
+         returnStatement$RuleMemoEnd = -1;
+         returnStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5493,6 +7122,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (throwStatement$RuleMemoStart == index) {
+         if (throwStatement$RuleMemoStart <= throwStatement$RuleMemoEnd) {
+            index = throwStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (throwStatement$RuleMemoStart == throwStatement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.THROW_STATEMENT, throwStatement$RuleMemoStart, throwStatement$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(throwStatement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(throwStatement$RuleMemoFirstNode);
+                  currentNode = throwStatement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('throw' TestNoAlpha OptionalSpacing Expression Semicolon)
       // 'throw'
@@ -5514,13 +7160,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         throwStatement$RuleMemoStart = startIndex;
+         throwStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            throwStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.THROW_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            throwStatement$RuleMemoFirstNode = currentNode;
+            throwStatement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         throwStatement$RuleMemoStart = startIndex;
+         throwStatement$RuleMemoEnd = -1;
+         throwStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5533,6 +7188,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (breakStatement$RuleMemoStart == index) {
+         if (breakStatement$RuleMemoStart <= breakStatement$RuleMemoEnd) {
+            index = breakStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (breakStatement$RuleMemoStart == breakStatement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.BREAK_STATEMENT, breakStatement$RuleMemoStart, breakStatement$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(breakStatement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(breakStatement$RuleMemoFirstNode);
+                  currentNode = breakStatement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('break' TestNoAlpha OptionalSpacing Identifier? Semicolon)
       // 'break'
@@ -5553,13 +7225,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         breakStatement$RuleMemoStart = startIndex;
+         breakStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            breakStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.BREAK_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            breakStatement$RuleMemoFirstNode = currentNode;
+            breakStatement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         breakStatement$RuleMemoStart = startIndex;
+         breakStatement$RuleMemoEnd = -1;
+         breakStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5572,6 +7253,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (continueStatement$RuleMemoStart == index) {
+         if (continueStatement$RuleMemoStart <= continueStatement$RuleMemoEnd) {
+            index = continueStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (continueStatement$RuleMemoStart == continueStatement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CONTINUE_STATEMENT, continueStatement$RuleMemoStart, continueStatement$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(continueStatement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(continueStatement$RuleMemoFirstNode);
+                  currentNode = continueStatement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('continue' TestNoAlpha OptionalSpacing Identifier? Semicolon)
       // 'continue'
@@ -5592,13 +7290,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         continueStatement$RuleMemoStart = startIndex;
+         continueStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            continueStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.CONTINUE_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            continueStatement$RuleMemoFirstNode = currentNode;
+            continueStatement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         continueStatement$RuleMemoStart = startIndex;
+         continueStatement$RuleMemoEnd = -1;
+         continueStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5611,6 +7318,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (identifiedStatement$RuleMemoStart == index) {
+         if (identifiedStatement$RuleMemoStart <= identifiedStatement$RuleMemoEnd) {
+            index = identifiedStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (identifiedStatement$RuleMemoStart == identifiedStatement$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.IDENTIFIED_STATEMENT, identifiedStatement$RuleMemoStart, identifiedStatement$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(identifiedStatement$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(identifiedStatement$RuleMemoFirstNode);
+                  currentNode = identifiedStatement$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Identifier ':' OptionalSpacing Statement)
       // Identifier
@@ -5628,13 +7352,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         identifiedStatement$RuleMemoStart = startIndex;
+         identifiedStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            identifiedStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.IDENTIFIED_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            identifiedStatement$RuleMemoFirstNode = currentNode;
+            identifiedStatement$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         identifiedStatement$RuleMemoStart = startIndex;
+         identifiedStatement$RuleMemoEnd = -1;
+         identifiedStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5647,6 +7380,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (statementExpression$RuleMemoStart == index) {
+         if (statementExpression$RuleMemoStart <= statementExpression$RuleMemoEnd) {
+            index = statementExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (statementExpression$RuleMemoStart == statementExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.STATEMENT_EXPRESSION, statementExpression$RuleMemoStart, statementExpression$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(statementExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(statementExpression$RuleMemoFirstNode);
+                  currentNode = statementExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Expression Semicolon)
       // Expression
@@ -5656,13 +7406,22 @@ public class JavaParser implements Parser {
          match = semicolon$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         statementExpression$RuleMemoStart = startIndex;
+         statementExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            statementExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.STATEMENT_EXPRESSION, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            statementExpression$RuleMemoFirstNode = currentNode;
+            statementExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         statementExpression$RuleMemoStart = startIndex;
+         statementExpression$RuleMemoEnd = -1;
+         statementExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5711,6 +7470,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (parExpression$RuleMemoStart == index) {
+         if (parExpression$RuleMemoStart <= parExpression$RuleMemoEnd) {
+            index = parExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (parExpression$RuleMemoStart == parExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.PAR_EXPRESSION, parExpression$RuleMemoStart, parExpression$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(parExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(parExpression$RuleMemoFirstNode);
+                  currentNode = parExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('(' OptionalSpacing Expression ')' OptionalSpacing)
       // '('
@@ -5732,13 +7508,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         parExpression$RuleMemoStart = startIndex;
+         parExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            parExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.PAR_EXPRESSION, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            parExpression$RuleMemoFirstNode = currentNode;
+            parExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         parExpression$RuleMemoStart = startIndex;
+         parExpression$RuleMemoEnd = -1;
+         parExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5751,6 +7536,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (expression$RuleMemoStart == index) {
+         if (expression$RuleMemoStart <= expression$RuleMemoEnd) {
+            index = expression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (expression$RuleMemoStart == expression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.EXPRESSION, expression$RuleMemoStart, expression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(expression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(expression$RuleMemoFirstNode);
+                  currentNode = expression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (AssignmentExpression | ConditionalExpression)
       switch(buffer.getChar(index)) {
@@ -5839,13 +7641,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         expression$RuleMemoStart = startIndex;
+         expression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            expression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            expression$RuleMemoFirstNode = currentNode;
+            expression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         expression$RuleMemoStart = startIndex;
+         expression$RuleMemoEnd = -1;
+         expression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -6415,6 +8226,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (forInitVariables$RuleMemoStart == index) {
+         if (forInitVariables$RuleMemoStart <= forInitVariables$RuleMemoEnd) {
+            index = forInitVariables$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (forInitVariables$RuleMemoStart == forInitVariables$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.FOR_INIT_VARIABLES, forInitVariables$RuleMemoStart, forInitVariables$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(forInitVariables$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(forInitVariables$RuleMemoFirstNode);
+                  currentNode = forInitVariables$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (VariableModifiers Type VariableDeclarations)
       // VariableModifiers
@@ -6428,13 +8256,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         forInitVariables$RuleMemoStart = startIndex;
+         forInitVariables$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            forInitVariables$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.FOR_INIT_VARIABLES, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            forInitVariables$RuleMemoFirstNode = currentNode;
+            forInitVariables$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         forInitVariables$RuleMemoStart = startIndex;
+         forInitVariables$RuleMemoEnd = -1;
+         forInitVariables$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -6447,6 +8284,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (forInitExpressions$RuleMemoStart == index) {
+         if (forInitExpressions$RuleMemoStart <= forInitExpressions$RuleMemoEnd) {
+            index = forInitExpressions$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (forInitExpressions$RuleMemoStart == forInitExpressions$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.FOR_INIT_EXPRESSIONS, forInitExpressions$RuleMemoStart, forInitExpressions$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(forInitExpressions$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(forInitExpressions$RuleMemoFirstNode);
+                  currentNode = forInitExpressions$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Expression (',' OptionalSpacing Expression)*)
       // Expression
@@ -6479,13 +8333,22 @@ public class JavaParser implements Parser {
          match = true;
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         forInitExpressions$RuleMemoStart = startIndex;
+         forInitExpressions$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            forInitExpressions$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.FOR_INIT_EXPRESSIONS, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            forInitExpressions$RuleMemoFirstNode = currentNode;
+            forInitExpressions$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         forInitExpressions$RuleMemoStart = startIndex;
+         forInitExpressions$RuleMemoEnd = -1;
+         forInitExpressions$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -6498,6 +8361,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (assignmentExpression$RuleMemoStart == index) {
+         if (assignmentExpression$RuleMemoStart <= assignmentExpression$RuleMemoEnd) {
+            index = assignmentExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (assignmentExpression$RuleMemoStart == assignmentExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ASSIGNMENT_EXPRESSION, assignmentExpression$RuleMemoStart, assignmentExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(assignmentExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(assignmentExpression$RuleMemoFirstNode);
+                  currentNode = assignmentExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (ConditionalExpression AssignmentOperator Expression)
       // ConditionalExpression
@@ -6511,13 +8391,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         assignmentExpression$RuleMemoStart = startIndex;
+         assignmentExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            assignmentExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ASSIGNMENT_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            assignmentExpression$RuleMemoFirstNode = currentNode;
+            assignmentExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         assignmentExpression$RuleMemoStart = startIndex;
+         assignmentExpression$RuleMemoEnd = -1;
+         assignmentExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -6663,23 +8552,6 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
-      if (assignmentOperator$RuleMemoStart == index) {
-         if (assignmentOperator$RuleMemoStart <= assignmentOperator$RuleMemoEnd) {
-            index = assignmentOperator$RuleMemoEnd;
-            if (! currentRuleIsAtomic) {
-               if (assignmentOperator$RuleMemoStart == assignmentOperator$RuleMemoEnd) {
-                  currentNode = new NodeImpl(JavaRuleType.ASSIGNMENT_OPERATOR, assignmentOperator$RuleMemoStart, assignmentOperator$RuleMemoEnd, true, true);
-                  lastNode.setSibling(currentNode);
-               } else if(assignmentOperator$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(assignmentOperator$RuleMemoFirstNode);
-                  currentNode = assignmentOperator$RuleMemoLastNode;
-               }
-            }
-            return true;
-         } else {
-            return false;
-         }
-      }
       startIndex = index;
       // (('=' | '+=' | '-=' | '*=' | '/=' | '&=' | '|=' | '^=' | '%=' | '<<=' | '>>=' | '>>>=') OptionalSpacing)
       // ('=' | '+=' | '-=' | '*=' | '/=' | '&=' | '|=' | '^=' | '%=' | '<<=' | '>>=' | '>>>=')
@@ -6808,22 +8680,13 @@ public class JavaParser implements Parser {
          match = optionalSpacing$Rule();
       }
       if (match) {
-         assignmentOperator$RuleMemoStart = startIndex;
-         assignmentOperator$RuleMemoEnd = index;
-         if (currentRuleIsAtomic) {
-            assignmentOperator$RuleMemoFirstNode = null;
-         } else {
+         if (! currentRuleIsAtomic) {
             currentNode = new NodeImpl(JavaRuleType.ASSIGNMENT_OPERATOR, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
-            assignmentOperator$RuleMemoFirstNode = currentNode;
-            assignmentOperator$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
-         assignmentOperator$RuleMemoStart = startIndex;
-         assignmentOperator$RuleMemoEnd = -1;
-         assignmentOperator$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -6836,6 +8699,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (ternaryExpression$RuleMemoStart == index) {
+         if (ternaryExpression$RuleMemoStart <= ternaryExpression$RuleMemoEnd) {
+            index = ternaryExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (ternaryExpression$RuleMemoStart == ternaryExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.TERNARY_EXPRESSION, ternaryExpression$RuleMemoStart, ternaryExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(ternaryExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(ternaryExpression$RuleMemoFirstNode);
+                  currentNode = ternaryExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (ConditionalOrExpression '?' OptionalSpacing Expression ':' OptionalSpacing ConditionalExpression)
       // ConditionalOrExpression
@@ -6865,13 +8745,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         ternaryExpression$RuleMemoStart = startIndex;
+         ternaryExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            ternaryExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.TERNARY_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            ternaryExpression$RuleMemoFirstNode = currentNode;
+            ternaryExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         ternaryExpression$RuleMemoStart = startIndex;
+         ternaryExpression$RuleMemoEnd = -1;
+         ternaryExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -7017,6 +8906,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (orExpression$RuleMemoStart == index) {
+         if (orExpression$RuleMemoStart <= orExpression$RuleMemoEnd) {
+            index = orExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (orExpression$RuleMemoStart == orExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.OR_EXPRESSION, orExpression$RuleMemoStart, orExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(orExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(orExpression$RuleMemoFirstNode);
+                  currentNode = orExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (ConditionalAndExpression '||' OptionalSpacing ConditionalOrExpression)
       // ConditionalAndExpression
@@ -7034,13 +8940,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         orExpression$RuleMemoStart = startIndex;
+         orExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            orExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.OR_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            orExpression$RuleMemoFirstNode = currentNode;
+            orExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         orExpression$RuleMemoStart = startIndex;
+         orExpression$RuleMemoEnd = -1;
+         orExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -7186,6 +9101,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (andExpression$RuleMemoStart == index) {
+         if (andExpression$RuleMemoStart <= andExpression$RuleMemoEnd) {
+            index = andExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (andExpression$RuleMemoStart == andExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.AND_EXPRESSION, andExpression$RuleMemoStart, andExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(andExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(andExpression$RuleMemoFirstNode);
+                  currentNode = andExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (OptionalBitOrExpression '&&' OptionalSpacing ConditionalAndExpression)
       // OptionalBitOrExpression
@@ -7203,13 +9135,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         andExpression$RuleMemoStart = startIndex;
+         andExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            andExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.AND_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            andExpression$RuleMemoFirstNode = currentNode;
+            andExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         andExpression$RuleMemoStart = startIndex;
+         andExpression$RuleMemoEnd = -1;
+         andExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -7355,6 +9296,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (bitOrExpression$RuleMemoStart == index) {
+         if (bitOrExpression$RuleMemoStart <= bitOrExpression$RuleMemoEnd) {
+            index = bitOrExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (bitOrExpression$RuleMemoStart == bitOrExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.BIT_OR_EXPRESSION, bitOrExpression$RuleMemoStart, bitOrExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(bitOrExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(bitOrExpression$RuleMemoFirstNode);
+                  currentNode = bitOrExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (OptionalBitXOrExpression '|' OptionalSpacing OptionalBitOrExpression)
       // OptionalBitXOrExpression
@@ -7372,13 +9330,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         bitOrExpression$RuleMemoStart = startIndex;
+         bitOrExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            bitOrExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.BIT_OR_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            bitOrExpression$RuleMemoFirstNode = currentNode;
+            bitOrExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         bitOrExpression$RuleMemoStart = startIndex;
+         bitOrExpression$RuleMemoEnd = -1;
+         bitOrExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -7524,6 +9491,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (bitXOrExpression$RuleMemoStart == index) {
+         if (bitXOrExpression$RuleMemoStart <= bitXOrExpression$RuleMemoEnd) {
+            index = bitXOrExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (bitXOrExpression$RuleMemoStart == bitXOrExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.BIT_XOR_EXPRESSION, bitXOrExpression$RuleMemoStart, bitXOrExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(bitXOrExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(bitXOrExpression$RuleMemoFirstNode);
+                  currentNode = bitXOrExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (OptionalBitAndExpression '^' OptionalSpacing OptionalBitXOrExpression)
       // OptionalBitAndExpression
@@ -7541,13 +9525,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         bitXOrExpression$RuleMemoStart = startIndex;
+         bitXOrExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            bitXOrExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.BIT_XOR_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            bitXOrExpression$RuleMemoFirstNode = currentNode;
+            bitXOrExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         bitXOrExpression$RuleMemoStart = startIndex;
+         bitXOrExpression$RuleMemoEnd = -1;
+         bitXOrExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -7693,6 +9686,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (bitAndExpression$RuleMemoStart == index) {
+         if (bitAndExpression$RuleMemoStart <= bitAndExpression$RuleMemoEnd) {
+            index = bitAndExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (bitAndExpression$RuleMemoStart == bitAndExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.BIT_AND_EXPRESSION, bitAndExpression$RuleMemoStart, bitAndExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(bitAndExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(bitAndExpression$RuleMemoFirstNode);
+                  currentNode = bitAndExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (OptionalRelationalExpression '&' OptionalSpacing OptionalBitAndExpression)
       // OptionalRelationalExpression
@@ -7710,13 +9720,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         bitAndExpression$RuleMemoStart = startIndex;
+         bitAndExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            bitAndExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.BIT_AND_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            bitAndExpression$RuleMemoFirstNode = currentNode;
+            bitAndExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         bitAndExpression$RuleMemoStart = startIndex;
+         bitAndExpression$RuleMemoEnd = -1;
+         bitAndExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -7862,6 +9881,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (relationalExpression$RuleMemoStart == index) {
+         if (relationalExpression$RuleMemoStart <= relationalExpression$RuleMemoEnd) {
+            index = relationalExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (relationalExpression$RuleMemoStart == relationalExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.RELATIONAL_EXPRESSION, relationalExpression$RuleMemoStart, relationalExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(relationalExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(relationalExpression$RuleMemoFirstNode);
+                  currentNode = relationalExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (OptionalInstanceOfExpression (('==' | '!=' | '<=' | '>=' | '<' | '>') OptionalSpacing) OptionalRelationalExpression)
       // OptionalInstanceOfExpression
@@ -7931,13 +9967,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         relationalExpression$RuleMemoStart = startIndex;
+         relationalExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            relationalExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.RELATIONAL_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            relationalExpression$RuleMemoFirstNode = currentNode;
+            relationalExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         relationalExpression$RuleMemoStart = startIndex;
+         relationalExpression$RuleMemoEnd = -1;
+         relationalExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -8083,6 +10128,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (instanceOfExpression$RuleMemoStart == index) {
+         if (instanceOfExpression$RuleMemoStart <= instanceOfExpression$RuleMemoEnd) {
+            index = instanceOfExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (instanceOfExpression$RuleMemoStart == instanceOfExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.INSTANCE_OF_EXPRESSION, instanceOfExpression$RuleMemoStart, instanceOfExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(instanceOfExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(instanceOfExpression$RuleMemoFirstNode);
+                  currentNode = instanceOfExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (OptionalAdditiveExpression 'instanceof' TestNoAlpha OptionalSpacing ReferenceType)
       // OptionalAdditiveExpression
@@ -8104,13 +10166,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         instanceOfExpression$RuleMemoStart = startIndex;
+         instanceOfExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            instanceOfExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.INSTANCE_OF_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            instanceOfExpression$RuleMemoFirstNode = currentNode;
+            instanceOfExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         instanceOfExpression$RuleMemoStart = startIndex;
+         instanceOfExpression$RuleMemoEnd = -1;
+         instanceOfExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -8383,6 +10454,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (additiveExpression$RuleMemoStart == index) {
+         if (additiveExpression$RuleMemoStart <= additiveExpression$RuleMemoEnd) {
+            index = additiveExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (additiveExpression$RuleMemoStart == additiveExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ADDITIVE_EXPRESSION, additiveExpression$RuleMemoStart, additiveExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(additiveExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(additiveExpression$RuleMemoFirstNode);
+                  currentNode = additiveExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (OptionalMultiplicativeExpression (('+' | '-') OptionalSpacing) OptionalAdditiveExpression)
       // OptionalMultiplicativeExpression
@@ -8424,13 +10512,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         additiveExpression$RuleMemoStart = startIndex;
+         additiveExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            additiveExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ADDITIVE_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            additiveExpression$RuleMemoFirstNode = currentNode;
+            additiveExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         additiveExpression$RuleMemoStart = startIndex;
+         additiveExpression$RuleMemoEnd = -1;
+         additiveExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -8576,6 +10673,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (multiplicativeExpression$RuleMemoStart == index) {
+         if (multiplicativeExpression$RuleMemoStart <= multiplicativeExpression$RuleMemoEnd) {
+            index = multiplicativeExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (multiplicativeExpression$RuleMemoStart == multiplicativeExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.MULTIPLICATIVE_EXPRESSION, multiplicativeExpression$RuleMemoStart, multiplicativeExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(multiplicativeExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(multiplicativeExpression$RuleMemoFirstNode);
+                  currentNode = multiplicativeExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (OptionalShiftExpression (('*' | '/' | '%') OptionalSpacing) OptionalMultiplicativeExpression)
       // OptionalShiftExpression
@@ -8623,13 +10737,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         multiplicativeExpression$RuleMemoStart = startIndex;
+         multiplicativeExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            multiplicativeExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.MULTIPLICATIVE_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            multiplicativeExpression$RuleMemoFirstNode = currentNode;
+            multiplicativeExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         multiplicativeExpression$RuleMemoStart = startIndex;
+         multiplicativeExpression$RuleMemoEnd = -1;
+         multiplicativeExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -8775,6 +10898,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (shiftExpression$RuleMemoStart == index) {
+         if (shiftExpression$RuleMemoStart <= shiftExpression$RuleMemoEnd) {
+            index = shiftExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (shiftExpression$RuleMemoStart == shiftExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.SHIFT_EXPRESSION, shiftExpression$RuleMemoStart, shiftExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(shiftExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(shiftExpression$RuleMemoFirstNode);
+                  currentNode = shiftExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (UnaryExpression (('<<' | '>>>' | '>>') OptionalSpacing) OptionalShiftExpression)
       // UnaryExpression
@@ -8830,13 +10970,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         shiftExpression$RuleMemoStart = startIndex;
+         shiftExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            shiftExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.SHIFT_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            shiftExpression$RuleMemoFirstNode = currentNode;
+            shiftExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         shiftExpression$RuleMemoStart = startIndex;
+         shiftExpression$RuleMemoEnd = -1;
+         shiftExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -8998,6 +11147,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (prefixedExpression$RuleMemoStart == index) {
+         if (prefixedExpression$RuleMemoStart <= prefixedExpression$RuleMemoEnd) {
+            index = prefixedExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (prefixedExpression$RuleMemoStart == prefixedExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.PREFIXED_EXPRESSION, prefixedExpression$RuleMemoStart, prefixedExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(prefixedExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(prefixedExpression$RuleMemoFirstNode);
+                  currentNode = prefixedExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (PrefixOp OptionalSpacing Expression)
       // PrefixOp
@@ -9011,13 +11177,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         prefixedExpression$RuleMemoStart = startIndex;
+         prefixedExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            prefixedExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.PREFIXED_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            prefixedExpression$RuleMemoFirstNode = currentNode;
+            prefixedExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         prefixedExpression$RuleMemoStart = startIndex;
+         prefixedExpression$RuleMemoEnd = -1;
+         prefixedExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -9030,6 +11205,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (castExpression$RuleMemoStart == index) {
+         if (castExpression$RuleMemoStart <= castExpression$RuleMemoEnd) {
+            index = castExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (castExpression$RuleMemoStart == castExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CAST_EXPRESSION, castExpression$RuleMemoStart, castExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(castExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(castExpression$RuleMemoFirstNode);
+                  currentNode = castExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('(' OptionalSpacing Type ')' OptionalSpacing Expression)
       // '('
@@ -9055,13 +11247,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         castExpression$RuleMemoStart = startIndex;
+         castExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            castExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.CAST_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            castExpression$RuleMemoFirstNode = currentNode;
+            castExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         castExpression$RuleMemoStart = startIndex;
+         castExpression$RuleMemoEnd = -1;
+         castExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -9074,6 +11275,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (postfixedExpression$RuleMemoStart == index) {
+         if (postfixedExpression$RuleMemoStart <= postfixedExpression$RuleMemoEnd) {
+            index = postfixedExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (postfixedExpression$RuleMemoStart == postfixedExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.POSTFIXED_EXPRESSION, postfixedExpression$RuleMemoStart, postfixedExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(postfixedExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(postfixedExpression$RuleMemoFirstNode);
+                  currentNode = postfixedExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Primary PostFixOp+)
       // Primary
@@ -9091,13 +11309,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         postfixedExpression$RuleMemoStart = startIndex;
+         postfixedExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            postfixedExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.POSTFIXED_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            postfixedExpression$RuleMemoFirstNode = currentNode;
+            postfixedExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         postfixedExpression$RuleMemoStart = startIndex;
+         postfixedExpression$RuleMemoEnd = -1;
+         postfixedExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -9364,6 +11591,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (qualifiedExpression$RuleMemoStart == index) {
+         if (qualifiedExpression$RuleMemoStart <= qualifiedExpression$RuleMemoEnd) {
+            index = qualifiedExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (qualifiedExpression$RuleMemoStart == qualifiedExpression$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.QUALIFIED_EXPRESSION, qualifiedExpression$RuleMemoStart, qualifiedExpression$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(qualifiedExpression$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(qualifiedExpression$RuleMemoFirstNode);
+                  currentNode = qualifiedExpression$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ((ArrayAccess | Atomic) ('.' OptionalSpacing NonWildcardTypeArguments? (ArrayAccess | Atomic))+)
       // (ArrayAccess | Atomic)
@@ -9657,13 +11901,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         qualifiedExpression$RuleMemoStart = startIndex;
+         qualifiedExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            qualifiedExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.QUALIFIED_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            qualifiedExpression$RuleMemoFirstNode = currentNode;
+            qualifiedExpression$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         qualifiedExpression$RuleMemoStart = startIndex;
+         qualifiedExpression$RuleMemoEnd = -1;
+         qualifiedExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -9676,6 +11929,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (arrayAccess$RuleMemoStart == index) {
+         if (arrayAccess$RuleMemoStart <= arrayAccess$RuleMemoEnd) {
+            index = arrayAccess$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (arrayAccess$RuleMemoStart == arrayAccess$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ARRAY_ACCESS, arrayAccess$RuleMemoStart, arrayAccess$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(arrayAccess$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(arrayAccess$RuleMemoFirstNode);
+                  currentNode = arrayAccess$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Atomic ArrayIndex)
       // Atomic
@@ -9685,13 +11955,22 @@ public class JavaParser implements Parser {
          match = arrayIndex$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         arrayAccess$RuleMemoStart = startIndex;
+         arrayAccess$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            arrayAccess$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ARRAY_ACCESS, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            arrayAccess$RuleMemoFirstNode = currentNode;
+            arrayAccess$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         arrayAccess$RuleMemoStart = startIndex;
+         arrayAccess$RuleMemoEnd = -1;
+         arrayAccess$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -9973,6 +12252,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (classTypeReference$RuleMemoStart == index) {
+         if (classTypeReference$RuleMemoStart <= classTypeReference$RuleMemoEnd) {
+            index = classTypeReference$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (classTypeReference$RuleMemoStart == classTypeReference$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CLASS_TYPE_REFERENCE, classTypeReference$RuleMemoStart, classTypeReference$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(classTypeReference$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(classTypeReference$RuleMemoFirstNode);
+                  currentNode = classTypeReference$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (QualifiedIdentifier Dimensions '.' OptionalSpacing 'class' TestNoAlpha OptionalSpacing)
       // QualifiedIdentifier
@@ -10002,13 +12298,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         classTypeReference$RuleMemoStart = startIndex;
+         classTypeReference$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            classTypeReference$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.CLASS_TYPE_REFERENCE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            classTypeReference$RuleMemoFirstNode = currentNode;
+            classTypeReference$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         classTypeReference$RuleMemoStart = startIndex;
+         classTypeReference$RuleMemoEnd = -1;
+         classTypeReference$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -10021,6 +12326,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (literal$RuleMemoStart == index) {
+         if (literal$RuleMemoStart <= literal$RuleMemoEnd) {
+            index = literal$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (literal$RuleMemoStart == literal$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.LITERAL, literal$RuleMemoStart, literal$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(literal$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(literal$RuleMemoFirstNode);
+                  currentNode = literal$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ((FloatLiteral | LongLiteral | IntegerLiteral | CharLiteral | StringLiteral | True | False | Null) OptionalSpacing)
       // (FloatLiteral | LongLiteral | IntegerLiteral | CharLiteral | StringLiteral | True | False | Null)
@@ -10086,13 +12408,22 @@ public class JavaParser implements Parser {
          match = optionalSpacing$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         literal$RuleMemoStart = startIndex;
+         literal$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            literal$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.LITERAL, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            literal$RuleMemoFirstNode = currentNode;
+            literal$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         literal$RuleMemoStart = startIndex;
+         literal$RuleMemoEnd = -1;
+         literal$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -10105,6 +12436,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (basicTypeClassReference$RuleMemoStart == index) {
+         if (basicTypeClassReference$RuleMemoStart <= basicTypeClassReference$RuleMemoEnd) {
+            index = basicTypeClassReference$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (basicTypeClassReference$RuleMemoStart == basicTypeClassReference$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.BASIC_TYPE_CLASS_REFERENCE, basicTypeClassReference$RuleMemoStart, basicTypeClassReference$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(basicTypeClassReference$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(basicTypeClassReference$RuleMemoFirstNode);
+                  currentNode = basicTypeClassReference$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (BasicType Dimensions '.' OptionalSpacing 'class' TestNoAlpha OptionalSpacing)
       // BasicType
@@ -10134,13 +12482,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         basicTypeClassReference$RuleMemoStart = startIndex;
+         basicTypeClassReference$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            basicTypeClassReference$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.BASIC_TYPE_CLASS_REFERENCE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            basicTypeClassReference$RuleMemoFirstNode = currentNode;
+            basicTypeClassReference$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         basicTypeClassReference$RuleMemoStart = startIndex;
+         basicTypeClassReference$RuleMemoEnd = -1;
+         basicTypeClassReference$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -10153,6 +12510,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (voidClassReference$RuleMemoStart == index) {
+         if (voidClassReference$RuleMemoStart <= voidClassReference$RuleMemoEnd) {
+            index = voidClassReference$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (voidClassReference$RuleMemoStart == voidClassReference$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.VOID_CLASS_REFERENCE, voidClassReference$RuleMemoStart, voidClassReference$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(voidClassReference$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(voidClassReference$RuleMemoFirstNode);
+                  currentNode = voidClassReference$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('void' TestNoAlpha OptionalSpacing '.' OptionalSpacing 'class' TestNoAlpha OptionalSpacing)
       // 'void'
@@ -10186,13 +12560,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         voidClassReference$RuleMemoStart = startIndex;
+         voidClassReference$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            voidClassReference$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.VOID_CLASS_REFERENCE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            voidClassReference$RuleMemoFirstNode = currentNode;
+            voidClassReference$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         voidClassReference$RuleMemoStart = startIndex;
+         voidClassReference$RuleMemoEnd = -1;
+         voidClassReference$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -10205,6 +12588,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (thisMethodCall$RuleMemoStart == index) {
+         if (thisMethodCall$RuleMemoStart <= thisMethodCall$RuleMemoEnd) {
+            index = thisMethodCall$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (thisMethodCall$RuleMemoStart == thisMethodCall$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.THIS_METHOD_CALL, thisMethodCall$RuleMemoStart, thisMethodCall$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(thisMethodCall$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(thisMethodCall$RuleMemoFirstNode);
+                  currentNode = thisMethodCall$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (This Arguments)
       // This
@@ -10214,13 +12614,22 @@ public class JavaParser implements Parser {
          match = arguments$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         thisMethodCall$RuleMemoStart = startIndex;
+         thisMethodCall$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            thisMethodCall$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.THIS_METHOD_CALL, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            thisMethodCall$RuleMemoFirstNode = currentNode;
+            thisMethodCall$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         thisMethodCall$RuleMemoStart = startIndex;
+         thisMethodCall$RuleMemoEnd = -1;
+         thisMethodCall$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -10349,6 +12758,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (superMethodCall$RuleMemoStart == index) {
+         if (superMethodCall$RuleMemoStart <= superMethodCall$RuleMemoEnd) {
+            index = superMethodCall$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (superMethodCall$RuleMemoStart == superMethodCall$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.SUPER_METHOD_CALL, superMethodCall$RuleMemoStart, superMethodCall$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(superMethodCall$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(superMethodCall$RuleMemoFirstNode);
+                  currentNode = superMethodCall$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Super '.' OptionalSpacing Identifier Arguments)
       // Super
@@ -10370,13 +12796,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         superMethodCall$RuleMemoStart = startIndex;
+         superMethodCall$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            superMethodCall$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.SUPER_METHOD_CALL, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            superMethodCall$RuleMemoFirstNode = currentNode;
+            superMethodCall$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         superMethodCall$RuleMemoStart = startIndex;
+         superMethodCall$RuleMemoEnd = -1;
+         superMethodCall$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -10389,6 +12824,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (superConstructorCall$RuleMemoStart == index) {
+         if (superConstructorCall$RuleMemoStart <= superConstructorCall$RuleMemoEnd) {
+            index = superConstructorCall$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (superConstructorCall$RuleMemoStart == superConstructorCall$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.SUPER_CONSTRUCTOR_CALL, superConstructorCall$RuleMemoStart, superConstructorCall$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(superConstructorCall$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(superConstructorCall$RuleMemoFirstNode);
+                  currentNode = superConstructorCall$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Super Arguments)
       // Super
@@ -10398,13 +12850,22 @@ public class JavaParser implements Parser {
          match = arguments$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         superConstructorCall$RuleMemoStart = startIndex;
+         superConstructorCall$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            superConstructorCall$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.SUPER_CONSTRUCTOR_CALL, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            superConstructorCall$RuleMemoFirstNode = currentNode;
+            superConstructorCall$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         superConstructorCall$RuleMemoStart = startIndex;
+         superConstructorCall$RuleMemoEnd = -1;
+         superConstructorCall$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -10417,6 +12878,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (superFieldAccess$RuleMemoStart == index) {
+         if (superFieldAccess$RuleMemoStart <= superFieldAccess$RuleMemoEnd) {
+            index = superFieldAccess$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (superFieldAccess$RuleMemoStart == superFieldAccess$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.SUPER_FIELD_ACCESS, superFieldAccess$RuleMemoStart, superFieldAccess$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(superFieldAccess$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(superFieldAccess$RuleMemoFirstNode);
+                  currentNode = superFieldAccess$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Super '.' OptionalSpacing Identifier)
       // Super
@@ -10434,13 +12912,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         superFieldAccess$RuleMemoStart = startIndex;
+         superFieldAccess$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            superFieldAccess$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.SUPER_FIELD_ACCESS, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            superFieldAccess$RuleMemoFirstNode = currentNode;
+            superFieldAccess$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         superFieldAccess$RuleMemoStart = startIndex;
+         superFieldAccess$RuleMemoEnd = -1;
+         superFieldAccess$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -10511,6 +12998,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (classCreator$RuleMemoStart == index) {
+         if (classCreator$RuleMemoStart <= classCreator$RuleMemoEnd) {
+            index = classCreator$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (classCreator$RuleMemoStart == classCreator$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CLASS_CREATOR, classCreator$RuleMemoStart, classCreator$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(classCreator$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(classCreator$RuleMemoFirstNode);
+                  currentNode = classCreator$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (New CreatedName Arguments ClassBody?)
       // New
@@ -10530,13 +13034,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         classCreator$RuleMemoStart = startIndex;
+         classCreator$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            classCreator$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.CLASS_CREATOR, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            classCreator$RuleMemoFirstNode = currentNode;
+            classCreator$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         classCreator$RuleMemoStart = startIndex;
+         classCreator$RuleMemoEnd = -1;
+         classCreator$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -10549,6 +13062,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (arrayCreator$RuleMemoStart == index) {
+         if (arrayCreator$RuleMemoStart <= arrayCreator$RuleMemoEnd) {
+            index = arrayCreator$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (arrayCreator$RuleMemoStart == arrayCreator$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ARRAY_CREATOR, arrayCreator$RuleMemoStart, arrayCreator$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(arrayCreator$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(arrayCreator$RuleMemoFirstNode);
+                  currentNode = arrayCreator$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (InitializedArrayCreator | EmptyArrayCreator)
       switch(buffer.getChar(index)) {
@@ -10566,13 +13096,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         arrayCreator$RuleMemoStart = startIndex;
+         arrayCreator$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            arrayCreator$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ARRAY_CREATOR, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            arrayCreator$RuleMemoFirstNode = currentNode;
+            arrayCreator$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         arrayCreator$RuleMemoStart = startIndex;
+         arrayCreator$RuleMemoEnd = -1;
+         arrayCreator$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -10639,23 +13178,6 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
-      if (arrayIndex$RuleMemoStart == index) {
-         if (arrayIndex$RuleMemoStart <= arrayIndex$RuleMemoEnd) {
-            index = arrayIndex$RuleMemoEnd;
-            if (! currentRuleIsAtomic) {
-               if (arrayIndex$RuleMemoStart == arrayIndex$RuleMemoEnd) {
-                  currentNode = new NodeImpl(JavaRuleType.ARRAY_INDEX, arrayIndex$RuleMemoStart, arrayIndex$RuleMemoEnd, true, false);
-                  lastNode.setSibling(currentNode);
-               } else if(arrayIndex$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(arrayIndex$RuleMemoFirstNode);
-                  currentNode = arrayIndex$RuleMemoLastNode;
-               }
-            }
-            return true;
-         } else {
-            return false;
-         }
-      }
       startIndex = index;
       // DimExpr+
       // DimExpr
@@ -10668,22 +13190,13 @@ public class JavaParser implements Parser {
          match = true;
       }
       if (match) {
-         arrayIndex$RuleMemoStart = startIndex;
-         arrayIndex$RuleMemoEnd = index;
-         if (currentRuleIsAtomic) {
-            arrayIndex$RuleMemoFirstNode = null;
-         } else {
+         if (! currentRuleIsAtomic) {
             currentNode = new NodeImpl(JavaRuleType.ARRAY_INDEX, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
-            arrayIndex$RuleMemoFirstNode = currentNode;
-            arrayIndex$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
-         arrayIndex$RuleMemoStart = startIndex;
-         arrayIndex$RuleMemoEnd = -1;
-         arrayIndex$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -10696,6 +13209,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (dimExpr$RuleMemoStart == index) {
+         if (dimExpr$RuleMemoStart <= dimExpr$RuleMemoEnd) {
+            index = dimExpr$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (dimExpr$RuleMemoStart == dimExpr$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.DIM_EXPR, dimExpr$RuleMemoStart, dimExpr$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(dimExpr$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(dimExpr$RuleMemoFirstNode);
+                  currentNode = dimExpr$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('[' OptionalSpacing Expression ']' OptionalSpacing)
       // '['
@@ -10717,13 +13247,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         dimExpr$RuleMemoStart = startIndex;
+         dimExpr$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            dimExpr$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.DIM_EXPR, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            dimExpr$RuleMemoFirstNode = currentNode;
+            dimExpr$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         dimExpr$RuleMemoStart = startIndex;
+         dimExpr$RuleMemoEnd = -1;
+         dimExpr$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -10898,6 +13437,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (nonWildcardTypeArguments$RuleMemoStart == index) {
+         if (nonWildcardTypeArguments$RuleMemoStart <= nonWildcardTypeArguments$RuleMemoEnd) {
+            index = nonWildcardTypeArguments$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (nonWildcardTypeArguments$RuleMemoStart == nonWildcardTypeArguments$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.NON_WILDCARD_TYPE_ARGUMENTS, nonWildcardTypeArguments$RuleMemoStart, nonWildcardTypeArguments$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(nonWildcardTypeArguments$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(nonWildcardTypeArguments$RuleMemoFirstNode);
+                  currentNode = nonWildcardTypeArguments$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('<' OptionalSpacing (ReferenceType (',' OptionalSpacing ReferenceType)*)? '>' OptionalSpacing)
       // '<'
@@ -10948,13 +13504,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         nonWildcardTypeArguments$RuleMemoStart = startIndex;
+         nonWildcardTypeArguments$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            nonWildcardTypeArguments$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.NON_WILDCARD_TYPE_ARGUMENTS, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            nonWildcardTypeArguments$RuleMemoFirstNode = currentNode;
+            nonWildcardTypeArguments$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         nonWildcardTypeArguments$RuleMemoStart = startIndex;
+         nonWildcardTypeArguments$RuleMemoEnd = -1;
+         nonWildcardTypeArguments$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11018,6 +13583,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (initializedArrayCreator$RuleMemoStart == index) {
+         if (initializedArrayCreator$RuleMemoStart <= initializedArrayCreator$RuleMemoEnd) {
+            index = initializedArrayCreator$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (initializedArrayCreator$RuleMemoStart == initializedArrayCreator$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.INITIALIZED_ARRAY_CREATOR, initializedArrayCreator$RuleMemoStart, initializedArrayCreator$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(initializedArrayCreator$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(initializedArrayCreator$RuleMemoFirstNode);
+                  currentNode = initializedArrayCreator$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (New ArrayType Dim+ ArrayInitializer)
       // New
@@ -11043,13 +13625,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         initializedArrayCreator$RuleMemoStart = startIndex;
+         initializedArrayCreator$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            initializedArrayCreator$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.INITIALIZED_ARRAY_CREATOR, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            initializedArrayCreator$RuleMemoFirstNode = currentNode;
+            initializedArrayCreator$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         initializedArrayCreator$RuleMemoStart = startIndex;
+         initializedArrayCreator$RuleMemoEnd = -1;
+         initializedArrayCreator$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11062,6 +13653,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (emptyArrayCreator$RuleMemoStart == index) {
+         if (emptyArrayCreator$RuleMemoStart <= emptyArrayCreator$RuleMemoEnd) {
+            index = emptyArrayCreator$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (emptyArrayCreator$RuleMemoStart == emptyArrayCreator$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.EMPTY_ARRAY_CREATOR, emptyArrayCreator$RuleMemoStart, emptyArrayCreator$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(emptyArrayCreator$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(emptyArrayCreator$RuleMemoFirstNode);
+                  currentNode = emptyArrayCreator$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (New ArrayType DimExpr+ Dimensions)
       // New
@@ -11087,13 +13695,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         emptyArrayCreator$RuleMemoStart = startIndex;
+         emptyArrayCreator$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            emptyArrayCreator$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.EMPTY_ARRAY_CREATOR, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            emptyArrayCreator$RuleMemoFirstNode = currentNode;
+            emptyArrayCreator$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         emptyArrayCreator$RuleMemoStart = startIndex;
+         emptyArrayCreator$RuleMemoEnd = -1;
+         emptyArrayCreator$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11106,6 +13723,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (arrayType$RuleMemoStart == index) {
+         if (arrayType$RuleMemoStart <= arrayType$RuleMemoEnd) {
+            index = arrayType$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (arrayType$RuleMemoStart == arrayType$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ARRAY_TYPE, arrayType$RuleMemoStart, arrayType$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(arrayType$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(arrayType$RuleMemoFirstNode);
+                  currentNode = arrayType$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (QualifiedClassName | BasicType)
       switch(buffer.getChar(index)) {
@@ -11180,13 +13814,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         arrayType$RuleMemoStart = startIndex;
+         arrayType$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            arrayType$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ARRAY_TYPE, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            arrayType$RuleMemoFirstNode = currentNode;
+            arrayType$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         arrayType$RuleMemoStart = startIndex;
+         arrayType$RuleMemoEnd = -1;
+         arrayType$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11199,6 +13842,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (dim$RuleMemoStart == index) {
+         if (dim$RuleMemoStart <= dim$RuleMemoEnd) {
+            index = dim$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (dim$RuleMemoStart == dim$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.DIM, dim$RuleMemoStart, dim$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(dim$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(dim$RuleMemoFirstNode);
+                  currentNode = dim$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('[' OptionalSpacing ']' OptionalSpacing)
       // '['
@@ -11216,13 +13876,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         dim$RuleMemoStart = startIndex;
+         dim$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            dim$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.DIM, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            dim$RuleMemoFirstNode = currentNode;
+            dim$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         dim$RuleMemoStart = startIndex;
+         dim$RuleMemoEnd = -1;
+         dim$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11235,6 +13904,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (arrayInitializer$RuleMemoStart == index) {
+         if (arrayInitializer$RuleMemoStart <= arrayInitializer$RuleMemoEnd) {
+            index = arrayInitializer$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (arrayInitializer$RuleMemoStart == arrayInitializer$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ARRAY_INITIALIZER, arrayInitializer$RuleMemoStart, arrayInitializer$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(arrayInitializer$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(arrayInitializer$RuleMemoFirstNode);
+                  currentNode = arrayInitializer$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('{' OptionalSpacing (VariableInitializer (',' OptionalSpacing VariableInitializer)*)? (',' OptionalSpacing)? '}' OptionalSpacing)
       // '{'
@@ -11301,13 +13987,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         arrayInitializer$RuleMemoStart = startIndex;
+         arrayInitializer$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            arrayInitializer$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ARRAY_INITIALIZER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            arrayInitializer$RuleMemoFirstNode = currentNode;
+            arrayInitializer$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         arrayInitializer$RuleMemoStart = startIndex;
+         arrayInitializer$RuleMemoEnd = -1;
+         arrayInitializer$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11320,6 +14015,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (typedName$RuleMemoStart == index) {
+         if (typedName$RuleMemoStart <= typedName$RuleMemoEnd) {
+            index = typedName$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (typedName$RuleMemoStart == typedName$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.TYPED_NAME, typedName$RuleMemoStart, typedName$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(typedName$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(typedName$RuleMemoFirstNode);
+                  currentNode = typedName$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Identifier NonWildcardTypeArguments)
       // Identifier
@@ -11329,13 +14041,22 @@ public class JavaParser implements Parser {
          match = nonWildcardTypeArguments$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         typedName$RuleMemoStart = startIndex;
+         typedName$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            typedName$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.TYPED_NAME, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            typedName$RuleMemoFirstNode = currentNode;
+            typedName$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         typedName$RuleMemoStart = startIndex;
+         typedName$RuleMemoEnd = -1;
+         typedName$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11348,6 +14069,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (typeName$RuleMemoStart == index) {
+         if (typeName$RuleMemoStart <= typeName$RuleMemoEnd) {
+            index = typeName$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (typeName$RuleMemoStart == typeName$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.TYPE_NAME, typeName$RuleMemoStart, typeName$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(typeName$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(typeName$RuleMemoFirstNode);
+                  currentNode = typeName$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (TypedName | Identifier)
       switch(buffer.getChar(index)) {
@@ -11418,13 +14156,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         typeName$RuleMemoStart = startIndex;
+         typeName$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            typeName$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.TYPE_NAME, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            typeName$RuleMemoFirstNode = currentNode;
+            typeName$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         typeName$RuleMemoStart = startIndex;
+         typeName$RuleMemoEnd = -1;
+         typeName$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11437,6 +14184,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (array$RuleMemoStart == index) {
+         if (array$RuleMemoStart <= array$RuleMemoEnd) {
+            index = array$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (array$RuleMemoStart == array$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ARRAY, array$RuleMemoStart, array$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(array$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(array$RuleMemoFirstNode);
+                  currentNode = array$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ((BasicType | QualifiedClassName) Dim+)
       // (BasicType | QualifiedClassName)
@@ -11524,13 +14288,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         array$RuleMemoStart = startIndex;
+         array$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            array$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ARRAY, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            array$RuleMemoFirstNode = currentNode;
+            array$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         array$RuleMemoStart = startIndex;
+         array$RuleMemoEnd = -1;
+         array$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11543,6 +14316,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (basicTypeArray$RuleMemoStart == index) {
+         if (basicTypeArray$RuleMemoStart <= basicTypeArray$RuleMemoEnd) {
+            index = basicTypeArray$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (basicTypeArray$RuleMemoStart == basicTypeArray$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.BASIC_TYPE_ARRAY, basicTypeArray$RuleMemoStart, basicTypeArray$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(basicTypeArray$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(basicTypeArray$RuleMemoFirstNode);
+                  currentNode = basicTypeArray$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (BasicType Dim+)
       // BasicType
@@ -11560,13 +14350,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         basicTypeArray$RuleMemoStart = startIndex;
+         basicTypeArray$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            basicTypeArray$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.BASIC_TYPE_ARRAY, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            basicTypeArray$RuleMemoFirstNode = currentNode;
+            basicTypeArray$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         basicTypeArray$RuleMemoStart = startIndex;
+         basicTypeArray$RuleMemoEnd = -1;
+         basicTypeArray$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11579,6 +14378,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (qualifiedClassNameArray$RuleMemoStart == index) {
+         if (qualifiedClassNameArray$RuleMemoStart <= qualifiedClassNameArray$RuleMemoEnd) {
+            index = qualifiedClassNameArray$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (qualifiedClassNameArray$RuleMemoStart == qualifiedClassNameArray$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.QUALIFIED_CLASS_NAME_ARRAY, qualifiedClassNameArray$RuleMemoStart, qualifiedClassNameArray$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(qualifiedClassNameArray$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(qualifiedClassNameArray$RuleMemoFirstNode);
+                  currentNode = qualifiedClassNameArray$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (QualifiedClassName Dim+)
       // QualifiedClassName
@@ -11596,13 +14412,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         qualifiedClassNameArray$RuleMemoStart = startIndex;
+         qualifiedClassNameArray$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            qualifiedClassNameArray$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.QUALIFIED_CLASS_NAME_ARRAY, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            qualifiedClassNameArray$RuleMemoFirstNode = currentNode;
+            qualifiedClassNameArray$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         qualifiedClassNameArray$RuleMemoStart = startIndex;
+         qualifiedClassNameArray$RuleMemoEnd = -1;
+         qualifiedClassNameArray$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11615,6 +14440,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (className$RuleMemoStart == index) {
+         if (className$RuleMemoStart <= className$RuleMemoEnd) {
+            index = className$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (className$RuleMemoStart == className$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CLASS_NAME, className$RuleMemoStart, className$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(className$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(className$RuleMemoFirstNode);
+                  currentNode = className$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (TypedClassName | Identifier)
       switch(buffer.getChar(index)) {
@@ -11685,13 +14527,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         className$RuleMemoStart = startIndex;
+         className$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            className$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.CLASS_NAME, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            className$RuleMemoFirstNode = currentNode;
+            className$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         className$RuleMemoStart = startIndex;
+         className$RuleMemoEnd = -1;
+         className$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11704,6 +14555,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (typedClassName$RuleMemoStart == index) {
+         if (typedClassName$RuleMemoStart <= typedClassName$RuleMemoEnd) {
+            index = typedClassName$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (typedClassName$RuleMemoStart == typedClassName$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.TYPED_CLASS_NAME, typedClassName$RuleMemoStart, typedClassName$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(typedClassName$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(typedClassName$RuleMemoFirstNode);
+                  currentNode = typedClassName$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Identifier TypeArguments)
       // Identifier
@@ -11713,13 +14581,22 @@ public class JavaParser implements Parser {
          match = typeArguments$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         typedClassName$RuleMemoStart = startIndex;
+         typedClassName$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            typedClassName$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.TYPED_CLASS_NAME, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            typedClassName$RuleMemoFirstNode = currentNode;
+            typedClassName$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         typedClassName$RuleMemoStart = startIndex;
+         typedClassName$RuleMemoEnd = -1;
+         typedClassName$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11796,6 +14673,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (typeArgument$RuleMemoStart == index) {
+         if (typeArgument$RuleMemoStart <= typeArgument$RuleMemoEnd) {
+            index = typeArgument$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (typeArgument$RuleMemoStart == typeArgument$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.TYPE_ARGUMENT, typeArgument$RuleMemoStart, typeArgument$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(typeArgument$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(typeArgument$RuleMemoFirstNode);
+                  currentNode = typeArgument$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (ReferenceType | QueryType)
       switch(buffer.getChar(index)) {
@@ -11867,13 +14761,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         typeArgument$RuleMemoStart = startIndex;
+         typeArgument$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            typeArgument$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.TYPE_ARGUMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            typeArgument$RuleMemoFirstNode = currentNode;
+            typeArgument$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         typeArgument$RuleMemoStart = startIndex;
+         typeArgument$RuleMemoEnd = -1;
+         typeArgument$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11886,6 +14789,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (queryType$RuleMemoStart == index) {
+         if (queryType$RuleMemoStart <= queryType$RuleMemoEnd) {
+            index = queryType$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (queryType$RuleMemoStart == queryType$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.QUERY_TYPE, queryType$RuleMemoStart, queryType$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(queryType$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(queryType$RuleMemoFirstNode);
+                  currentNode = queryType$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('?' OptionalSpacing ((('extends' | 'super') TestNoAlpha OptionalSpacing) ReferenceType)?)
       // '?'
@@ -11959,13 +14879,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         queryType$RuleMemoStart = startIndex;
+         queryType$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            queryType$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.QUERY_TYPE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            queryType$RuleMemoFirstNode = currentNode;
+            queryType$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         queryType$RuleMemoStart = startIndex;
+         queryType$RuleMemoEnd = -1;
+         queryType$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -11978,6 +14907,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (typeParameter$RuleMemoStart == index) {
+         if (typeParameter$RuleMemoStart <= typeParameter$RuleMemoEnd) {
+            index = typeParameter$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (typeParameter$RuleMemoStart == typeParameter$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.TYPE_PARAMETER, typeParameter$RuleMemoStart, typeParameter$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(typeParameter$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(typeParameter$RuleMemoFirstNode);
+                  currentNode = typeParameter$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Identifier Bound?)
       // Identifier
@@ -11989,13 +14935,22 @@ public class JavaParser implements Parser {
          match = true;
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         typeParameter$RuleMemoStart = startIndex;
+         typeParameter$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            typeParameter$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.TYPE_PARAMETER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            typeParameter$RuleMemoFirstNode = currentNode;
+            typeParameter$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         typeParameter$RuleMemoStart = startIndex;
+         typeParameter$RuleMemoEnd = -1;
+         typeParameter$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -12267,6 +15222,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (annotationMethod$RuleMemoStart == index) {
+         if (annotationMethod$RuleMemoStart <= annotationMethod$RuleMemoEnd) {
+            index = annotationMethod$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (annotationMethod$RuleMemoStart == annotationMethod$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ANNOTATION_METHOD, annotationMethod$RuleMemoStart, annotationMethod$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(annotationMethod$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(annotationMethod$RuleMemoFirstNode);
+                  currentNode = annotationMethod$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Modifiers Type Identifier '(' OptionalSpacing ')' OptionalSpacing DefaultValue? Semicolon)
       // Modifiers
@@ -12303,13 +15275,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         annotationMethod$RuleMemoStart = startIndex;
+         annotationMethod$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            annotationMethod$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ANNOTATION_METHOD, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            annotationMethod$RuleMemoFirstNode = currentNode;
+            annotationMethod$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         annotationMethod$RuleMemoStart = startIndex;
+         annotationMethod$RuleMemoEnd = -1;
+         annotationMethod$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -12322,6 +15303,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (annotationsConstants$RuleMemoStart == index) {
+         if (annotationsConstants$RuleMemoStart <= annotationsConstants$RuleMemoEnd) {
+            index = annotationsConstants$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (annotationsConstants$RuleMemoStart == annotationsConstants$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ANNOTATIONS_CONSTANTS, annotationsConstants$RuleMemoStart, annotationsConstants$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(annotationsConstants$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(annotationsConstants$RuleMemoFirstNode);
+                  currentNode = annotationsConstants$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Modifiers Type VariableDeclarations Semicolon)
       // Modifiers
@@ -12339,13 +15337,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         annotationsConstants$RuleMemoStart = startIndex;
+         annotationsConstants$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            annotationsConstants$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ANNOTATIONS_CONSTANTS, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            annotationsConstants$RuleMemoFirstNode = currentNode;
+            annotationsConstants$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         annotationsConstants$RuleMemoStart = startIndex;
+         annotationsConstants$RuleMemoEnd = -1;
+         annotationsConstants$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -12394,6 +15401,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (elementValue$RuleMemoStart == index) {
+         if (elementValue$RuleMemoStart <= elementValue$RuleMemoEnd) {
+            index = elementValue$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (elementValue$RuleMemoStart == elementValue$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ELEMENT_VALUE, elementValue$RuleMemoStart, elementValue$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(elementValue$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(elementValue$RuleMemoFirstNode);
+                  currentNode = elementValue$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (ConditionalExpression | Annotation | ElementValueArrayInitializer)
       switch(buffer.getChar(index)) {
@@ -12488,13 +15512,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         elementValue$RuleMemoStart = startIndex;
+         elementValue$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            elementValue$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ELEMENT_VALUE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            elementValue$RuleMemoFirstNode = currentNode;
+            elementValue$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         elementValue$RuleMemoStart = startIndex;
+         elementValue$RuleMemoEnd = -1;
+         elementValue$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -12543,6 +15576,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (normalAnnotationRest$RuleMemoStart == index) {
+         if (normalAnnotationRest$RuleMemoStart <= normalAnnotationRest$RuleMemoEnd) {
+            index = normalAnnotationRest$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (normalAnnotationRest$RuleMemoStart == normalAnnotationRest$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.NORMAL_ANNOTATION_REST, normalAnnotationRest$RuleMemoStart, normalAnnotationRest$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(normalAnnotationRest$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(normalAnnotationRest$RuleMemoFirstNode);
+                  currentNode = normalAnnotationRest$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('(' OptionalSpacing ElementValuePairs? ')' OptionalSpacing)
       // '('
@@ -12563,13 +15613,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         normalAnnotationRest$RuleMemoStart = startIndex;
+         normalAnnotationRest$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            normalAnnotationRest$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.NORMAL_ANNOTATION_REST, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            normalAnnotationRest$RuleMemoFirstNode = currentNode;
+            normalAnnotationRest$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         normalAnnotationRest$RuleMemoStart = startIndex;
+         normalAnnotationRest$RuleMemoEnd = -1;
+         normalAnnotationRest$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -12582,6 +15641,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (singleElementAnnotationRest$RuleMemoStart == index) {
+         if (singleElementAnnotationRest$RuleMemoStart <= singleElementAnnotationRest$RuleMemoEnd) {
+            index = singleElementAnnotationRest$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (singleElementAnnotationRest$RuleMemoStart == singleElementAnnotationRest$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.SINGLE_ELEMENT_ANNOTATION_REST, singleElementAnnotationRest$RuleMemoStart, singleElementAnnotationRest$RuleMemoEnd, true, true);
+                  lastNode.setSibling(currentNode);
+               } else if(singleElementAnnotationRest$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(singleElementAnnotationRest$RuleMemoFirstNode);
+                  currentNode = singleElementAnnotationRest$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('(' OptionalSpacing ElementValue ')' OptionalSpacing)
       // '('
@@ -12603,13 +15679,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         singleElementAnnotationRest$RuleMemoStart = startIndex;
+         singleElementAnnotationRest$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            singleElementAnnotationRest$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.SINGLE_ELEMENT_ANNOTATION_REST, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            singleElementAnnotationRest$RuleMemoFirstNode = currentNode;
+            singleElementAnnotationRest$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         singleElementAnnotationRest$RuleMemoStart = startIndex;
+         singleElementAnnotationRest$RuleMemoEnd = -1;
+         singleElementAnnotationRest$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -12673,6 +15758,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (elementValuePair$RuleMemoStart == index) {
+         if (elementValuePair$RuleMemoStart <= elementValuePair$RuleMemoEnd) {
+            index = elementValuePair$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (elementValuePair$RuleMemoStart == elementValuePair$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ELEMENT_VALUE_PAIR, elementValuePair$RuleMemoStart, elementValuePair$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(elementValuePair$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(elementValuePair$RuleMemoFirstNode);
+                  currentNode = elementValuePair$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Identifier '=' OptionalSpacing ElementValue)
       // Identifier
@@ -12690,13 +15792,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         elementValuePair$RuleMemoStart = startIndex;
+         elementValuePair$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            elementValuePair$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ELEMENT_VALUE_PAIR, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            elementValuePair$RuleMemoFirstNode = currentNode;
+            elementValuePair$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         elementValuePair$RuleMemoStart = startIndex;
+         elementValuePair$RuleMemoEnd = -1;
+         elementValuePair$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -12709,6 +15820,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (elementValueArrayInitializer$RuleMemoStart == index) {
+         if (elementValueArrayInitializer$RuleMemoStart <= elementValueArrayInitializer$RuleMemoEnd) {
+            index = elementValueArrayInitializer$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (elementValueArrayInitializer$RuleMemoStart == elementValueArrayInitializer$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.ELEMENT_VALUE_ARRAY_INITIALIZER, elementValueArrayInitializer$RuleMemoStart, elementValueArrayInitializer$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(elementValueArrayInitializer$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(elementValueArrayInitializer$RuleMemoFirstNode);
+                  currentNode = elementValueArrayInitializer$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('{' OptionalSpacing ElementValues? (',' OptionalSpacing)? '}' OptionalSpacing)
       // '{'
@@ -12745,13 +15873,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         elementValueArrayInitializer$RuleMemoStart = startIndex;
+         elementValueArrayInitializer$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            elementValueArrayInitializer$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.ELEMENT_VALUE_ARRAY_INITIALIZER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            elementValueArrayInitializer$RuleMemoFirstNode = currentNode;
+            elementValueArrayInitializer$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         elementValueArrayInitializer$RuleMemoStart = startIndex;
+         elementValueArrayInitializer$RuleMemoEnd = -1;
+         elementValueArrayInitializer$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -12846,23 +15983,6 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
-      if (spacing$RuleMemoStart == index) {
-         if (spacing$RuleMemoStart <= spacing$RuleMemoEnd) {
-            index = spacing$RuleMemoEnd;
-            if (! currentRuleIsAtomic) {
-               if (spacing$RuleMemoStart == spacing$RuleMemoEnd) {
-                  currentNode = new NodeImpl(JavaRuleType.SPACING, spacing$RuleMemoStart, spacing$RuleMemoEnd, false, false);
-                  lastNode.setSibling(currentNode);
-               } else if(spacing$RuleMemoFirstNode != null) {
-                  lastNode.setSibling(spacing$RuleMemoFirstNode);
-                  currentNode = spacing$RuleMemoLastNode;
-               }
-            }
-            return true;
-         } else {
-            return false;
-         }
-      }
       startIndex = index;
       // (BlockComment | LineComment | NewLine | Spaces)+
       // (BlockComment | LineComment | NewLine | Spaces)
@@ -12943,22 +16063,13 @@ public class JavaParser implements Parser {
          match = true;
       }
       if (match) {
-         spacing$RuleMemoStart = startIndex;
-         spacing$RuleMemoEnd = index;
-         if (currentRuleIsAtomic) {
-            spacing$RuleMemoFirstNode = null;
-         } else {
+         if (! currentRuleIsAtomic) {
             currentNode = new NodeImpl(JavaRuleType.SPACING, startIndex, index, false, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
-            spacing$RuleMemoFirstNode = currentNode;
-            spacing$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
-         spacing$RuleMemoStart = startIndex;
-         spacing$RuleMemoEnd = -1;
-         spacing$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -13048,6 +16159,23 @@ public class JavaParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (spaces$RuleMemoStart == index) {
+         if (spaces$RuleMemoStart <= spaces$RuleMemoEnd) {
+            index = spaces$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (spaces$RuleMemoStart == spaces$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.SPACES, spaces$RuleMemoStart, spaces$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(spaces$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(spaces$RuleMemoFirstNode);
+                  currentNode = spaces$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // (' ' | '\r' | '\t' | '\f')+
@@ -13118,13 +16246,22 @@ public class JavaParser implements Parser {
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         spaces$RuleMemoStart = startIndex;
+         spaces$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            spaces$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.SPACES, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            spaces$RuleMemoFirstNode = currentNode;
+            spaces$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         spaces$RuleMemoStart = startIndex;
+         spaces$RuleMemoEnd = -1;
+         spaces$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -13138,6 +16275,23 @@ public class JavaParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (blockComment$RuleMemoStart == index) {
+         if (blockComment$RuleMemoStart <= blockComment$RuleMemoEnd) {
+            index = blockComment$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (blockComment$RuleMemoStart == blockComment$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.BLOCK_COMMENT, blockComment$RuleMemoStart, blockComment$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(blockComment$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(blockComment$RuleMemoFirstNode);
+                  currentNode = blockComment$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // ('/*' ('*/'! .)* '*/')
@@ -13168,13 +16322,22 @@ public class JavaParser implements Parser {
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         blockComment$RuleMemoStart = startIndex;
+         blockComment$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            blockComment$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.BLOCK_COMMENT, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            blockComment$RuleMemoFirstNode = currentNode;
+            blockComment$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         blockComment$RuleMemoStart = startIndex;
+         blockComment$RuleMemoEnd = -1;
+         blockComment$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -13188,6 +16351,23 @@ public class JavaParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (newLine$RuleMemoStart == index) {
+         if (newLine$RuleMemoStart <= newLine$RuleMemoEnd) {
+            index = newLine$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (newLine$RuleMemoStart == newLine$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.NEW_LINE, newLine$RuleMemoStart, newLine$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(newLine$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(newLine$RuleMemoFirstNode);
+                  currentNode = newLine$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // ('\n' | '\r\n')
@@ -13212,13 +16392,22 @@ public class JavaParser implements Parser {
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         newLine$RuleMemoStart = startIndex;
+         newLine$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            newLine$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.NEW_LINE, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            newLine$RuleMemoFirstNode = currentNode;
+            newLine$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         newLine$RuleMemoStart = startIndex;
+         newLine$RuleMemoEnd = -1;
+         newLine$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -13232,6 +16421,23 @@ public class JavaParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (lineComment$RuleMemoStart == index) {
+         if (lineComment$RuleMemoStart <= lineComment$RuleMemoEnd) {
+            index = lineComment$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (lineComment$RuleMemoStart == lineComment$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.LINE_COMMENT, lineComment$RuleMemoStart, lineComment$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(lineComment$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(lineComment$RuleMemoFirstNode);
+                  currentNode = lineComment$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // ('//' ('\n'! .)* (NewLine | <EOI>))
@@ -13267,13 +16473,22 @@ public class JavaParser implements Parser {
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         lineComment$RuleMemoStart = startIndex;
+         lineComment$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            lineComment$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.LINE_COMMENT, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            lineComment$RuleMemoFirstNode = currentNode;
+            lineComment$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         lineComment$RuleMemoStart = startIndex;
+         lineComment$RuleMemoEnd = -1;
+         lineComment$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -13286,6 +16501,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (floatLiteral$RuleMemoStart == index) {
+         if (floatLiteral$RuleMemoStart <= floatLiteral$RuleMemoEnd) {
+            index = floatLiteral$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (floatLiteral$RuleMemoStart == floatLiteral$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.FLOAT_LITERAL, floatLiteral$RuleMemoStart, floatLiteral$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(floatLiteral$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(floatLiteral$RuleMemoFirstNode);
+                  currentNode = floatLiteral$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (HexFloat | DecimalFloat)
       switch(buffer.getChar(index)) {
@@ -13317,13 +16549,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         floatLiteral$RuleMemoStart = startIndex;
+         floatLiteral$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            floatLiteral$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.FLOAT_LITERAL, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            floatLiteral$RuleMemoFirstNode = currentNode;
+            floatLiteral$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         floatLiteral$RuleMemoStart = startIndex;
+         floatLiteral$RuleMemoEnd = -1;
+         floatLiteral$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -13337,6 +16578,23 @@ public class JavaParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (longLiteral$RuleMemoStart == index) {
+         if (longLiteral$RuleMemoStart <= longLiteral$RuleMemoEnd) {
+            index = longLiteral$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (longLiteral$RuleMemoStart == longLiteral$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.LONG_LITERAL, longLiteral$RuleMemoStart, longLiteral$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(longLiteral$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(longLiteral$RuleMemoFirstNode);
+                  currentNode = longLiteral$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // (IntegerLiteral ('l' | 'L'))
@@ -13364,13 +16622,22 @@ public class JavaParser implements Parser {
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         longLiteral$RuleMemoStart = startIndex;
+         longLiteral$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            longLiteral$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.LONG_LITERAL, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            longLiteral$RuleMemoFirstNode = currentNode;
+            longLiteral$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         longLiteral$RuleMemoStart = startIndex;
+         longLiteral$RuleMemoEnd = -1;
+         longLiteral$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -13589,6 +16856,23 @@ public class JavaParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (charLiteral$RuleMemoStart == index) {
+         if (charLiteral$RuleMemoStart <= charLiteral$RuleMemoEnd) {
+            index = charLiteral$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (charLiteral$RuleMemoStart == charLiteral$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.CHAR_LITERAL, charLiteral$RuleMemoStart, charLiteral$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(charLiteral$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(charLiteral$RuleMemoFirstNode);
+                  currentNode = charLiteral$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // (''' (Escape | ((''' | '\')! .)) ''')
@@ -13973,13 +17257,22 @@ public class JavaParser implements Parser {
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         charLiteral$RuleMemoStart = startIndex;
+         charLiteral$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            charLiteral$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.CHAR_LITERAL, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            charLiteral$RuleMemoFirstNode = currentNode;
+            charLiteral$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         charLiteral$RuleMemoStart = startIndex;
+         charLiteral$RuleMemoEnd = -1;
+         charLiteral$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -13993,6 +17286,23 @@ public class JavaParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (stringLiteral$RuleMemoStart == index) {
+         if (stringLiteral$RuleMemoStart <= stringLiteral$RuleMemoEnd) {
+            index = stringLiteral$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (stringLiteral$RuleMemoStart == stringLiteral$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.STRING_LITERAL, stringLiteral$RuleMemoStart, stringLiteral$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(stringLiteral$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(stringLiteral$RuleMemoFirstNode);
+                  currentNode = stringLiteral$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // ('"' (Escape | (('\r' | '\n' | '"' | '\')! .))* '"')
@@ -14390,13 +17700,22 @@ public class JavaParser implements Parser {
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         stringLiteral$RuleMemoStart = startIndex;
+         stringLiteral$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            stringLiteral$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.STRING_LITERAL, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            stringLiteral$RuleMemoFirstNode = currentNode;
+            stringLiteral$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         stringLiteral$RuleMemoStart = startIndex;
+         stringLiteral$RuleMemoEnd = -1;
+         stringLiteral$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -14409,6 +17728,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (true$RuleMemoStart == index) {
+         if (true$RuleMemoStart <= true$RuleMemoEnd) {
+            index = true$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (true$RuleMemoStart == true$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.TRUE, true$RuleMemoStart, true$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(true$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(true$RuleMemoFirstNode);
+                  currentNode = true$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('true' TestNoAlpha OptionalSpacing)
       // 'true'
@@ -14422,13 +17758,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         true$RuleMemoStart = startIndex;
+         true$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            true$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.TRUE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            true$RuleMemoFirstNode = currentNode;
+            true$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         true$RuleMemoStart = startIndex;
+         true$RuleMemoEnd = -1;
+         true$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -14441,6 +17786,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (false$RuleMemoStart == index) {
+         if (false$RuleMemoStart <= false$RuleMemoEnd) {
+            index = false$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (false$RuleMemoStart == false$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.FALSE, false$RuleMemoStart, false$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(false$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(false$RuleMemoFirstNode);
+                  currentNode = false$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('false' TestNoAlpha OptionalSpacing)
       // 'false'
@@ -14454,13 +17816,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         false$RuleMemoStart = startIndex;
+         false$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            false$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.FALSE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            false$RuleMemoFirstNode = currentNode;
+            false$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         false$RuleMemoStart = startIndex;
+         false$RuleMemoEnd = -1;
+         false$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -14473,6 +17844,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (null$RuleMemoStart == index) {
+         if (null$RuleMemoStart <= null$RuleMemoEnd) {
+            index = null$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (null$RuleMemoStart == null$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.NULL, null$RuleMemoStart, null$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(null$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(null$RuleMemoFirstNode);
+                  currentNode = null$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('null' TestNoAlpha OptionalSpacing)
       // 'null'
@@ -14486,13 +17874,22 @@ public class JavaParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         null$RuleMemoStart = startIndex;
+         null$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            null$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.NULL, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            null$RuleMemoFirstNode = currentNode;
+            null$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         null$RuleMemoStart = startIndex;
+         null$RuleMemoEnd = -1;
+         null$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -14506,6 +17903,23 @@ public class JavaParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (hexFloat$RuleMemoStart == index) {
+         if (hexFloat$RuleMemoStart <= hexFloat$RuleMemoEnd) {
+            index = hexFloat$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (hexFloat$RuleMemoStart == hexFloat$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.HEX_FLOAT, hexFloat$RuleMemoStart, hexFloat$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(hexFloat$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(hexFloat$RuleMemoFirstNode);
+                  currentNode = hexFloat$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // (HexSignificant BinaryExponent ('f' | 'F' | 'd' | 'D')?)
@@ -14755,13 +18169,22 @@ public class JavaParser implements Parser {
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         hexFloat$RuleMemoStart = startIndex;
+         hexFloat$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            hexFloat$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.HEX_FLOAT, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            hexFloat$RuleMemoFirstNode = currentNode;
+            hexFloat$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         hexFloat$RuleMemoStart = startIndex;
+         hexFloat$RuleMemoEnd = -1;
+         hexFloat$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -14775,6 +18198,23 @@ public class JavaParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (decimalFloat$RuleMemoStart == index) {
+         if (decimalFloat$RuleMemoStart <= decimalFloat$RuleMemoEnd) {
+            index = decimalFloat$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (decimalFloat$RuleMemoStart == decimalFloat$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.DECIMAL_FLOAT, decimalFloat$RuleMemoStart, decimalFloat$RuleMemoEnd, true, false);
+                  lastNode.setSibling(currentNode);
+               } else if(decimalFloat$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(decimalFloat$RuleMemoFirstNode);
+                  currentNode = decimalFloat$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // ((Digit+ '.' Digit* Exponent? ('f' | 'F' | 'd' | 'D')?) | ('.' Digit+ Exponent? ('f' | 'F' | 'd' | 'D')?) | (Digit+ Exponent ('f' | 'F' | 'd' | 'D')?) | (Digit+ Exponent? ('f' | 'F' | 'd' | 'D')))
@@ -15229,13 +18669,22 @@ public class JavaParser implements Parser {
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         decimalFloat$RuleMemoStart = startIndex;
+         decimalFloat$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            decimalFloat$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.DECIMAL_FLOAT, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            decimalFloat$RuleMemoFirstNode = currentNode;
+            decimalFloat$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         decimalFloat$RuleMemoStart = startIndex;
+         decimalFloat$RuleMemoEnd = -1;
+         decimalFloat$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -15248,6 +18697,23 @@ public class JavaParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (semicolon$RuleMemoStart == index) {
+         if (semicolon$RuleMemoStart <= semicolon$RuleMemoEnd) {
+            index = semicolon$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               if (semicolon$RuleMemoStart == semicolon$RuleMemoEnd) {
+                  currentNode = new NodeImpl(JavaRuleType.SEMICOLON, semicolon$RuleMemoStart, semicolon$RuleMemoEnd, false, false);
+                  lastNode.setSibling(currentNode);
+               } else if(semicolon$RuleMemoFirstNode != null) {
+                  lastNode.setSibling(semicolon$RuleMemoFirstNode);
+                  currentNode = semicolon$RuleMemoLastNode;
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (';' OptionalSpacing)
       // ';'
@@ -15257,13 +18723,22 @@ public class JavaParser implements Parser {
          match = optionalSpacing$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         semicolon$RuleMemoStart = startIndex;
+         semicolon$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            semicolon$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(JavaRuleType.SEMICOLON, startIndex, index, false, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            semicolon$RuleMemoFirstNode = currentNode;
+            semicolon$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
+         semicolon$RuleMemoStart = startIndex;
+         semicolon$RuleMemoEnd = -1;
+         semicolon$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;

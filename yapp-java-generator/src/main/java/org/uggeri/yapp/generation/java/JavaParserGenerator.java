@@ -383,12 +383,10 @@ public class JavaParserGenerator extends AbstractParserGenerator {
          indent(getOutput().append('\n'), indent).append("private final int[] ").append(varName(memoVarStart(rule))).append(" = newArrayInt(").append(getNumberMemorizations()).append(");");
          indent(getOutput().append('\n'), indent).append("private final int[] ").append(varName(memoVarEnd(rule))).append(" = new int[").append(getNumberMemorizations()).append("];");
          indent(getOutput().append('\n'), indent).append("private final Node[] ").append(varName(memoVarFirstNode(rule))).append(" = new Node[").append(getNumberMemorizations()).append("];");
-         indent(getOutput().append('\n'), indent).append("private final Node[] ").append(varName(memoVarLastNode(rule))).append(" = new Node[").append(getNumberMemorizations()).append("];");
       } else {
          indent(getOutput().append('\n'), indent).append("private int ").append(varName(memoVarStart(rule))).append(" = -1;");
          indent(getOutput().append('\n'), indent).append("private int ").append(varName(memoVarEnd(rule))).append(';');
          indent(getOutput().append('\n'), indent).append("private Node ").append(varName(memoVarFirstNode(rule))).append(';');
-         indent(getOutput().append('\n'), indent).append("private Node ").append(varName(memoVarLastNode(rule))).append(';');
       }
    }
 
@@ -561,6 +559,11 @@ public class JavaParserGenerator extends AbstractParserGenerator {
    @Override
    protected Expression getSibling(Variable nodeVar) {
       return funCall(nodeVar.getName() + ".getSibling");
+   }
+
+   @Override
+   protected Expression getFirstChild(Expression nodeVar) {
+      return funCall(nodeVar + ".getFirstChild");
    }
 
    @Override

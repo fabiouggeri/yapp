@@ -348,6 +348,8 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
    protected abstract void setFirstChild(Expression nodeVar, Expression expr);
 
    protected abstract Expression getSibling(Variable nodeVar);
+   
+   protected abstract Expression getFirstChild(Expression nodeVar);
 
    protected abstract Expression timeFunCall();
 
@@ -583,14 +585,6 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       }
    }
 
-   protected Expression memoVarLastNode(final NonTerminalRule rule) {
-      if (getNumberMemorizations() > 1) {
-         return var(rule.getMethodName() + "MemoLastNode").get(memoIndexVar);
-      } else {
-         return var(rule.getMethodName() + "MemoLastNode");
-      }
-   }
-
    private void memoizationCode(final Grammar grammar, NonTerminalRule rule, boolean memoize, final boolean syntaxOnly, final boolean skipNode, final boolean catchMismatch) {
       if (memoize && !rule.getRule().isTest()) {
          ifStmt(parserVar.member(memoVarStart(rule)).equal(indexVar));
@@ -653,13 +647,11 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       setValue(indexVar, parserVar.member(memoVarEnd(rule)));
       if (!rule.getRule().isTest()) {
          ifStmt(not(currentRuleIsAtomicVar));
-         ifStmt(parserVar.member(memoVarStart(rule)).equal(parserVar.member(memoVarEnd(rule))));
-         setValue(currentNodeVar, createNodeFunCall(ruleReference(grammar, rule), parserVar.member(memoVarStart(rule)), parserVar.member(memoVarEnd(rule)), !syntaxOnly, skipNode));
-         setSibling(lastNodeVar, currentNodeVar);
-         elseIfStmt(parserVar.member(memoVarFirstNode(rule)).diff(null));
-         setSibling(lastNodeVar, parserVar.member(memoVarFirstNode(rule)));
-         setValue(currentNodeVar, parserVar.member(memoVarLastNode(rule)));
-         endIf();
+            setValue(currentNodeVar, createNodeFunCall(ruleReference(grammar, rule), parserVar.member(memoVarStart(rule)), parserVar.member(memoVarEnd(rule)), !syntaxOnly, skipNode));
+            setSibling(lastNodeVar, currentNodeVar);
+            ifStmt(parserVar.member(memoVarStart(rule)).equal(parserVar.member(memoVarEnd(rule))));
+               setFirstChild(currentNodeVar, getFirstChild(parserVar.member(memoVarFirstNode(rule))));
+            endIf();
          endIf();
       }
       traceCodeExitRule(true);
@@ -690,7 +682,6 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
          setSibling(lastNodeVar, currentNodeVar);
          if (memoize) {
             setValue(parserVar.member(memoVarFirstNode(rule)), currentNodeVar);
-            setValue(parserVar.member(memoVarLastNode(rule)), currentNodeVar);
          }
          endIf();
       }
@@ -1421,7 +1412,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       return rulesList;
    }
 
-   protected LiteralRulesGroup groupLiteralsByFirstChar(List<GrammarRule> rules) {
+   private LiteralRulesGroup groupLiteralsByFirstChar(List<GrammarRule> rules) {
       final LiteralRulesGroup rulesGroup = new LiteralRulesGroup();
       boolean defaultMatch = false;
 

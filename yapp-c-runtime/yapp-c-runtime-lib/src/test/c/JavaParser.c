@@ -204,7 +204,7 @@ YAPP_RULE JAVA_SEMICOLON = {"Semicolon", FALSE, FALSE, 192};
 
 #define RULES_COUNT 193
 
-static JavaParser s_parser_model = {0, NULL, NULL, FALSE, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL, -1, 0, NULL, NULL};
+static JavaParser s_parser_model = {0, NULL, NULL, FALSE, NULL, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL, -1, 0, NULL};
 
 #define NODE_SET_CURRENT(c, n) c->sibling = n; c = c->sibling
 
@@ -899,12 +899,10 @@ static BOOL annotations_rule(JavaParser * parser) {
       if (parser->annotations_ruleMemoStart <= parser->annotations_ruleMemoEnd) {
          parser->index = parser->annotations_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ANNOTATIONS, parser->annotations_ruleMemoStart, parser->annotations_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->annotations_ruleMemoStart == parser->annotations_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ANNOTATIONS, parser->annotations_ruleMemoStart, parser->annotations_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->annotations_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->annotations_ruleMemoFirstNode;
-               parser->currentNode = parser->annotations_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->annotations_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -927,7 +925,6 @@ static BOOL annotations_rule(JavaParser * parser) {
       parser->currentNode->firstChild = lastNode->sibling;
       lastNode->sibling = parser->currentNode;
       parser->annotations_ruleMemoFirstNode = parser->currentNode;
-      parser->annotations_ruleMemoLastNode = parser->currentNode;
    }
    return TRUE;
 }
@@ -941,12 +938,10 @@ static BOOL annotation_rule(JavaParser * parser) {
       if (parser->annotation_ruleMemoStart <= parser->annotation_ruleMemoEnd) {
          parser->index = parser->annotation_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ANNOTATION, parser->annotation_ruleMemoStart, parser->annotation_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->annotation_ruleMemoStart == parser->annotation_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ANNOTATION, parser->annotation_ruleMemoStart, parser->annotation_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->annotation_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->annotation_ruleMemoFirstNode;
-               parser->currentNode = parser->annotation_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->annotation_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -988,7 +983,6 @@ static BOOL annotation_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->annotation_ruleMemoFirstNode = parser->currentNode;
-         parser->annotation_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -1011,12 +1005,10 @@ static BOOL qualifiedIdentifier_rule(JavaParser * parser) {
       if (parser->qualifiedIdentifier_ruleMemoStart <= parser->qualifiedIdentifier_ruleMemoEnd) {
          parser->index = parser->qualifiedIdentifier_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_QUALIFIED_IDENTIFIER, parser->qualifiedIdentifier_ruleMemoStart, parser->qualifiedIdentifier_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->qualifiedIdentifier_ruleMemoStart == parser->qualifiedIdentifier_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_QUALIFIED_IDENTIFIER, parser->qualifiedIdentifier_ruleMemoStart, parser->qualifiedIdentifier_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->qualifiedIdentifier_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->qualifiedIdentifier_ruleMemoFirstNode;
-               parser->currentNode = parser->qualifiedIdentifier_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->qualifiedIdentifier_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -1065,7 +1057,6 @@ static BOOL qualifiedIdentifier_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->qualifiedIdentifier_ruleMemoFirstNode = parser->currentNode;
-         parser->qualifiedIdentifier_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -1124,12 +1115,10 @@ static BOOL modifiers_rule(JavaParser * parser) {
       if (parser->modifiers_ruleMemoStart <= parser->modifiers_ruleMemoEnd) {
          parser->index = parser->modifiers_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_MODIFIERS, parser->modifiers_ruleMemoStart, parser->modifiers_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->modifiers_ruleMemoStart == parser->modifiers_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_MODIFIERS, parser->modifiers_ruleMemoStart, parser->modifiers_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->modifiers_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->modifiers_ruleMemoFirstNode;
-               parser->currentNode = parser->modifiers_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->modifiers_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -1152,7 +1141,6 @@ static BOOL modifiers_rule(JavaParser * parser) {
       parser->currentNode->firstChild = lastNode->sibling;
       lastNode->sibling = parser->currentNode;
       parser->modifiers_ruleMemoFirstNode = parser->currentNode;
-      parser->modifiers_ruleMemoLastNode = parser->currentNode;
    }
    return TRUE;
 }
@@ -1164,42 +1152,36 @@ static BOOL modifier_rule(JavaParser * parser) {
    BOOL match;
    startIndex = parser->index;
    // (Annotation | ('public' TestNoAlpha OptionalSpacing) | ('protected' TestNoAlpha OptionalSpacing) | ('private' TestNoAlpha OptionalSpacing) | ('static' TestNoAlpha OptionalSpacing) | ('abstract' TestNoAlpha OptionalSpacing) | ('final' TestNoAlpha OptionalSpacing) | ('native' TestNoAlpha OptionalSpacing) | ('synchronized' TestNoAlpha OptionalSpacing) | ('transient' TestNoAlpha OptionalSpacing) | ('volatile' TestNoAlpha OptionalSpacing) | ('strictfp' TestNoAlpha OptionalSpacing))
-   switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-      case 'n': {
-         // ('native' TestNoAlpha OptionalSpacing)
-         YAPP_NODE * lastNode_1 = parser->currentNode;
-         INT32 lastIndex_1 = parser->index;
-         // 'native'
-         match = stringMatcher(parser, "native", 6);
+   // Annotation
+   match = annotation_rule(parser);
+   if (! match) {
+      // ('public' TestNoAlpha OptionalSpacing)
+      YAPP_NODE * lastNode_1 = parser->currentNode;
+      INT32 lastIndex_1 = parser->index;
+      // 'public'
+      match = stringMatcher(parser, "public", 6);
+      if (match) {
+         // TestNoAlpha
+         match = testNoAlpha_rule(parser);
          if (match) {
-            // TestNoAlpha
-            match = testNoAlpha_rule(parser);
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing_rule(parser);
-               if (! match) {
-                  parser->index = lastIndex_1;
-                  lastNode_1->sibling = NULL;
-                  parser->currentNode = lastNode_1;
-               }
-            } else {
+            // OptionalSpacing
+            match = optionalSpacing_rule(parser);
+            if (! match) {
                parser->index = lastIndex_1;
                lastNode_1->sibling = NULL;
+               parser->currentNode = lastNode_1;
             }
+         } else {
+            parser->index = lastIndex_1;
+            lastNode_1->sibling = NULL;
          }
-         break;
       }
-      case '@': {
-         // Annotation
-         match = annotation_rule(parser);
-         break;
-      }
-      case 'p': {
-         // ('public' TestNoAlpha OptionalSpacing)
+      if (! match) {
+         // ('protected' TestNoAlpha OptionalSpacing)
          YAPP_NODE * lastNode_2 = parser->currentNode;
          INT32 lastIndex_2 = parser->index;
-         // 'public'
-         match = stringMatcher(parser, "public", 6);
+         // 'protected'
+         match = stringMatcher(parser, "protected", 9);
          if (match) {
             // TestNoAlpha
             match = testNoAlpha_rule(parser);
@@ -1217,11 +1199,11 @@ static BOOL modifier_rule(JavaParser * parser) {
             }
          }
          if (! match) {
-            // ('protected' TestNoAlpha OptionalSpacing)
+            // ('private' TestNoAlpha OptionalSpacing)
             YAPP_NODE * lastNode_3 = parser->currentNode;
             INT32 lastIndex_3 = parser->index;
-            // 'protected'
-            match = stringMatcher(parser, "protected", 9);
+            // 'private'
+            match = stringMatcher(parser, "private", 7);
             if (match) {
                // TestNoAlpha
                match = testNoAlpha_rule(parser);
@@ -1239,11 +1221,11 @@ static BOOL modifier_rule(JavaParser * parser) {
                }
             }
             if (! match) {
-               // ('private' TestNoAlpha OptionalSpacing)
+               // ('static' TestNoAlpha OptionalSpacing)
                YAPP_NODE * lastNode_4 = parser->currentNode;
                INT32 lastIndex_4 = parser->index;
-               // 'private'
-               match = stringMatcher(parser, "private", 7);
+               // 'static'
+               match = stringMatcher(parser, "static", 6);
                if (match) {
                   // TestNoAlpha
                   match = testNoAlpha_rule(parser);
@@ -1260,178 +1242,169 @@ static BOOL modifier_rule(JavaParser * parser) {
                      lastNode_4->sibling = NULL;
                   }
                }
-            }
-         }
-         break;
-      }
-      case 'a': {
-         // ('abstract' TestNoAlpha OptionalSpacing)
-         YAPP_NODE * lastNode_5 = parser->currentNode;
-         INT32 lastIndex_5 = parser->index;
-         // 'abstract'
-         match = stringMatcher(parser, "abstract", 8);
-         if (match) {
-            // TestNoAlpha
-            match = testNoAlpha_rule(parser);
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing_rule(parser);
                if (! match) {
-                  parser->index = lastIndex_5;
-                  lastNode_5->sibling = NULL;
-                  parser->currentNode = lastNode_5;
-               }
-            } else {
-               parser->index = lastIndex_5;
-               lastNode_5->sibling = NULL;
-            }
-         }
-         break;
-      }
-      case 's': {
-         // ('static' TestNoAlpha OptionalSpacing)
-         YAPP_NODE * lastNode_6 = parser->currentNode;
-         INT32 lastIndex_6 = parser->index;
-         // 'static'
-         match = stringMatcher(parser, "static", 6);
-         if (match) {
-            // TestNoAlpha
-            match = testNoAlpha_rule(parser);
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing_rule(parser);
-               if (! match) {
-                  parser->index = lastIndex_6;
-                  lastNode_6->sibling = NULL;
-                  parser->currentNode = lastNode_6;
-               }
-            } else {
-               parser->index = lastIndex_6;
-               lastNode_6->sibling = NULL;
-            }
-         }
-         if (! match) {
-            // ('synchronized' TestNoAlpha OptionalSpacing)
-            YAPP_NODE * lastNode_7 = parser->currentNode;
-            INT32 lastIndex_7 = parser->index;
-            // 'synchronized'
-            match = stringMatcher(parser, "synchronized", 12);
-            if (match) {
-               // TestNoAlpha
-               match = testNoAlpha_rule(parser);
-               if (match) {
-                  // OptionalSpacing
-                  match = optionalSpacing_rule(parser);
-                  if (! match) {
-                     parser->index = lastIndex_7;
-                     lastNode_7->sibling = NULL;
-                     parser->currentNode = lastNode_7;
-                  }
-               } else {
-                  parser->index = lastIndex_7;
-                  lastNode_7->sibling = NULL;
-               }
-            }
-            if (! match) {
-               // ('strictfp' TestNoAlpha OptionalSpacing)
-               YAPP_NODE * lastNode_8 = parser->currentNode;
-               INT32 lastIndex_8 = parser->index;
-               // 'strictfp'
-               match = stringMatcher(parser, "strictfp", 8);
-               if (match) {
-                  // TestNoAlpha
-                  match = testNoAlpha_rule(parser);
+                  // ('abstract' TestNoAlpha OptionalSpacing)
+                  YAPP_NODE * lastNode_5 = parser->currentNode;
+                  INT32 lastIndex_5 = parser->index;
+                  // 'abstract'
+                  match = stringMatcher(parser, "abstract", 8);
                   if (match) {
-                     // OptionalSpacing
-                     match = optionalSpacing_rule(parser);
-                     if (! match) {
-                        parser->index = lastIndex_8;
-                        lastNode_8->sibling = NULL;
-                        parser->currentNode = lastNode_8;
+                     // TestNoAlpha
+                     match = testNoAlpha_rule(parser);
+                     if (match) {
+                        // OptionalSpacing
+                        match = optionalSpacing_rule(parser);
+                        if (! match) {
+                           parser->index = lastIndex_5;
+                           lastNode_5->sibling = NULL;
+                           parser->currentNode = lastNode_5;
+                        }
+                     } else {
+                        parser->index = lastIndex_5;
+                        lastNode_5->sibling = NULL;
                      }
-                  } else {
-                     parser->index = lastIndex_8;
-                     lastNode_8->sibling = NULL;
+                  }
+                  if (! match) {
+                     // ('final' TestNoAlpha OptionalSpacing)
+                     YAPP_NODE * lastNode_6 = parser->currentNode;
+                     INT32 lastIndex_6 = parser->index;
+                     // 'final'
+                     match = stringMatcher(parser, "final", 5);
+                     if (match) {
+                        // TestNoAlpha
+                        match = testNoAlpha_rule(parser);
+                        if (match) {
+                           // OptionalSpacing
+                           match = optionalSpacing_rule(parser);
+                           if (! match) {
+                              parser->index = lastIndex_6;
+                              lastNode_6->sibling = NULL;
+                              parser->currentNode = lastNode_6;
+                           }
+                        } else {
+                           parser->index = lastIndex_6;
+                           lastNode_6->sibling = NULL;
+                        }
+                     }
+                     if (! match) {
+                        // ('native' TestNoAlpha OptionalSpacing)
+                        YAPP_NODE * lastNode_7 = parser->currentNode;
+                        INT32 lastIndex_7 = parser->index;
+                        // 'native'
+                        match = stringMatcher(parser, "native", 6);
+                        if (match) {
+                           // TestNoAlpha
+                           match = testNoAlpha_rule(parser);
+                           if (match) {
+                              // OptionalSpacing
+                              match = optionalSpacing_rule(parser);
+                              if (! match) {
+                                 parser->index = lastIndex_7;
+                                 lastNode_7->sibling = NULL;
+                                 parser->currentNode = lastNode_7;
+                              }
+                           } else {
+                              parser->index = lastIndex_7;
+                              lastNode_7->sibling = NULL;
+                           }
+                        }
+                        if (! match) {
+                           // ('synchronized' TestNoAlpha OptionalSpacing)
+                           YAPP_NODE * lastNode_8 = parser->currentNode;
+                           INT32 lastIndex_8 = parser->index;
+                           // 'synchronized'
+                           match = stringMatcher(parser, "synchronized", 12);
+                           if (match) {
+                              // TestNoAlpha
+                              match = testNoAlpha_rule(parser);
+                              if (match) {
+                                 // OptionalSpacing
+                                 match = optionalSpacing_rule(parser);
+                                 if (! match) {
+                                    parser->index = lastIndex_8;
+                                    lastNode_8->sibling = NULL;
+                                    parser->currentNode = lastNode_8;
+                                 }
+                              } else {
+                                 parser->index = lastIndex_8;
+                                 lastNode_8->sibling = NULL;
+                              }
+                           }
+                           if (! match) {
+                              // ('transient' TestNoAlpha OptionalSpacing)
+                              YAPP_NODE * lastNode_9 = parser->currentNode;
+                              INT32 lastIndex_9 = parser->index;
+                              // 'transient'
+                              match = stringMatcher(parser, "transient", 9);
+                              if (match) {
+                                 // TestNoAlpha
+                                 match = testNoAlpha_rule(parser);
+                                 if (match) {
+                                    // OptionalSpacing
+                                    match = optionalSpacing_rule(parser);
+                                    if (! match) {
+                                       parser->index = lastIndex_9;
+                                       lastNode_9->sibling = NULL;
+                                       parser->currentNode = lastNode_9;
+                                    }
+                                 } else {
+                                    parser->index = lastIndex_9;
+                                    lastNode_9->sibling = NULL;
+                                 }
+                              }
+                              if (! match) {
+                                 // ('volatile' TestNoAlpha OptionalSpacing)
+                                 YAPP_NODE * lastNode_10 = parser->currentNode;
+                                 INT32 lastIndex_10 = parser->index;
+                                 // 'volatile'
+                                 match = stringMatcher(parser, "volatile", 8);
+                                 if (match) {
+                                    // TestNoAlpha
+                                    match = testNoAlpha_rule(parser);
+                                    if (match) {
+                                       // OptionalSpacing
+                                       match = optionalSpacing_rule(parser);
+                                       if (! match) {
+                                          parser->index = lastIndex_10;
+                                          lastNode_10->sibling = NULL;
+                                          parser->currentNode = lastNode_10;
+                                       }
+                                    } else {
+                                       parser->index = lastIndex_10;
+                                       lastNode_10->sibling = NULL;
+                                    }
+                                 }
+                                 if (! match) {
+                                    // ('strictfp' TestNoAlpha OptionalSpacing)
+                                    YAPP_NODE * lastNode_11 = parser->currentNode;
+                                    INT32 lastIndex_11 = parser->index;
+                                    // 'strictfp'
+                                    match = stringMatcher(parser, "strictfp", 8);
+                                    if (match) {
+                                       // TestNoAlpha
+                                       match = testNoAlpha_rule(parser);
+                                       if (match) {
+                                          // OptionalSpacing
+                                          match = optionalSpacing_rule(parser);
+                                          if (! match) {
+                                             parser->index = lastIndex_11;
+                                             lastNode_11->sibling = NULL;
+                                             parser->currentNode = lastNode_11;
+                                          }
+                                       } else {
+                                          parser->index = lastIndex_11;
+                                          lastNode_11->sibling = NULL;
+                                       }
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
                   }
                }
             }
          }
-         break;
-      }
-      case 't': {
-         // ('transient' TestNoAlpha OptionalSpacing)
-         YAPP_NODE * lastNode_9 = parser->currentNode;
-         INT32 lastIndex_9 = parser->index;
-         // 'transient'
-         match = stringMatcher(parser, "transient", 9);
-         if (match) {
-            // TestNoAlpha
-            match = testNoAlpha_rule(parser);
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing_rule(parser);
-               if (! match) {
-                  parser->index = lastIndex_9;
-                  lastNode_9->sibling = NULL;
-                  parser->currentNode = lastNode_9;
-               }
-            } else {
-               parser->index = lastIndex_9;
-               lastNode_9->sibling = NULL;
-            }
-         }
-         break;
-      }
-      case 'f': {
-         // ('final' TestNoAlpha OptionalSpacing)
-         YAPP_NODE * lastNode_10 = parser->currentNode;
-         INT32 lastIndex_10 = parser->index;
-         // 'final'
-         match = stringMatcher(parser, "final", 5);
-         if (match) {
-            // TestNoAlpha
-            match = testNoAlpha_rule(parser);
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing_rule(parser);
-               if (! match) {
-                  parser->index = lastIndex_10;
-                  lastNode_10->sibling = NULL;
-                  parser->currentNode = lastNode_10;
-               }
-            } else {
-               parser->index = lastIndex_10;
-               lastNode_10->sibling = NULL;
-            }
-         }
-         break;
-      }
-      case 'v': {
-         // ('volatile' TestNoAlpha OptionalSpacing)
-         YAPP_NODE * lastNode_11 = parser->currentNode;
-         INT32 lastIndex_11 = parser->index;
-         // 'volatile'
-         match = stringMatcher(parser, "volatile", 8);
-         if (match) {
-            // TestNoAlpha
-            match = testNoAlpha_rule(parser);
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing_rule(parser);
-               if (! match) {
-                  parser->index = lastIndex_11;
-                  lastNode_11->sibling = NULL;
-                  parser->currentNode = lastNode_11;
-               }
-            } else {
-               parser->index = lastIndex_11;
-               lastNode_11->sibling = NULL;
-            }
-         }
-         break;
-      }
-      default: {
-         match = FALSE;
       }
    }
    if (match) {
@@ -1458,12 +1431,10 @@ static BOOL classDeclaration_rule(JavaParser * parser) {
       if (parser->classDeclaration_ruleMemoStart <= parser->classDeclaration_ruleMemoEnd) {
          parser->index = parser->classDeclaration_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CLASS_DECLARATION, parser->classDeclaration_ruleMemoStart, parser->classDeclaration_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->classDeclaration_ruleMemoStart == parser->classDeclaration_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CLASS_DECLARATION, parser->classDeclaration_ruleMemoStart, parser->classDeclaration_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->classDeclaration_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->classDeclaration_ruleMemoFirstNode;
-               parser->currentNode = parser->classDeclaration_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->classDeclaration_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -1514,7 +1485,6 @@ static BOOL classDeclaration_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->classDeclaration_ruleMemoFirstNode = parser->currentNode;
-         parser->classDeclaration_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -1537,12 +1507,10 @@ static BOOL enumDeclaration_rule(JavaParser * parser) {
       if (parser->enumDeclaration_ruleMemoStart <= parser->enumDeclaration_ruleMemoEnd) {
          parser->index = parser->enumDeclaration_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ENUM_DECLARATION, parser->enumDeclaration_ruleMemoStart, parser->enumDeclaration_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->enumDeclaration_ruleMemoStart == parser->enumDeclaration_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ENUM_DECLARATION, parser->enumDeclaration_ruleMemoStart, parser->enumDeclaration_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->enumDeclaration_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->enumDeclaration_ruleMemoFirstNode;
-               parser->currentNode = parser->enumDeclaration_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->enumDeclaration_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -1587,7 +1555,6 @@ static BOOL enumDeclaration_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->enumDeclaration_ruleMemoFirstNode = parser->currentNode;
-         parser->enumDeclaration_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -1610,12 +1577,10 @@ static BOOL interfaceDeclaration_rule(JavaParser * parser) {
       if (parser->interfaceDeclaration_ruleMemoStart <= parser->interfaceDeclaration_ruleMemoEnd) {
          parser->index = parser->interfaceDeclaration_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_INTERFACE_DECLARATION, parser->interfaceDeclaration_ruleMemoStart, parser->interfaceDeclaration_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->interfaceDeclaration_ruleMemoStart == parser->interfaceDeclaration_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_INTERFACE_DECLARATION, parser->interfaceDeclaration_ruleMemoStart, parser->interfaceDeclaration_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->interfaceDeclaration_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->interfaceDeclaration_ruleMemoFirstNode;
-               parser->currentNode = parser->interfaceDeclaration_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->interfaceDeclaration_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -1663,7 +1628,6 @@ static BOOL interfaceDeclaration_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->interfaceDeclaration_ruleMemoFirstNode = parser->currentNode;
-         parser->interfaceDeclaration_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -1686,12 +1650,10 @@ static BOOL annotationDeclaration_rule(JavaParser * parser) {
       if (parser->annotationDeclaration_ruleMemoStart <= parser->annotationDeclaration_ruleMemoEnd) {
          parser->index = parser->annotationDeclaration_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ANNOTATION_DECLARATION, parser->annotationDeclaration_ruleMemoStart, parser->annotationDeclaration_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->annotationDeclaration_ruleMemoStart == parser->annotationDeclaration_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ANNOTATION_DECLARATION, parser->annotationDeclaration_ruleMemoStart, parser->annotationDeclaration_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->annotationDeclaration_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->annotationDeclaration_ruleMemoFirstNode;
-               parser->currentNode = parser->annotationDeclaration_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->annotationDeclaration_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -1741,7 +1703,6 @@ static BOOL annotationDeclaration_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->annotationDeclaration_ruleMemoFirstNode = parser->currentNode;
-         parser->annotationDeclaration_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -1800,12 +1761,10 @@ static BOOL qualifiedClassName_rule(JavaParser * parser) {
       if (parser->qualifiedClassName_ruleMemoStart <= parser->qualifiedClassName_ruleMemoEnd) {
          parser->index = parser->qualifiedClassName_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_QUALIFIED_CLASS_NAME, parser->qualifiedClassName_ruleMemoStart, parser->qualifiedClassName_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->qualifiedClassName_ruleMemoStart == parser->qualifiedClassName_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_QUALIFIED_CLASS_NAME, parser->qualifiedClassName_ruleMemoStart, parser->qualifiedClassName_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->qualifiedClassName_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->qualifiedClassName_ruleMemoFirstNode;
-               parser->currentNode = parser->qualifiedClassName_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->qualifiedClassName_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -1854,7 +1813,6 @@ static BOOL qualifiedClassName_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->qualifiedClassName_ruleMemoFirstNode = parser->currentNode;
-         parser->qualifiedClassName_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -1877,12 +1835,10 @@ static BOOL implements_rule(JavaParser * parser) {
       if (parser->implements_ruleMemoStart <= parser->implements_ruleMemoEnd) {
          parser->index = parser->implements_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_IMPLEMENTS, parser->implements_ruleMemoStart, parser->implements_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->implements_ruleMemoStart == parser->implements_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_IMPLEMENTS, parser->implements_ruleMemoStart, parser->implements_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->implements_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->implements_ruleMemoFirstNode;
-               parser->currentNode = parser->implements_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->implements_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -1916,7 +1872,6 @@ static BOOL implements_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->implements_ruleMemoFirstNode = parser->currentNode;
-         parser->implements_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -1939,12 +1894,10 @@ static BOOL classTypeList_rule(JavaParser * parser) {
       if (parser->classTypeList_ruleMemoStart <= parser->classTypeList_ruleMemoEnd) {
          parser->index = parser->classTypeList_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CLASS_TYPE_LIST, parser->classTypeList_ruleMemoStart, parser->classTypeList_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->classTypeList_ruleMemoStart == parser->classTypeList_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CLASS_TYPE_LIST, parser->classTypeList_ruleMemoStart, parser->classTypeList_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->classTypeList_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->classTypeList_ruleMemoFirstNode;
-               parser->currentNode = parser->classTypeList_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->classTypeList_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -1993,7 +1946,6 @@ static BOOL classTypeList_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->classTypeList_ruleMemoFirstNode = parser->currentNode;
-         parser->classTypeList_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -2016,12 +1968,10 @@ static BOOL identifier_rule(JavaParser * parser) {
       if (parser->identifier_ruleMemoStart <= parser->identifier_ruleMemoEnd) {
          parser->index = parser->identifier_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_IDENTIFIER, parser->identifier_ruleMemoStart, parser->identifier_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->identifier_ruleMemoStart == parser->identifier_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_IDENTIFIER, parser->identifier_ruleMemoStart, parser->identifier_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->identifier_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->identifier_ruleMemoFirstNode;
-               parser->currentNode = parser->identifier_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->identifier_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -2709,7 +2659,6 @@ static BOOL identifier_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->identifier_ruleMemoFirstNode = parser->currentNode;
-         parser->identifier_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -2733,172 +2682,40 @@ static BOOL identifierPattern_rule(JavaParser * parser) {
    startIndex = parser->index;
    // (('a'-'z' | 'A'-'Z' | '_' | '$') ('a'-'z' | 'A'-'Z' | '0'-'9' | '_' | '$')*)
    // ('a'-'z' | 'A'-'Z' | '_' | '$')
-   switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-      case '_': {
+   // 'a'-'z'
+   match = charRangeMatcher(parser, 'a', 'z');
+   if (! match) {
+      // 'A'-'Z'
+      match = charRangeMatcher(parser, 'A', 'Z');
+      if (! match) {
          // '_'
          match = charMatcher(parser, '_');
-         break;
-      }
-      case 'A':
-      case 'B':
-      case 'C':
-      case 'D':
-      case 'E':
-      case 'F':
-      case 'G':
-      case 'H':
-      case 'I':
-      case 'J':
-      case 'K':
-      case 'L':
-      case 'M':
-      case 'N':
-      case 'O':
-      case 'P':
-      case 'Q':
-      case 'R':
-      case 'S':
-      case 'T':
-      case 'U':
-      case 'V':
-      case 'W':
-      case 'X':
-      case 'Y':
-      case 'Z': {
-         // 'A'-'Z'
-         match = charRangeMatcher(parser, 'A', 'Z');
-         break;
-      }
-      case 'a':
-      case 'b':
-      case 'c':
-      case 'd':
-      case 'e':
-      case 'f':
-      case 'g':
-      case 'h':
-      case 'i':
-      case 'j':
-      case 'k':
-      case 'l':
-      case 'm':
-      case 'n':
-      case 'o':
-      case 'p':
-      case 'q':
-      case 'r':
-      case 's':
-      case 't':
-      case 'u':
-      case 'v':
-      case 'w':
-      case 'x':
-      case 'y':
-      case 'z': {
-         // 'a'-'z'
-         match = charRangeMatcher(parser, 'a', 'z');
-         break;
-      }
-      case '$': {
-         // '$'
-         match = charMatcher(parser, '$');
-         break;
-      }
-      default: {
-         match = FALSE;
+         if (! match) {
+            // '$'
+            match = charMatcher(parser, '$');
+         }
       }
    }
    if (match) {
       // ('a'-'z' | 'A'-'Z' | '0'-'9' | '_' | '$')*
       do {
          // ('a'-'z' | 'A'-'Z' | '0'-'9' | '_' | '$')
-         switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-            case '_': {
-               // '_'
-               match = charMatcher(parser, '_');
-               break;
-            }
-            case '0':
-            case '1':
-            case '2':
-            case '3':
-            case '4':
-            case '5':
-            case '6':
-            case '7':
-            case '8':
-            case '9': {
+         // 'a'-'z'
+         match = charRangeMatcher(parser, 'a', 'z');
+         if (! match) {
+            // 'A'-'Z'
+            match = charRangeMatcher(parser, 'A', 'Z');
+            if (! match) {
                // '0'-'9'
                match = charRangeMatcher(parser, '0', '9');
-               break;
-            }
-            case 'A':
-            case 'B':
-            case 'C':
-            case 'D':
-            case 'E':
-            case 'F':
-            case 'G':
-            case 'H':
-            case 'I':
-            case 'J':
-            case 'K':
-            case 'L':
-            case 'M':
-            case 'N':
-            case 'O':
-            case 'P':
-            case 'Q':
-            case 'R':
-            case 'S':
-            case 'T':
-            case 'U':
-            case 'V':
-            case 'W':
-            case 'X':
-            case 'Y':
-            case 'Z': {
-               // 'A'-'Z'
-               match = charRangeMatcher(parser, 'A', 'Z');
-               break;
-            }
-            case 'a':
-            case 'b':
-            case 'c':
-            case 'd':
-            case 'e':
-            case 'f':
-            case 'g':
-            case 'h':
-            case 'i':
-            case 'j':
-            case 'k':
-            case 'l':
-            case 'm':
-            case 'n':
-            case 'o':
-            case 'p':
-            case 'q':
-            case 'r':
-            case 's':
-            case 't':
-            case 'u':
-            case 'v':
-            case 'w':
-            case 'x':
-            case 'y':
-            case 'z': {
-               // 'a'-'z'
-               match = charRangeMatcher(parser, 'a', 'z');
-               break;
-            }
-            case '$': {
-               // '$'
-               match = charMatcher(parser, '$');
-               break;
-            }
-            default: {
-               match = FALSE;
+               if (! match) {
+                  // '_'
+                  match = charMatcher(parser, '_');
+                  if (! match) {
+                     // '$'
+                     match = charMatcher(parser, '$');
+                  }
+               }
             }
          }
       } while(match);
@@ -2929,12 +2746,10 @@ static BOOL typeParameters_rule(JavaParser * parser) {
       if (parser->typeParameters_ruleMemoStart <= parser->typeParameters_ruleMemoEnd) {
          parser->index = parser->typeParameters_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_TYPE_PARAMETERS, parser->typeParameters_ruleMemoStart, parser->typeParameters_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->typeParameters_ruleMemoStart == parser->typeParameters_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_TYPE_PARAMETERS, parser->typeParameters_ruleMemoStart, parser->typeParameters_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->typeParameters_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->typeParameters_ruleMemoFirstNode;
-               parser->currentNode = parser->typeParameters_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->typeParameters_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -2996,7 +2811,6 @@ static BOOL typeParameters_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->typeParameters_ruleMemoFirstNode = parser->currentNode;
-         parser->typeParameters_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -3019,12 +2833,10 @@ static BOOL classBody_rule(JavaParser * parser) {
       if (parser->classBody_ruleMemoStart <= parser->classBody_ruleMemoEnd) {
          parser->index = parser->classBody_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CLASS_BODY, parser->classBody_ruleMemoStart, parser->classBody_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->classBody_ruleMemoStart == parser->classBody_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CLASS_BODY, parser->classBody_ruleMemoStart, parser->classBody_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->classBody_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->classBody_ruleMemoFirstNode;
-               parser->currentNode = parser->classBody_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->classBody_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -3063,7 +2875,6 @@ static BOOL classBody_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->classBody_ruleMemoFirstNode = parser->currentNode;
-         parser->classBody_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -3086,12 +2897,10 @@ static BOOL classBodyDeclaration_rule(JavaParser * parser) {
       if (parser->classBodyDeclaration_ruleMemoStart <= parser->classBodyDeclaration_ruleMemoEnd) {
          parser->index = parser->classBodyDeclaration_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CLASS_BODY_DECLARATION, parser->classBodyDeclaration_ruleMemoStart, parser->classBodyDeclaration_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->classBodyDeclaration_ruleMemoStart == parser->classBodyDeclaration_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CLASS_BODY_DECLARATION, parser->classBodyDeclaration_ruleMemoStart, parser->classBodyDeclaration_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->classBodyDeclaration_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->classBodyDeclaration_ruleMemoFirstNode;
-               parser->currentNode = parser->classBodyDeclaration_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->classBodyDeclaration_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -3310,7 +3119,6 @@ static BOOL classBodyDeclaration_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->classBodyDeclaration_ruleMemoFirstNode = parser->currentNode;
-         parser->classBodyDeclaration_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -3333,12 +3141,10 @@ static BOOL staticBlock_rule(JavaParser * parser) {
       if (parser->staticBlock_ruleMemoStart <= parser->staticBlock_ruleMemoEnd) {
          parser->index = parser->staticBlock_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_STATIC_BLOCK, parser->staticBlock_ruleMemoStart, parser->staticBlock_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->staticBlock_ruleMemoStart == parser->staticBlock_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_STATIC_BLOCK, parser->staticBlock_ruleMemoStart, parser->staticBlock_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->staticBlock_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->staticBlock_ruleMemoFirstNode;
-               parser->currentNode = parser->staticBlock_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->staticBlock_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -3382,7 +3188,6 @@ static BOOL staticBlock_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->staticBlock_ruleMemoFirstNode = parser->currentNode;
-         parser->staticBlock_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -3405,12 +3210,10 @@ static BOOL block_rule(JavaParser * parser) {
       if (parser->block_ruleMemoStart <= parser->block_ruleMemoEnd) {
          parser->index = parser->block_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_BLOCK, parser->block_ruleMemoStart, parser->block_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->block_ruleMemoStart == parser->block_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_BLOCK, parser->block_ruleMemoStart, parser->block_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->block_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->block_ruleMemoFirstNode;
-               parser->currentNode = parser->block_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->block_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -3448,7 +3251,6 @@ static BOOL block_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->block_ruleMemoFirstNode = parser->currentNode;
-         parser->block_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -3471,12 +3273,10 @@ static BOOL methodDeclaration_rule(JavaParser * parser) {
       if (parser->methodDeclaration_ruleMemoStart <= parser->methodDeclaration_ruleMemoEnd) {
          parser->index = parser->methodDeclaration_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_METHOD_DECLARATION, parser->methodDeclaration_ruleMemoStart, parser->methodDeclaration_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->methodDeclaration_ruleMemoStart == parser->methodDeclaration_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_METHOD_DECLARATION, parser->methodDeclaration_ruleMemoStart, parser->methodDeclaration_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->methodDeclaration_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->methodDeclaration_ruleMemoFirstNode;
-               parser->currentNode = parser->methodDeclaration_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->methodDeclaration_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -3520,7 +3320,6 @@ static BOOL methodDeclaration_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->methodDeclaration_ruleMemoFirstNode = parser->currentNode;
-         parser->methodDeclaration_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -3543,12 +3342,10 @@ static BOOL constructorDeclaration_rule(JavaParser * parser) {
       if (parser->constructorDeclaration_ruleMemoStart <= parser->constructorDeclaration_ruleMemoEnd) {
          parser->index = parser->constructorDeclaration_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CONSTRUCTOR_DECLARATION, parser->constructorDeclaration_ruleMemoStart, parser->constructorDeclaration_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->constructorDeclaration_ruleMemoStart == parser->constructorDeclaration_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CONSTRUCTOR_DECLARATION, parser->constructorDeclaration_ruleMemoStart, parser->constructorDeclaration_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->constructorDeclaration_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->constructorDeclaration_ruleMemoFirstNode;
-               parser->currentNode = parser->constructorDeclaration_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->constructorDeclaration_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -3588,7 +3385,6 @@ static BOOL constructorDeclaration_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->constructorDeclaration_ruleMemoFirstNode = parser->currentNode;
-         parser->constructorDeclaration_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -3611,12 +3407,10 @@ static BOOL fieldsDeclarations_rule(JavaParser * parser) {
       if (parser->fieldsDeclarations_ruleMemoStart <= parser->fieldsDeclarations_ruleMemoEnd) {
          parser->index = parser->fieldsDeclarations_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_FIELDS_DECLARATIONS, parser->fieldsDeclarations_ruleMemoStart, parser->fieldsDeclarations_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->fieldsDeclarations_ruleMemoStart == parser->fieldsDeclarations_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_FIELDS_DECLARATIONS, parser->fieldsDeclarations_ruleMemoStart, parser->fieldsDeclarations_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->fieldsDeclarations_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->fieldsDeclarations_ruleMemoFirstNode;
-               parser->currentNode = parser->fieldsDeclarations_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->fieldsDeclarations_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -3650,7 +3444,6 @@ static BOOL fieldsDeclarations_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->fieldsDeclarations_ruleMemoFirstNode = parser->currentNode;
-         parser->fieldsDeclarations_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -3673,12 +3466,10 @@ static BOOL type_rule(JavaParser * parser) {
       if (parser->type_ruleMemoStart <= parser->type_ruleMemoEnd) {
          parser->index = parser->type_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_TYPE, parser->type_ruleMemoStart, parser->type_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->type_ruleMemoStart == parser->type_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_TYPE, parser->type_ruleMemoStart, parser->type_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->type_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->type_ruleMemoFirstNode;
-               parser->currentNode = parser->type_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->type_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -3777,7 +3568,6 @@ static BOOL type_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->type_ruleMemoFirstNode = parser->currentNode;
-         parser->type_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -3800,12 +3590,10 @@ static BOOL variableDeclarations_rule(JavaParser * parser) {
       if (parser->variableDeclarations_ruleMemoStart <= parser->variableDeclarations_ruleMemoEnd) {
          parser->index = parser->variableDeclarations_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_VARIABLE_DECLARATIONS, parser->variableDeclarations_ruleMemoStart, parser->variableDeclarations_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->variableDeclarations_ruleMemoStart == parser->variableDeclarations_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_VARIABLE_DECLARATIONS, parser->variableDeclarations_ruleMemoStart, parser->variableDeclarations_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->variableDeclarations_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->variableDeclarations_ruleMemoFirstNode;
-               parser->currentNode = parser->variableDeclarations_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->variableDeclarations_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -3854,7 +3642,6 @@ static BOOL variableDeclarations_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->variableDeclarations_ruleMemoFirstNode = parser->currentNode;
-         parser->variableDeclarations_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -3877,12 +3664,10 @@ static BOOL throws_rule(JavaParser * parser) {
       if (parser->throws_ruleMemoStart <= parser->throws_ruleMemoEnd) {
          parser->index = parser->throws_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_THROWS, parser->throws_ruleMemoStart, parser->throws_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->throws_ruleMemoStart == parser->throws_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_THROWS, parser->throws_ruleMemoStart, parser->throws_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->throws_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->throws_ruleMemoFirstNode;
-               parser->currentNode = parser->throws_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->throws_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -3916,7 +3701,6 @@ static BOOL throws_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->throws_ruleMemoFirstNode = parser->currentNode;
-         parser->throws_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -3939,12 +3723,10 @@ static BOOL emptyBody_rule(JavaParser * parser) {
       if (parser->emptyBody_ruleMemoStart <= parser->emptyBody_ruleMemoEnd) {
          parser->index = parser->emptyBody_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_EMPTY_BODY, parser->emptyBody_ruleMemoStart, parser->emptyBody_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->emptyBody_ruleMemoStart == parser->emptyBody_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_EMPTY_BODY, parser->emptyBody_ruleMemoStart, parser->emptyBody_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->emptyBody_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->emptyBody_ruleMemoFirstNode;
-               parser->currentNode = parser->emptyBody_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->emptyBody_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -3965,7 +3747,6 @@ static BOOL emptyBody_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->emptyBody_ruleMemoFirstNode = parser->currentNode;
-         parser->emptyBody_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -3986,94 +3767,29 @@ static BOOL returnType_rule(JavaParser * parser) {
    BOOL match;
    startIndex = parser->index;
    // (Type | ('void' TestNoAlpha OptionalSpacing))
-   switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-      case '$':
-      case 'A':
-      case 'B':
-      case 'C':
-      case 'D':
-      case 'E':
-      case 'F':
-      case 'G':
-      case 'H':
-      case 'I':
-      case 'J':
-      case 'K':
-      case 'L':
-      case 'M':
-      case 'N':
-      case 'O':
-      case 'P':
-      case 'Q':
-      case 'R':
-      case 'S':
-      case 'T':
-      case 'U':
-      case 'V':
-      case 'W':
-      case 'X':
-      case 'Y':
-      case 'Z':
-      case '_':
-      case 'a':
-      case 'b':
-      case 'c':
-      case 'd':
-      case 'e':
-      case 'f':
-      case 'g':
-      case 'h':
-      case 'i':
-      case 'j':
-      case 'k':
-      case 'l':
-      case 'm':
-      case 'n':
-      case 'o':
-      case 'p':
-      case 'q':
-      case 'r':
-      case 's':
-      case 't':
-      case 'u':
-      case 'w':
-      case 'x':
-      case 'y':
-      case 'z': {
-         // Type
-         match = type_rule(parser);
-         break;
-      }
-      case 'v': {
-         // Type
-         match = type_rule(parser);
-         if (! match) {
-            // ('void' TestNoAlpha OptionalSpacing)
-            YAPP_NODE * lastNode_1 = parser->currentNode;
-            INT32 lastIndex_1 = parser->index;
-            // 'void'
-            match = stringMatcher(parser, "void", 4);
-            if (match) {
-               // TestNoAlpha
-               match = testNoAlpha_rule(parser);
-               if (match) {
-                  // OptionalSpacing
-                  match = optionalSpacing_rule(parser);
-                  if (! match) {
-                     parser->index = lastIndex_1;
-                     lastNode_1->sibling = NULL;
-                     parser->currentNode = lastNode_1;
-                  }
-               } else {
-                  parser->index = lastIndex_1;
-                  lastNode_1->sibling = NULL;
-               }
+   // Type
+   match = type_rule(parser);
+   if (! match) {
+      // ('void' TestNoAlpha OptionalSpacing)
+      YAPP_NODE * lastNode_1 = parser->currentNode;
+      INT32 lastIndex_1 = parser->index;
+      // 'void'
+      match = stringMatcher(parser, "void", 4);
+      if (match) {
+         // TestNoAlpha
+         match = testNoAlpha_rule(parser);
+         if (match) {
+            // OptionalSpacing
+            match = optionalSpacing_rule(parser);
+            if (! match) {
+               parser->index = lastIndex_1;
+               lastNode_1->sibling = NULL;
+               parser->currentNode = lastNode_1;
             }
+         } else {
+            parser->index = lastIndex_1;
+            lastNode_1->sibling = NULL;
          }
-         break;
-      }
-      default: {
-         match = FALSE;
       }
    }
    if (match) {
@@ -4100,12 +3816,10 @@ static BOOL methodSignature_rule(JavaParser * parser) {
       if (parser->methodSignature_ruleMemoStart <= parser->methodSignature_ruleMemoEnd) {
          parser->index = parser->methodSignature_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_METHOD_SIGNATURE, parser->methodSignature_ruleMemoStart, parser->methodSignature_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->methodSignature_ruleMemoStart == parser->methodSignature_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_METHOD_SIGNATURE, parser->methodSignature_ruleMemoStart, parser->methodSignature_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->methodSignature_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->methodSignature_ruleMemoFirstNode;
-               parser->currentNode = parser->methodSignature_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->methodSignature_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -4148,7 +3862,6 @@ static BOOL methodSignature_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->methodSignature_ruleMemoFirstNode = parser->currentNode;
-         parser->methodSignature_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -4171,12 +3884,10 @@ static BOOL parametersDeclarations_rule(JavaParser * parser) {
       if (parser->parametersDeclarations_ruleMemoStart <= parser->parametersDeclarations_ruleMemoEnd) {
          parser->index = parser->parametersDeclarations_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_PARAMETERS_DECLARATIONS, parser->parametersDeclarations_ruleMemoStart, parser->parametersDeclarations_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->parametersDeclarations_ruleMemoStart == parser->parametersDeclarations_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_PARAMETERS_DECLARATIONS, parser->parametersDeclarations_ruleMemoStart, parser->parametersDeclarations_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->parametersDeclarations_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->parametersDeclarations_ruleMemoFirstNode;
-               parser->currentNode = parser->parametersDeclarations_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->parametersDeclarations_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -4213,7 +3924,6 @@ static BOOL parametersDeclarations_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->parametersDeclarations_ruleMemoFirstNode = parser->currentNode;
-         parser->parametersDeclarations_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -4236,12 +3946,10 @@ static BOOL dimensions_rule(JavaParser * parser) {
       if (parser->dimensions_ruleMemoStart <= parser->dimensions_ruleMemoEnd) {
          parser->index = parser->dimensions_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_DIMENSIONS, parser->dimensions_ruleMemoStart, parser->dimensions_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->dimensions_ruleMemoStart == parser->dimensions_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_DIMENSIONS, parser->dimensions_ruleMemoStart, parser->dimensions_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->dimensions_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->dimensions_ruleMemoFirstNode;
-               parser->currentNode = parser->dimensions_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->dimensions_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -4264,7 +3972,6 @@ static BOOL dimensions_rule(JavaParser * parser) {
       parser->currentNode->firstChild = lastNode->sibling;
       lastNode->sibling = parser->currentNode;
       parser->dimensions_ruleMemoFirstNode = parser->currentNode;
-      parser->dimensions_ruleMemoLastNode = parser->currentNode;
    }
    return TRUE;
 }
@@ -4515,12 +4222,10 @@ static BOOL interfaceMethod_rule(JavaParser * parser) {
       if (parser->interfaceMethod_ruleMemoStart <= parser->interfaceMethod_ruleMemoEnd) {
          parser->index = parser->interfaceMethod_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_INTERFACE_METHOD, parser->interfaceMethod_ruleMemoStart, parser->interfaceMethod_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->interfaceMethod_ruleMemoStart == parser->interfaceMethod_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_INTERFACE_METHOD, parser->interfaceMethod_ruleMemoStart, parser->interfaceMethod_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->interfaceMethod_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->interfaceMethod_ruleMemoFirstNode;
-               parser->currentNode = parser->interfaceMethod_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->interfaceMethod_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -4550,7 +4255,6 @@ static BOOL interfaceMethod_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->interfaceMethod_ruleMemoFirstNode = parser->currentNode;
-         parser->interfaceMethod_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -4573,12 +4277,10 @@ static BOOL constantsDeclarations_rule(JavaParser * parser) {
       if (parser->constantsDeclarations_ruleMemoStart <= parser->constantsDeclarations_ruleMemoEnd) {
          parser->index = parser->constantsDeclarations_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CONSTANTS_DECLARATIONS, parser->constantsDeclarations_ruleMemoStart, parser->constantsDeclarations_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->constantsDeclarations_ruleMemoStart == parser->constantsDeclarations_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CONSTANTS_DECLARATIONS, parser->constantsDeclarations_ruleMemoStart, parser->constantsDeclarations_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->constantsDeclarations_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->constantsDeclarations_ruleMemoFirstNode;
-               parser->currentNode = parser->constantsDeclarations_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->constantsDeclarations_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -4612,7 +4314,6 @@ static BOOL constantsDeclarations_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->constantsDeclarations_ruleMemoFirstNode = parser->currentNode;
-         parser->constantsDeclarations_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -4686,12 +4387,10 @@ static BOOL constantDeclaration_rule(JavaParser * parser) {
       if (parser->constantDeclaration_ruleMemoStart <= parser->constantDeclaration_ruleMemoEnd) {
          parser->index = parser->constantDeclaration_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CONSTANT_DECLARATION, parser->constantDeclaration_ruleMemoStart, parser->constantDeclaration_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->constantDeclaration_ruleMemoStart == parser->constantDeclaration_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CONSTANT_DECLARATION, parser->constantDeclaration_ruleMemoStart, parser->constantDeclaration_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->constantDeclaration_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->constantDeclaration_ruleMemoFirstNode;
-               parser->currentNode = parser->constantDeclaration_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->constantDeclaration_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -4729,7 +4428,6 @@ static BOOL constantDeclaration_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->constantDeclaration_ruleMemoFirstNode = parser->currentNode;
-         parser->constantDeclaration_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -4752,12 +4450,10 @@ static BOOL variableInitializer_rule(JavaParser * parser) {
       if (parser->variableInitializer_ruleMemoStart <= parser->variableInitializer_ruleMemoEnd) {
          parser->index = parser->variableInitializer_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_VARIABLE_INITIALIZER, parser->variableInitializer_ruleMemoStart, parser->variableInitializer_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->variableInitializer_ruleMemoStart == parser->variableInitializer_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_VARIABLE_INITIALIZER, parser->variableInitializer_ruleMemoStart, parser->variableInitializer_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->variableInitializer_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->variableInitializer_ruleMemoFirstNode;
-               parser->currentNode = parser->variableInitializer_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->variableInitializer_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -4863,7 +4559,6 @@ static BOOL variableInitializer_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->variableInitializer_ruleMemoFirstNode = parser->currentNode;
-         parser->variableInitializer_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -5027,12 +4722,10 @@ static BOOL enumConstant_rule(JavaParser * parser) {
       if (parser->enumConstant_ruleMemoStart <= parser->enumConstant_ruleMemoEnd) {
          parser->index = parser->enumConstant_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ENUM_CONSTANT, parser->enumConstant_ruleMemoStart, parser->enumConstant_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->enumConstant_ruleMemoStart == parser->enumConstant_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ENUM_CONSTANT, parser->enumConstant_ruleMemoStart, parser->enumConstant_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->enumConstant_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->enumConstant_ruleMemoFirstNode;
-               parser->currentNode = parser->enumConstant_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->enumConstant_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -5067,7 +4760,6 @@ static BOOL enumConstant_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->enumConstant_ruleMemoFirstNode = parser->currentNode;
-         parser->enumConstant_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -5090,12 +4782,10 @@ static BOOL arguments_rule(JavaParser * parser) {
       if (parser->arguments_ruleMemoStart <= parser->arguments_ruleMemoEnd) {
          parser->index = parser->arguments_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ARGUMENTS, parser->arguments_ruleMemoStart, parser->arguments_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->arguments_ruleMemoStart == parser->arguments_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ARGUMENTS, parser->arguments_ruleMemoStart, parser->arguments_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->arguments_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->arguments_ruleMemoFirstNode;
-               parser->currentNode = parser->arguments_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->arguments_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -5162,7 +4852,6 @@ static BOOL arguments_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->arguments_ruleMemoFirstNode = parser->currentNode;
-         parser->arguments_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -5185,12 +4874,10 @@ static BOOL final_rule(JavaParser * parser) {
       if (parser->final_ruleMemoStart <= parser->final_ruleMemoEnd) {
          parser->index = parser->final_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_FINAL, parser->final_ruleMemoStart, parser->final_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->final_ruleMemoStart == parser->final_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_FINAL, parser->final_ruleMemoStart, parser->final_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->final_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->final_ruleMemoFirstNode;
-               parser->currentNode = parser->final_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->final_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -5220,7 +4907,6 @@ static BOOL final_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->final_ruleMemoFirstNode = parser->currentNode;
-         parser->final_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -5243,12 +4929,10 @@ static BOOL variableModifiers_rule(JavaParser * parser) {
       if (parser->variableModifiers_ruleMemoStart <= parser->variableModifiers_ruleMemoEnd) {
          parser->index = parser->variableModifiers_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_VARIABLE_MODIFIERS, parser->variableModifiers_ruleMemoStart, parser->variableModifiers_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->variableModifiers_ruleMemoStart == parser->variableModifiers_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_VARIABLE_MODIFIERS, parser->variableModifiers_ruleMemoStart, parser->variableModifiers_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->variableModifiers_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->variableModifiers_ruleMemoFirstNode;
-               parser->currentNode = parser->variableModifiers_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->variableModifiers_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -5285,7 +4969,6 @@ static BOOL variableModifiers_rule(JavaParser * parser) {
       parser->currentNode->firstChild = lastNode->sibling;
       lastNode->sibling = parser->currentNode;
       parser->variableModifiers_ruleMemoFirstNode = parser->currentNode;
-      parser->variableModifiers_ruleMemoLastNode = parser->currentNode;
    }
    return TRUE;
 }
@@ -5299,12 +4982,10 @@ static BOOL localVariableDeclarationStatement_rule(JavaParser * parser) {
       if (parser->localVariableDeclarationStatement_ruleMemoStart <= parser->localVariableDeclarationStatement_ruleMemoEnd) {
          parser->index = parser->localVariableDeclarationStatement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_LOCAL_VARIABLE_DECLARATION_STATEMENT, parser->localVariableDeclarationStatement_ruleMemoStart, parser->localVariableDeclarationStatement_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->localVariableDeclarationStatement_ruleMemoStart == parser->localVariableDeclarationStatement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_LOCAL_VARIABLE_DECLARATION_STATEMENT, parser->localVariableDeclarationStatement_ruleMemoStart, parser->localVariableDeclarationStatement_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->localVariableDeclarationStatement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->localVariableDeclarationStatement_ruleMemoFirstNode;
-               parser->currentNode = parser->localVariableDeclarationStatement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->localVariableDeclarationStatement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -5338,7 +5019,6 @@ static BOOL localVariableDeclarationStatement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->localVariableDeclarationStatement_ruleMemoFirstNode = parser->currentNode;
-         parser->localVariableDeclarationStatement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -5361,12 +5041,10 @@ static BOOL variableDeclaration_rule(JavaParser * parser) {
       if (parser->variableDeclaration_ruleMemoStart <= parser->variableDeclaration_ruleMemoEnd) {
          parser->index = parser->variableDeclaration_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_VARIABLE_DECLARATION, parser->variableDeclaration_ruleMemoStart, parser->variableDeclaration_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->variableDeclaration_ruleMemoStart == parser->variableDeclaration_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_VARIABLE_DECLARATION, parser->variableDeclaration_ruleMemoStart, parser->variableDeclaration_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->variableDeclaration_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->variableDeclaration_ruleMemoFirstNode;
-               parser->currentNode = parser->variableDeclaration_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->variableDeclaration_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -5398,7 +5076,6 @@ static BOOL variableDeclaration_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->variableDeclaration_ruleMemoFirstNode = parser->currentNode;
-         parser->variableDeclaration_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -5453,12 +5130,10 @@ static BOOL parametersDeclarationList_rule(JavaParser * parser) {
       if (parser->parametersDeclarationList_ruleMemoStart <= parser->parametersDeclarationList_ruleMemoEnd) {
          parser->index = parser->parametersDeclarationList_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_PARAMETERS_DECLARATION_LIST, parser->parametersDeclarationList_ruleMemoStart, parser->parametersDeclarationList_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->parametersDeclarationList_ruleMemoStart == parser->parametersDeclarationList_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_PARAMETERS_DECLARATION_LIST, parser->parametersDeclarationList_ruleMemoStart, parser->parametersDeclarationList_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->parametersDeclarationList_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->parametersDeclarationList_ruleMemoFirstNode;
-               parser->currentNode = parser->parametersDeclarationList_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->parametersDeclarationList_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -5468,102 +5143,40 @@ static BOOL parametersDeclarationList_rule(JavaParser * parser) {
    }
    startIndex = parser->index;
    // ((ParameterDeclaration ',' OptionalSpacing ParametersDeclarationList) | ParameterDeclaration | ParameterVariableDeclaration)
-   switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-      case '$':
-      case '@':
-      case 'A':
-      case 'B':
-      case 'C':
-      case 'D':
-      case 'E':
-      case 'F':
-      case 'G':
-      case 'H':
-      case 'I':
-      case 'J':
-      case 'K':
-      case 'L':
-      case 'M':
-      case 'N':
-      case 'O':
-      case 'P':
-      case 'Q':
-      case 'R':
-      case 'S':
-      case 'T':
-      case 'U':
-      case 'V':
-      case 'W':
-      case 'X':
-      case 'Y':
-      case 'Z':
-      case '_':
-      case 'a':
-      case 'b':
-      case 'c':
-      case 'd':
-      case 'e':
-      case 'f':
-      case 'g':
-      case 'h':
-      case 'i':
-      case 'j':
-      case 'k':
-      case 'l':
-      case 'm':
-      case 'n':
-      case 'o':
-      case 'p':
-      case 'q':
-      case 'r':
-      case 's':
-      case 't':
-      case 'u':
-      case 'v':
-      case 'w':
-      case 'x':
-      case 'y':
-      case 'z': {
-         // (ParameterDeclaration ',' OptionalSpacing ParametersDeclarationList)
-         YAPP_NODE * lastNode_1 = parser->currentNode;
-         INT32 lastIndex_1 = parser->index;
-         // ParameterDeclaration
-         match = parameterDeclaration_rule(parser);
+   // (ParameterDeclaration ',' OptionalSpacing ParametersDeclarationList)
+   YAPP_NODE * lastNode_1 = parser->currentNode;
+   INT32 lastIndex_1 = parser->index;
+   // ParameterDeclaration
+   match = parameterDeclaration_rule(parser);
+   if (match) {
+      // ','
+      match = charMatcher(parser, ',');
+      if (match) {
+         // OptionalSpacing
+         match = optionalSpacing_rule(parser);
          if (match) {
-            // ','
-            match = charMatcher(parser, ',');
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing_rule(parser);
-               if (match) {
-                  // ParametersDeclarationList
-                  match = parametersDeclarationList_rule(parser);
-                  if (! match) {
-                     parser->index = lastIndex_1;
-                     lastNode_1->sibling = NULL;
-                     parser->currentNode = lastNode_1;
-                  }
-               } else {
-                  parser->index = lastIndex_1;
-                  lastNode_1->sibling = NULL;
-               }
-            } else {
+            // ParametersDeclarationList
+            match = parametersDeclarationList_rule(parser);
+            if (! match) {
                parser->index = lastIndex_1;
                lastNode_1->sibling = NULL;
+               parser->currentNode = lastNode_1;
             }
+         } else {
+            parser->index = lastIndex_1;
+            lastNode_1->sibling = NULL;
          }
-         if (! match) {
-            // ParameterDeclaration
-            match = parameterDeclaration_rule(parser);
-            if (! match) {
-               // ParameterVariableDeclaration
-               match = parameterVariableDeclaration_rule(parser);
-            }
-         }
-         break;
+      } else {
+         parser->index = lastIndex_1;
+         lastNode_1->sibling = NULL;
       }
-      default: {
-         match = FALSE;
+   }
+   if (! match) {
+      // ParameterDeclaration
+      match = parameterDeclaration_rule(parser);
+      if (! match) {
+         // ParameterVariableDeclaration
+         match = parameterVariableDeclaration_rule(parser);
       }
    }
    if (match) {
@@ -5576,7 +5189,6 @@ static BOOL parametersDeclarationList_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->parametersDeclarationList_ruleMemoFirstNode = parser->currentNode;
-         parser->parametersDeclarationList_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -5599,12 +5211,10 @@ static BOOL parameterDeclaration_rule(JavaParser * parser) {
       if (parser->parameterDeclaration_ruleMemoStart <= parser->parameterDeclaration_ruleMemoEnd) {
          parser->index = parser->parameterDeclaration_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_PARAMETER_DECLARATION, parser->parameterDeclaration_ruleMemoStart, parser->parameterDeclaration_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->parameterDeclaration_ruleMemoStart == parser->parameterDeclaration_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_PARAMETER_DECLARATION, parser->parameterDeclaration_ruleMemoStart, parser->parameterDeclaration_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->parameterDeclaration_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->parameterDeclaration_ruleMemoFirstNode;
-               parser->currentNode = parser->parameterDeclaration_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->parameterDeclaration_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -5638,7 +5248,6 @@ static BOOL parameterDeclaration_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->parameterDeclaration_ruleMemoFirstNode = parser->currentNode;
-         parser->parameterDeclaration_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -5661,12 +5270,10 @@ static BOOL parameterVariableDeclaration_rule(JavaParser * parser) {
       if (parser->parameterVariableDeclaration_ruleMemoStart <= parser->parameterVariableDeclaration_ruleMemoEnd) {
          parser->index = parser->parameterVariableDeclaration_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_PARAMETER_VARIABLE_DECLARATION, parser->parameterVariableDeclaration_ruleMemoStart, parser->parameterVariableDeclaration_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->parameterVariableDeclaration_ruleMemoStart == parser->parameterVariableDeclaration_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_PARAMETER_VARIABLE_DECLARATION, parser->parameterVariableDeclaration_ruleMemoStart, parser->parameterVariableDeclaration_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->parameterVariableDeclaration_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->parameterVariableDeclaration_ruleMemoFirstNode;
-               parser->currentNode = parser->parameterVariableDeclaration_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->parameterVariableDeclaration_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -5708,7 +5315,6 @@ static BOOL parameterVariableDeclaration_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->parameterVariableDeclaration_ruleMemoFirstNode = parser->currentNode;
-         parser->parameterVariableDeclaration_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -5731,12 +5337,10 @@ static BOOL blockStatements_rule(JavaParser * parser) {
       if (parser->blockStatements_ruleMemoStart <= parser->blockStatements_ruleMemoEnd) {
          parser->index = parser->blockStatements_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_BLOCK_STATEMENTS, parser->blockStatements_ruleMemoStart, parser->blockStatements_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->blockStatements_ruleMemoStart == parser->blockStatements_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_BLOCK_STATEMENTS, parser->blockStatements_ruleMemoStart, parser->blockStatements_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->blockStatements_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->blockStatements_ruleMemoFirstNode;
-               parser->currentNode = parser->blockStatements_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->blockStatements_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -5759,7 +5363,6 @@ static BOOL blockStatements_rule(JavaParser * parser) {
       parser->currentNode->firstChild = lastNode->sibling;
       lastNode->sibling = parser->currentNode;
       parser->blockStatements_ruleMemoFirstNode = parser->currentNode;
-      parser->blockStatements_ruleMemoLastNode = parser->currentNode;
    }
    return TRUE;
 }
@@ -5939,12 +5542,10 @@ static BOOL statement_rule(JavaParser * parser) {
       if (parser->statement_ruleMemoStart <= parser->statement_ruleMemoEnd) {
          parser->index = parser->statement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_STATEMENT, parser->statement_ruleMemoStart, parser->statement_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->statement_ruleMemoStart == parser->statement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_STATEMENT, parser->statement_ruleMemoStart, parser->statement_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->statement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->statement_ruleMemoFirstNode;
-               parser->currentNode = parser->statement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->statement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -6195,7 +5796,6 @@ static BOOL statement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->statement_ruleMemoFirstNode = parser->currentNode;
-         parser->statement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -6218,12 +5818,10 @@ static BOOL assertStatement_rule(JavaParser * parser) {
       if (parser->assertStatement_ruleMemoStart <= parser->assertStatement_ruleMemoEnd) {
          parser->index = parser->assertStatement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ASSERT_STATEMENT, parser->assertStatement_ruleMemoStart, parser->assertStatement_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->assertStatement_ruleMemoStart == parser->assertStatement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ASSERT_STATEMENT, parser->assertStatement_ruleMemoStart, parser->assertStatement_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->assertStatement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->assertStatement_ruleMemoFirstNode;
-               parser->currentNode = parser->assertStatement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->assertStatement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -6283,7 +5881,6 @@ static BOOL assertStatement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->assertStatement_ruleMemoFirstNode = parser->currentNode;
-         parser->assertStatement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -6306,12 +5903,10 @@ static BOOL ifStatement_rule(JavaParser * parser) {
       if (parser->ifStatement_ruleMemoStart <= parser->ifStatement_ruleMemoEnd) {
          parser->index = parser->ifStatement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_IF_STATEMENT, parser->ifStatement_ruleMemoStart, parser->ifStatement_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->ifStatement_ruleMemoStart == parser->ifStatement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_IF_STATEMENT, parser->ifStatement_ruleMemoStart, parser->ifStatement_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->ifStatement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->ifStatement_ruleMemoFirstNode;
-               parser->currentNode = parser->ifStatement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->ifStatement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -6355,7 +5950,6 @@ static BOOL ifStatement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->ifStatement_ruleMemoFirstNode = parser->currentNode;
-         parser->ifStatement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -6378,12 +5972,10 @@ static BOOL forStatement_rule(JavaParser * parser) {
       if (parser->forStatement_ruleMemoStart <= parser->forStatement_ruleMemoEnd) {
          parser->index = parser->forStatement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_FOR_STATEMENT, parser->forStatement_ruleMemoStart, parser->forStatement_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->forStatement_ruleMemoStart == parser->forStatement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_FOR_STATEMENT, parser->forStatement_ruleMemoStart, parser->forStatement_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->forStatement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->forStatement_ruleMemoFirstNode;
-               parser->currentNode = parser->forStatement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->forStatement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -6450,7 +6042,6 @@ static BOOL forStatement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->forStatement_ruleMemoFirstNode = parser->currentNode;
-         parser->forStatement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -6473,12 +6064,10 @@ static BOOL forIterableStatement_rule(JavaParser * parser) {
       if (parser->forIterableStatement_ruleMemoStart <= parser->forIterableStatement_ruleMemoEnd) {
          parser->index = parser->forIterableStatement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_FOR_ITERABLE_STATEMENT, parser->forIterableStatement_ruleMemoStart, parser->forIterableStatement_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->forIterableStatement_ruleMemoStart == parser->forIterableStatement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_FOR_ITERABLE_STATEMENT, parser->forIterableStatement_ruleMemoStart, parser->forIterableStatement_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->forIterableStatement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->forIterableStatement_ruleMemoFirstNode;
-               parser->currentNode = parser->forIterableStatement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->forIterableStatement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -6544,7 +6133,6 @@ static BOOL forIterableStatement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->forIterableStatement_ruleMemoFirstNode = parser->currentNode;
-         parser->forIterableStatement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -6567,12 +6155,10 @@ static BOOL whileStatement_rule(JavaParser * parser) {
       if (parser->whileStatement_ruleMemoStart <= parser->whileStatement_ruleMemoEnd) {
          parser->index = parser->whileStatement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_WHILE_STATEMENT, parser->whileStatement_ruleMemoStart, parser->whileStatement_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->whileStatement_ruleMemoStart == parser->whileStatement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_WHILE_STATEMENT, parser->whileStatement_ruleMemoStart, parser->whileStatement_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->whileStatement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->whileStatement_ruleMemoFirstNode;
-               parser->currentNode = parser->whileStatement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->whileStatement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -6610,7 +6196,6 @@ static BOOL whileStatement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->whileStatement_ruleMemoFirstNode = parser->currentNode;
-         parser->whileStatement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -6633,12 +6218,10 @@ static BOOL doWhileStatement_rule(JavaParser * parser) {
       if (parser->doWhileStatement_ruleMemoStart <= parser->doWhileStatement_ruleMemoEnd) {
          parser->index = parser->doWhileStatement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_DO_WHILE_STATEMENT, parser->doWhileStatement_ruleMemoStart, parser->doWhileStatement_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->doWhileStatement_ruleMemoStart == parser->doWhileStatement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_DO_WHILE_STATEMENT, parser->doWhileStatement_ruleMemoStart, parser->doWhileStatement_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->doWhileStatement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->doWhileStatement_ruleMemoFirstNode;
-               parser->currentNode = parser->doWhileStatement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->doWhileStatement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -6692,7 +6275,6 @@ static BOOL doWhileStatement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->doWhileStatement_ruleMemoFirstNode = parser->currentNode;
-         parser->doWhileStatement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -6715,12 +6297,10 @@ static BOOL tryCatchStatement_rule(JavaParser * parser) {
       if (parser->tryCatchStatement_ruleMemoStart <= parser->tryCatchStatement_ruleMemoEnd) {
          parser->index = parser->tryCatchStatement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_TRY_CATCH_STATEMENT, parser->tryCatchStatement_ruleMemoStart, parser->tryCatchStatement_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->tryCatchStatement_ruleMemoStart == parser->tryCatchStatement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_TRY_CATCH_STATEMENT, parser->tryCatchStatement_ruleMemoStart, parser->tryCatchStatement_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->tryCatchStatement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->tryCatchStatement_ruleMemoFirstNode;
-               parser->currentNode = parser->tryCatchStatement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->tryCatchStatement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -6768,7 +6348,6 @@ static BOOL tryCatchStatement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->tryCatchStatement_ruleMemoFirstNode = parser->currentNode;
-         parser->tryCatchStatement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -6897,12 +6476,10 @@ static BOOL resource_rule(JavaParser * parser) {
       if (parser->resource_ruleMemoStart <= parser->resource_ruleMemoEnd) {
          parser->index = parser->resource_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_RESOURCE, parser->resource_ruleMemoStart, parser->resource_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->resource_ruleMemoStart == parser->resource_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_RESOURCE, parser->resource_ruleMemoStart, parser->resource_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->resource_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->resource_ruleMemoFirstNode;
-               parser->currentNode = parser->resource_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->resource_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -6948,7 +6525,6 @@ static BOOL resource_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->resource_ruleMemoFirstNode = parser->currentNode;
-         parser->resource_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -6971,12 +6547,10 @@ static BOOL switchStatement_rule(JavaParser * parser) {
       if (parser->switchStatement_ruleMemoStart <= parser->switchStatement_ruleMemoEnd) {
          parser->index = parser->switchStatement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_SWITCH_STATEMENT, parser->switchStatement_ruleMemoStart, parser->switchStatement_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->switchStatement_ruleMemoStart == parser->switchStatement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_SWITCH_STATEMENT, parser->switchStatement_ruleMemoStart, parser->switchStatement_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->switchStatement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->switchStatement_ruleMemoFirstNode;
-               parser->currentNode = parser->switchStatement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->switchStatement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -7030,7 +6604,6 @@ static BOOL switchStatement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->switchStatement_ruleMemoFirstNode = parser->currentNode;
-         parser->switchStatement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -7053,12 +6626,10 @@ static BOOL synchronizedStatement_rule(JavaParser * parser) {
       if (parser->synchronizedStatement_ruleMemoStart <= parser->synchronizedStatement_ruleMemoEnd) {
          parser->index = parser->synchronizedStatement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_SYNCHRONIZED_STATEMENT, parser->synchronizedStatement_ruleMemoStart, parser->synchronizedStatement_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->synchronizedStatement_ruleMemoStart == parser->synchronizedStatement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_SYNCHRONIZED_STATEMENT, parser->synchronizedStatement_ruleMemoStart, parser->synchronizedStatement_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->synchronizedStatement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->synchronizedStatement_ruleMemoFirstNode;
-               parser->currentNode = parser->synchronizedStatement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->synchronizedStatement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -7096,7 +6667,6 @@ static BOOL synchronizedStatement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->synchronizedStatement_ruleMemoFirstNode = parser->currentNode;
-         parser->synchronizedStatement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -7119,12 +6689,10 @@ static BOOL returnStatement_rule(JavaParser * parser) {
       if (parser->returnStatement_ruleMemoStart <= parser->returnStatement_ruleMemoEnd) {
          parser->index = parser->returnStatement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_RETURN_STATEMENT, parser->returnStatement_ruleMemoStart, parser->returnStatement_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->returnStatement_ruleMemoStart == parser->returnStatement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_RETURN_STATEMENT, parser->returnStatement_ruleMemoStart, parser->returnStatement_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->returnStatement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->returnStatement_ruleMemoFirstNode;
-               parser->currentNode = parser->returnStatement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->returnStatement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -7161,7 +6729,6 @@ static BOOL returnStatement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->returnStatement_ruleMemoFirstNode = parser->currentNode;
-         parser->returnStatement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -7184,12 +6751,10 @@ static BOOL throwStatement_rule(JavaParser * parser) {
       if (parser->throwStatement_ruleMemoStart <= parser->throwStatement_ruleMemoEnd) {
          parser->index = parser->throwStatement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_THROW_STATEMENT, parser->throwStatement_ruleMemoStart, parser->throwStatement_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->throwStatement_ruleMemoStart == parser->throwStatement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_THROW_STATEMENT, parser->throwStatement_ruleMemoStart, parser->throwStatement_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->throwStatement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->throwStatement_ruleMemoFirstNode;
-               parser->currentNode = parser->throwStatement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->throwStatement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -7227,7 +6792,6 @@ static BOOL throwStatement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->throwStatement_ruleMemoFirstNode = parser->currentNode;
-         parser->throwStatement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -7250,12 +6814,10 @@ static BOOL breakStatement_rule(JavaParser * parser) {
       if (parser->breakStatement_ruleMemoStart <= parser->breakStatement_ruleMemoEnd) {
          parser->index = parser->breakStatement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_BREAK_STATEMENT, parser->breakStatement_ruleMemoStart, parser->breakStatement_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->breakStatement_ruleMemoStart == parser->breakStatement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_BREAK_STATEMENT, parser->breakStatement_ruleMemoStart, parser->breakStatement_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->breakStatement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->breakStatement_ruleMemoFirstNode;
-               parser->currentNode = parser->breakStatement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->breakStatement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -7292,7 +6854,6 @@ static BOOL breakStatement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->breakStatement_ruleMemoFirstNode = parser->currentNode;
-         parser->breakStatement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -7315,12 +6876,10 @@ static BOOL continueStatement_rule(JavaParser * parser) {
       if (parser->continueStatement_ruleMemoStart <= parser->continueStatement_ruleMemoEnd) {
          parser->index = parser->continueStatement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CONTINUE_STATEMENT, parser->continueStatement_ruleMemoStart, parser->continueStatement_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->continueStatement_ruleMemoStart == parser->continueStatement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CONTINUE_STATEMENT, parser->continueStatement_ruleMemoStart, parser->continueStatement_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->continueStatement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->continueStatement_ruleMemoFirstNode;
-               parser->currentNode = parser->continueStatement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->continueStatement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -7357,7 +6916,6 @@ static BOOL continueStatement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->continueStatement_ruleMemoFirstNode = parser->currentNode;
-         parser->continueStatement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -7380,12 +6938,10 @@ static BOOL identifiedStatement_rule(JavaParser * parser) {
       if (parser->identifiedStatement_ruleMemoStart <= parser->identifiedStatement_ruleMemoEnd) {
          parser->index = parser->identifiedStatement_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_IDENTIFIED_STATEMENT, parser->identifiedStatement_ruleMemoStart, parser->identifiedStatement_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->identifiedStatement_ruleMemoStart == parser->identifiedStatement_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_IDENTIFIED_STATEMENT, parser->identifiedStatement_ruleMemoStart, parser->identifiedStatement_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->identifiedStatement_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->identifiedStatement_ruleMemoFirstNode;
-               parser->currentNode = parser->identifiedStatement_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->identifiedStatement_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -7419,7 +6975,6 @@ static BOOL identifiedStatement_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->identifiedStatement_ruleMemoFirstNode = parser->currentNode;
-         parser->identifiedStatement_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -7442,12 +6997,10 @@ static BOOL statementExpression_rule(JavaParser * parser) {
       if (parser->statementExpression_ruleMemoStart <= parser->statementExpression_ruleMemoEnd) {
          parser->index = parser->statementExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_STATEMENT_EXPRESSION, parser->statementExpression_ruleMemoStart, parser->statementExpression_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->statementExpression_ruleMemoStart == parser->statementExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_STATEMENT_EXPRESSION, parser->statementExpression_ruleMemoStart, parser->statementExpression_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->statementExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->statementExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->statementExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->statementExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -7473,7 +7026,6 @@ static BOOL statementExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->statementExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->statementExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -7532,12 +7084,10 @@ static BOOL parExpression_rule(JavaParser * parser) {
       if (parser->parExpression_ruleMemoStart <= parser->parExpression_ruleMemoEnd) {
          parser->index = parser->parExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_PAR_EXPRESSION, parser->parExpression_ruleMemoStart, parser->parExpression_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->parExpression_ruleMemoStart == parser->parExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_PAR_EXPRESSION, parser->parExpression_ruleMemoStart, parser->parExpression_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->parExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->parExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->parExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->parExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -7575,7 +7125,6 @@ static BOOL parExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->parExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->parExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -7598,12 +7147,10 @@ static BOOL expression_rule(JavaParser * parser) {
       if (parser->expression_ruleMemoStart <= parser->expression_ruleMemoEnd) {
          parser->index = parser->expression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_EXPRESSION, parser->expression_ruleMemoStart, parser->expression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->expression_ruleMemoStart == parser->expression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_EXPRESSION, parser->expression_ruleMemoStart, parser->expression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->expression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->expression_ruleMemoFirstNode;
-               parser->currentNode = parser->expression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->expression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -7708,7 +7255,6 @@ static BOOL expression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->expression_ruleMemoFirstNode = parser->currentNode;
-         parser->expression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -8118,40 +7664,30 @@ static BOOL switchLabel_rule(JavaParser * parser) {
    BOOL match;
    startIndex = parser->index;
    // (('case' TestNoAlpha OptionalSpacing Expression ':' OptionalSpacing) | ('case' TestNoAlpha OptionalSpacing EnumConstantName ':' OptionalSpacing) | ('default' TestNoAlpha OptionalSpacing ':' OptionalSpacing))
-   switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-      case 'c': {
-         // ('case' TestNoAlpha OptionalSpacing Expression ':' OptionalSpacing)
-         YAPP_NODE * lastNode_1 = parser->currentNode;
-         INT32 lastIndex_1 = parser->index;
-         // 'case'
-         match = stringMatcher(parser, "case", 4);
+   // ('case' TestNoAlpha OptionalSpacing Expression ':' OptionalSpacing)
+   YAPP_NODE * lastNode_1 = parser->currentNode;
+   INT32 lastIndex_1 = parser->index;
+   // 'case'
+   match = stringMatcher(parser, "case", 4);
+   if (match) {
+      // TestNoAlpha
+      match = testNoAlpha_rule(parser);
+      if (match) {
+         // OptionalSpacing
+         match = optionalSpacing_rule(parser);
          if (match) {
-            // TestNoAlpha
-            match = testNoAlpha_rule(parser);
+            // Expression
+            match = expression_rule(parser);
             if (match) {
-               // OptionalSpacing
-               match = optionalSpacing_rule(parser);
+               // ':'
+               match = charMatcher(parser, ':');
                if (match) {
-                  // Expression
-                  match = expression_rule(parser);
-                  if (match) {
-                     // ':'
-                     match = charMatcher(parser, ':');
-                     if (match) {
-                        // OptionalSpacing
-                        match = optionalSpacing_rule(parser);
-                        if (! match) {
-                           parser->index = lastIndex_1;
-                           lastNode_1->sibling = NULL;
-                           parser->currentNode = lastNode_1;
-                        }
-                     } else {
-                        parser->index = lastIndex_1;
-                        lastNode_1->sibling = NULL;
-                     }
-                  } else {
+                  // OptionalSpacing
+                  match = optionalSpacing_rule(parser);
+                  if (! match) {
                      parser->index = lastIndex_1;
                      lastNode_1->sibling = NULL;
+                     parser->currentNode = lastNode_1;
                   }
                } else {
                   parser->index = lastIndex_1;
@@ -8161,40 +7697,40 @@ static BOOL switchLabel_rule(JavaParser * parser) {
                parser->index = lastIndex_1;
                lastNode_1->sibling = NULL;
             }
+         } else {
+            parser->index = lastIndex_1;
+            lastNode_1->sibling = NULL;
          }
-         if (! match) {
-            // ('case' TestNoAlpha OptionalSpacing EnumConstantName ':' OptionalSpacing)
-            YAPP_NODE * lastNode_2 = parser->currentNode;
-            INT32 lastIndex_2 = parser->index;
-            // 'case'
-            match = stringMatcher(parser, "case", 4);
+      } else {
+         parser->index = lastIndex_1;
+         lastNode_1->sibling = NULL;
+      }
+   }
+   if (! match) {
+      // ('case' TestNoAlpha OptionalSpacing EnumConstantName ':' OptionalSpacing)
+      YAPP_NODE * lastNode_2 = parser->currentNode;
+      INT32 lastIndex_2 = parser->index;
+      // 'case'
+      match = stringMatcher(parser, "case", 4);
+      if (match) {
+         // TestNoAlpha
+         match = testNoAlpha_rule(parser);
+         if (match) {
+            // OptionalSpacing
+            match = optionalSpacing_rule(parser);
             if (match) {
-               // TestNoAlpha
-               match = testNoAlpha_rule(parser);
+               // EnumConstantName
+               match = enumConstantName_rule(parser);
                if (match) {
-                  // OptionalSpacing
-                  match = optionalSpacing_rule(parser);
+                  // ':'
+                  match = charMatcher(parser, ':');
                   if (match) {
-                     // EnumConstantName
-                     match = enumConstantName_rule(parser);
-                     if (match) {
-                        // ':'
-                        match = charMatcher(parser, ':');
-                        if (match) {
-                           // OptionalSpacing
-                           match = optionalSpacing_rule(parser);
-                           if (! match) {
-                              parser->index = lastIndex_2;
-                              lastNode_2->sibling = NULL;
-                              parser->currentNode = lastNode_2;
-                           }
-                        } else {
-                           parser->index = lastIndex_2;
-                           lastNode_2->sibling = NULL;
-                        }
-                     } else {
+                     // OptionalSpacing
+                     match = optionalSpacing_rule(parser);
+                     if (! match) {
                         parser->index = lastIndex_2;
                         lastNode_2->sibling = NULL;
+                        parser->currentNode = lastNode_2;
                      }
                   } else {
                      parser->index = lastIndex_2;
@@ -8204,11 +7740,16 @@ static BOOL switchLabel_rule(JavaParser * parser) {
                   parser->index = lastIndex_2;
                   lastNode_2->sibling = NULL;
                }
+            } else {
+               parser->index = lastIndex_2;
+               lastNode_2->sibling = NULL;
             }
+         } else {
+            parser->index = lastIndex_2;
+            lastNode_2->sibling = NULL;
          }
-         break;
       }
-      case 'd': {
+      if (! match) {
          // ('default' TestNoAlpha OptionalSpacing ':' OptionalSpacing)
          YAPP_NODE * lastNode_3 = parser->currentNode;
          INT32 lastIndex_3 = parser->index;
@@ -8244,10 +7785,6 @@ static BOOL switchLabel_rule(JavaParser * parser) {
                lastNode_3->sibling = NULL;
             }
          }
-         break;
-      }
-      default: {
-         match = FALSE;
       }
    }
    if (match) {
@@ -8297,12 +7834,10 @@ static BOOL forInitVariables_rule(JavaParser * parser) {
       if (parser->forInitVariables_ruleMemoStart <= parser->forInitVariables_ruleMemoEnd) {
          parser->index = parser->forInitVariables_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_FOR_INIT_VARIABLES, parser->forInitVariables_ruleMemoStart, parser->forInitVariables_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->forInitVariables_ruleMemoStart == parser->forInitVariables_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_FOR_INIT_VARIABLES, parser->forInitVariables_ruleMemoStart, parser->forInitVariables_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->forInitVariables_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->forInitVariables_ruleMemoFirstNode;
-               parser->currentNode = parser->forInitVariables_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->forInitVariables_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -8332,7 +7867,6 @@ static BOOL forInitVariables_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->forInitVariables_ruleMemoFirstNode = parser->currentNode;
-         parser->forInitVariables_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -8355,12 +7889,10 @@ static BOOL forInitExpressions_rule(JavaParser * parser) {
       if (parser->forInitExpressions_ruleMemoStart <= parser->forInitExpressions_ruleMemoEnd) {
          parser->index = parser->forInitExpressions_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_FOR_INIT_EXPRESSIONS, parser->forInitExpressions_ruleMemoStart, parser->forInitExpressions_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->forInitExpressions_ruleMemoStart == parser->forInitExpressions_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_FOR_INIT_EXPRESSIONS, parser->forInitExpressions_ruleMemoStart, parser->forInitExpressions_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->forInitExpressions_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->forInitExpressions_ruleMemoFirstNode;
-               parser->currentNode = parser->forInitExpressions_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->forInitExpressions_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -8409,7 +7941,6 @@ static BOOL forInitExpressions_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->forInitExpressions_ruleMemoFirstNode = parser->currentNode;
-         parser->forInitExpressions_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -8432,12 +7963,10 @@ static BOOL assignmentExpression_rule(JavaParser * parser) {
       if (parser->assignmentExpression_ruleMemoStart <= parser->assignmentExpression_ruleMemoEnd) {
          parser->index = parser->assignmentExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ASSIGNMENT_EXPRESSION, parser->assignmentExpression_ruleMemoStart, parser->assignmentExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->assignmentExpression_ruleMemoStart == parser->assignmentExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ASSIGNMENT_EXPRESSION, parser->assignmentExpression_ruleMemoStart, parser->assignmentExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->assignmentExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->assignmentExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->assignmentExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->assignmentExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -8467,7 +7996,6 @@ static BOOL assignmentExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->assignmentExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->assignmentExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -8490,12 +8018,10 @@ static BOOL conditionalExpression_rule(JavaParser * parser) {
       if (parser->conditionalExpression_ruleMemoStart <= parser->conditionalExpression_ruleMemoEnd) {
          parser->index = parser->conditionalExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CONDITIONAL_EXPRESSION, parser->conditionalExpression_ruleMemoStart, parser->conditionalExpression_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->conditionalExpression_ruleMemoStart == parser->conditionalExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CONDITIONAL_EXPRESSION, parser->conditionalExpression_ruleMemoStart, parser->conditionalExpression_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->conditionalExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->conditionalExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->conditionalExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->conditionalExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -8600,7 +8126,6 @@ static BOOL conditionalExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->conditionalExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->conditionalExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -8769,12 +8294,10 @@ static BOOL ternaryExpression_rule(JavaParser * parser) {
       if (parser->ternaryExpression_ruleMemoStart <= parser->ternaryExpression_ruleMemoEnd) {
          parser->index = parser->ternaryExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_TERNARY_EXPRESSION, parser->ternaryExpression_ruleMemoStart, parser->ternaryExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->ternaryExpression_ruleMemoStart == parser->ternaryExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_TERNARY_EXPRESSION, parser->ternaryExpression_ruleMemoStart, parser->ternaryExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->ternaryExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->ternaryExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->ternaryExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->ternaryExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -8820,7 +8343,6 @@ static BOOL ternaryExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->ternaryExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->ternaryExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -8843,12 +8365,10 @@ static BOOL conditionalOrExpression_rule(JavaParser * parser) {
       if (parser->conditionalOrExpression_ruleMemoStart <= parser->conditionalOrExpression_ruleMemoEnd) {
          parser->index = parser->conditionalOrExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CONDITIONAL_OR_EXPRESSION, parser->conditionalOrExpression_ruleMemoStart, parser->conditionalOrExpression_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->conditionalOrExpression_ruleMemoStart == parser->conditionalOrExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CONDITIONAL_OR_EXPRESSION, parser->conditionalOrExpression_ruleMemoStart, parser->conditionalOrExpression_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->conditionalOrExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->conditionalOrExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->conditionalOrExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->conditionalOrExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -8953,7 +8473,6 @@ static BOOL conditionalOrExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->conditionalOrExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->conditionalOrExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -8976,12 +8495,10 @@ static BOOL orExpression_rule(JavaParser * parser) {
       if (parser->orExpression_ruleMemoStart <= parser->orExpression_ruleMemoEnd) {
          parser->index = parser->orExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_OR_EXPRESSION, parser->orExpression_ruleMemoStart, parser->orExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->orExpression_ruleMemoStart == parser->orExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_OR_EXPRESSION, parser->orExpression_ruleMemoStart, parser->orExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->orExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->orExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->orExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->orExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -9015,7 +8532,6 @@ static BOOL orExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->orExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->orExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -9038,12 +8554,10 @@ static BOOL conditionalAndExpression_rule(JavaParser * parser) {
       if (parser->conditionalAndExpression_ruleMemoStart <= parser->conditionalAndExpression_ruleMemoEnd) {
          parser->index = parser->conditionalAndExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CONDITIONAL_AND_EXPRESSION, parser->conditionalAndExpression_ruleMemoStart, parser->conditionalAndExpression_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->conditionalAndExpression_ruleMemoStart == parser->conditionalAndExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CONDITIONAL_AND_EXPRESSION, parser->conditionalAndExpression_ruleMemoStart, parser->conditionalAndExpression_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->conditionalAndExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->conditionalAndExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->conditionalAndExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->conditionalAndExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -9148,7 +8662,6 @@ static BOOL conditionalAndExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->conditionalAndExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->conditionalAndExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -9171,12 +8684,10 @@ static BOOL andExpression_rule(JavaParser * parser) {
       if (parser->andExpression_ruleMemoStart <= parser->andExpression_ruleMemoEnd) {
          parser->index = parser->andExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_AND_EXPRESSION, parser->andExpression_ruleMemoStart, parser->andExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->andExpression_ruleMemoStart == parser->andExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_AND_EXPRESSION, parser->andExpression_ruleMemoStart, parser->andExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->andExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->andExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->andExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->andExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -9210,7 +8721,6 @@ static BOOL andExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->andExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->andExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -9233,12 +8743,10 @@ static BOOL optionalBitOrExpression_rule(JavaParser * parser) {
       if (parser->optionalBitOrExpression_ruleMemoStart <= parser->optionalBitOrExpression_ruleMemoEnd) {
          parser->index = parser->optionalBitOrExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_OPTIONAL_BIT_OR_EXPRESSION, parser->optionalBitOrExpression_ruleMemoStart, parser->optionalBitOrExpression_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->optionalBitOrExpression_ruleMemoStart == parser->optionalBitOrExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_OPTIONAL_BIT_OR_EXPRESSION, parser->optionalBitOrExpression_ruleMemoStart, parser->optionalBitOrExpression_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->optionalBitOrExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->optionalBitOrExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->optionalBitOrExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->optionalBitOrExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -9343,7 +8851,6 @@ static BOOL optionalBitOrExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->optionalBitOrExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->optionalBitOrExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -9366,12 +8873,10 @@ static BOOL bitOrExpression_rule(JavaParser * parser) {
       if (parser->bitOrExpression_ruleMemoStart <= parser->bitOrExpression_ruleMemoEnd) {
          parser->index = parser->bitOrExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_BIT_OR_EXPRESSION, parser->bitOrExpression_ruleMemoStart, parser->bitOrExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->bitOrExpression_ruleMemoStart == parser->bitOrExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_BIT_OR_EXPRESSION, parser->bitOrExpression_ruleMemoStart, parser->bitOrExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->bitOrExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->bitOrExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->bitOrExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->bitOrExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -9405,7 +8910,6 @@ static BOOL bitOrExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->bitOrExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->bitOrExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -9428,12 +8932,10 @@ static BOOL optionalBitXOrExpression_rule(JavaParser * parser) {
       if (parser->optionalBitXOrExpression_ruleMemoStart <= parser->optionalBitXOrExpression_ruleMemoEnd) {
          parser->index = parser->optionalBitXOrExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_OPTIONAL_BIT_XOR_EXPRESSION, parser->optionalBitXOrExpression_ruleMemoStart, parser->optionalBitXOrExpression_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->optionalBitXOrExpression_ruleMemoStart == parser->optionalBitXOrExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_OPTIONAL_BIT_XOR_EXPRESSION, parser->optionalBitXOrExpression_ruleMemoStart, parser->optionalBitXOrExpression_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->optionalBitXOrExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->optionalBitXOrExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->optionalBitXOrExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->optionalBitXOrExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -9538,7 +9040,6 @@ static BOOL optionalBitXOrExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->optionalBitXOrExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->optionalBitXOrExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -9561,12 +9062,10 @@ static BOOL bitXOrExpression_rule(JavaParser * parser) {
       if (parser->bitXOrExpression_ruleMemoStart <= parser->bitXOrExpression_ruleMemoEnd) {
          parser->index = parser->bitXOrExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_BIT_XOR_EXPRESSION, parser->bitXOrExpression_ruleMemoStart, parser->bitXOrExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->bitXOrExpression_ruleMemoStart == parser->bitXOrExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_BIT_XOR_EXPRESSION, parser->bitXOrExpression_ruleMemoStart, parser->bitXOrExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->bitXOrExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->bitXOrExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->bitXOrExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->bitXOrExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -9600,7 +9099,6 @@ static BOOL bitXOrExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->bitXOrExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->bitXOrExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -9623,12 +9121,10 @@ static BOOL optionalBitAndExpression_rule(JavaParser * parser) {
       if (parser->optionalBitAndExpression_ruleMemoStart <= parser->optionalBitAndExpression_ruleMemoEnd) {
          parser->index = parser->optionalBitAndExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_OPTIONAL_BIT_AND_EXPRESSION, parser->optionalBitAndExpression_ruleMemoStart, parser->optionalBitAndExpression_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->optionalBitAndExpression_ruleMemoStart == parser->optionalBitAndExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_OPTIONAL_BIT_AND_EXPRESSION, parser->optionalBitAndExpression_ruleMemoStart, parser->optionalBitAndExpression_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->optionalBitAndExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->optionalBitAndExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->optionalBitAndExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->optionalBitAndExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -9733,7 +9229,6 @@ static BOOL optionalBitAndExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->optionalBitAndExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->optionalBitAndExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -9756,12 +9251,10 @@ static BOOL bitAndExpression_rule(JavaParser * parser) {
       if (parser->bitAndExpression_ruleMemoStart <= parser->bitAndExpression_ruleMemoEnd) {
          parser->index = parser->bitAndExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_BIT_AND_EXPRESSION, parser->bitAndExpression_ruleMemoStart, parser->bitAndExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->bitAndExpression_ruleMemoStart == parser->bitAndExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_BIT_AND_EXPRESSION, parser->bitAndExpression_ruleMemoStart, parser->bitAndExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->bitAndExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->bitAndExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->bitAndExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->bitAndExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -9795,7 +9288,6 @@ static BOOL bitAndExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->bitAndExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->bitAndExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -9818,12 +9310,10 @@ static BOOL optionalRelationalExpression_rule(JavaParser * parser) {
       if (parser->optionalRelationalExpression_ruleMemoStart <= parser->optionalRelationalExpression_ruleMemoEnd) {
          parser->index = parser->optionalRelationalExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_OPTIONAL_RELATIONAL_EXPRESSION, parser->optionalRelationalExpression_ruleMemoStart, parser->optionalRelationalExpression_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->optionalRelationalExpression_ruleMemoStart == parser->optionalRelationalExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_OPTIONAL_RELATIONAL_EXPRESSION, parser->optionalRelationalExpression_ruleMemoStart, parser->optionalRelationalExpression_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->optionalRelationalExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->optionalRelationalExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->optionalRelationalExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->optionalRelationalExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -9928,7 +9418,6 @@ static BOOL optionalRelationalExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->optionalRelationalExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->optionalRelationalExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -9951,12 +9440,10 @@ static BOOL relationalExpression_rule(JavaParser * parser) {
       if (parser->relationalExpression_ruleMemoStart <= parser->relationalExpression_ruleMemoEnd) {
          parser->index = parser->relationalExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_RELATIONAL_EXPRESSION, parser->relationalExpression_ruleMemoStart, parser->relationalExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->relationalExpression_ruleMemoStart == parser->relationalExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_RELATIONAL_EXPRESSION, parser->relationalExpression_ruleMemoStart, parser->relationalExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->relationalExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->relationalExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->relationalExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->relationalExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -10041,7 +9528,6 @@ static BOOL relationalExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->relationalExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->relationalExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -10064,12 +9550,10 @@ static BOOL optionalInstanceOfExpression_rule(JavaParser * parser) {
       if (parser->optionalInstanceOfExpression_ruleMemoStart <= parser->optionalInstanceOfExpression_ruleMemoEnd) {
          parser->index = parser->optionalInstanceOfExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_OPTIONAL_INSTANCE_OF_EXPRESSION, parser->optionalInstanceOfExpression_ruleMemoStart, parser->optionalInstanceOfExpression_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->optionalInstanceOfExpression_ruleMemoStart == parser->optionalInstanceOfExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_OPTIONAL_INSTANCE_OF_EXPRESSION, parser->optionalInstanceOfExpression_ruleMemoStart, parser->optionalInstanceOfExpression_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->optionalInstanceOfExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->optionalInstanceOfExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->optionalInstanceOfExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->optionalInstanceOfExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -10174,7 +9658,6 @@ static BOOL optionalInstanceOfExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->optionalInstanceOfExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->optionalInstanceOfExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -10197,12 +9680,10 @@ static BOOL instanceOfExpression_rule(JavaParser * parser) {
       if (parser->instanceOfExpression_ruleMemoStart <= parser->instanceOfExpression_ruleMemoEnd) {
          parser->index = parser->instanceOfExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_INSTANCE_OF_EXPRESSION, parser->instanceOfExpression_ruleMemoStart, parser->instanceOfExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->instanceOfExpression_ruleMemoStart == parser->instanceOfExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_INSTANCE_OF_EXPRESSION, parser->instanceOfExpression_ruleMemoStart, parser->instanceOfExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->instanceOfExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->instanceOfExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->instanceOfExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->instanceOfExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -10240,7 +9721,6 @@ static BOOL instanceOfExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->instanceOfExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->instanceOfExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -10263,12 +9743,10 @@ static BOOL optionalAdditiveExpression_rule(JavaParser * parser) {
       if (parser->optionalAdditiveExpression_ruleMemoStart <= parser->optionalAdditiveExpression_ruleMemoEnd) {
          parser->index = parser->optionalAdditiveExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_OPTIONAL_ADDITIVE_EXPRESSION, parser->optionalAdditiveExpression_ruleMemoStart, parser->optionalAdditiveExpression_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->optionalAdditiveExpression_ruleMemoStart == parser->optionalAdditiveExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_OPTIONAL_ADDITIVE_EXPRESSION, parser->optionalAdditiveExpression_ruleMemoStart, parser->optionalAdditiveExpression_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->optionalAdditiveExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->optionalAdditiveExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->optionalAdditiveExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->optionalAdditiveExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -10373,7 +9851,6 @@ static BOOL optionalAdditiveExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->optionalAdditiveExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->optionalAdditiveExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -10396,12 +9873,10 @@ static BOOL referenceType_rule(JavaParser * parser) {
       if (parser->referenceType_ruleMemoStart <= parser->referenceType_ruleMemoEnd) {
          parser->index = parser->referenceType_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_REFERENCE_TYPE, parser->referenceType_ruleMemoStart, parser->referenceType_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->referenceType_ruleMemoStart == parser->referenceType_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_REFERENCE_TYPE, parser->referenceType_ruleMemoStart, parser->referenceType_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->referenceType_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->referenceType_ruleMemoFirstNode;
-               parser->currentNode = parser->referenceType_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->referenceType_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -10500,7 +9975,6 @@ static BOOL referenceType_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->referenceType_ruleMemoFirstNode = parser->currentNode;
-         parser->referenceType_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -10523,12 +9997,10 @@ static BOOL additiveExpression_rule(JavaParser * parser) {
       if (parser->additiveExpression_ruleMemoStart <= parser->additiveExpression_ruleMemoEnd) {
          parser->index = parser->additiveExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ADDITIVE_EXPRESSION, parser->additiveExpression_ruleMemoStart, parser->additiveExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->additiveExpression_ruleMemoStart == parser->additiveExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ADDITIVE_EXPRESSION, parser->additiveExpression_ruleMemoStart, parser->additiveExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->additiveExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->additiveExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->additiveExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->additiveExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -10585,7 +10057,6 @@ static BOOL additiveExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->additiveExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->additiveExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -10608,12 +10079,10 @@ static BOOL optionalMultiplicativeExpression_rule(JavaParser * parser) {
       if (parser->optionalMultiplicativeExpression_ruleMemoStart <= parser->optionalMultiplicativeExpression_ruleMemoEnd) {
          parser->index = parser->optionalMultiplicativeExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_OPTIONAL_MULTIPLICATIVE_EXPRESSION, parser->optionalMultiplicativeExpression_ruleMemoStart, parser->optionalMultiplicativeExpression_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->optionalMultiplicativeExpression_ruleMemoStart == parser->optionalMultiplicativeExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_OPTIONAL_MULTIPLICATIVE_EXPRESSION, parser->optionalMultiplicativeExpression_ruleMemoStart, parser->optionalMultiplicativeExpression_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->optionalMultiplicativeExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->optionalMultiplicativeExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->optionalMultiplicativeExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->optionalMultiplicativeExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -10718,7 +10187,6 @@ static BOOL optionalMultiplicativeExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->optionalMultiplicativeExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->optionalMultiplicativeExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -10741,12 +10209,10 @@ static BOOL multiplicativeExpression_rule(JavaParser * parser) {
       if (parser->multiplicativeExpression_ruleMemoStart <= parser->multiplicativeExpression_ruleMemoEnd) {
          parser->index = parser->multiplicativeExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_MULTIPLICATIVE_EXPRESSION, parser->multiplicativeExpression_ruleMemoStart, parser->multiplicativeExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->multiplicativeExpression_ruleMemoStart == parser->multiplicativeExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_MULTIPLICATIVE_EXPRESSION, parser->multiplicativeExpression_ruleMemoStart, parser->multiplicativeExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->multiplicativeExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->multiplicativeExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->multiplicativeExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->multiplicativeExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -10809,7 +10275,6 @@ static BOOL multiplicativeExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->multiplicativeExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->multiplicativeExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -10832,12 +10297,10 @@ static BOOL optionalShiftExpression_rule(JavaParser * parser) {
       if (parser->optionalShiftExpression_ruleMemoStart <= parser->optionalShiftExpression_ruleMemoEnd) {
          parser->index = parser->optionalShiftExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_OPTIONAL_SHIFT_EXPRESSION, parser->optionalShiftExpression_ruleMemoStart, parser->optionalShiftExpression_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->optionalShiftExpression_ruleMemoStart == parser->optionalShiftExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_OPTIONAL_SHIFT_EXPRESSION, parser->optionalShiftExpression_ruleMemoStart, parser->optionalShiftExpression_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->optionalShiftExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->optionalShiftExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->optionalShiftExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->optionalShiftExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -10942,7 +10405,6 @@ static BOOL optionalShiftExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->optionalShiftExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->optionalShiftExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -10965,12 +10427,10 @@ static BOOL shiftExpression_rule(JavaParser * parser) {
       if (parser->shiftExpression_ruleMemoStart <= parser->shiftExpression_ruleMemoEnd) {
          parser->index = parser->shiftExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_SHIFT_EXPRESSION, parser->shiftExpression_ruleMemoStart, parser->shiftExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->shiftExpression_ruleMemoStart == parser->shiftExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_SHIFT_EXPRESSION, parser->shiftExpression_ruleMemoStart, parser->shiftExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->shiftExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->shiftExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->shiftExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->shiftExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -11041,7 +10501,6 @@ static BOOL shiftExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->shiftExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->shiftExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -11064,12 +10523,10 @@ static BOOL unaryExpression_rule(JavaParser * parser) {
       if (parser->unaryExpression_ruleMemoStart <= parser->unaryExpression_ruleMemoEnd) {
          parser->index = parser->unaryExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_UNARY_EXPRESSION, parser->unaryExpression_ruleMemoStart, parser->unaryExpression_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->unaryExpression_ruleMemoStart == parser->unaryExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_UNARY_EXPRESSION, parser->unaryExpression_ruleMemoStart, parser->unaryExpression_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->unaryExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->unaryExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->unaryExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->unaryExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -11190,7 +10647,6 @@ static BOOL unaryExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->unaryExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->unaryExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -11213,12 +10669,10 @@ static BOOL prefixedExpression_rule(JavaParser * parser) {
       if (parser->prefixedExpression_ruleMemoStart <= parser->prefixedExpression_ruleMemoEnd) {
          parser->index = parser->prefixedExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_PREFIXED_EXPRESSION, parser->prefixedExpression_ruleMemoStart, parser->prefixedExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->prefixedExpression_ruleMemoStart == parser->prefixedExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_PREFIXED_EXPRESSION, parser->prefixedExpression_ruleMemoStart, parser->prefixedExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->prefixedExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->prefixedExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->prefixedExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->prefixedExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -11248,7 +10702,6 @@ static BOOL prefixedExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->prefixedExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->prefixedExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -11271,12 +10724,10 @@ static BOOL castExpression_rule(JavaParser * parser) {
       if (parser->castExpression_ruleMemoStart <= parser->castExpression_ruleMemoEnd) {
          parser->index = parser->castExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CAST_EXPRESSION, parser->castExpression_ruleMemoStart, parser->castExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->castExpression_ruleMemoStart == parser->castExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CAST_EXPRESSION, parser->castExpression_ruleMemoStart, parser->castExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->castExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->castExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->castExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->castExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -11318,7 +10769,6 @@ static BOOL castExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->castExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->castExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -11341,12 +10791,10 @@ static BOOL postfixedExpression_rule(JavaParser * parser) {
       if (parser->postfixedExpression_ruleMemoStart <= parser->postfixedExpression_ruleMemoEnd) {
          parser->index = parser->postfixedExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_POSTFIXED_EXPRESSION, parser->postfixedExpression_ruleMemoStart, parser->postfixedExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->postfixedExpression_ruleMemoStart == parser->postfixedExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_POSTFIXED_EXPRESSION, parser->postfixedExpression_ruleMemoStart, parser->postfixedExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->postfixedExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->postfixedExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->postfixedExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->postfixedExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -11380,7 +10828,6 @@ static BOOL postfixedExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->postfixedExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->postfixedExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -11523,12 +10970,10 @@ static BOOL primary_rule(JavaParser * parser) {
       if (parser->primary_ruleMemoStart <= parser->primary_ruleMemoEnd) {
          parser->index = parser->primary_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_PRIMARY, parser->primary_ruleMemoStart, parser->primary_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->primary_ruleMemoStart == parser->primary_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_PRIMARY, parser->primary_ruleMemoStart, parser->primary_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->primary_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->primary_ruleMemoFirstNode;
-               parser->currentNode = parser->primary_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->primary_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -11633,7 +11078,6 @@ static BOOL primary_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->primary_ruleMemoFirstNode = parser->currentNode;
-         parser->primary_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -11656,12 +11100,10 @@ static BOOL qualifiedExpression_rule(JavaParser * parser) {
       if (parser->qualifiedExpression_ruleMemoStart <= parser->qualifiedExpression_ruleMemoEnd) {
          parser->index = parser->qualifiedExpression_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_QUALIFIED_EXPRESSION, parser->qualifiedExpression_ruleMemoStart, parser->qualifiedExpression_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->qualifiedExpression_ruleMemoStart == parser->qualifiedExpression_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_QUALIFIED_EXPRESSION, parser->qualifiedExpression_ruleMemoStart, parser->qualifiedExpression_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->qualifiedExpression_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->qualifiedExpression_ruleMemoFirstNode;
-               parser->currentNode = parser->qualifiedExpression_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->qualifiedExpression_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -11971,7 +11413,6 @@ static BOOL qualifiedExpression_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->qualifiedExpression_ruleMemoFirstNode = parser->currentNode;
-         parser->qualifiedExpression_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -11994,12 +11435,10 @@ static BOOL arrayAccess_rule(JavaParser * parser) {
       if (parser->arrayAccess_ruleMemoStart <= parser->arrayAccess_ruleMemoEnd) {
          parser->index = parser->arrayAccess_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ARRAY_ACCESS, parser->arrayAccess_ruleMemoStart, parser->arrayAccess_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->arrayAccess_ruleMemoStart == parser->arrayAccess_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ARRAY_ACCESS, parser->arrayAccess_ruleMemoStart, parser->arrayAccess_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->arrayAccess_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->arrayAccess_ruleMemoFirstNode;
-               parser->currentNode = parser->arrayAccess_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->arrayAccess_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -12025,7 +11464,6 @@ static BOOL arrayAccess_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->arrayAccess_ruleMemoFirstNode = parser->currentNode;
-         parser->arrayAccess_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -12048,12 +11486,10 @@ static BOOL atomic_rule(JavaParser * parser) {
       if (parser->atomic_ruleMemoStart <= parser->atomic_ruleMemoEnd) {
          parser->index = parser->atomic_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ATOMIC, parser->atomic_ruleMemoStart, parser->atomic_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->atomic_ruleMemoStart == parser->atomic_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ATOMIC, parser->atomic_ruleMemoStart, parser->atomic_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->atomic_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->atomic_ruleMemoFirstNode;
-               parser->currentNode = parser->atomic_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->atomic_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -12294,7 +11730,6 @@ static BOOL atomic_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->atomic_ruleMemoFirstNode = parser->currentNode;
-         parser->atomic_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -12317,12 +11752,10 @@ static BOOL classTypeReference_rule(JavaParser * parser) {
       if (parser->classTypeReference_ruleMemoStart <= parser->classTypeReference_ruleMemoEnd) {
          parser->index = parser->classTypeReference_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CLASS_TYPE_REFERENCE, parser->classTypeReference_ruleMemoStart, parser->classTypeReference_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->classTypeReference_ruleMemoStart == parser->classTypeReference_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CLASS_TYPE_REFERENCE, parser->classTypeReference_ruleMemoStart, parser->classTypeReference_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->classTypeReference_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->classTypeReference_ruleMemoFirstNode;
-               parser->currentNode = parser->classTypeReference_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->classTypeReference_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -12368,7 +11801,6 @@ static BOOL classTypeReference_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->classTypeReference_ruleMemoFirstNode = parser->currentNode;
-         parser->classTypeReference_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -12391,12 +11823,10 @@ static BOOL literal_rule(JavaParser * parser) {
       if (parser->literal_ruleMemoStart <= parser->literal_ruleMemoEnd) {
          parser->index = parser->literal_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_LITERAL, parser->literal_ruleMemoStart, parser->literal_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->literal_ruleMemoStart == parser->literal_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_LITERAL, parser->literal_ruleMemoStart, parser->literal_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->literal_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->literal_ruleMemoFirstNode;
-               parser->currentNode = parser->literal_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->literal_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -12478,7 +11908,6 @@ static BOOL literal_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->literal_ruleMemoFirstNode = parser->currentNode;
-         parser->literal_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -12501,12 +11930,10 @@ static BOOL basicTypeClassReference_rule(JavaParser * parser) {
       if (parser->basicTypeClassReference_ruleMemoStart <= parser->basicTypeClassReference_ruleMemoEnd) {
          parser->index = parser->basicTypeClassReference_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_BASIC_TYPE_CLASS_REFERENCE, parser->basicTypeClassReference_ruleMemoStart, parser->basicTypeClassReference_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->basicTypeClassReference_ruleMemoStart == parser->basicTypeClassReference_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_BASIC_TYPE_CLASS_REFERENCE, parser->basicTypeClassReference_ruleMemoStart, parser->basicTypeClassReference_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->basicTypeClassReference_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->basicTypeClassReference_ruleMemoFirstNode;
-               parser->currentNode = parser->basicTypeClassReference_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->basicTypeClassReference_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -12552,7 +11979,6 @@ static BOOL basicTypeClassReference_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->basicTypeClassReference_ruleMemoFirstNode = parser->currentNode;
-         parser->basicTypeClassReference_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -12575,12 +12001,10 @@ static BOOL voidClassReference_rule(JavaParser * parser) {
       if (parser->voidClassReference_ruleMemoStart <= parser->voidClassReference_ruleMemoEnd) {
          parser->index = parser->voidClassReference_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_VOID_CLASS_REFERENCE, parser->voidClassReference_ruleMemoStart, parser->voidClassReference_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->voidClassReference_ruleMemoStart == parser->voidClassReference_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_VOID_CLASS_REFERENCE, parser->voidClassReference_ruleMemoStart, parser->voidClassReference_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->voidClassReference_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->voidClassReference_ruleMemoFirstNode;
-               parser->currentNode = parser->voidClassReference_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->voidClassReference_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -12630,7 +12054,6 @@ static BOOL voidClassReference_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->voidClassReference_ruleMemoFirstNode = parser->currentNode;
-         parser->voidClassReference_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -12653,12 +12076,10 @@ static BOOL thisMethodCall_rule(JavaParser * parser) {
       if (parser->thisMethodCall_ruleMemoStart <= parser->thisMethodCall_ruleMemoEnd) {
          parser->index = parser->thisMethodCall_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_THIS_METHOD_CALL, parser->thisMethodCall_ruleMemoStart, parser->thisMethodCall_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->thisMethodCall_ruleMemoStart == parser->thisMethodCall_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_THIS_METHOD_CALL, parser->thisMethodCall_ruleMemoStart, parser->thisMethodCall_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->thisMethodCall_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->thisMethodCall_ruleMemoFirstNode;
-               parser->currentNode = parser->thisMethodCall_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->thisMethodCall_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -12684,7 +12105,6 @@ static BOOL thisMethodCall_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->thisMethodCall_ruleMemoFirstNode = parser->currentNode;
-         parser->thisMethodCall_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -12707,12 +12127,10 @@ static BOOL this_rule(JavaParser * parser) {
       if (parser->this_ruleMemoStart <= parser->this_ruleMemoEnd) {
          parser->index = parser->this_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_THIS, parser->this_ruleMemoStart, parser->this_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->this_ruleMemoStart == parser->this_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_THIS, parser->this_ruleMemoStart, parser->this_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->this_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->this_ruleMemoFirstNode;
-               parser->currentNode = parser->this_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->this_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -12742,7 +12160,6 @@ static BOOL this_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->this_ruleMemoFirstNode = parser->currentNode;
-         parser->this_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -12765,12 +12182,10 @@ static BOOL super_rule(JavaParser * parser) {
       if (parser->super_ruleMemoStart <= parser->super_ruleMemoEnd) {
          parser->index = parser->super_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_SUPER, parser->super_ruleMemoStart, parser->super_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->super_ruleMemoStart == parser->super_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_SUPER, parser->super_ruleMemoStart, parser->super_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->super_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->super_ruleMemoFirstNode;
-               parser->currentNode = parser->super_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->super_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -12800,7 +12215,6 @@ static BOOL super_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->super_ruleMemoFirstNode = parser->currentNode;
-         parser->super_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -12823,12 +12237,10 @@ static BOOL superMethodCall_rule(JavaParser * parser) {
       if (parser->superMethodCall_ruleMemoStart <= parser->superMethodCall_ruleMemoEnd) {
          parser->index = parser->superMethodCall_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_SUPER_METHOD_CALL, parser->superMethodCall_ruleMemoStart, parser->superMethodCall_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->superMethodCall_ruleMemoStart == parser->superMethodCall_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_SUPER_METHOD_CALL, parser->superMethodCall_ruleMemoStart, parser->superMethodCall_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->superMethodCall_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->superMethodCall_ruleMemoFirstNode;
-               parser->currentNode = parser->superMethodCall_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->superMethodCall_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -12866,7 +12278,6 @@ static BOOL superMethodCall_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->superMethodCall_ruleMemoFirstNode = parser->currentNode;
-         parser->superMethodCall_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -12889,12 +12300,10 @@ static BOOL superConstructorCall_rule(JavaParser * parser) {
       if (parser->superConstructorCall_ruleMemoStart <= parser->superConstructorCall_ruleMemoEnd) {
          parser->index = parser->superConstructorCall_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_SUPER_CONSTRUCTOR_CALL, parser->superConstructorCall_ruleMemoStart, parser->superConstructorCall_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->superConstructorCall_ruleMemoStart == parser->superConstructorCall_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_SUPER_CONSTRUCTOR_CALL, parser->superConstructorCall_ruleMemoStart, parser->superConstructorCall_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->superConstructorCall_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->superConstructorCall_ruleMemoFirstNode;
-               parser->currentNode = parser->superConstructorCall_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->superConstructorCall_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -12920,7 +12329,6 @@ static BOOL superConstructorCall_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->superConstructorCall_ruleMemoFirstNode = parser->currentNode;
-         parser->superConstructorCall_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -12943,12 +12351,10 @@ static BOOL superFieldAccess_rule(JavaParser * parser) {
       if (parser->superFieldAccess_ruleMemoStart <= parser->superFieldAccess_ruleMemoEnd) {
          parser->index = parser->superFieldAccess_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_SUPER_FIELD_ACCESS, parser->superFieldAccess_ruleMemoStart, parser->superFieldAccess_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->superFieldAccess_ruleMemoStart == parser->superFieldAccess_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_SUPER_FIELD_ACCESS, parser->superFieldAccess_ruleMemoStart, parser->superFieldAccess_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->superFieldAccess_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->superFieldAccess_ruleMemoFirstNode;
-               parser->currentNode = parser->superFieldAccess_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->superFieldAccess_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -12982,7 +12388,6 @@ static BOOL superFieldAccess_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->superFieldAccess_ruleMemoFirstNode = parser->currentNode;
-         parser->superFieldAccess_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -13005,12 +12410,10 @@ static BOOL new_rule(JavaParser * parser) {
       if (parser->new_ruleMemoStart <= parser->new_ruleMemoEnd) {
          parser->index = parser->new_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_NEW, parser->new_ruleMemoStart, parser->new_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->new_ruleMemoStart == parser->new_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_NEW, parser->new_ruleMemoStart, parser->new_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->new_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->new_ruleMemoFirstNode;
-               parser->currentNode = parser->new_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->new_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -13040,7 +12443,6 @@ static BOOL new_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->new_ruleMemoFirstNode = parser->currentNode;
-         parser->new_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -13063,12 +12465,10 @@ static BOOL classCreator_rule(JavaParser * parser) {
       if (parser->classCreator_ruleMemoStart <= parser->classCreator_ruleMemoEnd) {
          parser->index = parser->classCreator_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CLASS_CREATOR, parser->classCreator_ruleMemoStart, parser->classCreator_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->classCreator_ruleMemoStart == parser->classCreator_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CLASS_CREATOR, parser->classCreator_ruleMemoStart, parser->classCreator_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->classCreator_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->classCreator_ruleMemoFirstNode;
-               parser->currentNode = parser->classCreator_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->classCreator_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -13104,7 +12504,6 @@ static BOOL classCreator_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->classCreator_ruleMemoFirstNode = parser->currentNode;
-         parser->classCreator_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -13127,12 +12526,10 @@ static BOOL arrayCreator_rule(JavaParser * parser) {
       if (parser->arrayCreator_ruleMemoStart <= parser->arrayCreator_ruleMemoEnd) {
          parser->index = parser->arrayCreator_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ARRAY_CREATOR, parser->arrayCreator_ruleMemoStart, parser->arrayCreator_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->arrayCreator_ruleMemoStart == parser->arrayCreator_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ARRAY_CREATOR, parser->arrayCreator_ruleMemoStart, parser->arrayCreator_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->arrayCreator_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->arrayCreator_ruleMemoFirstNode;
-               parser->currentNode = parser->arrayCreator_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->arrayCreator_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -13166,7 +12563,6 @@ static BOOL arrayCreator_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->arrayCreator_ruleMemoFirstNode = parser->currentNode;
-         parser->arrayCreator_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -13189,12 +12585,10 @@ static BOOL methodCall_rule(JavaParser * parser) {
       if (parser->methodCall_ruleMemoStart <= parser->methodCall_ruleMemoEnd) {
          parser->index = parser->methodCall_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_METHOD_CALL, parser->methodCall_ruleMemoStart, parser->methodCall_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->methodCall_ruleMemoStart == parser->methodCall_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_METHOD_CALL, parser->methodCall_ruleMemoStart, parser->methodCall_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->methodCall_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->methodCall_ruleMemoFirstNode;
-               parser->currentNode = parser->methodCall_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->methodCall_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -13220,7 +12614,6 @@ static BOOL methodCall_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->methodCall_ruleMemoFirstNode = parser->currentNode;
-         parser->methodCall_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -13274,12 +12667,10 @@ static BOOL dimExpr_rule(JavaParser * parser) {
       if (parser->dimExpr_ruleMemoStart <= parser->dimExpr_ruleMemoEnd) {
          parser->index = parser->dimExpr_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_DIM_EXPR, parser->dimExpr_ruleMemoStart, parser->dimExpr_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->dimExpr_ruleMemoStart == parser->dimExpr_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_DIM_EXPR, parser->dimExpr_ruleMemoStart, parser->dimExpr_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->dimExpr_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->dimExpr_ruleMemoFirstNode;
-               parser->currentNode = parser->dimExpr_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->dimExpr_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -13317,7 +12708,6 @@ static BOOL dimExpr_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->dimExpr_ruleMemoFirstNode = parser->currentNode;
-         parser->dimExpr_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -13340,12 +12730,10 @@ static BOOL basicType_rule(JavaParser * parser) {
       if (parser->basicType_ruleMemoStart <= parser->basicType_ruleMemoEnd) {
          parser->index = parser->basicType_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_BASIC_TYPE, parser->basicType_ruleMemoStart, parser->basicType_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->basicType_ruleMemoStart == parser->basicType_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_BASIC_TYPE, parser->basicType_ruleMemoStart, parser->basicType_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->basicType_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->basicType_ruleMemoFirstNode;
-               parser->currentNode = parser->basicType_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->basicType_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -13375,7 +12763,6 @@ static BOOL basicType_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->basicType_ruleMemoFirstNode = parser->currentNode;
-         parser->basicType_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -13502,12 +12889,10 @@ static BOOL nonWildcardTypeArguments_rule(JavaParser * parser) {
       if (parser->nonWildcardTypeArguments_ruleMemoStart <= parser->nonWildcardTypeArguments_ruleMemoEnd) {
          parser->index = parser->nonWildcardTypeArguments_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_NON_WILDCARD_TYPE_ARGUMENTS, parser->nonWildcardTypeArguments_ruleMemoStart, parser->nonWildcardTypeArguments_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->nonWildcardTypeArguments_ruleMemoStart == parser->nonWildcardTypeArguments_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_NON_WILDCARD_TYPE_ARGUMENTS, parser->nonWildcardTypeArguments_ruleMemoStart, parser->nonWildcardTypeArguments_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->nonWildcardTypeArguments_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->nonWildcardTypeArguments_ruleMemoFirstNode;
-               parser->currentNode = parser->nonWildcardTypeArguments_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->nonWildcardTypeArguments_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -13574,7 +12959,6 @@ static BOOL nonWildcardTypeArguments_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->nonWildcardTypeArguments_ruleMemoFirstNode = parser->currentNode;
-         parser->nonWildcardTypeArguments_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -13648,12 +13032,10 @@ static BOOL initializedArrayCreator_rule(JavaParser * parser) {
       if (parser->initializedArrayCreator_ruleMemoStart <= parser->initializedArrayCreator_ruleMemoEnd) {
          parser->index = parser->initializedArrayCreator_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_INITIALIZED_ARRAY_CREATOR, parser->initializedArrayCreator_ruleMemoStart, parser->initializedArrayCreator_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->initializedArrayCreator_ruleMemoStart == parser->initializedArrayCreator_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_INITIALIZED_ARRAY_CREATOR, parser->initializedArrayCreator_ruleMemoStart, parser->initializedArrayCreator_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->initializedArrayCreator_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->initializedArrayCreator_ruleMemoFirstNode;
-               parser->currentNode = parser->initializedArrayCreator_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->initializedArrayCreator_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -13695,7 +13077,6 @@ static BOOL initializedArrayCreator_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->initializedArrayCreator_ruleMemoFirstNode = parser->currentNode;
-         parser->initializedArrayCreator_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -13718,12 +13099,10 @@ static BOOL emptyArrayCreator_rule(JavaParser * parser) {
       if (parser->emptyArrayCreator_ruleMemoStart <= parser->emptyArrayCreator_ruleMemoEnd) {
          parser->index = parser->emptyArrayCreator_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_EMPTY_ARRAY_CREATOR, parser->emptyArrayCreator_ruleMemoStart, parser->emptyArrayCreator_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->emptyArrayCreator_ruleMemoStart == parser->emptyArrayCreator_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_EMPTY_ARRAY_CREATOR, parser->emptyArrayCreator_ruleMemoStart, parser->emptyArrayCreator_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->emptyArrayCreator_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->emptyArrayCreator_ruleMemoFirstNode;
-               parser->currentNode = parser->emptyArrayCreator_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->emptyArrayCreator_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -13765,7 +13144,6 @@ static BOOL emptyArrayCreator_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->emptyArrayCreator_ruleMemoFirstNode = parser->currentNode;
-         parser->emptyArrayCreator_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -13788,12 +13166,10 @@ static BOOL arrayType_rule(JavaParser * parser) {
       if (parser->arrayType_ruleMemoStart <= parser->arrayType_ruleMemoEnd) {
          parser->index = parser->arrayType_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ARRAY_TYPE, parser->arrayType_ruleMemoStart, parser->arrayType_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->arrayType_ruleMemoStart == parser->arrayType_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ARRAY_TYPE, parser->arrayType_ruleMemoStart, parser->arrayType_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->arrayType_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->arrayType_ruleMemoFirstNode;
-               parser->currentNode = parser->arrayType_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->arrayType_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -13884,7 +13260,6 @@ static BOOL arrayType_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->arrayType_ruleMemoFirstNode = parser->currentNode;
-         parser->arrayType_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -13907,12 +13282,10 @@ static BOOL dim_rule(JavaParser * parser) {
       if (parser->dim_ruleMemoStart <= parser->dim_ruleMemoEnd) {
          parser->index = parser->dim_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_DIM, parser->dim_ruleMemoStart, parser->dim_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->dim_ruleMemoStart == parser->dim_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_DIM, parser->dim_ruleMemoStart, parser->dim_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->dim_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->dim_ruleMemoFirstNode;
-               parser->currentNode = parser->dim_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->dim_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -13946,7 +13319,6 @@ static BOOL dim_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->dim_ruleMemoFirstNode = parser->currentNode;
-         parser->dim_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -13969,12 +13341,10 @@ static BOOL arrayInitializer_rule(JavaParser * parser) {
       if (parser->arrayInitializer_ruleMemoStart <= parser->arrayInitializer_ruleMemoEnd) {
          parser->index = parser->arrayInitializer_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ARRAY_INITIALIZER, parser->arrayInitializer_ruleMemoStart, parser->arrayInitializer_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->arrayInitializer_ruleMemoStart == parser->arrayInitializer_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ARRAY_INITIALIZER, parser->arrayInitializer_ruleMemoStart, parser->arrayInitializer_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->arrayInitializer_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->arrayInitializer_ruleMemoFirstNode;
-               parser->currentNode = parser->arrayInitializer_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->arrayInitializer_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -14057,7 +13427,6 @@ static BOOL arrayInitializer_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->arrayInitializer_ruleMemoFirstNode = parser->currentNode;
-         parser->arrayInitializer_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -14080,12 +13449,10 @@ static BOOL typedName_rule(JavaParser * parser) {
       if (parser->typedName_ruleMemoStart <= parser->typedName_ruleMemoEnd) {
          parser->index = parser->typedName_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_TYPED_NAME, parser->typedName_ruleMemoStart, parser->typedName_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->typedName_ruleMemoStart == parser->typedName_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_TYPED_NAME, parser->typedName_ruleMemoStart, parser->typedName_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->typedName_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->typedName_ruleMemoFirstNode;
-               parser->currentNode = parser->typedName_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->typedName_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -14111,7 +13478,6 @@ static BOOL typedName_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->typedName_ruleMemoFirstNode = parser->currentNode;
-         parser->typedName_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -14134,12 +13500,10 @@ static BOOL typeName_rule(JavaParser * parser) {
       if (parser->typeName_ruleMemoStart <= parser->typeName_ruleMemoEnd) {
          parser->index = parser->typeName_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_TYPE_NAME, parser->typeName_ruleMemoStart, parser->typeName_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->typeName_ruleMemoStart == parser->typeName_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_TYPE_NAME, parser->typeName_ruleMemoStart, parser->typeName_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->typeName_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->typeName_ruleMemoFirstNode;
-               parser->currentNode = parser->typeName_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->typeName_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -14226,7 +13590,6 @@ static BOOL typeName_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->typeName_ruleMemoFirstNode = parser->currentNode;
-         parser->typeName_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -14249,12 +13612,10 @@ static BOOL array_rule(JavaParser * parser) {
       if (parser->array_ruleMemoStart <= parser->array_ruleMemoEnd) {
          parser->index = parser->array_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ARRAY, parser->array_ruleMemoStart, parser->array_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->array_ruleMemoStart == parser->array_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ARRAY, parser->array_ruleMemoStart, parser->array_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->array_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->array_ruleMemoFirstNode;
-               parser->currentNode = parser->array_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->array_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -14358,7 +13719,6 @@ static BOOL array_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->array_ruleMemoFirstNode = parser->currentNode;
-         parser->array_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -14381,12 +13741,10 @@ static BOOL basicTypeArray_rule(JavaParser * parser) {
       if (parser->basicTypeArray_ruleMemoStart <= parser->basicTypeArray_ruleMemoEnd) {
          parser->index = parser->basicTypeArray_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_BASIC_TYPE_ARRAY, parser->basicTypeArray_ruleMemoStart, parser->basicTypeArray_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->basicTypeArray_ruleMemoStart == parser->basicTypeArray_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_BASIC_TYPE_ARRAY, parser->basicTypeArray_ruleMemoStart, parser->basicTypeArray_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->basicTypeArray_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->basicTypeArray_ruleMemoFirstNode;
-               parser->currentNode = parser->basicTypeArray_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->basicTypeArray_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -14420,7 +13778,6 @@ static BOOL basicTypeArray_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->basicTypeArray_ruleMemoFirstNode = parser->currentNode;
-         parser->basicTypeArray_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -14443,12 +13800,10 @@ static BOOL qualifiedClassNameArray_rule(JavaParser * parser) {
       if (parser->qualifiedClassNameArray_ruleMemoStart <= parser->qualifiedClassNameArray_ruleMemoEnd) {
          parser->index = parser->qualifiedClassNameArray_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_QUALIFIED_CLASS_NAME_ARRAY, parser->qualifiedClassNameArray_ruleMemoStart, parser->qualifiedClassNameArray_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->qualifiedClassNameArray_ruleMemoStart == parser->qualifiedClassNameArray_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_QUALIFIED_CLASS_NAME_ARRAY, parser->qualifiedClassNameArray_ruleMemoStart, parser->qualifiedClassNameArray_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->qualifiedClassNameArray_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->qualifiedClassNameArray_ruleMemoFirstNode;
-               parser->currentNode = parser->qualifiedClassNameArray_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->qualifiedClassNameArray_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -14482,7 +13837,6 @@ static BOOL qualifiedClassNameArray_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->qualifiedClassNameArray_ruleMemoFirstNode = parser->currentNode;
-         parser->qualifiedClassNameArray_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -14505,12 +13859,10 @@ static BOOL className_rule(JavaParser * parser) {
       if (parser->className_ruleMemoStart <= parser->className_ruleMemoEnd) {
          parser->index = parser->className_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CLASS_NAME, parser->className_ruleMemoStart, parser->className_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->className_ruleMemoStart == parser->className_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CLASS_NAME, parser->className_ruleMemoStart, parser->className_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->className_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->className_ruleMemoFirstNode;
-               parser->currentNode = parser->className_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->className_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -14597,7 +13949,6 @@ static BOOL className_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->className_ruleMemoFirstNode = parser->currentNode;
-         parser->className_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -14620,12 +13971,10 @@ static BOOL typedClassName_rule(JavaParser * parser) {
       if (parser->typedClassName_ruleMemoStart <= parser->typedClassName_ruleMemoEnd) {
          parser->index = parser->typedClassName_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_TYPED_CLASS_NAME, parser->typedClassName_ruleMemoStart, parser->typedClassName_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->typedClassName_ruleMemoStart == parser->typedClassName_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_TYPED_CLASS_NAME, parser->typedClassName_ruleMemoStart, parser->typedClassName_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->typedClassName_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->typedClassName_ruleMemoFirstNode;
-               parser->currentNode = parser->typedClassName_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->typedClassName_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -14651,7 +14000,6 @@ static BOOL typedClassName_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->typedClassName_ruleMemoFirstNode = parser->currentNode;
-         parser->typedClassName_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -14738,12 +14086,10 @@ static BOOL typeArgument_rule(JavaParser * parser) {
       if (parser->typeArgument_ruleMemoStart <= parser->typeArgument_ruleMemoEnd) {
          parser->index = parser->typeArgument_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_TYPE_ARGUMENT, parser->typeArgument_ruleMemoStart, parser->typeArgument_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->typeArgument_ruleMemoStart == parser->typeArgument_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_TYPE_ARGUMENT, parser->typeArgument_ruleMemoStart, parser->typeArgument_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->typeArgument_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->typeArgument_ruleMemoFirstNode;
-               parser->currentNode = parser->typeArgument_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->typeArgument_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -14831,7 +14177,6 @@ static BOOL typeArgument_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->typeArgument_ruleMemoFirstNode = parser->currentNode;
-         parser->typeArgument_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -14854,12 +14199,10 @@ static BOOL queryType_rule(JavaParser * parser) {
       if (parser->queryType_ruleMemoStart <= parser->queryType_ruleMemoEnd) {
          parser->index = parser->queryType_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_QUERY_TYPE, parser->queryType_ruleMemoStart, parser->queryType_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->queryType_ruleMemoStart == parser->queryType_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_QUERY_TYPE, parser->queryType_ruleMemoStart, parser->queryType_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->queryType_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->queryType_ruleMemoFirstNode;
-               parser->currentNode = parser->queryType_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->queryType_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -14948,7 +14291,6 @@ static BOOL queryType_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->queryType_ruleMemoFirstNode = parser->currentNode;
-         parser->queryType_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -14971,12 +14313,10 @@ static BOOL typeParameter_rule(JavaParser * parser) {
       if (parser->typeParameter_ruleMemoStart <= parser->typeParameter_ruleMemoEnd) {
          parser->index = parser->typeParameter_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_TYPE_PARAMETER, parser->typeParameter_ruleMemoStart, parser->typeParameter_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->typeParameter_ruleMemoStart == parser->typeParameter_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_TYPE_PARAMETER, parser->typeParameter_ruleMemoStart, parser->typeParameter_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->typeParameter_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->typeParameter_ruleMemoFirstNode;
-               parser->currentNode = parser->typeParameter_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->typeParameter_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -15004,7 +14344,6 @@ static BOOL typeParameter_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->typeParameter_ruleMemoFirstNode = parser->currentNode;
-         parser->typeParameter_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -15286,12 +14625,10 @@ static BOOL annotationMethod_rule(JavaParser * parser) {
       if (parser->annotationMethod_ruleMemoStart <= parser->annotationMethod_ruleMemoEnd) {
          parser->index = parser->annotationMethod_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ANNOTATION_METHOD, parser->annotationMethod_ruleMemoStart, parser->annotationMethod_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->annotationMethod_ruleMemoStart == parser->annotationMethod_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ANNOTATION_METHOD, parser->annotationMethod_ruleMemoStart, parser->annotationMethod_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->annotationMethod_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->annotationMethod_ruleMemoFirstNode;
-               parser->currentNode = parser->annotationMethod_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->annotationMethod_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -15344,7 +14681,6 @@ static BOOL annotationMethod_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->annotationMethod_ruleMemoFirstNode = parser->currentNode;
-         parser->annotationMethod_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -15367,12 +14703,10 @@ static BOOL annotationsConstants_rule(JavaParser * parser) {
       if (parser->annotationsConstants_ruleMemoStart <= parser->annotationsConstants_ruleMemoEnd) {
          parser->index = parser->annotationsConstants_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ANNOTATIONS_CONSTANTS, parser->annotationsConstants_ruleMemoStart, parser->annotationsConstants_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->annotationsConstants_ruleMemoStart == parser->annotationsConstants_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ANNOTATIONS_CONSTANTS, parser->annotationsConstants_ruleMemoStart, parser->annotationsConstants_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->annotationsConstants_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->annotationsConstants_ruleMemoFirstNode;
-               parser->currentNode = parser->annotationsConstants_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->annotationsConstants_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -15406,7 +14740,6 @@ static BOOL annotationsConstants_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->annotationsConstants_ruleMemoFirstNode = parser->currentNode;
-         parser->annotationsConstants_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -15465,12 +14798,10 @@ static BOOL elementValue_rule(JavaParser * parser) {
       if (parser->elementValue_ruleMemoStart <= parser->elementValue_ruleMemoEnd) {
          parser->index = parser->elementValue_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ELEMENT_VALUE, parser->elementValue_ruleMemoStart, parser->elementValue_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->elementValue_ruleMemoStart == parser->elementValue_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ELEMENT_VALUE, parser->elementValue_ruleMemoStart, parser->elementValue_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->elementValue_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->elementValue_ruleMemoFirstNode;
-               parser->currentNode = parser->elementValue_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->elementValue_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -15581,7 +14912,6 @@ static BOOL elementValue_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->elementValue_ruleMemoFirstNode = parser->currentNode;
-         parser->elementValue_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -15640,12 +14970,10 @@ static BOOL normalAnnotationRest_rule(JavaParser * parser) {
       if (parser->normalAnnotationRest_ruleMemoStart <= parser->normalAnnotationRest_ruleMemoEnd) {
          parser->index = parser->normalAnnotationRest_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_NORMAL_ANNOTATION_REST, parser->normalAnnotationRest_ruleMemoStart, parser->normalAnnotationRest_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->normalAnnotationRest_ruleMemoStart == parser->normalAnnotationRest_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_NORMAL_ANNOTATION_REST, parser->normalAnnotationRest_ruleMemoStart, parser->normalAnnotationRest_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->normalAnnotationRest_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->normalAnnotationRest_ruleMemoFirstNode;
-               parser->currentNode = parser->normalAnnotationRest_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->normalAnnotationRest_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -15682,7 +15010,6 @@ static BOOL normalAnnotationRest_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->normalAnnotationRest_ruleMemoFirstNode = parser->currentNode;
-         parser->normalAnnotationRest_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -15705,12 +15032,10 @@ static BOOL singleElementAnnotationRest_rule(JavaParser * parser) {
       if (parser->singleElementAnnotationRest_ruleMemoStart <= parser->singleElementAnnotationRest_ruleMemoEnd) {
          parser->index = parser->singleElementAnnotationRest_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_SINGLE_ELEMENT_ANNOTATION_REST, parser->singleElementAnnotationRest_ruleMemoStart, parser->singleElementAnnotationRest_ruleMemoEnd, TRUE, TRUE);
+            lastNode->sibling = parser->currentNode;
             if (parser->singleElementAnnotationRest_ruleMemoStart == parser->singleElementAnnotationRest_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_SINGLE_ELEMENT_ANNOTATION_REST, parser->singleElementAnnotationRest_ruleMemoStart, parser->singleElementAnnotationRest_ruleMemoEnd, TRUE, TRUE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->singleElementAnnotationRest_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->singleElementAnnotationRest_ruleMemoFirstNode;
-               parser->currentNode = parser->singleElementAnnotationRest_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->singleElementAnnotationRest_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -15748,7 +15073,6 @@ static BOOL singleElementAnnotationRest_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->singleElementAnnotationRest_ruleMemoFirstNode = parser->currentNode;
-         parser->singleElementAnnotationRest_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -15822,12 +15146,10 @@ static BOOL elementValuePair_rule(JavaParser * parser) {
       if (parser->elementValuePair_ruleMemoStart <= parser->elementValuePair_ruleMemoEnd) {
          parser->index = parser->elementValuePair_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ELEMENT_VALUE_PAIR, parser->elementValuePair_ruleMemoStart, parser->elementValuePair_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->elementValuePair_ruleMemoStart == parser->elementValuePair_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ELEMENT_VALUE_PAIR, parser->elementValuePair_ruleMemoStart, parser->elementValuePair_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->elementValuePair_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->elementValuePair_ruleMemoFirstNode;
-               parser->currentNode = parser->elementValuePair_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->elementValuePair_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -15861,7 +15183,6 @@ static BOOL elementValuePair_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->elementValuePair_ruleMemoFirstNode = parser->currentNode;
-         parser->elementValuePair_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -15884,12 +15205,10 @@ static BOOL elementValueArrayInitializer_rule(JavaParser * parser) {
       if (parser->elementValueArrayInitializer_ruleMemoStart <= parser->elementValueArrayInitializer_ruleMemoEnd) {
          parser->index = parser->elementValueArrayInitializer_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_ELEMENT_VALUE_ARRAY_INITIALIZER, parser->elementValueArrayInitializer_ruleMemoStart, parser->elementValueArrayInitializer_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->elementValueArrayInitializer_ruleMemoStart == parser->elementValueArrayInitializer_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_ELEMENT_VALUE_ARRAY_INITIALIZER, parser->elementValueArrayInitializer_ruleMemoStart, parser->elementValueArrayInitializer_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->elementValueArrayInitializer_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->elementValueArrayInitializer_ruleMemoFirstNode;
-               parser->currentNode = parser->elementValueArrayInitializer_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->elementValueArrayInitializer_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -15942,7 +15261,6 @@ static BOOL elementValueArrayInitializer_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->elementValueArrayInitializer_ruleMemoFirstNode = parser->currentNode;
-         parser->elementValueArrayInitializer_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -16012,93 +15330,22 @@ static BOOL testNoAlpha_rule(JavaParser * parser) {
    BOOL match;
    // ('a'-'z' | 'A'-'Z' | '0'-'9' | '_' | '$')!
    // ('a'-'z' | 'A'-'Z' | '0'-'9' | '_' | '$')
-   switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-      case '_': {
-         // '_'
-         match = yapp_buffer_matchChar(parser->buffer, parser->index, '_');
-         break;
-      }
-      case '0':
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9': {
+   // 'a'-'z'
+   match = yapp_buffer_matchCharRange(parser->buffer, parser->index, 'a', 'z');
+   if (! match) {
+      // 'A'-'Z'
+      match = yapp_buffer_matchCharRange(parser->buffer, parser->index, 'A', 'Z');
+      if (! match) {
          // '0'-'9'
          match = yapp_buffer_matchCharRange(parser->buffer, parser->index, '0', '9');
-         break;
-      }
-      case 'A':
-      case 'B':
-      case 'C':
-      case 'D':
-      case 'E':
-      case 'F':
-      case 'G':
-      case 'H':
-      case 'I':
-      case 'J':
-      case 'K':
-      case 'L':
-      case 'M':
-      case 'N':
-      case 'O':
-      case 'P':
-      case 'Q':
-      case 'R':
-      case 'S':
-      case 'T':
-      case 'U':
-      case 'V':
-      case 'W':
-      case 'X':
-      case 'Y':
-      case 'Z': {
-         // 'A'-'Z'
-         match = yapp_buffer_matchCharRange(parser->buffer, parser->index, 'A', 'Z');
-         break;
-      }
-      case 'a':
-      case 'b':
-      case 'c':
-      case 'd':
-      case 'e':
-      case 'f':
-      case 'g':
-      case 'h':
-      case 'i':
-      case 'j':
-      case 'k':
-      case 'l':
-      case 'm':
-      case 'n':
-      case 'o':
-      case 'p':
-      case 'q':
-      case 'r':
-      case 's':
-      case 't':
-      case 'u':
-      case 'v':
-      case 'w':
-      case 'x':
-      case 'y':
-      case 'z': {
-         // 'a'-'z'
-         match = yapp_buffer_matchCharRange(parser->buffer, parser->index, 'a', 'z');
-         break;
-      }
-      case '$': {
-         // '$'
-         match = yapp_buffer_matchChar(parser->buffer, parser->index, '$');
-         break;
-      }
-      default: {
-         match = FALSE;
+         if (! match) {
+            // '_'
+            match = yapp_buffer_matchChar(parser->buffer, parser->index, '_');
+            if (! match) {
+               // '$'
+               match = yapp_buffer_matchChar(parser->buffer, parser->index, '$');
+            }
+         }
       }
    }
    match = ! match;
@@ -16217,12 +15464,10 @@ static BOOL optionalSpacing_rule(JavaParser * parser) {
       if (parser->optionalSpacing_ruleMemoStart <= parser->optionalSpacing_ruleMemoEnd) {
          parser->index = parser->optionalSpacing_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_SPACING, parser->optionalSpacing_ruleMemoStart, parser->optionalSpacing_ruleMemoEnd, FALSE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->optionalSpacing_ruleMemoStart == parser->optionalSpacing_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_SPACING, parser->optionalSpacing_ruleMemoStart, parser->optionalSpacing_ruleMemoEnd, FALSE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->optionalSpacing_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->optionalSpacing_ruleMemoFirstNode;
-               parser->currentNode = parser->optionalSpacing_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->optionalSpacing_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -16279,7 +15524,6 @@ static BOOL optionalSpacing_rule(JavaParser * parser) {
       parser->currentNode->firstChild = lastNode->sibling;
       lastNode->sibling = parser->currentNode;
       parser->optionalSpacing_ruleMemoFirstNode = parser->currentNode;
-      parser->optionalSpacing_ruleMemoLastNode = parser->currentNode;
    }
    return TRUE;
 }
@@ -16294,12 +15538,10 @@ static BOOL spaces_rule(JavaParser * parser) {
       if (parser->spaces_ruleMemoStart <= parser->spaces_ruleMemoEnd) {
          parser->index = parser->spaces_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_SPACES, parser->spaces_ruleMemoStart, parser->spaces_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->spaces_ruleMemoStart == parser->spaces_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_SPACES, parser->spaces_ruleMemoStart, parser->spaces_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->spaces_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->spaces_ruleMemoFirstNode;
-               parser->currentNode = parser->spaces_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->spaces_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -16385,7 +15627,6 @@ static BOOL spaces_rule(JavaParser * parser) {
          parser->currentNode = createNode(parser, &JAVA_SPACES, startIndex, parser->index, TRUE, FALSE);
          lastNode->sibling = parser->currentNode;
          parser->spaces_ruleMemoFirstNode = parser->currentNode;
-         parser->spaces_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -16410,12 +15651,10 @@ static BOOL blockComment_rule(JavaParser * parser) {
       if (parser->blockComment_ruleMemoStart <= parser->blockComment_ruleMemoEnd) {
          parser->index = parser->blockComment_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_BLOCK_COMMENT, parser->blockComment_ruleMemoStart, parser->blockComment_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->blockComment_ruleMemoStart == parser->blockComment_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_BLOCK_COMMENT, parser->blockComment_ruleMemoStart, parser->blockComment_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->blockComment_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->blockComment_ruleMemoFirstNode;
-               parser->currentNode = parser->blockComment_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->blockComment_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -16461,7 +15700,6 @@ static BOOL blockComment_rule(JavaParser * parser) {
          parser->currentNode = createNode(parser, &JAVA_BLOCK_COMMENT, startIndex, parser->index, TRUE, FALSE);
          lastNode->sibling = parser->currentNode;
          parser->blockComment_ruleMemoFirstNode = parser->currentNode;
-         parser->blockComment_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -16486,12 +15724,10 @@ static BOOL newLine_rule(JavaParser * parser) {
       if (parser->newLine_ruleMemoStart <= parser->newLine_ruleMemoEnd) {
          parser->index = parser->newLine_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_NEW_LINE, parser->newLine_ruleMemoStart, parser->newLine_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->newLine_ruleMemoStart == parser->newLine_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_NEW_LINE, parser->newLine_ruleMemoStart, parser->newLine_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->newLine_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->newLine_ruleMemoFirstNode;
-               parser->currentNode = parser->newLine_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->newLine_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -16531,7 +15767,6 @@ static BOOL newLine_rule(JavaParser * parser) {
          parser->currentNode = createNode(parser, &JAVA_NEW_LINE, startIndex, parser->index, TRUE, FALSE);
          lastNode->sibling = parser->currentNode;
          parser->newLine_ruleMemoFirstNode = parser->currentNode;
-         parser->newLine_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -16556,12 +15791,10 @@ static BOOL lineComment_rule(JavaParser * parser) {
       if (parser->lineComment_ruleMemoStart <= parser->lineComment_ruleMemoEnd) {
          parser->index = parser->lineComment_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_LINE_COMMENT, parser->lineComment_ruleMemoStart, parser->lineComment_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->lineComment_ruleMemoStart == parser->lineComment_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_LINE_COMMENT, parser->lineComment_ruleMemoStart, parser->lineComment_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->lineComment_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->lineComment_ruleMemoFirstNode;
-               parser->currentNode = parser->lineComment_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->lineComment_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -16594,18 +15827,12 @@ static BOOL lineComment_rule(JavaParser * parser) {
             }
          }
       } while(match);
-      match = TRUE;
       // (NewLine | <EOI>)
-      switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-         case '\n':
-         case '\r': {
-            // NewLine
-            match = newLine_rule(parser);
-            break;
-         }
-         default: {
-            match = FALSE;
-         }
+      // NewLine
+      match = newLine_rule(parser);
+      if (! match) {
+         // <EOI>
+         match = eoi(parser);
       }
    }
    if (match) {
@@ -16618,7 +15845,6 @@ static BOOL lineComment_rule(JavaParser * parser) {
          parser->currentNode = createNode(parser, &JAVA_LINE_COMMENT, startIndex, parser->index, TRUE, FALSE);
          lastNode->sibling = parser->currentNode;
          parser->lineComment_ruleMemoFirstNode = parser->currentNode;
-         parser->lineComment_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -16642,12 +15868,10 @@ static BOOL floatLiteral_rule(JavaParser * parser) {
       if (parser->floatLiteral_ruleMemoStart <= parser->floatLiteral_ruleMemoEnd) {
          parser->index = parser->floatLiteral_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_FLOAT_LITERAL, parser->floatLiteral_ruleMemoStart, parser->floatLiteral_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->floatLiteral_ruleMemoStart == parser->floatLiteral_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_FLOAT_LITERAL, parser->floatLiteral_ruleMemoStart, parser->floatLiteral_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->floatLiteral_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->floatLiteral_ruleMemoFirstNode;
-               parser->currentNode = parser->floatLiteral_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->floatLiteral_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -16695,7 +15919,6 @@ static BOOL floatLiteral_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->floatLiteral_ruleMemoFirstNode = parser->currentNode;
-         parser->floatLiteral_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -16719,12 +15942,10 @@ static BOOL longLiteral_rule(JavaParser * parser) {
       if (parser->longLiteral_ruleMemoStart <= parser->longLiteral_ruleMemoEnd) {
          parser->index = parser->longLiteral_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_LONG_LITERAL, parser->longLiteral_ruleMemoStart, parser->longLiteral_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->longLiteral_ruleMemoStart == parser->longLiteral_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_LONG_LITERAL, parser->longLiteral_ruleMemoStart, parser->longLiteral_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->longLiteral_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->longLiteral_ruleMemoFirstNode;
-               parser->currentNode = parser->longLiteral_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->longLiteral_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -16767,7 +15988,6 @@ static BOOL longLiteral_rule(JavaParser * parser) {
          parser->currentNode = createNode(parser, &JAVA_LONG_LITERAL, startIndex, parser->index, TRUE, FALSE);
          lastNode->sibling = parser->currentNode;
          parser->longLiteral_ruleMemoFirstNode = parser->currentNode;
-         parser->longLiteral_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -16792,12 +16012,10 @@ static BOOL integerLiteral_rule(JavaParser * parser) {
       if (parser->integerLiteral_ruleMemoStart <= parser->integerLiteral_ruleMemoEnd) {
          parser->index = parser->integerLiteral_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_INTEGER_LITERAL, parser->integerLiteral_ruleMemoStart, parser->integerLiteral_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->integerLiteral_ruleMemoStart == parser->integerLiteral_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_INTEGER_LITERAL, parser->integerLiteral_ruleMemoStart, parser->integerLiteral_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->integerLiteral_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->integerLiteral_ruleMemoFirstNode;
-               parser->currentNode = parser->integerLiteral_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->integerLiteral_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -16837,85 +16055,27 @@ static BOOL integerLiteral_rule(JavaParser * parser) {
             if (match) {
                // HexDigit+
                // ('a'-'f' | 'A'-'F' | '0'-'9')
-               switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                  case '0':
-                  case '1':
-                  case '2':
-                  case '3':
-                  case '4':
-                  case '5':
-                  case '6':
-                  case '7':
-                  case '8':
-                  case '9': {
+               // 'a'-'f'
+               match = charRangeMatcher(parser, 'a', 'f');
+               if (! match) {
+                  // 'A'-'F'
+                  match = charRangeMatcher(parser, 'A', 'F');
+                  if (! match) {
                      // '0'-'9'
                      match = charRangeMatcher(parser, '0', '9');
-                     break;
-                  }
-                  case 'a':
-                  case 'b':
-                  case 'c':
-                  case 'd':
-                  case 'e':
-                  case 'f': {
-                     // 'a'-'f'
-                     match = charRangeMatcher(parser, 'a', 'f');
-                     break;
-                  }
-                  case 'A':
-                  case 'B':
-                  case 'C':
-                  case 'D':
-                  case 'E':
-                  case 'F': {
-                     // 'A'-'F'
-                     match = charRangeMatcher(parser, 'A', 'F');
-                     break;
-                  }
-                  default: {
-                     match = FALSE;
                   }
                }
                if (match) {
                   do {
                      // ('a'-'f' | 'A'-'F' | '0'-'9')
-                     switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                        case '0':
-                        case '1':
-                        case '2':
-                        case '3':
-                        case '4':
-                        case '5':
-                        case '6':
-                        case '7':
-                        case '8':
-                        case '9': {
+                     // 'a'-'f'
+                     match = charRangeMatcher(parser, 'a', 'f');
+                     if (! match) {
+                        // 'A'-'F'
+                        match = charRangeMatcher(parser, 'A', 'F');
+                        if (! match) {
                            // '0'-'9'
                            match = charRangeMatcher(parser, '0', '9');
-                           break;
-                        }
-                        case 'a':
-                        case 'b':
-                        case 'c':
-                        case 'd':
-                        case 'e':
-                        case 'f': {
-                           // 'a'-'f'
-                           match = charRangeMatcher(parser, 'a', 'f');
-                           break;
-                        }
-                        case 'A':
-                        case 'B':
-                        case 'C':
-                        case 'D':
-                        case 'E':
-                        case 'F': {
-                           // 'A'-'F'
-                           match = charRangeMatcher(parser, 'A', 'F');
-                           break;
-                        }
-                        default: {
-                           match = FALSE;
                         }
                      }
                   } while(match);
@@ -16956,43 +16116,26 @@ static BOOL integerLiteral_rule(JavaParser * parser) {
             }
             if (! match) {
                // ('0' | ('1'-'9' Digit*))
-               switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                  case '0': {
-                     // '0'
-                     match = charMatcher(parser, '0');
-                     break;
-                  }
-                  case '1':
-                  case '2':
-                  case '3':
-                  case '4':
-                  case '5':
-                  case '6':
-                  case '7':
-                  case '8':
-                  case '9': {
-                     // ('1'-'9' Digit*)
-                     YAPP_NODE * lastNode_3 = parser->currentNode;
-                     INT32 lastIndex_3 = parser->index;
-                     // '1'-'9'
-                     match = charRangeMatcher(parser, '1', '9');
-                     if (match) {
-                        // Digit*
-                        do {
-                           // '0'-'9'
-                           match = charRangeMatcher(parser, '0', '9');
-                        } while(match);
-                        match = TRUE;
-                        if (! match) {
-                           parser->index = lastIndex_3;
-                           lastNode_3->sibling = NULL;
-                           parser->currentNode = lastNode_3;
-                        }
+               // '0'
+               match = charMatcher(parser, '0');
+               if (! match) {
+                  // ('1'-'9' Digit*)
+                  YAPP_NODE * lastNode_3 = parser->currentNode;
+                  INT32 lastIndex_3 = parser->index;
+                  // '1'-'9'
+                  match = charRangeMatcher(parser, '1', '9');
+                  if (match) {
+                     // Digit*
+                     do {
+                        // '0'-'9'
+                        match = charRangeMatcher(parser, '0', '9');
+                     } while(match);
+                     match = TRUE;
+                     if (! match) {
+                        parser->index = lastIndex_3;
+                        lastNode_3->sibling = NULL;
+                        parser->currentNode = lastNode_3;
                      }
-                     break;
-                  }
-                  default: {
-                     match = FALSE;
                   }
                }
             }
@@ -17009,43 +16152,26 @@ static BOOL integerLiteral_rule(JavaParser * parser) {
       case '8':
       case '9': {
          // ('0' | ('1'-'9' Digit*))
-         switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-            case '0': {
-               // '0'
-               match = charMatcher(parser, '0');
-               break;
-            }
-            case '1':
-            case '2':
-            case '3':
-            case '4':
-            case '5':
-            case '6':
-            case '7':
-            case '8':
-            case '9': {
-               // ('1'-'9' Digit*)
-               YAPP_NODE * lastNode_4 = parser->currentNode;
-               INT32 lastIndex_4 = parser->index;
-               // '1'-'9'
-               match = charRangeMatcher(parser, '1', '9');
-               if (match) {
-                  // Digit*
-                  do {
-                     // '0'-'9'
-                     match = charRangeMatcher(parser, '0', '9');
-                  } while(match);
-                  match = TRUE;
-                  if (! match) {
-                     parser->index = lastIndex_4;
-                     lastNode_4->sibling = NULL;
-                     parser->currentNode = lastNode_4;
-                  }
+         // '0'
+         match = charMatcher(parser, '0');
+         if (! match) {
+            // ('1'-'9' Digit*)
+            YAPP_NODE * lastNode_4 = parser->currentNode;
+            INT32 lastIndex_4 = parser->index;
+            // '1'-'9'
+            match = charRangeMatcher(parser, '1', '9');
+            if (match) {
+               // Digit*
+               do {
+                  // '0'-'9'
+                  match = charRangeMatcher(parser, '0', '9');
+               } while(match);
+               match = TRUE;
+               if (! match) {
+                  parser->index = lastIndex_4;
+                  lastNode_4->sibling = NULL;
+                  parser->currentNode = lastNode_4;
                }
-               break;
-            }
-            default: {
-               match = FALSE;
             }
          }
          break;
@@ -17064,7 +16190,6 @@ static BOOL integerLiteral_rule(JavaParser * parser) {
          parser->currentNode = createNode(parser, &JAVA_INTEGER_LITERAL, startIndex, parser->index, TRUE, FALSE);
          lastNode->sibling = parser->currentNode;
          parser->integerLiteral_ruleMemoFirstNode = parser->currentNode;
-         parser->integerLiteral_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -17089,12 +16214,10 @@ static BOOL charLiteral_rule(JavaParser * parser) {
       if (parser->charLiteral_ruleMemoStart <= parser->charLiteral_ruleMemoEnd) {
          parser->index = parser->charLiteral_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_CHAR_LITERAL, parser->charLiteral_ruleMemoStart, parser->charLiteral_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->charLiteral_ruleMemoStart == parser->charLiteral_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_CHAR_LITERAL, parser->charLiteral_ruleMemoStart, parser->charLiteral_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->charLiteral_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->charLiteral_ruleMemoFirstNode;
-               parser->currentNode = parser->charLiteral_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->charLiteral_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -17109,729 +16232,373 @@ static BOOL charLiteral_rule(JavaParser * parser) {
    match = charMatcher(parser, '\'');
    if (match) {
       // (Escape | ((''' | '\')! .))
-      switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-         case '\\': {
-            // ('\' (('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\') | OctalEscape | UnicodeEscape))
-            YAPP_NODE * lastNode_1 = parser->currentNode;
-            INT32 lastIndex_1 = parser->index;
-            // '\'
-            match = charMatcher(parser, '\\');
+      // ('\' (('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\') | OctalEscape | UnicodeEscape))
+      YAPP_NODE * lastNode_1 = parser->currentNode;
+      INT32 lastIndex_1 = parser->index;
+      // '\'
+      match = charMatcher(parser, '\\');
+      if (match) {
+         // (('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\') | OctalEscape | UnicodeEscape)
+         // ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\')
+         switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
+            case '\\': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            case 'n': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            case 'b': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            case 'r': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            case '\"': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            case 't': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            case 'f': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            case '\'': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            default: {
+               match = FALSE;
+            }
+         }
+         if (! match) {
+            // (('0'-'3' '0'-'7' '0'-'7') | ('0'-'7' '0'-'7') | '0'-'7')
+            // ('0'-'3' '0'-'7' '0'-'7')
+            YAPP_NODE * lastNode_2 = parser->currentNode;
+            INT32 lastIndex_2 = parser->index;
+            // '0'-'3'
+            match = charRangeMatcher(parser, '0', '3');
             if (match) {
-               // (('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\') | OctalEscape | UnicodeEscape)
-               switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                  case 'r':
-                  case 'b':
-                  case '\"':
-                  case 't':
-                  case 'f':
-                  case '\'':
-                  case '\\':
-                  case 'n': {
-                     // ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\')
-                     switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                        case '\\': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        case 'n': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        case 'b': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        case 'r': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        case '\"': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        case 't': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        case 'f': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        case '\'': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        default: {
-                           match = FALSE;
-                        }
-                     }
-                     break;
+               // '0'-'7'
+               match = charRangeMatcher(parser, '0', '7');
+               if (match) {
+                  // '0'-'7'
+                  match = charRangeMatcher(parser, '0', '7');
+                  if (! match) {
+                     parser->index = lastIndex_2;
+                     lastNode_2->sibling = NULL;
+                     parser->currentNode = lastNode_2;
                   }
-                  case '0':
-                  case '1':
-                  case '2':
-                  case '3':
-                  case '4':
-                  case '5':
-                  case '6':
-                  case '7': {
-                     // (('0'-'3' '0'-'7' '0'-'7') | ('0'-'7' '0'-'7') | '0'-'7')
-                     switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                        case '0':
-                        case '1':
-                        case '2':
-                        case '3': {
-                           // ('0'-'3' '0'-'7' '0'-'7')
-                           YAPP_NODE * lastNode_2 = parser->currentNode;
-                           INT32 lastIndex_2 = parser->index;
-                           // '0'-'3'
-                           match = charRangeMatcher(parser, '0', '3');
-                           if (match) {
-                              // '0'-'7'
-                              match = charRangeMatcher(parser, '0', '7');
-                              if (match) {
-                                 // '0'-'7'
-                                 match = charRangeMatcher(parser, '0', '7');
-                                 if (! match) {
-                                    parser->index = lastIndex_2;
-                                    lastNode_2->sibling = NULL;
-                                    parser->currentNode = lastNode_2;
-                                 }
-                              } else {
-                                 parser->index = lastIndex_2;
-                                 lastNode_2->sibling = NULL;
-                              }
-                           }
-                           if (! match) {
-                              // ('0'-'7' '0'-'7')
-                              YAPP_NODE * lastNode_3 = parser->currentNode;
-                              INT32 lastIndex_3 = parser->index;
-                              // '0'-'7'
-                              match = charRangeMatcher(parser, '0', '7');
-                              if (match) {
-                                 // '0'-'7'
-                                 match = charRangeMatcher(parser, '0', '7');
-                                 if (! match) {
-                                    parser->index = lastIndex_3;
-                                    lastNode_3->sibling = NULL;
-                                    parser->currentNode = lastNode_3;
-                                 }
-                              }
-                              if (! match) {
-                                 // '0'-'7'
-                                 match = charRangeMatcher(parser, '0', '7');
-                              }
-                           }
-                           break;
-                        }
-                        case '4':
-                        case '5':
-                        case '6':
-                        case '7': {
-                           // ('0'-'7' '0'-'7')
-                           YAPP_NODE * lastNode_4 = parser->currentNode;
-                           INT32 lastIndex_4 = parser->index;
-                           // '0'-'7'
-                           match = charRangeMatcher(parser, '0', '7');
-                           if (match) {
-                              // '0'-'7'
-                              match = charRangeMatcher(parser, '0', '7');
-                              if (! match) {
-                                 parser->index = lastIndex_4;
-                                 lastNode_4->sibling = NULL;
-                                 parser->currentNode = lastNode_4;
-                              }
-                           }
-                           if (! match) {
-                              // '0'-'7'
-                              match = charRangeMatcher(parser, '0', '7');
-                           }
-                           break;
-                        }
-                        default: {
-                           match = FALSE;
-                        }
-                     }
-                     break;
+               } else {
+                  parser->index = lastIndex_2;
+                  lastNode_2->sibling = NULL;
+               }
+            }
+            if (! match) {
+               // ('0'-'7' '0'-'7')
+               YAPP_NODE * lastNode_3 = parser->currentNode;
+               INT32 lastIndex_3 = parser->index;
+               // '0'-'7'
+               match = charRangeMatcher(parser, '0', '7');
+               if (match) {
+                  // '0'-'7'
+                  match = charRangeMatcher(parser, '0', '7');
+                  if (! match) {
+                     parser->index = lastIndex_3;
+                     lastNode_3->sibling = NULL;
+                     parser->currentNode = lastNode_3;
                   }
-                  case 'u': {
-                     // (('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))) | ('u'+ HexDigit HexDigit HexDigit HexDigit))
-                     switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                        case 'u': {
-                           // ('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit)))
-                           YAPP_NODE * lastNode_5 = parser->currentNode;
-                           INT32 lastIndex_5 = parser->index;
-                           // 'u'+
-                           // 'u'
-                           match = charMatcher(parser, 'u');
-                           if (match) {
-                              do {
-                                 // 'u'
-                                 match = charMatcher(parser, 'u');
-                              } while(match);
-                              match = TRUE;
-                           }
-                           if (match) {
-                              // "005C"
-                              match = ignoreCaseStringMatcher(parser, "005C", 4);
-                              if (match) {
-                                 // ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))
-                                 switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                    case '\\': {
-                                       // '\'
-                                       match = charMatcher(parser, '\\');
-                                       break;
-                                    }
-                                    case 'n': {
-                                       // 'n'
-                                       match = charMatcher(parser, 'n');
-                                       break;
-                                    }
-                                    case 'b': {
-                                       // 'b'
-                                       match = charMatcher(parser, 'b');
-                                       break;
-                                    }
-                                    case 'r': {
-                                       // 'r'
-                                       match = charMatcher(parser, 'r');
-                                       break;
-                                    }
-                                    case '\"': {
-                                       // '"'
-                                       match = charMatcher(parser, '\"');
-                                       break;
-                                    }
-                                    case 't': {
-                                       // 't'
-                                       match = charMatcher(parser, 't');
-                                       break;
-                                    }
-                                    case 'u': {
-                                       // ('u'+ HexDigit HexDigit HexDigit HexDigit)
-                                       YAPP_NODE * lastNode_6 = parser->currentNode;
-                                       INT32 lastIndex_6 = parser->index;
-                                       // 'u'+
-                                       // 'u'
-                                       match = charMatcher(parser, 'u');
-                                       if (match) {
-                                          do {
+               }
+               if (! match) {
+                  // '0'-'7'
+                  match = charRangeMatcher(parser, '0', '7');
+               }
+            }
+            if (! match) {
+               // (('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))) | ('u'+ HexDigit HexDigit HexDigit HexDigit))
+               // ('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit)))
+               YAPP_NODE * lastNode_4 = parser->currentNode;
+               INT32 lastIndex_4 = parser->index;
+               // 'u'+
+               // 'u'
+               match = charMatcher(parser, 'u');
+               if (match) {
+                  do {
+                     // 'u'
+                     match = charMatcher(parser, 'u');
+                  } while(match);
+                  match = TRUE;
+               }
+               if (match) {
+                  // "005C"
+                  match = ignoreCaseStringMatcher(parser, "005C", 4);
+                  if (match) {
+                     // ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))
+                     // 'b'
+                     match = charMatcher(parser, 'b');
+                     if (! match) {
+                        // 't'
+                        match = charMatcher(parser, 't');
+                        if (! match) {
+                           // 'n'
+                           match = charMatcher(parser, 'n');
+                           if (! match) {
+                              // 'f'
+                              match = charMatcher(parser, 'f');
+                              if (! match) {
+                                 // 'r'
+                                 match = charMatcher(parser, 'r');
+                                 if (! match) {
+                                    // '"'
+                                    match = charMatcher(parser, '\"');
+                                    if (! match) {
+                                       // '''
+                                       match = charMatcher(parser, '\'');
+                                       if (! match) {
+                                          // '\'
+                                          match = charMatcher(parser, '\\');
+                                          if (! match) {
+                                             // ('u'+ HexDigit HexDigit HexDigit HexDigit)
+                                             YAPP_NODE * lastNode_5 = parser->currentNode;
+                                             INT32 lastIndex_5 = parser->index;
+                                             // 'u'+
                                              // 'u'
                                              match = charMatcher(parser, 'u');
-                                          } while(match);
-                                          match = TRUE;
-                                       }
-                                       if (match) {
-                                          // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                          switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                             case '0':
-                                             case '1':
-                                             case '2':
-                                             case '3':
-                                             case '4':
-                                             case '5':
-                                             case '6':
-                                             case '7':
-                                             case '8':
-                                             case '9': {
-                                                // '0'-'9'
-                                                match = charRangeMatcher(parser, '0', '9');
-                                                break;
-                                             }
-                                             case 'a':
-                                             case 'b':
-                                             case 'c':
-                                             case 'd':
-                                             case 'e':
-                                             case 'f': {
-                                                // 'a'-'f'
-                                                match = charRangeMatcher(parser, 'a', 'f');
-                                                break;
-                                             }
-                                             case 'A':
-                                             case 'B':
-                                             case 'C':
-                                             case 'D':
-                                             case 'E':
-                                             case 'F': {
-                                                // 'A'-'F'
-                                                match = charRangeMatcher(parser, 'A', 'F');
-                                                break;
-                                             }
-                                             default: {
-                                                match = FALSE;
-                                             }
-                                          }
-                                          if (match) {
-                                             // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                             switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                                case '0':
-                                                case '1':
-                                                case '2':
-                                                case '3':
-                                                case '4':
-                                                case '5':
-                                                case '6':
-                                                case '7':
-                                                case '8':
-                                                case '9': {
-                                                   // '0'-'9'
-                                                   match = charRangeMatcher(parser, '0', '9');
-                                                   break;
-                                                }
-                                                case 'a':
-                                                case 'b':
-                                                case 'c':
-                                                case 'd':
-                                                case 'e':
-                                                case 'f': {
-                                                   // 'a'-'f'
-                                                   match = charRangeMatcher(parser, 'a', 'f');
-                                                   break;
-                                                }
-                                                case 'A':
-                                                case 'B':
-                                                case 'C':
-                                                case 'D':
-                                                case 'E':
-                                                case 'F': {
-                                                   // 'A'-'F'
-                                                   match = charRangeMatcher(parser, 'A', 'F');
-                                                   break;
-                                                }
-                                                default: {
-                                                   match = FALSE;
-                                                }
+                                             if (match) {
+                                                do {
+                                                   // 'u'
+                                                   match = charMatcher(parser, 'u');
+                                                } while(match);
+                                                match = TRUE;
                                              }
                                              if (match) {
                                                 // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                                switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                                   case '0':
-                                                   case '1':
-                                                   case '2':
-                                                   case '3':
-                                                   case '4':
-                                                   case '5':
-                                                   case '6':
-                                                   case '7':
-                                                   case '8':
-                                                   case '9': {
+                                                // 'a'-'f'
+                                                match = charRangeMatcher(parser, 'a', 'f');
+                                                if (! match) {
+                                                   // 'A'-'F'
+                                                   match = charRangeMatcher(parser, 'A', 'F');
+                                                   if (! match) {
                                                       // '0'-'9'
                                                       match = charRangeMatcher(parser, '0', '9');
-                                                      break;
-                                                   }
-                                                   case 'a':
-                                                   case 'b':
-                                                   case 'c':
-                                                   case 'd':
-                                                   case 'e':
-                                                   case 'f': {
-                                                      // 'a'-'f'
-                                                      match = charRangeMatcher(parser, 'a', 'f');
-                                                      break;
-                                                   }
-                                                   case 'A':
-                                                   case 'B':
-                                                   case 'C':
-                                                   case 'D':
-                                                   case 'E':
-                                                   case 'F': {
-                                                      // 'A'-'F'
-                                                      match = charRangeMatcher(parser, 'A', 'F');
-                                                      break;
-                                                   }
-                                                   default: {
-                                                      match = FALSE;
                                                    }
                                                 }
                                                 if (match) {
                                                    // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                                   switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                                      case '0':
-                                                      case '1':
-                                                      case '2':
-                                                      case '3':
-                                                      case '4':
-                                                      case '5':
-                                                      case '6':
-                                                      case '7':
-                                                      case '8':
-                                                      case '9': {
+                                                   // 'a'-'f'
+                                                   match = charRangeMatcher(parser, 'a', 'f');
+                                                   if (! match) {
+                                                      // 'A'-'F'
+                                                      match = charRangeMatcher(parser, 'A', 'F');
+                                                      if (! match) {
                                                          // '0'-'9'
                                                          match = charRangeMatcher(parser, '0', '9');
-                                                         break;
                                                       }
-                                                      case 'a':
-                                                      case 'b':
-                                                      case 'c':
-                                                      case 'd':
-                                                      case 'e':
-                                                      case 'f': {
-                                                         // 'a'-'f'
-                                                         match = charRangeMatcher(parser, 'a', 'f');
-                                                         break;
-                                                      }
-                                                      case 'A':
-                                                      case 'B':
-                                                      case 'C':
-                                                      case 'D':
-                                                      case 'E':
-                                                      case 'F': {
+                                                   }
+                                                   if (match) {
+                                                      // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                                      // 'a'-'f'
+                                                      match = charRangeMatcher(parser, 'a', 'f');
+                                                      if (! match) {
                                                          // 'A'-'F'
                                                          match = charRangeMatcher(parser, 'A', 'F');
-                                                         break;
+                                                         if (! match) {
+                                                            // '0'-'9'
+                                                            match = charRangeMatcher(parser, '0', '9');
+                                                         }
                                                       }
-                                                      default: {
-                                                         match = FALSE;
+                                                      if (match) {
+                                                         // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                                         // 'a'-'f'
+                                                         match = charRangeMatcher(parser, 'a', 'f');
+                                                         if (! match) {
+                                                            // 'A'-'F'
+                                                            match = charRangeMatcher(parser, 'A', 'F');
+                                                            if (! match) {
+                                                               // '0'-'9'
+                                                               match = charRangeMatcher(parser, '0', '9');
+                                                            }
+                                                         }
+                                                         if (! match) {
+                                                            parser->index = lastIndex_5;
+                                                            lastNode_5->sibling = NULL;
+                                                            parser->currentNode = lastNode_5;
+                                                         }
+                                                      } else {
+                                                         parser->index = lastIndex_5;
+                                                         lastNode_5->sibling = NULL;
                                                       }
-                                                   }
-                                                   if (! match) {
-                                                      parser->index = lastIndex_6;
-                                                      lastNode_6->sibling = NULL;
-                                                      parser->currentNode = lastNode_6;
+                                                   } else {
+                                                      parser->index = lastIndex_5;
+                                                      lastNode_5->sibling = NULL;
                                                    }
                                                 } else {
-                                                   parser->index = lastIndex_6;
-                                                   lastNode_6->sibling = NULL;
+                                                   parser->index = lastIndex_5;
+                                                   lastNode_5->sibling = NULL;
                                                 }
-                                             } else {
-                                                parser->index = lastIndex_6;
-                                                lastNode_6->sibling = NULL;
-                                             }
-                                          } else {
-                                             parser->index = lastIndex_6;
-                                             lastNode_6->sibling = NULL;
-                                          }
-                                       }
-                                       break;
-                                    }
-                                    case 'f': {
-                                       // 'f'
-                                       match = charMatcher(parser, 'f');
-                                       break;
-                                    }
-                                    case '\'': {
-                                       // '''
-                                       match = charMatcher(parser, '\'');
-                                       break;
-                                    }
-                                    default: {
-                                       match = FALSE;
-                                    }
-                                 }
-                                 if (! match) {
-                                    parser->index = lastIndex_5;
-                                    lastNode_5->sibling = NULL;
-                                    parser->currentNode = lastNode_5;
-                                 }
-                              } else {
-                                 parser->index = lastIndex_5;
-                                 lastNode_5->sibling = NULL;
-                              }
-                           }
-                           if (! match) {
-                              // ('u'+ HexDigit HexDigit HexDigit HexDigit)
-                              YAPP_NODE * lastNode_7 = parser->currentNode;
-                              INT32 lastIndex_7 = parser->index;
-                              // 'u'+
-                              // 'u'
-                              match = charMatcher(parser, 'u');
-                              if (match) {
-                                 do {
-                                    // 'u'
-                                    match = charMatcher(parser, 'u');
-                                 } while(match);
-                                 match = TRUE;
-                              }
-                              if (match) {
-                                 // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                 switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                    case '0':
-                                    case '1':
-                                    case '2':
-                                    case '3':
-                                    case '4':
-                                    case '5':
-                                    case '6':
-                                    case '7':
-                                    case '8':
-                                    case '9': {
-                                       // '0'-'9'
-                                       match = charRangeMatcher(parser, '0', '9');
-                                       break;
-                                    }
-                                    case 'a':
-                                    case 'b':
-                                    case 'c':
-                                    case 'd':
-                                    case 'e':
-                                    case 'f': {
-                                       // 'a'-'f'
-                                       match = charRangeMatcher(parser, 'a', 'f');
-                                       break;
-                                    }
-                                    case 'A':
-                                    case 'B':
-                                    case 'C':
-                                    case 'D':
-                                    case 'E':
-                                    case 'F': {
-                                       // 'A'-'F'
-                                       match = charRangeMatcher(parser, 'A', 'F');
-                                       break;
-                                    }
-                                    default: {
-                                       match = FALSE;
-                                    }
-                                 }
-                                 if (match) {
-                                    // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                    switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                       case '0':
-                                       case '1':
-                                       case '2':
-                                       case '3':
-                                       case '4':
-                                       case '5':
-                                       case '6':
-                                       case '7':
-                                       case '8':
-                                       case '9': {
-                                          // '0'-'9'
-                                          match = charRangeMatcher(parser, '0', '9');
-                                          break;
-                                       }
-                                       case 'a':
-                                       case 'b':
-                                       case 'c':
-                                       case 'd':
-                                       case 'e':
-                                       case 'f': {
-                                          // 'a'-'f'
-                                          match = charRangeMatcher(parser, 'a', 'f');
-                                          break;
-                                       }
-                                       case 'A':
-                                       case 'B':
-                                       case 'C':
-                                       case 'D':
-                                       case 'E':
-                                       case 'F': {
-                                          // 'A'-'F'
-                                          match = charRangeMatcher(parser, 'A', 'F');
-                                          break;
-                                       }
-                                       default: {
-                                          match = FALSE;
-                                       }
-                                    }
-                                    if (match) {
-                                       // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                       switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                          case '0':
-                                          case '1':
-                                          case '2':
-                                          case '3':
-                                          case '4':
-                                          case '5':
-                                          case '6':
-                                          case '7':
-                                          case '8':
-                                          case '9': {
-                                             // '0'-'9'
-                                             match = charRangeMatcher(parser, '0', '9');
-                                             break;
-                                          }
-                                          case 'a':
-                                          case 'b':
-                                          case 'c':
-                                          case 'd':
-                                          case 'e':
-                                          case 'f': {
-                                             // 'a'-'f'
-                                             match = charRangeMatcher(parser, 'a', 'f');
-                                             break;
-                                          }
-                                          case 'A':
-                                          case 'B':
-                                          case 'C':
-                                          case 'D':
-                                          case 'E':
-                                          case 'F': {
-                                             // 'A'-'F'
-                                             match = charRangeMatcher(parser, 'A', 'F');
-                                             break;
-                                          }
-                                          default: {
-                                             match = FALSE;
-                                          }
-                                       }
-                                       if (match) {
-                                          // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                          switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                             case '0':
-                                             case '1':
-                                             case '2':
-                                             case '3':
-                                             case '4':
-                                             case '5':
-                                             case '6':
-                                             case '7':
-                                             case '8':
-                                             case '9': {
-                                                // '0'-'9'
-                                                match = charRangeMatcher(parser, '0', '9');
-                                                break;
-                                             }
-                                             case 'a':
-                                             case 'b':
-                                             case 'c':
-                                             case 'd':
-                                             case 'e':
-                                             case 'f': {
-                                                // 'a'-'f'
-                                                match = charRangeMatcher(parser, 'a', 'f');
-                                                break;
-                                             }
-                                             case 'A':
-                                             case 'B':
-                                             case 'C':
-                                             case 'D':
-                                             case 'E':
-                                             case 'F': {
-                                                // 'A'-'F'
-                                                match = charRangeMatcher(parser, 'A', 'F');
-                                                break;
-                                             }
-                                             default: {
-                                                match = FALSE;
                                              }
                                           }
-                                          if (! match) {
-                                             parser->index = lastIndex_7;
-                                             lastNode_7->sibling = NULL;
-                                             parser->currentNode = lastNode_7;
-                                          }
-                                       } else {
-                                          parser->index = lastIndex_7;
-                                          lastNode_7->sibling = NULL;
                                        }
-                                    } else {
-                                       parser->index = lastIndex_7;
-                                       lastNode_7->sibling = NULL;
                                     }
-                                 } else {
-                                    parser->index = lastIndex_7;
-                                    lastNode_7->sibling = NULL;
                                  }
                               }
                            }
-                           break;
-                        }
-                        default: {
-                           match = FALSE;
                         }
                      }
-                     break;
-                  }
-                  default: {
-                     match = FALSE;
+                     if (! match) {
+                        parser->index = lastIndex_4;
+                        lastNode_4->sibling = NULL;
+                        parser->currentNode = lastNode_4;
+                     }
+                  } else {
+                     parser->index = lastIndex_4;
+                     lastNode_4->sibling = NULL;
                   }
                }
                if (! match) {
-                  parser->index = lastIndex_1;
-                  lastNode_1->sibling = NULL;
-                  parser->currentNode = lastNode_1;
+                  // ('u'+ HexDigit HexDigit HexDigit HexDigit)
+                  YAPP_NODE * lastNode_6 = parser->currentNode;
+                  INT32 lastIndex_6 = parser->index;
+                  // 'u'+
+                  // 'u'
+                  match = charMatcher(parser, 'u');
+                  if (match) {
+                     do {
+                        // 'u'
+                        match = charMatcher(parser, 'u');
+                     } while(match);
+                     match = TRUE;
+                  }
+                  if (match) {
+                     // ('a'-'f' | 'A'-'F' | '0'-'9')
+                     // 'a'-'f'
+                     match = charRangeMatcher(parser, 'a', 'f');
+                     if (! match) {
+                        // 'A'-'F'
+                        match = charRangeMatcher(parser, 'A', 'F');
+                        if (! match) {
+                           // '0'-'9'
+                           match = charRangeMatcher(parser, '0', '9');
+                        }
+                     }
+                     if (match) {
+                        // ('a'-'f' | 'A'-'F' | '0'-'9')
+                        // 'a'-'f'
+                        match = charRangeMatcher(parser, 'a', 'f');
+                        if (! match) {
+                           // 'A'-'F'
+                           match = charRangeMatcher(parser, 'A', 'F');
+                           if (! match) {
+                              // '0'-'9'
+                              match = charRangeMatcher(parser, '0', '9');
+                           }
+                        }
+                        if (match) {
+                           // ('a'-'f' | 'A'-'F' | '0'-'9')
+                           // 'a'-'f'
+                           match = charRangeMatcher(parser, 'a', 'f');
+                           if (! match) {
+                              // 'A'-'F'
+                              match = charRangeMatcher(parser, 'A', 'F');
+                              if (! match) {
+                                 // '0'-'9'
+                                 match = charRangeMatcher(parser, '0', '9');
+                              }
+                           }
+                           if (match) {
+                              // ('a'-'f' | 'A'-'F' | '0'-'9')
+                              // 'a'-'f'
+                              match = charRangeMatcher(parser, 'a', 'f');
+                              if (! match) {
+                                 // 'A'-'F'
+                                 match = charRangeMatcher(parser, 'A', 'F');
+                                 if (! match) {
+                                    // '0'-'9'
+                                    match = charRangeMatcher(parser, '0', '9');
+                                 }
+                              }
+                              if (! match) {
+                                 parser->index = lastIndex_6;
+                                 lastNode_6->sibling = NULL;
+                                 parser->currentNode = lastNode_6;
+                              }
+                           } else {
+                              parser->index = lastIndex_6;
+                              lastNode_6->sibling = NULL;
+                           }
+                        } else {
+                           parser->index = lastIndex_6;
+                           lastNode_6->sibling = NULL;
+                        }
+                     } else {
+                        parser->index = lastIndex_6;
+                        lastNode_6->sibling = NULL;
+                     }
+                  }
                }
             }
-            if (! match) {
-               // ((''' | '\')! .)
-               YAPP_NODE * lastNode_8 = parser->currentNode;
-               INT32 lastIndex_8 = parser->index;
-               // (''' | '\')!
-               // (''' | '\')
-               INT32 startIndex_9 = parser->index;
-               switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                  case '\\': {
-                     ++parser->index;
-                     // <EMPTY>
-                     match = TRUE;
-                     break;
-                  }
-                  case '\'': {
-                     ++parser->index;
-                     // <EMPTY>
-                     match = TRUE;
-                     break;
-                  }
-                  default: {
-                     match = FALSE;
-                  }
-               }
-               parser->index = startIndex_9;
-               match = ! match;
-               if (match) {
-                  // .
-                  match = anyCharMatcher(parser);
-                  if (! match) {
-                     parser->index = lastIndex_8;
-                     lastNode_8->sibling = NULL;
-                     parser->currentNode = lastNode_8;
-                  }
-               }
-            }
-            break;
          }
-         default: {
-            // ((''' | '\')! .)
-            YAPP_NODE * lastNode_10 = parser->currentNode;
-            INT32 lastIndex_10 = parser->index;
-            // (''' | '\')!
-            // (''' | '\')
-            INT32 startIndex_11 = parser->index;
-            switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-               case '\\': {
-                  ++parser->index;
-                  // <EMPTY>
-                  match = TRUE;
-                  break;
-               }
-               case '\'': {
-                  ++parser->index;
-                  // <EMPTY>
-                  match = TRUE;
-                  break;
-               }
-               default: {
-                  match = FALSE;
-               }
+         if (! match) {
+            parser->index = lastIndex_1;
+            lastNode_1->sibling = NULL;
+            parser->currentNode = lastNode_1;
+         }
+      }
+      if (! match) {
+         // ((''' | '\')! .)
+         YAPP_NODE * lastNode_7 = parser->currentNode;
+         INT32 lastIndex_7 = parser->index;
+         // (''' | '\')!
+         // (''' | '\')
+         INT32 startIndex_8 = parser->index;
+         switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
+            case '\\': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
             }
-            parser->index = startIndex_11;
-            match = ! match;
-            if (match) {
-               // .
-               match = anyCharMatcher(parser);
-               if (! match) {
-                  parser->index = lastIndex_10;
-                  lastNode_10->sibling = NULL;
-                  parser->currentNode = lastNode_10;
-               }
+            case '\'': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            default: {
+               match = FALSE;
+            }
+         }
+         parser->index = startIndex_8;
+         match = ! match;
+         if (match) {
+            // .
+            match = anyCharMatcher(parser);
+            if (! match) {
+               parser->index = lastIndex_7;
+               lastNode_7->sibling = NULL;
+               parser->currentNode = lastNode_7;
             }
          }
       }
@@ -17850,7 +16617,6 @@ static BOOL charLiteral_rule(JavaParser * parser) {
          parser->currentNode = createNode(parser, &JAVA_CHAR_LITERAL, startIndex, parser->index, TRUE, FALSE);
          lastNode->sibling = parser->currentNode;
          parser->charLiteral_ruleMemoFirstNode = parser->currentNode;
-         parser->charLiteral_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -17875,12 +16641,10 @@ static BOOL stringLiteral_rule(JavaParser * parser) {
       if (parser->stringLiteral_ruleMemoStart <= parser->stringLiteral_ruleMemoEnd) {
          parser->index = parser->stringLiteral_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_STRING_LITERAL, parser->stringLiteral_ruleMemoStart, parser->stringLiteral_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->stringLiteral_ruleMemoStart == parser->stringLiteral_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_STRING_LITERAL, parser->stringLiteral_ruleMemoStart, parser->stringLiteral_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->stringLiteral_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->stringLiteral_ruleMemoFirstNode;
-               parser->currentNode = parser->stringLiteral_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->stringLiteral_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -17897,753 +16661,385 @@ static BOOL stringLiteral_rule(JavaParser * parser) {
       // (Escape | (('\r' | '\n' | '"' | '\')! .))*
       do {
          // (Escape | (('\r' | '\n' | '"' | '\')! .))
-         switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-            case '\\': {
-               // ('\' (('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\') | OctalEscape | UnicodeEscape))
-               YAPP_NODE * lastNode_1 = parser->currentNode;
-               INT32 lastIndex_1 = parser->index;
-               // '\'
-               match = charMatcher(parser, '\\');
+         // ('\' (('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\') | OctalEscape | UnicodeEscape))
+         YAPP_NODE * lastNode_1 = parser->currentNode;
+         INT32 lastIndex_1 = parser->index;
+         // '\'
+         match = charMatcher(parser, '\\');
+         if (match) {
+            // (('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\') | OctalEscape | UnicodeEscape)
+            // ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\')
+            switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
+               case '\\': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               case 'n': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               case 'b': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               case 'r': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               case '\"': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               case 't': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               case 'f': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               case '\'': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               default: {
+                  match = FALSE;
+               }
+            }
+            if (! match) {
+               // (('0'-'3' '0'-'7' '0'-'7') | ('0'-'7' '0'-'7') | '0'-'7')
+               // ('0'-'3' '0'-'7' '0'-'7')
+               YAPP_NODE * lastNode_2 = parser->currentNode;
+               INT32 lastIndex_2 = parser->index;
+               // '0'-'3'
+               match = charRangeMatcher(parser, '0', '3');
                if (match) {
-                  // (('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\') | OctalEscape | UnicodeEscape)
-                  switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                     case 'r':
-                     case 'b':
-                     case '\"':
-                     case 't':
-                     case 'f':
-                     case '\'':
-                     case '\\':
-                     case 'n': {
-                        // ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\')
-                        switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                           case '\\': {
-                              ++parser->index;
-                              // <EMPTY>
-                              match = TRUE;
-                              break;
-                           }
-                           case 'n': {
-                              ++parser->index;
-                              // <EMPTY>
-                              match = TRUE;
-                              break;
-                           }
-                           case 'b': {
-                              ++parser->index;
-                              // <EMPTY>
-                              match = TRUE;
-                              break;
-                           }
-                           case 'r': {
-                              ++parser->index;
-                              // <EMPTY>
-                              match = TRUE;
-                              break;
-                           }
-                           case '\"': {
-                              ++parser->index;
-                              // <EMPTY>
-                              match = TRUE;
-                              break;
-                           }
-                           case 't': {
-                              ++parser->index;
-                              // <EMPTY>
-                              match = TRUE;
-                              break;
-                           }
-                           case 'f': {
-                              ++parser->index;
-                              // <EMPTY>
-                              match = TRUE;
-                              break;
-                           }
-                           case '\'': {
-                              ++parser->index;
-                              // <EMPTY>
-                              match = TRUE;
-                              break;
-                           }
-                           default: {
-                              match = FALSE;
-                           }
-                        }
-                        break;
+                  // '0'-'7'
+                  match = charRangeMatcher(parser, '0', '7');
+                  if (match) {
+                     // '0'-'7'
+                     match = charRangeMatcher(parser, '0', '7');
+                     if (! match) {
+                        parser->index = lastIndex_2;
+                        lastNode_2->sibling = NULL;
+                        parser->currentNode = lastNode_2;
                      }
-                     case '0':
-                     case '1':
-                     case '2':
-                     case '3':
-                     case '4':
-                     case '5':
-                     case '6':
-                     case '7': {
-                        // (('0'-'3' '0'-'7' '0'-'7') | ('0'-'7' '0'-'7') | '0'-'7')
-                        switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                           case '0':
-                           case '1':
-                           case '2':
-                           case '3': {
-                              // ('0'-'3' '0'-'7' '0'-'7')
-                              YAPP_NODE * lastNode_2 = parser->currentNode;
-                              INT32 lastIndex_2 = parser->index;
-                              // '0'-'3'
-                              match = charRangeMatcher(parser, '0', '3');
-                              if (match) {
-                                 // '0'-'7'
-                                 match = charRangeMatcher(parser, '0', '7');
-                                 if (match) {
-                                    // '0'-'7'
-                                    match = charRangeMatcher(parser, '0', '7');
-                                    if (! match) {
-                                       parser->index = lastIndex_2;
-                                       lastNode_2->sibling = NULL;
-                                       parser->currentNode = lastNode_2;
-                                    }
-                                 } else {
-                                    parser->index = lastIndex_2;
-                                    lastNode_2->sibling = NULL;
-                                 }
-                              }
-                              if (! match) {
-                                 // ('0'-'7' '0'-'7')
-                                 YAPP_NODE * lastNode_3 = parser->currentNode;
-                                 INT32 lastIndex_3 = parser->index;
-                                 // '0'-'7'
-                                 match = charRangeMatcher(parser, '0', '7');
-                                 if (match) {
-                                    // '0'-'7'
-                                    match = charRangeMatcher(parser, '0', '7');
-                                    if (! match) {
-                                       parser->index = lastIndex_3;
-                                       lastNode_3->sibling = NULL;
-                                       parser->currentNode = lastNode_3;
-                                    }
-                                 }
-                                 if (! match) {
-                                    // '0'-'7'
-                                    match = charRangeMatcher(parser, '0', '7');
-                                 }
-                              }
-                              break;
-                           }
-                           case '4':
-                           case '5':
-                           case '6':
-                           case '7': {
-                              // ('0'-'7' '0'-'7')
-                              YAPP_NODE * lastNode_4 = parser->currentNode;
-                              INT32 lastIndex_4 = parser->index;
-                              // '0'-'7'
-                              match = charRangeMatcher(parser, '0', '7');
-                              if (match) {
-                                 // '0'-'7'
-                                 match = charRangeMatcher(parser, '0', '7');
-                                 if (! match) {
-                                    parser->index = lastIndex_4;
-                                    lastNode_4->sibling = NULL;
-                                    parser->currentNode = lastNode_4;
-                                 }
-                              }
-                              if (! match) {
-                                 // '0'-'7'
-                                 match = charRangeMatcher(parser, '0', '7');
-                              }
-                              break;
-                           }
-                           default: {
-                              match = FALSE;
-                           }
-                        }
-                        break;
+                  } else {
+                     parser->index = lastIndex_2;
+                     lastNode_2->sibling = NULL;
+                  }
+               }
+               if (! match) {
+                  // ('0'-'7' '0'-'7')
+                  YAPP_NODE * lastNode_3 = parser->currentNode;
+                  INT32 lastIndex_3 = parser->index;
+                  // '0'-'7'
+                  match = charRangeMatcher(parser, '0', '7');
+                  if (match) {
+                     // '0'-'7'
+                     match = charRangeMatcher(parser, '0', '7');
+                     if (! match) {
+                        parser->index = lastIndex_3;
+                        lastNode_3->sibling = NULL;
+                        parser->currentNode = lastNode_3;
                      }
-                     case 'u': {
-                        // (('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))) | ('u'+ HexDigit HexDigit HexDigit HexDigit))
-                        switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                           case 'u': {
-                              // ('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit)))
-                              YAPP_NODE * lastNode_5 = parser->currentNode;
-                              INT32 lastIndex_5 = parser->index;
-                              // 'u'+
-                              // 'u'
-                              match = charMatcher(parser, 'u');
-                              if (match) {
-                                 do {
-                                    // 'u'
-                                    match = charMatcher(parser, 'u');
-                                 } while(match);
-                                 match = TRUE;
-                              }
-                              if (match) {
-                                 // "005C"
-                                 match = ignoreCaseStringMatcher(parser, "005C", 4);
-                                 if (match) {
-                                    // ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))
-                                    switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                       case '\\': {
-                                          // '\'
-                                          match = charMatcher(parser, '\\');
-                                          break;
-                                       }
-                                       case 'n': {
-                                          // 'n'
-                                          match = charMatcher(parser, 'n');
-                                          break;
-                                       }
-                                       case 'b': {
-                                          // 'b'
-                                          match = charMatcher(parser, 'b');
-                                          break;
-                                       }
-                                       case 'r': {
-                                          // 'r'
-                                          match = charMatcher(parser, 'r');
-                                          break;
-                                       }
-                                       case '\"': {
-                                          // '"'
-                                          match = charMatcher(parser, '\"');
-                                          break;
-                                       }
-                                       case 't': {
-                                          // 't'
-                                          match = charMatcher(parser, 't');
-                                          break;
-                                       }
-                                       case 'u': {
-                                          // ('u'+ HexDigit HexDigit HexDigit HexDigit)
-                                          YAPP_NODE * lastNode_6 = parser->currentNode;
-                                          INT32 lastIndex_6 = parser->index;
-                                          // 'u'+
-                                          // 'u'
-                                          match = charMatcher(parser, 'u');
-                                          if (match) {
-                                             do {
+                  }
+                  if (! match) {
+                     // '0'-'7'
+                     match = charRangeMatcher(parser, '0', '7');
+                  }
+               }
+               if (! match) {
+                  // (('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))) | ('u'+ HexDigit HexDigit HexDigit HexDigit))
+                  // ('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit)))
+                  YAPP_NODE * lastNode_4 = parser->currentNode;
+                  INT32 lastIndex_4 = parser->index;
+                  // 'u'+
+                  // 'u'
+                  match = charMatcher(parser, 'u');
+                  if (match) {
+                     do {
+                        // 'u'
+                        match = charMatcher(parser, 'u');
+                     } while(match);
+                     match = TRUE;
+                  }
+                  if (match) {
+                     // "005C"
+                     match = ignoreCaseStringMatcher(parser, "005C", 4);
+                     if (match) {
+                        // ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))
+                        // 'b'
+                        match = charMatcher(parser, 'b');
+                        if (! match) {
+                           // 't'
+                           match = charMatcher(parser, 't');
+                           if (! match) {
+                              // 'n'
+                              match = charMatcher(parser, 'n');
+                              if (! match) {
+                                 // 'f'
+                                 match = charMatcher(parser, 'f');
+                                 if (! match) {
+                                    // 'r'
+                                    match = charMatcher(parser, 'r');
+                                    if (! match) {
+                                       // '"'
+                                       match = charMatcher(parser, '\"');
+                                       if (! match) {
+                                          // '''
+                                          match = charMatcher(parser, '\'');
+                                          if (! match) {
+                                             // '\'
+                                             match = charMatcher(parser, '\\');
+                                             if (! match) {
+                                                // ('u'+ HexDigit HexDigit HexDigit HexDigit)
+                                                YAPP_NODE * lastNode_5 = parser->currentNode;
+                                                INT32 lastIndex_5 = parser->index;
+                                                // 'u'+
                                                 // 'u'
                                                 match = charMatcher(parser, 'u');
-                                             } while(match);
-                                             match = TRUE;
-                                          }
-                                          if (match) {
-                                             // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                             switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                                case '0':
-                                                case '1':
-                                                case '2':
-                                                case '3':
-                                                case '4':
-                                                case '5':
-                                                case '6':
-                                                case '7':
-                                                case '8':
-                                                case '9': {
-                                                   // '0'-'9'
-                                                   match = charRangeMatcher(parser, '0', '9');
-                                                   break;
-                                                }
-                                                case 'a':
-                                                case 'b':
-                                                case 'c':
-                                                case 'd':
-                                                case 'e':
-                                                case 'f': {
-                                                   // 'a'-'f'
-                                                   match = charRangeMatcher(parser, 'a', 'f');
-                                                   break;
-                                                }
-                                                case 'A':
-                                                case 'B':
-                                                case 'C':
-                                                case 'D':
-                                                case 'E':
-                                                case 'F': {
-                                                   // 'A'-'F'
-                                                   match = charRangeMatcher(parser, 'A', 'F');
-                                                   break;
-                                                }
-                                                default: {
-                                                   match = FALSE;
-                                                }
-                                             }
-                                             if (match) {
-                                                // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                                switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                                   case '0':
-                                                   case '1':
-                                                   case '2':
-                                                   case '3':
-                                                   case '4':
-                                                   case '5':
-                                                   case '6':
-                                                   case '7':
-                                                   case '8':
-                                                   case '9': {
-                                                      // '0'-'9'
-                                                      match = charRangeMatcher(parser, '0', '9');
-                                                      break;
-                                                   }
-                                                   case 'a':
-                                                   case 'b':
-                                                   case 'c':
-                                                   case 'd':
-                                                   case 'e':
-                                                   case 'f': {
-                                                      // 'a'-'f'
-                                                      match = charRangeMatcher(parser, 'a', 'f');
-                                                      break;
-                                                   }
-                                                   case 'A':
-                                                   case 'B':
-                                                   case 'C':
-                                                   case 'D':
-                                                   case 'E':
-                                                   case 'F': {
-                                                      // 'A'-'F'
-                                                      match = charRangeMatcher(parser, 'A', 'F');
-                                                      break;
-                                                   }
-                                                   default: {
-                                                      match = FALSE;
-                                                   }
+                                                if (match) {
+                                                   do {
+                                                      // 'u'
+                                                      match = charMatcher(parser, 'u');
+                                                   } while(match);
+                                                   match = TRUE;
                                                 }
                                                 if (match) {
                                                    // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                                   switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                                      case '0':
-                                                      case '1':
-                                                      case '2':
-                                                      case '3':
-                                                      case '4':
-                                                      case '5':
-                                                      case '6':
-                                                      case '7':
-                                                      case '8':
-                                                      case '9': {
+                                                   // 'a'-'f'
+                                                   match = charRangeMatcher(parser, 'a', 'f');
+                                                   if (! match) {
+                                                      // 'A'-'F'
+                                                      match = charRangeMatcher(parser, 'A', 'F');
+                                                      if (! match) {
                                                          // '0'-'9'
                                                          match = charRangeMatcher(parser, '0', '9');
-                                                         break;
-                                                      }
-                                                      case 'a':
-                                                      case 'b':
-                                                      case 'c':
-                                                      case 'd':
-                                                      case 'e':
-                                                      case 'f': {
-                                                         // 'a'-'f'
-                                                         match = charRangeMatcher(parser, 'a', 'f');
-                                                         break;
-                                                      }
-                                                      case 'A':
-                                                      case 'B':
-                                                      case 'C':
-                                                      case 'D':
-                                                      case 'E':
-                                                      case 'F': {
-                                                         // 'A'-'F'
-                                                         match = charRangeMatcher(parser, 'A', 'F');
-                                                         break;
-                                                      }
-                                                      default: {
-                                                         match = FALSE;
                                                       }
                                                    }
                                                    if (match) {
                                                       // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                                      switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                                         case '0':
-                                                         case '1':
-                                                         case '2':
-                                                         case '3':
-                                                         case '4':
-                                                         case '5':
-                                                         case '6':
-                                                         case '7':
-                                                         case '8':
-                                                         case '9': {
+                                                      // 'a'-'f'
+                                                      match = charRangeMatcher(parser, 'a', 'f');
+                                                      if (! match) {
+                                                         // 'A'-'F'
+                                                         match = charRangeMatcher(parser, 'A', 'F');
+                                                         if (! match) {
                                                             // '0'-'9'
                                                             match = charRangeMatcher(parser, '0', '9');
-                                                            break;
                                                          }
-                                                         case 'a':
-                                                         case 'b':
-                                                         case 'c':
-                                                         case 'd':
-                                                         case 'e':
-                                                         case 'f': {
-                                                            // 'a'-'f'
-                                                            match = charRangeMatcher(parser, 'a', 'f');
-                                                            break;
-                                                         }
-                                                         case 'A':
-                                                         case 'B':
-                                                         case 'C':
-                                                         case 'D':
-                                                         case 'E':
-                                                         case 'F': {
+                                                      }
+                                                      if (match) {
+                                                         // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                                         // 'a'-'f'
+                                                         match = charRangeMatcher(parser, 'a', 'f');
+                                                         if (! match) {
                                                             // 'A'-'F'
                                                             match = charRangeMatcher(parser, 'A', 'F');
-                                                            break;
+                                                            if (! match) {
+                                                               // '0'-'9'
+                                                               match = charRangeMatcher(parser, '0', '9');
+                                                            }
                                                          }
-                                                         default: {
-                                                            match = FALSE;
+                                                         if (match) {
+                                                            // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                                            // 'a'-'f'
+                                                            match = charRangeMatcher(parser, 'a', 'f');
+                                                            if (! match) {
+                                                               // 'A'-'F'
+                                                               match = charRangeMatcher(parser, 'A', 'F');
+                                                               if (! match) {
+                                                                  // '0'-'9'
+                                                                  match = charRangeMatcher(parser, '0', '9');
+                                                               }
+                                                            }
+                                                            if (! match) {
+                                                               parser->index = lastIndex_5;
+                                                               lastNode_5->sibling = NULL;
+                                                               parser->currentNode = lastNode_5;
+                                                            }
+                                                         } else {
+                                                            parser->index = lastIndex_5;
+                                                            lastNode_5->sibling = NULL;
                                                          }
-                                                      }
-                                                      if (! match) {
-                                                         parser->index = lastIndex_6;
-                                                         lastNode_6->sibling = NULL;
-                                                         parser->currentNode = lastNode_6;
+                                                      } else {
+                                                         parser->index = lastIndex_5;
+                                                         lastNode_5->sibling = NULL;
                                                       }
                                                    } else {
-                                                      parser->index = lastIndex_6;
-                                                      lastNode_6->sibling = NULL;
+                                                      parser->index = lastIndex_5;
+                                                      lastNode_5->sibling = NULL;
                                                    }
-                                                } else {
-                                                   parser->index = lastIndex_6;
-                                                   lastNode_6->sibling = NULL;
-                                                }
-                                             } else {
-                                                parser->index = lastIndex_6;
-                                                lastNode_6->sibling = NULL;
-                                             }
-                                          }
-                                          break;
-                                       }
-                                       case 'f': {
-                                          // 'f'
-                                          match = charMatcher(parser, 'f');
-                                          break;
-                                       }
-                                       case '\'': {
-                                          // '''
-                                          match = charMatcher(parser, '\'');
-                                          break;
-                                       }
-                                       default: {
-                                          match = FALSE;
-                                       }
-                                    }
-                                    if (! match) {
-                                       parser->index = lastIndex_5;
-                                       lastNode_5->sibling = NULL;
-                                       parser->currentNode = lastNode_5;
-                                    }
-                                 } else {
-                                    parser->index = lastIndex_5;
-                                    lastNode_5->sibling = NULL;
-                                 }
-                              }
-                              if (! match) {
-                                 // ('u'+ HexDigit HexDigit HexDigit HexDigit)
-                                 YAPP_NODE * lastNode_7 = parser->currentNode;
-                                 INT32 lastIndex_7 = parser->index;
-                                 // 'u'+
-                                 // 'u'
-                                 match = charMatcher(parser, 'u');
-                                 if (match) {
-                                    do {
-                                       // 'u'
-                                       match = charMatcher(parser, 'u');
-                                    } while(match);
-                                    match = TRUE;
-                                 }
-                                 if (match) {
-                                    // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                    switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                       case '0':
-                                       case '1':
-                                       case '2':
-                                       case '3':
-                                       case '4':
-                                       case '5':
-                                       case '6':
-                                       case '7':
-                                       case '8':
-                                       case '9': {
-                                          // '0'-'9'
-                                          match = charRangeMatcher(parser, '0', '9');
-                                          break;
-                                       }
-                                       case 'a':
-                                       case 'b':
-                                       case 'c':
-                                       case 'd':
-                                       case 'e':
-                                       case 'f': {
-                                          // 'a'-'f'
-                                          match = charRangeMatcher(parser, 'a', 'f');
-                                          break;
-                                       }
-                                       case 'A':
-                                       case 'B':
-                                       case 'C':
-                                       case 'D':
-                                       case 'E':
-                                       case 'F': {
-                                          // 'A'-'F'
-                                          match = charRangeMatcher(parser, 'A', 'F');
-                                          break;
-                                       }
-                                       default: {
-                                          match = FALSE;
-                                       }
-                                    }
-                                    if (match) {
-                                       // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                       switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                          case '0':
-                                          case '1':
-                                          case '2':
-                                          case '3':
-                                          case '4':
-                                          case '5':
-                                          case '6':
-                                          case '7':
-                                          case '8':
-                                          case '9': {
-                                             // '0'-'9'
-                                             match = charRangeMatcher(parser, '0', '9');
-                                             break;
-                                          }
-                                          case 'a':
-                                          case 'b':
-                                          case 'c':
-                                          case 'd':
-                                          case 'e':
-                                          case 'f': {
-                                             // 'a'-'f'
-                                             match = charRangeMatcher(parser, 'a', 'f');
-                                             break;
-                                          }
-                                          case 'A':
-                                          case 'B':
-                                          case 'C':
-                                          case 'D':
-                                          case 'E':
-                                          case 'F': {
-                                             // 'A'-'F'
-                                             match = charRangeMatcher(parser, 'A', 'F');
-                                             break;
-                                          }
-                                          default: {
-                                             match = FALSE;
-                                          }
-                                       }
-                                       if (match) {
-                                          // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                          switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                             case '0':
-                                             case '1':
-                                             case '2':
-                                             case '3':
-                                             case '4':
-                                             case '5':
-                                             case '6':
-                                             case '7':
-                                             case '8':
-                                             case '9': {
-                                                // '0'-'9'
-                                                match = charRangeMatcher(parser, '0', '9');
-                                                break;
-                                             }
-                                             case 'a':
-                                             case 'b':
-                                             case 'c':
-                                             case 'd':
-                                             case 'e':
-                                             case 'f': {
-                                                // 'a'-'f'
-                                                match = charRangeMatcher(parser, 'a', 'f');
-                                                break;
-                                             }
-                                             case 'A':
-                                             case 'B':
-                                             case 'C':
-                                             case 'D':
-                                             case 'E':
-                                             case 'F': {
-                                                // 'A'-'F'
-                                                match = charRangeMatcher(parser, 'A', 'F');
-                                                break;
-                                             }
-                                             default: {
-                                                match = FALSE;
-                                             }
-                                          }
-                                          if (match) {
-                                             // ('a'-'f' | 'A'-'F' | '0'-'9')
-                                             switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                                                case '0':
-                                                case '1':
-                                                case '2':
-                                                case '3':
-                                                case '4':
-                                                case '5':
-                                                case '6':
-                                                case '7':
-                                                case '8':
-                                                case '9': {
-                                                   // '0'-'9'
-                                                   match = charRangeMatcher(parser, '0', '9');
-                                                   break;
-                                                }
-                                                case 'a':
-                                                case 'b':
-                                                case 'c':
-                                                case 'd':
-                                                case 'e':
-                                                case 'f': {
-                                                   // 'a'-'f'
-                                                   match = charRangeMatcher(parser, 'a', 'f');
-                                                   break;
-                                                }
-                                                case 'A':
-                                                case 'B':
-                                                case 'C':
-                                                case 'D':
-                                                case 'E':
-                                                case 'F': {
-                                                   // 'A'-'F'
-                                                   match = charRangeMatcher(parser, 'A', 'F');
-                                                   break;
-                                                }
-                                                default: {
-                                                   match = FALSE;
                                                 }
                                              }
-                                             if (! match) {
-                                                parser->index = lastIndex_7;
-                                                lastNode_7->sibling = NULL;
-                                                parser->currentNode = lastNode_7;
-                                             }
-                                          } else {
-                                             parser->index = lastIndex_7;
-                                             lastNode_7->sibling = NULL;
                                           }
-                                       } else {
-                                          parser->index = lastIndex_7;
-                                          lastNode_7->sibling = NULL;
                                        }
-                                    } else {
-                                       parser->index = lastIndex_7;
-                                       lastNode_7->sibling = NULL;
                                     }
                                  }
                               }
-                              break;
-                           }
-                           default: {
-                              match = FALSE;
                            }
                         }
-                        break;
-                     }
-                     default: {
-                        match = FALSE;
+                        if (! match) {
+                           parser->index = lastIndex_4;
+                           lastNode_4->sibling = NULL;
+                           parser->currentNode = lastNode_4;
+                        }
+                     } else {
+                        parser->index = lastIndex_4;
+                        lastNode_4->sibling = NULL;
                      }
                   }
                   if (! match) {
-                     parser->index = lastIndex_1;
-                     lastNode_1->sibling = NULL;
-                     parser->currentNode = lastNode_1;
+                     // ('u'+ HexDigit HexDigit HexDigit HexDigit)
+                     YAPP_NODE * lastNode_6 = parser->currentNode;
+                     INT32 lastIndex_6 = parser->index;
+                     // 'u'+
+                     // 'u'
+                     match = charMatcher(parser, 'u');
+                     if (match) {
+                        do {
+                           // 'u'
+                           match = charMatcher(parser, 'u');
+                        } while(match);
+                        match = TRUE;
+                     }
+                     if (match) {
+                        // ('a'-'f' | 'A'-'F' | '0'-'9')
+                        // 'a'-'f'
+                        match = charRangeMatcher(parser, 'a', 'f');
+                        if (! match) {
+                           // 'A'-'F'
+                           match = charRangeMatcher(parser, 'A', 'F');
+                           if (! match) {
+                              // '0'-'9'
+                              match = charRangeMatcher(parser, '0', '9');
+                           }
+                        }
+                        if (match) {
+                           // ('a'-'f' | 'A'-'F' | '0'-'9')
+                           // 'a'-'f'
+                           match = charRangeMatcher(parser, 'a', 'f');
+                           if (! match) {
+                              // 'A'-'F'
+                              match = charRangeMatcher(parser, 'A', 'F');
+                              if (! match) {
+                                 // '0'-'9'
+                                 match = charRangeMatcher(parser, '0', '9');
+                              }
+                           }
+                           if (match) {
+                              // ('a'-'f' | 'A'-'F' | '0'-'9')
+                              // 'a'-'f'
+                              match = charRangeMatcher(parser, 'a', 'f');
+                              if (! match) {
+                                 // 'A'-'F'
+                                 match = charRangeMatcher(parser, 'A', 'F');
+                                 if (! match) {
+                                    // '0'-'9'
+                                    match = charRangeMatcher(parser, '0', '9');
+                                 }
+                              }
+                              if (match) {
+                                 // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                 // 'a'-'f'
+                                 match = charRangeMatcher(parser, 'a', 'f');
+                                 if (! match) {
+                                    // 'A'-'F'
+                                    match = charRangeMatcher(parser, 'A', 'F');
+                                    if (! match) {
+                                       // '0'-'9'
+                                       match = charRangeMatcher(parser, '0', '9');
+                                    }
+                                 }
+                                 if (! match) {
+                                    parser->index = lastIndex_6;
+                                    lastNode_6->sibling = NULL;
+                                    parser->currentNode = lastNode_6;
+                                 }
+                              } else {
+                                 parser->index = lastIndex_6;
+                                 lastNode_6->sibling = NULL;
+                              }
+                           } else {
+                              parser->index = lastIndex_6;
+                              lastNode_6->sibling = NULL;
+                           }
+                        } else {
+                           parser->index = lastIndex_6;
+                           lastNode_6->sibling = NULL;
+                        }
+                     }
                   }
                }
-               if (! match) {
-                  // (('\r' | '\n' | '"' | '\')! .)
-                  YAPP_NODE * lastNode_8 = parser->currentNode;
-                  INT32 lastIndex_8 = parser->index;
-                  // ('\r' | '\n' | '"' | '\')!
-                  // ('\r' | '\n' | '"' | '\')
-                  INT32 startIndex_9 = parser->index;
-                  switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                     case '\\': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     case '\r': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     case '\"': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     case '\n': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     default: {
-                        match = FALSE;
-                     }
-                  }
-                  parser->index = startIndex_9;
-                  match = ! match;
-                  if (match) {
-                     // .
-                     match = anyCharMatcher(parser);
-                     if (! match) {
-                        parser->index = lastIndex_8;
-                        lastNode_8->sibling = NULL;
-                        parser->currentNode = lastNode_8;
-                     }
-                  }
-               }
-               break;
             }
-            default: {
-               // (('\r' | '\n' | '"' | '\')! .)
-               YAPP_NODE * lastNode_10 = parser->currentNode;
-               INT32 lastIndex_10 = parser->index;
-               // ('\r' | '\n' | '"' | '\')!
-               // ('\r' | '\n' | '"' | '\')
-               INT32 startIndex_11 = parser->index;
-               switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                  case '\\': {
-                     ++parser->index;
-                     // <EMPTY>
-                     match = TRUE;
-                     break;
-                  }
-                  case '\r': {
-                     ++parser->index;
-                     // <EMPTY>
-                     match = TRUE;
-                     break;
-                  }
-                  case '\"': {
-                     ++parser->index;
-                     // <EMPTY>
-                     match = TRUE;
-                     break;
-                  }
-                  case '\n': {
-                     ++parser->index;
-                     // <EMPTY>
-                     match = TRUE;
-                     break;
-                  }
-                  default: {
-                     match = FALSE;
-                  }
+            if (! match) {
+               parser->index = lastIndex_1;
+               lastNode_1->sibling = NULL;
+               parser->currentNode = lastNode_1;
+            }
+         }
+         if (! match) {
+            // (('\r' | '\n' | '"' | '\')! .)
+            YAPP_NODE * lastNode_7 = parser->currentNode;
+            INT32 lastIndex_7 = parser->index;
+            // ('\r' | '\n' | '"' | '\')!
+            // ('\r' | '\n' | '"' | '\')
+            INT32 startIndex_8 = parser->index;
+            switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
+               case '\\': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
                }
-               parser->index = startIndex_11;
-               match = ! match;
-               if (match) {
-                  // .
-                  match = anyCharMatcher(parser);
-                  if (! match) {
-                     parser->index = lastIndex_10;
-                     lastNode_10->sibling = NULL;
-                     parser->currentNode = lastNode_10;
-                  }
+               case '\r': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               case '\"': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               case '\n': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               default: {
+                  match = FALSE;
+               }
+            }
+            parser->index = startIndex_8;
+            match = ! match;
+            if (match) {
+               // .
+               match = anyCharMatcher(parser);
+               if (! match) {
+                  parser->index = lastIndex_7;
+                  lastNode_7->sibling = NULL;
+                  parser->currentNode = lastNode_7;
                }
             }
          }
@@ -18661,7 +17057,6 @@ static BOOL stringLiteral_rule(JavaParser * parser) {
          parser->currentNode = createNode(parser, &JAVA_STRING_LITERAL, startIndex, parser->index, TRUE, FALSE);
          lastNode->sibling = parser->currentNode;
          parser->stringLiteral_ruleMemoFirstNode = parser->currentNode;
-         parser->stringLiteral_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -18685,12 +17080,10 @@ static BOOL true_rule(JavaParser * parser) {
       if (parser->true_ruleMemoStart <= parser->true_ruleMemoEnd) {
          parser->index = parser->true_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_TRUE, parser->true_ruleMemoStart, parser->true_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->true_ruleMemoStart == parser->true_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_TRUE, parser->true_ruleMemoStart, parser->true_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->true_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->true_ruleMemoFirstNode;
-               parser->currentNode = parser->true_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->true_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -18720,7 +17113,6 @@ static BOOL true_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->true_ruleMemoFirstNode = parser->currentNode;
-         parser->true_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -18743,12 +17135,10 @@ static BOOL false_rule(JavaParser * parser) {
       if (parser->false_ruleMemoStart <= parser->false_ruleMemoEnd) {
          parser->index = parser->false_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_FALSE, parser->false_ruleMemoStart, parser->false_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->false_ruleMemoStart == parser->false_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_FALSE, parser->false_ruleMemoStart, parser->false_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->false_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->false_ruleMemoFirstNode;
-               parser->currentNode = parser->false_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->false_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -18778,7 +17168,6 @@ static BOOL false_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->false_ruleMemoFirstNode = parser->currentNode;
-         parser->false_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -18801,12 +17190,10 @@ static BOOL null_rule(JavaParser * parser) {
       if (parser->null_ruleMemoStart <= parser->null_ruleMemoEnd) {
          parser->index = parser->null_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_NULL, parser->null_ruleMemoStart, parser->null_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->null_ruleMemoStart == parser->null_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_NULL, parser->null_ruleMemoStart, parser->null_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->null_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->null_ruleMemoFirstNode;
-               parser->currentNode = parser->null_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->null_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -18836,7 +17223,6 @@ static BOOL null_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->null_ruleMemoFirstNode = parser->currentNode;
-         parser->null_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -18860,12 +17246,10 @@ static BOOL hexFloat_rule(JavaParser * parser) {
       if (parser->hexFloat_ruleMemoStart <= parser->hexFloat_ruleMemoEnd) {
          parser->index = parser->hexFloat_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_HEX_FLOAT, parser->hexFloat_ruleMemoStart, parser->hexFloat_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->hexFloat_ruleMemoStart == parser->hexFloat_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_HEX_FLOAT, parser->hexFloat_ruleMemoStart, parser->hexFloat_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->hexFloat_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->hexFloat_ruleMemoFirstNode;
-               parser->currentNode = parser->hexFloat_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->hexFloat_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -18877,325 +17261,161 @@ static BOOL hexFloat_rule(JavaParser * parser) {
    startIndex = parser->index;
    // (HexSignificant BinaryExponent ('f' | 'F' | 'd' | 'D')?)
    // ((('0x' | '0X') HexDigit* '.' HexDigit+) | (HexNumeral '.'?))
-   switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-      case '0': {
-         // (('0x' | '0X') HexDigit* '.' HexDigit+)
-         YAPP_NODE * lastNode_1 = parser->currentNode;
-         INT32 lastIndex_1 = parser->index;
-         // ('0x' | '0X')
-         if (yapp_buffer_matchChar(parser->buffer, parser->index, '0')) {
+   // (('0x' | '0X') HexDigit* '.' HexDigit+)
+   YAPP_NODE * lastNode_1 = parser->currentNode;
+   INT32 lastIndex_1 = parser->index;
+   // ('0x' | '0X')
+   if (yapp_buffer_matchChar(parser->buffer, parser->index, '0')) {
+      ++parser->index;
+      // ('x' | 'X')
+      switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
+         case 'x': {
             ++parser->index;
-            // ('x' | 'X')
-            switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-               case 'x': {
-                  ++parser->index;
-                  // <EMPTY>
-                  match = TRUE;
-                  break;
-               }
-               case 'X': {
-                  ++parser->index;
-                  // <EMPTY>
-                  match = TRUE;
-                  break;
-               }
-               default: {
-                  match = FALSE;
-               }
-            }
-         } else {
+            // <EMPTY>
+            match = TRUE;
+            break;
+         }
+         case 'X': {
+            ++parser->index;
+            // <EMPTY>
+            match = TRUE;
+            break;
+         }
+         default: {
             match = FALSE;
          }
+      }
+   } else {
+      match = FALSE;
+   }
+   if (match) {
+      // HexDigit*
+      do {
+         // ('a'-'f' | 'A'-'F' | '0'-'9')
+         // 'a'-'f'
+         match = charRangeMatcher(parser, 'a', 'f');
+         if (! match) {
+            // 'A'-'F'
+            match = charRangeMatcher(parser, 'A', 'F');
+            if (! match) {
+               // '0'-'9'
+               match = charRangeMatcher(parser, '0', '9');
+            }
+         }
+      } while(match);
+      // '.'
+      match = charMatcher(parser, '.');
+      if (match) {
+         // HexDigit+
+         // ('a'-'f' | 'A'-'F' | '0'-'9')
+         // 'a'-'f'
+         match = charRangeMatcher(parser, 'a', 'f');
+         if (! match) {
+            // 'A'-'F'
+            match = charRangeMatcher(parser, 'A', 'F');
+            if (! match) {
+               // '0'-'9'
+               match = charRangeMatcher(parser, '0', '9');
+            }
+         }
          if (match) {
-            // HexDigit*
             do {
                // ('a'-'f' | 'A'-'F' | '0'-'9')
-               switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                  case '0':
-                  case '1':
-                  case '2':
-                  case '3':
-                  case '4':
-                  case '5':
-                  case '6':
-                  case '7':
-                  case '8':
-                  case '9': {
+               // 'a'-'f'
+               match = charRangeMatcher(parser, 'a', 'f');
+               if (! match) {
+                  // 'A'-'F'
+                  match = charRangeMatcher(parser, 'A', 'F');
+                  if (! match) {
                      // '0'-'9'
                      match = charRangeMatcher(parser, '0', '9');
-                     break;
-                  }
-                  case 'a':
-                  case 'b':
-                  case 'c':
-                  case 'd':
-                  case 'e':
-                  case 'f': {
-                     // 'a'-'f'
-                     match = charRangeMatcher(parser, 'a', 'f');
-                     break;
-                  }
-                  case 'A':
-                  case 'B':
-                  case 'C':
-                  case 'D':
-                  case 'E':
-                  case 'F': {
-                     // 'A'-'F'
-                     match = charRangeMatcher(parser, 'A', 'F');
-                     break;
-                  }
-                  default: {
-                     match = FALSE;
                   }
                }
             } while(match);
             match = TRUE;
-            if (match) {
-               // '.'
-               match = charMatcher(parser, '.');
-               if (match) {
-                  // HexDigit+
-                  // ('a'-'f' | 'A'-'F' | '0'-'9')
-                  switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                     case '0':
-                     case '1':
-                     case '2':
-                     case '3':
-                     case '4':
-                     case '5':
-                     case '6':
-                     case '7':
-                     case '8':
-                     case '9': {
-                        // '0'-'9'
-                        match = charRangeMatcher(parser, '0', '9');
-                        break;
-                     }
-                     case 'a':
-                     case 'b':
-                     case 'c':
-                     case 'd':
-                     case 'e':
-                     case 'f': {
-                        // 'a'-'f'
-                        match = charRangeMatcher(parser, 'a', 'f');
-                        break;
-                     }
-                     case 'A':
-                     case 'B':
-                     case 'C':
-                     case 'D':
-                     case 'E':
-                     case 'F': {
-                        // 'A'-'F'
-                        match = charRangeMatcher(parser, 'A', 'F');
-                        break;
-                     }
-                     default: {
-                        match = FALSE;
-                     }
-                  }
-                  if (match) {
-                     do {
-                        // ('a'-'f' | 'A'-'F' | '0'-'9')
-                        switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                           case '0':
-                           case '1':
-                           case '2':
-                           case '3':
-                           case '4':
-                           case '5':
-                           case '6':
-                           case '7':
-                           case '8':
-                           case '9': {
-                              // '0'-'9'
-                              match = charRangeMatcher(parser, '0', '9');
-                              break;
-                           }
-                           case 'a':
-                           case 'b':
-                           case 'c':
-                           case 'd':
-                           case 'e':
-                           case 'f': {
-                              // 'a'-'f'
-                              match = charRangeMatcher(parser, 'a', 'f');
-                              break;
-                           }
-                           case 'A':
-                           case 'B':
-                           case 'C':
-                           case 'D':
-                           case 'E':
-                           case 'F': {
-                              // 'A'-'F'
-                              match = charRangeMatcher(parser, 'A', 'F');
-                              break;
-                           }
-                           default: {
-                              match = FALSE;
-                           }
-                        }
-                     } while(match);
-                     match = TRUE;
-                  }
-                  if (! match) {
-                     parser->index = lastIndex_1;
-                     lastNode_1->sibling = NULL;
-                     parser->currentNode = lastNode_1;
-                  }
-               } else {
-                  parser->index = lastIndex_1;
-                  lastNode_1->sibling = NULL;
-               }
-            } else {
-               parser->index = lastIndex_1;
-               lastNode_1->sibling = NULL;
-            }
          }
          if (! match) {
-            // (HexNumeral '.'?)
-            YAPP_NODE * lastNode_2 = parser->currentNode;
-            INT32 lastIndex_2 = parser->index;
-            // ('0' ('x' | 'X') HexDigit+)
-            YAPP_NODE * lastNode_3 = parser->currentNode;
-            INT32 lastIndex_3 = parser->index;
-            // '0'
-            match = charMatcher(parser, '0');
-            if (match) {
-               // ('x' | 'X')
-               switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                  case 'x': {
-                     ++parser->index;
-                     // <EMPTY>
-                     match = TRUE;
-                     break;
-                  }
-                  case 'X': {
-                     ++parser->index;
-                     // <EMPTY>
-                     match = TRUE;
-                     break;
-                  }
-                  default: {
-                     match = FALSE;
-                  }
-               }
-               if (match) {
-                  // HexDigit+
-                  // ('a'-'f' | 'A'-'F' | '0'-'9')
-                  switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                     case '0':
-                     case '1':
-                     case '2':
-                     case '3':
-                     case '4':
-                     case '5':
-                     case '6':
-                     case '7':
-                     case '8':
-                     case '9': {
-                        // '0'-'9'
-                        match = charRangeMatcher(parser, '0', '9');
-                        break;
-                     }
-                     case 'a':
-                     case 'b':
-                     case 'c':
-                     case 'd':
-                     case 'e':
-                     case 'f': {
-                        // 'a'-'f'
-                        match = charRangeMatcher(parser, 'a', 'f');
-                        break;
-                     }
-                     case 'A':
-                     case 'B':
-                     case 'C':
-                     case 'D':
-                     case 'E':
-                     case 'F': {
-                        // 'A'-'F'
-                        match = charRangeMatcher(parser, 'A', 'F');
-                        break;
-                     }
-                     default: {
-                        match = FALSE;
-                     }
-                  }
-                  if (match) {
-                     do {
-                        // ('a'-'f' | 'A'-'F' | '0'-'9')
-                        switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                           case '0':
-                           case '1':
-                           case '2':
-                           case '3':
-                           case '4':
-                           case '5':
-                           case '6':
-                           case '7':
-                           case '8':
-                           case '9': {
-                              // '0'-'9'
-                              match = charRangeMatcher(parser, '0', '9');
-                              break;
-                           }
-                           case 'a':
-                           case 'b':
-                           case 'c':
-                           case 'd':
-                           case 'e':
-                           case 'f': {
-                              // 'a'-'f'
-                              match = charRangeMatcher(parser, 'a', 'f');
-                              break;
-                           }
-                           case 'A':
-                           case 'B':
-                           case 'C':
-                           case 'D':
-                           case 'E':
-                           case 'F': {
-                              // 'A'-'F'
-                              match = charRangeMatcher(parser, 'A', 'F');
-                              break;
-                           }
-                           default: {
-                              match = FALSE;
-                           }
-                        }
-                     } while(match);
-                     match = TRUE;
-                  }
-                  if (! match) {
-                     parser->index = lastIndex_3;
-                     lastNode_3->sibling = NULL;
-                     parser->currentNode = lastNode_3;
-                  }
-               } else {
-                  parser->index = lastIndex_3;
-                  lastNode_3->sibling = NULL;
-               }
-            }
-            if (match) {
-               // '.'?
-               // '.'
-               match = charMatcher(parser, '.');
+            parser->index = lastIndex_1;
+            lastNode_1->sibling = NULL;
+            parser->currentNode = lastNode_1;
+         }
+      } else {
+         parser->index = lastIndex_1;
+         lastNode_1->sibling = NULL;
+      }
+   }
+   if (! match) {
+      // (HexNumeral '.'?)
+      YAPP_NODE * lastNode_2 = parser->currentNode;
+      INT32 lastIndex_2 = parser->index;
+      // ('0' ('x' | 'X') HexDigit+)
+      YAPP_NODE * lastNode_3 = parser->currentNode;
+      INT32 lastIndex_3 = parser->index;
+      // '0'
+      match = charMatcher(parser, '0');
+      if (match) {
+         // ('x' | 'X')
+         switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
+            case 'x': {
+               ++parser->index;
+               // <EMPTY>
                match = TRUE;
-               if (! match) {
-                  parser->index = lastIndex_2;
-                  lastNode_2->sibling = NULL;
-                  parser->currentNode = lastNode_2;
-               }
+               break;
+            }
+            case 'X': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            default: {
+               match = FALSE;
             }
          }
-         break;
+         if (match) {
+            // HexDigit+
+            // ('a'-'f' | 'A'-'F' | '0'-'9')
+            // 'a'-'f'
+            match = charRangeMatcher(parser, 'a', 'f');
+            if (! match) {
+               // 'A'-'F'
+               match = charRangeMatcher(parser, 'A', 'F');
+               if (! match) {
+                  // '0'-'9'
+                  match = charRangeMatcher(parser, '0', '9');
+               }
+            }
+            if (match) {
+               do {
+                  // ('a'-'f' | 'A'-'F' | '0'-'9')
+                  // 'a'-'f'
+                  match = charRangeMatcher(parser, 'a', 'f');
+                  if (! match) {
+                     // 'A'-'F'
+                     match = charRangeMatcher(parser, 'A', 'F');
+                     if (! match) {
+                        // '0'-'9'
+                        match = charRangeMatcher(parser, '0', '9');
+                     }
+                  }
+               } while(match);
+               match = TRUE;
+            }
+            if (! match) {
+               parser->index = lastIndex_3;
+               lastNode_3->sibling = NULL;
+               parser->currentNode = lastNode_3;
+            }
+         } else {
+            parser->index = lastIndex_3;
+            lastNode_3->sibling = NULL;
+         }
       }
-      default: {
-         match = FALSE;
+      if (match) {
+         // '.'?
+         // '.'
+         charMatcher(parser, '.');
+         match = TRUE;
       }
    }
    if (match) {
@@ -19294,7 +17514,6 @@ static BOOL hexFloat_rule(JavaParser * parser) {
          parser->currentNode = createNode(parser, &JAVA_HEX_FLOAT, startIndex, parser->index, TRUE, FALSE);
          lastNode->sibling = parser->currentNode;
          parser->hexFloat_ruleMemoFirstNode = parser->currentNode;
-         parser->hexFloat_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -19319,12 +17538,10 @@ static BOOL decimalFloat_rule(JavaParser * parser) {
       if (parser->decimalFloat_ruleMemoStart <= parser->decimalFloat_ruleMemoEnd) {
          parser->index = parser->decimalFloat_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_DECIMAL_FLOAT, parser->decimalFloat_ruleMemoStart, parser->decimalFloat_ruleMemoEnd, TRUE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->decimalFloat_ruleMemoStart == parser->decimalFloat_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_DECIMAL_FLOAT, parser->decimalFloat_ruleMemoStart, parser->decimalFloat_ruleMemoEnd, TRUE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->decimalFloat_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->decimalFloat_ruleMemoFirstNode;
-               parser->currentNode = parser->decimalFloat_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->decimalFloat_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -19335,14 +17552,351 @@ static BOOL decimalFloat_rule(JavaParser * parser) {
    parser->currentRuleIsAtomic = TRUE;
    startIndex = parser->index;
    // ((Digit+ '.' Digit* Exponent? ('f' | 'F' | 'd' | 'D')?) | ('.' Digit+ Exponent? ('f' | 'F' | 'd' | 'D')?) | (Digit+ Exponent ('f' | 'F' | 'd' | 'D')?) | (Digit+ Exponent? ('f' | 'F' | 'd' | 'D')))
-   switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-      case '.': {
-         // ('.' Digit+ Exponent? ('f' | 'F' | 'd' | 'D')?)
-         YAPP_NODE * lastNode_1 = parser->currentNode;
-         INT32 lastIndex_1 = parser->index;
-         // '.'
-         match = charMatcher(parser, '.');
+   // (Digit+ '.' Digit* Exponent? ('f' | 'F' | 'd' | 'D')?)
+   YAPP_NODE * lastNode_1 = parser->currentNode;
+   INT32 lastIndex_1 = parser->index;
+   // Digit+
+   // '0'-'9'
+   match = charRangeMatcher(parser, '0', '9');
+   if (match) {
+      do {
+         // '0'-'9'
+         match = charRangeMatcher(parser, '0', '9');
+      } while(match);
+      match = TRUE;
+   }
+   if (match) {
+      // '.'
+      match = charMatcher(parser, '.');
+      if (match) {
+         // Digit*
+         do {
+            // '0'-'9'
+            match = charRangeMatcher(parser, '0', '9');
+         } while(match);
+         match = TRUE;
+         // Exponent?
+         // (('e' | 'E') ('+' | '-')? Digit+)
+         YAPP_NODE * lastNode_2 = parser->currentNode;
+         INT32 lastIndex_2 = parser->index;
+         // ('e' | 'E')
+         switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
+            case 'e': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            case 'E': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            default: {
+               match = FALSE;
+            }
+         }
+         // ('+' | '-')?
+         // ('+' | '-')
+         switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
+            case '+': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            case '-': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            default: {
+               match = FALSE;
+            }
+         }
+         // Digit+
+         // '0'-'9'
+         match = charRangeMatcher(parser, '0', '9');
          if (match) {
+            do {
+               // '0'-'9'
+               match = charRangeMatcher(parser, '0', '9');
+            } while(match);
+            match = TRUE;
+         }
+         if (! match) {
+            parser->index = lastIndex_2;
+            lastNode_2->sibling = NULL;
+            parser->currentNode = lastNode_2;
+         }
+         match = TRUE;
+         // ('f' | 'F' | 'd' | 'D')?
+         // ('f' | 'F' | 'd' | 'D')
+         switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
+            case 'd': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            case 'D': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            case 'f': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            case 'F': {
+               ++parser->index;
+               // <EMPTY>
+               match = TRUE;
+               break;
+            }
+            default: {
+               match = FALSE;
+            }
+         }
+         match = TRUE;
+      } else {
+         parser->index = lastIndex_1;
+         lastNode_1->sibling = NULL;
+      }
+   }
+   if (! match) {
+      // ('.' Digit+ Exponent? ('f' | 'F' | 'd' | 'D')?)
+      YAPP_NODE * lastNode_3 = parser->currentNode;
+      INT32 lastIndex_3 = parser->index;
+      // '.'
+      match = charMatcher(parser, '.');
+      if (match) {
+         // Digit+
+         // '0'-'9'
+         match = charRangeMatcher(parser, '0', '9');
+         if (match) {
+            do {
+               // '0'-'9'
+               match = charRangeMatcher(parser, '0', '9');
+            } while(match);
+            match = TRUE;
+         }
+         if (match) {
+            // Exponent?
+            // (('e' | 'E') ('+' | '-')? Digit+)
+            YAPP_NODE * lastNode_4 = parser->currentNode;
+            INT32 lastIndex_4 = parser->index;
+            // ('e' | 'E')
+            switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
+               case 'e': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               case 'E': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               default: {
+                  match = FALSE;
+               }
+            }
+            if (match) {
+               // ('+' | '-')?
+               // ('+' | '-')
+               switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
+                  case '+': {
+                     ++parser->index;
+                     // <EMPTY>
+                     match = TRUE;
+                     break;
+                  }
+                  case '-': {
+                     ++parser->index;
+                     // <EMPTY>
+                     match = TRUE;
+                     break;
+                  }
+                  default: {
+                     match = FALSE;
+                  }
+               }
+               // Digit+
+               // '0'-'9'
+               match = charRangeMatcher(parser, '0', '9');
+               if (match) {
+                  do {
+                     // '0'-'9'
+                     match = charRangeMatcher(parser, '0', '9');
+                  } while(match);
+                  match = TRUE;
+               }
+               if (! match) {
+                  parser->index = lastIndex_4;
+                  lastNode_4->sibling = NULL;
+                  parser->currentNode = lastNode_4;
+               }
+            }
+            match = TRUE;
+            // ('f' | 'F' | 'd' | 'D')?
+            // ('f' | 'F' | 'd' | 'D')
+            switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
+               case 'd': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               case 'D': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               case 'f': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               case 'F': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               default: {
+                  match = FALSE;
+               }
+            }
+            match = TRUE;
+         } else {
+            parser->index = lastIndex_3;
+            lastNode_3->sibling = NULL;
+         }
+      }
+      if (! match) {
+         // (Digit+ Exponent ('f' | 'F' | 'd' | 'D')?)
+         YAPP_NODE * lastNode_5 = parser->currentNode;
+         INT32 lastIndex_5 = parser->index;
+         // Digit+
+         // '0'-'9'
+         match = charRangeMatcher(parser, '0', '9');
+         if (match) {
+            do {
+               // '0'-'9'
+               match = charRangeMatcher(parser, '0', '9');
+            } while(match);
+            match = TRUE;
+         }
+         if (match) {
+            // (('e' | 'E') ('+' | '-')? Digit+)
+            YAPP_NODE * lastNode_6 = parser->currentNode;
+            INT32 lastIndex_6 = parser->index;
+            // ('e' | 'E')
+            switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
+               case 'e': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               case 'E': {
+                  ++parser->index;
+                  // <EMPTY>
+                  match = TRUE;
+                  break;
+               }
+               default: {
+                  match = FALSE;
+               }
+            }
+            if (match) {
+               // ('+' | '-')?
+               // ('+' | '-')
+               switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
+                  case '+': {
+                     ++parser->index;
+                     // <EMPTY>
+                     match = TRUE;
+                     break;
+                  }
+                  case '-': {
+                     ++parser->index;
+                     // <EMPTY>
+                     match = TRUE;
+                     break;
+                  }
+                  default: {
+                     match = FALSE;
+                  }
+               }
+               // Digit+
+               // '0'-'9'
+               match = charRangeMatcher(parser, '0', '9');
+               if (match) {
+                  do {
+                     // '0'-'9'
+                     match = charRangeMatcher(parser, '0', '9');
+                  } while(match);
+                  match = TRUE;
+               }
+               if (! match) {
+                  parser->index = lastIndex_6;
+                  lastNode_6->sibling = NULL;
+                  parser->currentNode = lastNode_6;
+               }
+            }
+            if (match) {
+               // ('f' | 'F' | 'd' | 'D')?
+               // ('f' | 'F' | 'd' | 'D')
+               switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
+                  case 'd': {
+                     ++parser->index;
+                     // <EMPTY>
+                     match = TRUE;
+                     break;
+                  }
+                  case 'D': {
+                     ++parser->index;
+                     // <EMPTY>
+                     match = TRUE;
+                     break;
+                  }
+                  case 'f': {
+                     ++parser->index;
+                     // <EMPTY>
+                     match = TRUE;
+                     break;
+                  }
+                  case 'F': {
+                     ++parser->index;
+                     // <EMPTY>
+                     match = TRUE;
+                     break;
+                  }
+                  default: {
+                     match = FALSE;
+                  }
+               }
+               match = TRUE;
+            } else {
+               parser->index = lastIndex_5;
+               lastNode_5->sibling = NULL;
+            }
+         }
+         if (! match) {
+            // (Digit+ Exponent? ('f' | 'F' | 'd' | 'D'))
+            YAPP_NODE * lastNode_7 = parser->currentNode;
+            INT32 lastIndex_7 = parser->index;
             // Digit+
             // '0'-'9'
             match = charRangeMatcher(parser, '0', '9');
@@ -19356,8 +17910,8 @@ static BOOL decimalFloat_rule(JavaParser * parser) {
             if (match) {
                // Exponent?
                // (('e' | 'E') ('+' | '-')? Digit+)
-               YAPP_NODE * lastNode_2 = parser->currentNode;
-               INT32 lastIndex_2 = parser->index;
+               YAPP_NODE * lastNode_8 = parser->currentNode;
+               INT32 lastIndex_8 = parser->index;
                // ('e' | 'E')
                switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
                   case 'e': {
@@ -19396,255 +17950,44 @@ static BOOL decimalFloat_rule(JavaParser * parser) {
                         match = FALSE;
                      }
                   }
-                  match = TRUE;
-                  if (match) {
-                     // Digit+
-                     // '0'-'9'
-                     match = charRangeMatcher(parser, '0', '9');
-                     if (match) {
-                        do {
-                           // '0'-'9'
-                           match = charRangeMatcher(parser, '0', '9');
-                        } while(match);
-                        match = TRUE;
-                     }
-                     if (! match) {
-                        parser->index = lastIndex_2;
-                        lastNode_2->sibling = NULL;
-                        parser->currentNode = lastNode_2;
-                     }
-                  } else {
-                     parser->index = lastIndex_2;
-                     lastNode_2->sibling = NULL;
-                  }
-               }
-               match = TRUE;
-               if (match) {
-                  // ('f' | 'F' | 'd' | 'D')?
-                  // ('f' | 'F' | 'd' | 'D')
-                  switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                     case 'd': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     case 'D': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     case 'f': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     case 'F': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     default: {
-                        match = FALSE;
-                     }
-                  }
-                  match = TRUE;
-                  if (! match) {
-                     parser->index = lastIndex_1;
-                     lastNode_1->sibling = NULL;
-                     parser->currentNode = lastNode_1;
-                  }
-               } else {
-                  parser->index = lastIndex_1;
-                  lastNode_1->sibling = NULL;
-               }
-            } else {
-               parser->index = lastIndex_1;
-               lastNode_1->sibling = NULL;
-            }
-         }
-         break;
-      }
-      case '0':
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9': {
-         // (Digit+ '.' Digit* Exponent? ('f' | 'F' | 'd' | 'D')?)
-         YAPP_NODE * lastNode_3 = parser->currentNode;
-         INT32 lastIndex_3 = parser->index;
-         // Digit+
-         // '0'-'9'
-         match = charRangeMatcher(parser, '0', '9');
-         if (match) {
-            do {
-               // '0'-'9'
-               match = charRangeMatcher(parser, '0', '9');
-            } while(match);
-            match = TRUE;
-         }
-         if (match) {
-            // '.'
-            match = charMatcher(parser, '.');
-            if (match) {
-               // Digit*
-               do {
+                  // Digit+
                   // '0'-'9'
                   match = charRangeMatcher(parser, '0', '9');
-               } while(match);
-               match = TRUE;
-               if (match) {
-                  // Exponent?
-                  // (('e' | 'E') ('+' | '-')? Digit+)
-                  YAPP_NODE * lastNode_4 = parser->currentNode;
-                  INT32 lastIndex_4 = parser->index;
-                  // ('e' | 'E')
-                  switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                     case 'e': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     case 'E': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     default: {
-                        match = FALSE;
-                     }
-                  }
                   if (match) {
-                     // ('+' | '-')?
-                     // ('+' | '-')
-                     switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                        case '+': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        case '-': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        default: {
-                           match = FALSE;
-                        }
-                     }
-                     match = TRUE;
-                     if (match) {
-                        // Digit+
+                     do {
                         // '0'-'9'
                         match = charRangeMatcher(parser, '0', '9');
-                        if (match) {
-                           do {
-                              // '0'-'9'
-                              match = charRangeMatcher(parser, '0', '9');
-                           } while(match);
-                           match = TRUE;
-                        }
-                        if (! match) {
-                           parser->index = lastIndex_4;
-                           lastNode_4->sibling = NULL;
-                           parser->currentNode = lastNode_4;
-                        }
-                     } else {
-                        parser->index = lastIndex_4;
-                        lastNode_4->sibling = NULL;
-                     }
-                  }
-                  match = TRUE;
-                  if (match) {
-                     // ('f' | 'F' | 'd' | 'D')?
-                     // ('f' | 'F' | 'd' | 'D')
-                     switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                        case 'd': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        case 'D': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        case 'f': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        case 'F': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        default: {
-                           match = FALSE;
-                        }
-                     }
+                     } while(match);
                      match = TRUE;
-                     if (! match) {
-                        parser->index = lastIndex_3;
-                        lastNode_3->sibling = NULL;
-                        parser->currentNode = lastNode_3;
-                     }
-                  } else {
-                     parser->index = lastIndex_3;
-                     lastNode_3->sibling = NULL;
                   }
-               } else {
-                  parser->index = lastIndex_3;
-                  lastNode_3->sibling = NULL;
+                  if (! match) {
+                     parser->index = lastIndex_8;
+                     lastNode_8->sibling = NULL;
+                     parser->currentNode = lastNode_8;
+                  }
                }
-            } else {
-               parser->index = lastIndex_3;
-               lastNode_3->sibling = NULL;
-            }
-         }
-         if (! match) {
-            // (Digit+ Exponent ('f' | 'F' | 'd' | 'D')?)
-            YAPP_NODE * lastNode_5 = parser->currentNode;
-            INT32 lastIndex_5 = parser->index;
-            // Digit+
-            // '0'-'9'
-            match = charRangeMatcher(parser, '0', '9');
-            if (match) {
-               do {
-                  // '0'-'9'
-                  match = charRangeMatcher(parser, '0', '9');
-               } while(match);
                match = TRUE;
-            }
-            if (match) {
-               // (('e' | 'E') ('+' | '-')? Digit+)
-               YAPP_NODE * lastNode_6 = parser->currentNode;
-               INT32 lastIndex_6 = parser->index;
-               // ('e' | 'E')
+               // ('f' | 'F' | 'd' | 'D')
                switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                  case 'e': {
+                  case 'd': {
                      ++parser->index;
                      // <EMPTY>
                      match = TRUE;
                      break;
                   }
-                  case 'E': {
+                  case 'D': {
+                     ++parser->index;
+                     // <EMPTY>
+                     match = TRUE;
+                     break;
+                  }
+                  case 'f': {
+                     ++parser->index;
+                     // <EMPTY>
+                     match = TRUE;
+                     break;
+                  }
+                  case 'F': {
                      ++parser->index;
                      // <EMPTY>
                      match = TRUE;
@@ -19654,218 +17997,8 @@ static BOOL decimalFloat_rule(JavaParser * parser) {
                      match = FALSE;
                   }
                }
-               if (match) {
-                  // ('+' | '-')?
-                  // ('+' | '-')
-                  switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                     case '+': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     case '-': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     default: {
-                        match = FALSE;
-                     }
-                  }
-                  match = TRUE;
-                  if (match) {
-                     // Digit+
-                     // '0'-'9'
-                     match = charRangeMatcher(parser, '0', '9');
-                     if (match) {
-                        do {
-                           // '0'-'9'
-                           match = charRangeMatcher(parser, '0', '9');
-                        } while(match);
-                        match = TRUE;
-                     }
-                     if (! match) {
-                        parser->index = lastIndex_6;
-                        lastNode_6->sibling = NULL;
-                        parser->currentNode = lastNode_6;
-                     }
-                  } else {
-                     parser->index = lastIndex_6;
-                     lastNode_6->sibling = NULL;
-                  }
-               }
-               if (match) {
-                  // ('f' | 'F' | 'd' | 'D')?
-                  // ('f' | 'F' | 'd' | 'D')
-                  switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                     case 'd': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     case 'D': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     case 'f': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     case 'F': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     default: {
-                        match = FALSE;
-                     }
-                  }
-                  match = TRUE;
-                  if (! match) {
-                     parser->index = lastIndex_5;
-                     lastNode_5->sibling = NULL;
-                     parser->currentNode = lastNode_5;
-                  }
-               } else {
-                  parser->index = lastIndex_5;
-                  lastNode_5->sibling = NULL;
-               }
-            }
-            if (! match) {
-               // (Digit+ Exponent? ('f' | 'F' | 'd' | 'D'))
-               YAPP_NODE * lastNode_7 = parser->currentNode;
-               INT32 lastIndex_7 = parser->index;
-               // Digit+
-               // '0'-'9'
-               match = charRangeMatcher(parser, '0', '9');
-               if (match) {
-                  do {
-                     // '0'-'9'
-                     match = charRangeMatcher(parser, '0', '9');
-                  } while(match);
-                  match = TRUE;
-               }
-               if (match) {
-                  // Exponent?
-                  // (('e' | 'E') ('+' | '-')? Digit+)
-                  YAPP_NODE * lastNode_8 = parser->currentNode;
-                  INT32 lastIndex_8 = parser->index;
-                  // ('e' | 'E')
-                  switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                     case 'e': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     case 'E': {
-                        ++parser->index;
-                        // <EMPTY>
-                        match = TRUE;
-                        break;
-                     }
-                     default: {
-                        match = FALSE;
-                     }
-                  }
-                  if (match) {
-                     // ('+' | '-')?
-                     // ('+' | '-')
-                     switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                        case '+': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        case '-': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        default: {
-                           match = FALSE;
-                        }
-                     }
-                     match = TRUE;
-                     if (match) {
-                        // Digit+
-                        // '0'-'9'
-                        match = charRangeMatcher(parser, '0', '9');
-                        if (match) {
-                           do {
-                              // '0'-'9'
-                              match = charRangeMatcher(parser, '0', '9');
-                           } while(match);
-                           match = TRUE;
-                        }
-                        if (! match) {
-                           parser->index = lastIndex_8;
-                           lastNode_8->sibling = NULL;
-                           parser->currentNode = lastNode_8;
-                        }
-                     } else {
-                        parser->index = lastIndex_8;
-                        lastNode_8->sibling = NULL;
-                     }
-                  }
-                  match = TRUE;
-                  if (match) {
-                     // ('f' | 'F' | 'd' | 'D')
-                     switch(yapp_buffer_getChar(parser->buffer, parser->index)) {
-                        case 'd': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        case 'D': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        case 'f': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        case 'F': {
-                           ++parser->index;
-                           // <EMPTY>
-                           match = TRUE;
-                           break;
-                        }
-                        default: {
-                           match = FALSE;
-                        }
-                     }
-                     if (! match) {
-                        parser->index = lastIndex_7;
-                        lastNode_7->sibling = NULL;
-                        parser->currentNode = lastNode_7;
-                     }
-                  } else {
-                     parser->index = lastIndex_7;
-                     lastNode_7->sibling = NULL;
-                  }
-               }
             }
          }
-         break;
-      }
-      default: {
-         match = FALSE;
       }
    }
    if (match) {
@@ -19878,7 +18011,6 @@ static BOOL decimalFloat_rule(JavaParser * parser) {
          parser->currentNode = createNode(parser, &JAVA_DECIMAL_FLOAT, startIndex, parser->index, TRUE, FALSE);
          lastNode->sibling = parser->currentNode;
          parser->decimalFloat_ruleMemoFirstNode = parser->currentNode;
-         parser->decimalFloat_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {
@@ -19902,12 +18034,10 @@ static BOOL semicolon_rule(JavaParser * parser) {
       if (parser->semicolon_ruleMemoStart <= parser->semicolon_ruleMemoEnd) {
          parser->index = parser->semicolon_ruleMemoEnd;
          if (! parser->currentRuleIsAtomic) {
+            parser->currentNode = createNode(parser, &JAVA_SEMICOLON, parser->semicolon_ruleMemoStart, parser->semicolon_ruleMemoEnd, FALSE, FALSE);
+            lastNode->sibling = parser->currentNode;
             if (parser->semicolon_ruleMemoStart == parser->semicolon_ruleMemoEnd) {
-               parser->currentNode = createNode(parser, &JAVA_SEMICOLON, parser->semicolon_ruleMemoStart, parser->semicolon_ruleMemoEnd, FALSE, FALSE);
-               lastNode->sibling = parser->currentNode;
-            } else if(parser->semicolon_ruleMemoFirstNode != NULL) {
-               lastNode->sibling = parser->semicolon_ruleMemoFirstNode;
-               parser->currentNode = parser->semicolon_ruleMemoLastNode;
+               parser->currentNode->firstChild = parser->semicolon_ruleMemoFirstNode->firstChild;
             }
          }
          return TRUE;
@@ -19933,7 +18063,6 @@ static BOOL semicolon_rule(JavaParser * parser) {
          parser->currentNode->firstChild = lastNode->sibling;
          lastNode->sibling = parser->currentNode;
          parser->semicolon_ruleMemoFirstNode = parser->currentNode;
-         parser->semicolon_ruleMemoLastNode = parser->currentNode;
       }
       return TRUE;
    } else {

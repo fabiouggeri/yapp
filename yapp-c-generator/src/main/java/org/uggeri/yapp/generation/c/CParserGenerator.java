@@ -269,16 +269,12 @@ public class CParserGenerator extends AbstractParserGenerator {
                   initParserStructValues.add(arrayOfValue("0", getNumberMemorizations()));
                   indent(getOutput(), indent).append("YAPP_NODE *").append(varName(memoVarFirstNode(rule))).append("[").append(getNumberMemorizations()).append("];\n");
                   initParserStructValues.add(arrayOfValue("NULL", getNumberMemorizations()));
-                  indent(getOutput(), indent).append("YAPP_NODE *").append(varName(memoVarLastNode(rule))).append("[").append(getNumberMemorizations()).append("];\n");
-                  initParserStructValues.add(arrayOfValue("NULL", getNumberMemorizations()));
                } else {
                   indent(getOutput(), indent).append("INT32 ").append(varName(memoVarStart(rule))).append(";\n");
                   initParserStructValues.add("-1");
                   indent(getOutput(), indent).append("INT32 ").append(varName(memoVarEnd(rule))).append(";\n");
                   initParserStructValues.add("0");
                   indent(getOutput(), indent).append("YAPP_NODE *").append(varName(memoVarFirstNode(rule))).append(";\n");
-                  initParserStructValues.add("NULL");
-                  indent(getOutput(), indent).append("YAPP_NODE *").append(varName(memoVarLastNode(rule))).append(";\n");
                   initParserStructValues.add("NULL");
                }
             }
@@ -578,6 +574,11 @@ public class CParserGenerator extends AbstractParserGenerator {
    @Override
    protected Expression getSibling(Variable nodeVar) {
       return var(nodeVar.getName() + "->sibling");
+   }
+
+   @Override
+   protected Expression getFirstChild(Expression nodeVar) {
+      return var(nodeVar + "->firstChild");
    }
 
    @Override

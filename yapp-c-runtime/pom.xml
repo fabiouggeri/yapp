@@ -16,7 +16,7 @@
    <url>http://maven.apache.org</url>
    
    <properties>
-      <build-plugin-version>1.0-SNAPSHOT</build-plugin-version>
+      <build-plugin-version>2.0-SNAPSHOT</build-plugin-version>
       <arch-target>32</arch-target>
       <os-target>win</os-target>
       <c-compiler>gcc</c-compiler>

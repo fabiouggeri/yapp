@@ -50,8 +50,8 @@
                         <artifactId>maven-build-custom</artifactId>
                         <version>${build-plugin-version}</version>
                         <scope>runtime</scope>
+                        <toolClass>br.com.uggeri.build.tools.custom.compiler.CustomCompiler</toolClass>
                      </tool>
-                     <toolClass>br.com.uggeri.build.tools.custom.compiler.CustomCompiler</toolClass>
                            
                      <toolConfig>
                         <outputType>obj</outputType>
@@ -76,8 +76,8 @@
                         <artifactId>maven-build-custom</artifactId>
                         <version>${build-plugin-version}</version>
                         <scope>runtime</scope>
+                        <toolClass>br.com.uggeri.build.tools.custom.packer.CustomPacker</toolClass>
                      </tool>
-                     <toolClass>br.com.uggeri.build.tools.custom.packer.CustomPacker</toolClass>
                            
                      <toolConfig>
                         <outputType>exe</outputType>
@@ -100,8 +100,8 @@
                         <artifactId>maven-build-custom</artifactId>
                         <version>${build-plugin-version}</version>
                         <scope>runtime</scope>
+                        <toolClass>br.com.uggeri.build.tools.custom.packer.CustomPacker</toolClass>
                      </tool>
-                     <toolClass>br.com.uggeri.build.tools.custom.packer.CustomPacker</toolClass>
                            
                      <toolConfig>
                         <outputType>a</outputType>

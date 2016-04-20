@@ -86,6 +86,32 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitStatement(node);
       }
    },
+   UNKNOWN_COMMAND {
+      @Override
+      public String getLabel() {
+         return "UnknownCommand";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterUnknownCommand(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitUnknownCommand(node);
+      }
+   },
    LOCAL_VARIABLES_DECLARATION {
       @Override
       public String getLabel() {
@@ -697,7 +723,7 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public boolean isSkiped() {
-         return false;
+         return true;
       }
 
       @Override
@@ -1724,32 +1750,6 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitUseIndexes(node);
       }
    },
-   OLD_STYLE_COMMANDS {
-      @Override
-      public String getLabel() {
-         return "OldStyleCommands";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return true;
-      }
-
-      @Override
-      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterOldStyleCommands(node);
-      }
-
-      @Override
-      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitOldStyleCommands(node);
-      }
-   },
    ARROBA_GET_SAY {
       @Override
       public String getLabel() {
@@ -2034,6 +2034,32 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
          visitor.exitRestoreCmd(node);
+      }
+   },
+   STORE_CMD {
+      @Override
+      public String getLabel() {
+         return "StoreCmd";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterStoreCmd(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitStoreCmd(node);
       }
    },
    SAVE_CMD {
@@ -2608,32 +2634,6 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitGotoCmd(node);
       }
    },
-   GO_CMD {
-      @Override
-      public String getLabel() {
-         return "GoCmd";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return false;
-      }
-
-      @Override
-      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterGoCmd(node);
-      }
-
-      @Override
-      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitGoCmd(node);
-      }
-   },
    SKIP_CMD {
       @Override
       public String getLabel() {
@@ -3206,6 +3206,58 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitMenuToCmd(node);
       }
    },
+   DEFAULT_CMD {
+      @Override
+      public String getLabel() {
+         return "DefaultCmd";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterDefaultCmd(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitDefaultCmd(node);
+      }
+   },
+   MACRO_SUBSTITION {
+      @Override
+      public String getLabel() {
+         return "MacroSubstition";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return true;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterMacroSubstition(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitMacroSubstition(node);
+      }
+   },
    IGNORE_LINE {
       @Override
       public String getLabel() {
@@ -3765,7 +3817,7 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public boolean isSkiped() {
-         return false;
+         return true;
       }
 
       @Override
@@ -3776,6 +3828,32 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
          visitor.exitParenthesesExpressionList(node);
+      }
+   },
+   PARENTHESES_STATEMENT {
+      @Override
+      public String getLabel() {
+         return "ParenthesesStatement";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterParenthesesStatement(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitParenthesesStatement(node);
       }
    },
    QUALIFIED_VARIABLE {
@@ -5338,10 +5416,10 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitStep(node);
       }
    },
-   ASSIGNMENT {
+   ASSIGNMENT_EXPRESSION {
       @Override
       public String getLabel() {
-         return "Assignment";
+         return "AssignmentExpression";
       }
 
       @Override
@@ -5356,12 +5434,12 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterAssignment(node);
+         visitor.enterAssignmentExpression(node);
       }
 
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitAssignment(node);
+         visitor.exitAssignmentExpression(node);
       }
    },
    BEGIN_SEQUENCE_KEYWORD {
@@ -5830,6 +5908,162 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
          visitor.exitArrayLiteral(node);
+      }
+   },
+   ARRAY_ITEM_LIST {
+      @Override
+      public String getLabel() {
+         return "ArrayItemList";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return true;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterArrayItemList(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitArrayItemList(node);
+      }
+   },
+   ARRAY_ITEM {
+      @Override
+      public String getLabel() {
+         return "ArrayItem";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return true;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterArrayItem(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitArrayItem(node);
+      }
+   },
+   VARIABLE_BY_REF {
+      @Override
+      public String getLabel() {
+         return "VariableByRef";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterVariableByRef(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitVariableByRef(node);
+      }
+   },
+   ALIASED_FIELD_BY_REF {
+      @Override
+      public String getLabel() {
+         return "AliasedFieldByRef";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterAliasedFieldByRef(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitAliasedFieldByRef(node);
+      }
+   },
+   QUALIFIED_VARIABLE_BY_REF {
+      @Override
+      public String getLabel() {
+         return "QualifiedVariableByRef";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterQualifiedVariableByRef(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitQualifiedVariableByRef(node);
+      }
+   },
+   ARRAY_BY_REF {
+      @Override
+      public String getLabel() {
+         return "ArrayByRef";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterArrayByRef(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitArrayByRef(node);
       }
    },
    HASH_ITEM {
@@ -6326,36 +6560,10 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitExpression(node);
       }
    },
-   ASSIGNMENT_EXPRESSION {
+   OPTIONAL_OR_EXPRESSION {
       @Override
       public String getLabel() {
-         return "AssignmentExpression";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return false;
-      }
-
-      @Override
-      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterAssignmentExpression(node);
-      }
-
-      @Override
-      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitAssignmentExpression(node);
-      }
-   },
-   CONDITION_OPERATOR {
-      @Override
-      public String getLabel() {
-         return "ConditionOperator";
+         return "OptionalOrExpression";
       }
 
       @Override
@@ -6370,18 +6578,18 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterConditionOperator(node);
+         visitor.enterOptionalOrExpression(node);
       }
 
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitConditionOperator(node);
+         visitor.exitOptionalOrExpression(node);
       }
    },
-   CONDITIONAL_EXPRESSION {
+   OR_EXPRESSION {
       @Override
       public String getLabel() {
-         return "ConditionalExpression";
+         return "OrExpression";
       }
 
       @Override
@@ -6396,18 +6604,18 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterConditionalExpression(node);
+         visitor.enterOrExpression(node);
       }
 
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitConditionalExpression(node);
+         visitor.exitOrExpression(node);
       }
    },
-   COMPARISON_OPERATOR {
+   OPTIONAL_AND_EXPRESSION {
       @Override
       public String getLabel() {
-         return "ComparisonOperator";
+         return "OptionalAndExpression";
       }
 
       @Override
@@ -6422,18 +6630,18 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterComparisonOperator(node);
+         visitor.enterOptionalAndExpression(node);
       }
 
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitComparisonOperator(node);
+         visitor.exitOptionalAndExpression(node);
       }
    },
-   COMPARISON_EXPRESSION {
+   AND_EXPRESSION {
       @Override
       public String getLabel() {
-         return "ComparisonExpression";
+         return "AndExpression";
       }
 
       @Override
@@ -6448,12 +6656,90 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterComparisonExpression(node);
+         visitor.enterAndExpression(node);
       }
 
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitComparisonExpression(node);
+         visitor.exitAndExpression(node);
+      }
+   },
+   RELATIONAL_OPERATOR {
+      @Override
+      public String getLabel() {
+         return "RelationalOperator";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return true;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterRelationalOperator(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitRelationalOperator(node);
+      }
+   },
+   OPTIONAL_RELATIONAL_EXPRESSION {
+      @Override
+      public String getLabel() {
+         return "OptionalRelationalExpression";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return true;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterOptionalRelationalExpression(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitOptionalRelationalExpression(node);
+      }
+   },
+   RELATIONAL_EXPRESSION {
+      @Override
+      public String getLabel() {
+         return "RelationalExpression";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterRelationalExpression(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitRelationalExpression(node);
       }
    },
    MATH_OPERATOR {
@@ -6480,6 +6766,32 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
          visitor.exitMathOperator(node);
+      }
+   },
+   OPTIONAL_MATH_EXPRESSION {
+      @Override
+      public String getLabel() {
+         return "OptionalMathExpression";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return true;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterOptionalMathExpression(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitOptionalMathExpression(node);
       }
    },
    MATH_EXPRESSION {
@@ -6766,6 +7078,32 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
          visitor.exitLeftValue(node);
+      }
+   },
+   PARENTHESES_LEFT_VALUE {
+      @Override
+      public String getLabel() {
+         return "ParenthesesLeftValue";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return true;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterParenthesesLeftValue(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitParenthesesLeftValue(node);
       }
    },
    DUMP {

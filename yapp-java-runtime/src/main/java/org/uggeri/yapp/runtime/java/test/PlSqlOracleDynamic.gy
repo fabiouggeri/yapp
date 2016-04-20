@@ -1,0 +1,9 @@
+grammar PlSqlOracleDynamic;
+
+import PlSqlOracle;
+
+/*********************************************************************************
+                              PARSER rules
+**********************************************************************************/
+
+SqlCall : (DmlSentence | PlSqlSource) ';'? EOI;

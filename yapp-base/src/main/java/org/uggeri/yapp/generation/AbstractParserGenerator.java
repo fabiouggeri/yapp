@@ -61,11 +61,11 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author fabio 
- * TODO: verificar recursao a esquerda -> OK - Testar melhor 
- * TODO: verificar possibilidade de reordenar regras de acordo com a possibilidade de consumo de cadeias mais longas 
- * TODO: Gerar erro em regras opcoes redundantes de literais. ex.: ("e" | "E"), ('end' | 'endif' | 'end') 
- * TODO: Agrupar regras OR que comecam com literais. Ex.: ('AAA' S)|('BBB' S)|R => (('AAA'|'BBB') S) | R 
+ * @author fabio
+ * TODO: verificar recursao a esquerda -> OK - Testar melhor
+ * TODO: verificar possibilidade de reordenar regras de acordo com a possibilidade de consumo de cadeias mais longas
+ * TODO: Gerar erro em regras opcoes redundantes de literais. ex.: ("e" | "E"), ('end' | 'endif' | 'end')
+ * TODO: Agrupar regras OR que comecam com literais. Ex.: ('AAA' S)|('BBB' S)|R => (('AAA'|'BBB') S) | R
  * TODO: Tratar erros de sintaxe para tentar prosseguir com o parser. Ex.: "incluir" terminais esperados e nao encontrados,
  * remover terminais nao esperados
  */
@@ -348,7 +348,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
    protected abstract void setFirstChild(Expression nodeVar, Expression expr);
 
    protected abstract Expression getSibling(Variable nodeVar);
-   
+
    protected abstract Expression getFirstChild(Expression nodeVar);
 
    protected abstract Expression timeFunCall();
@@ -649,7 +649,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
          ifStmt(not(currentRuleIsAtomicVar));
             setValue(currentNodeVar, createNodeFunCall(ruleReference(grammar, rule), parserVar.member(memoVarStart(rule)), parserVar.member(memoVarEnd(rule)), !syntaxOnly, skipNode));
             setSibling(lastNodeVar, currentNodeVar);
-            ifStmt(parserVar.member(memoVarStart(rule)).equal(parserVar.member(memoVarEnd(rule))));
+            ifStmt(parserVar.member(memoVarFirstNode(rule)).diff(null));
                setFirstChild(currentNodeVar, getFirstChild(parserVar.member(memoVarFirstNode(rule))));
             endIf();
          endIf();

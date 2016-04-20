@@ -276,7 +276,7 @@ public class JavaParserGenerator extends AbstractParserGenerator {
       }
    }
 
-   private boolean generateEnums(Grammar grammar, boolean first, Set<String> generatedRules, int indent) {
+   private boolean generateEnums(Grammar mainGrammar, Grammar grammar, boolean first, Set<String> generatedRules, int indent) {
       for (NonTerminalRule rule : grammar.getDeclaredRules()) {
          if (! generatedRules.contains(rule.getRuleId()) &&
                  ! rule.getOptions().containsKey(NonTerminalOption.FRAGMENT)) {
@@ -303,12 +303,12 @@ public class JavaParserGenerator extends AbstractParserGenerator {
             indent(getOutput().append('\n'), indent).append("   }");
             getOutput().append('\n');
             indent(getOutput().append('\n'), indent).append("   @Override");
-            indent(getOutput().append('\n'), indent).append("   public void enterRule(").append(visitorClassName(grammar)).append(" visitor, Node node) {");
+            indent(getOutput().append('\n'), indent).append("   public void enterRule(").append(visitorClassName(mainGrammar)).append(" visitor, Node node) {");
             indent(getOutput().append('\n'), indent).append("      visitor.enter").append(rule.getLabel()).append("(node);");
             indent(getOutput().append('\n'), indent).append("   }");
             getOutput().append('\n');
             indent(getOutput().append('\n'), indent).append("   @Override");
-            indent(getOutput().append('\n'), indent).append("   public void exitRule(").append(visitorClassName(grammar)).append(" visitor, Node node) {");
+            indent(getOutput().append('\n'), indent).append("   public void exitRule(").append(visitorClassName(mainGrammar)).append(" visitor, Node node) {");
             indent(getOutput().append('\n'), indent).append("      visitor.exit").append(rule.getLabel()).append("(node);");
             indent(getOutput().append('\n'), indent).append("   }");
             indent(getOutput().append('\n'), indent).append("}");
@@ -321,7 +321,7 @@ public class JavaParserGenerator extends AbstractParserGenerator {
       if (getOptions().isGenerateSingleFileSource()) {
          getOutput().append('\n');
          getOutput().append("   public static enum ").append(rulesEnumName(grammar)).append(" implements Rule<").append(visitorClassName(grammar)).append("> {");
-         generateGrammarEnums(grammar, true, new HashSet<String>(), 6);
+         generateGrammarEnums(grammar, grammar, true, new HashSet<String>(), 6);
          getOutput().append(";\n\n");
          getOutput().append("      @Override\n");
          getOutput().append("      public int getValue() {\n");
@@ -338,7 +338,7 @@ public class JavaParserGenerator extends AbstractParserGenerator {
          getOutput().append("import org.uggeri.yapp.runtime.java.parser.Rule;\n");
          getOutput().append('\n');
          getOutput().append("public enum ").append(rulesEnumName(grammar)).append(" implements Rule<").append(visitorClassName(grammar)).append("> {");
-         generateGrammarEnums(grammar, true, new HashSet<String>(), 3);
+         generateGrammarEnums(grammar, grammar, true, new HashSet<String>(), 3);
          getOutput().append(";\n\n");
          getOutput().append("   @Override\n");
          getOutput().append("   public int getValue() {\n");
@@ -350,10 +350,10 @@ public class JavaParserGenerator extends AbstractParserGenerator {
       }
    }
 
-   private boolean generateGrammarEnums(Grammar grammar, boolean first, Set<String> generatedRules, int indent) {
-      first = generateEnums(grammar, first, generatedRules, indent);
+   private boolean generateGrammarEnums(Grammar mainGrammar, Grammar grammar, boolean first, Set<String> generatedRules, int indent) {
+      first = generateEnums(mainGrammar, grammar, first, generatedRules, indent);
       for (Grammar importGrammar : grammar.getImportGrammars()) {
-         first = generateGrammarEnums(importGrammar, first, generatedRules, indent);
+         first = generateGrammarEnums(grammar, importGrammar, first, generatedRules, indent);
       }
       return first;
    }

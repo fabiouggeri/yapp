@@ -18,6 +18,9 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
    public void enterStatement(Node node) {}
    public void exitStatement(Node node) {}
 
+   public void enterUnknownCommand(Node node) {}
+   public void exitUnknownCommand(Node node) {}
+
    public void enterLocalVariablesDeclaration(Node node) {}
    public void exitLocalVariablesDeclaration(Node node) {}
 
@@ -207,9 +210,6 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
    public void enterUseIndexes(Node node) {}
    public void exitUseIndexes(Node node) {}
 
-   public void enterOldStyleCommands(Node node) {}
-   public void exitOldStyleCommands(Node node) {}
-
    public void enterArrobaGetSay(Node node) {}
    public void exitArrobaGetSay(Node node) {}
 
@@ -242,6 +242,9 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
 
    public void enterRestoreCmd(Node node) {}
    public void exitRestoreCmd(Node node) {}
+
+   public void enterStoreCmd(Node node) {}
+   public void exitStoreCmd(Node node) {}
 
    public void enterSaveCmd(Node node) {}
    public void exitSaveCmd(Node node) {}
@@ -309,9 +312,6 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
    public void enterGotoCmd(Node node) {}
    public void exitGotoCmd(Node node) {}
 
-   public void enterGoCmd(Node node) {}
-   public void exitGoCmd(Node node) {}
-
    public void enterSkipCmd(Node node) {}
    public void exitSkipCmd(Node node) {}
 
@@ -378,6 +378,12 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
    public void enterMenuToCmd(Node node) {}
    public void exitMenuToCmd(Node node) {}
 
+   public void enterDefaultCmd(Node node) {}
+   public void exitDefaultCmd(Node node) {}
+
+   public void enterMacroSubstition(Node node) {}
+   public void exitMacroSubstition(Node node) {}
+
    public void enterIgnoreLine(Node node) {}
    public void exitIgnoreLine(Node node) {}
 
@@ -443,6 +449,9 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
 
    public void enterParenthesesExpressionList(Node node) {}
    public void exitParenthesesExpressionList(Node node) {}
+
+   public void enterParenthesesStatement(Node node) {}
+   public void exitParenthesesStatement(Node node) {}
 
    public void enterQualifiedVariable(Node node) {}
    public void exitQualifiedVariable(Node node) {}
@@ -624,8 +633,8 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
    public void enterStep(Node node) {}
    public void exitStep(Node node) {}
 
-   public void enterAssignment(Node node) {}
-   public void exitAssignment(Node node) {}
+   public void enterAssignmentExpression(Node node) {}
+   public void exitAssignmentExpression(Node node) {}
 
    public void enterBeginSequenceKeyword(Node node) {}
    public void exitBeginSequenceKeyword(Node node) {}
@@ -680,6 +689,24 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
 
    public void enterArrayLiteral(Node node) {}
    public void exitArrayLiteral(Node node) {}
+
+   public void enterArrayItemList(Node node) {}
+   public void exitArrayItemList(Node node) {}
+
+   public void enterArrayItem(Node node) {}
+   public void exitArrayItem(Node node) {}
+
+   public void enterVariableByRef(Node node) {}
+   public void exitVariableByRef(Node node) {}
+
+   public void enterAliasedFieldByRef(Node node) {}
+   public void exitAliasedFieldByRef(Node node) {}
+
+   public void enterQualifiedVariableByRef(Node node) {}
+   public void exitQualifiedVariableByRef(Node node) {}
+
+   public void enterArrayByRef(Node node) {}
+   public void exitArrayByRef(Node node) {}
 
    public void enterHashItem(Node node) {}
    public void exitHashItem(Node node) {}
@@ -738,23 +765,32 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
    public void enterExpression(Node node) {}
    public void exitExpression(Node node) {}
 
-   public void enterAssignmentExpression(Node node) {}
-   public void exitAssignmentExpression(Node node) {}
+   public void enterOptionalOrExpression(Node node) {}
+   public void exitOptionalOrExpression(Node node) {}
 
-   public void enterConditionOperator(Node node) {}
-   public void exitConditionOperator(Node node) {}
+   public void enterOrExpression(Node node) {}
+   public void exitOrExpression(Node node) {}
 
-   public void enterConditionalExpression(Node node) {}
-   public void exitConditionalExpression(Node node) {}
+   public void enterOptionalAndExpression(Node node) {}
+   public void exitOptionalAndExpression(Node node) {}
 
-   public void enterComparisonOperator(Node node) {}
-   public void exitComparisonOperator(Node node) {}
+   public void enterAndExpression(Node node) {}
+   public void exitAndExpression(Node node) {}
 
-   public void enterComparisonExpression(Node node) {}
-   public void exitComparisonExpression(Node node) {}
+   public void enterRelationalOperator(Node node) {}
+   public void exitRelationalOperator(Node node) {}
+
+   public void enterOptionalRelationalExpression(Node node) {}
+   public void exitOptionalRelationalExpression(Node node) {}
+
+   public void enterRelationalExpression(Node node) {}
+   public void exitRelationalExpression(Node node) {}
 
    public void enterMathOperator(Node node) {}
    public void exitMathOperator(Node node) {}
+
+   public void enterOptionalMathExpression(Node node) {}
+   public void exitOptionalMathExpression(Node node) {}
 
    public void enterMathExpression(Node node) {}
    public void exitMathExpression(Node node) {}
@@ -788,6 +824,9 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
 
    public void enterLeftValue(Node node) {}
    public void exitLeftValue(Node node) {}
+
+   public void enterParenthesesLeftValue(Node node) {}
+   public void exitParenthesesLeftValue(Node node) {}
 
    public void enterDump(Node node) {}
    public void exitDump(Node node) {}

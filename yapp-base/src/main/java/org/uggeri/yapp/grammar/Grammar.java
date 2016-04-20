@@ -48,10 +48,12 @@ public class Grammar {
 
    public NonTerminalRule getRule(String ruleName) {
       NonTerminalRule rule = rules.get(ruleName);
-      for (int i = importGrammars.size() - 1; i >= 0; i--) {
-         rule = importGrammars.get(i).getRule(ruleName);
-         if (rule != null) {
-            break;
+      if (rule == null) {
+         for (int i = importGrammars.size() - 1; i >= 0; i--) {
+            rule = importGrammars.get(i).getRule(ruleName);
+            if (rule != null) {
+               break;
+            }
          }
       }
       return rule;

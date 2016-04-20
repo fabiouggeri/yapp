@@ -1,0 +1,13 @@
+grammar PlSqlOracleScript;
+
+import PlSqlOracle;
+
+/*********************************************************************************
+                              PARSER rules
+**********************************************************************************/
+
+Script : MultiplesSQLSentence EOI;
+
+MultiplesSQLSentence : (SqlSentence '/'?)*;
+
+SqlSentence : (DmlSentence ';') | PlSqlSource;

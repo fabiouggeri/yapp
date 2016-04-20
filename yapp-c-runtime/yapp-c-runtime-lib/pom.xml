@@ -28,7 +28,7 @@
                <testOutputDirectory>${project.basedir}/target/test-classes/${c-classifier}</testOutputDirectory>
                <sourceDirectory>${project.basedir}/src/main</sourceDirectory>
                <testSourceDirectory>${project.basedir}/src/test</testSourceDirectory>
-               
+
                <envVars>
                   <INCLUDE>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE;C:\Program Files (x86)\Windows Kits\8.1\include\shared;C:\Program Files (x86)\Windows Kits\8.1\include\um;C:\Program Files (x86)\Windows Kits\8.1\include\winrt</INCLUDE>
                   <LIB>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\LIB;C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86</LIB>
@@ -36,7 +36,7 @@
                </envVars>
 
                <classifier>${c-classifier}</classifier>
-                     
+
                <defines>
                   <__ARCH__>${os-target}${arch-target}</__ARCH__>
                   <__CC__>${c-compiler}</__CC__>
@@ -52,7 +52,7 @@
                         <scope>runtime</scope>
                         <toolClass>br.com.uggeri.build.tools.custom.compiler.CustomCompiler</toolClass>
                      </tool>
-                           
+
                      <toolConfig>
                         <outputType>obj</outputType>
                         <sourceTypes>
@@ -68,7 +68,7 @@
                         <!--commandLine>cl /W3 /GL /Ox /c #{includesPaths, '/I', ' /I'} #{defines, '/D', ' /D', '='} /Fo#{outputFile} #{inputFile}</commandLine-->
                      </toolConfig>
                   </toolMapping>
-                  
+
                   <!-- Configuracao da ferramenta para geracao (linker) de executaveis  -->
                   <toolMapping>
                      <tool>
@@ -78,7 +78,7 @@
                         <scope>runtime</scope>
                         <toolClass>br.com.uggeri.build.tools.custom.packer.CustomPacker</toolClass>
                      </tool>
-                           
+
                      <toolConfig>
                         <outputType>exe</outputType>
                         <sourceTypes>
@@ -91,8 +91,8 @@
                         <commandLine>gcc -Ofast #{inputFiles,, ' '} #{inputLibraries, '-l', ' -l'} -o#{outputFile}</commandLine>
                         <!--commandLine>link /INCREMENTAL:no /FORCE:MULTIPLE #{inputFiles,, ' '} #{inputLibraries, '-l', ' -l'} libcmt.lib /OUT:#{outputFile}</commandLine-->
                      </toolConfig>
-                  </toolMapping>    
-                  
+                  </toolMapping>
+
                   <!-- Configuracao da ferramenta para geracao (archiver) de bibliotecas  -->
                   <toolMapping>
                      <tool>
@@ -102,7 +102,7 @@
                         <scope>runtime</scope>
                         <toolClass>br.com.uggeri.build.tools.custom.packer.CustomPacker</toolClass>
                      </tool>
-                           
+
                      <toolConfig>
                         <outputType>a</outputType>
                         <sourceTypes>
@@ -115,7 +115,7 @@
                         <commandLine>ar rcs #{outputFile} #{inputFiles,, ' '}</commandLine>
                         <!--commandLine>lib /SUBSYSTEM:CONSOLE /OUT:#{outputFile} #{inputFiles,, ' '}</commandLine-->
                      </toolConfig>
-                  </toolMapping>    
+                  </toolMapping>
                </toolsMapping>
             </configuration>
          </plugin>

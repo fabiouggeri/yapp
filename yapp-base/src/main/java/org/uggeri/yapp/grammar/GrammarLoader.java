@@ -38,14 +38,14 @@ import java.util.Map.Entry;
  * @author fabio
  */
 public class GrammarLoader {
-   
+
    private void loadGrammar(Grammar grammar, File file) throws GrammarSyntaxException, GrammarException {
       FileReader fr = null;
       try {
          final StringBuilder grammarText = new StringBuilder(4096);
          final BufferedReader br;
          String lineReaded;
-         
+
          fr = new FileReader(file);
          br = new BufferedReader(fr);
          lineReaded = br.readLine();
@@ -73,7 +73,7 @@ public class GrammarLoader {
          }
       }
    }
-   
+
    public Grammar loadGrammar(File file) throws GrammarSyntaxException, GrammarException {
       Grammar grammar = new Grammar();
       loadGrammar(grammar, file);
@@ -116,16 +116,16 @@ public class GrammarLoader {
          throw new GrammarSyntaxException(ctx.line, ctx.column, "Unknown character found.");
       }
    }
-   
+
    private void nonTerminalEntry(final Grammar grammar, final GrammarParsingContext ctx, final CharSequence ruleName) throws GrammarSyntaxException, GrammarException {
       NonTerminalRule rule = grammar.getRule(ruleName.toString());
-      
+
       if (charSequencesEquals(ruleName, "EOI")) {
          throw new GrammarSyntaxException(ctx.line, ctx.column, "EOI is a reserved rule name. ");
       } else if (charSequencesEquals(ruleName, "EMPTY")) {
          throw new GrammarSyntaxException(ctx.line, ctx.column, "EMPTY is a reserved rule name. ");
-      } 
-      
+      }
+
       if (rule == null) {
          rule = new NonTerminalRule(ruleName.toString(), null);
          grammar.addRule(rule);
@@ -167,11 +167,11 @@ public class GrammarLoader {
          throw new GrammarSyntaxException(ctx.line, ctx.column, ": not found after rule name.");
       }
    }
-   
+
    private CharSequence consumeUp(final GrammarParsingContext ctx, char endChar) {
       final StringBuilder text = new StringBuilder(32);
       char lastChar = '\0';
- 
+
       ctx.skipSpaces();
       while (ctx.hasNext()) {
          final char c = ctx.currentChar();
@@ -190,10 +190,10 @@ public class GrammarLoader {
       }
       return text;
    }
-   
+
    private CharSequence consumeIdentifier(final GrammarParsingContext ctx) {
       final StringBuilder id = new StringBuilder(32);
-      
+
       ctx.skipSpaces();
       id.append(ctx.currentChar());
       ctx.advanceIndex();
@@ -208,7 +208,7 @@ public class GrammarLoader {
       }
       return id;
    }
-   
+
    private GrammarRule orRule(final Grammar grammar, final GrammarParsingContext ctx) throws GrammarSyntaxException {
       final List<GrammarRule> rules = new ArrayList<GrammarRule>();
       GrammarRule rule = andRule(grammar, ctx);
@@ -225,12 +225,12 @@ public class GrammarLoader {
                rule = null;
             }
          } while (rule != null);
-         
+
          rule = rules.size() == 1 ? rules.get(0) : new OrRule(rules);
       }
       return rule;
    }
-   
+
    private GrammarRule andRule(final Grammar grammar, final GrammarParsingContext ctx) throws GrammarSyntaxException {
       final List<GrammarRule> rules = new ArrayList<GrammarRule>();
       GrammarRule rule = postFixedRule(grammar, ctx);
@@ -239,7 +239,7 @@ public class GrammarLoader {
             rules.add(rule);
             rule = postFixedRule(grammar, ctx);
          } while (rule != null);
-         
+
          rule = rules.size() == 1 ? rules.get(0) : new AndRule(rules);
       }
       return rule;
@@ -403,7 +403,7 @@ public class GrammarLoader {
 
    private CharSequence consumeNumber(final GrammarParsingContext ctx) {
       final StringBuilder number = new StringBuilder(32);
-      
+
       ctx.skipSpaces();
       number.append(ctx.currentChar());
       ctx.advanceIndex();
@@ -418,12 +418,12 @@ public class GrammarLoader {
       }
       return number;
    }
-   
-   
+
+
    private GrammarRule groupedRule(final Grammar grammar, final GrammarParsingContext ctx) throws GrammarSyntaxException {
       GrammarRule rule;
       ctx.advanceIndex();
-      rule = orRule(grammar, ctx); 
+      rule = orRule(grammar, ctx);
       ctx.skipSpaces();
       if (ctx.currentChar() != ')') {
          throw new GrammarSyntaxException(ctx.line, ctx.column, "Closing parenthesis not found.");
@@ -510,7 +510,7 @@ public class GrammarLoader {
       }
       return adjustedFileName;
    }
-   
+
    private void importGrammar(Grammar grammar, CharSequence importGrammar) throws GrammarException {
       File grammarFile;
       importGrammar = adjustFileName(importGrammar);
@@ -523,8 +523,9 @@ public class GrammarLoader {
       }
       grammar.addImportGrammar(loadGrammar(grammarFile));
    }
-   
+
    private void importGrammarEntry(Grammar grammar, GrammarParsingContext ctx) throws GrammarSyntaxException, GrammarException {
+      ctx.skipSpaces();
       if (Character.isLetter(ctx.currentChar())) {
          final CharSequence importName  = consumeUp(ctx, ';');
          importGrammar(grammar, importName);
@@ -537,7 +538,7 @@ public class GrammarLoader {
          throw new GrammarSyntaxException(ctx.line, ctx.column, "Grammar name not found!");
       }
    }
-   
+
    private void grammarNameEntry(Grammar grammar, GrammarParsingContext ctx) throws GrammarSyntaxException {
       if (grammar.getGrammarName() == null) {
          ctx.skipSpaces();
@@ -645,11 +646,11 @@ public class GrammarLoader {
          this.text = text;
          skipSpaces();
       }
-      
+
       public char currentChar() {
          return text.charAt(index);
       }
-      
+
       public final void skipSpaces() {
          int state = NO_COMMENT;
          while (index < text.length()) {
@@ -706,16 +707,16 @@ public class GrammarLoader {
             ++index;
          }
       }
-      
+
       public void advanceIndex() {
          ++column;
          ++index;
       }
-      
+
       public boolean hasNext() {
          return index < text.length();
       }
-      
+
       public void addOption(NonTerminalOption option) {
          options.put(option, "");
       }
@@ -723,7 +724,7 @@ public class GrammarLoader {
       public void addOption(NonTerminalOption option, String value) {
          options.put(option, value);
       }
-      
+
       public void clearOptions() {
          options.clear();
       }

@@ -7,8 +7,9 @@ grammar HarbourUnprocessed;
 HarbourProgram : Statements EOI;
 
 @SkipNode
-Statements : ( OptionalSpacing ((Statement EndStmt) | (IgnoreLine EndStmt) | EndStmt) )*
-             OptionalSpacing (Statement | IgnoreLine )?;
+Statements : ( OptionalSpacing
+               ( (AloneLineComment EndStmt) | (Statement EndStmt) | (IgnoreLine EndStmt) | EndStmt) )*
+             OptionalSpacing (AloneLineComment | Statement | IgnoreLine )?;
 
 @Memoize
 Statement : LocalVariablesDeclaration
@@ -44,6 +45,7 @@ Statement : LocalVariablesDeclaration
           | ForEachEnd
           | SwitchBegin
           | SwitchOptionBegin
+          | DefaultCmd
           | SwitchDefaultBegin
           | SwitchEnd
           | TryCatchBegin
@@ -82,10 +84,68 @@ Statement : LocalVariablesDeclaration
           | SimpleFunctionCall
           | KeyboardCall
           | Macro
-          | ParenthesesExpressionList
-          | AloneLineComment
+          | ParenthesesStatement
           | Directive
-          | OldStyleCommands;
+          | ArrobaGetSay
+          | SetCmd
+          | ReadCmd
+          | ClearCmd
+          | ClsCmd
+          | KeyboardCmd
+          | WaitCmd
+          | AcceptCmd
+          | InputCmd
+          | ReleaseCmd
+          | RestoreCmd
+          | StoreCmd
+          | SaveCmd
+          | JoinCmd
+          | EjectCmd
+          | EraseCmd
+          | DeleteCmd
+          | RenameCmd
+          | CopyCmd
+          | DirCmd
+          | TypeCmd
+          | RequestCmd
+          | CancelCmd
+          | QuitCmd
+          | RunCmd
+          | OutCmd
+          | CloseCmd
+          | SelectCmd
+          | AppendCmd
+          | PackCmd
+          | ZapCmd
+          | UnlockCmd
+          | CommitCmd
+          | GotoCmd
+          | SkipCmd
+          | FindCmd
+          | ContinueCmd
+          | SeekCmd
+          | LocateCmd
+          | ReplaceCmd
+          | RecallCmd
+          | CreateCmd
+          | SortCmd
+          | TotalCmd
+          | UpdateCmd
+          | CountCmd
+          | SumCmd
+          | AverageCmd
+          | ListCmd
+          | DisplayCmd
+          | ReportCmd
+          | LabelCmd
+          | IndexOnCmd
+          | ReindexCmd
+          | QOutCommand
+          | MenuToCmd
+          | UnknownCommand;
+
+@Memoize
+UnknownCommand : (AnySimpleFunctionCall | Expression | UnknownIdentifier | Separator)+;
 
 LocalVariablesDeclaration : "local":4 VariableDeclarationList;
 
@@ -164,6 +224,7 @@ ExitStmt : "exit";
 
 LoopStmt : "loop";
 
+@SkipNode
 Directive : IncludeDirective
           | DefineDirective
           | TranslateDirective
@@ -256,7 +317,7 @@ Separator : ','
 
 @SkipNode
 @Memoize
-CmdComplementation : (AnySimpleFunctionCall | UnknownIdentifier | PrimaryExpression | Separator)*;
+CmdComplementation : (AnySimpleFunctionCall | Expression | UnknownIdentifier | Separator)*;
 
 @Memoize
 @SkipNode
@@ -281,7 +342,7 @@ UseAs : UseAsDatabase
         UseAlias
         UseAsOptions;
 
-UseAsDatabase : "use" AliasIdentifier;
+UseAsDatabase : "use" (AliasIdentifier | Expression);
 
 UseAsCommand : "as" UseAsType Expression;
 
@@ -289,7 +350,7 @@ UseAsType : ("fun" | "proc")?;
 
 UseAsParams : ("with" Expression)?;
 
-UseAlias : ("alias" AliasIdentifier)?;
+UseAlias : ("alias" (AliasIdentifier | Expression))?;
 
 UseAsPrecision : "precision" Expression;
 
@@ -309,7 +370,7 @@ UseArea : UseDatabase
           UseOptions
           UseIndexes;
 
-UseDatabase : "use" AliasIdentifier;
+UseDatabase : "use" (AliasIdentifier | Expression)?;
 
 UseAreaVia : ("via" Expression)?;
 
@@ -323,64 +384,6 @@ UseOptions : ( "new"
 
 UseIndexes : ("index" Expression (',' Expression)*)?;
 
-@SkipNode
-OldStyleCommands : ArrobaGetSay
-                 | SetCmd
-                 | ReadCmd
-                 | ClearCmd
-                 | ClsCmd
-                 | KeyboardCmd
-                 | WaitCmd
-                 | AcceptCmd
-                 | InputCmd
-                 | ReleaseCmd
-                 | RestoreCmd
-                 | SaveCmd
-                 | JoinCmd
-                 | EjectCmd
-                 | EraseCmd
-                 | DeleteCmd
-                 | RenameCmd
-                 | CopyCmd
-                 | DirCmd
-                 | TypeCmd
-                 | RequestCmd
-                 | CancelCmd
-                 | QuitCmd
-                 | RunCmd
-                 | OutCmd
-                 | CloseCmd
-                 | SelectCmd
-                 | AppendCmd
-                 | PackCmd
-                 | ZapCmd
-                 | UnlockCmd
-                 | CommitCmd
-                 | GotoCmd
-                 | GoCmd
-                 | SkipCmd
-                 | FindCmd
-                 | ContinueCmd
-                 | SeekCmd
-                 | LocateCmd
-                 | ReplaceCmd
-                 | RecallCmd
-                 | CreateCmd
-                 | SortCmd
-                 | TotalCmd
-                 | UpdateCmd
-                 | CountCmd
-                 | SumCmd
-                 | AverageCmd
-                 | ListCmd
-                 | DisplayCmd
-                 | ReportCmd
-                 | LabelCmd
-                 | IndexOnCmd
-                 | ReindexCmd
-                 | QOutCommand
-                 | MenuToCmd;
-
 ArrobaGetSay : '@' CmdComplementation;
 
 SetCmd : "set" CmdComplementation;
@@ -391,29 +394,31 @@ ClsCmd : "cls" CmdComplementation;
 
 ClearCmd : "clear" CmdComplementation;
 
-KeyboardCmd : "keyboard" CmdComplementation;
+KeyboardCmd : "keyboard":4 CmdComplementation;
 
 WaitCmd : "wait" CmdComplementation;
 
-AcceptCmd : "accept" CmdComplementation;
+AcceptCmd : "accept":4 CmdComplementation;
 
 InputCmd : "input" CmdComplementation;
 
-ReleaseCmd : "release" CmdComplementation;
+ReleaseCmd : "release":4 CmdComplementation;
 
-RestoreCmd : "restore" CmdComplementation;
+RestoreCmd : "restore":4 CmdComplementation;
+
+StoreCmd : "store":4 Expression "to" VariableList;
 
 SaveCmd : "save" CmdComplementation;
 
 JoinCmd : "join" CmdComplementation;
 
-EjectCmd : "eject";
+EjectCmd : "eject":4;
 
 EraseCmd : "erase" CmdComplementation;
 
-DeleteCmd : "delete" CmdComplementation;
+DeleteCmd : "delete":4 CmdComplementation;
 
-RenameCmd : "rename" CmdComplementation;
+RenameCmd : "rename":4 CmdComplementation;
 
 CopyCmd : "copy" CmdComplementation;
 
@@ -421,80 +426,88 @@ DirCmd : "dir" CmdComplementation;
 
 TypeCmd : "type" CmdComplementation;
 
-RequestCmd : "request" CmdComplementation;
+RequestCmd : "request":4 CmdComplementation;
 
-CancelCmd : "cancel";
+CancelCmd : "cancel":4;
 
 QuitCmd : "quit";
 
 RunCmd : ("run" | "exclamation") CmdComplementation;
 
-OutCmd : "question" CmdComplementation;
+OutCmd : "question":4 CmdComplementation;
 
 CloseCmd : "close" CmdComplementation;
 
-SelectCmd : "select" CmdComplementation;
+SelectCmd : "select":4 CmdComplementation;
 
-AppendCmd : "append" CmdComplementation;
+AppendCmd : "append":4 CmdComplementation;
 
 PackCmd : "pack";
 
 ZapCmd : "zap";
 
-UnlockCmd : "unlock" CmdComplementation;
+UnlockCmd : "unlock":4 CmdComplementation;
 
 CommitCmd : "commit";
 
-GotoCmd : "goto" CmdComplementation;
-
-GoCmd : "go" CmdComplementation;
+GotoCmd : ("goto" | "go") CmdComplementation;
 
 SkipCmd : "skip" CmdComplementation;
 
 FindCmd : "find" CmdComplementation;
 
-ContinueCmd : "continue";
+ContinueCmd : "continue":4;
 
 SeekCmd : "seek" CmdComplementation;
 
-LocateCmd : "locate" CmdComplementation;
+LocateCmd : "locate":4 CmdComplementation;
 
-ReplaceCmd : "replace" CmdComplementation;
+ReplaceCmd : "replace":4 CmdComplementation;
 
-RecallCmd : "recall" CmdComplementation;
+RecallCmd : "recall":4 CmdComplementation;
 
-CreateCmd : "create" CmdComplementation;
+CreateCmd : "create":4 CmdComplementation;
 
 SortCmd : "sort" CmdComplementation;
 
 TotalCmd : "total" CmdComplementation;
 
-UpdateCmd : "update" CmdComplementation;
+UpdateCmd : "update":4 CmdComplementation;
 
 CountCmd : "count" CmdComplementation;
 
 SumCmd : "sum" CmdComplementation;
 
-AverageCmd : "average" CmdComplementation;
+AverageCmd : "average":4 CmdComplementation;
 
 ListCmd : "list" CmdComplementation;
 
-DisplayCmd : "display" CmdComplementation;
+DisplayCmd : "display":4 CmdComplementation;
 
-ReportCmd : "report" CmdComplementation;
+ReportCmd : "report":4 CmdComplementation;
 
-LabelCmd : "label" CmdComplementation;
+LabelCmd : "label":4 CmdComplementation;
 
-IndexOnCmd : "index" "on" CmdComplementation;
+IndexOnCmd : "index":4 "on" CmdComplementation;
 
-ReindexCmd : "reindex" CmdComplementation;
+ReindexCmd : "reindex":4 CmdComplementation;
 
 QOutCommand : ('?' | '??') CmdComplementation;
 
 MenuToCmd : "menu" "to" LeftValue;
 
+DefaultCmd : "default":4 LeftValue "to" Expression;
+
+@SkipNode
 @Memoize
-IgnoreLine : (('\n' | '\r' | EOI)! .)+;
+MacroSubstition : MacroSubstitionPattern OptionalSpacing;
+
+@Rule(MacroSubstition)
+@Atomic
+MacroSubstitionPattern : ([A-Z] | '_') ([A-Z] | [0-9] | '_')*;
+
+@Memoize
+IgnoreLine : (('\n' | '\r' | EOI | ';')! .)+;
 
 @SkipNode
 VariableDeclarationList : VariableDefinition VariableDefinitionCommaList;
@@ -551,7 +564,10 @@ Macro : MacroVar | MacroExpression;
 
 AliasedExpression : AliasIdentifier '->' ParenthesesExpressionList;
 
+@SkipNode
 ParenthesesExpressionList : '(' ExpressionList ')';
+
+ParenthesesStatement : '(' ExpressionList ')';
 
 QualifiedVariable : Variable (':' AnyIdentifier)+;
 
@@ -567,7 +583,7 @@ AnySimpleFunctionCall : AnyIdentifier ParParameters;
 @SyntaxOnly
 IgnoreRestOfLine : TestNoAlpha ((('\n' | '\r' | EOI)! .)* )?;
 
-IfInLine : IIFKeyword '(' Condition ',' Parameter? ',' Parameter? ')';
+IfInLine : IIFKeyword '(' Condition ',' Expression? ',' Expression? ')';
 
 IfBegin : "if" Condition;
 
@@ -582,8 +598,7 @@ EndKeyword : "end" IgnoreRestOfLine;
 
 DoWhileBegin : "do"? "while":4 Condition;
 
-DoWhileEnd : "end" "do"
-           | "enddo":4;
+DoWhileEnd : ("end" "do" | "enddo":4) IgnoreRestOfLine;
 
 ForNextBegin : "for" ForIndexInitialization "to" Expression Step;
 
@@ -596,20 +611,19 @@ BeginSequenceBegin : BeginSequenceKeyword WithCodeBlock;
 
 DoCaseBegin : "do" "case";
 
-DoCaseEnd : "end" "case"
-          | "endcase":4;
+DoCaseEnd : ("end" "case" | "endcase":4) IgnoreRestOfLine;
 
 ForEachBegin : "for" "each" Variable "in" Expression;
 
-ForEachEnd : "next";
+ForEachEnd : "next" IgnoreRestOfLine;
 
 SwitchBegin : "switch":4 Expression;
 
-SwitchEnd : "end" "switch";
+SwitchEnd : "end" "switch" IgnoreRestOfLine;
 
 TryCatchBegin : "try";
 
-TryCatchEnd : "end" "try";
+TryCatchEnd : "end" "try" IgnoreRestOfLine;
 
 FinallyBlockBegin : "finally";
 
@@ -735,7 +749,7 @@ StepArgument : "step" Expression;
 
 Step : StepArgument?;
 
-@Rule(Assignment)
+@Rule(AssignmentExpression)
 ForIndexInitialization : (AliasedField | Macro | QualifiedVariable | Variable) AssignmentOperator Expression;
 
 BeginSequenceKeyword : "begin":4 "sequence":4;
@@ -748,8 +762,7 @@ CodeBlockLiteral : CodeBlockPattern OptionalSpacing;
 
 WithCodeBlock : WithOption?;
 
-BeginSequenceEnd : "end" "sequence":4
-                 | "endsequence":4;
+BeginSequenceEnd : ("end" "sequence":4 | "endsequence":4) IgnoreRestOfLine;
 
 @SkipNode
 UsingSpec : "using":4 Variable;
@@ -792,7 +805,25 @@ CodeBlockPattern : '{' '|' CodeBlockParameters? '|' ExpressionList '}';
 ArrayLiteral : ArrayPattern OptionalSpacing;
 
 @Rule(ArrayLiteral)
-ArrayPattern : '{' ValuesList '}';
+ArrayPattern : '{' ArrayItemList '}';
+
+@SkipNode
+ArrayItemList : ArrayItem? (',' ArrayItem?)*;
+
+@SkipNode
+ArrayItem : Expression
+          | ArrayByRef
+          | AliasedFieldByRef
+          | QualifiedVariableByRef
+          | VariableByRef;
+
+VariableByRef : '@' Variable;
+
+AliasedFieldByRef : '@' AliasedField;
+
+QualifiedVariableByRef : '@' QualifiedVariable;
+
+ArrayByRef : '@' ArrayAccess;
 
 HashItem : Expression '=>' Expression?;
 
@@ -876,45 +907,43 @@ AssignOperatorOnly : ':='
 
 @SkipNode
 @Memoize
-Expression : AssignmentExpression
-           | MathExpression
-           | ComparisonExpression
-           | ConditionalExpression
-           | PrimaryExpression;
+Expression : AssignmentExpression | OptionalOrExpression;
 
 @Memoize
 AssignmentExpression : LeftValue AssignOperator (ValueByReference | Expression);
 
 @SkipNode
-ConditionOperator : ConditionOperatorOnly OptionalSpacing;
+OptionalOrExpression : OrExpression | OptionalAndExpression;
 
-@Atomic
-@Rule(ConditionOperator)
-ConditionOperatorOnly : ".and."
-                      | ".or.";
-
-@Memoize
-ConditionalExpression : PrimaryExpression ConditionOperator Expression;
+OrExpression : OptionalAndExpression ".or." OptionalOrExpression;
 
 @SkipNode
-ComparisonOperator : ComparisonOperatorOnly OptionalSpacing;
+OptionalAndExpression : AndExpression | OptionalRelationalExpression;
+
+AndExpression : OptionalRelationalExpression ".and." OptionalAndExpression;
+
+@SkipNode
+RelationalOperator : RelationalOperatorOnly OptionalSpacing;
 
 @Atomic
-@Rule(ComparisonOperator)
-ComparisonOperatorOnly : '>='
+@Rule(RelationalOperator)
+RelationalOperatorOnly : '>='
                        | '<='
                        | '<>'
                        | '#'
                        | '!='
-                       | GreaterOperator
-                       | LessOperator
+                       | '>'
+                       | '<'
                        | '=='
                        | '$'
                        | "in"
                        | EqualOperator;
 
+@SkipNode
+OptionalRelationalExpression : RelationalExpression | OptionalMathExpression;
+
 @Memoize
-ComparisonExpression : PrimaryExpression ComparisonOperator Expression;
+RelationalExpression : PrimaryExpression RelationalOperator OptionalRelationalExpression;
 
 @SkipNode
 MathOperator : MathOperatorOnly OptionalSpacing;
@@ -934,8 +963,11 @@ MathOperatorOnly : PlusSign
                  | '<<'
                  | '>>';
 
+@SkipNode
+OptionalMathExpression : MathExpression | PrimaryExpression;
+
 @Memoize
-MathExpression : PrimaryExpression MathOperator Expression;
+MathExpression : PrimaryExpression MathOperator OptionalRelationalExpression;
 
 @Memoize
 PrefixedExpression : PrefixOperator Expression;
@@ -1018,17 +1050,15 @@ LeftValue : SelfExpression
           | AliasedField
           | AliasedMacro
           | Macro
-          | Variable;
+          | Variable
+          | ParenthesesLeftValue;
+
+@SkipNode
+ParenthesesLeftValue : '(' LeftValue ')';
 
 @Fragment
 NotOperator : ( ".not."
               | ('!' '='!) );
-
-@Fragment
-GreaterOperator : '>' '='!;
-
-@Fragment
-LessOperator : '<' ('=' | '>')!;
 
 @NotExtendLiterals
 Dump : "begindump" (EndDump! .)* EndDump;
@@ -1114,6 +1144,7 @@ LineComment : ('//' | '&&') (('\n' | '\r' | EOI)! .)*;
 BlockComment : '/*' ('*/'! .)* '*/';
 
 @Atomic
+@SyntaxOnly
 AloneLineComment : '*' (('\n' | '\r' | EOI)! .)*;
 
 @Atomic
@@ -1130,6 +1161,7 @@ Spacing : ( Whitespace
           | BlockComment
           | ContinueNL )+;
 
+@NotExtendLiterals
 ContinueNL : ';' (Whitespace | LineComment | BlockComment)* NewLine;
 
 @Fragment

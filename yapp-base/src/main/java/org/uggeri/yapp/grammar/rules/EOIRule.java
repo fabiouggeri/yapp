@@ -27,14 +27,4 @@ public class EOIRule implements GrammarRule {
    public String toString() {
       return "<EOI>";
    }
-
-   @Override
-   public boolean isTest() {
-      return true;
-   }
-
-   @Override
-   public boolean canBeEmpty() {
-      return true;
-   }
 }

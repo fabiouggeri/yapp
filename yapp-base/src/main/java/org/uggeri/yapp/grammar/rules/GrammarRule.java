@@ -16,8 +16,4 @@ public interface GrammarRule {
    public void visit(ParserGenerationOptions options, GrammarRuleVisitor visitor);
    
    public boolean isTerminal();
-
-   public boolean isTest();
-   
-   public boolean canBeEmpty();
 }

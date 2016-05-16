@@ -37,6 +37,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.uggeri.yapp.generation.LeftRecursionStrategy;
 
 /**
  *
@@ -86,6 +87,7 @@ public class TesteGeracao {
          options.setGenerateTraceCode(false);
          options.setProfile(false);
          options.setCatchMismatches(false);
+         options.setLeftRecursionStrategy(LeftRecursionStrategy.ACCEPT);
          //options.setMemoizeMode(MemoizeMode.ALL);
          options.setMemoizeMode(MemoizeMode.AUTO);
          //options.setGenerateSingleFileSource(true);

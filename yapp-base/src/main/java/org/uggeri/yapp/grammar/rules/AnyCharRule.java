@@ -43,9 +43,4 @@ public class AnyCharRule extends TerminalRule {
    public int length() {
       return 1;
    }
-
-   @Override
-   public boolean canBeEmpty() {
-      return false;
-   }
 }

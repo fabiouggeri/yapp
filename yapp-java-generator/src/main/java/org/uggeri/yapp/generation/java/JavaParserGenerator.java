@@ -85,6 +85,7 @@ public class JavaParserGenerator extends AbstractParserGenerator {
       getOutput().append("   private Node currentNode = new NodeImpl(null, 0, 0, false, false);\n");
       generateMemoFields(getGrammar(), new HashSet<String>(), 3);
       generateProfileFields(getGrammar(), new HashSet<String>(), 3);
+      generateLeftRecursionFields(getGrammar(), new HashSet<String>(), 3);
       generateAbstractVisitor(getGrammar());
       generateRulesEnum(getGrammar());
    }
@@ -411,6 +412,27 @@ public class JavaParserGenerator extends AbstractParserGenerator {
 
    private String profileFieldName(NonTerminalRule rule) {
       return rule.getMethodName() + "Profile";
+   }
+
+   private void generateLeftRecursionFields(Grammar grammar, Set<String> generatedRules, int indent) {
+      generateGrammarLeftRecursionFields(grammar, generatedRules, indent);
+      for (Grammar importGrammar : grammar.getImportGrammars()) {
+         generateLeftRecursionFields(importGrammar, generatedRules, indent);
+      }
+   }
+
+   private void generateGrammarLeftRecursionFields(Grammar grammar, Set<String> generatedRules, int indent) {
+      for (NonTerminalRule rule : grammar.getDeclaredRules()) {
+         if (rule.hasLeftRecursion() && !generatedRules.contains(rule.getName()) && !rule.getOptions().containsKey(NonTerminalOption.FRAGMENT)) {
+            generatedRules.add(rule.getName());
+            declareRuleLeftRecursionFields(rule, indent);
+         }
+      }
+   }
+
+   private void declareRuleLeftRecursionFields(final NonTerminalRule rule, final int indent) {
+      indent(getOutput().append('\n'), indent).append("private int ").append(varName(ruleLastIndexVar(rule))).append(" = -1;");
+      indent(getOutput().append('\n'), indent).append("private int ").append(varName(ruleTryVar(rule))).append(" = 0;");
    }
 
    @Override

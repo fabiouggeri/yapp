@@ -14,11 +14,6 @@ public abstract class TerminalRule implements GrammarRule {
    public boolean isTerminal() {
       return true;
    }
-
-   @Override
-   public boolean isTest() {
-      return false;
-   }
    
    public abstract String getText();
    

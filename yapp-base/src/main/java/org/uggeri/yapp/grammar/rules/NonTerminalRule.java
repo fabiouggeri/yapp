@@ -32,6 +32,8 @@ public class NonTerminalRule implements GrammarRule, SimpleGrammarRule {
    private Pattern patternToFollow = null;
 
    private boolean followIfMatch = true;
+   
+   private boolean leftRecursion = false;
 
    public NonTerminalRule(String name, GrammarRule rule) {
       this.name = name;
@@ -141,13 +143,11 @@ public class NonTerminalRule implements GrammarRule, SimpleGrammarRule {
       this.followIfMatch = followIfMatch;
    }
 
-   @Override
-   public boolean isTest() {
-      return rule.isTest();
+   public boolean hasLeftRecursion() {
+      return leftRecursion;
    }
 
-   @Override
-   public boolean canBeEmpty() {
-      return rule.canBeEmpty();
+   public void setLeftRecursion(boolean leftRecursion) {
+      this.leftRecursion = leftRecursion;
    }
 }

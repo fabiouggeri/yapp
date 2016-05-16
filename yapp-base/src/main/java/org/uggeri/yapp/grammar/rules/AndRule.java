@@ -59,24 +59,4 @@ public class AndRule implements GrammarRule, ComposedGrammarRule {
    public boolean isTerminal() {
       return false;
    }
-
-   @Override
-   public boolean isTest() {
-      for (GrammarRule rule : rules) {
-         if (! rule.isTest()) {
-            return false;
-         }
-      }
-      return true;
-   }
-
-   @Override
-   public boolean canBeEmpty() {
-      for (GrammarRule r : rules) {
-         if (! r.canBeEmpty()) {
-            return false;
-         }
-      }
-      return true;
-   }
 }

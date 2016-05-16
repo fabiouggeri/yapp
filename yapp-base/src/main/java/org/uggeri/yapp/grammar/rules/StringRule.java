@@ -64,9 +64,4 @@ public class StringRule extends TerminalRule {
    public int getPartialMatchLength() {
       return partialMatchLength;
    }
-
-   @Override
-   public boolean canBeEmpty() {
-      return false;
-   }
 }

@@ -43,14 +43,4 @@ public class ZeroOrMoreRule implements GrammarRule, SimpleGrammarRule {
    public void setRule(GrammarRule rule) {
       this.rule = rule;
    }
-
-   @Override
-   public boolean isTest() {
-      return rule.isTest();
-   }
-
-   @Override
-   public boolean canBeEmpty() {
-      return true;
-   }
 }

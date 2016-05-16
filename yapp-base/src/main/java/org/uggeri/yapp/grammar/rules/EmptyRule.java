@@ -27,14 +27,4 @@ public class EmptyRule implements GrammarRule {
    public String toString() {
       return "<EMPTY>";
    }
-
-   @Override
-   public boolean isTest() {
-      return true;
-   }
-
-   @Override
-   public boolean canBeEmpty() {
-      return true;
-   }
 }

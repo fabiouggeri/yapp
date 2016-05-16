@@ -243,6 +243,9 @@ public abstract class JavaVisitor implements NodeVisitor {
    public void enterParExpression(Node node) {}
    public void exitParExpression(Node node) {}
 
+   public void enterRecursiveExpression(Node node) {}
+   public void exitRecursiveExpression(Node node) {}
+
    public void enterExpression(Node node) {}
    public void exitExpression(Node node) {}
 

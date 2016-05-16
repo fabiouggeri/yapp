@@ -40,17 +40,7 @@ public class TestRule implements GrammarRule, SimpleGrammarRule {
    }
 
    @Override
-   public boolean isTest() {
-      return true;
-   }
-
-   @Override
    public void setRule(GrammarRule rule) {
       this.rule = rule;
-   }
-
-   @Override
-   public boolean canBeEmpty() {
-      return true;
    }
 }

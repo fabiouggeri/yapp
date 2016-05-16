@@ -58,15 +58,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Pattern;
+import org.uggeri.yapp.grammar.rules.ComposedGrammarRule;
+import org.uggeri.yapp.grammar.rules.SimpleGrammarRule;
 
 /**
  *
- * @author fabio
- * TODO: verificar recursao a esquerda -> OK - Testar melhor
- * TODO: verificar possibilidade de reordenar regras de acordo com a possibilidade de consumo de cadeias mais longas
- * TODO: Gerar erro em regras opcoes redundantes de literais. ex.: ("e" | "E"), ('end' | 'endif' | 'end')
- * TODO: Agrupar regras OR que comecam com literais. Ex.: ('AAA' S)|('BBB' S)|R => (('AAA'|'BBB') S) | R
- * TODO: Tratar erros de sintaxe para tentar prosseguir com o parser. Ex.: "incluir" terminais esperados e nao encontrados,
+ * @author fabio TODO: verificar recursao a esquerda -> OK - Testar melhor TODO: verificar possibilidade de reordenar regras de
+ * acordo com a possibilidade de consumo de cadeias mais longas TODO: Gerar erro em regras opcoes redundantes de literais. ex.: ("e"
+ * | "E"), ('end' | 'endif' | 'end') TODO: Agrupar regras OR que comecam com literais. Ex.: ('AAA' S)|('BBB' S)|R => (('AAA'|'BBB')
+ * S) | R TODO: Tratar erros de sintaxe para tentar prosseguir com o parser. Ex.: "incluir" terminais esperados e nao encontrados,
  * remover terminais nao esperados
  */
 public abstract class AbstractParserGenerator implements ParserGenerator, GrammarRuleVisitor {
@@ -92,6 +92,10 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
    protected static final String MEMO_INDEX_VAR_NAME = "memoIndex";
 
    protected static final String LAST_NODE_VAR_NAME = "lastNode";
+
+   protected static final String LAST_INDEX_VAR_NAME = "lastRuleIndex";
+
+   protected static final String LAST_TRY_VAR_NAME = "lastRuleTry";
 
    protected static final String START_INDEX_VAR_NAME = "startIndex";
 
@@ -237,10 +241,14 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
 
    private FunctionDefinition charTestFunction;
 
+   private NonTerminalRule currentNonTerminalRule = null;
+
+   private int currentOrOption = 0;
+
    public AbstractParserGenerator(Grammar grammar, ParserGenerationOptions options) {
       this.grammar = grammar;
       this.options = options;
-      initializeVariables();
+      createVariables();
       initializeFunctions();
    }
 
@@ -265,7 +273,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       charTestFunction = defineFunction(functionScope(), BOOLEAN, "charTest", var("c").declare(CHAR));
    }
 
-   private void initializeVariables() {
+   private void createVariables() {
       parserVar = var("this");
       startIndexVar = var(START_INDEX_VAR_NAME);
       matchVar = var(MATCH_VAR_NAME);
@@ -476,6 +484,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       final boolean catchMismatch = rule.getOptions().containsKey(NonTerminalOption.CATCH_MISMATCH);
       auxVarNumber = 1;
 
+      currentNonTerminalRule = rule;
       atomicRule = rule.getOptions().containsKey(NonTerminalOption.ATOMIC);
       memoize = isMemoizeRule(rule);
       output.append('\n');
@@ -487,7 +496,18 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       if (atomicRule) {
          setValue(currentRuleIsAtomicVar, true);
       }
-      if (!rule.getRule().isTest()) {
+      if (rule.hasLeftRecursion()) {
+         currentOrOption = 1;
+         ifStmt(ruleLastIndexVar(rule).equal(indexVar));
+         stmt(ruleTryVar(rule).preInc());
+         elseStmt();
+         setValue(ruleLastIndexVar(rule), indexVar);
+         setValue(ruleTryVar(rule), 0);
+         endIf();
+      } else {
+         currentOrOption = 0;
+      }
+      if (!isTest(rule.getRule())) {
          setValue(startIndexVar, indexVar);
       }
       rule.getRule().visit(getOptions(), this);
@@ -585,8 +605,16 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       }
    }
 
+   protected Expression ruleLastIndexVar(final NonTerminalRule rule) {
+      return var(rule.getMethodName() + "LastIndex");
+   }
+
+   protected Expression ruleTryVar(final NonTerminalRule rule) {
+      return var(rule.getMethodName() + "Try");
+   }
+
    private void memoizationCode(final Grammar grammar, NonTerminalRule rule, boolean memoize, final boolean syntaxOnly, final boolean skipNode, final boolean catchMismatch) {
-      if (memoize && !rule.getRule().isTest()) {
+      if (memoize && !isTest(rule.getRule())) {
          ifStmt(parserVar.member(memoVarStart(rule)).equal(indexVar));
          ifStmt(parserVar.member(memoVarStart(rule)).lessOrEqual(parserVar.member(memoVarEnd(rule))));
          memorizedMatchExitRule(grammar, rule, syntaxOnly, skipNode, catchMismatch);
@@ -614,7 +642,11 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
    }
 
    private void declareLocalVariables(final Grammar grammar, final NonTerminalRule rule, final boolean memoize, final boolean syntaxOnly, final boolean catchMismatch) {
-      if (!rule.getRule().isTest()) {
+      if (rule.hasLeftRecursion()) {
+         declareVarStmt(INTEGER, LAST_INDEX_VAR_NAME, ruleLastIndexVar(rule));
+         declareVarStmt(INTEGER, LAST_TRY_VAR_NAME, ruleTryVar(rule));
+      }
+      if (!isTest(rule.getRule())) {
          declareVarStmt(NODE, LAST_NODE_VAR_NAME, currentNodeVar);
          declareVarStmt(INTEGER, START_INDEX_VAR_NAME);
       }
@@ -645,13 +677,13 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
 
    private void memorizedMatchExitRule(final Grammar grammar, final NonTerminalRule rule, final boolean syntaxOnly, final boolean skipNode, final boolean catchMismatch) {
       setValue(indexVar, parserVar.member(memoVarEnd(rule)));
-      if (!rule.getRule().isTest()) {
+      if (!isTest(rule.getRule())) {
          ifStmt(not(currentRuleIsAtomicVar));
-            setValue(currentNodeVar, createNodeFunCall(ruleReference(grammar, rule), parserVar.member(memoVarStart(rule)), parserVar.member(memoVarEnd(rule)), !syntaxOnly, skipNode));
-            setSibling(lastNodeVar, currentNodeVar);
-            ifStmt(parserVar.member(memoVarFirstNode(rule)).diff(null));
-               setFirstChild(currentNodeVar, getFirstChild(parserVar.member(memoVarFirstNode(rule))));
-            endIf();
+         setValue(currentNodeVar, createNodeFunCall(ruleReference(grammar, rule), parserVar.member(memoVarStart(rule)), parserVar.member(memoVarEnd(rule)), !syntaxOnly, skipNode));
+         setSibling(lastNodeVar, currentNodeVar);
+         ifStmt(parserVar.member(memoVarFirstNode(rule)).diff(null));
+         setFirstChild(currentNodeVar, getFirstChild(parserVar.member(memoVarFirstNode(rule))));
+         endIf();
          endIf();
       }
       traceCodeExitRule(true);
@@ -664,7 +696,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       if (atomicRule) {
          setValue(currentRuleIsAtomicVar, lastRuleIsAtomicVar);
       }
-      if (!rule.getRule().isTest()) {
+      if (!isTest(rule.getRule())) {
          if (memoize) {
             setValue(parserVar.member(memoVarStart(rule)), startIndexVar);
             setValue(parserVar.member(memoVarEnd(rule)), indexVar);
@@ -688,6 +720,10 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       traceCodeExitRule(true);
       profileCodeExitRule(grammar, rule, false, true);
       captureErrorCodeExitRule(grammar, rule, syntaxOnly, catchMismatch, true);
+      if (rule.hasLeftRecursion()) {
+         setValue(ruleLastIndexVar(rule), var(LAST_INDEX_VAR_NAME));
+         setValue(ruleTryVar(rule), var(LAST_TRY_VAR_NAME));
+      }
       returnStmt(true);
    }
 
@@ -703,7 +739,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
          setValue(currentRuleIsAtomicVar, lastRuleIsAtomicVar);
       }
       captureErrorCodeExitRule(grammar, rule, syntaxOnly, catchMismatch, false);
-      if (!rule.getRule().isTest()) {
+      if (!isTest(rule.getRule())) {
          if (memoize) {
             setValue(parserVar.member(memoVarStart(rule)), startIndexVar);
             setValue(parserVar.member(memoVarEnd(rule)), -1);
@@ -715,6 +751,10 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       }
       traceCodeExitRule(false);
       profileCodeExitRule(grammar, rule, false, false);
+      if (rule.hasLeftRecursion()) {
+         setValue(ruleLastIndexVar(rule), var(LAST_INDEX_VAR_NAME));
+         setValue(ruleTryVar(rule), var(LAST_TRY_VAR_NAME));
+      }
       returnStmt(false);
    }
 
@@ -826,12 +866,17 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
          rule.getRule().visit(options, this);
       } else {
          ruleComment(rule);
-         setValue(matchVar, parserVar.member(funCall(rule.getMethodName())));
+         if (currentOrOption > 0 && currentNonTerminalRule.hasLeftRecursion()) {
+            setValue(matchVar, ruleTryVar(currentNonTerminalRule).less(currentOrOption).and(parserVar.member(funCall(rule.getMethodName()))));
+         } else {
+            setValue(matchVar, parserVar.member(funCall(rule.getMethodName())));
+         }
       }
    }
 
    private void appendAndRule(final Iterator<GrammarRule> it, final Variable auxIndexVar, final Variable auxNodeVar, final boolean first) {
       it.next().visit(getOptions(), this);
+      currentOrOption = 0;
       if (it.hasNext()) {
          ifStmt(matchVar);
          appendAndRule(it, auxIndexVar, auxNodeVar, false);
@@ -853,6 +898,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
    @Override
    public void visitAnd(ParserGenerationOptions options, AndRule rule) {
       final Iterator<GrammarRule> it = rule.getRules().iterator();
+      final int oldCurrentOrOption = currentOrOption;
       Variable auxNodeVar = null;
       Variable auxIndexVar = null;
       ruleComment(rule);
@@ -860,17 +906,19 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
          if (restoreIndex) {
             auxNodeVar = declareVarStmt(NODE, "lastNode_" + auxVarNumber, currentNodeVar).getVariable();
             auxIndexVar = declareVarStmt(INTEGER, "lastIndex_" + auxVarNumber++, indexVar).getVariable();
-            appendAndRule(it, auxIndexVar, auxNodeVar, true);
-         } else {
-            appendAndRule(it, auxIndexVar, auxNodeVar, true);
          }
+         appendAndRule(it, auxIndexVar, auxNodeVar, true);
       }
+      currentOrOption = oldCurrentOrOption;
    }
 
    private void appendOrRule(final Iterator<GrammarRule> it) {
       it.next().visit(getOptions(), this);
       if (it.hasNext()) {
          ifStmt(not(matchVar));
+         if (currentOrOption > 0) {
+            ++currentOrOption;
+         }
          appendOrRule(it);
          endIf();
       }
@@ -1071,6 +1119,8 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
    @Override
    public void visitZeroOrMore(ParserGenerationOptions options, ZeroOrMoreRule rule) {
       final boolean oldRestoreIndex = restoreIndex;
+      final int oldCurrentOrOption = currentOrOption;
+      currentOrOption = 0;
       ruleComment(rule);
       restoreIndex = true;
       doWhileStmt(matchVar);
@@ -1078,11 +1128,14 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       endDo();
       setValue(matchVar, true);
       restoreIndex = oldRestoreIndex;
+      currentOrOption = oldCurrentOrOption;
    }
 
    @Override
    public void visitOneOrMore(ParserGenerationOptions options, OneOrMoreRule rule) {
       final boolean oldRestoreIndex = restoreIndex;
+      final int oldCurrentOrOption = currentOrOption;
+      currentOrOption = 0;
       ruleComment(rule);
       restoreIndex = true;
       rule.getRule().visit(options, this);
@@ -1093,16 +1146,20 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       setValue(matchVar, true);
       endIf();
       restoreIndex = oldRestoreIndex;
+      currentOrOption = oldCurrentOrOption;
    }
 
    @Override
    public void visitOptional(ParserGenerationOptions options, OptionalRule rule) {
       final boolean oldRestoreIndex = restoreIndex;
+      final int oldCurrentOrOption = currentOrOption;
+      currentOrOption = 0;
       restoreIndex = true;
       ruleComment(rule);
       rule.getRule().visit(options, this);
       setValue(matchVar, true);
       restoreIndex = oldRestoreIndex;
+      currentOrOption = oldCurrentOrOption;
    }
 
    @Override
@@ -1114,6 +1171,8 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
    @Override
    public void visitTest(ParserGenerationOptions options, TestRule rule) {
       final TestVisitor testVisitor = new TestVisitor();
+      final int oldCurrentOrOption = currentOrOption;
+      currentOrOption = 0;
       ruleComment(rule);
       rule.getRule().visit(options, testVisitor);
       if (testVisitor.isOnlyTest()) {
@@ -1131,11 +1190,14 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
          setSibling(auxNodeVar, null);
          setValue(currentNodeVar, auxNodeVar);
       }
+      currentOrOption = oldCurrentOrOption;
    }
 
    @Override
    public void visitTestNot(ParserGenerationOptions options, TestNotRule rule) {
       final TestVisitor testVisitor = new TestVisitor();
+      final int oldCurrentOrOption = currentOrOption;
+      currentOrOption = 0;
       ruleComment(rule);
       rule.getRule().visit(options, testVisitor);
       if (testVisitor.isOnlyTest()) {
@@ -1155,6 +1217,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
          setValue(currentNodeVar, auxNodeVar);
          setValue(matchVar, not(matchVar));
       }
+      currentOrOption = oldCurrentOrOption;
    }
 
    @Override
@@ -1233,6 +1296,8 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
             if (!recursivePath.isEmpty()) {
                throw new ParserGenerationException("Rule '" + rule.getName() + "' contains left recursion: " + recursivePath.toString());
             }
+         } else if (options.getLeftRecursionStrategy().equals(LeftRecursionStrategy.ACCEPT)) {
+            rule.setLeftRecursion(!leftRecursionPath(rule).isEmpty());
          }
       }
       for (Grammar importedGramar : grammar.getImportGrammars()) {
@@ -1846,6 +1911,46 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
 
    protected int getInitialIndentation() {
       return 0;
+   }
+
+   // x : x | y;
+   private boolean isTest(GrammarRule rule, Map<GrammarRule, Boolean> verifiedRules) {
+      if (!verifiedRules.containsKey(rule)) {
+         verifiedRules.put(rule, false);
+         if (rule instanceof ComposedGrammarRule) {
+            final List<GrammarRule> rules = ((ComposedGrammarRule) rule).getRules();
+            for (GrammarRule r : rules) {
+               if (!isTest(r, verifiedRules)) {
+                  return false;
+               }
+            }
+            verifiedRules.put(rule, true);
+            return true;
+         } else if (rule instanceof SimpleGrammarRule) {
+            final boolean test = isTest(((SimpleGrammarRule) rule).getRule(), verifiedRules);
+            verifiedRules.put(rule, test);
+            return test;
+         } else if (rule instanceof EmptyRule) {
+            verifiedRules.put(rule, true);
+            return true;
+         } else if (rule instanceof TestRule) {
+            verifiedRules.put(rule, true);
+            return true;
+         } else if (rule instanceof TestNotRule) {
+            verifiedRules.put(rule, true);
+            return true;
+         } else if (rule instanceof EOIRule) {
+            verifiedRules.put(rule, true);
+            return true;
+         }
+         return false;
+      } else {
+         return verifiedRules.get(rule);
+      }
+   }
+
+   protected boolean isTest(GrammarRule rule) {
+      return isTest(rule, new HashMap<GrammarRule, Boolean>());
    }
 
    private static class CharSet {

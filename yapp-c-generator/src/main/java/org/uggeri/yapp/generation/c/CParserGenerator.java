@@ -214,6 +214,7 @@ public class CParserGenerator extends AbstractParserGenerator {
       }
       generateMemoFields(getGrammar(), new HashSet<String>(), 3);
       generateProfilesFields();
+      generateLeftRecursionFields(getGrammar(), new HashSet<String>(), 3);
       getOutput().append("} ").append(parserClassName(getGrammar())).append(";\n");
       declareRulesConstants(getGrammar());
       declarePublicFunctions(getGrammar());
@@ -278,6 +279,25 @@ public class CParserGenerator extends AbstractParserGenerator {
                   initParserStructValues.add("NULL");
                }
             }
+         }
+      }
+   }
+   
+   private void generateLeftRecursionFields(Grammar grammar, Set<String> generatedRules, int indent) {
+      generateGrammarLeftRecursionFields(grammar, generatedRules, indent);
+      for (Grammar importGrammar : grammar.getImportGrammars()) {
+         generateLeftRecursionFields(importGrammar, generatedRules, indent);
+      }
+   }
+
+   private void generateGrammarLeftRecursionFields(Grammar grammar, Set<String> generatedRules, int indent) {
+      for (NonTerminalRule rule : grammar.getDeclaredRules()) {
+         if (rule.hasLeftRecursion() && !generatedRules.contains(rule.getName()) && !rule.getOptions().containsKey(NonTerminalOption.FRAGMENT)) {
+            generatedRules.add(rule.getName());
+            indent(getOutput(), indent).append("INT32 ").append(varName(ruleLastIndexVar(rule))).append(";\n");
+            initParserStructValues.add("-1");
+            indent(getOutput(), indent).append("INT32 ").append(varName(ruleTryVar(rule))).append(";\n");
+            initParserStructValues.add("0");
          }
       }
    }

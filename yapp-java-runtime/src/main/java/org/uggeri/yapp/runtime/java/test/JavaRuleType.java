@@ -2036,32 +2036,6 @@ public enum JavaRuleType implements Rule<JavaVisitor> {
          visitor.exitParExpression(node);
       }
    },
-   RECURSIVE_EXPRESSION {
-      @Override
-      public String getLabel() {
-         return "RecursiveExpression";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return false;
-      }
-
-      @Override
-      public void enterRule(JavaVisitor visitor, Node node) {
-         visitor.enterRecursiveExpression(node);
-      }
-
-      @Override
-      public void exitRule(JavaVisitor visitor, Node node) {
-         visitor.exitRecursiveExpression(node);
-      }
-   },
    EXPRESSION {
       @Override
       public String getLabel() {

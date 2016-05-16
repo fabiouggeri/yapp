@@ -219,10 +219,6 @@ ElseStatement : 'else' Statement;
 @SkipNode
 ParExpression : '(' Expression ')';
 
-RecursiveExpression : (RecursiveExpression '+' RecursiveExpression)
-                    | (RecursiveExpression '-' RecursiveExpression)
-                    | Atomic;
-
 Expression : AssignmentExpression | ConditionalExpression;
 
 ForInit : ForInitVariables | ForInitExpressions;

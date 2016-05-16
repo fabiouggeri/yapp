@@ -477,8 +477,6 @@ public class JavaParser implements Parser {
    private int semicolon$RuleMemoStart = -1;
    private int semicolon$RuleMemoEnd;
    private Node semicolon$RuleMemoFirstNode;
-   private int recursiveExpression$RuleLastIndex = -1;
-   private int recursiveExpression$RuleTry = 0;
 
    private int[] newArrayInt(final int size) {
       final int[] array = new int[size];
@@ -7202,102 +7200,6 @@ public class JavaParser implements Parser {
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
-         return false;
-      }
-   }
-
-   //RecursiveExpression : ((RecursiveExpression '+' OptionalSpacing RecursiveExpression) | (RecursiveExpression '-' OptionalSpacing RecursiveExpression) | Atomic)
-   protected boolean recursiveExpression$Rule() {
-      int lastRuleIndex = recursiveExpression$RuleLastIndex;
-      int lastRuleTry = recursiveExpression$RuleTry;
-      Node lastNode = currentNode;
-      int startIndex;
-      boolean match;
-      if (recursiveExpression$RuleLastIndex == index) {
-         ++recursiveExpression$RuleTry;
-      } else {
-         recursiveExpression$RuleLastIndex = index;
-         recursiveExpression$RuleTry = 0;
-      }
-      startIndex = index;
-      // ((RecursiveExpression '+' OptionalSpacing RecursiveExpression) | (RecursiveExpression '-' OptionalSpacing RecursiveExpression) | Atomic)
-      // (RecursiveExpression '+' OptionalSpacing RecursiveExpression)
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // RecursiveExpression
-      match = recursiveExpression$RuleTry < 1 && recursiveExpression$Rule();
-      if (match) {
-         // '+'
-         match = charMatcher('+');
-         if (match) {
-            // OptionalSpacing
-            match = optionalSpacing$Rule();
-            if (match) {
-               // RecursiveExpression
-               match = recursiveExpression$Rule();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
-            } else {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-            }
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-         }
-      }
-      if (! match) {
-         // (RecursiveExpression '-' OptionalSpacing RecursiveExpression)
-         Node lastNode_2 = currentNode;
-         int lastIndex_2 = index;
-         // RecursiveExpression
-         match = recursiveExpression$RuleTry < 2 && recursiveExpression$Rule();
-         if (match) {
-            // '-'
-            match = charMatcher('-');
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
-               if (match) {
-                  // RecursiveExpression
-                  match = recursiveExpression$Rule();
-                  if (! match) {
-                     index = lastIndex_2;
-                     lastNode_2.setSibling(null);
-                     currentNode = lastNode_2;
-                  }
-               } else {
-                  index = lastIndex_2;
-                  lastNode_2.setSibling(null);
-               }
-            } else {
-               index = lastIndex_2;
-               lastNode_2.setSibling(null);
-            }
-         }
-         if (! match) {
-            // Atomic
-            match = recursiveExpression$RuleTry < 3 && atomic$Rule();
-         }
-      }
-      if (match) {
-         if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(JavaRuleType.RECURSIVE_EXPRESSION, startIndex, index, true, false);
-            currentNode.setFirstChild(lastNode.getSibling());
-            lastNode.setSibling(currentNode);
-         }
-         recursiveExpression$RuleLastIndex = lastRuleIndex;
-         recursiveExpression$RuleTry = lastRuleTry;
-         return true;
-      } else {
-         index = startIndex;
-         lastNode.setSibling(null);
-         currentNode = lastNode;
-         recursiveExpression$RuleLastIndex = lastRuleIndex;
-         recursiveExpression$RuleTry = lastRuleTry;
          return false;
       }
    }

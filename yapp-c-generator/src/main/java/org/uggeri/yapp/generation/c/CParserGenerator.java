@@ -87,9 +87,6 @@ public class CParserGenerator extends AbstractParserGenerator {
    private void declareRulesFunctions(Grammar grammar, Set<String> generatedMethods) throws ParserGenerationException {
       getOutput().append('\n');
       declareGrammarRulesFunctions(grammar, generatedMethods);
-      for (Grammar importedGrammar : grammar.getImportGrammars()) {
-         declareRulesFunctions(importedGrammar, generatedMethods);
-      }
    }
 
    private void declareGrammarRulesFunctions(Grammar grammar, Set<String> generatedMethods) throws ParserGenerationException {
@@ -114,11 +111,7 @@ public class CParserGenerator extends AbstractParserGenerator {
    }
 
    private int generateRulesConstants(Grammar grammar, Set<String> generatedRules, int rulesCount) {
-      rulesCount = generateGrammarRulesConstants(grammar, generatedRules, rulesCount);
-      for (Grammar importGrammar : grammar.getImportGrammars()) {
-         rulesCount = generateRulesConstants(importGrammar, generatedRules, rulesCount);
-      }
-      return rulesCount;
+      return generateGrammarRulesConstants(grammar, generatedRules, rulesCount);
    }
 
    private int generateGrammarRulesConstants(Grammar grammar, Set<String> generatedRules, int rulesCount) {
@@ -237,9 +230,6 @@ public class CParserGenerator extends AbstractParserGenerator {
    private void generateMemoFields(Grammar grammar, Set<String> generatedRules, int indent) {
       if (! getOptions().getMemoizeMode().equals(MemoizeMode.NONE)) {
          generateGrammarMemoFields(grammar, generatedRules, indent);
-         for (Grammar importGrammar : grammar.getImportGrammars()) {
-            generateMemoFields(importGrammar, generatedRules, indent);
-         }
       }
    }
 
@@ -285,9 +275,6 @@ public class CParserGenerator extends AbstractParserGenerator {
    
    private void generateLeftRecursionFields(Grammar grammar, Set<String> generatedRules, int indent) {
       generateGrammarLeftRecursionFields(grammar, generatedRules, indent);
-      for (Grammar importGrammar : grammar.getImportGrammars()) {
-         generateLeftRecursionFields(importGrammar, generatedRules, indent);
-      }
    }
 
    private void generateGrammarLeftRecursionFields(Grammar grammar, Set<String> generatedRules, int indent) {
@@ -373,9 +360,6 @@ public class CParserGenerator extends AbstractParserGenerator {
 
    private void declareRulesConstants(Grammar grammar, Set<String> generatedRules, int indent) {
       declareGrammarRulesConstants(grammar, generatedRules, indent);
-      for (Grammar importGrammar : grammar.getImportGrammars()) {
-         declareRulesConstants(importGrammar, generatedRules, indent);
-      }
    }
 
    private void declareGrammarRulesConstants(Grammar grammar, Set<String> generatedRules, int indent) {

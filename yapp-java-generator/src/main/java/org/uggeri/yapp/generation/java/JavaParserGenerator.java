@@ -142,9 +142,6 @@ public class JavaParserGenerator extends AbstractParserGenerator {
             mappedRules.add(rule.getMethodName());
          }
       }
-      for (Grammar importedGrammar : grammar.getImportGrammars()) {
-         mapGrammarRulesProfiles(importedGrammar, mappedRules);
-      }
    }
 
    private void appendImports() {
@@ -272,9 +269,6 @@ public class JavaParserGenerator extends AbstractParserGenerator {
 
    private void generateGrammarVisitorMethods(Grammar grammar, Set<String> generatedMethods, int indent) {
       generateVisitorMethods(grammar, generatedMethods, indent);
-      for (Grammar importedGrammar : grammar.getImportGrammars()) {
-         generateGrammarVisitorMethods(importedGrammar, generatedMethods, indent);
-      }
    }
 
    private boolean generateEnums(Grammar mainGrammar, Grammar grammar, boolean first, Set<String> generatedRules, int indent) {
@@ -352,19 +346,12 @@ public class JavaParserGenerator extends AbstractParserGenerator {
    }
 
    private boolean generateGrammarEnums(Grammar mainGrammar, Grammar grammar, boolean first, Set<String> generatedRules, int indent) {
-      first = generateEnums(mainGrammar, grammar, first, generatedRules, indent);
-      for (Grammar importGrammar : grammar.getImportGrammars()) {
-         first = generateGrammarEnums(grammar, importGrammar, first, generatedRules, indent);
-      }
-      return first;
+      return generateEnums(mainGrammar, grammar, first, generatedRules, indent);
    }
 
    private void generateMemoFields(Grammar grammar, Set<String> generatedRules, int indent) {
       if (! getOptions().getMemoizeMode().equals(MemoizeMode.NONE)) {
          generateGrammarMemoFields(grammar, generatedRules, indent);
-         for (Grammar importGrammar : grammar.getImportGrammars()) {
-            generateMemoFields(importGrammar, generatedRules, indent);
-         }
       }
    }
 
@@ -394,9 +381,6 @@ public class JavaParserGenerator extends AbstractParserGenerator {
    private void generateProfileFields(Grammar grammar, Set<String> generatedRules, int indent) {
       if (getOptions().isProfile()) {
          generateGrammarProfileFields(grammar, generatedRules, indent);
-         for (Grammar importGrammar : grammar.getImportGrammars()) {
-            generateProfileFields(importGrammar, generatedRules, indent);
-         }
       }
    }
 
@@ -416,9 +400,6 @@ public class JavaParserGenerator extends AbstractParserGenerator {
 
    private void generateLeftRecursionFields(Grammar grammar, Set<String> generatedRules, int indent) {
       generateGrammarLeftRecursionFields(grammar, generatedRules, indent);
-      for (Grammar importGrammar : grammar.getImportGrammars()) {
-         generateLeftRecursionFields(importGrammar, generatedRules, indent);
-      }
    }
 
    private void generateGrammarLeftRecursionFields(Grammar grammar, Set<String> generatedRules, int indent) {

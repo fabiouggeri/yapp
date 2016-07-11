@@ -11,7 +11,11 @@ PackageDeclaration : Annotations 'package' QualifiedIdentifier Semicolon;
 ImportDeclaration : 'import' 'static'? QualifiedIdentifier DotStar? Semicolon;
 
 @SkipNode
-TypeDeclaration : ClassDeclaration | EnumDeclaration | InterfaceDeclaration | AnnotationDeclaration | Semicolon;
+TypeDeclaration : ClassDeclaration 
+                | EnumDeclaration 
+                | InterfaceDeclaration 
+                | AnnotationDeclaration 
+                | Semicolon;
 
 Annotations : Annotation*;
 
@@ -72,7 +76,15 @@ TypeParameters : '<' TypeParameter (',' TypeParameter)* '>';
 ClassBody : '{' ClassBodyDeclaration* '}';
 
 @SkipNode
-ClassBodyDeclaration : Semicolon | StaticBlock | MethodDeclaration | ConstructorDeclaration | FieldsDeclarations | InterfaceDeclaration | ClassDeclaration | EnumDeclaration | AnnotationDeclaration;
+ClassBodyDeclaration : Semicolon 
+                     | StaticBlock 
+                     | MethodDeclaration 
+                     | ConstructorDeclaration 
+                     | FieldsDeclarations 
+                     | InterfaceDeclaration 
+                     | ClassDeclaration 
+                     | EnumDeclaration 
+                     | AnnotationDeclaration;
 
 StaticBlock : 'static'? Block;
 
@@ -109,7 +121,13 @@ ExtendsInterfaces : 'extends' ClassTypeList;
 InterfaceBody : '{' InterfaceBodyDeclaration* '}';
 
 @SkipNode
-InterfaceBodyDeclaration : InterfaceMethod | ConstantsDeclarations | InterfaceDeclaration | AnnotationDeclaration | ClassDeclaration | EnumDeclaration | Semicolon;
+InterfaceBodyDeclaration : InterfaceMethod 
+                         | ConstantsDeclarations 
+                         | InterfaceDeclaration 
+                         | AnnotationDeclaration 
+                         | ClassDeclaration 
+                         | EnumDeclaration 
+                         | Semicolon;
 
 InterfaceMethod : Modifiers MethodSignature Semicolon;
 
@@ -155,7 +173,10 @@ ParameterVariableDeclaration : VariableModifiers Type '...' Identifier Dimension
 BlockStatements : BlockStatement*;
 
 @SkipNode
-BlockStatement : LocalVariableDeclarationStatement | ClassDeclaration | EnumDeclaration | Statement;
+BlockStatement : LocalVariableDeclarationStatement 
+               | ClassDeclaration 
+               | EnumDeclaration 
+               | Statement;
 
 @SkipNode
 Statement : Block | 
@@ -452,7 +473,13 @@ Bound : 'extends' QualifiedClassName ('&' QualifiedClassName)*;
 AnnotationTypeBody : '{' AnnotationTypeElementDeclaration* '}';
 
 @SkipNode
-AnnotationTypeElementDeclaration : AnnotationMethod | AnnotationsConstants | ClassDeclaration | EnumDeclaration | InterfaceDeclaration | AnnotationDeclaration | Semicolon;
+AnnotationTypeElementDeclaration : AnnotationMethod 
+                                 | AnnotationsConstants 
+                                 | ClassDeclaration 
+                                 | EnumDeclaration 
+                                 | InterfaceDeclaration 
+                                 | AnnotationDeclaration 
+                                 | Semicolon;
 
 AnnotationMethod : Modifiers Type Identifier '(' ')' DefaultValue? Semicolon;
 
@@ -460,7 +487,9 @@ AnnotationsConstants : Modifiers Type VariableDeclarations Semicolon;
 
 DefaultValue : 'default' ElementValue;
 
-ElementValue : ConditionalExpression | Annotation | ElementValueArrayInitializer;
+ElementValue : ConditionalExpression 
+             | Annotation 
+             | ElementValueArrayInitializer;
 
 AnnotationParameters : NormalAnnotationRest | SingleElementAnnotationRest;
 

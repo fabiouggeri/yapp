@@ -39,7 +39,7 @@ import java.util.Map.Entry;
  */
 public class GrammarLoader {
 
-   private void loadGrammar(Grammar grammar, File file) throws GrammarSyntaxException, GrammarException {
+   private void loadGrammar(Grammar grammar, File file, boolean importing) throws GrammarSyntaxException, GrammarException {
       FileReader fr = null;
       try {
          final StringBuilder grammarText = new StringBuilder(4096);
@@ -58,7 +58,7 @@ public class GrammarLoader {
             }
          }
          grammar.setGrammarFile(file);
-         grammarEntries(grammar, new GrammarParsingContext(grammarText));
+         grammarEntries(grammar, new GrammarParsingContext(grammarText), importing);
       } catch (FileNotFoundException ex) {
          throw new GrammarException("Grammar file not found!", ex);
       } catch (IOException ex) {
@@ -76,19 +76,19 @@ public class GrammarLoader {
 
    public Grammar loadGrammar(File file) throws GrammarSyntaxException, GrammarException {
       Grammar grammar = new Grammar();
-      loadGrammar(grammar, file);
+      loadGrammar(grammar, file, false);
       return grammar;
    }
 
    public Grammar loadGrammar(CharSequence grammarText) throws GrammarSyntaxException, GrammarException {
       Grammar grammar = new Grammar();
-      grammarEntries(grammar, new GrammarParsingContext(grammarText));
+      grammarEntries(grammar, new GrammarParsingContext(grammarText), false);
       return grammar;
    }
 
-   private void grammarEntries(Grammar grammar, GrammarParsingContext ctx) throws GrammarSyntaxException, GrammarException {
+   private void grammarEntries(Grammar grammar, GrammarParsingContext ctx, boolean importing) throws GrammarSyntaxException, GrammarException {
       while (ctx.hasNext()) {
-         grammarEntry(grammar, ctx);
+         grammarEntry(grammar, ctx, importing);
       }
    }
 
@@ -97,18 +97,18 @@ public class GrammarLoader {
     *    grammar nome [extends nome];
     *    regra : (r1|r2)r3+r4*r5?r6!r7&;
     */
-   private void grammarEntry(Grammar grammar, GrammarParsingContext ctx) throws GrammarSyntaxException, GrammarException {
+   private void grammarEntry(Grammar grammar, GrammarParsingContext ctx, boolean importing) throws GrammarSyntaxException, GrammarException {
       final char c;
       ctx.skipSpaces();
       c = ctx.currentChar();
       if (Character.isLetter(c)) {
          final CharSequence identifier = consumeIdentifier(ctx);
          if (charSequencesEquals(identifier, "grammar")) {
-            grammarNameEntry(grammar, ctx);
+            grammarNameEntry(grammar, ctx, importing);
          } else if (charSequencesEquals(identifier, "import")) {
             importGrammarEntry(grammar, ctx);
          } else {
-            nonTerminalEntry(grammar, ctx, identifier);
+            nonTerminalEntry(grammar, ctx, identifier, importing);
          }
       } else if (c == '@') {
          optionEntry(ctx);
@@ -117,7 +117,7 @@ public class GrammarLoader {
       }
    }
 
-   private void nonTerminalEntry(final Grammar grammar, final GrammarParsingContext ctx, final CharSequence ruleName) throws GrammarSyntaxException, GrammarException {
+   private void nonTerminalEntry(final Grammar grammar, final GrammarParsingContext ctx, final CharSequence ruleName, boolean importing) throws GrammarSyntaxException, GrammarException {
       NonTerminalRule rule = grammar.getRule(ruleName.toString());
 
       if (charSequencesEquals(ruleName, "EOI")) {
@@ -143,15 +143,17 @@ public class GrammarLoader {
             for (Entry<NonTerminalOption, String> option : ctx.getOptions().entrySet()) {
                rule.addOption(option.getKey(), option.getValue());
             }
-            if (ctx.getOptions().containsKey(NonTerminalOption.MAIN_RULE)) {
-               if (! ctx.explicitMainRule) {
+            if (! importing) {
+               if (ctx.getOptions().containsKey(NonTerminalOption.MAIN_RULE)) {
+                  if (! ctx.explicitMainRule) {
+                     grammar.setMainRule(rule);
+                     ctx.explicitMainRule = true;
+                  } else {
+                     throw new GrammarSyntaxException(ctx.line, ctx.column, "Rule '" + grammar.getMainRule().getName() + "' is already defined as main rule.");
+                  }
+               } else if (grammar.getMainRule() == null) {
                   grammar.setMainRule(rule);
-                  ctx.explicitMainRule = true;
-               } else {
-                  throw new GrammarSyntaxException(ctx.line, ctx.column, "Rule '" + grammar.getMainRule().getName() + "' is already defined as main rule.");
                }
-            } else if (grammar.getMainRule() == null) {
-               grammar.setMainRule(rule);
             }
             ctx.clearOptions();
             ctx.skipSpaces();
@@ -521,7 +523,8 @@ public class GrammarLoader {
             grammarFile = new File(grammar.getGrammarFile().getParent(), grammarFile.getPath());
          }
       }
-      grammar.addImportGrammar(loadGrammar(grammarFile));
+      //grammar.addImportGrammar(loadGrammar(grammarFile));
+      loadGrammar(grammar, grammarFile, true);
    }
 
    private void importGrammarEntry(Grammar grammar, GrammarParsingContext ctx) throws GrammarSyntaxException, GrammarException {
@@ -539,12 +542,14 @@ public class GrammarLoader {
       }
    }
 
-   private void grammarNameEntry(Grammar grammar, GrammarParsingContext ctx) throws GrammarSyntaxException {
-      if (grammar.getGrammarName() == null) {
+   private void grammarNameEntry(Grammar grammar, GrammarParsingContext ctx, boolean importing) throws GrammarSyntaxException {
+      if (grammar.getGrammarName() == null || importing) {
          ctx.skipSpaces();
          if (Character.isLetter(ctx.currentChar())) {
             final CharSequence name  = consumeIdentifier(ctx);
-            grammar.setGrammarName(name.toString());
+            if (! importing) {
+               grammar.setGrammarName(name.toString());
+            }
             ctx.skipSpaces();
             if (ctx.currentChar() == ';') {
                ctx.advanceIndex();

@@ -22,9 +22,29 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import org.uggeri.yapp.grammar.rules.AndRule;
+import org.uggeri.yapp.grammar.rules.CharRangeRule;
+import org.uggeri.yapp.grammar.rules.CharRule;
+import org.uggeri.yapp.grammar.rules.GrammarRule;
+import org.uggeri.yapp.grammar.rules.IgnoreCaseStringRule;
+import org.uggeri.yapp.grammar.rules.NonTerminalRule;
+import org.uggeri.yapp.grammar.rules.OneOrMoreRule;
+import org.uggeri.yapp.grammar.rules.OptionalRule;
+import org.uggeri.yapp.grammar.rules.OrRule;
+import org.uggeri.yapp.grammar.rules.StringRule;
+import org.uggeri.yapp.grammar.rules.TestNotRule;
+import org.uggeri.yapp.grammar.rules.TestRule;
+import org.uggeri.yapp.grammar.rules.ZeroOrMoreRule;
+import org.uggeri.yapp.runtime.java.parser.ParseTreeWalker;
+import org.uggeri.yapp.runtime.java.test.JavaVisitor;
+import org.uggeri.yapp.runtime.java.test.OracleScriptParser;
 
 /**
  *
@@ -38,7 +58,8 @@ public class TesteExecucao {
    public static void main(String[] args) {
       //char c = '\u005cn';
       //new TesteExecucao().testesDiversos();
-      new TesteExecucao().testeParseJavaSources();
+      //new TesteExecucao().testeParseJavaSources();
+      new TesteExecucao().testeExecucaoPlSql();
       //new TesteExecucao().testeExecucaoJava();
       //new TesteExecucao().testeExecucaoHarbourPP();
       //new TesteExecucao().testeExecucaoHarbourUnprocessed();
@@ -131,8 +152,8 @@ public class TesteExecucao {
          }
       } else if (file.getName().toLowerCase().endsWith(".java")) {
          //if (file.getName().equalsIgnoreCase("ParserTokenManager.java")) {
-            totalTime += parseJavaFile(file, rulesProfiles);
-            countLinesJavaFile(file);
+         totalTime += parseJavaFile(file, rulesProfiles);
+         countLinesJavaFile(file);
          //}
       }
       return totalTime;
@@ -176,6 +197,42 @@ public class TesteExecucao {
       return 0L;
    }
 
+   // 
+   private void testeExecucaoPlSql() {
+      try {
+         TraceParser traceFile = new LimitedTraceFile(new File("c:\\temp\\yapp.trc"), 100 * 1024 * 1024);
+         //TraceParser traceFile = new TraceStandardOutput();
+         InputBuffer inputBuffer;
+         OracleScriptParser parser = new OracleScriptParser();
+         Node node;
+         long iniParse;
+         parser.setTraceParser(traceFile);
+         parser.setTrace(true);
+         //javax.swing.JOptionPane.showMessageDialog(null, "Tecla para continuar");
+//         System.out.println("1. Mem. Livre: " + Runtime.getRuntime().freeMemory() / 1024.0 / 1024.0 + "MB");
+         iniParse = System.currentTimeMillis();
+         inputBuffer = new FileInputBuffer(new File("E:\\desenvolvimento\\sicredi\\infra-2.0.5\\05-construcao\\infra-plsql\\src\\main\\plsql\\pkgl_infra_util.pkb"));
+//         System.out.println("File size: " + inputBuffer.length());
+//         System.out.println("2. Mem. Livre: " + Runtime.getRuntime().freeMemory() / 1024.0 / 1024.0 + "MB");
+         node = parser.parse(inputBuffer);
+         System.out.println("Tempo : " + (System.currentTimeMillis() - iniParse));
+         traceFile.close();
+         //javax.swing.JOptionPane.showMessageDialog(null, "Fim");
+         //printProfile(parser.getProfilesMap());
+//         System.out.println("3. Mem. Livre: " + Runtime.getRuntime().freeMemory() / 1024.0 / 1024.0 + "MB");
+         if (node != null) {
+            //printTree(inputBuffer, node, 0);
+//            System.out.println("==============================");
+            printSemanticTree(inputBuffer, node, 0);
+            //new ParseTreeWalker().walk(node, new JavaVisitor(inputBuffer));
+         } else {
+            System.out.println("Index error: " + parser.getMismatches());
+         }
+      } catch (IOException ex) {
+         ex.printStackTrace(System.out);
+      }
+   }
+
    private void testeExecucaoJava() {
       try {
          TraceParser traceFile = new LimitedTraceFile(new File("c:\\temp\\yapp.trc"), 100 * 1024 * 1024);
@@ -184,12 +241,13 @@ public class TesteExecucao {
          JavaParser javaParser = new JavaParser();
          Node node;
          long iniParse;
-         javaParser.setTraceParser(traceFile);
-         javaParser.setTrace(true);
+         //javaParser.setTraceParser(traceFile);
+         //javaParser.setTrace(true);
          //javax.swing.JOptionPane.showMessageDialog(null, "Tecla para continuar");
 //         System.out.println("1. Mem. Livre: " + Runtime.getRuntime().freeMemory() / 1024.0 / 1024.0 + "MB");
          iniParse = System.currentTimeMillis();
-         inputBuffer = new FileInputBuffer(new File("C:\\temp\\jdk-src\\sun\\java2d\\SunGraphics2D.java"));
+         //inputBuffer = new FileInputBuffer(new File("C:\\temp\\plsql\\SqlGrammar.java"));
+         inputBuffer = new FileInputBuffer(new File("C:\\temp\\plsql\\PlSqlGrammar.java"));
          //inputBuffer = new FileInputBuffer(new File("C:\\temp\\jdk-src\\com\\sun\\tools\\doclets\\formats\\html\\SingleIndexWriter.java"));
          //inputBuffer = new FileInputBuffer(new File("C:\\temp\\jdk-src\\com\\sun\\xml\\internal\\rngom\\parse\\compact\\CompactSyntax.java"));
 //         System.out.println("File size: " + inputBuffer.length());
@@ -205,6 +263,7 @@ public class TesteExecucao {
 //            System.out.println("==============================");
             //printSemanticTree(inputBuffer, node, 0);
             //new ParseTreeWalker().walk(node, new JavaVisitor(inputBuffer));
+            new ParseTreeWalker().walk(node, new GrammarConverterVisitor(inputBuffer));
          } else {
             System.out.println("Index error: " + javaParser.getMismatches());
          }
@@ -347,11 +406,11 @@ public class TesteExecucao {
       System.out.println("-------------------------------- -------------------- -------------------- -------------------- --------------------");
       for (RuleProfile profile : profilesMap.values()) {
          System.out.printf("%s %s %s %s %s\n",
-            rightPad(profile.getRule().getLabel(), 32, ' '),
-            rightPad(nf.format(profile.getMemoMatchCount()) + "(" + nf.format(profile.getMemoMatchTimeMillis()) + "ms)", 20, ' '),
-            rightPad(nf.format(profile.getMemoMismatchCount()) + "(" + nf.format(profile.getMemoMismatchTimeMillis()) + "ms)", 20, ' '),
-            rightPad(nf.format(profile.getMatchCount()) + "(" + nf.format(profile.getMatchTimeMillis()) + "ms)", 20, ' '),
-            rightPad(nf.format(profile.getMismatchCount()) + "(" + nf.format(profile.getMismatchTimeMillis()) + "ms)", 20, ' '));
+                 rightPad(profile.getRule().getLabel(), 32, ' '),
+                 rightPad(nf.format(profile.getMemoMatchCount()) + "(" + nf.format(profile.getMemoMatchTimeMillis()) + "ms)", 20, ' '),
+                 rightPad(nf.format(profile.getMemoMismatchCount()) + "(" + nf.format(profile.getMemoMismatchTimeMillis()) + "ms)", 20, ' '),
+                 rightPad(nf.format(profile.getMatchCount()) + "(" + nf.format(profile.getMatchTimeMillis()) + "ms)", 20, ' '),
+                 rightPad(nf.format(profile.getMismatchCount()) + "(" + nf.format(profile.getMismatchTimeMillis()) + "ms)", 20, ' '));
       }
    }
 
@@ -412,7 +471,6 @@ public class TesteExecucao {
 //   private void removeSkipedNodes(Node node, InputBuffer inputBuffer) {
 //      new SkipedNodesRemover(inputBuffer, node).buildTree();
 //   }
-
    private Node lastChild(Node node) {
       Node child = node.getFirstChild();
       if (child != null) {
@@ -455,6 +513,271 @@ public class TesteExecucao {
                child = child.getSibling();
             }
          }
+      }
+   }
+
+   class GrammarConverterVisitor extends JavaVisitor {
+
+      private InputBuffer inputBuffer;
+
+      private Deque<List<GrammarRule>> rules = new ArrayDeque<List<GrammarRule>>();
+
+      private boolean ruleDeclaration = false;
+
+      public GrammarConverterVisitor(InputBuffer InputBuffer) {
+         this.inputBuffer = InputBuffer;
+      }
+
+      @Override
+      public void enterMethodDeclaration(Node node) {
+         List<Node> children = node.getSemanticChildren();
+         Node signatureNode = children.get(1);
+         String methodReturn;
+         children = signatureNode.getSemanticChildren();
+         methodReturn = children.get(0).getText(inputBuffer).toString().trim();
+         if (methodReturn.equalsIgnoreCase("Rule")) {
+            rules.push(new ArrayList<GrammarRule>());
+            ruleDeclaration = true;
+         }
+      }
+
+      @Override
+      public void exitMethodDeclaration(Node node) {
+         if (ruleDeclaration) {
+            List<Node> children = node.getSemanticChildren();
+            Node signatureNode = children.get(1);
+            String methodReturn;
+            ruleDeclaration = false;
+            children = signatureNode.getSemanticChildren();
+            methodReturn = children.get(0).getText(inputBuffer).toString().trim();
+            if (methodReturn.equalsIgnoreCase("Rule")) {
+               final String ruleName = children.get(1).getText(inputBuffer).toString();
+               final NonTerminalRule rule = new NonTerminalRule(ruleName, rules.pop().get(0));
+               System.out.println(rule + " : " + rule.getRule() + ";");
+               System.out.println();
+            }
+            rules.clear();
+         }
+      }
+
+      @Override
+      public void enterMethodCall(Node node) {
+         if (ruleDeclaration) {
+            rules.push(new ArrayList<GrammarRule>());
+         }
+      }
+
+      @Override
+      public void exitMethodCall(Node node) {
+         if (ruleDeclaration) {
+            final List<Node> children = node.getSemanticChildren();
+            final String methodName = children.get(0).getText(inputBuffer).toString();
+            if ("Sequence".equals(methodName)) {
+               final GrammarRule andRule = new AndRule(rules.pop());
+               rules.peek().add(andRule);
+            } else if ("ZeroOrMore".equals(methodName)) {
+               final List<GrammarRule> rulesList = rules.pop();
+               if (rulesList.size() > 1) {
+                  rules.peek().add(new ZeroOrMoreRule(new AndRule(rulesList)));
+               } else if (!rulesList.isEmpty()) {
+                  rules.peek().add(new ZeroOrMoreRule(rulesList.get(0)));
+               }
+            } else if ("OneOrMore".equals(methodName)) {
+               final List<GrammarRule> rulesList = rules.pop();
+               if (rulesList.size() > 1) {
+                  rules.peek().add(new OneOrMoreRule(new AndRule(rulesList)));
+               } else if (!rulesList.isEmpty()) {
+                  rules.peek().add(new OneOrMoreRule(rulesList.get(0)));
+               }
+            } else if ("FirstOf".equals(methodName)) {
+               final GrammarRule orRule = new OrRule(rules.pop());
+               rules.peek().add(orRule);
+            } else if ("CharRange".equals(methodName)) {
+               final List<GrammarRule> rulesList = rules.pop();
+               rules.peek().add(new CharRangeRule(((CharRule) rulesList.get(0)).getCharacter(), ((CharRule) rulesList.get(1)).getCharacter()));
+            } else if ("Optional".equals(methodName) || "OptionalLabel".equals(methodName)) {
+               final List<GrammarRule> rulesList = rules.pop();
+               if (rulesList.size() > 1) {
+                  rules.peek().add(new OptionalRule(new AndRule(rulesList)));
+               } else if (!rulesList.isEmpty()) {
+                  rules.peek().add(new OptionalRule(rulesList.get(0)));
+               }
+            } else if ("Test".equals(methodName)) {
+               final List<GrammarRule> rulesList = rules.pop();
+               if (rulesList.size() > 1) {
+                  rules.peek().add(new TestRule(new AndRule(rulesList)));
+               } else if (!rulesList.isEmpty()) {
+                  rules.peek().add(new TestRule(rulesList.get(0)));
+               }
+            } else if ("AnyOf".equals(methodName)) {
+               final List<GrammarRule> rulesList = rules.pop();
+               final List<GrammarRule> list = toCharRuleList(((IgnoreCaseStringRule) rulesList.get(0)).getText());
+               rules.peek().add(new OrRule(list));
+            } else if ("TestNot".equals(methodName)) {
+               final List<GrammarRule> rulesList = rules.pop();
+               if (rulesList.size() > 1) {
+                  rules.peek().add(new TestNotRule(new AndRule(rulesList)));
+               } else if (!rulesList.isEmpty()) {
+                  rules.peek().add(new TestNotRule(rulesList.get(0)));
+               }
+            } else if ("Keyword".equals(methodName)
+                    || "Ch".equals(methodName)
+                    || "String".equals(methodName)) {
+               final GrammarRule rule = rules.pop().get(0);
+               rules.peek().add(rule);
+            } else if ("skipNode".equals(methodName)
+                    || "Operator".equals(methodName)
+                    || "label".equals(methodName)
+                    || "suppressSubnodes".equals(methodName)) {
+               final List<GrammarRule> rulesList = rules.pop();
+               if (rulesList.size() > 1) {
+                  rules.peek().add(new AndRule(rulesList));
+               } else if (rulesList.size() == 1) {
+                  rules.peek().add(rulesList.get(0));
+               }
+            } else {
+               rules.pop();
+               rules.peek().add(new NonTerminalRule(methodName, null));
+            }
+         }
+      }
+
+      @Override
+      public void exitStringLiteral(Node node) {
+         if (ruleDeclaration && !rules.isEmpty()) {
+            final String str = node.getText(inputBuffer).toString();
+            rules.peek().add(new IgnoreCaseStringRule(str.substring(1, str.length() - 1)));
+         }
+      }
+
+      @Override
+      public void exitCharLiteral(Node node) {
+         if (ruleDeclaration) {
+            final String str = node.getText(inputBuffer).toString();
+            final List<Character> list = toCharList(str.substring(1, str.length() - 1));
+            rules.peek().add(new CharRule(list.get(0)));
+         }
+      }
+
+      @Override
+      public void enterIdentifier(Node node) {
+         if (ruleDeclaration) {
+            final String id = node.getText(inputBuffer).toString();
+            if (id.equals("STAR")) {
+               rules.peek().add(new CharRule('*'));
+            } else if (id.equals("ARROBA")) {
+               rules.peek().add(new CharRule('@'));
+            } else if (id.equals("EXP")) {
+               rules.peek().add(new StringRule("**"));
+            } else if (id.equals("DIV")) {
+               rules.peek().add(new CharRule('/'));
+            } else if (id.equals("PLUS")) {
+               rules.peek().add(new CharRule('+'));
+            } else if (id.equals("MINUS")) {
+               rules.peek().add(new CharRule('-'));
+            } else if (id.equals("CONCAT")) {
+               rules.peek().add(new AndRule(new CharRule('|'), new CharRule('|')));
+            } else if (id.equals("MOD")) {
+               rules.peek().add(new StringRule("mod"));
+            } else if (id.equals("PRIOR")) {
+               rules.peek().add(new StringRule("prior"));
+            } else if (id.equals("CONNECT_BY_ROOT")) {
+               rules.peek().add(new StringRule("connect_by_root"));
+            } else if (id.equals("EQUAL")) {
+               rules.peek().add(new AndRule(new CharRule('='), new TestNotRule(new CharRule('>'))));
+            } else if (id.equals("DIFFERENT")) {
+               rules.peek().add(new OrRule(new AndRule(new CharRule('<'), new CharRule('>')),
+                       new AndRule(new CharRule('!'), new CharRule('=')),
+                       new AndRule(new CharRule('^'), new CharRule('=')),
+                       new AndRule(new CharRule('~'), new CharRule('='))));
+            } else if (id.equals("GREATER_EQUAL")) {
+               rules.peek().add(new AndRule(new CharRule('>'), new CharRule('=')));
+            } else if (id.equals("LESS_EQUAL")) {
+               rules.peek().add(new AndRule(new CharRule('<'), new CharRule('=')));
+            } else if (id.equals("GREATER")) {
+               rules.peek().add(new AndRule(new CharRule('>'), new TestNotRule(new CharRule('='))));
+            } else if (id.equals("LESS")) {
+               rules.peek().add(new AndRule(new CharRule('<'), new TestNotRule(new OrRule(new CharRule('='), new CharRule('>')))));
+            } else if (id.equals("SINGLE_QUOTE")) {
+               rules.peek().add(new CharRule('\''));
+            } else if (id.equals("NAMED_OPERATOR")) {
+               rules.peek().add(new AndRule(new CharRule('='), new CharRule('>')));
+            } else if (id.equals("TRUE")) {
+               rules.peek().add(new AndRule(new IgnoreCaseStringRule("true"), new TestNotRule(new NonTerminalRule("IdentifierChar", null))));
+            } else if (id.equals("FALSE")) {
+               rules.peek().add(new AndRule(new IgnoreCaseStringRule("false"), new TestNotRule(new NonTerminalRule("IdentifierChar", null))));
+            } else if (id.equals("DOT_DOT")) {
+               rules.peek().add(new IgnoreCaseStringRule(".."));
+            } else if (id.equals("ASSIGN")) {
+               rules.peek().add(new IgnoreCaseStringRule(":="));
+            } else if (id.equals("LABEL_START")) {
+               rules.peek().add(new IgnoreCaseStringRule("<<"));
+            } else if (id.equals("LABEL_END")) {
+               rules.peek().add(new IgnoreCaseStringRule(">>"));
+            } else if (id.equals("NAMED_PARAMETER")) {
+               rules.peek().add(new IgnoreCaseStringRule("=>"));
+            }
+         }
+      }
+
+      private List<GrammarRule> toCharRuleList(String str) {
+         final List<GrammarRule> list = new ArrayList<GrammarRule>();
+         final List<Character> charList = toCharList(str);
+         for (char c : charList) {
+            list.add(new CharRule(c));
+         }
+         return list;
+      }
+
+      private List<Character> toCharList(String str) {
+         final List<Character> list = new ArrayList<Character>();
+         int i = 0;
+         while (i < str.length()) {
+            final int j = i + 1;
+            if (str.charAt(i) == '\\' && j < str.length()) {
+               switch (str.charAt(j)) {
+                  case '\\':
+                     list.add('\\');
+                     i += 2;
+                     break;
+                  case 'n':
+                     list.add('\n');
+                     i += 2;
+                     break;
+                  case 'r':
+                     list.add('\r');
+                     i += 2;
+                     break;
+                  case 't':
+                     list.add('\t');
+                     i += 2;
+                     break;
+                  case 'b':
+                     list.add('\b');
+                     i += 2;
+                     break;
+                  case 'f':
+                     list.add('\f');
+                     i += 2;
+                     break;
+                  case '\'':
+                     list.add('\'');
+                     i += 2;
+                     break;
+                  case '"':
+                     list.add('"');
+                     i += 2;
+                     break;
+                  default:
+                     list.add('\\');
+                     ++i;
+                     break;
+               }
+            } else {
+               list.add(str.charAt(i++));
+            }
+         }
+         return list;
       }
    }
 }

@@ -30,7 +30,24 @@ public class CharRule extends TerminalRule {
 
    @Override
    public String toString() {
-      return "'" + character + "'";
+      switch(character) {
+         case '\n':
+            return "'\\n'";
+         case '\r':
+            return "'\\r'";
+         case '\f':
+            return "'\\f'";
+         case '\t':
+            return "'\\t'";
+         case '\b':
+            return "'\\b'";
+         case '\'':
+            return "'\\''";
+         case '\\':
+            return "'\\'";
+         default:
+            return "'" + character + "'";
+      }
    }
 
    @Override

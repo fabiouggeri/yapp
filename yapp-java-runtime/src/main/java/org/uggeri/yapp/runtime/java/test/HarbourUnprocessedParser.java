@@ -3524,12 +3524,14 @@ public class HarbourUnprocessedParser implements Parser {
                            // ("on" | "o" | <EMPTY>)
                            if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
                               ++index;
-                              // "n"
-                              if (match = buffer.matchIgnoreCaseChar(index, 'n')) {
+                              // ("n" | <EMPTY>)
+                              if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                                  ++index;
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
                               }
-                              // <EMPTY>
-                              match = true;
                            } else {
                               match = true;
                            }
@@ -3649,12 +3651,14 @@ public class HarbourUnprocessedParser implements Parser {
                               // ("re" | "r" | <EMPTY>)
                               if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                                  ++index;
-                                 // "e"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                 // ("e" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                     ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
                                  }
-                                 // <EMPTY>
-                                 match = true;
                               } else {
                                  match = true;
                               }
@@ -5069,12 +5073,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("ic" | "i" | <EMPTY>)
                   if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                      ++index;
-                     // "c"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
+                     // ("c" | <EMPTY>)
+                     if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -5342,12 +5348,14 @@ public class HarbourUnprocessedParser implements Parser {
                               // ("rs" | "r" | <EMPTY>)
                               if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                                  ++index;
-                                 // "s"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 's')) {
+                                 // ("s" | <EMPTY>)
+                                 if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                                     ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
                                  }
-                                 // <EMPTY>
-                                 match = true;
                               } else {
                                  match = true;
                               }
@@ -5457,12 +5465,14 @@ public class HarbourUnprocessedParser implements Parser {
                      // ("re" | "r" | <EMPTY>)
                      if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                         ++index;
-                        // "e"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                        // ("e" | <EMPTY>)
+                        if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -9422,12 +9432,14 @@ public class HarbourUnprocessedParser implements Parser {
                         // ("rd" | "r" | <EMPTY>)
                         if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                            ++index;
-                           // "d"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
+                           // ("d" | <EMPTY>)
+                           if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -9587,12 +9599,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("pt" | "p" | <EMPTY>)
                   if (buffer.matchChar(index, 'p') || buffer.matchChar(index, 'P')) {
                      ++index;
-                     // "t"
-                     if (match = buffer.matchIgnoreCaseChar(index, 't')) {
+                     // ("t" | <EMPTY>)
+                     if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -9749,12 +9763,14 @@ public class HarbourUnprocessedParser implements Parser {
                      // ("se" | "s" | <EMPTY>)
                      if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                         ++index;
-                        // "e"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                        // ("e" | <EMPTY>)
+                        if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -9855,12 +9871,14 @@ public class HarbourUnprocessedParser implements Parser {
                      // ("re" | "r" | <EMPTY>)
                      if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                         ++index;
-                        // "e"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                        // ("e" | <EMPTY>)
+                        if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -10339,12 +10357,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("te" | "t" | <EMPTY>)
                   if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                      ++index;
-                     // "e"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                     // ("e" | <EMPTY>)
+                     if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -10439,12 +10459,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("me" | "m" | <EMPTY>)
                   if (buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M')) {
                      ++index;
-                     // "e"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                     // ("e" | <EMPTY>)
+                     if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -10719,12 +10741,14 @@ public class HarbourUnprocessedParser implements Parser {
                      // ("st" | "s" | <EMPTY>)
                      if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                         ++index;
-                        // "t"
-                        if (match = buffer.matchIgnoreCaseChar(index, 't')) {
+                        // ("t" | <EMPTY>)
+                        if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -10822,12 +10846,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("el" | "e" | <EMPTY>)
                   if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                      ++index;
-                     // "l"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'l')) {
+                     // ("l" | <EMPTY>)
+                     if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -11068,12 +11094,14 @@ public class HarbourUnprocessedParser implements Parser {
                         // ("on" | "o" | <EMPTY>)
                         if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
                            ++index;
-                           // "n"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'n')) {
+                           // ("n" | <EMPTY>)
+                           if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -11233,12 +11261,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("ct" | "c" | <EMPTY>)
                   if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                      ++index;
-                     // "t"
-                     if (match = buffer.matchIgnoreCaseChar(index, 't')) {
+                     // ("t" | <EMPTY>)
+                     if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -11333,12 +11363,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("nd" | "n" | <EMPTY>)
                   if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                      ++index;
-                     // "d"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
+                     // ("d" | <EMPTY>)
+                     if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -11543,12 +11575,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("ck" | "c" | <EMPTY>)
                   if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                      ++index;
-                     // "k"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'k')) {
+                     // ("k" | <EMPTY>)
+                     if (buffer.matchChar(index, 'k') || buffer.matchChar(index, 'K')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -11909,12 +11943,14 @@ public class HarbourUnprocessedParser implements Parser {
                         // ("ue" | "u" | <EMPTY>)
                         if (buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U')) {
                            ++index;
-                           // "e"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                           // ("e" | <EMPTY>)
+                           if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -12070,12 +12106,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("te" | "t" | <EMPTY>)
                   if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                      ++index;
-                     // "e"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                     // ("e" | <EMPTY>)
+                     if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -12173,12 +12211,14 @@ public class HarbourUnprocessedParser implements Parser {
                      // ("ce" | "c" | <EMPTY>)
                      if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                         ++index;
-                        // "e"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                        // ("e" | <EMPTY>)
+                        if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -12276,12 +12316,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("ll" | "l" | <EMPTY>)
                   if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                      ++index;
-                     // "l"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'l')) {
+                     // ("l" | <EMPTY>)
+                     if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -12376,12 +12418,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("te" | "t" | <EMPTY>)
                   if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                      ++index;
-                     // "e"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                     // ("e" | <EMPTY>)
+                     if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -12594,12 +12638,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("te" | "t" | <EMPTY>)
                   if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                      ++index;
-                     // "e"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                     // ("e" | <EMPTY>)
+                     if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -12815,12 +12861,14 @@ public class HarbourUnprocessedParser implements Parser {
                      // ("ge" | "g" | <EMPTY>)
                      if (buffer.matchChar(index, 'g') || buffer.matchChar(index, 'G')) {
                         ++index;
-                        // "e"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                        // ("e" | <EMPTY>)
+                        if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -12980,12 +13028,14 @@ public class HarbourUnprocessedParser implements Parser {
                      // ("ay" | "a" | <EMPTY>)
                      if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                         ++index;
-                        // "y"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'y')) {
+                        // ("y" | <EMPTY>)
+                        if (buffer.matchChar(index, 'y') || buffer.matchChar(index, 'Y')) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -13083,12 +13133,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("rt" | "r" | <EMPTY>)
                   if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                      ++index;
-                     // "t"
-                     if (match = buffer.matchIgnoreCaseChar(index, 't')) {
+                     // ("t" | <EMPTY>)
+                     if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -13390,12 +13442,14 @@ public class HarbourUnprocessedParser implements Parser {
                      // ("ex" | "e" | <EMPTY>)
                      if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                         ++index;
-                        // "x"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'x')) {
+                        // ("x" | <EMPTY>)
+                        if (buffer.matchChar(index, 'x') || buffer.matchChar(index, 'X')) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -13642,12 +13696,14 @@ public class HarbourUnprocessedParser implements Parser {
                      // ("lt" | "l" | <EMPTY>)
                      if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                         ++index;
-                        // "t"
-                        if (match = buffer.matchIgnoreCaseChar(index, 't')) {
+                        // ("t" | <EMPTY>)
+                        if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -14854,12 +14910,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("ar" | "a" | <EMPTY>)
                   if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                      ++index;
-                     // "r"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
+                     // ("r" | <EMPTY>)
+                     if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -16867,12 +16925,14 @@ public class HarbourUnprocessedParser implements Parser {
                         // ("se" | "s" | <EMPTY>)
                         if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                            ++index;
-                           // "e"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                           // ("e" | <EMPTY>)
+                           if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -17125,12 +17185,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("ch" | "c" | <EMPTY>)
                   if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                      ++index;
-                     // "h"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'h')) {
+                     // ("h" | <EMPTY>)
+                     if (buffer.matchChar(index, 'h') || buffer.matchChar(index, 'H')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -17477,12 +17539,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("rn" | "r" | <EMPTY>)
                   if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                      ++index;
-                     // "n"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'n')) {
+                     // ("n" | <EMPTY>)
+                     if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -17802,12 +17866,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("ic" | "i" | <EMPTY>)
                   if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                      ++index;
-                     // "c"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
+                     // ("c" | <EMPTY>)
+                     if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -17905,12 +17971,14 @@ public class HarbourUnprocessedParser implements Parser {
                      // ("te" | "t" | <EMPTY>)
                      if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                         ++index;
-                        // "e"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                        // ("e" | <EMPTY>)
+                        if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -18014,12 +18082,14 @@ public class HarbourUnprocessedParser implements Parser {
                         // ("al" | "a" | <EMPTY>)
                         if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                            ++index;
-                           // "l"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'l')) {
+                           // ("l" | <EMPTY>)
+                           if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -18126,12 +18196,14 @@ public class HarbourUnprocessedParser implements Parser {
                         // ("ce" | "c" | <EMPTY>)
                         if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                            ++index;
-                           // "e"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                           // ("e" | <EMPTY>)
+                           if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -18235,12 +18307,14 @@ public class HarbourUnprocessedParser implements Parser {
                      // ("st" | "s" | <EMPTY>)
                      if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                         ++index;
-                        // "t"
-                        if (match = buffer.matchIgnoreCaseChar(index, 't')) {
+                        // ("t" | <EMPTY>)
+                        if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -18926,12 +19000,14 @@ public class HarbourUnprocessedParser implements Parser {
                               // ("on" | "o" | <EMPTY>)
                               if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
                                  ++index;
-                                 // "n"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'n')) {
+                                 // ("n" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                                     ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
                                  }
-                                 // <EMPTY>
-                                 match = true;
                               } else {
                                  match = true;
                               }
@@ -18978,12 +19054,14 @@ public class HarbourUnprocessedParser implements Parser {
                               // ("nd" | "n" | <EMPTY>)
                               if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                                  ++index;
-                                 // "d"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
+                                 // ("d" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
                                     ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
                                  }
-                                 // <EMPTY>
-                                 match = true;
                               } else {
                                  match = true;
                               }
@@ -19025,12 +19103,14 @@ public class HarbourUnprocessedParser implements Parser {
                                     // ("te" | "t" | <EMPTY>)
                                     if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                                        ++index;
-                                       // "e"
-                                       if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                       // ("e" | <EMPTY>)
+                                       if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                           ++index;
+                                          // <EMPTY>
+                                          match = true;
+                                       } else {
+                                          match = true;
                                        }
-                                       // <EMPTY>
-                                       match = true;
                                     } else {
                                        match = true;
                                     }
@@ -19102,12 +19182,14 @@ public class HarbourUnprocessedParser implements Parser {
                               // ("se" | "s" | <EMPTY>)
                               if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                                  ++index;
-                                 // "e"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                 // ("e" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                     ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
                                  }
-                                 // <EMPTY>
-                                 match = true;
                               } else {
                                  match = true;
                               }
@@ -19157,12 +19239,14 @@ public class HarbourUnprocessedParser implements Parser {
                                  // ("re" | "r" | <EMPTY>)
                                  if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                                     ++index;
-                                    // "e"
-                                    if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                    // ("e" | <EMPTY>)
+                                    if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                        ++index;
+                                       // <EMPTY>
+                                       match = true;
+                                    } else {
+                                       match = true;
                                     }
-                                    // <EMPTY>
-                                    match = true;
                                  } else {
                                     match = true;
                                  }
@@ -19195,12 +19279,14 @@ public class HarbourUnprocessedParser implements Parser {
                         // ("ic" | "i" | <EMPTY>)
                         if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                            ++index;
-                           // "c"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
+                           // ("c" | <EMPTY>)
+                           if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -19281,12 +19367,14 @@ public class HarbourUnprocessedParser implements Parser {
                         // ("er" | "e" | <EMPTY>)
                         if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                            ++index;
-                           // "r"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
+                           // ("r" | <EMPTY>)
+                           if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -19324,12 +19412,14 @@ public class HarbourUnprocessedParser implements Parser {
                            // ("nd" | "n" | <EMPTY>)
                            if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                               ++index;
-                              // "d"
-                              if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
+                              // ("d" | <EMPTY>)
+                              if (buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D')) {
                                  ++index;
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
                               }
-                              // <EMPTY>
-                              match = true;
                            } else {
                               match = true;
                            }
@@ -19407,12 +19497,14 @@ public class HarbourUnprocessedParser implements Parser {
                               // ("ce" | "c" | <EMPTY>)
                               if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                                  ++index;
-                                 // "e"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                 // ("e" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                     ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
                                  }
-                                 // <EMPTY>
-                                 match = true;
                               } else {
                                  match = true;
                               }
@@ -19473,12 +19565,14 @@ public class HarbourUnprocessedParser implements Parser {
                               // ("ne" | "n" | <EMPTY>)
                               if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                                  ++index;
-                                 // "e"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                 // ("e" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                     ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
                                  }
-                                 // <EMPTY>
-                                 match = true;
                               } else {
                                  match = true;
                               }
@@ -19502,12 +19596,14 @@ public class HarbourUnprocessedParser implements Parser {
                               // ("re" | "r" | <EMPTY>)
                               if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                                  ++index;
-                                 // "e"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                 // ("e" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                     ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
                                  }
-                                 // <EMPTY>
-                                 match = true;
                               } else {
                                  match = true;
                               }
@@ -19564,12 +19660,14 @@ public class HarbourUnprocessedParser implements Parser {
                                  // ("te" | "t" | <EMPTY>)
                                  if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                                     ++index;
-                                    // "e"
-                                    if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                    // ("e" | <EMPTY>)
+                                    if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                        ++index;
+                                       // <EMPTY>
+                                       match = true;
+                                    } else {
+                                       match = true;
                                     }
-                                    // <EMPTY>
-                                    match = true;
                                  } else {
                                     match = true;
                                  }
@@ -19630,12 +19728,14 @@ public class HarbourUnprocessedParser implements Parser {
                                  // ("al" | "a" | <EMPTY>)
                                  if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                                     ++index;
-                                    // "l"
-                                    if (match = buffer.matchIgnoreCaseChar(index, 'l')) {
+                                    // ("l" | <EMPTY>)
+                                    if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                                        ++index;
+                                       // <EMPTY>
+                                       match = true;
+                                    } else {
+                                       match = true;
                                     }
-                                    // <EMPTY>
-                                    match = true;
                                  } else {
                                     match = true;
                                  }
@@ -20800,12 +20900,14 @@ public class HarbourUnprocessedParser implements Parser {
                            // ("se" | "s" | <EMPTY>)
                            if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                               ++index;
-                              // "e"
-                              if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                              // ("e" | <EMPTY>)
+                              if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                  ++index;
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
                               }
-                              // <EMPTY>
-                              match = true;
                            } else {
                               match = true;
                            }
@@ -21183,12 +21285,14 @@ public class HarbourUnprocessedParser implements Parser {
                                  // ("ce" | "c" | <EMPTY>)
                                  if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                                     ++index;
-                                    // "e"
-                                    if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                    // ("e" | <EMPTY>)
+                                    if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                        ++index;
+                                       // <EMPTY>
+                                       match = true;
+                                    } else {
+                                       match = true;
                                     }
-                                    // <EMPTY>
-                                    match = true;
                                  } else {
                                     match = true;
                                  }
@@ -21403,12 +21507,14 @@ public class HarbourUnprocessedParser implements Parser {
                                  // ("ce" | "c" | <EMPTY>)
                                  if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                                     ++index;
-                                    // "e"
-                                    if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                    // ("e" | <EMPTY>)
+                                    if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                        ++index;
+                                       // <EMPTY>
+                                       match = true;
+                                    } else {
+                                       match = true;
                                     }
-                                    // <EMPTY>
-                                    match = true;
                                  } else {
                                     match = true;
                                  }
@@ -21499,12 +21605,14 @@ public class HarbourUnprocessedParser implements Parser {
                                     // ("ce" | "c" | <EMPTY>)
                                     if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                                        ++index;
-                                       // "e"
-                                       if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                       // ("e" | <EMPTY>)
+                                       if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                           ++index;
+                                          // <EMPTY>
+                                          match = true;
+                                       } else {
+                                          match = true;
                                        }
-                                       // <EMPTY>
-                                       match = true;
                                     } else {
                                        match = true;
                                     }
@@ -21716,12 +21824,14 @@ public class HarbourUnprocessedParser implements Parser {
                      // ("er" | "e" | <EMPTY>)
                      if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                         ++index;
-                        // "r"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
+                        // ("r" | <EMPTY>)
+                        if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -21819,12 +21929,14 @@ public class HarbourUnprocessedParser implements Parser {
                   // ("ys" | "y" | <EMPTY>)
                   if (buffer.matchChar(index, 'y') || buffer.matchChar(index, 'Y')) {
                      ++index;
-                     // "s"
-                     if (match = buffer.matchIgnoreCaseChar(index, 's')) {
+                     // ("s" | <EMPTY>)
+                     if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -23440,7 +23552,7 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //DateTimePattern : (('0d' Digit Digit Digit Digit Digit Digit Digit Digit) | ("d" (('"' DatePattern ("T"? TimePattern)? '"') | (''' DatePattern ("T"? TimePattern)? ''') | ('[' DatePattern ("T"? TimePattern)? ']'))) | ('{' '^' (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)? TimePattern? OptionalSpacing '}'))
+   //DateTimePattern : (('0d' Digit Digit Digit Digit Digit Digit Digit Digit) | ("d" (('"' DatePattern ("T"? TimePattern)? '"') | ('\'' DatePattern ("T"? TimePattern)? '\'') | ('[' DatePattern ("T"? TimePattern)? ']'))) | ('{' '^' (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)? TimePattern? OptionalSpacing '}'))
    protected boolean dateTimePattern$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -23448,7 +23560,7 @@ public class HarbourUnprocessedParser implements Parser {
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
       currentRuleIsAtomic = true;
       startIndex = index;
-      // (('0d' Digit Digit Digit Digit Digit Digit Digit Digit) | ("d" (('"' DatePattern ("T"? TimePattern)? '"') | (''' DatePattern ("T"? TimePattern)? ''') | ('[' DatePattern ("T"? TimePattern)? ']'))) | ('{' '^' (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)? TimePattern? OptionalSpacing '}'))
+      // (('0d' Digit Digit Digit Digit Digit Digit Digit Digit) | ("d" (('"' DatePattern ("T"? TimePattern)? '"') | ('\'' DatePattern ("T"? TimePattern)? '\'') | ('[' DatePattern ("T"? TimePattern)? ']'))) | ('{' '^' (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)? TimePattern? OptionalSpacing '}'))
       // ('0d' Digit Digit Digit Digit Digit Digit Digit Digit)
       Node lastNode_1 = currentNode;
       int lastIndex_1 = index;
@@ -23513,13 +23625,13 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       if (! match) {
-         // ("d" (('"' DatePattern ("T"? TimePattern)? '"') | (''' DatePattern ("T"? TimePattern)? ''') | ('[' DatePattern ("T"? TimePattern)? ']')))
+         // ("d" (('"' DatePattern ("T"? TimePattern)? '"') | ('\'' DatePattern ("T"? TimePattern)? '\'') | ('[' DatePattern ("T"? TimePattern)? ']')))
          Node lastNode_2 = currentNode;
          int lastIndex_2 = index;
          // "d"
          match = ignoreCaseCharMatcher('d');
          if (match) {
-            // (('"' DatePattern ("T"? TimePattern)? '"') | (''' DatePattern ("T"? TimePattern)? ''') | ('[' DatePattern ("T"? TimePattern)? ']'))
+            // (('"' DatePattern ("T"? TimePattern)? '"') | ('\'' DatePattern ("T"? TimePattern)? '\'') | ('[' DatePattern ("T"? TimePattern)? ']'))
             // ('"' DatePattern ("T"? TimePattern)? '"')
             Node lastNode_3 = currentNode;
             int lastIndex_3 = index;
@@ -23556,10 +23668,10 @@ public class HarbourUnprocessedParser implements Parser {
                }
             }
             if (! match) {
-               // (''' DatePattern ("T"? TimePattern)? ''')
+               // ('\'' DatePattern ("T"? TimePattern)? '\'')
                Node lastNode_5 = currentNode;
                int lastIndex_5 = index;
-               // '''
+               // '\''
                match = charMatcher('\'');
                if (match) {
                   // DatePattern
@@ -23579,7 +23691,7 @@ public class HarbourUnprocessedParser implements Parser {
                         lastNode_6.setSibling(null);
                         currentNode = lastNode_6;
                      }
-                     // '''
+                     // '\''
                      match = charMatcher('\'');
                      if (! match) {
                         index = lastIndex_5;
@@ -27570,12 +27682,14 @@ public class HarbourUnprocessedParser implements Parser {
                      // ("ic" | "i" | <EMPTY>)
                      if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                         ++index;
-                        // "c"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
+                        // ("c" | <EMPTY>)
+                        if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -27720,7 +27834,7 @@ public class HarbourUnprocessedParser implements Parser {
       }
    }
 
-   //StringPattern : (('"' (('\n' | '"')! .)* '"') | (''' (('\n' | ''')! .)* ''') | ('[' (('\n' | ']')! .)* ']') | ("e" '"' (('\' '\n'! .) | (('\n' | '"')! .))* '"'))
+   //StringPattern : (('"' (('\n' | '"')! .)* '"') | ('\'' (('\n' | '\'')! .)* '\'') | ('[' (('\n' | ']')! .)* ']') | ("e" '"' (('\' '\n'! .) | (('\n' | '"')! .))* '"'))
    protected boolean stringPattern$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -27728,7 +27842,7 @@ public class HarbourUnprocessedParser implements Parser {
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
       currentRuleIsAtomic = true;
       startIndex = index;
-      // (('"' (('\n' | '"')! .)* '"') | (''' (('\n' | ''')! .)* ''') | ('[' (('\n' | ']')! .)* ']') | ("e" '"' (('\' '\n'! .) | (('\n' | '"')! .))* '"'))
+      // (('"' (('\n' | '"')! .)* '"') | ('\'' (('\n' | '\'')! .)* '\'') | ('[' (('\n' | ']')! .)* ']') | ("e" '"' (('\' '\n'! .) | (('\n' | '"')! .))* '"'))
       // ('"' (('\n' | '"')! .)* '"')
       Node lastNode_1 = currentNode;
       int lastIndex_1 = index;
@@ -27781,19 +27895,19 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       if (! match) {
-         // (''' (('\n' | ''')! .)* ''')
+         // ('\'' (('\n' | '\'')! .)* '\'')
          Node lastNode_4 = currentNode;
          int lastIndex_4 = index;
-         // '''
+         // '\''
          match = charMatcher('\'');
          if (match) {
-            // (('\n' | ''')! .)*
+            // (('\n' | '\'')! .)*
             do {
-               // (('\n' | ''')! .)
+               // (('\n' | '\'')! .)
                Node lastNode_5 = currentNode;
                int lastIndex_5 = index;
-               // ('\n' | ''')!
-               // ('\n' | ''')
+               // ('\n' | '\'')!
+               // ('\n' | '\'')
                int startIndex_6 = index;
                switch(buffer.getChar(index)) {
                   case '\'': {
@@ -27824,7 +27938,7 @@ public class HarbourUnprocessedParser implements Parser {
                   }
                }
             } while(match);
-            // '''
+            // '\''
             match = charMatcher('\'');
             if (! match) {
                index = lastIndex_4;
@@ -28262,12 +28376,14 @@ public class HarbourUnprocessedParser implements Parser {
                            // ("er" | "e" | <EMPTY>)
                            if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                               ++index;
-                              // "r"
-                              if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
+                              // ("r" | <EMPTY>)
+                              if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                                  ++index;
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
                               }
-                              // <EMPTY>
-                              match = true;
                            } else {
                               match = true;
                            }
@@ -28337,12 +28453,14 @@ public class HarbourUnprocessedParser implements Parser {
                         // ("ic" | "i" | <EMPTY>)
                         if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                            ++index;
-                           // "c"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
+                           // ("c" | <EMPTY>)
+                           if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -28428,12 +28546,14 @@ public class HarbourUnprocessedParser implements Parser {
                               // ("al" | "a" | <EMPTY>)
                               if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                                  ++index;
-                                 // "l"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'l')) {
+                                 // ("l" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                                     ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
                                  }
-                                 // <EMPTY>
-                                 match = true;
                               } else {
                                  match = true;
                               }
@@ -28497,12 +28617,14 @@ public class HarbourUnprocessedParser implements Parser {
                                  // ("ct" | "c" | <EMPTY>)
                                  if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                                     ++index;
-                                    // "t"
-                                    if (match = buffer.matchIgnoreCaseChar(index, 't')) {
+                                    // ("t" | <EMPTY>)
+                                    if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                                        ++index;
+                                       // <EMPTY>
+                                       match = true;
+                                    } else {
+                                       match = true;
                                     }
-                                    // <EMPTY>
-                                    match = true;
                                  } else {
                                     match = true;
                                  }
@@ -28569,12 +28691,14 @@ public class HarbourUnprocessedParser implements Parser {
                                              // ("ck" | "c" | <EMPTY>)
                                              if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                                                 ++index;
-                                                // "k"
-                                                if (match = buffer.matchIgnoreCaseChar(index, 'k')) {
+                                                // ("k" | <EMPTY>)
+                                                if (buffer.matchChar(index, 'k') || buffer.matchChar(index, 'K')) {
                                                    ++index;
+                                                   // <EMPTY>
+                                                   match = true;
+                                                } else {
+                                                   match = true;
                                                 }
-                                                // <EMPTY>
-                                                match = true;
                                              } else {
                                                 match = true;
                                              }
@@ -29087,12 +29211,14 @@ public class HarbourUnprocessedParser implements Parser {
                               // ("on" | "o" | <EMPTY>)
                               if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
                                  ++index;
-                                 // "n"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'n')) {
+                                 // ("n" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                                     ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
                                  }
-                                 // <EMPTY>
-                                 match = true;
                               } else {
                                  match = true;
                               }
@@ -29249,12 +29375,14 @@ public class HarbourUnprocessedParser implements Parser {
                      // ("ar" | "a" | <EMPTY>)
                      if (buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A')) {
                         ++index;
-                        // "r"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
+                        // ("r" | <EMPTY>)
+                        if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -29322,12 +29450,14 @@ public class HarbourUnprocessedParser implements Parser {
                               // ("se" | "s" | <EMPTY>)
                               if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                                  ++index;
-                                 // "e"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                 // ("e" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                     ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
                                  }
-                                 // <EMPTY>
-                                 match = true;
                               } else {
                                  match = true;
                               }
@@ -29380,12 +29510,14 @@ public class HarbourUnprocessedParser implements Parser {
                                     // ("rs" | "r" | <EMPTY>)
                                     if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                                        ++index;
-                                       // "s"
-                                       if (match = buffer.matchIgnoreCaseChar(index, 's')) {
+                                       // ("s" | <EMPTY>)
+                                       if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                                           ++index;
+                                          // <EMPTY>
+                                          match = true;
+                                       } else {
+                                          match = true;
                                        }
-                                       // <EMPTY>
-                                       match = true;
                                     } else {
                                        match = true;
                                     }
@@ -29430,12 +29562,14 @@ public class HarbourUnprocessedParser implements Parser {
                                  // ("re" | "r" | <EMPTY>)
                                  if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                                     ++index;
-                                    // "e"
-                                    if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                    // ("e" | <EMPTY>)
+                                    if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                        ++index;
+                                       // <EMPTY>
+                                       match = true;
+                                    } else {
+                                       match = true;
                                     }
-                                    // <EMPTY>
-                                    match = true;
                                  } else {
                                     match = true;
                                  }
@@ -29468,12 +29602,14 @@ public class HarbourUnprocessedParser implements Parser {
                         // ("ic" | "i" | <EMPTY>)
                         if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                            ++index;
-                           // "c"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
+                           // ("c" | <EMPTY>)
+                           if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -29512,12 +29648,14 @@ public class HarbourUnprocessedParser implements Parser {
                            // ("ce" | "c" | <EMPTY>)
                            if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                               ++index;
-                              // "e"
-                              if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                              // ("e" | <EMPTY>)
+                              if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                  ++index;
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
                               }
-                              // <EMPTY>
-                              match = true;
                            } else {
                               match = true;
                            }
@@ -29619,12 +29757,14 @@ public class HarbourUnprocessedParser implements Parser {
                            // ("er" | "e" | <EMPTY>)
                            if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                               ++index;
-                              // "r"
-                              if (match = buffer.matchIgnoreCaseChar(index, 'r')) {
+                              // ("r" | <EMPTY>)
+                              if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                                  ++index;
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
                               }
-                              // <EMPTY>
-                              match = true;
                            } else {
                               match = true;
                            }
@@ -29645,12 +29785,14 @@ public class HarbourUnprocessedParser implements Parser {
                         // ("rn" | "r" | <EMPTY>)
                         if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                            ++index;
-                           // "n"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'n')) {
+                           // ("n" | <EMPTY>)
+                           if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -29730,12 +29872,14 @@ public class HarbourUnprocessedParser implements Parser {
                         // ("ch" | "c" | <EMPTY>)
                         if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                            ++index;
-                           // "h"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'h')) {
+                           // ("h" | <EMPTY>)
+                           if (buffer.matchChar(index, 'h') || buffer.matchChar(index, 'H')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -29759,12 +29903,14 @@ public class HarbourUnprocessedParser implements Parser {
                         // ("ic" | "i" | <EMPTY>)
                         if (buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I')) {
                            ++index;
-                           // "c"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'c')) {
+                           // ("c" | <EMPTY>)
+                           if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -29796,12 +29942,14 @@ public class HarbourUnprocessedParser implements Parser {
                                  // ("ce" | "c" | <EMPTY>)
                                  if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                                     ++index;
-                                    // "e"
-                                    if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                    // ("e" | <EMPTY>)
+                                    if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                        ++index;
+                                       // <EMPTY>
+                                       match = true;
+                                    } else {
+                                       match = true;
                                     }
-                                    // <EMPTY>
-                                    match = true;
                                  } else {
                                     match = true;
                                  }
@@ -29855,12 +30003,14 @@ public class HarbourUnprocessedParser implements Parser {
                         // ("lt" | "l" | <EMPTY>)
                         if (buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L')) {
                            ++index;
-                           // "t"
-                           if (match = buffer.matchIgnoreCaseChar(index, 't')) {
+                           // ("t" | <EMPTY>)
+                           if (buffer.matchChar(index, 't') || buffer.matchChar(index, 'T')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -29903,12 +30053,14 @@ public class HarbourUnprocessedParser implements Parser {
                         case 'i':
                         case 'I': {
                            ++index;
-                           // "f"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'f')) {
+                           // ("f" | <EMPTY>)
+                           if (buffer.matchChar(index, 'f') || buffer.matchChar(index, 'F')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                            break;
                         }
                         case 's':
@@ -29932,12 +30084,14 @@ public class HarbourUnprocessedParser implements Parser {
                                           // ("ce" | "c" | <EMPTY>)
                                           if (buffer.matchChar(index, 'c') || buffer.matchChar(index, 'C')) {
                                              ++index;
-                                             // "e"
-                                             if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                             // ("e" | <EMPTY>)
+                                             if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                                 ++index;
+                                                // <EMPTY>
+                                                match = true;
+                                             } else {
+                                                match = true;
                                              }
-                                             // <EMPTY>
-                                             match = true;
                                           } else {
                                              match = true;
                                           }
@@ -29967,12 +30121,14 @@ public class HarbourUnprocessedParser implements Parser {
                               // ("se" | "s" | <EMPTY>)
                               if (buffer.matchChar(index, 's') || buffer.matchChar(index, 'S')) {
                                  ++index;
-                                 // "e"
-                                 if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                                 // ("e" | <EMPTY>)
+                                 if (buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E')) {
                                     ++index;
+                                    // <EMPTY>
+                                    match = true;
+                                 } else {
+                                    match = true;
                                  }
-                                 // <EMPTY>
-                                 match = true;
                               } else {
                                  match = true;
                               }
@@ -29984,12 +30140,14 @@ public class HarbourUnprocessedParser implements Parser {
                         case 'd':
                         case 'D': {
                            ++index;
-                           // "o"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'o')) {
+                           // ("o" | <EMPTY>)
+                           if (buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O')) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                            break;
                         }
                         default: {
@@ -30024,12 +30182,14 @@ public class HarbourUnprocessedParser implements Parser {
                            // ("rn" | "r" | <EMPTY>)
                            if (buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R')) {
                               ++index;
-                              // "n"
-                              if (match = buffer.matchIgnoreCaseChar(index, 'n')) {
+                              // ("n" | <EMPTY>)
+                              if (buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N')) {
                                  ++index;
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
                               }
-                              // <EMPTY>
-                              match = true;
                            } else {
                               match = true;
                            }
@@ -30897,7 +31057,25 @@ public class HarbourUnprocessedParser implements Parser {
 
    //TestNoAlpha : ('a'-'z' | 'A'-'Z' | '0'-'9' | '_')!
    protected boolean testNoAlpha$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
       boolean match;
+      if (testNoAlpha$RuleMemoStart == index) {
+         if (testNoAlpha$RuleMemoStart <= testNoAlpha$RuleMemoEnd) {
+            index = testNoAlpha$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourUnprocessedRuleType.TEST_NO_ALPHA, testNoAlpha$RuleMemoStart, testNoAlpha$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (testNoAlpha$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(testNoAlpha$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
+      startIndex = index;
       // ('a'-'z' | 'A'-'Z' | '0'-'9' | '_')!
       // ('a'-'z' | 'A'-'Z' | '0'-'9' | '_')
       // 'a'-'z'
@@ -30916,8 +31094,24 @@ public class HarbourUnprocessedParser implements Parser {
       }
       match = ! match;
       if (match) {
+         testNoAlpha$RuleMemoStart = startIndex;
+         testNoAlpha$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            testNoAlpha$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(HarbourUnprocessedRuleType.TEST_NO_ALPHA, startIndex, index, true, false);
+            currentNode.setFirstChild(lastNode.getSibling());
+            lastNode.setSibling(currentNode);
+            testNoAlpha$RuleMemoFirstNode = currentNode;
+         }
          return true;
       } else {
+         testNoAlpha$RuleMemoStart = startIndex;
+         testNoAlpha$RuleMemoEnd = -1;
+         testNoAlpha$RuleMemoFirstNode = null;
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
          return false;
       }
    }

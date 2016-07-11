@@ -50,9 +50,10 @@ public class TesteGeracao {
     */
    public static void main(String[] args) {
       //new TesteGeracao().showFirstLiterals();
-      new TesteGeracao().testeGeracaoJava();
+      //new TesteGeracao().testeGeracaoJava();
       //new TesteGeracao().testeGeracaoHarbourPP();
-      //new TesteGeracao().testeGeracaoHarbour();
+      new TesteGeracao().testeGeracaoPlSql();
+      // new TesteGeracao().testeGeracaoHarbour();
    }
 
    private void showFirstLiterals() {
@@ -82,6 +83,36 @@ public class TesteGeracao {
          Grammar g;
          gr = new GrammarLoader();
          g = gr.loadGrammar(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test\\Java.gy"));
+         options = new JavaParserGenerationOptions(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test"),
+                 "org.uggeri.yapp.runtime.java.test");
+         options.setGenerateTraceCode(false);
+         options.setProfile(false);
+         options.setCatchMismatches(false);
+         options.setLeftRecursionStrategy(LeftRecursionStrategy.ACCEPT);
+         //options.setMemoizeMode(MemoizeMode.ALL);
+         options.setMemoizeMode(MemoizeMode.AUTO);
+         //options.setGenerateSingleFileSource(true);
+         pg = new JavaParserGenerator(g, options);
+         //pg.validate();
+         pg.generateParser();
+      } catch (GrammarSyntaxException ex) {
+         System.out.println("Error at: " + ex.getLine() + "," + ex.getColumn());
+         ex.printStackTrace(System.out);
+      } catch (GrammarException ex) {
+         ex.printStackTrace(System.out);
+      } catch (ParserGenerationException ex) {
+         ex.printStackTrace(System.out);
+      }
+   }
+
+   private void testeGeracaoPlSql() {
+      try {
+         JavaParserGenerationOptions options;
+         ParserGenerator pg;
+         GrammarLoader gr;
+         Grammar g;
+         gr = new GrammarLoader();    
+         g = gr.loadGrammar(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test\\OracleScript.gy"));
          options = new JavaParserGenerationOptions(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test"),
                  "org.uggeri.yapp.runtime.java.test");
          options.setGenerateTraceCode(false);

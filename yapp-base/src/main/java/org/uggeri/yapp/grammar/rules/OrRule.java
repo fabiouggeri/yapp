@@ -4,6 +4,7 @@
  */
 package org.uggeri.yapp.grammar.rules;
 
+import java.util.Arrays;
 import org.uggeri.yapp.generation.ParserGenerationOptions;
 import org.uggeri.yapp.grammar.GrammarRuleVisitor;
 import java.util.List;
@@ -15,6 +16,10 @@ import java.util.List;
 public class OrRule implements GrammarRule, ComposedGrammarRule {
 
    private List<GrammarRule> rules;
+
+   public OrRule(GrammarRule... rules) {
+      this.rules = Arrays.asList(rules);
+   }
 
    public OrRule(List<GrammarRule> rules) {
       this.rules = rules;

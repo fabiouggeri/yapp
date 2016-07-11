@@ -63,10 +63,12 @@ import org.uggeri.yapp.grammar.rules.SimpleGrammarRule;
 
 /**
  *
- * @author fabio TODO: verificar recursao a esquerda -> OK - Testar melhor TODO: verificar possibilidade de reordenar regras de
- * acordo com a possibilidade de consumo de cadeias mais longas TODO: Gerar erro em regras opcoes redundantes de literais. ex.: ("e"
- * | "E"), ('end' | 'endif' | 'end') TODO: Agrupar regras OR que comecam com literais. Ex.: ('AAA' S)|('BBB' S)|R => (('AAA'|'BBB')
- * S) | R TODO: Tratar erros de sintaxe para tentar prosseguir com o parser. Ex.: "incluir" terminais esperados e nao encontrados,
+ * @author fabio 
+ * TODO: verificar recursao a esquerda -> OK - Testar melhor 
+ * TODO: verificar possibilidade de reordenar regras de acordo com a possibilidade de consumo de cadeias mais longas 
+ * TODO: Gerar erro em regras opcoes redundantes de literais. ex.: ("e" | "E"), ('end' | 'endif' | 'end') 
+ * TODO: Agrupar regras OR que comecam com literais. Ex.: ('AAA' S)|('BBB' S)|R => (('AAA'|'BBB') S) | R 
+ * TODO: Tratar erros de sintaxe para tentar prosseguir com o parser. Ex.: "incluir" terminais esperados e nao encontrados,
  * remover terminais nao esperados
  */
 public abstract class AbstractParserGenerator implements ParserGenerator, GrammarRuleVisitor {
@@ -459,9 +461,6 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
 
    private void generateRulesFunctions(Grammar grammar, Set<String> created) throws ParserGenerationException {
       generateGrammarRulesFunctions(grammar, created);
-      for (Grammar importedGrammar : grammar.getImportGrammars()) {
-         generateRulesFunctions(importedGrammar, created);
-      }
    }
 
    private void generateGrammarRulesFunctions(Grammar grammar, Set<String> generatedFunctions) throws ParserGenerationException {
@@ -1094,20 +1093,8 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
    }
 
    private void continueLiteralMatchBlock(Map.Entry<CharSet, List<GrammarRule>> entry, boolean containsEmpty) {
-      if (entry.getValue().size() > 2) {
+      if (entry.getValue().size() > 1) {
          new OrRule(entry.getValue()).visit(getOptions(), this);
-      } else if (entry.getValue().size() == 2) {
-         /* Se possui uma regra EMPTY na lista, entao nao pode gerar um novo switch. Ex.: { 'a', EMPTY } */
-         if (containsEmpty) {
-            final boolean lastSwitchOption = switchOption;
-            switchOption = true;
-            for (GrammarRule subrule : entry.getValue()) {
-               subrule.visit(getOptions(), this);
-            }
-            switchOption = lastSwitchOption;
-         } else {
-            new OrRule(entry.getValue()).visit(getOptions(), this);
-         }
       } else {
          final boolean lastSwitchOption = switchOption;
          switchOption = true;
@@ -1300,9 +1287,6 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
             rule.setLeftRecursion(!leftRecursionPath(rule).isEmpty());
          }
       }
-      for (Grammar importedGramar : grammar.getImportGrammars()) {
-         validateGrammar(importedGramar);
-      }
    }
 
    /* Verifica se a regra tem recursao a esquerda, retornando o caminho que gera a recursao */
@@ -1362,9 +1346,6 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
          if (alias != null) {
             rule.setLabel(alias);
          }
-      }
-      for (Grammar importGramar : grammar.getImportGrammars()) {
-         prepareRules(importGramar);
       }
       appendFollowLiterals(grammar);
       breakPartialLiterals(grammar);
@@ -1436,9 +1417,9 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
             case '\f':
                sb.append("\\f");
                break;
-            case '\'':
-               sb.append("\\'");
-               break;
+//            case '\'':
+//               sb.append("\\'");
+//               break;
             case '"':
                sb.append("\\\"");
                break;
@@ -1485,13 +1466,11 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
          List<GrammarRule> groupedRules;
          if (r instanceof CharRule) {
             final CharSet charPooler = new CharSet(((CharRule) r).getCharacter());
-            groupedRules = getGroupOfChar(rulesGroup, charPooler);
-            groupedRules.add(new EmptyRule());
+            addEmptyRule(getGroupOfChar(rulesGroup, charPooler));
          } else if (r instanceof IgnoreCaseCharRule) {
             final CharSet charPooler = new CharSet(Character.toLowerCase(((IgnoreCaseCharRule) r).getCharacter()),
                     Character.toUpperCase(((IgnoreCaseCharRule) r).getCharacter()));
-            groupedRules = getGroupOfChar(rulesGroup, charPooler);
-            groupedRules.add(new EmptyRule());
+            addEmptyRule(getGroupOfChar(rulesGroup, charPooler));
          } else if (r instanceof StringRule) {
             final CharSet charPooler = new CharSet(((StringRule) r).getText().charAt(0));
             groupedRules = getGroupOfChar(rulesGroup, charPooler);
@@ -1500,7 +1479,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
             } else if (((StringRule) r).getText().length() == 2) {
                groupedRules.add(new CharRule(((StringRule) r).getText().charAt(1)));
             } else {
-               groupedRules.add(new EmptyRule());
+               addEmptyRule(groupedRules);
             }
 
          } else if (r instanceof IgnoreCaseStringRule) {
@@ -1513,7 +1492,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
             } else if (((IgnoreCaseStringRule) r).getText().length() == 2) {
                groupedRules.add(new IgnoreCaseCharRule(((IgnoreCaseStringRule) r).getText().charAt(1)));
             } else {
-               groupedRules.add(new EmptyRule());
+               addEmptyRule(groupedRules);
             }
 
          } else if (r instanceof EmptyRule) {
@@ -1532,6 +1511,15 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
          });
       }
       return rulesGroup;
+   }
+
+   private void addEmptyRule(List<GrammarRule> groupedRules) {
+      for (GrammarRule r : groupedRules) {
+         if (r instanceof EmptyRule) {
+            return;
+         }
+      }
+      groupedRules.add(new EmptyRule());
    }
 
    protected boolean isPartialStringMatch(GrammarRule rule) {

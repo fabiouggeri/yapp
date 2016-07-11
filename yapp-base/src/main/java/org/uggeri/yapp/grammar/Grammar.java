@@ -20,8 +20,6 @@ public class Grammar {
 
    private String grammarName;
 
-   private final List<Grammar> importGrammars = new ArrayList<Grammar>();
-
    private NonTerminalRule mainRule = null;
 
    private final Map<String, NonTerminalRule> rules = new HashMap<String, NonTerminalRule>();
@@ -47,16 +45,7 @@ public class Grammar {
    }
 
    public NonTerminalRule getRule(String ruleName) {
-      NonTerminalRule rule = rules.get(ruleName);
-      if (rule == null) {
-         for (int i = importGrammars.size() - 1; i >= 0; i--) {
-            rule = importGrammars.get(i).getRule(ruleName);
-            if (rule != null) {
-               break;
-            }
-         }
-      }
-      return rule;
+      return rules.get(ruleName);
    }
 
    /** Regras declaradas explicitamente na gramatica
@@ -68,14 +57,6 @@ public class Grammar {
 
    public Collection<NonTerminalRule> getRules() {
       return rules.values();
-   }
-
-   public List<Grammar> getImportGrammars() {
-      return importGrammars;
-   }
-
-   public void addImportGrammar(Grammar extendsGrammar) {
-      importGrammars.add(extendsGrammar);
    }
 
    public File getGrammarFile() {

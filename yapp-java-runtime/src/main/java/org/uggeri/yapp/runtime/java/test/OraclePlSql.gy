@@ -7,8 +7,13 @@ import OracleSql;
 **********************************************************************************/
 PlSqlProgram : OptionalSpacing PlSqlSource OptionalSpacing;
 
-PlSqlSource : CreatePackageBody | CreatePackage | CreateFunction | CreateProcedure | AnonymousPlSqlBlock;
+PlSqlSource : CreatePackageBody 
+            | CreatePackage 
+            | CreateFunction 
+            | CreateProcedure 
+            | AnonymousPlSqlBlock;
 
+@SkipNode
 PlSqlExpression : OptionalAndExpression OrExpression*;
 
 OrExpression : "or" OptionalAndExpression;
@@ -24,7 +29,12 @@ LogicalExpression : NotExpression | RelationalExpression;
 NotExpression : "not" RelationalExpression;
 
 @SkipNode
-RelationalExpression : ComparisonExpression | InExpression | BetweenExpression | LikeExpression | IsNullExpression | NumericExpression;
+RelationalExpression : ComparisonExpression 
+                     | InExpression 
+                     | BetweenExpression 
+                     | LikeExpression 
+                     | IsNullExpression 
+                     | NumericExpression;
 
 ComparisonExpression : NumericExpression RelationalOperator PlSqlExpression;
 
@@ -43,6 +53,7 @@ PlSqlMathExpression : PlSqlAtomicExpression SqlMathOperator PlSqlExpression;
 
 PlSqlUnaryExpression : ('+' | '-') "Sign" PlSqlExpression;
 
+@SkipNode
 PlSqlParenthesesExpression : '(' PlSqlExpression ')';
 
 SqlCursorAttribute : "sql" CursorAttribute;
@@ -54,7 +65,15 @@ PlSqlObjectCollection : PlSqlObjectIdentifier CollectionAttribute;
 HostVariableCursor : HostVariable CursorAttribute;
 
 @SkipNode
-PlSqlAtomicExpression : PlSqlParenthesesExpression | PlSqlLiteral | SqlCursorAttribute | PlSqlCaseExpression | PlSqlObjectCursor | PlSqlObjectCollection | PlSqlObjectIdentifier | HostVariableCursor | HostVariable;
+PlSqlAtomicExpression : PlSqlParenthesesExpression 
+                      | PlSqlLiteral 
+                      | SqlCursorAttribute 
+                      | PlSqlCaseExpression 
+                      | PlSqlObjectCursor 
+                      | PlSqlObjectCollection 
+                      | PlSqlObjectIdentifier 
+                      | HostVariableCursor 
+                      | HostVariable;
 
 CaseExpressionElse : "else" PlSqlExpression;
 
@@ -64,7 +83,14 @@ CaseExpressionWhenList : CaseExpressionWhen+;
 
 PlSqlCaseExpression : "case" PlSqlExpression? CaseExpressionWhenList CaseExpressionElse? "end";
 
-CollectionAttribute : '.' ("count" | "Count" | "first" | "First" | "last" | "Last" | "limit" | "Limit" | ("exists" PlSqlParenthesesExpression) | "Exists" | ("next" PlSqlParenthesesExpression) | "Next" | ("prior" PlSqlParenthesesExpression) | "Prior");
+CollectionAttribute : '.' 
+                    ( "count" 
+                    | "first" 
+                    | "last" 
+                    | "limit" 
+                    | ("exists" PlSqlParenthesesExpression) 
+                    | ("next" PlSqlParenthesesExpression) 
+                    | ("prior" PlSqlParenthesesExpression) );
 
 CursorAttribute : '%' PlSqlObjectIdentifier;
 
@@ -92,12 +118,23 @@ ExternalCParametersDeclaration : '(' ExternalCParameter (',' ExternalCParameter)
 
 CallJavaSpec : "language" "java" "name" StringLiteral;
 
-CallCSpec : "language" "c" ("name" PlSqlAnyIdentifier)? "library" PlSqlIdentifier ("agent" "in" '(' PlSqlIdentifier (',' PlSqlIdentifier)* ')')? ("with" "context")? ("parameters" ExternalCParametersDeclaration)?;
+PlSqlIdentifierList : PlSqlIdentifier (',' PlSqlIdentifier)*;
 
-CallSpec : CallJavaSpec | CallCSpec;
+CallCSpec : "language" "c" 
+            ("name" PlSqlAnyIdentifier)? 
+            "library" PlSqlIdentifier 
+            ("agent" "in" '(' PlSqlIdentifierList ')')? 
+            ("with" "context")? 
+            ("parameters" ExternalCParametersDeclaration)?;
 
-PragmaOrStatement : Pragma | PlSqlStatement;
+CallSpec : CallJavaSpec 
+         | CallCSpec;
 
+@SkipNode
+PragmaOrStatement : Pragma 
+                  | PlSqlStatement;
+
+@SkipNode
 PlSqlBodyStatements : PragmaOrStatement ';' (PragmaOrStatement ';')*;
 
 PlSqlBody : "begin" PlSqlBodyStatements? ExceptionBlock? "end" PlSqlAnyIdentifier?;
@@ -177,35 +214,58 @@ CollectionTypeDefinition : "type" PlSqlAnyIdentifier "is" (VarrayTypeDefinition 
 
 IndexBy : "index" "by" ("pls_integer" | "binary_integer" | ("varchar2" NumericExpression));
 
-OptionalIndexBy : IndexBy?;
+AssociativeArrayTypeDefinition : "table" "of" TypeSpec Nullable? IndexBy?;
 
-AssociativeArrayTypeDefinition : "table" "of" TypeSpec Nullable? OptionalIndexBy;
-
-VarrayTypeDefinition : (("varying" "array"?) | "varray") '(' IntegerLiteral ')' "of" TypeSpec Nullable?;
+VarrayTypeDefinition : ( ("varying" "array"?) | "varray") '(' IntegerLiteral ')' "of" TypeSpec Nullable?;
 
 NestedTableTypeDefinition : "table" "of" TypeSpec Nullable? ("index" "by" TypeSpec)?;
 
 RefCursorTypeDefinition : "type" PlSqlAnyIdentifier "is" "ref" "cursor" ReturnType?;
 
-NumericDataType : ("number" | "numeric" | "decimal" | "dec") NumberSize;
+Numeric : ("number" | "numeric" | "decimal" | "dec") NumberSize;
 
-SmallIntPrecisionDataType : "smallint" "precision";
+SmallIntPrecision : "smallint" "precision";
 
-CharacterDataType : "character" "varying"? Size?;
+Character : "character" "varying"? Size?;
 
-NVarCharDataType : "nvarchar" Size?;
+NVarChar : "nvarchar" Size?;
 
-NationalCharacterDataType : "national" ("character" | "char") "varying"? Size?;
+NationalCharacter : "national" ("character" | "char") "varying"? Size?;
 
-IntegerDataType : "integer" Size?;
+Integer : "integer" Size?;
 
-IntDataType : "int" Size?;
+Int : "int" Size?;
 
-SmallIntDataType : "smallint" Size?;
+SmallInt : "smallint" Size?;
 
-RealDataType : "real" Size?;
+Real : "real" Size?;
 
-PlSqlDataType : SqlDataType | "binary_integer" | "BinaryInteger" | "natural" | "Natural" | "positive" | "Positive" | NumericDataType | "Number" | "boolean" | "Boolean" | IntegerDataType | "Integer" | IntDataType | "Int" | SmallIntDataType | "SmallInt" | RealDataType | "Real" | SmallIntPrecisionDataType | "SmallIntPrecision" | CharacterDataType | "Character" | NVarCharDataType | "NVarChar" | NationalCharacterDataType | "NationalCharacter" | "pls_integer" | "PLS_Integer";
+BinaryInteger : "binary_integer";
+
+Natural : "natural";
+
+Positive : "positive";
+
+Boolean : "boolean";
+
+Pls_Integer : "pls_integer";
+
+@SkipNode
+PlSqlDataType : SqlDataType 
+              | BinaryInteger 
+              | Natural 
+              | Positive
+              | Numeric 
+              | Boolean
+              | Integer 
+              | Int
+              | SmallInt 
+              | Real
+              | SmallIntPrecision 
+              | Character 
+              | NVarChar 
+              | NationalCharacter
+              | Pls_Integer;
 
 RowType : '%' "rowtype";
 
@@ -219,8 +279,11 @@ UserTypeAttribute : RowType | Type | Size;
 
 UserType : SqlObjectIdentifier UserTypeAttribute?;
 
-TypeSpec : PlSqlDataType | CursorRef | UserType;
+TypeSpec : PlSqlDataType 
+         | CursorRef 
+         | UserType;
 
+@SkipNode
 ParenthesesParametersDeclaration : '(' ParameterDeclaration (',' ParameterDeclaration)* ')';
 
 Out : "out" "nocopy"?;
@@ -229,7 +292,11 @@ ParameterDeclaration : PlSqlIdentifier "in"? Out? TypeSpec DefaultValue?;
 
 CursorDeclaration : "cursor" PlSqlAnyIdentifier ParametersDeclaration "is" SelectStatement;
 
-ItemDeclaration : ExceptionDeclaration | ConstantDeclaration | CursorDeclaration | VariableDeclaration;
+@SkipNode
+ItemDeclaration : ExceptionDeclaration 
+                | ConstantDeclaration 
+                | CursorDeclaration 
+                | VariableDeclaration;
 
 ExceptionDeclaration : PlSqlAnyIdentifier "exception";
 
@@ -245,11 +312,21 @@ FunctionModifier : ("deterministic" | "pipelined" | "parallel_enable" | ResultCa
 
 ProcedureDeclaration : ProcedureHeading;
 
-Pragma : "pragma" (("restrict_references" '(' ("default" | PlSqlAnyIdentifier) (',' PragmaParam)+ ')') | ("exception_init" '(' PlSqlAnyIdentifier ',' PlSqlLiteral ')') | "autonomous_transaction" | "serially_reusable" | ("builtin" PragmaParams) | ("fipsflag" PragmaParams) | ("interface" PragmaParams) | ("new_names" PragmaParams) | ("timestamp" PragmaParams));
+Pragma : "pragma" ( ("restrict_references" '(' ("default" | PlSqlAnyIdentifier) (',' PragmaParam)+ ')') 
+                  | ("exception_init" '(' PlSqlAnyIdentifier ',' PlSqlLiteral ')') 
+                  | "autonomous_transaction" 
+                  | "serially_reusable" 
+                  | ("builtin" PragmaParams) 
+                  | ("fipsflag" PragmaParams) 
+                  | ("interface" PragmaParams) 
+                  | ("new_names" PragmaParams) 
+                  | ("timestamp" PragmaParams) );
 
 PragmaParams : '(' PragmaParam (',' PragmaParam)* ')';
 
-PragmaParam : PlSqlIdentifier | StringLiteral | (('+' | '-')? NumberLiteral);
+PragmaParam : PlSqlIdentifier 
+            | StringLiteral 
+            | (('+' | '-')? NumberLiteral);
 
 Label : "<<" PlSqlAnyIdentifier ">>";
 
@@ -286,9 +363,12 @@ LeftValue : HostVariable | PlSqlObjectIdentifier;
 
 AssignStatement : LeftValue ":=" PlSqlExpression;
 
-NamedParameter : PlSqlIdentifier PlSqlExpression;
+NamedParameter : PlSqlIdentifier "=>" PlSqlExpression;
 
-PlSqlFunctionParameter : NamedParameter | PlSqlExpression | BindVariable;
+@Rule(FunctionParameter)
+PlSqlFunctionParameter : NamedParameter 
+                       | PlSqlExpression 
+                       | BindVariable;
 
 @SkipNode
 PlSqlParameters : '(' (')'& | (PlSqlFunctionParameter (',' PlSqlFunctionParameter)*)) ')';
@@ -307,7 +387,10 @@ CloseStatement : "close" SqlObjectIdentifier;
 
 BasicLoopStatement : "loop" PlSqlStatements "end" "loop" PlSqlAnyIdentifier?;
 
-ExecuteImediateOptions : (IntoClause UsingClause?) | "IntoClause" | (BulkCollectIntoClause UsingClause?) | "BulkIntoClause" | (UsingClause DynamicReturningClause?) | "UsingClauseDynamic" | DynamicReturningClause;
+ExecuteImediateOptions : (IntoClause UsingClause?) 
+                       | (BulkCollectIntoClause UsingClause?) 
+                       | (UsingClause DynamicReturningClause?) 
+                       | DynamicReturningClause;
 
 ExecuteImmediateStatement : "execute" "immediate" PlSqlExpression ExecuteImediateOptions?;
 
@@ -347,7 +430,9 @@ IndicesOfCollection : "indices" "of" PlSqlAtomicExpression BetweenBounds?;
 
 ValuesOfIndexCollection : "values" "of" PlSqlAtomicExpression;
 
-ForAllBoundsClause : Range | IndicesOfCollection | ValuesOfIndexCollection;
+ForAllBoundsClause : Range 
+                   | IndicesOfCollection 
+                   | ValuesOfIndexCollection;
 
 GotoStatement : "goto" PlSqlAnyIdentifier;
 
@@ -355,6 +440,7 @@ PlSqlStatements : (PlSqlStatement ';')+;
 
 ElsIf : "elsif" PlSqlExpression "then" PlSqlStatements;
 
+@SkipNode
 ElsIfList : ElsIf*;
 
 ElseBody : "else" PlSqlStatements;
@@ -365,7 +451,8 @@ IfStatement : "if" PlSqlExpression "then" PlSqlStatements ElsIfList Else "end" "
 
 NullStatement : NullLiteral;
 
-CursorSource : SelectStatement | PlSqlExpression;
+CursorSource : SelectStatement 
+             | PlSqlExpression;
 
 CursorUsingClause : UsingClause?;
 
@@ -414,11 +501,14 @@ BooleanLiteral : BooleanPattern OptionalSpacing;
 
 @Rule(BooleanLiteral)
 @NotExtendLiterals
-BooleanPattern : "true" | "false";
+BooleanPattern : "true" 
+               | "false";
 
 @SkipNode
-PlSqlLiteral : SqlLiteral | BooleanLiteral;
+PlSqlLiteral : SqlLiteral 
+             | BooleanLiteral;
 
+@Rule(ParametersList)
 PlSqlParametersList : PlSqlParameters*;
 
 PlSqlQualifiedIdentifierRemote : PlSqlQualifiedIdentifier DBLink PlSqlParametersList PlSqlAttributes?;
@@ -429,17 +519,23 @@ PlSqlAttributes : ('.' PlSqlAnySimpleIdentifier)+;
 
 PlSqlQualifiedIdentifier : PlSqlSimpleIdentifier PlSqlAttributes;
 
+@Rule(SimpleIdentifier)
 PlSqlAnySimpleIdentifier : PlSqlAnyIdentifier PlSqlParametersList;
 
+@Rule(SimpleIdentifier)
 PlSqlSimpleIdentifier : PlSqlIdentifier PlSqlParametersList;
 
 @SkipNode
-PlSqlObjectIdentifier : BuiltInFunctionCall | PlSqlQualifiedIdentifierRemote | PlSqlSimpleIdentifierRemote | PlSqlQualifiedIdentifier | PlSqlSimpleIdentifier;
+PlSqlObjectIdentifier : BuiltInFunctionCall 
+                      | PlSqlQualifiedIdentifierRemote 
+                      | PlSqlSimpleIdentifierRemote 
+                      | PlSqlQualifiedIdentifier 
+                      | PlSqlSimpleIdentifier;
 
 @SkipNode
 PlSqlIdentifier : PlSqlKeyword! PlSqlIdentifierPattern OptionalSpacing;
 
-@Rule(PlSqlIdentifier)
+@Rule(Identifier)
 @Atomic
 PlSqlIdentifierPattern : ([a-z] | [A-Z] | [0-9] | '_' | '$' | '#')+
                        | ( '"' ( ( '\r' | '\n')! . )+ '"' );

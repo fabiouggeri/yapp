@@ -82,9 +82,9 @@ MergeStatement : "merge" Hint?
                  "using" ( Subquery | TableName )? Alias? 
                  "on" '(' SqlCondition ')' 
                  ( ( MergeUpdateClause MergeInsertClause ) 
-                   | ( MergeInsertClause MergeUpdateClause ) 
-                   | MergeInsertClause 
-				       | MergeUpdateClause )? 
+                 | ( MergeInsertClause MergeUpdateClause ) 
+                 | MergeInsertClause 
+				     | MergeUpdateClause )? 
                  ErrorLogingClause?;
 
 BlockHint : '/*+' ('*/'! .)* '*/';
@@ -103,10 +103,13 @@ SelectListElement : ListAllFields
 
 ColumnAlias : "as"? SqlIdentifier;
 
+@SkipNode
 CommaSelectListElement : ',' SelectListElement;
 
+@SkipNode
 ZeroOrMoreCommaSelectListElement : CommaSelectListElement*;
 
+@SkipNode
 ListOfSelectListElement : SelectListElement ZeroOrMoreCommaSelectListElement;
 
 SelectList : '*' 
@@ -131,9 +134,10 @@ SampleClause : "sample" "block"? SampleNumber Seed?;
 
 TableOrView : ( TablePartitionName | TableSubPartitionName | TableName ) SampleClause?;
 
+@SkipNode
 QueryTableExpression : TableOrView 
                      | Subquery 
-					 | TableCollectionExpression;
+					      | TableCollectionExpression;
 
 DBLink : '@' SqlAnyIdentifier;
 
@@ -154,11 +158,13 @@ SqlMathOperator : '**'
                 | ( '|' '|' ) 
                 | 'mod';
 
+@SkipNode
 SqlExpression : SqlMathExpression 
               | SqlAtomicExpression;
 
 SqlMathExpression : SqlAtomicExpression SqlMathOperator SqlExpression;
 
+@SkipNode
 ParenthesesSqlExpression : '(' SqlExpression ')';
 
 SqlUnaryOperator : '+' 
@@ -203,8 +209,8 @@ RowNum : "rownum";
 
 IdentifiedRowId : TableName '.' "rowid";
 
-RowId : IdentifiedRowId 
-      | "rowid";
+RowIdColumn : IdentifiedRowId 
+            | "rowid";
 
 Level : "level";
 
@@ -213,7 +219,7 @@ SqlOuterJoinObject : SqlObjectIdentifier OuterJoinSign;
 @SkipNode
 SqlSimpleExpression : SqlLiteral 
                     | RowNum 
-                    | RowId 
+                    | RowIdColumn 
                     | Level 
                     | SqlOuterJoinObject 
                     | SqlObjectIdentifier;
@@ -430,15 +436,15 @@ AsDataType : "as" SqlDataType;
 
 XmlSerialize : "xmlparse" 
                '(' 
-			   ( "document" | "content" ) 
-			   SqlExpression 
-			   AsDataType? 
-			   ( "encoding" SqlExpression )? 
-			   ( "version" StringLiteral )? 
-			   ( ( "no" "indent" ) 
-			   | ( "indent" ( "size" '=' SqlExpression )? ) )? 
-			   ( ( "hide" | "show" ) "defaults" )? 
-			   ')';
+			      ( "document" | "content" ) 
+			      SqlExpression 
+			      AsDataType? 
+			      ( "encoding" SqlExpression )? 
+			      ( "version" StringLiteral )? 
+			      ( ( "no" "indent" ) 
+			      | ( "indent" ( "size" '=' SqlExpression )? ) )? 
+			      ( ( "hide" | "show" ) "defaults" )? 
+			      ')';
 
 XmlNamespacesArg : StringLiteral AsAlias;
 
@@ -502,27 +508,28 @@ BuiltInFunctionCall : AnalyticFunctionCall
 
 AnalyticFunctionCall : Avg 
                      | Corr 
-					 | Count 
-					 | CovarPop 
-					 | CovarSamp 
-					 | CumeDistAnalytic 
-					 | DenseRankAnalytic 
-					 | Lag 
-					 | PercentileCont 
-					 | PercentileDisc 
-					 | RatioToReport 
-					 | RegrLinearFunctions 
-					 | RowNumber 
-					 | StdDev 
-					 | StdDevPop 
-					 | StdDevSamp 
-					 | Sum 
-					 | VarPop 
-					 | VarSamp 
+					      | Count 
+					      | CovarPop 
+					      | CovarSamp 
+					      | CumeDistAnalytic 
+					      | DenseRankAnalytic 
+					      | Lag 
+					      | PercentileCont 
+					      | PercentileDisc 
+					      | RatioToReport 
+					      | RegrLinearFunctions 
+					      | RowNumber 
+					      | StdDev 
+					      | StdDevPop 
+					      | StdDevSamp 
+					      | Sum 
+					      | VarPop 
+					      | VarSamp 
                      | Variance;
 
 SqlIdentifiedFunctionParameter : SqlAnyIdentifier ( '=' '>' ) SqlExpression;
 
+@Rule(FunctionParameter)
 SqlFunctionParameter : SqlIdentifiedFunctionParameter 
                      | SqlExpression;
 
@@ -572,6 +579,7 @@ AnyList : "any" ( ',' "any" )*;
 
 SqlExpressionList : SqlExpression ( ',' SqlExpression )*;
 
+@SkipNode
 ParenthesesSqlExpressionList : '(' SqlExpressionList ')';
 
 PivoInExpressionList : PivotInExpression ( ',' PivotInExpression )*;
@@ -600,8 +608,10 @@ UnpivotInClauseList : UnpivotInElement ( ',' UnpivotInElement )*;
 
 SqlLiteralList : SqlLiteral ( ',' SqlLiteral )*;
 
+@SkipNode
 ParenthesesLiteralList : '(' SqlLiteralList ')';
 
+@SkipNode
 ParenthesesLiteralListList : ParenthesesLiteralList ( ',' ParenthesesLiteralList )*;
 
 Schema : SqlIdentifier;
@@ -617,7 +627,7 @@ SchemaObjectName : ( Schema '.' Object )
 
 ColumnName : ( Schema '.' Table '.' Column ) 
            | ( Table '.' Column ) 
-		   | Column;
+		     | Column;
 
 ColumnsList : '(' ColumnName ( ',' ColumnName )* ')';
 
@@ -627,10 +637,11 @@ QueryTableExpressionPivotClause : QueryTableExpression PivotClause;
 
 QueryTableExpressionUnpivotClause : QueryTableExpression UnpivotClause;
 
+@SkipNode
 QueryTableExpressionType : OnlyQueryTableExpression 
                          | QueryTableExpressionPivotClause 
-						 | QueryTableExpressionUnpivotClause 
-						 | QueryTableExpression;
+						       | QueryTableExpressionUnpivotClause 
+						       | QueryTableExpression;
 
 TableReference : QueryTableExpressionType FlashbackQueryClause? SqlIdentifier?;
 
@@ -656,8 +667,8 @@ RelationalOperator : ( '=' '>'! )
 
 SqlCondition : NotCondition 
              | AndCondition 
-			 | OrCondition 
-			 | ConditionExpression;
+             | OrCondition 
+             | ConditionExpression;
 
 OrCondition : ConditionExpression "or" SqlCondition;
 
@@ -665,26 +676,28 @@ AndCondition : ConditionExpression "and" SqlCondition;
 
 NotCondition : "not" SqlCondition;
 
+@SkipNode
 ParenthesesCondition : '(' SqlCondition ')';
 
+@SkipNode
 ConditionExpression : ExistsCondition 
                     | IsCondition 
-					| RelationalCondition 
-					| RelationalGroupCondition 
-					| InCondition 
-					| IsASetCondition 
-					| IsAnyCondition 
-					| IsEmptyCondition 
-					| IsOfTypeCondition 
-					| IsPresentCondition 
-					| LikeCondition 
-					| RegexCondition 
-					| MemberCondition 
-					| BetweenCondition 
-					| SubMultiSetCondition 
-					| EqualsPathCondition 
-					| UnderPathCondition 
-					| ParenthesesCondition;
+                    | RelationalCondition 
+                    | RelationalGroupCondition 
+                    | InCondition 
+                    | IsASetCondition 
+                    | IsAnyCondition 
+                    | IsEmptyCondition 
+                    | IsOfTypeCondition 
+                    | IsPresentCondition 
+                    | LikeCondition 
+                    | RegexCondition 
+                    | MemberCondition 
+                    | BetweenCondition 
+                    | SubMultiSetCondition 
+                    | EqualsPathCondition 
+                    | UnderPathCondition 
+                    | ParenthesesCondition;
 
 ExistsCondition : "exists" '(' Subquery ')';
 
@@ -801,7 +814,7 @@ BulkCollect : "bulk" "collect";
 SelectIntoClause : BulkCollect? 
                    "into" 
                    ( ( '(' SqlObjectIdentifierList ')' ) 
-				   | SqlObjectIdentifierList );
+				       | SqlObjectIdentifierList );
 
 Distinct : "distinct" 
          | "unique" 
@@ -907,11 +920,11 @@ MultiColumnForLoop : "for" '(' SqlIdentifierList ')' "in" '(' ( ParenthesesLiter
 @SkipNode
 SqlLiteral : NumberLiteral 
            | StringLiteral 
-		   | DateLiteral 
-		   | TimestampLiteral 
-		   | IntervalDayToSecondLiteral 
-		   | IntervalYearToMonthLiteral 
-		   | NullLiteral;
+		     | DateLiteral 
+		     | TimestampLiteral 
+		     | IntervalDayToSecondLiteral 
+		     | IntervalYearToMonthLiteral 
+		     | NullLiteral;
 
 @SkipNode
 NullLiteral : NullPattern TestNoAlpha OptionalSpacing;
@@ -1103,21 +1116,21 @@ CharSetAttr : ( '%' "charset" )?;
 
 CharSize : ( '(' NumberLiteral ( "byte" | "char" )? ')' )?;
 
-VarChar2DataType : "varchar2" CharSize CharSetDefinition;
+VarChar2 : "varchar2" CharSize CharSetDefinition;
 
-VarCharDataType : "varchar" CharSize CharSetDefinition;
+VarChar : "varchar" CharSize CharSetDefinition;
 
-CharDataType : "char" "varying"? CharSize CharSetDefinition;
+Char : "char" "varying"? CharSize CharSetDefinition;
 
 Precision : NumberLiteral;
 
 NumberSize : ( '(' Precision ( ',' NumberLiteral )? ')' )?;
 
-NumberDataType : "number" NumberSize;
+Number : "number" NumberSize;
 
-FloatDataType : "float" Size?;
+Float : "float" Size?;
 
-TimestampDataType : "timestamp" Size? ( "with" "local"? "time" "zone" )? "TimeZone";
+Timestamp : "timestamp" Size? ( "with" "local"? "time" "zone" )? "TimeZone";
 
 IntervalDayToSecondSpec : '\'' 
                           ( ( IntegerPattern TimeExpression ) 
@@ -1133,58 +1146,74 @@ IntervalDayToSecondLiteral : "interval"
 							        IntervalDayToSecondLeadingPrecision 
 							        ( "to" ( "day" | "hour" | "minute" | ( "second" IntegerPattern? ) ) )?;
 
-IntervalDayToSecondDataType : "interval" "day" Size? "to" "second" Size?;
+IntervalDayToSecond : "interval" "day" Size? "to" "second" Size?;
 
 IntervalYearToMonthLeadingTrailing : '\'' IntegerPattern ( "-" IntegerPattern )? '\'';
 
 IntervalYearToMonthLiteral : ( "interval" IntervalYearToMonthLeadingTrailing "year" Size? ( "to" "month" )? ) 
                            | ( "interval" IntervalYearToMonthLeadingTrailing "month" Size? ( "to" "year" )? );
 
-IntervalYearToMonthDataType : "interval" "year" Size? "to" "month";
+IntervalYearToMonth : "interval" "year" Size? "to" "month";
 
-TimeDataType : "time" Size? ( "with" "local"? "time" "zone" )? "TimeZone";
+Time : "time" Size? ( "with" "local"? "time" "zone" )? "TimeZone";
 
-RefXmlDataType : "ref" "xmltype";
+RefXml : "ref" "xmltype";
 
-NCharDataType : "nchar" "varying"? Size?;
+NChar : "nchar" "varying"? Size?;
 
-NVarChar2DataType : "nvarchar2" Size?;
+NVarChar2 : "nvarchar2" Size?;
 
-LongRawDataType : "long" "raw"? Size?;
+LongRaw : "long" "raw"? Size?;
 
-RawDataType : "raw" Size?;
+Raw : "raw" Size?;
 
-CLobDataType : "clob" CharSetDefinition;
+CLob : "clob" CharSetDefinition;
 
-URowIdDataType : "urowid" Size?;
+URowId : "urowid" Size?;
 
-SqlDataType : "binary_float" 
-            | "binary_double" 
-            | "date" 
-            | NumberDataType 
-            | IntervalDayToSecondDataType 
-            | IntervalYearToMonthDataType 
-            | TimeDataType 
-            | TimestampDataType 
-            | RefXmlDataType 
-            | FloatDataType 
-            | CharDataType 
-            | NCharDataType 
-            | NVarChar2DataType 
-            | VarChar2DataType 
-            | VarCharDataType 
-            | LongRawDataType 
-            | RawDataType 
-            | "blob" 
-            | CLobDataType 
-            | "nclob" 
-            | "bfile" 
-            | "rowid" 
-            | URowIdDataType;
+BinaryFloat : "binary_float";
+
+BinaryDouble : "binary_double";
+
+Date : "date";
+
+BLob : "blob";
+
+NCLob : "nclob";
+
+BFile : "bfile";
+
+RowId : "rowid";
+
+@SkipNode
+SqlDataType : BinaryFloat 
+            | BinaryDouble
+            | Date 
+            | Number 
+            | IntervalDayToSecond 
+            | IntervalYearToMonth 
+            | Time 
+            | Timestamp 
+            | RefXml 
+            | Float 
+            | Char
+            | NChar 
+            | NVarChar2 
+            | VarChar2 
+            | VarChar 
+            | LongRaw 
+            | Raw 
+            | BLob 
+            | CLob 
+            | NCLob 
+            | BFile
+            | RowId 
+            | URowId;
 
 @SkipNode
 SqlParameters : '(' ( SqlFunctionParameter ( ',' SqlFunctionParameter )* )? ')';
 
+@Rule(ParametersList)
 SqlParametersList : SqlParameters*;
 
 SqlQualifiedIdentifierRemote : SqlQualifiedIdentifier DBLink SqlParametersList SqlAttributes?;
@@ -1195,11 +1224,13 @@ SqlAttributes : ( '.' SqlAnySimpleIdentifier )+;
 
 SqlQualifiedIdentifier : SqlSimpleIdentifier SqlAttributes;
 
-@Rule(SqlSimpleIdentifier)
+@Rule(SimpleIdentifier)
 SqlAnySimpleIdentifier : SqlAnyIdentifier SqlParametersList;
 
+@Rule(SimpleIdentifier)
 SqlSimpleIdentifier : SqlIdentifier SqlParametersList;
 
+@SkipNode
 SqlObjectIdentifier : BuiltInFunctionCall 
                     | SqlQualifiedIdentifierRemote 
                     | SqlSimpleIdentifierRemote 
@@ -1209,7 +1240,7 @@ SqlObjectIdentifier : BuiltInFunctionCall
 @SkipNode
 SqlIdentifier : SqlKeyword! SqlIdentifierPattern OptionalSpacing;
 
-@Rule(SqlIdentifier)
+@Rule(Identifier)
 @Atomic
 SqlIdentifierPattern : ([a-z] | [A-Z] | [0-9] | '_' | '$' | '#')+
                      | ( '"' ( ( '\r' | '\n')! . )+ '"' );
@@ -1253,6 +1284,7 @@ SqlKeyword : ( "access" | "add" | "all" | "alter" | "and" | "any" | "as" | "asc"
 		       | "validate" | "values" | "varchar" | "varchar2" | "view" 
 		       | "whenever" | "when" | "where" | "with" ) TestNoAlpha;
 						
+@SkipNode
 SqlObjectIdentifierList : SqlObjectIdentifier ( ',' SqlObjectIdentifier )*;
 
 SqlIdentifierList : SqlIdentifier ( ',' SqlIdentifier )*;

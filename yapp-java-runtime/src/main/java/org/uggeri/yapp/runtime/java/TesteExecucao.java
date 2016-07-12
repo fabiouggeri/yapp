@@ -211,7 +211,8 @@ public class TesteExecucao {
          //javax.swing.JOptionPane.showMessageDialog(null, "Tecla para continuar");
 //         System.out.println("1. Mem. Livre: " + Runtime.getRuntime().freeMemory() / 1024.0 / 1024.0 + "MB");
          iniParse = System.currentTimeMillis();
-         inputBuffer = new FileInputBuffer(new File("E:\\desenvolvimento\\sicredi\\infra-2.0.5\\05-construcao\\infra-plsql\\src\\main\\plsql\\pkgl_infra_util.pkb"));
+         // inputBuffer = new FileInputBuffer(new File("E:\\desenvolvimento\\sicredi\\infra-2.0.5\\05-construcao\\infra-plsql\\src\\main\\plsql\\pkgl_infra_util.pkb"));
+         inputBuffer = new FileInputBuffer(new File("E:\\desenvolvimento\\sicredi\\infra-2.0.5\\05-construcao\\infra-plsql\\src\\main\\plsql\\pkgl_infra_indices.pkb"));
 //         System.out.println("File size: " + inputBuffer.length());
 //         System.out.println("2. Mem. Livre: " + Runtime.getRuntime().freeMemory() / 1024.0 / 1024.0 + "MB");
          node = parser.parse(inputBuffer);

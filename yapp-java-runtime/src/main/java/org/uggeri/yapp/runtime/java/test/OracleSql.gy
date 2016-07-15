@@ -614,16 +614,19 @@ ParenthesesLiteralList : '(' SqlLiteralList ')';
 @SkipNode
 ParenthesesLiteralListList : ParenthesesLiteralList ( ',' ParenthesesLiteralList )*;
 
+@Atomic
 Schema : SqlIdentifier;
 
+@Atomic
 Table : SqlIdentifier;
 
+@Atomic
 Object : SqlIdentifier;
 
+@Atomic
 Column : SqlIdentifier;
 
-SchemaObjectName : ( Schema '.' Object ) 
-                 | Object;
+SchemaObjectName : ( Schema '.' )? Object;
 
 ColumnName : ( Schema '.' Table '.' Column ) 
            | ( Table '.' Column ) 
@@ -1012,6 +1015,7 @@ DmlTableExpressionClause : TablePartitionName
 
 UpdateSetClause : "set" ( ObjectSetValue | ColumnSetValueList );
 
+@Atomic
 Alias : SqlIdentifier;
 
 ObjectSetValue : "value" '(' Alias ')' '=' ( ( '(' Subquery ')' ) | SqlExpression );
@@ -1210,25 +1214,33 @@ SqlDataType : BinaryFloat
             | RowId 
             | URowId;
 
-@SkipNode
+@Rule(Parameters)
 SqlParameters : '(' ( SqlFunctionParameter ( ',' SqlFunctionParameter )* )? ')';
 
-@Rule(ParametersList)
-SqlParametersList : SqlParameters*;
+@Rule(QualifiedIdentifierRemote)
+SqlQualifiedIdentifierRemote : SqlQualifiedIdentifier DBLink SqlParameters* SqlAttributes?;
 
-SqlQualifiedIdentifierRemote : SqlQualifiedIdentifier DBLink SqlParametersList SqlAttributes?;
-
-SqlSimpleIdentifierRemote : SqlSimpleIdentifier DBLink SqlParametersList SqlAttributes?;
+@Rule(IdentifierRemote)
+SqlSimpleIdentifierRemote : SqlSimpleIdentifier DBLink SqlParameters* SqlAttributes?;
 
 SqlAttributes : ( '.' SqlAnySimpleIdentifier )+;
 
+@Rule(QualifiedIdentifier)
 SqlQualifiedIdentifier : SqlSimpleIdentifier SqlAttributes;
 
-@Rule(SimpleIdentifier)
-SqlAnySimpleIdentifier : SqlAnyIdentifier SqlParametersList;
+@SkipNode
+SqlAnySimpleIdentifier : SqlAnyParameterizedIdentifier 
+                       | SqlAnyIdentifier;
 
-@Rule(SimpleIdentifier)
-SqlSimpleIdentifier : SqlIdentifier SqlParametersList;
+@Rule(ParameterizedIdentifier)
+SqlAnyParameterizedIdentifier : SqlAnyIdentifier SqlParameters+;
+
+@SkipNode
+SqlSimpleIdentifier : SqlParameterizedIdentifier
+                    | SqlIdentifier;
+
+@Rule(ParameterizedIdentifier)
+SqlParameterizedIdentifier : SqlIdentifier SqlParameters+;
 
 @SkipNode
 SqlObjectIdentifier : BuiltInFunctionCall 

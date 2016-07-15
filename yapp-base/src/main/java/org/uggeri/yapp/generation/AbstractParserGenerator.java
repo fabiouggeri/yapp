@@ -137,13 +137,11 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
 
    private int auxVarNumber;
 
-   private boolean restoreIndex = false;
-
    private boolean onlyTest = false;
 
    private boolean switchOption = false;
 
-   private boolean switchCommand = false;
+   private boolean inSwitch = false;
 
    private boolean atomicRule = false;
 
@@ -873,23 +871,12 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       }
    }
 
-   private void appendAndRule(final Iterator<GrammarRule> it, final Variable auxIndexVar, final Variable auxNodeVar, final boolean first) {
+   private void appendAndRule(final Iterator<GrammarRule> it) {
       it.next().visit(getOptions(), this);
       currentOrOption = 0;
       if (it.hasNext()) {
          ifStmt(matchVar);
-         appendAndRule(it, auxIndexVar, auxNodeVar, false);
-         if (restoreIndex && !first) {
-            elseStmt();
-            setValue(indexVar, auxIndexVar);
-            setSibling(auxNodeVar, null);
-         }
-         endIf();
-      } else if (restoreIndex) {
-         ifStmt(not(matchVar));
-         setValue(indexVar, auxIndexVar);
-         setSibling(auxNodeVar, null);
-         setValue(currentNodeVar, auxNodeVar);
+         appendAndRule(it);
          endIf();
       }
    }
@@ -898,54 +885,58 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
    public void visitAnd(ParserGenerationOptions options, AndRule rule) {
       final Iterator<GrammarRule> it = rule.getRules().iterator();
       final int oldCurrentOrOption = currentOrOption;
-      Variable auxNodeVar = null;
-      Variable auxIndexVar = null;
       ruleComment(rule);
       if (it.hasNext()) {
-         if (restoreIndex) {
-            auxNodeVar = declareVarStmt(NODE, "lastNode_" + auxVarNumber, currentNodeVar).getVariable();
-            auxIndexVar = declareVarStmt(INTEGER, "lastIndex_" + auxVarNumber++, indexVar).getVariable();
-         }
-         appendAndRule(it, auxIndexVar, auxNodeVar, true);
+         appendAndRule(it);
       }
       currentOrOption = oldCurrentOrOption;
    }
 
-   private void appendOrRule(final Iterator<GrammarRule> it) {
+   private void appendOrRule(final Iterator<GrammarRule> it, final Variable auxIndexVar, final Variable auxNodeVar) {
       it.next().visit(getOptions(), this);
       if (it.hasNext()) {
          ifStmt(not(matchVar));
          if (currentOrOption > 0) {
             ++currentOrOption;
          }
-         appendOrRule(it);
+         setValue(indexVar, auxIndexVar);
+         setSibling(auxNodeVar, null);
+         setValue(currentNodeVar, auxNodeVar);
+         appendOrRule(it, auxIndexVar, auxNodeVar);
          endIf();
-      }
+      } else {
+         ifStmt(not(matchVar));
+         setValue(indexVar, auxIndexVar);
+         setSibling(auxNodeVar, null);
+         setValue(currentNodeVar, auxNodeVar);
+         endIf();
+      }     
    }
 
    @Override
    public void visitOr(final ParserGenerationOptions options, final OrRule rule) {
-      final boolean oldRestoreIndex = restoreIndex;
-      restoreIndex = true;
       ruleComment(rule);
       if (canGroupOrLiterals(rule)) {
          final LiteralRulesGroup groupRules = groupLiteralsByFirstChar(rule.getRules());
          if (!groupRules.hasMultipleOptions()) {
-            singleStartOptions(groupRules);
+            orLiteralsSingleStart(groupRules);
          } else {
-            multipleStartOptions(groupRules);
+            orLiteralsMultipleStart(groupRules);
          }
       } else if (canGroupOrNonTerminals(rule)) {
          final LiteralRulesGroup groupRules = groupRulesByFirstChar(rule.getRules());
+         Variable auxNodeVar = declareVarStmt(NODE, "lastNode_" + auxVarNumber, currentNodeVar).getVariable();
+         Variable auxIndexVar = declareVarStmt(INTEGER, "lastIndex_" + auxVarNumber++, indexVar).getVariable();
          groupRules.groupCommons();
-         switchByFirstChar(groupRules);
+         switchByFirstChar(groupRules, auxIndexVar, auxNodeVar);
       } else {
          final Iterator<GrammarRule> it = rule.getRules().iterator();
+         Variable auxNodeVar = declareVarStmt(NODE, "lastNode_" + auxVarNumber, currentNodeVar).getVariable();
+         Variable auxIndexVar = declareVarStmt(INTEGER, "lastIndex_" + auxVarNumber++, indexVar).getVariable();
          if (it.hasNext()) {
-            appendOrRule(it);
+            appendOrRule(it, auxIndexVar, auxNodeVar);
          }
       }
-      restoreIndex = oldRestoreIndex;
    }
 
    private boolean canGroupOrNonTerminals(OrRule rule) {
@@ -957,7 +948,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       return true;
    }
 
-   private void switchByFirstChar(final LiteralRulesGroup groupRules) {
+   private void switchByFirstChar(final LiteralRulesGroup groupRules, final Variable auxIndexVar, final Variable auxNodeVar) {
       final SwitchStatement switchStatement;
       Iterator<GrammarRule> it;
 
@@ -967,7 +958,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
             it = entry.getValue().iterator();
             getStatements().push(switchStatement.switchOption(entry.getKey().characters));
             if (it.hasNext()) {
-               appendOrRule(it);
+               appendOrRule(it, auxIndexVar, auxNodeVar);
             }
             breakCommand();
             getStatements().pop();
@@ -978,7 +969,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
          getStatements().push(switchStatement.switchOption(null));
          it = defaultRules.iterator();
          if (it.hasNext()) {
-            appendOrRule(it);
+            appendOrRule(it, auxIndexVar, auxNodeVar);
          }
          getStatements().pop();
       } else {
@@ -1018,17 +1009,17 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       return rulesGroup;
    }
 
-   private void multipleStartOptions(final LiteralRulesGroup groupRules) {
+   private void orLiteralsMultipleStart(final LiteralRulesGroup groupRules) {
       final Variable auxStartIndexVar;
       final SwitchStatement switchStatement;
       final boolean lastSwitchCommand;
-      if ((!switchCommand && !atomicRule) || onlyTest) {
+      if ((!inSwitch && !atomicRule) || onlyTest) {
          auxStartIndexVar = declareVarStmt(INTEGER, "startIndex_" + auxVarNumber++, indexVar).getVariable();
       } else {
          auxStartIndexVar = null;
       }
-      lastSwitchCommand = switchCommand;
-      switchCommand = true;
+      lastSwitchCommand = inSwitch;
+      inSwitch = true;
       switchStatement = getStatements().peek().switchStatement(bufferVar.member(funCall(bufferGetCharFunctionName(), indexVar)));
       for (Map.Entry<CharSet, List<GrammarRule>> entry : groupRules.groupedRules.entrySet()) {
          getStatements().push(switchStatement.switchOption(entry.getKey().characters));
@@ -1038,21 +1029,21 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
          getStatements().pop();
       }
       switchStatement.switchOption(null).setValue(matchVar, groupRules.acceptEmpty);
-      switchCommand = lastSwitchCommand;
+      inSwitch = lastSwitchCommand;
       finishLiteralMatchBlock(auxStartIndexVar);
    }
 
-   private void singleStartOptions(final LiteralRulesGroup groupRules) {
+   private void orLiteralsSingleStart(final LiteralRulesGroup groupRules) {
       final Variable auxStartIndexVar;
-      if ((!switchCommand && !atomicRule) || onlyTest) {
+      if ((!inSwitch && !atomicRule) || onlyTest) {
          auxStartIndexVar = declareVarStmt(INTEGER, "startIndex_" + auxVarNumber++, indexVar).getVariable();
       } else {
          auxStartIndexVar = null;
       }
       for (Map.Entry<CharSet, List<GrammarRule>> entry : groupRules.groupedRules.entrySet()) {
-         final boolean lastSwitchCommand = switchCommand;
+         final boolean lastSwitchCommand = inSwitch;
          Expression condition = null;
-         switchCommand = true;
+         inSwitch = true;
          for (char c : entry.getKey().characters) {
             if (condition == null) {
                condition = bufferVar.member(funCall(bufferMatchCharFunctionName(), indexVar, c));
@@ -1060,13 +1051,16 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
                condition = condition.or(bufferVar.member(funCall(bufferMatchCharFunctionName(), indexVar, c)));
             }
          }
-         ifStmt(condition);
+         setValue(matchVar, condition);
+         ifStmt(matchVar);
          stmt(indexVar.preInc());
          continueLiteralMatchBlock(entry, groupRules.acceptEmpty);
-         elseStmt();
-         setValue(matchVar, groupRules.acceptEmpty);
+         if (groupRules.acceptEmpty) {
+            elseStmt();
+            setValue(matchVar, true);
+         }
          endIf();
-         switchCommand = lastSwitchCommand;
+         inSwitch = lastSwitchCommand;
          finishLiteralMatchBlock(auxStartIndexVar);
       }
    }
@@ -1083,7 +1077,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
    private void finishLiteralMatchBlock(final Variable auxStartIndexVar) {
       if (onlyTest) {
          setValue(indexVar, auxStartIndexVar);
-      } else if (!switchCommand && !atomicRule) {
+      } else if (!inSwitch && !atomicRule) {
          ifStmt(not(matchVar));
          setValue(indexVar, auxStartIndexVar);
          elseIfStmt(not(currentRuleIsAtomicVar));
@@ -1105,47 +1099,69 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
 
    @Override
    public void visitZeroOrMore(ParserGenerationOptions options, ZeroOrMoreRule rule) {
-      final boolean oldRestoreIndex = restoreIndex;
       final int oldCurrentOrOption = currentOrOption;
+      final Variable auxNodeVar;
+      final Variable auxIndexVar;
       currentOrOption = 0;
       ruleComment(rule);
-      restoreIndex = true;
+      auxNodeVar = declareVarStmt(NODE, "lastNode_" + auxVarNumber).getVariable();
+      auxIndexVar = declareVarStmt(INTEGER, "lastIndex_" + auxVarNumber++).getVariable();
       doWhileStmt(matchVar);
+      setValue(auxNodeVar, currentNodeVar);
+      setValue(auxIndexVar, indexVar);
       rule.getRule().visit(options, this);
       endDo();
+      setSibling(auxNodeVar, null);
+      setValue(currentNodeVar, auxNodeVar);
+      setValue(indexVar, auxIndexVar);
       setValue(matchVar, true);
-      restoreIndex = oldRestoreIndex;
       currentOrOption = oldCurrentOrOption;
    }
 
    @Override
    public void visitOneOrMore(ParserGenerationOptions options, OneOrMoreRule rule) {
-      final boolean oldRestoreIndex = restoreIndex;
       final int oldCurrentOrOption = currentOrOption;
+      final Variable auxNodeVar;
+      final Variable auxIndexVar;
       currentOrOption = 0;
       ruleComment(rule);
-      restoreIndex = true;
+      auxNodeVar = declareVarStmt(NODE, "lastNode_" + auxVarNumber, currentNodeVar).getVariable();
+      auxIndexVar = declareVarStmt(INTEGER, "lastIndex_" + auxVarNumber++, indexVar).getVariable();
       rule.getRule().visit(options, this);
       ifStmt(matchVar);
       doWhileStmt(matchVar);
+      setValue(auxNodeVar, currentNodeVar);
+      setValue(auxIndexVar, indexVar);
       rule.getRule().visit(options, this);
       endDo();
+      setSibling(auxNodeVar, null);
+      setValue(currentNodeVar, auxNodeVar);
+      setValue(indexVar, auxIndexVar);
       setValue(matchVar, true);
+      elseStmt();
+      setSibling(auxNodeVar, null);
+      setValue(currentNodeVar, auxNodeVar);
+      setValue(indexVar, auxIndexVar);
       endIf();
-      restoreIndex = oldRestoreIndex;
       currentOrOption = oldCurrentOrOption;
    }
 
    @Override
    public void visitOptional(ParserGenerationOptions options, OptionalRule rule) {
-      final boolean oldRestoreIndex = restoreIndex;
       final int oldCurrentOrOption = currentOrOption;
+      final Variable auxNodeVar;
+      final Variable auxIndexVar;
       currentOrOption = 0;
-      restoreIndex = true;
       ruleComment(rule);
+      auxNodeVar = declareVarStmt(NODE, "lastNode_" + auxVarNumber, currentNodeVar).getVariable();
+      auxIndexVar = declareVarStmt(INTEGER, "lastIndex_" + auxVarNumber++, indexVar).getVariable();
       rule.getRule().visit(options, this);
+      ifStmt(not(matchVar));
+      setSibling(auxNodeVar, null);
+      setValue(currentNodeVar, auxNodeVar);
+      setValue(indexVar, auxIndexVar);
       setValue(matchVar, true);
-      restoreIndex = oldRestoreIndex;
+      endIf();
       currentOrOption = oldCurrentOrOption;
    }
 

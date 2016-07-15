@@ -94,6 +94,7 @@ CollectionAttribute : '.'
 
 CursorAttribute : '%' PlSqlObjectIdentifier;
 
+@SyntaxOnly
 IsAsKeyword : "is" | "as";
 
 DeclarationSection : "declare" DeclareSection?;
@@ -141,6 +142,7 @@ PlSqlBody : "begin" PlSqlBodyStatements? ExceptionBlock? "end" PlSqlAnyIdentifie
 
 FunctionBody : DeclareSection? PlSqlBlock;
 
+@SkipNode
 CallSpecOrFunctionBody : CallSpec | FunctionBody;
 
 CreateFunction : CreateOrReplace FunctionDefinition ';';
@@ -275,10 +277,13 @@ CursorReturnType : "return" SqlObjectIdentifier RowType;
 
 CursorRef : "ref" "cursor" CursorReturnType?;
 
-UserTypeAttribute : RowType | Type | Size;
+UserTypeAttribute : RowType 
+                  | Type 
+                  | Size;
 
 UserType : SqlObjectIdentifier UserTypeAttribute?;
 
+@SkipNode
 TypeSpec : PlSqlDataType 
          | CursorRef 
          | UserType;
@@ -370,7 +375,7 @@ PlSqlFunctionParameter : NamedParameter
                        | PlSqlExpression 
                        | BindVariable;
 
-@SkipNode
+@Rule(Parameters)
 PlSqlParameters : '(' (')'& | (PlSqlFunctionParameter (',' PlSqlFunctionParameter)*)) ')';
 
 CaseStatementWhen : "when" PlSqlExpression "then" PlSqlStatements;
@@ -430,7 +435,7 @@ IndicesOfCollection : "indices" "of" PlSqlAtomicExpression BetweenBounds?;
 
 ValuesOfIndexCollection : "values" "of" PlSqlAtomicExpression;
 
-ForAllBoundsClause : Range 
+ForAllBoundsClause : Range
                    | IndicesOfCollection 
                    | ValuesOfIndexCollection;
 
@@ -508,22 +513,30 @@ BooleanPattern : "true"
 PlSqlLiteral : SqlLiteral 
              | BooleanLiteral;
 
-@Rule(ParametersList)
-PlSqlParametersList : PlSqlParameters*;
+@Rule(QualifiedIdentifierRemote)
+PlSqlQualifiedIdentifierRemote : PlSqlQualifiedIdentifier DBLink PlSqlParameters* PlSqlAttributes?;
 
-PlSqlQualifiedIdentifierRemote : PlSqlQualifiedIdentifier DBLink PlSqlParametersList PlSqlAttributes?;
-
-PlSqlSimpleIdentifierRemote : PlSqlSimpleIdentifier DBLink PlSqlParametersList PlSqlAttributes?;
+@Rule(IdentifierRemote)
+PlSqlSimpleIdentifierRemote : PlSqlSimpleIdentifier DBLink PlSqlParameters* PlSqlAttributes?;
 
 PlSqlAttributes : ('.' PlSqlAnySimpleIdentifier)+;
 
+@Rule(QualifiedIdentifier)
 PlSqlQualifiedIdentifier : PlSqlSimpleIdentifier PlSqlAttributes;
 
-@Rule(SimpleIdentifier)
-PlSqlAnySimpleIdentifier : PlSqlAnyIdentifier PlSqlParametersList;
+@SkipNode
+PlSqlAnySimpleIdentifier : PlSqlAnyParameterizedIdentifier 
+                         | PlSqlAnyIdentifier;
 
-@Rule(SimpleIdentifier)
-PlSqlSimpleIdentifier : PlSqlIdentifier PlSqlParametersList;
+@Rule(ParameterizedIdentifier)
+PlSqlAnyParameterizedIdentifier : PlSqlAnyIdentifier PlSqlParameters+;
+
+@SkipNode
+PlSqlSimpleIdentifier : PlSqlParameterizedIdentifier 
+                      | PlSqlIdentifier;
+
+@Rule(ParameterizedIdentifier)
+PlSqlParameterizedIdentifier : PlSqlIdentifier PlSqlParameters+;
 
 @SkipNode
 PlSqlObjectIdentifier : BuiltInFunctionCall 
@@ -544,7 +557,7 @@ PlSqlIdentifierPattern : ([a-z] | [A-Z] | [0-9] | '_' | '$' | '#')+
 @SkipNode
 PlSqlAnyIdentifier : PlSqlAnyIdentifierPattern OptionalSpacing;
 
-@Rule(PlSqlAnyIdentifier)
+@Rule(Identifier)
 @Atomic
 PlSqlAnyIdentifierPattern : ([a-z] | [A-Z] | [0-9] | '_' | '$' | '#')+
                           | ( '"' ( ( '\r' | '\n')! . )+ '"' );

@@ -156,7 +156,7 @@ SqlMathOperator : '**'
                 | '+' 
                 | '-' 
                 | ( '|' '|' ) 
-                | 'mod';
+                | "mod";
 
 @SkipNode
 SqlExpression : SqlMathExpression 
@@ -169,8 +169,8 @@ ParenthesesSqlExpression : '(' SqlExpression ')';
 
 SqlUnaryOperator : '+' 
                  | '-' 
-                 | 'prior' 
-                 | 'connect_by_root';
+                 | "prior"
+                 | "connect_by_root";
 
 SqlUnaryExpression : SqlUnaryOperator SqlLeftAtomicExpression;
 
@@ -197,7 +197,7 @@ SqlCaseExpression : "case" ( SqlSearchedCaseExpression | SqlSimpleCaseExpression
 
 SqlWhenExpressionThen : "when" SqlExpression "then" SqlExpression;
 
-SqlSimpleCaseExpression : SqlExpression SqlWhenExpressionThen+ "WhenExpressionThenList";
+SqlSimpleCaseExpression : SqlExpression SqlWhenExpressionThen+;
 
 SqlWhenConditionThen : "when" SqlCondition "then" SqlExpression;
 
@@ -279,14 +279,14 @@ DenseRankClause : "keep" '(' "dense_rank" ( "first" | "last" ) OrderByFunctionCl
 
 DataToExtract : "year" 
               | "month" 
-			  | "day" 
-			  | "hour" 
-			  | "minute" 
-			  | "second" 
-			  | "timezone_hour" 
-			  | "timezone_minute" 
-			  | "timezone_region" 
-			  | "timezone_abbr";
+			     | "day" 
+			     | "hour" 
+			     | "minute" 
+			     | "second" 
+			     | "timezone_hour" 
+			     | "timezone_minute" 
+			     | "timezone_region" 
+			     | "timezone_abbr";
 
 Extract : "extract" '(' DataToExtract "from" SqlExpression ')';
 
@@ -626,7 +626,8 @@ Object : SqlIdentifier;
 @Atomic
 Column : SqlIdentifier;
 
-SchemaObjectName : ( Schema '.' )? Object;
+SchemaObjectName : ( Schema '.' Object )
+                 | Object;
 
 ColumnName : ( Schema '.' Table '.' Column ) 
            | ( Table '.' Column ) 
@@ -654,19 +655,19 @@ FlashbackQueryClause : VersionsBetween? "as" "of" ( "scn" | "timestamp" ) SqlExp
 
 EqualityOperator : ( '=' '>'! ) 
                  | ( '<' '>' ) 
-				 | ( '!' '=' ) 
-				 | ( '^' '=' ) 
-				 | ( '~' '=' );
+                 | ( '!' '=' ) 
+                 | ( '^' '=' ) 
+                 | ( '~' '=' );
 
 RelationalOperator : ( '=' '>'! ) 
                    | ( '<' '>' ) 
-				   | ( '!' '=' ) 
-				   | ( '^' '=' ) 
-				   | ( '~' '=' ) 
-				   | ( '>' '=' ) 
-				   | ( '<' '=' ) 
-				   | ( '>' '='! ) 
-				   | ( '<' ( '=' | '>' )! );
+                   | ( '!' '=' ) 
+                   | ( '^' '=' ) 
+                   | ( '~' '=' ) 
+                   | ( '>' '=' ) 
+                   | ( '<' '=' ) 
+                   | ( '>' '='! ) 
+                   | ( '<' ( '=' | '>' )! );
 
 SqlCondition : NotCondition 
              | AndCondition 
@@ -730,7 +731,9 @@ RelationalGroupCondition : EqualityGroupCondition
 inExpressionList : ParenthesesSqlExpressionList 
                  | SqlExpression;
 
-InCondition : inExpressionList Not? "in" ParenthesesSqlExpressionList;
+InCondition : inExpressionList 
+              Not? "in" 
+              ( ParenthesesSqlExpressionList | SqlObjectIdentifier );
 
 IsASetCondition : SqlObjectIdentifier "is" Not? "a" "set";
 
@@ -1254,16 +1257,30 @@ SqlIdentifier : SqlKeyword! SqlIdentifierPattern OptionalSpacing;
 
 @Rule(Identifier)
 @Atomic
-SqlIdentifierPattern : ([a-z] | [A-Z] | [0-9] | '_' | '$' | '#')+
-                     | ( '"' ( ( '\r' | '\n')! . )+ '"' );
+SqlIdentifierPattern : ( [a-z] | [A-Z] | [0-9] 
+                       | '_' | '$' | '#' 
+                       | '\u00C1'| '\u00C1' | '\u00C2' | '\u00C3' | '\u00C4' | '\u00C7' | '\u00C8' | '\u00C9' | '\u00CA' 
+                       | '\u00CB' | '\u00CC' | '\u00CD' | '\u00CE' | '\u00CF'
+                       | '\u00D2' | '\u00D3' | '\u00D4' | '\u00D5' | '\u00D6' | '\u00D9' | '\u00DA' | '\u00DB' | '\u00DC' 
+                       | '\u00E0' | '\u00E1' | '\u00E2' | '\u00E3' | '\u00E4' | '\u00E7' | '\u00E8' | '\u00E9' 
+                       | '\u00EA' | '\u00EB' | '\u00EC' | '\u00ED' | '\u00EE' | '\u00EF'
+                       | '\u00F2' | '\u00F3' | '\u00F4' | '\u00F5' | '\u00F6' | '\u00F9' | '\u00FA' | '\u00FB' | '\u00FC'  )+
+                     | ( '"' ( ( '\r' | '\n' | '"' )! . )+ '"' );
 
 @SkipNode
 SqlAnyIdentifier : SqlAnyIdentifierPattern OptionalSpacing;
 
 @Rule(SqlIdentifier)
 @Atomic
-SqlAnyIdentifierPattern : ([a-z] | [A-Z] | [0-9] | '_' | '$' | '#')+
-                        | ( '"' ( ( '\r' | '\n')! . )+ '"' );
+SqlAnyIdentifierPattern : ( [a-z] | [A-Z] | [0-9] 
+                          | '_' | '$' | '#' 
+                          | '\u00C1'| '\u00C1' | '\u00C2' | '\u00C3' | '\u00C4' | '\u00C7' | '\u00C8' | '\u00C9' | '\u00CA' 
+                          | '\u00CB' | '\u00CC' | '\u00CD' | '\u00CE' | '\u00CF'
+                          | '\u00D2' | '\u00D3' | '\u00D4' | '\u00D5' | '\u00D6' | '\u00D9' | '\u00DA' | '\u00DB' | '\u00DC' 
+                          | '\u00E0' | '\u00E1' | '\u00E2' | '\u00E3' | '\u00E4' | '\u00E7' | '\u00E8' | '\u00E9' 
+                          | '\u00EA' | '\u00EB' | '\u00EC' | '\u00ED' | '\u00EE' | '\u00EF'
+                          | '\u00F2' | '\u00F3' | '\u00F4' | '\u00F5' | '\u00F6' | '\u00F9' | '\u00FA' | '\u00FB' | '\u00FC' )+
+                        | ( '"' ( ( '\r' | '\n'| '"' )! . )+ '"' );
 
 @FollowLiterals([A-Za-z_$#]+)
 @SyntaxOnly

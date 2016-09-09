@@ -27,6 +27,8 @@ public class Grammar {
    private final List<NonTerminalRule> declaredRules = new ArrayList<NonTerminalRule>();
 
    private File grammarFile = null;
+   
+   private String charset = null;
 
    public String getGrammarName() {
       return grammarName;
@@ -73,5 +75,20 @@ public class Grammar {
 
    void declareRule(final NonTerminalRule rule) {
       declaredRules.add(rule);
+   }
+
+   public String getCharset() {
+      return charset;
+   }
+   
+   public String getCharset(boolean defValue) {
+      if (charset == null && defValue) {
+         return "UTF8";
+      }
+      return charset;
+   }
+
+   public void setCharset(String charset) {
+      this.charset = charset;
    }
 }

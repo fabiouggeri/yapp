@@ -42,8 +42,9 @@ import org.uggeri.yapp.grammar.rules.TestNotRule;
 import org.uggeri.yapp.grammar.rules.TestRule;
 import org.uggeri.yapp.grammar.rules.ZeroOrMoreRule;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -893,23 +894,28 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
    }
 
    private void appendOrRule(final Iterator<GrammarRule> it, final Variable auxIndexVar, final Variable auxNodeVar) {
-      it.next().visit(getOptions(), this);
+      final GrammarRule r = it.next();
+      r.visit(getOptions(), this);
       if (it.hasNext()) {
          ifStmt(not(matchVar));
          if (currentOrOption > 0) {
             ++currentOrOption;
          }
-         setValue(indexVar, auxIndexVar);
-         setSibling(auxNodeVar, null);
-         setValue(currentNodeVar, auxNodeVar);
+         if (! r.isTerminal()) {
+            setValue(indexVar, auxIndexVar);
+            setSibling(auxNodeVar, null);
+            setValue(currentNodeVar, auxNodeVar);
+         }
          appendOrRule(it, auxIndexVar, auxNodeVar);
          endIf();
       } else {
-         ifStmt(not(matchVar));
-         setValue(indexVar, auxIndexVar);
-         setSibling(auxNodeVar, null);
-         setValue(currentNodeVar, auxNodeVar);
-         endIf();
+         if (! r.isTerminal()) {
+            ifStmt(not(matchVar));
+            setValue(indexVar, auxIndexVar);
+            setSibling(auxNodeVar, null);
+            setValue(currentNodeVar, auxNodeVar);
+            endIf();
+         }
       }     
    }
 
@@ -1241,8 +1247,8 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
                throw new ParserGenerationException("File '" + sourceFile.getPath() + "' already exists.");
             }
          }
-         try {
-            writer = new BufferedWriter(new FileWriter(sourceFile));
+         try {           
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(sourceFile), grammar.getCharset(true)));
             writer.append(sourceFile.getContent());
             writer.flush();
             writer.close();
@@ -1407,7 +1413,11 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
          case '\\':
             return "\\\\";
       }
-      return Character.toString(c);
+      if (c < 128) {
+         return Character.toString(c);
+      } else {
+         return "\\u" + String.format("%04x", (int)c).toUpperCase();
+      }
    }
 
    public static String escapeString(final String str) {

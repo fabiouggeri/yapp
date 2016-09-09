@@ -24,9 +24,10 @@ import org.uggeri.yapp.grammar.rules.TestRule;
 import org.uggeri.yapp.grammar.rules.ZeroOrMoreRule;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -40,14 +41,12 @@ import java.util.Map.Entry;
 public class GrammarLoader {
 
    private void loadGrammar(Grammar grammar, File file, boolean importing) throws GrammarSyntaxException, GrammarException {
-      FileReader fr = null;
+      BufferedReader br = null;
       try {
          final StringBuilder grammarText = new StringBuilder(4096);
-         final BufferedReader br;
          String lineReaded;
 
-         fr = new FileReader(file);
-         br = new BufferedReader(fr);
+         br = new BufferedReader(new InputStreamReader(new FileInputStream(file), grammar.getCharset(true)));
          lineReaded = br.readLine();
          if (lineReaded != null) {
             grammarText.append(lineReaded);
@@ -65,8 +64,8 @@ public class GrammarLoader {
          throw new GrammarException("Erro reading grammar file!", ex);
       } finally {
          try {
-            if (fr != null) {
-               fr.close();
+            if (br != null) {
+               br.close();
             }
          } catch (IOException ex) {
             throw new GrammarException("Erro closing grammar file!", ex);
@@ -107,6 +106,8 @@ public class GrammarLoader {
             grammarNameEntry(grammar, ctx, importing);
          } else if (charSequencesEquals(identifier, "import")) {
             importGrammarEntry(grammar, ctx);
+         } else if (charSequencesEquals(identifier, "charset")) {
+            charsetEntry(grammar, ctx, importing);
          } else {
             nonTerminalEntry(grammar, ctx, identifier, importing);
          }
@@ -130,7 +131,7 @@ public class GrammarLoader {
          rule = new NonTerminalRule(ruleName.toString(), null);
          grammar.addRule(rule);
       } else if (rule.getRule() != null) {
-         warning(ctx, "Rule " + rule.getName()+ " redefined.");
+         warning(ctx, "Rule " + rule.getName() + " redefined.");
       }
       ctx.skipSpaces();
       if (ctx.currentChar() == ':') {
@@ -143,9 +144,9 @@ public class GrammarLoader {
             for (Entry<NonTerminalOption, String> option : ctx.getOptions().entrySet()) {
                rule.addOption(option.getKey(), option.getValue());
             }
-            if (! importing) {
+            if (!importing) {
                if (ctx.getOptions().containsKey(NonTerminalOption.MAIN_RULE)) {
-                  if (! ctx.explicitMainRule) {
+                  if (!ctx.explicitMainRule) {
                      grammar.setMainRule(rule);
                      ctx.explicitMainRule = true;
                   } else {
@@ -183,7 +184,7 @@ public class GrammarLoader {
          } else {
             if (c == endChar) {
                break;
-            } else if (c != '\\' ) {
+            } else if (c != '\\') {
                text.append(c);
             }
             lastChar = c;
@@ -284,7 +285,7 @@ public class GrammarLoader {
       char c;
       ctx.skipSpaces();
       c = ctx.currentChar();
-      switch(c) {
+      switch (c) {
          case '"':
             rule = ignoreCaseLiteralRule(ctx);
             break;
@@ -318,16 +319,14 @@ public class GrammarLoader {
          final char c = ctx.currentChar();
          ctx.advanceIndex();
          if (lastChar == '\\') {
-            appendEscapedChar(literal, c);
+            appendEscapedChar(ctx, literal, c);
             lastChar = '\0';
+         } else if (c == '"') {
+            break;
+         } else if (c == '\\') {
+            lastChar = c;
          } else {
-            if (c == '"') {
-               break;
-            } else if (c == '\\') {
-               lastChar = c;
-            } else {
-               literal.append(c);
-            }
+            literal.append(c);
          }
       }
       ctx.skipSpaces();
@@ -346,7 +345,11 @@ public class GrammarLoader {
                throw new GrammarSyntaxException(ctx.line, ctx.column, "Literal partial match value not found!");
             }
          } else if (literal.length() > 1) {
-            rule = new IgnoreCaseStringRule(literal.toString());
+            if (literal.charAt(0) == '\\' && literal.charAt(1) == 'u') {
+               rule = new IgnoreCaseCharRule(Character.toChars(Integer.decode("0x" + literal.substring(2)))[0]);
+            } else {
+               rule = new IgnoreCaseStringRule(literal.toString());
+            }
          } else {
             rule = new IgnoreCaseCharRule(literal.charAt(0));
          }
@@ -365,16 +368,14 @@ public class GrammarLoader {
          final char c = ctx.currentChar();
          ctx.advanceIndex();
          if (lastChar == '\\') {
-            appendEscapedChar(literal, c);
+            appendEscapedChar(ctx, literal, c);
             lastChar = '\0';
+         } else if (c == '\'') {
+            break;
+         } else if (c == '\\') {
+            lastChar = c;
          } else {
-            if (c == '\'') {
-               break;
-            } else if (c == '\\') {
-               lastChar = c;
-            } else {
-               literal.append(c);
-            }
+            literal.append(c);
          }
       }
       ctx.skipSpaces();
@@ -393,7 +394,11 @@ public class GrammarLoader {
                throw new GrammarSyntaxException(ctx.line, ctx.column, "Literal partial match value not found!");
             }
          } else if (literal.length() > 1) {
-            rule = new StringRule(literal.toString());
+            if (literal.charAt(0) == '\\' && literal.charAt(1) == 'u') {
+               rule = new CharRule(Character.toChars(Integer.decode("0x" + literal.substring(2)))[0]);
+            } else {
+               rule = new StringRule(literal.toString());
+            }
          } else {
             rule = new CharRule(literal.charAt(0));
          }
@@ -420,7 +425,6 @@ public class GrammarLoader {
       }
       return number;
    }
-
 
    private GrammarRule groupedRule(final Grammar grammar, final GrammarParsingContext ctx) throws GrammarSyntaxException {
       GrammarRule rule;
@@ -496,7 +500,7 @@ public class GrammarLoader {
       boolean withExtension = false;
       for (int i = 0; i < fileName.length(); i++) {
          final char c = fileName.charAt(i);
-         switch(c) {
+         switch (c) {
             case '/':
             case '\\':
                adjustedFileName.append(File.separatorChar);
@@ -507,7 +511,7 @@ public class GrammarLoader {
                adjustedFileName.append(c);
          }
       }
-      if (! withExtension) {
+      if (!withExtension) {
          adjustedFileName.append(".gy");
       }
       return adjustedFileName;
@@ -517,7 +521,7 @@ public class GrammarLoader {
       File grammarFile;
       importGrammar = adjustFileName(importGrammar);
       grammarFile = new File(importGrammar.toString());
-      if (! grammarFile.isAbsolute()) {
+      if (!grammarFile.isAbsolute()) {
          /* Se a gramatica esta sendo lida de um arquivo, entao usa o diretorio onde ela esta como path relativo */
          if (grammar.getGrammarFile() != null && grammar.getGrammarFile().getParentFile() != null) {
             grammarFile = new File(grammar.getGrammarFile().getParent(), grammarFile.getPath());
@@ -527,15 +531,37 @@ public class GrammarLoader {
       loadGrammar(grammar, grammarFile, true);
    }
 
+   private void charsetEntry(Grammar grammar, GrammarParsingContext ctx, boolean importing) throws GrammarSyntaxException, GrammarException {
+      if (grammar.getCharset() == null || importing) {
+         ctx.skipSpaces();
+         if (Character.isLetter(ctx.currentChar())) {
+            final CharSequence charset = consumeIdentifier(ctx);
+            if (!importing) {
+               grammar.setCharset(charset.toString());
+            }
+            ctx.skipSpaces();
+            if (ctx.currentChar() == ';') {
+               ctx.advanceIndex();
+            } else {
+               throw new GrammarSyntaxException(ctx.line, ctx.column, "; not found after charset!");
+            }
+         } else {
+            throw new GrammarSyntaxException(ctx.line, ctx.column, "Charset not found!");
+         }
+      } else {
+         throw new GrammarSyntaxException(ctx.line, ctx.column, "Charset already defined!");
+      }
+   }
+
    private void importGrammarEntry(Grammar grammar, GrammarParsingContext ctx) throws GrammarSyntaxException, GrammarException {
       ctx.skipSpaces();
       if (Character.isLetter(ctx.currentChar())) {
-         final CharSequence importName  = consumeUp(ctx, ';');
+         final CharSequence importName = consumeUp(ctx, ';');
          importGrammar(grammar, importName);
          if (ctx.currentChar() == ';') {
             ctx.advanceIndex();
          } else {
-            throw new GrammarSyntaxException(ctx.line, ctx.column, "; not found after grammar entry!");
+            throw new GrammarSyntaxException(ctx.line, ctx.column, "; not found after grammar name!");
          }
       } else {
          throw new GrammarSyntaxException(ctx.line, ctx.column, "Grammar name not found!");
@@ -546,15 +572,15 @@ public class GrammarLoader {
       if (grammar.getGrammarName() == null || importing) {
          ctx.skipSpaces();
          if (Character.isLetter(ctx.currentChar())) {
-            final CharSequence name  = consumeIdentifier(ctx);
-            if (! importing) {
+            final CharSequence name = consumeIdentifier(ctx);
+            if (!importing) {
                grammar.setGrammarName(name.toString());
             }
             ctx.skipSpaces();
             if (ctx.currentChar() == ';') {
                ctx.advanceIndex();
             } else {
-               throw new GrammarSyntaxException(ctx.line, ctx.column, "; not found after grammar entry!");
+               throw new GrammarSyntaxException(ctx.line, ctx.column, "; not found after grammar name!");
             }
          } else {
             throw new GrammarSyntaxException(ctx.line, ctx.column, "Grammar name not found!");
@@ -587,7 +613,7 @@ public class GrammarLoader {
                      } else {
                         throw new GrammarSyntaxException(ctx.line, ctx.column, "expected ) not found on option parameter.");
                      }
-                  } else if (! option.isParameterMandatory()) {
+                  } else if (!option.isParameterMandatory()) {
                      ctx.addOption(option);
                      foundOption = true;
                      break;
@@ -601,7 +627,7 @@ public class GrammarLoader {
                }
             }
          }
-         if (! foundOption) {
+         if (!foundOption) {
             throw new GrammarSyntaxException(ctx.line, ctx.column, "Unknown option specified.");
          }
       } else {
@@ -609,8 +635,8 @@ public class GrammarLoader {
       }
    }
 
-   private void appendEscapedChar(final StringBuilder literal, final char c) {
-      switch(c) {
+   private void appendEscapedChar(final GrammarParsingContext ctx, final StringBuilder literal, final char c) {
+      switch (c) {
          case 'n':
             literal.append('\n');
             break;
@@ -625,6 +651,13 @@ public class GrammarLoader {
             break;
          case 'f':
             literal.append('\f');
+            break;
+         case 'u':
+            literal.append("\\u").append(ctx.text.subSequence(ctx.index, ctx.index + 4));
+            ctx.advanceIndex();
+            ctx.advanceIndex();
+            ctx.advanceIndex();
+            ctx.advanceIndex();
             break;
          default:
             literal.append(c);

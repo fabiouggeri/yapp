@@ -5,7 +5,7 @@ import OraclePlSql;
 Script : OptionalSpacing MultiplesSQLSentence OptionalSpacing EOI;
 
 @SkipNode
-MultiplesSQLSentence : (SQLSentence OptionalSpacing '/'? OptionalSpacing)+;
+MultiplesSQLSentence : (SQLSentence OptionalSpacing '/'* OptionalSpacing)+;
 
 @SkipNode
 SQLSentence : (DmlSentence ';') | PlSqlSource;

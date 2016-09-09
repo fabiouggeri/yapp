@@ -59,6 +59,7 @@ public class TesteExecucao {
       //char c = '\u005cn';
       //new TesteExecucao().testesDiversos();
       //new TesteExecucao().testeParseJavaSources();
+      //new TesteExecucao().testeParsePlSqlSources();
       new TesteExecucao().testeExecucaoPlSql();
       //new TesteExecucao().testeExecucaoJava();
       //new TesteExecucao().testeExecucaoHarbourPP();
@@ -153,13 +154,13 @@ public class TesteExecucao {
       } else if (file.getName().toLowerCase().endsWith(".java")) {
          //if (file.getName().equalsIgnoreCase("ParserTokenManager.java")) {
          totalTime += parseJavaFile(file, rulesProfiles);
-         countLinesJavaFile(file);
+         countFileLines(file);
          //}
       }
       return totalTime;
    }
 
-   private void countLinesJavaFile(File file) {
+   private void countFileLines(File file) {
       BufferedReader br = null;
       try {
          br = new BufferedReader(new FileReader(file));
@@ -196,6 +197,61 @@ public class TesteExecucao {
       }
       return 0L;
    }
+   
+   private void testeParsePlSqlSources() {
+      final long initTime = System.currentTimeMillis();
+      final File dirScan = new File("E:\\desenvolvimento\\sicredi");
+      final long totalTime;
+      final Map<Rule, RuleProfile> rulesProfiles = new HashMap<Rule, RuleProfile>();
+      totalTime = scanPlSqlSources(dirScan, 0, rulesProfiles);
+      System.out.println("Parse time: " + totalTime + "ms");
+      System.out.println("Total time: " + (System.currentTimeMillis() - initTime) + "ms");
+      System.out.println("Total Mem: " + (Runtime.getRuntime().totalMemory()) / 1024 + "KB");
+      System.out.println("Total Lines: " + linesCount);
+      System.out.println("Total Size: " + (totalSize / 1024) + " KB");
+      printProfile(rulesProfiles);
+   }
+
+   private long scanPlSqlSources(File file, long totalTime, final Map<Rule, RuleProfile> rulesProfiles) {
+      final String fileName = file.getName().toLowerCase();
+      if (file.isDirectory()) {
+         for (File child : file.listFiles()) {
+            totalTime += scanPlSqlSources(child, 0, rulesProfiles);
+         }
+      } else if (fileName.endsWith(".pkb") ||
+              fileName.endsWith(".pks") ||
+              fileName.endsWith(".pkg") ||
+              fileName.endsWith(".fnc") ||
+              fileName.endsWith(".prc")) {
+         //if (file.getName().equalsIgnoreCase("ParserTokenManager.java")) {
+         totalTime += parsePlSqlFile(file, rulesProfiles);
+         countFileLines(file);
+         //}
+      }
+      return totalTime;
+   }
+
+   private long parsePlSqlFile(File file, Map<Rule, RuleProfile> profilesMap) {
+      try {
+         final OracleScriptParser parser = new OracleScriptParser();
+         final InputBuffer inputBuffer = new FileInputBuffer(file);
+         final Node node;
+         final long iniParse;
+         System.out.print("Parsing " + file.getAbsolutePath() + "...");
+         iniParse = System.currentTimeMillis();
+         parser.setProfilesMap(profilesMap);
+         node = parser.parse(inputBuffer);
+         if (node != null) {
+            System.out.println("OK");
+         } else {
+            System.out.println("Error at " + parser.getMismatches());
+         }
+         return System.currentTimeMillis() - iniParse;
+      } catch (IOException ex) {
+         ex.printStackTrace(System.out);
+      }
+      return 0L;
+   }
 
    // 
    private void testeExecucaoPlSql() {
@@ -212,7 +268,7 @@ public class TesteExecucao {
 //         System.out.println("1. Mem. Livre: " + Runtime.getRuntime().freeMemory() / 1024.0 / 1024.0 + "MB");
          iniParse = System.currentTimeMillis();
          // inputBuffer = new FileInputBuffer(new File("E:\\desenvolvimento\\sicredi\\infra-2.0.5\\05-construcao\\infra-plsql\\src\\main\\plsql\\pkgl_infra_util.pkb"));
-         inputBuffer = new FileInputBuffer(new File("E:\\desenvolvimento\\sicredi\\infra-2.0.5\\05-construcao\\infra-plsql\\src\\main\\plsql\\pkgl_infra_indices.pkb"));
+         inputBuffer = new FileInputBuffer(new File("E:\\desenvolvimento\\sicredi\\ccro\\src\\plsql\\pkgl_ccro_sefazrs.pkb"));
 //         System.out.println("File size: " + inputBuffer.length());
 //         System.out.println("2. Mem. Livre: " + Runtime.getRuntime().freeMemory() / 1024.0 / 1024.0 + "MB");
          node = parser.parse(inputBuffer);

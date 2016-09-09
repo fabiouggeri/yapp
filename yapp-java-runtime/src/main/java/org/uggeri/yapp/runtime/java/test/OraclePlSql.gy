@@ -47,11 +47,13 @@ LikeExpression : NumericExpression Not? "like" PlSqlExpression;
 IsNullExpression : NumericExpression "is" Nullable;
 
 @SkipNode
-NumericExpression : PlSqlMathExpression | PlSqlUnaryExpression | PlSqlAtomicExpression;
+NumericExpression : PlSqlMathExpression 
+                  | PlSqlUnaryExpression 
+                  | PlSqlAtomicExpression;
 
 PlSqlMathExpression : PlSqlAtomicExpression SqlMathOperator PlSqlExpression;
 
-PlSqlUnaryExpression : ('+' | '-') "Sign" PlSqlExpression;
+PlSqlUnaryExpression : ('+' | '-') PlSqlExpression;
 
 @SkipNode
 PlSqlParenthesesExpression : '(' PlSqlExpression ')';
@@ -151,7 +153,7 @@ FunctionDefinition : FunctionHeading FunctionModifier IsAsKeyword CallSpecOrFunc
 
 CreateProcedure : CreateOrReplace ProcedureDefinition ';';
 
-ProcedureDefinition : ProcedureHeading IsAsKeyword CallSpecOrFunctionBody;
+ProcedureDefinition : ProcedureHeading FunctionModifier IsAsKeyword CallSpecOrFunctionBody;
 
 CreateOrReplace : "create" ("or" "replace")?;
 
@@ -319,6 +321,7 @@ ProcedureDeclaration : ProcedureHeading;
 
 Pragma : "pragma" ( ("restrict_references" '(' ("default" | PlSqlAnyIdentifier) (',' PragmaParam)+ ')') 
                   | ("exception_init" '(' PlSqlAnyIdentifier ',' PlSqlLiteral ')') 
+                  | ("inline" '(' PlSqlAnyIdentifier ',' ( "'yes'" | "'no'" ) ')') 
                   | "autonomous_transaction" 
                   | "serially_reusable" 
                   | ("builtin" PragmaParams) 
@@ -550,8 +553,15 @@ PlSqlIdentifier : PlSqlKeyword! PlSqlIdentifierPattern OptionalSpacing;
 
 @Rule(Identifier)
 @Atomic
-PlSqlIdentifierPattern : ([a-z] | [A-Z] | [0-9] | '_' | '$' | '#')+
-                       | ( '"' ( ( '\r' | '\n')! . )+ '"' );
+PlSqlIdentifierPattern : ( [a-z] | [A-Z] | [0-9] 
+                         | '_' | '$' | '#' 
+                         | '\u00C1'| '\u00C1' | '\u00C2' | '\u00C3' | '\u00C4' | '\u00C7' | '\u00C8' | '\u00C9' | '\u00CA' 
+                         | '\u00CB' | '\u00CC' | '\u00CD' | '\u00CE' | '\u00CF'
+                         | '\u00D2' | '\u00D3' | '\u00D4' | '\u00D5' | '\u00D6' | '\u00D9' | '\u00DA' | '\u00DB' | '\u00DC' 
+                         | '\u00E0' | '\u00E1' | '\u00E2' | '\u00E3' | '\u00E4' | '\u00E7' | '\u00E8' | '\u00E9' 
+                         | '\u00EA' | '\u00EB' | '\u00EC' | '\u00ED' | '\u00EE' | '\u00EF'
+                         | '\u00F2' | '\u00F3' | '\u00F4' | '\u00F5' | '\u00F6' | '\u00F9' | '\u00FA' | '\u00FB' | '\u00FC'  )+
+                       | ( '"' ( ( '\r' | '\n'| '"' )! . )+ '"' );
 
 
 @SkipNode
@@ -559,8 +569,15 @@ PlSqlAnyIdentifier : PlSqlAnyIdentifierPattern OptionalSpacing;
 
 @Rule(Identifier)
 @Atomic
-PlSqlAnyIdentifierPattern : ([a-z] | [A-Z] | [0-9] | '_' | '$' | '#')+
-                          | ( '"' ( ( '\r' | '\n')! . )+ '"' );
+PlSqlAnyIdentifierPattern : ( [a-z] | [A-Z] | [0-9] 
+                            | '_' | '$' | '#' 
+                            | '\u00C1'| '\u00C1' | '\u00C2' | '\u00C3' | '\u00C4' | '\u00C7' | '\u00C8' | '\u00C9' | '\u00CA' 
+                            | '\u00CB' | '\u00CC' | '\u00CD' | '\u00CE' | '\u00CF'
+                            | '\u00D2' | '\u00D3' | '\u00D4' | '\u00D5' | '\u00D6' | '\u00D9' | '\u00DA' | '\u00DB' | '\u00DC' 
+                            | '\u00E0' | '\u00E1' | '\u00E2' | '\u00E3' | '\u00E4' | '\u00E7' | '\u00E8' | '\u00E9' 
+                            | '\u00EA' | '\u00EB' | '\u00EC' | '\u00ED' | '\u00EE' | '\u00EF'
+                            | '\u00F2' | '\u00F3' | '\u00F4' | '\u00F5' | '\u00F6' | '\u00F9' | '\u00FA' | '\u00FB' | '\u00FC'  )+
+                          | ( '"' ( ( '\r' | '\n' | '"' )! . )+ '"' );
 
 @Fragment
 PlSqlKeyword : ( "all" | "alter" | "and" | "any" | "array" | "arrow" | "as" | "asc" | "at" 

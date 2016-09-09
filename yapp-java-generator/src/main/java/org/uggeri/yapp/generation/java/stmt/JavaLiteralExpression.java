@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.uggeri.yapp.generation.java.stmt;
 
 import static org.uggeri.yapp.generation.java.stmt.AbstractJavaCodeFragment.asExpression;
@@ -22,7 +21,7 @@ public class JavaLiteralExpression<T> extends JavaExpression implements LiteralE
    public JavaLiteralExpression(T value) {
       this.value = value;
    }
-   
+
    @Override
    public void appendCode(StringBuilder text, int indentation) {
       indent(text, indentation).append(value.toString());
@@ -32,7 +31,7 @@ public class JavaLiteralExpression<T> extends JavaExpression implements LiteralE
    public T getValue() {
       return value;
    }
-   
+
    @Override
    public Expression member(Object expr) {
       if (value.toString().equals("this")) {
@@ -42,7 +41,6 @@ public class JavaLiteralExpression<T> extends JavaExpression implements LiteralE
       }
    }
 
-
    @Override
    public boolean containsVariableReference(String varName) {
       return false;
@@ -51,7 +49,7 @@ public class JavaLiteralExpression<T> extends JavaExpression implements LiteralE
    @Override
    public boolean equals(Object obj) {
       if (obj instanceof LiteralExpression) {
-         return value.equals(((LiteralExpression)obj).getValue());
+         return value.equals(((LiteralExpression) obj).getValue());
       }
       return false;
    }

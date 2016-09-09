@@ -115,7 +115,7 @@ public class TesteGeracao {
          g = gr.loadGrammar(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test\\OracleScript.gy"));
          options = new JavaParserGenerationOptions(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test"),
                  "org.uggeri.yapp.runtime.java.test");
-         options.setGenerateTraceCode(false);
+         options.setGenerateTraceCode(true);
          options.setProfile(false);
          options.setCatchMismatches(false);
          options.setLeftRecursionStrategy(LeftRecursionStrategy.ACCEPT);

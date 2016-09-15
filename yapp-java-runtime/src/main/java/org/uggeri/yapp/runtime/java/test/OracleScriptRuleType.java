@@ -5780,58 +5780,6 @@ public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
          visitor.exitOrCondition(node);
       }
    },
-   AND_CONDITION {
-      @Override
-      public String getLabel() {
-         return "AndCondition";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return false;
-      }
-
-      @Override
-      public void enterRule(OracleScriptVisitor visitor, Node node) {
-         visitor.enterAndCondition(node);
-      }
-
-      @Override
-      public void exitRule(OracleScriptVisitor visitor, Node node) {
-         visitor.exitAndCondition(node);
-      }
-   },
-   NOT_CONDITION {
-      @Override
-      public String getLabel() {
-         return "NotCondition";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return false;
-      }
-
-      @Override
-      public void enterRule(OracleScriptVisitor visitor, Node node) {
-         visitor.enterNotCondition(node);
-      }
-
-      @Override
-      public void exitRule(OracleScriptVisitor visitor, Node node) {
-         visitor.exitNotCondition(node);
-      }
-   },
    PARENTHESES_CONDITION {
       @Override
       public String getLabel() {
@@ -5858,10 +5806,10 @@ public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
          visitor.exitParenthesesCondition(node);
       }
    },
-   CONDITION_EXPRESSION {
+   SIMPLE_CONDITION {
       @Override
       public String getLabel() {
-         return "ConditionExpression";
+         return "SimpleCondition";
       }
 
       @Override
@@ -5876,12 +5824,12 @@ public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
 
       @Override
       public void enterRule(OracleScriptVisitor visitor, Node node) {
-         visitor.enterConditionExpression(node);
+         visitor.enterSimpleCondition(node);
       }
 
       @Override
       public void exitRule(OracleScriptVisitor visitor, Node node) {
-         visitor.exitConditionExpression(node);
+         visitor.exitSimpleCondition(node);
       }
    },
    EXISTS_CONDITION {
@@ -5908,6 +5856,32 @@ public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
       @Override
       public void exitRule(OracleScriptVisitor visitor, Node node) {
          visitor.exitExistsCondition(node);
+      }
+   },
+   NOT_CONDITION {
+      @Override
+      public String getLabel() {
+         return "NotCondition";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(OracleScriptVisitor visitor, Node node) {
+         visitor.enterNotCondition(node);
+      }
+
+      @Override
+      public void exitRule(OracleScriptVisitor visitor, Node node) {
+         visitor.exitNotCondition(node);
       }
    },
    NOT {
@@ -11578,36 +11552,10 @@ public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
          visitor.exitOrExpression(node);
       }
    },
-   OPTIONAL_AND_EXPRESSION {
+   RELATIONAL_EXPRESSION {
       @Override
       public String getLabel() {
-         return "OptionalAndExpression";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return true;
-      }
-
-      @Override
-      public void enterRule(OracleScriptVisitor visitor, Node node) {
-         visitor.enterOptionalAndExpression(node);
-      }
-
-      @Override
-      public void exitRule(OracleScriptVisitor visitor, Node node) {
-         visitor.exitOptionalAndExpression(node);
-      }
-   },
-   AND_EXPRESSION {
-      @Override
-      public String getLabel() {
-         return "AndExpression";
+         return "RelationalExpression";
       }
 
       @Override
@@ -11622,12 +11570,12 @@ public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
 
       @Override
       public void enterRule(OracleScriptVisitor visitor, Node node) {
-         visitor.enterAndExpression(node);
+         visitor.enterRelationalExpression(node);
       }
 
       @Override
       public void exitRule(OracleScriptVisitor visitor, Node node) {
-         visitor.exitAndExpression(node);
+         visitor.exitRelationalExpression(node);
       }
    },
    LOGICAL_EXPRESSION {
@@ -11654,84 +11602,6 @@ public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
       @Override
       public void exitRule(OracleScriptVisitor visitor, Node node) {
          visitor.exitLogicalExpression(node);
-      }
-   },
-   NOT_EXPRESSION {
-      @Override
-      public String getLabel() {
-         return "NotExpression";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return false;
-      }
-
-      @Override
-      public void enterRule(OracleScriptVisitor visitor, Node node) {
-         visitor.enterNotExpression(node);
-      }
-
-      @Override
-      public void exitRule(OracleScriptVisitor visitor, Node node) {
-         visitor.exitNotExpression(node);
-      }
-   },
-   RELATIONAL_EXPRESSION {
-      @Override
-      public String getLabel() {
-         return "RelationalExpression";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return true;
-      }
-
-      @Override
-      public void enterRule(OracleScriptVisitor visitor, Node node) {
-         visitor.enterRelationalExpression(node);
-      }
-
-      @Override
-      public void exitRule(OracleScriptVisitor visitor, Node node) {
-         visitor.exitRelationalExpression(node);
-      }
-   },
-   COMPARISON_EXPRESSION {
-      @Override
-      public String getLabel() {
-         return "ComparisonExpression";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return false;
-      }
-
-      @Override
-      public void enterRule(OracleScriptVisitor visitor, Node node) {
-         visitor.enterComparisonExpression(node);
-      }
-
-      @Override
-      public void exitRule(OracleScriptVisitor visitor, Node node) {
-         visitor.exitComparisonExpression(node);
       }
    },
    IN_EXPRESSION {
@@ -11838,10 +11708,10 @@ public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
          visitor.exitIsNullExpression(node);
       }
    },
-   NUMERIC_EXPRESSION {
+   NOT_EXPRESSION {
       @Override
       public String getLabel() {
-         return "NumericExpression";
+         return "NotExpression";
       }
 
       @Override
@@ -11851,17 +11721,17 @@ public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
 
       @Override
       public boolean isSkiped() {
-         return true;
+         return false;
       }
 
       @Override
       public void enterRule(OracleScriptVisitor visitor, Node node) {
-         visitor.enterNumericExpression(node);
+         visitor.enterNotExpression(node);
       }
 
       @Override
       public void exitRule(OracleScriptVisitor visitor, Node node) {
-         visitor.exitNumericExpression(node);
+         visitor.exitNotExpression(node);
       }
    },
    PL_SQL_MATH_EXPRESSION {
@@ -11914,6 +11784,32 @@ public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
       @Override
       public void exitRule(OracleScriptVisitor visitor, Node node) {
          visitor.exitPlSqlUnaryExpression(node);
+      }
+   },
+   NUMERIC_EXPRESSION {
+      @Override
+      public String getLabel() {
+         return "NumericExpression";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return true;
+      }
+
+      @Override
+      public void enterRule(OracleScriptVisitor visitor, Node node) {
+         visitor.enterNumericExpression(node);
+      }
+
+      @Override
+      public void exitRule(OracleScriptVisitor visitor, Node node) {
+         visitor.exitNumericExpression(node);
       }
    },
    PL_SQL_PARENTHESES_EXPRESSION {

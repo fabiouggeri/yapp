@@ -485,9 +485,31 @@ PrefixOperator : '++' | '--' | NotOperator | PlusSign | MinusSign;
 PostfixOperator : '++' | '--';
 
 @SkipNode
-AtomicExpression : SelfExpression | ArrayAccess | AliasedExpression | AliasedField | AliasedMacro | Literal | IfInLine | MacroFunctionCall | AnySimpleFunctionCall | Macro | ParenthesesExpressionList | AnyIdentifier | ValueByReference;
+AtomicExpression : SelfExpression 
+                 | ArrayAccess 
+                 | AliasedExpression 
+                 | AliasedField 
+                 | AliasedMacro 
+                 | Literal 
+                 | IfInLine 
+                 | MacroFunctionCall 
+                 | AnySimpleFunctionCall 
+                 | Macro 
+                 | ParenthesesExpressionList 
+                 | AnyIdentifier 
+                 | ValueByReference;
 
-ArrayAccess : (ArrayLiteral | HashLiteral | StringLiteral | AliasedExpression | AliasedField | AliasedMacro | IfInLine | MacroFunctionCall | AnySimpleFunctionCall | Macro | AnyIdentifier) ArrayIndex;
+ArrayAccess : (ArrayLiteral 
+            | HashLiteral 
+            | StringLiteral 
+            | AliasedExpression 
+            | AliasedField 
+            | AliasedMacro 
+            | IfInLine 
+            | MacroFunctionCall 
+            | AnySimpleFunctionCall 
+            | Macro 
+            | AnyIdentifier) ArrayIndex;
 
 @SkipNode
 LeftValue : SelfExpression | QualifiedExpression | ArrayAccess | AliasedField | AliasedMacro | Macro | AnyIdentifier;

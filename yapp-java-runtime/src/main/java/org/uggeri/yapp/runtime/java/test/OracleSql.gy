@@ -567,7 +567,7 @@ CellReferenceArgumentsList : CellReferenceArgument ( ',' CellReferenceArgument )
 
 CellReferenceArgument : SqlCondition 
                       | SqlExpression 
-					  | SingleColumnForLoop;
+			             | SingleColumnForLoop;
 
 PlaceHolderExpression : BindVariable ( "indicator"? BindVariable )?;
 
@@ -669,47 +669,43 @@ RelationalOperator : ( '=' '>'! )
                    | ( '>' '='! ) 
                    | ( '<' ( '=' | '>' )! );
 
-SqlCondition : NotCondition 
-             | AndCondition 
-             | OrCondition 
-             | ConditionExpression;
+SqlCondition : OrCondition ("and" SqlCondition)?;
 
-OrCondition : ConditionExpression "or" SqlCondition;
-
-AndCondition : ConditionExpression "and" SqlCondition;
-
-NotCondition : "not" SqlCondition;
+OrCondition : SimpleCondition ("or" OrCondition)?;
 
 @SkipNode
 ParenthesesCondition : '(' SqlCondition ')';
 
 @SkipNode
-ConditionExpression : ExistsCondition 
-                    | IsCondition 
-                    | RelationalCondition 
-                    | RelationalGroupCondition 
-                    | InCondition 
-                    | IsASetCondition 
-                    | IsAnyCondition 
-                    | IsEmptyCondition 
-                    | IsOfTypeCondition 
-                    | IsPresentCondition 
-                    | LikeCondition 
-                    | RegexCondition 
-                    | MemberCondition 
-                    | BetweenCondition 
-                    | SubMultiSetCondition 
-                    | EqualsPathCondition 
-                    | UnderPathCondition 
-                    | ParenthesesCondition;
+SimpleCondition : ExistsCondition 
+                | IsCondition 
+                | RelationalCondition 
+                | RelationalGroupCondition 
+                | InCondition 
+                | IsASetCondition 
+                | IsAnyCondition 
+                | IsEmptyCondition 
+                | IsOfTypeCondition 
+                | IsPresentCondition 
+                | LikeCondition 
+                | RegexCondition 
+                | MemberCondition 
+                | BetweenCondition 
+                | SubMultiSetCondition 
+                | EqualsPathCondition 
+                | UnderPathCondition 
+                | ParenthesesCondition
+                | NotCondition;
 
 ExistsCondition : "exists" '(' Subquery ')';
+
+NotCondition : "not" SqlCondition;
 
 Not : "not";
 
 IsConditionOption : "null" 
                   | "nan" 
-				  | "infinite";
+				      | "infinite";
 
 IsCondition : SqlExpression "is" Not? IsConditionOption;
 
@@ -719,7 +715,7 @@ RelationalCondition : Prior? SqlExpression RelationalOperator Prior? SqlExpressi
 
 GroupConditionCoverageType : "any" 
                            | "some" 
-						   | "all";
+						         | "all";
 
 EqualityGroupCondition : ParenthesesSqlExpressionList EqualityOperator GroupConditionCoverageType? ParenthesesSqlExpressionList;
 
@@ -911,7 +907,7 @@ CellAssignmentArgumentsList : CellAssignmentArgument ( ',' CellAssignmentArgumen
 
 CellAssignmentArgument : SqlCondition 
                        | SqlExpression 
-					   | SingleColumnForLoop;
+					        | SingleColumnForLoop;
 
 ForIn : "in" '(' ( SqlLiteralList | Subquery ) ')';
 
@@ -994,7 +990,7 @@ WaitClause : "nowait"
            | ( "wait" IntegerLiteral ) 
 		   | ( "skip" "locked" );
 
-ForUpdateClause : "for" "update" ( ( "of" TableName ) "OfTable" )? WaitClause?;
+ForUpdateClause : "for" "update" ( "of" TableName )? WaitClause?;
 
 OnlyDmlTableExpresionClause : "only" '(' DmlTableExpressionClause ')';
 
@@ -1034,8 +1030,8 @@ ColumnSetValueList : ColumnSetValue ( ',' ColumnSetValue )*;
 
 ReturningClause : ( "returning" | "return" ) 
                   SqlExpressionList BulkCollect? 
-				  "into" 
-				  ReturnIntoVariablesList;
+                  "into" 
+                  ReturnIntoVariablesList;
 
 BindVariable : '?' 
              | ( ':' ( SqlAnyIdentifier | IntegerLiteral ) );

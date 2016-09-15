@@ -14,29 +14,19 @@ PlSqlSource : CreatePackageBody
             | AnonymousPlSqlBlock;
 
 @SkipNode
-PlSqlExpression : OptionalAndExpression OrExpression*;
+PlSqlExpression : OrExpression ("and" PlSqlExpression)?;
 
-OrExpression : "or" OptionalAndExpression;
+OrExpression : RelationalExpression ("or" OrExpression)?;
 
-@SkipNode
-OptionalAndExpression : LogicalExpression AndExpression*;
-
-AndExpression : "and" LogicalExpression;
+RelationalExpression : LogicalExpression (RelationalOperator RelationalExpression)?;
 
 @SkipNode
-LogicalExpression : NotExpression | RelationalExpression;
-
-NotExpression : "not" RelationalExpression;
-
-@SkipNode
-RelationalExpression : ComparisonExpression 
-                     | InExpression 
-                     | BetweenExpression 
-                     | LikeExpression 
-                     | IsNullExpression 
-                     | NumericExpression;
-
-ComparisonExpression : NumericExpression RelationalOperator PlSqlExpression;
+LogicalExpression : InExpression 
+                  | BetweenExpression 
+                  | LikeExpression 
+                  | IsNullExpression 
+                  | NotExpression
+                  | PlSqlMathExpression;
 
 InExpression : NumericExpression Not? "in" PlSqlExpressionList;
 
@@ -46,14 +36,14 @@ LikeExpression : NumericExpression Not? "like" PlSqlExpression;
 
 IsNullExpression : NumericExpression "is" Nullable;
 
+NotExpression : "not" RelationalExpression;
+
+PlSqlMathExpression : PlSqlUnaryExpression (SqlMathOperator PlSqlMathExpression)?;
+
+PlSqlUnaryExpression : (('+' | '-') PlSqlUnaryExpression) | PlSqlAtomicExpression;
+
 @SkipNode
-NumericExpression : PlSqlMathExpression 
-                  | PlSqlUnaryExpression 
-                  | PlSqlAtomicExpression;
-
-PlSqlMathExpression : PlSqlAtomicExpression SqlMathOperator PlSqlExpression;
-
-PlSqlUnaryExpression : ('+' | '-') PlSqlExpression;
+NumericExpression : PlSqlMathExpression;
 
 @SkipNode
 PlSqlParenthesesExpression : '(' PlSqlExpression ')';
@@ -480,7 +470,7 @@ ReturnStatement : "return" PlSqlExpression?;
 
 WhileLoopStatement : "while" PlSqlExpression "loop" PlSqlStatements "end" "loop" PlSqlAnyIdentifier?;
 
-PipeRowStatement : "pipe" "row" '(' PlSqlAnyIdentifier ')';
+PipeRowStatement : "pipe" "row" '(' PlSqlObjectIdentifier ')';
 
 SqlStatement : DmlSentence;
 

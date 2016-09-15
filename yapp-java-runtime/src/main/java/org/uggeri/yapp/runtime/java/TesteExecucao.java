@@ -59,8 +59,8 @@ public class TesteExecucao {
       //char c = '\u005cn';
       //new TesteExecucao().testesDiversos();
       //new TesteExecucao().testeParseJavaSources();
-      //new TesteExecucao().testeParsePlSqlSources();
-      new TesteExecucao().testeExecucaoPlSql();
+      new TesteExecucao().testeParsePlSqlSources();
+      //new TesteExecucao().testeExecucaoPlSql();
       //new TesteExecucao().testeExecucaoJava();
       //new TesteExecucao().testeExecucaoHarbourPP();
       //new TesteExecucao().testeExecucaoHarbourUnprocessed();
@@ -268,7 +268,7 @@ public class TesteExecucao {
 //         System.out.println("1. Mem. Livre: " + Runtime.getRuntime().freeMemory() / 1024.0 / 1024.0 + "MB");
          iniParse = System.currentTimeMillis();
          // inputBuffer = new FileInputBuffer(new File("E:\\desenvolvimento\\sicredi\\infra-2.0.5\\05-construcao\\infra-plsql\\src\\main\\plsql\\pkgl_infra_util.pkb"));
-         inputBuffer = new FileInputBuffer(new File("E:\\desenvolvimento\\sicredi\\ccro\\src\\plsql\\pkgl_ccro_sefazrs.pkb"));
+         inputBuffer = new FileInputBuffer(new File("E:\\desenvolvimento\\sicredi\\ccrp\\src\\plsql\\pkgl_ccrp_publica.pkb"));
 //         System.out.println("File size: " + inputBuffer.length());
 //         System.out.println("2. Mem. Livre: " + Runtime.getRuntime().freeMemory() / 1024.0 / 1024.0 + "MB");
          node = parser.parse(inputBuffer);

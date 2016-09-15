@@ -675,20 +675,17 @@ public abstract class OracleScriptVisitor implements NodeVisitor {
    public void enterOrCondition(Node node) {}
    public void exitOrCondition(Node node) {}
 
-   public void enterAndCondition(Node node) {}
-   public void exitAndCondition(Node node) {}
-
-   public void enterNotCondition(Node node) {}
-   public void exitNotCondition(Node node) {}
-
    public void enterParenthesesCondition(Node node) {}
    public void exitParenthesesCondition(Node node) {}
 
-   public void enterConditionExpression(Node node) {}
-   public void exitConditionExpression(Node node) {}
+   public void enterSimpleCondition(Node node) {}
+   public void exitSimpleCondition(Node node) {}
 
    public void enterExistsCondition(Node node) {}
    public void exitExistsCondition(Node node) {}
+
+   public void enterNotCondition(Node node) {}
+   public void exitNotCondition(Node node) {}
 
    public void enterNot(Node node) {}
    public void exitNot(Node node) {}
@@ -1344,23 +1341,11 @@ public abstract class OracleScriptVisitor implements NodeVisitor {
    public void enterOrExpression(Node node) {}
    public void exitOrExpression(Node node) {}
 
-   public void enterOptionalAndExpression(Node node) {}
-   public void exitOptionalAndExpression(Node node) {}
-
-   public void enterAndExpression(Node node) {}
-   public void exitAndExpression(Node node) {}
-
-   public void enterLogicalExpression(Node node) {}
-   public void exitLogicalExpression(Node node) {}
-
-   public void enterNotExpression(Node node) {}
-   public void exitNotExpression(Node node) {}
-
    public void enterRelationalExpression(Node node) {}
    public void exitRelationalExpression(Node node) {}
 
-   public void enterComparisonExpression(Node node) {}
-   public void exitComparisonExpression(Node node) {}
+   public void enterLogicalExpression(Node node) {}
+   public void exitLogicalExpression(Node node) {}
 
    public void enterInExpression(Node node) {}
    public void exitInExpression(Node node) {}
@@ -1374,14 +1359,17 @@ public abstract class OracleScriptVisitor implements NodeVisitor {
    public void enterIsNullExpression(Node node) {}
    public void exitIsNullExpression(Node node) {}
 
-   public void enterNumericExpression(Node node) {}
-   public void exitNumericExpression(Node node) {}
+   public void enterNotExpression(Node node) {}
+   public void exitNotExpression(Node node) {}
 
    public void enterPlSqlMathExpression(Node node) {}
    public void exitPlSqlMathExpression(Node node) {}
 
    public void enterPlSqlUnaryExpression(Node node) {}
    public void exitPlSqlUnaryExpression(Node node) {}
+
+   public void enterNumericExpression(Node node) {}
+   public void exitNumericExpression(Node node) {}
 
    public void enterPlSqlParenthesesExpression(Node node) {}
    public void exitPlSqlParenthesesExpression(Node node) {}

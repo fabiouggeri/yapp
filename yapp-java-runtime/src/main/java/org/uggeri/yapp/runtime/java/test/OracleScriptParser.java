@@ -561,12 +561,21 @@ public class OracleScriptParser implements Parser {
    private int sqlCondition$RuleMemoStart = -1;
    private int sqlCondition$RuleMemoEnd;
    private Node sqlCondition$RuleMemoFirstNode;
+   private int andCondition$RuleMemoStart = -1;
+   private int andCondition$RuleMemoEnd;
+   private Node andCondition$RuleMemoFirstNode;
+   private int optionalOrCondition$RuleMemoStart = -1;
+   private int optionalOrCondition$RuleMemoEnd;
+   private Node optionalOrCondition$RuleMemoFirstNode;
    private int orCondition$RuleMemoStart = -1;
    private int orCondition$RuleMemoEnd;
    private Node orCondition$RuleMemoFirstNode;
    private int parenthesesCondition$RuleMemoStart = -1;
    private int parenthesesCondition$RuleMemoEnd;
    private Node parenthesesCondition$RuleMemoFirstNode;
+   private int simpleCondition$RuleMemoStart = -1;
+   private int simpleCondition$RuleMemoEnd;
+   private Node simpleCondition$RuleMemoFirstNode;
    private int existsCondition$RuleMemoStart = -1;
    private int existsCondition$RuleMemoEnd;
    private Node existsCondition$RuleMemoFirstNode;
@@ -1053,12 +1062,24 @@ public class OracleScriptParser implements Parser {
    private int plSqlExpression$RuleMemoStart = -1;
    private int plSqlExpression$RuleMemoEnd;
    private Node plSqlExpression$RuleMemoFirstNode;
-   private int orExpression$RuleMemoStart = -1;
-   private int orExpression$RuleMemoEnd;
-   private Node orExpression$RuleMemoFirstNode;
+   private int plSqlAndExpression$RuleMemoStart = -1;
+   private int plSqlAndExpression$RuleMemoEnd;
+   private Node plSqlAndExpression$RuleMemoFirstNode;
+   private int plSqlOptionalOrExpression$RuleMemoStart = -1;
+   private int plSqlOptionalOrExpression$RuleMemoEnd;
+   private Node plSqlOptionalOrExpression$RuleMemoFirstNode;
+   private int plSqlOrExpression$RuleMemoStart = -1;
+   private int plSqlOrExpression$RuleMemoEnd;
+   private Node plSqlOrExpression$RuleMemoFirstNode;
+   private int optionalRelationalExpression$RuleMemoStart = -1;
+   private int optionalRelationalExpression$RuleMemoEnd;
+   private Node optionalRelationalExpression$RuleMemoFirstNode;
    private int relationalExpression$RuleMemoStart = -1;
    private int relationalExpression$RuleMemoEnd;
    private Node relationalExpression$RuleMemoFirstNode;
+   private int logicalExpression$RuleMemoStart = -1;
+   private int logicalExpression$RuleMemoEnd;
+   private Node logicalExpression$RuleMemoFirstNode;
    private int inExpression$RuleMemoStart = -1;
    private int inExpression$RuleMemoEnd;
    private Node inExpression$RuleMemoFirstNode;
@@ -1074,9 +1095,15 @@ public class OracleScriptParser implements Parser {
    private int notExpression$RuleMemoStart = -1;
    private int notExpression$RuleMemoEnd;
    private Node notExpression$RuleMemoFirstNode;
+   private int plSqlOptionalMathExpression$RuleMemoStart = -1;
+   private int plSqlOptionalMathExpression$RuleMemoEnd;
+   private Node plSqlOptionalMathExpression$RuleMemoFirstNode;
    private int plSqlMathExpression$RuleMemoStart = -1;
    private int plSqlMathExpression$RuleMemoEnd;
    private Node plSqlMathExpression$RuleMemoFirstNode;
+   private int plSqlOptionalUnaryExpression$RuleMemoStart = -1;
+   private int plSqlOptionalUnaryExpression$RuleMemoEnd;
+   private Node plSqlOptionalUnaryExpression$RuleMemoFirstNode;
    private int plSqlUnaryExpression$RuleMemoStart = -1;
    private int plSqlUnaryExpression$RuleMemoEnd;
    private Node plSqlUnaryExpression$RuleMemoFirstNode;
@@ -26721,7 +26748,7 @@ public class OracleScriptParser implements Parser {
       }
    }
 
-   //SqlCondition : (OrCondition ("and" TestNoAlpha OptionalSpacing SqlCondition)?)
+   //SqlCondition : (AndCondition | OptionalOrCondition)
    protected boolean sqlCondition$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -26742,33 +26769,145 @@ public class OracleScriptParser implements Parser {
          }
       }
       startIndex = index;
-      // (OrCondition ("and" TestNoAlpha OptionalSpacing SqlCondition)?)
-      // OrCondition
-      match = orCondition$Rule();
-      if (match) {
-         // ("and" TestNoAlpha OptionalSpacing SqlCondition)?
-         Node lastNode_1 = currentNode;
-         int lastIndex_1 = index;
-         // ("and" TestNoAlpha OptionalSpacing SqlCondition)
-         // "and"
-         match = ignoreCaseStringMatcher("and", 3);
-         if (match) {
-            // TestNoAlpha
-            match = testNoAlpha$Rule();
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
-               if (match) {
-                  // SqlCondition
-                  match = sqlCondition$Rule();
+      // (AndCondition | OptionalOrCondition)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case '#':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case ':':
+         case '?':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '\u00C1':
+         case '\u00C2':
+         case '\u00C3':
+         case '\u00C4':
+         case '\u00C7':
+         case '\u00C8':
+         case '\u00C9':
+         case '\u00CA':
+         case '\u00CB':
+         case '\u00CC':
+         case '\u00CD':
+         case '\u00CE':
+         case '\u00CF':
+         case '\u00D2':
+         case '\u00D3':
+         case '\u00D4':
+         case '\u00D5':
+         case '\u00D6':
+         case '\u00D9':
+         case '\u00DA':
+         case '\u00DB':
+         case '\u00DC':
+         case '\u00E0':
+         case '\u00E1':
+         case '\u00E2':
+         case '\u00E3':
+         case '\u00E4':
+         case '\u00E7':
+         case '\u00E8':
+         case '\u00E9':
+         case '\u00EA':
+         case '\u00EB':
+         case '\u00EC':
+         case '\u00ED':
+         case '\u00EE':
+         case '\u00EF':
+         case '\u00F2':
+         case '\u00F3':
+         case '\u00F4':
+         case '\u00F5':
+         case '\u00F6':
+         case '\u00F9':
+         case '\u00FA':
+         case '\u00FB':
+         case '\u00FC': {
+            // AndCondition
+            match = andCondition$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // OptionalOrCondition
+               match = optionalOrCondition$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                }
             }
+            break;
          }
-         if (! match) {
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-            index = lastIndex_1;
-            match = true;
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -26794,7 +26933,255 @@ public class OracleScriptParser implements Parser {
       }
    }
 
-   //OrCondition : (SimpleCondition ("or" TestNoAlpha OptionalSpacing OrCondition)?)
+   //AndCondition : (OptionalOrCondition "and" TestNoAlpha OptionalSpacing SqlCondition)
+   protected boolean andCondition$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      if (andCondition$RuleMemoStart == index) {
+         if (andCondition$RuleMemoStart <= andCondition$RuleMemoEnd) {
+            index = andCondition$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(OracleScriptRuleType.AND_CONDITION, andCondition$RuleMemoStart, andCondition$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (andCondition$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(andCondition$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
+      startIndex = index;
+      // (OptionalOrCondition "and" TestNoAlpha OptionalSpacing SqlCondition)
+      // OptionalOrCondition
+      match = optionalOrCondition$Rule();
+      if (match) {
+         // "and"
+         match = ignoreCaseStringMatcher("and", 3);
+         if (match) {
+            // TestNoAlpha
+            match = testNoAlpha$Rule();
+            if (match) {
+               // OptionalSpacing
+               match = optionalSpacing$Rule();
+               if (match) {
+                  // SqlCondition
+                  match = sqlCondition$Rule();
+               }
+            }
+         }
+      }
+      if (match) {
+         andCondition$RuleMemoStart = startIndex;
+         andCondition$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            andCondition$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(OracleScriptRuleType.AND_CONDITION, startIndex, index, true, false);
+            currentNode.setFirstChild(lastNode.getSibling());
+            lastNode.setSibling(currentNode);
+            andCondition$RuleMemoFirstNode = currentNode;
+         }
+         return true;
+      } else {
+         andCondition$RuleMemoStart = startIndex;
+         andCondition$RuleMemoEnd = -1;
+         andCondition$RuleMemoFirstNode = null;
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //OptionalOrCondition : (OrCondition | SimpleCondition)
+   protected boolean optionalOrCondition$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      if (optionalOrCondition$RuleMemoStart == index) {
+         if (optionalOrCondition$RuleMemoStart <= optionalOrCondition$RuleMemoEnd) {
+            index = optionalOrCondition$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(OracleScriptRuleType.OPTIONAL_OR_CONDITION, optionalOrCondition$RuleMemoStart, optionalOrCondition$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (optionalOrCondition$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(optionalOrCondition$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
+      startIndex = index;
+      // (OrCondition | SimpleCondition)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case '#':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case ':':
+         case '?':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '\u00C1':
+         case '\u00C2':
+         case '\u00C3':
+         case '\u00C4':
+         case '\u00C7':
+         case '\u00C8':
+         case '\u00C9':
+         case '\u00CA':
+         case '\u00CB':
+         case '\u00CC':
+         case '\u00CD':
+         case '\u00CE':
+         case '\u00CF':
+         case '\u00D2':
+         case '\u00D3':
+         case '\u00D4':
+         case '\u00D5':
+         case '\u00D6':
+         case '\u00D9':
+         case '\u00DA':
+         case '\u00DB':
+         case '\u00DC':
+         case '\u00E0':
+         case '\u00E1':
+         case '\u00E2':
+         case '\u00E3':
+         case '\u00E4':
+         case '\u00E7':
+         case '\u00E8':
+         case '\u00E9':
+         case '\u00EA':
+         case '\u00EB':
+         case '\u00EC':
+         case '\u00ED':
+         case '\u00EE':
+         case '\u00EF':
+         case '\u00F2':
+         case '\u00F3':
+         case '\u00F4':
+         case '\u00F5':
+         case '\u00F6':
+         case '\u00F9':
+         case '\u00FA':
+         case '\u00FB':
+         case '\u00FC': {
+            // OrCondition
+            match = orCondition$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // SimpleCondition
+               match = simpleCondition$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
+      }
+      if (match) {
+         optionalOrCondition$RuleMemoStart = startIndex;
+         optionalOrCondition$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            optionalOrCondition$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(OracleScriptRuleType.OPTIONAL_OR_CONDITION, startIndex, index, true, true);
+            currentNode.setFirstChild(lastNode.getSibling());
+            lastNode.setSibling(currentNode);
+            optionalOrCondition$RuleMemoFirstNode = currentNode;
+         }
+         return true;
+      } else {
+         optionalOrCondition$RuleMemoStart = startIndex;
+         optionalOrCondition$RuleMemoEnd = -1;
+         optionalOrCondition$RuleMemoFirstNode = null;
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //OrCondition : (SimpleCondition "or" TestNoAlpha OptionalSpacing OptionalOrCondition)
    protected boolean orCondition$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -26815,14 +27202,10 @@ public class OracleScriptParser implements Parser {
          }
       }
       startIndex = index;
-      // (SimpleCondition ("or" TestNoAlpha OptionalSpacing OrCondition)?)
+      // (SimpleCondition "or" TestNoAlpha OptionalSpacing OptionalOrCondition)
       // SimpleCondition
       match = simpleCondition$Rule();
       if (match) {
-         // ("or" TestNoAlpha OptionalSpacing OrCondition)?
-         Node lastNode_1 = currentNode;
-         int lastIndex_1 = index;
-         // ("or" TestNoAlpha OptionalSpacing OrCondition)
          // "or"
          match = ignoreCaseStringMatcher("or", 2);
          if (match) {
@@ -26832,16 +27215,10 @@ public class OracleScriptParser implements Parser {
                // OptionalSpacing
                match = optionalSpacing$Rule();
                if (match) {
-                  // OrCondition
-                  match = orCondition$Rule();
+                  // OptionalOrCondition
+                  match = optionalOrCondition$Rule();
                }
             }
-         }
-         if (! match) {
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-            index = lastIndex_1;
-            match = true;
          }
       }
       if (match) {
@@ -26935,6 +27312,21 @@ public class OracleScriptParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (simpleCondition$RuleMemoStart == index) {
+         if (simpleCondition$RuleMemoStart <= simpleCondition$RuleMemoEnd) {
+            index = simpleCondition$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(OracleScriptRuleType.SIMPLE_CONDITION, simpleCondition$RuleMemoStart, simpleCondition$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (simpleCondition$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(simpleCondition$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (ExistsCondition | IsCondition | RelationalCondition | RelationalGroupCondition | InCondition | IsASetCondition | IsAnyCondition | IsEmptyCondition | IsOfTypeCondition | IsPresentCondition | LikeCondition | RegexCondition | MemberCondition | BetweenCondition | SubMultiSetCondition | EqualsPathCondition | UnderPathCondition | ParenthesesCondition | NotCondition)
       Node lastNode_1 = currentNode;
@@ -27685,13 +28077,21 @@ public class OracleScriptParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         simpleCondition$RuleMemoStart = startIndex;
+         simpleCondition$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            simpleCondition$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(OracleScriptRuleType.SIMPLE_CONDITION, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            simpleCondition$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         simpleCondition$RuleMemoStart = startIndex;
+         simpleCondition$RuleMemoEnd = -1;
+         simpleCondition$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -50432,7 +50832,7 @@ public class OracleScriptParser implements Parser {
       }
    }
 
-   //PlSqlExpression : (OrExpression ("and" TestNoAlpha OptionalSpacing PlSqlExpression)?)
+   //PlSqlExpression : (PlSqlAndExpression | PlSqlOptionalOrExpression)
    protected boolean plSqlExpression$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -50453,33 +50853,144 @@ public class OracleScriptParser implements Parser {
          }
       }
       startIndex = index;
-      // (OrExpression ("and" TestNoAlpha OptionalSpacing PlSqlExpression)?)
-      // OrExpression
-      match = orExpression$Rule();
-      if (match) {
-         // ("and" TestNoAlpha OptionalSpacing PlSqlExpression)?
-         Node lastNode_1 = currentNode;
-         int lastIndex_1 = index;
-         // ("and" TestNoAlpha OptionalSpacing PlSqlExpression)
-         // "and"
-         match = ignoreCaseStringMatcher("and", 3);
-         if (match) {
-            // TestNoAlpha
-            match = testNoAlpha$Rule();
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
-               if (match) {
-                  // PlSqlExpression
-                  match = plSqlExpression$Rule();
+      // (PlSqlAndExpression | PlSqlOptionalOrExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case '#':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case ':':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '\u00C1':
+         case '\u00C2':
+         case '\u00C3':
+         case '\u00C4':
+         case '\u00C7':
+         case '\u00C8':
+         case '\u00C9':
+         case '\u00CA':
+         case '\u00CB':
+         case '\u00CC':
+         case '\u00CD':
+         case '\u00CE':
+         case '\u00CF':
+         case '\u00D2':
+         case '\u00D3':
+         case '\u00D4':
+         case '\u00D5':
+         case '\u00D6':
+         case '\u00D9':
+         case '\u00DA':
+         case '\u00DB':
+         case '\u00DC':
+         case '\u00E0':
+         case '\u00E1':
+         case '\u00E2':
+         case '\u00E3':
+         case '\u00E4':
+         case '\u00E7':
+         case '\u00E8':
+         case '\u00E9':
+         case '\u00EA':
+         case '\u00EB':
+         case '\u00EC':
+         case '\u00ED':
+         case '\u00EE':
+         case '\u00EF':
+         case '\u00F2':
+         case '\u00F3':
+         case '\u00F4':
+         case '\u00F5':
+         case '\u00F6':
+         case '\u00F9':
+         case '\u00FA':
+         case '\u00FB':
+         case '\u00FC': {
+            // PlSqlAndExpression
+            match = plSqlAndExpression$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // PlSqlOptionalOrExpression
+               match = plSqlOptionalOrExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                }
             }
+            break;
          }
-         if (! match) {
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-            index = lastIndex_1;
-            match = true;
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -50505,19 +51016,19 @@ public class OracleScriptParser implements Parser {
       }
    }
 
-   //OrExpression : (RelationalExpression ("or" TestNoAlpha OptionalSpacing OrExpression)?)
-   protected boolean orExpression$Rule() {
+   //PlSqlAndExpression : (PlSqlOptionalOrExpression "and" TestNoAlpha OptionalSpacing PlSqlExpression)
+   protected boolean plSqlAndExpression$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
-      if (orExpression$RuleMemoStart == index) {
-         if (orExpression$RuleMemoStart <= orExpression$RuleMemoEnd) {
-            index = orExpression$RuleMemoEnd;
+      if (plSqlAndExpression$RuleMemoStart == index) {
+         if (plSqlAndExpression$RuleMemoStart <= plSqlAndExpression$RuleMemoEnd) {
+            index = plSqlAndExpression$RuleMemoEnd;
             if (! currentRuleIsAtomic) {
-               currentNode = new NodeImpl(OracleScriptRuleType.OR_EXPRESSION, orExpression$RuleMemoStart, orExpression$RuleMemoEnd, true, false);
+               currentNode = new NodeImpl(OracleScriptRuleType.PL_SQL_AND_EXPRESSION, plSqlAndExpression$RuleMemoStart, plSqlAndExpression$RuleMemoEnd, true, false);
                lastNode.setSibling(currentNode);
-               if (orExpression$RuleMemoFirstNode != null) {
-                  currentNode.setFirstChild(orExpression$RuleMemoFirstNode.getFirstChild());
+               if (plSqlAndExpression$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(plSqlAndExpression$RuleMemoFirstNode.getFirstChild());
                }
             }
             return true;
@@ -50526,14 +51037,257 @@ public class OracleScriptParser implements Parser {
          }
       }
       startIndex = index;
-      // (RelationalExpression ("or" TestNoAlpha OptionalSpacing OrExpression)?)
-      // RelationalExpression
-      match = relationalExpression$Rule();
+      // (PlSqlOptionalOrExpression "and" TestNoAlpha OptionalSpacing PlSqlExpression)
+      // PlSqlOptionalOrExpression
+      match = plSqlOptionalOrExpression$Rule();
       if (match) {
-         // ("or" TestNoAlpha OptionalSpacing OrExpression)?
-         Node lastNode_1 = currentNode;
-         int lastIndex_1 = index;
-         // ("or" TestNoAlpha OptionalSpacing OrExpression)
+         // "and"
+         match = ignoreCaseStringMatcher("and", 3);
+         if (match) {
+            // TestNoAlpha
+            match = testNoAlpha$Rule();
+            if (match) {
+               // OptionalSpacing
+               match = optionalSpacing$Rule();
+               if (match) {
+                  // PlSqlExpression
+                  match = plSqlExpression$Rule();
+               }
+            }
+         }
+      }
+      if (match) {
+         plSqlAndExpression$RuleMemoStart = startIndex;
+         plSqlAndExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            plSqlAndExpression$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(OracleScriptRuleType.PL_SQL_AND_EXPRESSION, startIndex, index, true, false);
+            currentNode.setFirstChild(lastNode.getSibling());
+            lastNode.setSibling(currentNode);
+            plSqlAndExpression$RuleMemoFirstNode = currentNode;
+         }
+         return true;
+      } else {
+         plSqlAndExpression$RuleMemoStart = startIndex;
+         plSqlAndExpression$RuleMemoEnd = -1;
+         plSqlAndExpression$RuleMemoFirstNode = null;
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //PlSqlOptionalOrExpression : (PlSqlOrExpression | OptionalRelationalExpression)
+   protected boolean plSqlOptionalOrExpression$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      if (plSqlOptionalOrExpression$RuleMemoStart == index) {
+         if (plSqlOptionalOrExpression$RuleMemoStart <= plSqlOptionalOrExpression$RuleMemoEnd) {
+            index = plSqlOptionalOrExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(OracleScriptRuleType.PL_SQL_OPTIONAL_OR_EXPRESSION, plSqlOptionalOrExpression$RuleMemoStart, plSqlOptionalOrExpression$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (plSqlOptionalOrExpression$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(plSqlOptionalOrExpression$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
+      startIndex = index;
+      // (PlSqlOrExpression | OptionalRelationalExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case '#':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case ':':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '\u00C1':
+         case '\u00C2':
+         case '\u00C3':
+         case '\u00C4':
+         case '\u00C7':
+         case '\u00C8':
+         case '\u00C9':
+         case '\u00CA':
+         case '\u00CB':
+         case '\u00CC':
+         case '\u00CD':
+         case '\u00CE':
+         case '\u00CF':
+         case '\u00D2':
+         case '\u00D3':
+         case '\u00D4':
+         case '\u00D5':
+         case '\u00D6':
+         case '\u00D9':
+         case '\u00DA':
+         case '\u00DB':
+         case '\u00DC':
+         case '\u00E0':
+         case '\u00E1':
+         case '\u00E2':
+         case '\u00E3':
+         case '\u00E4':
+         case '\u00E7':
+         case '\u00E8':
+         case '\u00E9':
+         case '\u00EA':
+         case '\u00EB':
+         case '\u00EC':
+         case '\u00ED':
+         case '\u00EE':
+         case '\u00EF':
+         case '\u00F2':
+         case '\u00F3':
+         case '\u00F4':
+         case '\u00F5':
+         case '\u00F6':
+         case '\u00F9':
+         case '\u00FA':
+         case '\u00FB':
+         case '\u00FC': {
+            // PlSqlOrExpression
+            match = plSqlOrExpression$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // OptionalRelationalExpression
+               match = optionalRelationalExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
+      }
+      if (match) {
+         plSqlOptionalOrExpression$RuleMemoStart = startIndex;
+         plSqlOptionalOrExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            plSqlOptionalOrExpression$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(OracleScriptRuleType.PL_SQL_OPTIONAL_OR_EXPRESSION, startIndex, index, true, true);
+            currentNode.setFirstChild(lastNode.getSibling());
+            lastNode.setSibling(currentNode);
+            plSqlOptionalOrExpression$RuleMemoFirstNode = currentNode;
+         }
+         return true;
+      } else {
+         plSqlOptionalOrExpression$RuleMemoStart = startIndex;
+         plSqlOptionalOrExpression$RuleMemoEnd = -1;
+         plSqlOptionalOrExpression$RuleMemoFirstNode = null;
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //PlSqlOrExpression : (OptionalRelationalExpression "or" TestNoAlpha OptionalSpacing PlSqlOptionalOrExpression)
+   protected boolean plSqlOrExpression$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      if (plSqlOrExpression$RuleMemoStart == index) {
+         if (plSqlOrExpression$RuleMemoStart <= plSqlOrExpression$RuleMemoEnd) {
+            index = plSqlOrExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(OracleScriptRuleType.PL_SQL_OR_EXPRESSION, plSqlOrExpression$RuleMemoStart, plSqlOrExpression$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (plSqlOrExpression$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(plSqlOrExpression$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
+      startIndex = index;
+      // (OptionalRelationalExpression "or" TestNoAlpha OptionalSpacing PlSqlOptionalOrExpression)
+      // OptionalRelationalExpression
+      match = optionalRelationalExpression$Rule();
+      if (match) {
          // "or"
          match = ignoreCaseStringMatcher("or", 2);
          if (match) {
@@ -50543,34 +51297,28 @@ public class OracleScriptParser implements Parser {
                // OptionalSpacing
                match = optionalSpacing$Rule();
                if (match) {
-                  // OrExpression
-                  match = orExpression$Rule();
+                  // PlSqlOptionalOrExpression
+                  match = plSqlOptionalOrExpression$Rule();
                }
             }
          }
-         if (! match) {
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-            index = lastIndex_1;
-            match = true;
-         }
       }
       if (match) {
-         orExpression$RuleMemoStart = startIndex;
-         orExpression$RuleMemoEnd = index;
+         plSqlOrExpression$RuleMemoStart = startIndex;
+         plSqlOrExpression$RuleMemoEnd = index;
          if (currentRuleIsAtomic) {
-            orExpression$RuleMemoFirstNode = null;
+            plSqlOrExpression$RuleMemoFirstNode = null;
          } else {
-            currentNode = new NodeImpl(OracleScriptRuleType.OR_EXPRESSION, startIndex, index, true, false);
+            currentNode = new NodeImpl(OracleScriptRuleType.PL_SQL_OR_EXPRESSION, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
-            orExpression$RuleMemoFirstNode = currentNode;
+            plSqlOrExpression$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
-         orExpression$RuleMemoStart = startIndex;
-         orExpression$RuleMemoEnd = -1;
-         orExpression$RuleMemoFirstNode = null;
+         plSqlOrExpression$RuleMemoStart = startIndex;
+         plSqlOrExpression$RuleMemoEnd = -1;
+         plSqlOrExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -50578,7 +51326,191 @@ public class OracleScriptParser implements Parser {
       }
    }
 
-   //RelationalExpression : (LogicalExpression (RelationalOperator RelationalExpression)?)
+   //OptionalRelationalExpression : (RelationalExpression | LogicalExpression)
+   protected boolean optionalRelationalExpression$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      if (optionalRelationalExpression$RuleMemoStart == index) {
+         if (optionalRelationalExpression$RuleMemoStart <= optionalRelationalExpression$RuleMemoEnd) {
+            index = optionalRelationalExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(OracleScriptRuleType.OPTIONAL_RELATIONAL_EXPRESSION, optionalRelationalExpression$RuleMemoStart, optionalRelationalExpression$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (optionalRelationalExpression$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(optionalRelationalExpression$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
+      startIndex = index;
+      // (RelationalExpression | LogicalExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case '#':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case ':':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '\u00C1':
+         case '\u00C2':
+         case '\u00C3':
+         case '\u00C4':
+         case '\u00C7':
+         case '\u00C8':
+         case '\u00C9':
+         case '\u00CA':
+         case '\u00CB':
+         case '\u00CC':
+         case '\u00CD':
+         case '\u00CE':
+         case '\u00CF':
+         case '\u00D2':
+         case '\u00D3':
+         case '\u00D4':
+         case '\u00D5':
+         case '\u00D6':
+         case '\u00D9':
+         case '\u00DA':
+         case '\u00DB':
+         case '\u00DC':
+         case '\u00E0':
+         case '\u00E1':
+         case '\u00E2':
+         case '\u00E3':
+         case '\u00E4':
+         case '\u00E7':
+         case '\u00E8':
+         case '\u00E9':
+         case '\u00EA':
+         case '\u00EB':
+         case '\u00EC':
+         case '\u00ED':
+         case '\u00EE':
+         case '\u00EF':
+         case '\u00F2':
+         case '\u00F3':
+         case '\u00F4':
+         case '\u00F5':
+         case '\u00F6':
+         case '\u00F9':
+         case '\u00FA':
+         case '\u00FB':
+         case '\u00FC': {
+            // RelationalExpression
+            match = relationalExpression$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // LogicalExpression
+               match = logicalExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
+      }
+      if (match) {
+         optionalRelationalExpression$RuleMemoStart = startIndex;
+         optionalRelationalExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            optionalRelationalExpression$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(OracleScriptRuleType.OPTIONAL_RELATIONAL_EXPRESSION, startIndex, index, true, true);
+            currentNode.setFirstChild(lastNode.getSibling());
+            lastNode.setSibling(currentNode);
+            optionalRelationalExpression$RuleMemoFirstNode = currentNode;
+         }
+         return true;
+      } else {
+         optionalRelationalExpression$RuleMemoStart = startIndex;
+         optionalRelationalExpression$RuleMemoEnd = -1;
+         optionalRelationalExpression$RuleMemoFirstNode = null;
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //RelationalExpression : (LogicalExpression RelationalOperator OptionalRelationalExpression)
    protected boolean relationalExpression$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -50599,25 +51531,15 @@ public class OracleScriptParser implements Parser {
          }
       }
       startIndex = index;
-      // (LogicalExpression (RelationalOperator RelationalExpression)?)
+      // (LogicalExpression RelationalOperator OptionalRelationalExpression)
       // LogicalExpression
       match = logicalExpression$Rule();
       if (match) {
-         // (RelationalOperator RelationalExpression)?
-         Node lastNode_1 = currentNode;
-         int lastIndex_1 = index;
-         // (RelationalOperator RelationalExpression)
          // RelationalOperator
          match = relationalOperator$Rule();
          if (match) {
-            // RelationalExpression
-            match = relationalExpression$Rule();
-         }
-         if (! match) {
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-            index = lastIndex_1;
-            match = true;
+            // OptionalRelationalExpression
+            match = optionalRelationalExpression$Rule();
          }
       }
       if (match) {
@@ -50643,13 +51565,28 @@ public class OracleScriptParser implements Parser {
       }
    }
 
-   //LogicalExpression : (InExpression | BetweenExpression | LikeExpression | IsNullExpression | NotExpression | PlSqlMathExpression)
+   //LogicalExpression : (InExpression | BetweenExpression | LikeExpression | IsNullExpression | NotExpression | PlSqlOptionalMathExpression)
    protected boolean logicalExpression$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (logicalExpression$RuleMemoStart == index) {
+         if (logicalExpression$RuleMemoStart <= logicalExpression$RuleMemoEnd) {
+            index = logicalExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(OracleScriptRuleType.LOGICAL_EXPRESSION, logicalExpression$RuleMemoStart, logicalExpression$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (logicalExpression$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(logicalExpression$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
-      // (InExpression | BetweenExpression | LikeExpression | IsNullExpression | NotExpression | PlSqlMathExpression)
+      // (InExpression | BetweenExpression | LikeExpression | IsNullExpression | NotExpression | PlSqlOptionalMathExpression)
       Node lastNode_1 = currentNode;
       int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
@@ -50791,8 +51728,8 @@ public class OracleScriptParser implements Parser {
                         index = lastIndex_1;
                         lastNode_1.setSibling(null);
                         currentNode = lastNode_1;
-                        // PlSqlMathExpression
-                        match = plSqlMathExpression$Rule();
+                        // PlSqlOptionalMathExpression
+                        match = plSqlOptionalMathExpression$Rule();
                         if (! match) {
                            index = lastIndex_1;
                            lastNode_1.setSibling(null);
@@ -50836,8 +51773,8 @@ public class OracleScriptParser implements Parser {
                            index = lastIndex_1;
                            lastNode_1.setSibling(null);
                            currentNode = lastNode_1;
-                           // PlSqlMathExpression
-                           match = plSqlMathExpression$Rule();
+                           // PlSqlOptionalMathExpression
+                           match = plSqlOptionalMathExpression$Rule();
                            if (! match) {
                               index = lastIndex_1;
                               lastNode_1.setSibling(null);
@@ -50855,13 +51792,21 @@ public class OracleScriptParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         logicalExpression$RuleMemoStart = startIndex;
+         logicalExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            logicalExpression$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(OracleScriptRuleType.LOGICAL_EXPRESSION, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            logicalExpression$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         logicalExpression$RuleMemoStart = startIndex;
+         logicalExpression$RuleMemoEnd = -1;
+         logicalExpression$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -51148,7 +52093,7 @@ public class OracleScriptParser implements Parser {
       }
    }
 
-   //NotExpression : ("not" TestNoAlpha OptionalSpacing RelationalExpression)
+   //NotExpression : ("not" TestNoAlpha OptionalSpacing OptionalRelationalExpression)
    protected boolean notExpression$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -51169,7 +52114,7 @@ public class OracleScriptParser implements Parser {
          }
       }
       startIndex = index;
-      // ("not" TestNoAlpha OptionalSpacing RelationalExpression)
+      // ("not" TestNoAlpha OptionalSpacing OptionalRelationalExpression)
       // "not"
       match = ignoreCaseStringMatcher("not", 3);
       if (match) {
@@ -51179,8 +52124,8 @@ public class OracleScriptParser implements Parser {
             // OptionalSpacing
             match = optionalSpacing$Rule();
             if (match) {
-               // RelationalExpression
-               match = relationalExpression$Rule();
+               // OptionalRelationalExpression
+               match = optionalRelationalExpression$Rule();
             }
          }
       }
@@ -51207,7 +52152,191 @@ public class OracleScriptParser implements Parser {
       }
    }
 
-   //PlSqlMathExpression : (PlSqlUnaryExpression (SqlMathOperator PlSqlMathExpression)?)
+   //PlSqlOptionalMathExpression : (PlSqlMathExpression | PlSqlOptionalUnaryExpression)
+   protected boolean plSqlOptionalMathExpression$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      if (plSqlOptionalMathExpression$RuleMemoStart == index) {
+         if (plSqlOptionalMathExpression$RuleMemoStart <= plSqlOptionalMathExpression$RuleMemoEnd) {
+            index = plSqlOptionalMathExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(OracleScriptRuleType.PL_SQL_OPTIONAL_MATH_EXPRESSION, plSqlOptionalMathExpression$RuleMemoStart, plSqlOptionalMathExpression$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (plSqlOptionalMathExpression$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(plSqlOptionalMathExpression$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
+      startIndex = index;
+      // (PlSqlMathExpression | PlSqlOptionalUnaryExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case '\"':
+         case '#':
+         case '$':
+         case '\'':
+         case '(':
+         case '+':
+         case '-':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case ':':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '\u00C1':
+         case '\u00C2':
+         case '\u00C3':
+         case '\u00C4':
+         case '\u00C7':
+         case '\u00C8':
+         case '\u00C9':
+         case '\u00CA':
+         case '\u00CB':
+         case '\u00CC':
+         case '\u00CD':
+         case '\u00CE':
+         case '\u00CF':
+         case '\u00D2':
+         case '\u00D3':
+         case '\u00D4':
+         case '\u00D5':
+         case '\u00D6':
+         case '\u00D9':
+         case '\u00DA':
+         case '\u00DB':
+         case '\u00DC':
+         case '\u00E0':
+         case '\u00E1':
+         case '\u00E2':
+         case '\u00E3':
+         case '\u00E4':
+         case '\u00E7':
+         case '\u00E8':
+         case '\u00E9':
+         case '\u00EA':
+         case '\u00EB':
+         case '\u00EC':
+         case '\u00ED':
+         case '\u00EE':
+         case '\u00EF':
+         case '\u00F2':
+         case '\u00F3':
+         case '\u00F4':
+         case '\u00F5':
+         case '\u00F6':
+         case '\u00F9':
+         case '\u00FA':
+         case '\u00FB':
+         case '\u00FC': {
+            // PlSqlMathExpression
+            match = plSqlMathExpression$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // PlSqlOptionalUnaryExpression
+               match = plSqlOptionalUnaryExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
+      }
+      if (match) {
+         plSqlOptionalMathExpression$RuleMemoStart = startIndex;
+         plSqlOptionalMathExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            plSqlOptionalMathExpression$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(OracleScriptRuleType.PL_SQL_OPTIONAL_MATH_EXPRESSION, startIndex, index, true, true);
+            currentNode.setFirstChild(lastNode.getSibling());
+            lastNode.setSibling(currentNode);
+            plSqlOptionalMathExpression$RuleMemoFirstNode = currentNode;
+         }
+         return true;
+      } else {
+         plSqlOptionalMathExpression$RuleMemoStart = startIndex;
+         plSqlOptionalMathExpression$RuleMemoEnd = -1;
+         plSqlOptionalMathExpression$RuleMemoFirstNode = null;
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //PlSqlMathExpression : (PlSqlOptionalUnaryExpression SqlMathOperator PlSqlOptionalMathExpression)
    protected boolean plSqlMathExpression$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -51228,25 +52357,15 @@ public class OracleScriptParser implements Parser {
          }
       }
       startIndex = index;
-      // (PlSqlUnaryExpression (SqlMathOperator PlSqlMathExpression)?)
-      // PlSqlUnaryExpression
-      match = plSqlUnaryExpression$Rule();
+      // (PlSqlOptionalUnaryExpression SqlMathOperator PlSqlOptionalMathExpression)
+      // PlSqlOptionalUnaryExpression
+      match = plSqlOptionalUnaryExpression$Rule();
       if (match) {
-         // (SqlMathOperator PlSqlMathExpression)?
-         Node lastNode_1 = currentNode;
-         int lastIndex_1 = index;
-         // (SqlMathOperator PlSqlMathExpression)
          // SqlMathOperator
          match = sqlMathOperator$Rule();
          if (match) {
-            // PlSqlMathExpression
-            match = plSqlMathExpression$Rule();
-         }
-         if (! match) {
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-            index = lastIndex_1;
-            match = true;
+            // PlSqlOptionalMathExpression
+            match = plSqlOptionalMathExpression$Rule();
          }
       }
       if (match) {
@@ -51272,7 +52391,200 @@ public class OracleScriptParser implements Parser {
       }
    }
 
-   //PlSqlUnaryExpression : (((('+' | '-') OptionalSpacing) PlSqlUnaryExpression) | PlSqlAtomicExpression)
+   //PlSqlOptionalUnaryExpression : (PlSqlUnaryExpression | PlSqlAtomicExpression)
+   protected boolean plSqlOptionalUnaryExpression$Rule() {
+      Node lastNode = currentNode;
+      int startIndex;
+      boolean match;
+      if (plSqlOptionalUnaryExpression$RuleMemoStart == index) {
+         if (plSqlOptionalUnaryExpression$RuleMemoStart <= plSqlOptionalUnaryExpression$RuleMemoEnd) {
+            index = plSqlOptionalUnaryExpression$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(OracleScriptRuleType.PL_SQL_OPTIONAL_UNARY_EXPRESSION, plSqlOptionalUnaryExpression$RuleMemoStart, plSqlOptionalUnaryExpression$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (plSqlOptionalUnaryExpression$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(plSqlOptionalUnaryExpression$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
+      startIndex = index;
+      // (PlSqlUnaryExpression | PlSqlAtomicExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case '+':
+         case '-': {
+            // PlSqlUnaryExpression
+            match = plSqlUnaryExpression$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // PlSqlAtomicExpression
+               match = plSqlAtomicExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '\"':
+         case '#':
+         case '$':
+         case '\'':
+         case '(':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case ':':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '\u00C1':
+         case '\u00C2':
+         case '\u00C3':
+         case '\u00C4':
+         case '\u00C7':
+         case '\u00C8':
+         case '\u00C9':
+         case '\u00CA':
+         case '\u00CB':
+         case '\u00CC':
+         case '\u00CD':
+         case '\u00CE':
+         case '\u00CF':
+         case '\u00D2':
+         case '\u00D3':
+         case '\u00D4':
+         case '\u00D5':
+         case '\u00D6':
+         case '\u00D9':
+         case '\u00DA':
+         case '\u00DB':
+         case '\u00DC':
+         case '\u00E0':
+         case '\u00E1':
+         case '\u00E2':
+         case '\u00E3':
+         case '\u00E4':
+         case '\u00E7':
+         case '\u00E8':
+         case '\u00E9':
+         case '\u00EA':
+         case '\u00EB':
+         case '\u00EC':
+         case '\u00ED':
+         case '\u00EE':
+         case '\u00EF':
+         case '\u00F2':
+         case '\u00F3':
+         case '\u00F4':
+         case '\u00F5':
+         case '\u00F6':
+         case '\u00F9':
+         case '\u00FA':
+         case '\u00FB':
+         case '\u00FC': {
+            // PlSqlAtomicExpression
+            match = plSqlAtomicExpression$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
+      }
+      if (match) {
+         plSqlOptionalUnaryExpression$RuleMemoStart = startIndex;
+         plSqlOptionalUnaryExpression$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            plSqlOptionalUnaryExpression$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(OracleScriptRuleType.PL_SQL_OPTIONAL_UNARY_EXPRESSION, startIndex, index, true, true);
+            currentNode.setFirstChild(lastNode.getSibling());
+            lastNode.setSibling(currentNode);
+            plSqlOptionalUnaryExpression$RuleMemoFirstNode = currentNode;
+         }
+         return true;
+      } else {
+         plSqlOptionalUnaryExpression$RuleMemoStart = startIndex;
+         plSqlOptionalUnaryExpression$RuleMemoEnd = -1;
+         plSqlOptionalUnaryExpression$RuleMemoFirstNode = null;
+         index = startIndex;
+         lastNode.setSibling(null);
+         currentNode = lastNode;
+         return false;
+      }
+   }
+
+   //PlSqlUnaryExpression : ((('+' | '-') OptionalSpacing) PlSqlOptionalUnaryExpression)
    protected boolean plSqlUnaryExpression$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -51293,13 +52605,10 @@ public class OracleScriptParser implements Parser {
          }
       }
       startIndex = index;
-      // (((('+' | '-') OptionalSpacing) PlSqlUnaryExpression) | PlSqlAtomicExpression)
-      Node lastNode_1 = currentNode;
-      int lastIndex_1 = index;
-      // ((('+' | '-') OptionalSpacing) PlSqlUnaryExpression)
+      // ((('+' | '-') OptionalSpacing) PlSqlOptionalUnaryExpression)
       // (('+' | '-') OptionalSpacing)
       // ('+' | '-')
-      int startIndex_2 = index;
+      int startIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '+': {
             ++index;
@@ -51318,9 +52627,9 @@ public class OracleScriptParser implements Parser {
          }
       }
       if (! match) {
-         index = startIndex_2;
+         index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_2, index, false, false));
+         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -51328,20 +52637,8 @@ public class OracleScriptParser implements Parser {
          match = optionalSpacing$Rule();
       }
       if (match) {
-         // PlSqlUnaryExpression
-         match = plSqlUnaryExpression$Rule();
-      }
-      if (! match) {
-         index = lastIndex_1;
-         lastNode_1.setSibling(null);
-         currentNode = lastNode_1;
-         // PlSqlAtomicExpression
-         match = plSqlAtomicExpression$Rule();
-         if (! match) {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-         }
+         // PlSqlOptionalUnaryExpression
+         match = plSqlOptionalUnaryExpression$Rule();
       }
       if (match) {
          plSqlUnaryExpression$RuleMemoStart = startIndex;
@@ -51366,7 +52663,7 @@ public class OracleScriptParser implements Parser {
       }
    }
 
-   //NumericExpression : PlSqlMathExpression
+   //NumericExpression : PlSqlOptionalMathExpression
    protected boolean numericExpression$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -51387,8 +52684,8 @@ public class OracleScriptParser implements Parser {
          }
       }
       startIndex = index;
-      // PlSqlMathExpression
-      match = plSqlMathExpression$Rule();
+      // PlSqlOptionalMathExpression
+      match = plSqlOptionalMathExpression$Rule();
       if (match) {
          numericExpression$RuleMemoStart = startIndex;
          numericExpression$RuleMemoEnd = index;

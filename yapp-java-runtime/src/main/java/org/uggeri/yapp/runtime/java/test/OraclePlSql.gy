@@ -14,11 +14,19 @@ PlSqlSource : CreatePackageBody
             | AnonymousPlSqlBlock;
 
 @SkipNode
-PlSqlExpression : OrExpression ("and" PlSqlExpression)?;
+PlSqlExpression : PlSqlAndExpression | PlSqlOptionalOrExpression;
 
-OrExpression : RelationalExpression ("or" OrExpression)?;
+PlSqlAndExpression : PlSqlOptionalOrExpression "and" PlSqlExpression;
 
-RelationalExpression : LogicalExpression (RelationalOperator RelationalExpression)?;
+@SkipNode
+PlSqlOptionalOrExpression : PlSqlOrExpression | OptionalRelationalExpression;
+
+PlSqlOrExpression : OptionalRelationalExpression "or" PlSqlOptionalOrExpression;
+
+@SkipNode
+OptionalRelationalExpression : RelationalExpression | LogicalExpression;
+
+RelationalExpression : LogicalExpression RelationalOperator OptionalRelationalExpression;
 
 @SkipNode
 LogicalExpression : InExpression 
@@ -26,7 +34,7 @@ LogicalExpression : InExpression
                   | LikeExpression 
                   | IsNullExpression 
                   | NotExpression
-                  | PlSqlMathExpression;
+                  | PlSqlOptionalMathExpression;
 
 InExpression : NumericExpression Not? "in" PlSqlExpressionList;
 
@@ -36,14 +44,20 @@ LikeExpression : NumericExpression Not? "like" PlSqlExpression;
 
 IsNullExpression : NumericExpression "is" Nullable;
 
-NotExpression : "not" RelationalExpression;
-
-PlSqlMathExpression : PlSqlUnaryExpression (SqlMathOperator PlSqlMathExpression)?;
-
-PlSqlUnaryExpression : (('+' | '-') PlSqlUnaryExpression) | PlSqlAtomicExpression;
+NotExpression : "not" OptionalRelationalExpression;
 
 @SkipNode
-NumericExpression : PlSqlMathExpression;
+PlSqlOptionalMathExpression : PlSqlMathExpression | PlSqlOptionalUnaryExpression;
+
+PlSqlMathExpression : PlSqlOptionalUnaryExpression SqlMathOperator PlSqlOptionalMathExpression;
+
+@SkipNode
+PlSqlOptionalUnaryExpression : PlSqlUnaryExpression | PlSqlAtomicExpression;
+
+PlSqlUnaryExpression : ('+' | '-') PlSqlOptionalUnaryExpression;
+
+@SkipNode
+NumericExpression : PlSqlOptionalMathExpression;
 
 @SkipNode
 PlSqlParenthesesExpression : '(' PlSqlExpression ')';

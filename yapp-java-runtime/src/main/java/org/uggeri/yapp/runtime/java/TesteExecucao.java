@@ -280,7 +280,7 @@ public class TesteExecucao {
          if (node != null) {
             //printTree(inputBuffer, node, 0);
 //            System.out.println("==============================");
-            //printSemanticTree(inputBuffer, node, 0);
+            printSemanticTree(inputBuffer, node, 0);
             //new ParseTreeWalker().walk(node, new JavaVisitor(inputBuffer));
          } else {
             System.out.println("Index error: " + parser.getMismatches());

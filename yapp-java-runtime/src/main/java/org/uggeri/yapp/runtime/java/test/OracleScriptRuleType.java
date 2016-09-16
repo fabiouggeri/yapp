@@ -5754,6 +5754,58 @@ public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
          visitor.exitSqlCondition(node);
       }
    },
+   AND_CONDITION {
+      @Override
+      public String getLabel() {
+         return "AndCondition";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(OracleScriptVisitor visitor, Node node) {
+         visitor.enterAndCondition(node);
+      }
+
+      @Override
+      public void exitRule(OracleScriptVisitor visitor, Node node) {
+         visitor.exitAndCondition(node);
+      }
+   },
+   OPTIONAL_OR_CONDITION {
+      @Override
+      public String getLabel() {
+         return "OptionalOrCondition";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return true;
+      }
+
+      @Override
+      public void enterRule(OracleScriptVisitor visitor, Node node) {
+         visitor.enterOptionalOrCondition(node);
+      }
+
+      @Override
+      public void exitRule(OracleScriptVisitor visitor, Node node) {
+         visitor.exitOptionalOrCondition(node);
+      }
+   },
    OR_CONDITION {
       @Override
       public String getLabel() {
@@ -11526,10 +11578,10 @@ public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
          visitor.exitPlSqlExpression(node);
       }
    },
-   OR_EXPRESSION {
+   PL_SQL_AND_EXPRESSION {
       @Override
       public String getLabel() {
-         return "OrExpression";
+         return "PlSqlAndExpression";
       }
 
       @Override
@@ -11544,12 +11596,90 @@ public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
 
       @Override
       public void enterRule(OracleScriptVisitor visitor, Node node) {
-         visitor.enterOrExpression(node);
+         visitor.enterPlSqlAndExpression(node);
       }
 
       @Override
       public void exitRule(OracleScriptVisitor visitor, Node node) {
-         visitor.exitOrExpression(node);
+         visitor.exitPlSqlAndExpression(node);
+      }
+   },
+   PL_SQL_OPTIONAL_OR_EXPRESSION {
+      @Override
+      public String getLabel() {
+         return "PlSqlOptionalOrExpression";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return true;
+      }
+
+      @Override
+      public void enterRule(OracleScriptVisitor visitor, Node node) {
+         visitor.enterPlSqlOptionalOrExpression(node);
+      }
+
+      @Override
+      public void exitRule(OracleScriptVisitor visitor, Node node) {
+         visitor.exitPlSqlOptionalOrExpression(node);
+      }
+   },
+   PL_SQL_OR_EXPRESSION {
+      @Override
+      public String getLabel() {
+         return "PlSqlOrExpression";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(OracleScriptVisitor visitor, Node node) {
+         visitor.enterPlSqlOrExpression(node);
+      }
+
+      @Override
+      public void exitRule(OracleScriptVisitor visitor, Node node) {
+         visitor.exitPlSqlOrExpression(node);
+      }
+   },
+   OPTIONAL_RELATIONAL_EXPRESSION {
+      @Override
+      public String getLabel() {
+         return "OptionalRelationalExpression";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return true;
+      }
+
+      @Override
+      public void enterRule(OracleScriptVisitor visitor, Node node) {
+         visitor.enterOptionalRelationalExpression(node);
+      }
+
+      @Override
+      public void exitRule(OracleScriptVisitor visitor, Node node) {
+         visitor.exitOptionalRelationalExpression(node);
       }
    },
    RELATIONAL_EXPRESSION {
@@ -11734,6 +11864,32 @@ public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
          visitor.exitNotExpression(node);
       }
    },
+   PL_SQL_OPTIONAL_MATH_EXPRESSION {
+      @Override
+      public String getLabel() {
+         return "PlSqlOptionalMathExpression";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return true;
+      }
+
+      @Override
+      public void enterRule(OracleScriptVisitor visitor, Node node) {
+         visitor.enterPlSqlOptionalMathExpression(node);
+      }
+
+      @Override
+      public void exitRule(OracleScriptVisitor visitor, Node node) {
+         visitor.exitPlSqlOptionalMathExpression(node);
+      }
+   },
    PL_SQL_MATH_EXPRESSION {
       @Override
       public String getLabel() {
@@ -11758,6 +11914,32 @@ public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
       @Override
       public void exitRule(OracleScriptVisitor visitor, Node node) {
          visitor.exitPlSqlMathExpression(node);
+      }
+   },
+   PL_SQL_OPTIONAL_UNARY_EXPRESSION {
+      @Override
+      public String getLabel() {
+         return "PlSqlOptionalUnaryExpression";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return true;
+      }
+
+      @Override
+      public void enterRule(OracleScriptVisitor visitor, Node node) {
+         visitor.enterPlSqlOptionalUnaryExpression(node);
+      }
+
+      @Override
+      public void exitRule(OracleScriptVisitor visitor, Node node) {
+         visitor.exitPlSqlOptionalUnaryExpression(node);
       }
    },
    PL_SQL_UNARY_EXPRESSION {

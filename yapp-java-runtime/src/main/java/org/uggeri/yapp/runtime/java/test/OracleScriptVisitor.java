@@ -672,6 +672,12 @@ public abstract class OracleScriptVisitor implements NodeVisitor {
    public void enterSqlCondition(Node node) {}
    public void exitSqlCondition(Node node) {}
 
+   public void enterAndCondition(Node node) {}
+   public void exitAndCondition(Node node) {}
+
+   public void enterOptionalOrCondition(Node node) {}
+   public void exitOptionalOrCondition(Node node) {}
+
    public void enterOrCondition(Node node) {}
    public void exitOrCondition(Node node) {}
 
@@ -1338,8 +1344,17 @@ public abstract class OracleScriptVisitor implements NodeVisitor {
    public void enterPlSqlExpression(Node node) {}
    public void exitPlSqlExpression(Node node) {}
 
-   public void enterOrExpression(Node node) {}
-   public void exitOrExpression(Node node) {}
+   public void enterPlSqlAndExpression(Node node) {}
+   public void exitPlSqlAndExpression(Node node) {}
+
+   public void enterPlSqlOptionalOrExpression(Node node) {}
+   public void exitPlSqlOptionalOrExpression(Node node) {}
+
+   public void enterPlSqlOrExpression(Node node) {}
+   public void exitPlSqlOrExpression(Node node) {}
+
+   public void enterOptionalRelationalExpression(Node node) {}
+   public void exitOptionalRelationalExpression(Node node) {}
 
    public void enterRelationalExpression(Node node) {}
    public void exitRelationalExpression(Node node) {}
@@ -1362,8 +1377,14 @@ public abstract class OracleScriptVisitor implements NodeVisitor {
    public void enterNotExpression(Node node) {}
    public void exitNotExpression(Node node) {}
 
+   public void enterPlSqlOptionalMathExpression(Node node) {}
+   public void exitPlSqlOptionalMathExpression(Node node) {}
+
    public void enterPlSqlMathExpression(Node node) {}
    public void exitPlSqlMathExpression(Node node) {}
+
+   public void enterPlSqlOptionalUnaryExpression(Node node) {}
+   public void exitPlSqlOptionalUnaryExpression(Node node) {}
 
    public void enterPlSqlUnaryExpression(Node node) {}
    public void exitPlSqlUnaryExpression(Node node) {}

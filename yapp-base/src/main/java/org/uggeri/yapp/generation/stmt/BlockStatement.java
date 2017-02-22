@@ -16,6 +16,8 @@ public interface BlockStatement extends Statement {
    
    public VariableDeclaration declareVariable(final DataType dataType, final String name);   
    public VariableDeclaration declareVariable(final DataType dataType, final String name, final Object initialValue);
+   public void incVar(final Expression var);
+   public void decVar(final Expression var);
    public void setValue(final Expression left, final Object right);
    public void statementExpression(final Object expr);
    public void returnStatement(final Object expr);

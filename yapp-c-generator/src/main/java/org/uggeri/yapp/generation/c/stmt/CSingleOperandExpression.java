@@ -15,9 +15,9 @@ import org.uggeri.yapp.generation.stmt.SingleOperandExpression;
  */
 public class CSingleOperandExpression extends CExpression implements SingleOperandExpression {
    
-   private Operator operator;
+   private final Operator operator;
 
-   private Expression expression;
+   private final Expression expression;
 
    public CSingleOperandExpression(Operator operator, Expression expression) {
       this.operator = operator;

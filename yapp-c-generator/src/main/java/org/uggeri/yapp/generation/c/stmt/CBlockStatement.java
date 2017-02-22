@@ -45,6 +45,16 @@ public class CBlockStatement extends AbstractCCodeFragment implements BlockState
    }
 
    @Override
+   public void decVar(Expression var) {
+      statements.add(new CStatementCode(var.preDec()));
+   }
+
+   @Override
+   public void incVar(Expression var) {
+      statements.add(new CStatementCode(var.preInc()));
+   }
+
+   @Override
    public void setValue(final Expression var, final Object expr) {
       statements.add(new CStatementCode(var.assign(asExpression(expr))));
    }

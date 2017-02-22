@@ -121,6 +121,8 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
    protected static final String CHAR_INI_VAR_NAME = "charIni";
 
    protected static final String CHAR_END_VAR_NAME = "charEnd";
+   
+   // protected static final String TEST_COUNT_VAR_NAME = "testCount";
 
    private final List<NonTerminalRule> followLiterals = new ArrayList<NonTerminalRule>();
 
@@ -170,6 +172,8 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
 
    protected Expression indexVar;
 
+   // private Expression testCount;
+   
    protected Expression traceVar;
 
    protected Expression tracePathVar;
@@ -205,6 +209,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
    private Variable charIniVar;
 
    private Variable charEndVar;
+   
 
    private FunctionDefinition eoiFunction;
 
@@ -287,6 +292,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       catchTerminalMismatchVar = parserVar.member(var(CATCH_TERMINAL_MISMATCH_VAR_NAME));
       currentNodeVar = parserVar.member(var(CURRENT_NODE_VAR_NAME));
       tailRuleVar = parserVar.member(var(TAIL_RULE_VAR_NAME));
+      // testCount = parserVar.member(var(TEST_COUNT_VAR_NAME));
       oldIgnoreMismatchVar = var(OLD_IGNORE_MISMATCH_VAR_NAME);
       oldCatchTerminalMismatchVar = var(OLD_CATCH_TERM_MISMATCH_VAR_NAME);
       lastRuleIsAtomicVar = var(LAST_RULE_ATOMIC_VAR_NAME);
@@ -480,6 +486,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       final boolean memoize;
       final boolean syntaxOnly = rule.getOptions().containsKey(NonTerminalOption.SYNTAX_ONLY);
       final boolean catchMismatch = rule.getOptions().containsKey(NonTerminalOption.CATCH_MISMATCH);
+      final boolean ignoreEmpty = rule.getOptions().containsKey(NonTerminalOption.IGNORE_EMPTY);
       auxVarNumber = 1;
 
       currentNonTerminalRule = rule;
@@ -490,7 +497,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       beginFunction(defineFunction(functionScope(), BOOLEAN, rule.getMethodName()));
       declareLocalVariables(grammar, rule, memoize, syntaxOnly, catchMismatch);
       traceCodeEnterRule(duplicateString(rule.getName(), rule.getName().length(), null));
-      memoizationCode(grammar, rule, memoize, syntaxOnly, skipNode, catchMismatch);
+      memoizationCode(grammar, rule, memoize, syntaxOnly, skipNode, catchMismatch, ignoreEmpty);
       if (atomicRule) {
          setValue(currentRuleIsAtomicVar, true);
       }
@@ -510,7 +517,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       }
       rule.getRule().visit(getOptions(), this);
       ifStmt(matchVar);
-      matchExitRule(grammar, rule, memoize, skipNode, syntaxOnly, catchMismatch);
+      matchExitRule(grammar, rule, memoize, skipNode, syntaxOnly, catchMismatch, ignoreEmpty);
       elseStmt();
       mismatchExitRule(grammar, rule, memoize, syntaxOnly, catchMismatch);
       endIf();
@@ -611,11 +618,11 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       return var(rule.getMethodName() + "Try");
    }
 
-   private void memoizationCode(final Grammar grammar, NonTerminalRule rule, boolean memoize, final boolean syntaxOnly, final boolean skipNode, final boolean catchMismatch) {
+   private void memoizationCode(final Grammar grammar, NonTerminalRule rule, boolean memoize, final boolean syntaxOnly, final boolean skipNode, final boolean catchMismatch, final boolean ignoreEmpty) {
       if (memoize && !isTest(rule.getRule())) {
          ifStmt(parserVar.member(memoVarStart(rule)).equal(indexVar));
          ifStmt(parserVar.member(memoVarStart(rule)).lessOrEqual(parserVar.member(memoVarEnd(rule))));
-         memorizedMatchExitRule(grammar, rule, syntaxOnly, skipNode, catchMismatch);
+         memorizedMatchExitRule(grammar, rule, syntaxOnly, skipNode, catchMismatch, ignoreEmpty);
          elseStmt();
          memorizedMismatchExitRule(grammar, rule, syntaxOnly, catchMismatch);
          endIf();
@@ -673,10 +680,14 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       }
    }
 
-   private void memorizedMatchExitRule(final Grammar grammar, final NonTerminalRule rule, final boolean syntaxOnly, final boolean skipNode, final boolean catchMismatch) {
+   private void memorizedMatchExitRule(final Grammar grammar, final NonTerminalRule rule, final boolean syntaxOnly, final boolean skipNode, final boolean catchMismatch, final boolean ignoreEmpty) {
       setValue(indexVar, parserVar.member(memoVarEnd(rule)));
       if (!isTest(rule.getRule())) {
-         ifStmt(not(currentRuleIsAtomicVar));
+         if (ignoreEmpty) {
+            ifStmt(not(currentRuleIsAtomicVar).and(parserVar.member(memoVarEnd(rule))).greater(parserVar.member(memoVarStart(rule))));
+         } else {
+            ifStmt(not(currentRuleIsAtomicVar));
+         }
          setValue(currentNodeVar, createNodeFunCall(ruleReference(grammar, rule), parserVar.member(memoVarStart(rule)), parserVar.member(memoVarEnd(rule)), !syntaxOnly, skipNode));
          setSibling(lastNodeVar, currentNodeVar);
          ifStmt(parserVar.member(memoVarFirstNode(rule)).diff(null));
@@ -690,7 +701,7 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       returnStmt(true);
    }
 
-   private void matchExitRule(final Grammar grammar, final NonTerminalRule rule, final boolean memoize, final boolean skipNode, final boolean syntaxOnly, final boolean catchMismatch) {
+   private void matchExitRule(final Grammar grammar, final NonTerminalRule rule, final boolean memoize, final boolean skipNode, final boolean syntaxOnly, final boolean catchMismatch, final boolean ignoreEmpty) {
       if (atomicRule) {
          setValue(currentRuleIsAtomicVar, lastRuleIsAtomicVar);
       }
@@ -698,11 +709,23 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
          if (memoize) {
             setValue(parserVar.member(memoVarStart(rule)), startIndexVar);
             setValue(parserVar.member(memoVarEnd(rule)), indexVar);
-            ifStmt(currentRuleIsAtomicVar);
+            if (ignoreEmpty) {
+               //ifStmt(currentRuleIsAtomicVar.or(testCount.greater(0)).or(indexVar.equal(startIndexVar)));
+               ifStmt(currentRuleIsAtomicVar.or(indexVar.equal(startIndexVar)));
+            } else {
+               // ifStmt(currentRuleIsAtomicVar.or(testCount.greater(0)));
+               ifStmt(currentRuleIsAtomicVar);
+            }
             setValue(parserVar.member(memoVarFirstNode(rule)), null);
             elseStmt();
          } else {
-            ifStmt(not(currentRuleIsAtomicVar));
+            if (ignoreEmpty) {
+               // ifStmt(not(currentRuleIsAtomicVar).and(testCount.equal(0)).and(indexVar.greater(startIndexVar)));
+               ifStmt(not(currentRuleIsAtomicVar).and(indexVar.greater(startIndexVar)));
+            } else {
+               // ifStmt(not(currentRuleIsAtomicVar).and(testCount.equal(0)));
+               ifStmt(not(currentRuleIsAtomicVar));
+            }
          }
          setValue(currentNodeVar, createNodeFunCall(ruleReference(grammar, rule), startIndexVar, indexVar, !syntaxOnly, skipNode));
          /* quanto o noh eh atomico, nao possui subnos */
@@ -1187,13 +1210,17 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       if (testVisitor.isOnlyTest()) {
          final boolean oldOnlyTest = onlyTest;
          onlyTest = true;
+         //incVar(testCount);
          rule.getRule().visit(options, this);
+         //decVar(testCount);
          onlyTest = oldOnlyTest;
       } else {
          final Variable auxNodeVar = declareVarStmt(NODE, "lastNode_" + auxVarNumber, currentNodeVar).getVariable();
          final Variable auxIndexVar = declareVarStmt(INTEGER, "lastIndex_" + auxVarNumber, indexVar).getVariable();
          final Variable auxAtomicVar = declareVarStmt(BOOLEAN, "lastAtomic_" + auxVarNumber++, currentRuleIsAtomicVar).getVariable();
+         //incVar(testCount);
          rule.getRule().visit(options, this);
+         //decVar(testCount);
          setValue(currentRuleIsAtomicVar, auxAtomicVar);
          setValue(indexVar, auxIndexVar);
          setSibling(auxNodeVar, null);
@@ -1212,14 +1239,18 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
       if (testVisitor.isOnlyTest()) {
          final boolean oldOnlyTest = onlyTest;
          onlyTest = true;
+         //incVar(testCount);
          rule.getRule().visit(options, this);
+         //decVar(testCount);
          setValue(matchVar, not(matchVar));
          onlyTest = oldOnlyTest;
       } else {
          final Variable auxNodeVar = declareVarStmt(NODE, "lastNode_" + auxVarNumber, currentNodeVar).getVariable();
          final Variable auxIndexVar = declareVarStmt(INTEGER, "lastIndex_" + auxVarNumber, indexVar).getVariable();
          final Variable auxAtomicVar = declareVarStmt(BOOLEAN, "lastAtomic_" + auxVarNumber++, currentRuleIsAtomicVar).getVariable();
+         //incVar(testCount);
          rule.getRule().visit(options, this);
+         //decVar(testCount);
          setValue(currentRuleIsAtomicVar, auxAtomicVar);
          setValue(indexVar, auxIndexVar);
          setSibling(auxNodeVar, null);
@@ -1631,6 +1662,14 @@ public abstract class AbstractParserGenerator implements ParserGenerator, Gramma
 
    protected void setValue(final Expression left, final Object right) {
       statements.peek().setValue(left, right);
+   }
+
+   protected void incVar(final Expression val) {
+      statements.peek().incVar(val);
+   }
+
+   protected void decVar(final Expression val) {
+      statements.peek().decVar(val);
    }
 
    public Deque<BlockStatement> getStatements() {

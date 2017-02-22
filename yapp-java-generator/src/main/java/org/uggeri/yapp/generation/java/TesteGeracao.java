@@ -52,8 +52,8 @@ public class TesteGeracao {
       //new TesteGeracao().showFirstLiterals();
       //new TesteGeracao().testeGeracaoJava();
       //new TesteGeracao().testeGeracaoHarbourPP();
-      new TesteGeracao().testeGeracaoPlSql();
-      // new TesteGeracao().testeGeracaoHarbour();
+      //new TesteGeracao().testeGeracaoPlSql();
+       new TesteGeracao().testeGeracaoHarbour();
    }
 
    private void showFirstLiterals() {
@@ -169,8 +169,8 @@ public class TesteGeracao {
          GrammarLoader gr;
          Grammar g;
          gr = new GrammarLoader();
-         g = gr.loadGrammar(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test\\HarbourUnprocessed.gy"));
-         options = new JavaParserGenerationOptions(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test"),
+         g = gr.loadGrammar(new File("C:\\Users\\fabio_uggeri\\sicredi\\sistemas\\externos\\fabiouggeri\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test\\HarbourUnprocessed.gy"));
+         options = new JavaParserGenerationOptions(new File("C:\\Users\\fabio_uggeri\\sicredi\\sistemas\\externos\\fabiouggeri\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test"),
                  "org.uggeri.yapp.runtime.java.test");
          options.setGenerateTraceCode(false);
          options.setProfile(false);

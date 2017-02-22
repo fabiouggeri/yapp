@@ -29,4 +29,8 @@ public interface InputBuffer {
    public boolean isEoi(int index);
    
    public int length();
+   
+   public Position getPosition(int index);
+   
+   public int lineLength(int line);
 }

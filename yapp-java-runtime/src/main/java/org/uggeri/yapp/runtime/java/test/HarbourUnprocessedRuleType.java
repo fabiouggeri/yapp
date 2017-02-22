@@ -372,6 +372,32 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitMemberScope(node);
       }
    },
+   MEMBER_SCOPES {
+      @Override
+      public String getLabel() {
+         return "MemberScopes";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterMemberScopes(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitMemberScopes(node);
+      }
+   },
    METHOD_MEMBER {
       @Override
       public String getLabel() {
@@ -3713,7 +3739,7 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public boolean isSkiped() {
-         return true;
+         return false;
       }
 
       @Override
@@ -5858,32 +5884,6 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitCodeBlockParameters(node);
       }
    },
-   CODE_BLOCK_PATTERN {
-      @Override
-      public String getLabel() {
-         return "CodeBlockPattern";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return false;
-      }
-
-      @Override
-      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterCodeBlockPattern(node);
-      }
-
-      @Override
-      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitCodeBlockPattern(node);
-      }
-   },
    ARRAY_LITERAL {
       @Override
       public String getLabel() {
@@ -7470,32 +7470,6 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitAsDataType(node);
       }
    },
-   ANY_IDENTIFIER {
-      @Override
-      public String getLabel() {
-         return "AnyIdentifier";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return true;
-      }
-
-      @Override
-      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterAnyIdentifier(node);
-      }
-
-      @Override
-      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitAnyIdentifier(node);
-      }
-   },
    IDENTIFIER {
       @Override
       public String getLabel() {
@@ -7702,32 +7676,6 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
          visitor.exitContinueNL(node);
-      }
-   },
-   TEST_NO_ALPHA {
-      @Override
-      public String getLabel() {
-         return "TestNoAlpha";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return false;
-      }
-
-      @Override
-      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterTestNoAlpha(node);
-      }
-
-      @Override
-      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitTestNoAlpha(node);
       }
    };
 

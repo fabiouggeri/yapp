@@ -4,6 +4,8 @@
  */
 package org.uggeri.yapp.runtime.java.buffer;
 
+import java.util.Arrays;
+
 /**
  *
  * @author fabio
@@ -11,7 +13,9 @@ package org.uggeri.yapp.runtime.java.buffer;
 public abstract class AbstractInputBuffer implements InputBuffer {
 
    protected abstract CharSequence getBuffer();
-   
+
+   private int[] newlines;
+
    @Override
    public char getChar(int index) {
       if (index >= 0 && index < getBuffer().length()) {
@@ -56,12 +60,12 @@ public abstract class AbstractInputBuffer implements InputBuffer {
    public boolean matchChar(final int index, final char c) {
       return index < getBuffer().length() && getBuffer().charAt(index) == c;
    }
-   
+
    @Override
    public boolean matchIgnoreCaseChar(final int index, final char c) {
       return index < getBuffer().length() && Character.toLowerCase(getBuffer().charAt(index)) == Character.toLowerCase(c);
    }
-   
+
    @Override
    public boolean matchString(final int index, final String str, int strLen) {
       if (strLen > getBuffer().length() - index) {
@@ -87,7 +91,45 @@ public abstract class AbstractInputBuffer implements InputBuffer {
       }
       return "";
    }
-   
+
+   @Override
+   public Position getPosition(int index) {
+      buildNewlines();
+      int line = getLine0(newlines, index);
+      int column = index - (line > 0 ? newlines[line - 1] : -1);
+      return new Position(line + 1, column);
+   }
+
+   @Override
+   public int lineLength(int line) {
+      buildNewlines();
+      int start = line > 1 ? newlines[line - 2] + 1 : 0;
+      int end = line <= newlines.length ? newlines[line - 1] : length();
+      if (getBuffer().charAt(end - 1) == '\r') {
+         end--;
+      }
+      return end - start;
+   }
+
+   private static int getLine0(int[] newlines, int index) {
+      int j = Arrays.binarySearch(newlines, index);
+      return j >= 0 ? j : -(j + 1);
+   }
+
+   private void buildNewlines() {
+      if (newlines == null) {
+         final int len = getBuffer().length();
+         final IntArrayStack newlinesStack = new IntArrayStack((int) len / 50);
+         for (int i = 0; i < len; i++) {
+            if (getBuffer().charAt(i) == '\n') {
+               newlinesStack.push(i);
+            }
+         }
+         this.newlines = new int[newlinesStack.size()];
+         newlinesStack.getElements(this.newlines, 0);
+      }
+   }
+
    private final class BufferSubsequence implements CharSequence {
 
       private final int indexBase;
@@ -95,7 +137,7 @@ public abstract class AbstractInputBuffer implements InputBuffer {
       public BufferSubsequence(int index) {
          this.indexBase = index;
       }
-      
+
       @Override
       public int length() {
          return getBuffer().length() - indexBase;
@@ -110,7 +152,7 @@ public abstract class AbstractInputBuffer implements InputBuffer {
       public CharSequence subSequence(int start, int end) {
          return new BufferSubsequence(indexBase + start);
       }
-      
+
    }
 
 }

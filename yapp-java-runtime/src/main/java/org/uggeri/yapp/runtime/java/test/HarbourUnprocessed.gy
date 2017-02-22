@@ -52,6 +52,8 @@ Statement : LocalVariablesDeclaration
           | CatchBlockBegin
           | FinallyBlockBegin
           | TryCatchEnd
+          | BeginProducer
+          | EndProducer
           | EndKeyword
           | Return
           | Break
@@ -74,8 +76,6 @@ Statement : LocalVariablesDeclaration
           | QualifiedExpression
           | BeginTransaction
           | CommitTransaction
-          | BeginProducer
-          | EndProducer
           | RollbackTransaction
           | UseAs
           | UseArea
@@ -181,25 +181,27 @@ MemberScope : "hidden"
             | "protected"
             | "published";
 
+MemberScopes : MemberScope*;
+
 MethodMember : ("method" | "classmethod" | "constructor" | "procedure" | "assign")
                AnyIdentifier
                ParParametersDeclaration
                "constructor"?
-               AsDataType?
-               MemberScope*
-               InLineExpression?;
+               AsType
+               MemberScopes
+               InLineExpression;
 
 FieldMember : ("data" | "var" | "classvar" | "access")
               AnyIdentifier
-              AsDataType?
-              InitFieldMember?
+              AsType
+              InitFieldMember
               IsInObject?
-              MemberScope*
-              InLineExpression?;
+              MemberScopes
+              InLineExpression;
 
-InLineExpression : "inline" ExpressionList;
+InLineExpression : ("inline" ExpressionList)?;
 
-InitFieldMember : "init" Expression;
+InitFieldMember : ("init" Expression)?;
 
 IsInObject : "is" AnyIdentifier "in" AnyIdentifier;
 
@@ -246,7 +248,7 @@ LineDirective : '#' "line" NumberLiteral StringLiteral;
 
 IncludeDirective : '#' "include" StringLiteral;
 
-DefineDirective : '#' "define"  AnyToken*;
+DefineDirective : '#' "define"  AnyIdentifier ParParametersDeclaration? AnyToken*;
 
 TranslateDirective : '#' "translate" AnyToken*;
 
@@ -555,7 +557,6 @@ IdentifierList : AnyIdentifier (',' AnyIdentifier)*;
 
 MemvarDeclaration : "memvar":4 IdentifierList;
 
-@SkipNode
 AliasIdentifier : ParenthesesExpressionList | Macro | AnyIdentifier;
 
 ExpressionList : Expression? (',' Expression?)*;
@@ -656,7 +657,7 @@ QualifiedExpression : AtomicExpression (':' MemberCall)+;
 MemberCall : ArrayAccess
            | MacroFunctionCall
            | AnySimpleFunctionCall
-           | AnyIdentifier;
+           | Variable;
 
 @SkipNode
 KeywordsFunctionCall : ( "begin"
@@ -799,6 +800,7 @@ CatchBlockBegin : "catch" Variable?;
 
 CodeBlockParameters : VariableDeclarationList;
 
+@Rule(CodeBlockLiteral)
 CodeBlockPattern : '{' '|' CodeBlockParameters? '|' ExpressionList '}';
 
 @SkipNode
@@ -1124,6 +1126,7 @@ AsDataType : "as" DataType;
 
 @SkipNode
 @Memoize
+@Rule(Identifier)
 AnyIdentifier : IdentifierPattern OptionalSpacing;
 
 @SkipNode
@@ -1169,12 +1172,14 @@ NewLine : '\n'
         | '\r\n';
 
 @FollowLiterals([A-Za-z_][A-Za-z0-9_]*)
+@Fragment
 TestNoAlpha : ([a-z] | [A-Z] | [0-9] | '_')!;
 
 @SyntaxOnly
 @FollowLiterals
 @Memoize
 @Rule(Spacing)
+@IgnoreEmpty
 OptionalSpacing : ( Whitespace
                   | LineComment
                   | BlockComment

@@ -21,6 +21,7 @@ import org.uggeri.yapp.generation.stmt.VariableDeclaration;
 import org.uggeri.yapp.generation.stmt.WhileStatement;
 import java.util.ArrayList;
 import java.util.List;
+import org.uggeri.yapp.generation.stmt.Variable;
 
 /**
  *
@@ -47,6 +48,16 @@ public class JavaBlockStatement extends AbstractJavaCodeFragment implements Bloc
    @Override
    public void setValue(final Expression var, final Object expr) {
       statements.add(new JavaStatementCode(var.assign(asExpression(expr))));
+   }
+
+   @Override
+   public void incVar(Expression var) {
+      statements.add(new JavaStatementCode(var.preInc()));
+   }
+
+   @Override
+   public void decVar(Expression var) {
+      statements.add(new JavaStatementCode(var.preDec()));
    }
 
    @Override

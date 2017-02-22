@@ -184,6 +184,24 @@ public enum NonTerminalOption {
       public boolean isParameterMandatory() {
          return true;
       }
+   },
+
+   /* Nohs vazios nao serao criados */   
+   IGNORE_EMPTY {
+      @Override
+      public boolean isOptionName(final String optionName) {
+         return "IgnoreEmpty".equalsIgnoreCase(optionName);
+      }
+
+      @Override
+      public boolean isParameterized() {
+         return false;
+      }
+      
+      @Override
+      public boolean isParameterMandatory() {
+         return false;
+      }
    };
    
    public abstract boolean isOptionName(final String optionName);

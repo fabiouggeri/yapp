@@ -51,6 +51,9 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
    public void enterMemberScope(Node node) {}
    public void exitMemberScope(Node node) {}
 
+   public void enterMemberScopes(Node node) {}
+   public void exitMemberScopes(Node node) {}
+
    public void enterMethodMember(Node node) {}
    public void exitMethodMember(Node node) {}
 
@@ -684,9 +687,6 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
    public void enterCodeBlockParameters(Node node) {}
    public void exitCodeBlockParameters(Node node) {}
 
-   public void enterCodeBlockPattern(Node node) {}
-   public void exitCodeBlockPattern(Node node) {}
-
    public void enterArrayLiteral(Node node) {}
    public void exitArrayLiteral(Node node) {}
 
@@ -870,9 +870,6 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
    public void enterAsDataType(Node node) {}
    public void exitAsDataType(Node node) {}
 
-   public void enterAnyIdentifier(Node node) {}
-   public void exitAnyIdentifier(Node node) {}
-
    public void enterIdentifier(Node node) {}
    public void exitIdentifier(Node node) {}
 
@@ -895,7 +892,4 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
    public void exitSpacing(Node node) {}
 
    public void enterContinueNL(Node node) {}
-   public void exitContinueNL(Node node) {}
-
-   public void enterTestNoAlpha(Node node) {}
-   public void exitTestNoAlpha(Node node) {}}
+   public void exitContinueNL(Node node) {}}

@@ -59,11 +59,11 @@ public class TesteExecucao {
       //char c = '\u005cn';
       //new TesteExecucao().testesDiversos();
       //new TesteExecucao().testeParseJavaSources();
-      new TesteExecucao().testeParsePlSqlSources();
+      // new TesteExecucao().testeParsePlSqlSources();
       //new TesteExecucao().testeExecucaoPlSql();
       //new TesteExecucao().testeExecucaoJava();
       //new TesteExecucao().testeExecucaoHarbourPP();
-      //new TesteExecucao().testeExecucaoHarbourUnprocessed();
+      new TesteExecucao().testeExecucaoHarbourUnprocessed();
       //new TesteExecucao().testeExecucao();
    }
 
@@ -367,9 +367,9 @@ public class TesteExecucao {
          long iniParse = System.currentTimeMillis();
          parser = new HarbourUnprocessedParser();
          parser.setTraceParser(traceFile);
-         parser.setTrace(true);
+         parser.setTrace(false);
          //javax.swing.JOptionPane.showMessageDialog(null, "Tecla para continuar");
-         inputBuffer = new FileInputBuffer(new File("W:\\Sicredi\\sistemas\\legado\\ccr1-9.50\\libsiret\\RTDBAB2.prg"));
+         inputBuffer = new FileInputBuffer(new File("C:\\Users\\fabio_uggeri\\sicredi\\sistemas\\legado\\paralelo-ccor-perf\\ccr1-9.69.35\\libsiret\\rtdbab_mp.prg"));
          //inputBuffer = new FileInputBuffer(new File("W:\\Sicredi\\sistemas\\legado\\ccr1-9.50\\libsiret\\ccr1stru.prg"));
          //inputBuffer = new FileInputBuffer(new File("c:\\Temp\\teste.prg"));
          node = parser.parse(inputBuffer);
@@ -384,7 +384,7 @@ public class TesteExecucao {
          }
          traceFile.close();
          //javax.swing.JOptionPane.showMessageDialog(null, "Fim");
-         //printTree(inputBuffer, node, 0);
+         printTree(inputBuffer, node, 0);
          //System.out.println("==============================");
          //printProfile(parser.getProfilesMap());
          //printSemanticTree(inputBuffer, node, 0);

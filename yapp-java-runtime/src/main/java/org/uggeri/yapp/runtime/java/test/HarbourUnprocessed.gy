@@ -232,6 +232,8 @@ Directive : IncludeDirective
           | TranslateDirective
           | XTranslateDirective
           | XCommandDirective
+          | YTranslateDirective
+          | YCommandDirective
           | CommandDirective
           | IfDefDirective
           | IfDirective
@@ -240,6 +242,12 @@ Directive : IncludeDirective
           | EndIfDirective
           | PragmaDirective
           | UndefDirective
+          | UntranslateDirective
+          | XUntranslateDirective
+          | YUntranslateDirective
+          | UncommandDirective
+          | XUncommandDirective
+          | YUncommandDirective
           | StdoutDirective
           | ErrorDirective
           | LineDirective;
@@ -254,9 +262,25 @@ TranslateDirective : '#' "translate" AnyToken*;
 
 XTranslateDirective : '#' "xtranslate" AnyToken*;
 
-XCommandDirective : '#' "xcommand" AnyToken*;
+YTranslateDirective : '#' "ytranslate" AnyToken*;
+
+UntranslateDirective : '#' "untranslate" AnyToken*;
+
+XUntranslateDirective : '#' "xuntranslate" AnyToken*;
+
+YUntranslateDirective : '#' "yuntranslate" AnyToken*;
 
 CommandDirective : '#' "command" AnyToken*;
+
+XCommandDirective : '#' "xcommand" AnyToken*;
+
+YCommandDirective : '#' "ycommand" AnyToken*;
+
+UncommandDirective : '#' "uncommand" AnyToken*;
+
+XUncommandDirective : '#' "xuncommand" AnyToken*;
+
+YUncommandDirective : '#' "yuncommand" AnyToken*;
 
 IfDefDirective : '#' "ifdef" AnyToken*;
 

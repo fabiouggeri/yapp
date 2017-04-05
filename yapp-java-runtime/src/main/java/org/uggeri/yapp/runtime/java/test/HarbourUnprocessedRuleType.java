@@ -892,10 +892,10 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitXTranslateDirective(node);
       }
    },
-   XCOMMAND_DIRECTIVE {
+   YTRANSLATE_DIRECTIVE {
       @Override
       public String getLabel() {
-         return "XCommandDirective";
+         return "YTranslateDirective";
       }
 
       @Override
@@ -910,12 +910,90 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
 
       @Override
       public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterXCommandDirective(node);
+         visitor.enterYTranslateDirective(node);
       }
 
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitXCommandDirective(node);
+         visitor.exitYTranslateDirective(node);
+      }
+   },
+   UNTRANSLATE_DIRECTIVE {
+      @Override
+      public String getLabel() {
+         return "UntranslateDirective";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterUntranslateDirective(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitUntranslateDirective(node);
+      }
+   },
+   XUNTRANSLATE_DIRECTIVE {
+      @Override
+      public String getLabel() {
+         return "XUntranslateDirective";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterXUntranslateDirective(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitXUntranslateDirective(node);
+      }
+   },
+   YUNTRANSLATE_DIRECTIVE {
+      @Override
+      public String getLabel() {
+         return "YUntranslateDirective";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterYUntranslateDirective(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitYUntranslateDirective(node);
       }
    },
    COMMAND_DIRECTIVE {
@@ -942,6 +1020,136 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
          visitor.exitCommandDirective(node);
+      }
+   },
+   XCOMMAND_DIRECTIVE {
+      @Override
+      public String getLabel() {
+         return "XCommandDirective";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterXCommandDirective(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitXCommandDirective(node);
+      }
+   },
+   YCOMMAND_DIRECTIVE {
+      @Override
+      public String getLabel() {
+         return "YCommandDirective";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterYCommandDirective(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitYCommandDirective(node);
+      }
+   },
+   UNCOMMAND_DIRECTIVE {
+      @Override
+      public String getLabel() {
+         return "UncommandDirective";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterUncommandDirective(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitUncommandDirective(node);
+      }
+   },
+   XUNCOMMAND_DIRECTIVE {
+      @Override
+      public String getLabel() {
+         return "XUncommandDirective";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterXUncommandDirective(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitXUncommandDirective(node);
+      }
+   },
+   YUNCOMMAND_DIRECTIVE {
+      @Override
+      public String getLabel() {
+         return "YUncommandDirective";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return false;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterYUncommandDirective(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitYUncommandDirective(node);
       }
    },
    IF_DEF_DIRECTIVE {

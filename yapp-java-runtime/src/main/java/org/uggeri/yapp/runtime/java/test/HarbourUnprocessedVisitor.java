@@ -111,11 +111,35 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
    public void enterXTranslateDirective(Node node) {}
    public void exitXTranslateDirective(Node node) {}
 
-   public void enterXCommandDirective(Node node) {}
-   public void exitXCommandDirective(Node node) {}
+   public void enterYTranslateDirective(Node node) {}
+   public void exitYTranslateDirective(Node node) {}
+
+   public void enterUntranslateDirective(Node node) {}
+   public void exitUntranslateDirective(Node node) {}
+
+   public void enterXUntranslateDirective(Node node) {}
+   public void exitXUntranslateDirective(Node node) {}
+
+   public void enterYUntranslateDirective(Node node) {}
+   public void exitYUntranslateDirective(Node node) {}
 
    public void enterCommandDirective(Node node) {}
    public void exitCommandDirective(Node node) {}
+
+   public void enterXCommandDirective(Node node) {}
+   public void exitXCommandDirective(Node node) {}
+
+   public void enterYCommandDirective(Node node) {}
+   public void exitYCommandDirective(Node node) {}
+
+   public void enterUncommandDirective(Node node) {}
+   public void exitUncommandDirective(Node node) {}
+
+   public void enterXUncommandDirective(Node node) {}
+   public void exitXUncommandDirective(Node node) {}
+
+   public void enterYUncommandDirective(Node node) {}
+   public void exitYUncommandDirective(Node node) {}
 
    public void enterIfDefDirective(Node node) {}
    public void exitIfDefDirective(Node node) {}

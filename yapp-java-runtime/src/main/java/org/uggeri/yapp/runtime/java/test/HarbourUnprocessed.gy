@@ -209,6 +209,7 @@ IsInObject : "is" AnyIdentifier "in" AnyIdentifier;
 @SkipNode
 Variable : VariablePattern OptionalSpacing;
 
+// @Atomic
 @Rule(Variable)
 VariablePattern : IdentifierPattern ('(' | '->')!;
 
@@ -352,7 +353,7 @@ UnknownIdentifier : UnknownIdentifierPattern OptionalSpacing;
 @Rule(UnknownIdentifier)
 UnknownIdentifierPattern : IdentifierPattern ('(' | '->')!;
 
-BeginProducer : "begin" "producer" ("transaction" IntegerNumber)? "wait"?;
+BeginProducer : "begin" "producer" ("transaction" IntegerNumber)? ("wait" | "nowait")*;
 
 EndProducer : "end" "producer";
 
@@ -1162,12 +1163,15 @@ Identifier : Keyword! IdentifierPattern OptionalSpacing;
 IdentifierPattern : ([A-Z] | [a-z] | '_') ([A-Z] | [a-z] | [0-9] | '_')*;
 
 @Atomic
+@SyntaxOnly
 Whitespace : (' ' | '\t' | '\f')+;
 
 @Atomic
+@SyntaxOnly
 LineComment : ('//' | '&&') (('\n' | '\r' | EOI)! .)*;
 
 @Atomic
+@SyntaxOnly
 BlockComment : '/*' ('*/'! .)* '*/';
 
 @Atomic

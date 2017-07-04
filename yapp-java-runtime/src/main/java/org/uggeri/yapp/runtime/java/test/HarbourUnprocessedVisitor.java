@@ -534,9 +534,6 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
    public void enterForEachBegin(Node node) {}
    public void exitForEachBegin(Node node) {}
 
-   public void enterForEachEnd(Node node) {}
-   public void exitForEachEnd(Node node) {}
-
    public void enterSwitchBegin(Node node) {}
    public void exitSwitchBegin(Node node) {}
 
@@ -854,6 +851,9 @@ public abstract class HarbourUnprocessedVisitor implements NodeVisitor {
 
    public void enterDump(Node node) {}
    public void exitDump(Node node) {}
+
+   public void enterDumpBody(Node node) {}
+   public void exitDumpBody(Node node) {}
 
    public void enterEndDump(Node node) {}
    public void exitEndDump(Node node) {}

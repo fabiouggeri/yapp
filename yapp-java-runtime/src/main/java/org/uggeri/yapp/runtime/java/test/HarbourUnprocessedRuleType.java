@@ -4558,32 +4558,6 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
          visitor.exitForEachBegin(node);
       }
    },
-   FOR_EACH_END {
-      @Override
-      public String getLabel() {
-         return "ForEachEnd";
-      }
-
-      @Override
-      public boolean isAtomic() {
-         return false;
-      }
-
-      @Override
-      public boolean isSkiped() {
-         return false;
-      }
-
-      @Override
-      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.enterForEachEnd(node);
-      }
-
-      @Override
-      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
-         visitor.exitForEachEnd(node);
-      }
-   },
    SWITCH_BEGIN {
       @Override
       public String getLabel() {
@@ -7338,6 +7312,32 @@ public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor
       @Override
       public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
          visitor.exitDump(node);
+      }
+   },
+   DUMP_BODY {
+      @Override
+      public String getLabel() {
+         return "DumpBody";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return true;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.enterDumpBody(node);
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+         visitor.exitDumpBody(node);
       }
    },
    END_DUMP {

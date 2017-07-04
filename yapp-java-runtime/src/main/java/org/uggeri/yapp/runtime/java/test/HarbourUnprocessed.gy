@@ -6,10 +6,16 @@ grammar HarbourUnprocessed;
 
 HarbourProgram : Statements EOI;
 
+/*
 @SkipNode
 Statements : ( OptionalSpacing
-               ( (AloneLineComment EndStmt) | (Statement EndStmt) | (IgnoreLine EndStmt) | EndStmt) )*
-             OptionalSpacing (AloneLineComment | Statement | IgnoreLine )?;
+               ( (AloneLineComment | Statement)? EndStmt) )*
+             OptionalSpacing (AloneLineComment | Statement )?;
+*/
+
+@SkipNode
+Statements : OptionalSpacing (AloneLineComment | Statement)? 
+             (EndStmt OptionalSpacing (AloneLineComment | Statement)? )*;
 
 @Memoize
 Statement : LocalVariablesDeclaration
@@ -42,7 +48,6 @@ Statement : LocalVariablesDeclaration
           | OtherwiseBegin
           | DoCaseEnd
           | ForEachBegin
-          | ForEachEnd
           | SwitchBegin
           | SwitchOptionBegin
           | DefaultCmd
@@ -85,6 +90,7 @@ Statement : LocalVariablesDeclaration
           | KeyboardCall
           | Macro
           | ParenthesesStatement
+          | Dump
           | Directive
           | ArrobaGetSay
           | SetCmd
@@ -142,7 +148,8 @@ Statement : LocalVariablesDeclaration
           | ReindexCmd
           | QOutCommand
           | MenuToCmd
-          | UnknownCommand;
+          | UnknownCommand
+          | IgnoreLine;
 
 @Memoize
 UnknownCommand : (AnySimpleFunctionCall | Expression | UnknownIdentifier | Separator)+;
@@ -641,8 +648,6 @@ DoCaseEnd : ("end" "case" | "endcase":4) IgnoreRestOfLine;
 
 ForEachBegin : "for" "each" Variable "in" Expression;
 
-ForEachEnd : "next" IgnoreRestOfLine;
-
 SwitchBegin : "switch":4 Expression;
 
 SwitchEnd : "end" "switch" IgnoreRestOfLine;
@@ -1088,7 +1093,10 @@ NotOperator : ( ".not."
               | ('!' '='!) );
 
 @NotExtendLiterals
-Dump : "begindump" (EndDump! .)* EndDump;
+Dump : '#' Whitespace? "pragma" Whitespace "begindump" DumpBody EndDump;
+
+@Atomic
+DumpBody : (EndDump! .)*;
 
 EndDump : '#' "pragma" "enddump";
 

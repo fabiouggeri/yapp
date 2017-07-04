@@ -369,7 +369,9 @@ public class TesteExecucao {
          parser.setTraceParser(traceFile);
          parser.setTrace(false);
          //javax.swing.JOptionPane.showMessageDialog(null, "Tecla para continuar");
-         inputBuffer = new FileInputBuffer(new File("C:\\Users\\fabio_uggeri\\sicredi\\sistemas\\legado\\paralelo-ccor-perf\\ccr1-9.69.35\\libsiret\\rtdbab_mp.prg"));
+         // inputBuffer = new FileInputBuffer(new File("C:\\temp\\teste.prg"));
+         inputBuffer = new FileInputBuffer(new File("C:\\Users\\fabio_uggeri\\sicredi\\sistemas\\infra\\infra-3.04-SNAPSHOT\\05-construcao\\infra-lib\\src\\main\\clipper\\infra_multiproc.prg"));
+         // inputBuffer = new FileInputBuffer(new File("C:\\Users\\fabio_uggeri\\sicredi\\sistemas\\legado\\paralelo-ccor-perf\\ccr1-9.69.35\\libsiret\\rtdbab_mp.prg"));
          //inputBuffer = new FileInputBuffer(new File("W:\\Sicredi\\sistemas\\legado\\ccr1-9.50\\libsiret\\ccr1stru.prg"));
          //inputBuffer = new FileInputBuffer(new File("c:\\Temp\\teste.prg"));
          node = parser.parse(inputBuffer);

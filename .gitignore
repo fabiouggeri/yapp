@@ -1,0 +1,6 @@
+/yapp-java-runtime/target
+/yapp-java-generator/target
+/yapp-c-runtime/yapp-c-runtime-lib/target
+/yapp-c-runtime/yapp-c-runtime-headers/target
+/yapp-c-generator/target
+/yapp-base/target

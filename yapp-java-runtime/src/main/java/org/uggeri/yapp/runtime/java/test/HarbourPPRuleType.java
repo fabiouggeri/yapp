@@ -8,6 +8,30 @@ import org.uggeri.yapp.runtime.java.node.Node;
 import org.uggeri.yapp.runtime.java.parser.Rule;
 
 public enum HarbourPPRuleType implements Rule<HarbourPPVisitor> {
+   TERMINAL {
+      @Override
+      public String getLabel() {
+         return "Terminal";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return true;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourPPVisitor visitor, Node node) {
+      }
+
+      @Override
+      public void exitRule(HarbourPPVisitor visitor, Node node) {
+      }
+   },
    PRE_PROCESSOR {
       @Override
       public String getLabel() {
@@ -203,7 +227,7 @@ public enum HarbourPPRuleType implements Rule<HarbourPPVisitor> {
 
       @Override
       public boolean isSkiped() {
-         return false;
+         return true;
       }
 
       @Override
@@ -411,7 +435,7 @@ public enum HarbourPPRuleType implements Rule<HarbourPPVisitor> {
 
       @Override
       public boolean isSkiped() {
-         return false;
+         return true;
       }
 
       @Override
@@ -2049,7 +2073,7 @@ public enum HarbourPPRuleType implements Rule<HarbourPPVisitor> {
 
       @Override
       public boolean isSkiped() {
-         return false;
+         return true;
       }
 
       @Override

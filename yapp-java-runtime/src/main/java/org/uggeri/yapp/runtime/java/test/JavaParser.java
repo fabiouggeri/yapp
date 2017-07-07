@@ -487,7 +487,7 @@ public class JavaParser implements Parser {
    protected boolean charMatcher(char c) {
       if (buffer.matchChar(index, c)) {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + 1, false, false));
+            currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, index, index + 1, false, false));
             currentNode = currentNode.getSibling();
          }
          ++index;
@@ -499,7 +499,7 @@ public class JavaParser implements Parser {
    protected boolean ignoreCaseCharMatcher(char c) {
       if (buffer.matchIgnoreCaseChar(index, c)) {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + 1, false, false));
+            currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, index, index + 1, false, false));
             currentNode = currentNode.getSibling();
          }
          ++index;
@@ -511,7 +511,7 @@ public class JavaParser implements Parser {
    protected boolean stringMatcher(String str, int strLen) {
       if (buffer.matchString(index, str, strLen)) {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + strLen, false, false));
+            currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, index, index + strLen, false, false));
             currentNode = currentNode.getSibling();
          }
          index += strLen;
@@ -532,7 +532,7 @@ public class JavaParser implements Parser {
          }
       }
       if (! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + i, false, false));
+         currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, index, index + i, false, false));
          currentNode = currentNode.getSibling();
       }
       index += i;
@@ -542,7 +542,7 @@ public class JavaParser implements Parser {
    protected boolean ignoreCaseStringMatcher(String str, int strLen) {
       if (buffer.matchIgnoreCaseString(index, str, strLen)) {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + strLen, false, false));
+            currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, index, index + strLen, false, false));
             currentNode = currentNode.getSibling();
          }
          index += strLen;
@@ -563,7 +563,7 @@ public class JavaParser implements Parser {
          }
       }
       if (! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + i, false, false));
+         currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, index, index + i, false, false));
          currentNode = currentNode.getSibling();
       }
       index += i;
@@ -573,7 +573,7 @@ public class JavaParser implements Parser {
    protected boolean charRangeMatcher(char charIni, char charEnd) {
       if (buffer.matchCharRange(index, charIni, charEnd)) {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + 1, false, false));
+            currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, index, index + 1, false, false));
             currentNode = currentNode.getSibling();
          }
          ++index;
@@ -585,7 +585,7 @@ public class JavaParser implements Parser {
    protected boolean anyCharMatcher() {
       if (buffer.getChar(index) != '\0') {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + 1, false, false));
+            currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, index, index + 1, false, false));
             currentNode = currentNode.getSibling();
          }
          ++index;
@@ -743,23 +743,58 @@ public class JavaParser implements Parser {
       startIndex = index;
       // (Spacing? PackageDeclaration? ImportDeclaration* TypeDeclaration* <EOI>)
       // Spacing?
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // Spacing
-      spacing$Rule();
-      // PackageDeclaration?
-      // PackageDeclaration
-      packageDeclaration$Rule();
-      // ImportDeclaration*
-      do {
-         // ImportDeclaration
-         match = importDeclaration$Rule();
-      } while(match);
-      // TypeDeclaration*
-      do {
-         // TypeDeclaration
-         match = typeDeclaration$Rule();
-      } while(match);
-      // <EOI>
-      match = eoi();
+      match = spacing$Rule();
+      if (! match) {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
+         match = true;
+      }
+      if (match) {
+         // PackageDeclaration?
+         Node lastNode_2 = currentNode;
+         int lastIndex_2 = index;
+         // PackageDeclaration
+         match = packageDeclaration$Rule();
+         if (! match) {
+            lastNode_2.setSibling(null);
+            currentNode = lastNode_2;
+            index = lastIndex_2;
+            match = true;
+         }
+         if (match) {
+            // ImportDeclaration*
+            Node lastNode_3;
+            int lastIndex_3;
+            do {
+               lastNode_3 = currentNode;
+               lastIndex_3 = index;
+               // ImportDeclaration
+               match = importDeclaration$Rule();
+            } while(match);
+            lastNode_3.setSibling(null);
+            currentNode = lastNode_3;
+            index = lastIndex_3;
+            match = true;
+            // TypeDeclaration*
+            Node lastNode_4;
+            int lastIndex_4;
+            do {
+               lastNode_4 = currentNode;
+               lastIndex_4 = index;
+               // TypeDeclaration
+               match = typeDeclaration$Rule();
+            } while(match);
+            lastNode_4.setSibling(null);
+            currentNode = lastNode_4;
+            index = lastIndex_4;
+            // <EOI>
+            match = eoi();
+         }
+      }
       if (match) {
          if (! currentRuleIsAtomic) {
             currentNode = new NodeImpl(JavaRuleType.COMPILATION_UNIT, startIndex, index, true, false);
@@ -836,9 +871,9 @@ public class JavaParser implements Parser {
             match = optionalSpacing$Rule();
             if (match) {
                // ('static' TestNoAlpha OptionalSpacing)?
-               // ('static' TestNoAlpha OptionalSpacing)
                Node lastNode_1 = currentNode;
                int lastIndex_1 = index;
+               // ('static' TestNoAlpha OptionalSpacing)
                // 'static'
                match = stringMatcher("static", 6);
                if (match) {
@@ -847,24 +882,34 @@ public class JavaParser implements Parser {
                   if (match) {
                      // OptionalSpacing
                      match = optionalSpacing$Rule();
-                     if (! match) {
-                        index = lastIndex_1;
-                        lastNode_1.setSibling(null);
-                        currentNode = lastNode_1;
-                     }
-                  } else {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
                   }
                }
-               // QualifiedIdentifier
-               match = qualifiedIdentifier$Rule();
+               if (! match) {
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+                  index = lastIndex_1;
+                  match = true;
+               }
                if (match) {
-                  // DotStar?
-                  // DotStar
-                  dotStar$Rule();
-                  // Semicolon
-                  match = semicolon$Rule();
+                  // QualifiedIdentifier
+                  match = qualifiedIdentifier$Rule();
+                  if (match) {
+                     // DotStar?
+                     Node lastNode_2 = currentNode;
+                     int lastIndex_2 = index;
+                     // DotStar
+                     match = dotStar$Rule();
+                     if (! match) {
+                        lastNode_2.setSibling(null);
+                        currentNode = lastNode_2;
+                        index = lastIndex_2;
+                        match = true;
+                     }
+                     if (match) {
+                        // Semicolon
+                        match = semicolon$Rule();
+                     }
+                  }
                }
             }
          }
@@ -891,10 +936,17 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (ClassDeclaration | EnumDeclaration | InterfaceDeclaration | AnnotationDeclaration | Semicolon)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case ';': {
             // Semicolon
             match = semicolon$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '@':
@@ -908,14 +960,28 @@ public class JavaParser implements Parser {
             // ClassDeclaration
             match = classDeclaration$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // EnumDeclaration
                match = enumDeclaration$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // InterfaceDeclaration
                   match = interfaceDeclaration$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // AnnotationDeclaration
                      match = annotationDeclaration$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
                   }
                }
             }
@@ -924,16 +990,31 @@ public class JavaParser implements Parser {
          case 'c': {
             // ClassDeclaration
             match = classDeclaration$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case 'e': {
             // EnumDeclaration
             match = enumDeclaration$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case 'i': {
             // InterfaceDeclaration
             match = interfaceDeclaration$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          default: {
@@ -977,10 +1058,17 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // Annotation*
+      Node lastNode_1;
+      int lastIndex_1;
       do {
+         lastNode_1 = currentNode;
+         lastIndex_1 = index;
          // Annotation
          match = annotation$Rule();
       } while(match);
+      lastNode_1.setSibling(null);
+      currentNode = lastNode_1;
+      index = lastIndex_1;
       annotations$RuleMemoStart = startIndex;
       annotations$RuleMemoEnd = index;
       if (currentRuleIsAtomic) {
@@ -1031,9 +1119,16 @@ public class JavaParser implements Parser {
                match = qualifiedIdentifier$Rule();
                if (match) {
                   // AnnotationParameters?
+                  Node lastNode_1 = currentNode;
+                  int lastIndex_1 = index;
                   // AnnotationParameters
-                  annotationParameters$Rule();
-                  match = true;
+                  match = annotationParameters$Rule();
+                  if (! match) {
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                     index = lastIndex_1;
+                     match = true;
+                  }
                }
             }
          }
@@ -1087,10 +1182,12 @@ public class JavaParser implements Parser {
       match = identifier$Rule();
       if (match) {
          // ('.' OptionalSpacing Identifier)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // ('.' OptionalSpacing Identifier)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // '.'
             match = charMatcher('.');
             if (match) {
@@ -1099,17 +1196,12 @@ public class JavaParser implements Parser {
                if (match) {
                   // Identifier
                   match = identifier$Rule();
-                  if (! match) {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
-                     currentNode = lastNode_1;
-                  }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
@@ -1193,10 +1285,17 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // Modifier*
+      Node lastNode_1;
+      int lastIndex_1;
       do {
+         lastNode_1 = currentNode;
+         lastIndex_1 = index;
          // Modifier
          match = modifier$Rule();
       } while(match);
+      lastNode_1.setSibling(null);
+      currentNode = lastNode_1;
+      index = lastIndex_1;
       modifiers$RuleMemoStart = startIndex;
       modifiers$RuleMemoEnd = index;
       if (currentRuleIsAtomic) {
@@ -1217,12 +1316,15 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (Annotation | ('public' TestNoAlpha OptionalSpacing) | ('protected' TestNoAlpha OptionalSpacing) | ('private' TestNoAlpha OptionalSpacing) | ('static' TestNoAlpha OptionalSpacing) | ('abstract' TestNoAlpha OptionalSpacing) | ('final' TestNoAlpha OptionalSpacing) | ('native' TestNoAlpha OptionalSpacing) | ('synchronized' TestNoAlpha OptionalSpacing) | ('transient' TestNoAlpha OptionalSpacing) | ('volatile' TestNoAlpha OptionalSpacing) | ('strictfp' TestNoAlpha OptionalSpacing))
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // Annotation
       match = annotation$Rule();
       if (! match) {
+         index = lastIndex_1;
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
          // ('public' TestNoAlpha OptionalSpacing)
-         Node lastNode_1 = currentNode;
-         int lastIndex_1 = index;
          // 'public'
          match = stringMatcher("public", 6);
          if (match) {
@@ -1231,20 +1333,13 @@ public class JavaParser implements Parser {
             if (match) {
                // OptionalSpacing
                match = optionalSpacing$Rule();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
-            } else {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
             }
          }
          if (! match) {
+            index = lastIndex_1;
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
             // ('protected' TestNoAlpha OptionalSpacing)
-            Node lastNode_2 = currentNode;
-            int lastIndex_2 = index;
             // 'protected'
             match = stringMatcher("protected", 9);
             if (match) {
@@ -1253,20 +1348,13 @@ public class JavaParser implements Parser {
                if (match) {
                   // OptionalSpacing
                   match = optionalSpacing$Rule();
-                  if (! match) {
-                     index = lastIndex_2;
-                     lastNode_2.setSibling(null);
-                     currentNode = lastNode_2;
-                  }
-               } else {
-                  index = lastIndex_2;
-                  lastNode_2.setSibling(null);
                }
             }
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ('private' TestNoAlpha OptionalSpacing)
-               Node lastNode_3 = currentNode;
-               int lastIndex_3 = index;
                // 'private'
                match = stringMatcher("private", 7);
                if (match) {
@@ -1275,20 +1363,13 @@ public class JavaParser implements Parser {
                   if (match) {
                      // OptionalSpacing
                      match = optionalSpacing$Rule();
-                     if (! match) {
-                        index = lastIndex_3;
-                        lastNode_3.setSibling(null);
-                        currentNode = lastNode_3;
-                     }
-                  } else {
-                     index = lastIndex_3;
-                     lastNode_3.setSibling(null);
                   }
                }
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // ('static' TestNoAlpha OptionalSpacing)
-                  Node lastNode_4 = currentNode;
-                  int lastIndex_4 = index;
                   // 'static'
                   match = stringMatcher("static", 6);
                   if (match) {
@@ -1297,20 +1378,13 @@ public class JavaParser implements Parser {
                      if (match) {
                         // OptionalSpacing
                         match = optionalSpacing$Rule();
-                        if (! match) {
-                           index = lastIndex_4;
-                           lastNode_4.setSibling(null);
-                           currentNode = lastNode_4;
-                        }
-                     } else {
-                        index = lastIndex_4;
-                        lastNode_4.setSibling(null);
                      }
                   }
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // ('abstract' TestNoAlpha OptionalSpacing)
-                     Node lastNode_5 = currentNode;
-                     int lastIndex_5 = index;
                      // 'abstract'
                      match = stringMatcher("abstract", 8);
                      if (match) {
@@ -1319,20 +1393,13 @@ public class JavaParser implements Parser {
                         if (match) {
                            // OptionalSpacing
                            match = optionalSpacing$Rule();
-                           if (! match) {
-                              index = lastIndex_5;
-                              lastNode_5.setSibling(null);
-                              currentNode = lastNode_5;
-                           }
-                        } else {
-                           index = lastIndex_5;
-                           lastNode_5.setSibling(null);
                         }
                      }
                      if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
                         // ('final' TestNoAlpha OptionalSpacing)
-                        Node lastNode_6 = currentNode;
-                        int lastIndex_6 = index;
                         // 'final'
                         match = stringMatcher("final", 5);
                         if (match) {
@@ -1341,20 +1408,13 @@ public class JavaParser implements Parser {
                            if (match) {
                               // OptionalSpacing
                               match = optionalSpacing$Rule();
-                              if (! match) {
-                                 index = lastIndex_6;
-                                 lastNode_6.setSibling(null);
-                                 currentNode = lastNode_6;
-                              }
-                           } else {
-                              index = lastIndex_6;
-                              lastNode_6.setSibling(null);
                            }
                         }
                         if (! match) {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
                            // ('native' TestNoAlpha OptionalSpacing)
-                           Node lastNode_7 = currentNode;
-                           int lastIndex_7 = index;
                            // 'native'
                            match = stringMatcher("native", 6);
                            if (match) {
@@ -1363,20 +1423,13 @@ public class JavaParser implements Parser {
                               if (match) {
                                  // OptionalSpacing
                                  match = optionalSpacing$Rule();
-                                 if (! match) {
-                                    index = lastIndex_7;
-                                    lastNode_7.setSibling(null);
-                                    currentNode = lastNode_7;
-                                 }
-                              } else {
-                                 index = lastIndex_7;
-                                 lastNode_7.setSibling(null);
                               }
                            }
                            if (! match) {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
                               // ('synchronized' TestNoAlpha OptionalSpacing)
-                              Node lastNode_8 = currentNode;
-                              int lastIndex_8 = index;
                               // 'synchronized'
                               match = stringMatcher("synchronized", 12);
                               if (match) {
@@ -1385,20 +1438,13 @@ public class JavaParser implements Parser {
                                  if (match) {
                                     // OptionalSpacing
                                     match = optionalSpacing$Rule();
-                                    if (! match) {
-                                       index = lastIndex_8;
-                                       lastNode_8.setSibling(null);
-                                       currentNode = lastNode_8;
-                                    }
-                                 } else {
-                                    index = lastIndex_8;
-                                    lastNode_8.setSibling(null);
                                  }
                               }
                               if (! match) {
+                                 index = lastIndex_1;
+                                 lastNode_1.setSibling(null);
+                                 currentNode = lastNode_1;
                                  // ('transient' TestNoAlpha OptionalSpacing)
-                                 Node lastNode_9 = currentNode;
-                                 int lastIndex_9 = index;
                                  // 'transient'
                                  match = stringMatcher("transient", 9);
                                  if (match) {
@@ -1407,20 +1453,13 @@ public class JavaParser implements Parser {
                                     if (match) {
                                        // OptionalSpacing
                                        match = optionalSpacing$Rule();
-                                       if (! match) {
-                                          index = lastIndex_9;
-                                          lastNode_9.setSibling(null);
-                                          currentNode = lastNode_9;
-                                       }
-                                    } else {
-                                       index = lastIndex_9;
-                                       lastNode_9.setSibling(null);
                                     }
                                  }
                                  if (! match) {
+                                    index = lastIndex_1;
+                                    lastNode_1.setSibling(null);
+                                    currentNode = lastNode_1;
                                     // ('volatile' TestNoAlpha OptionalSpacing)
-                                    Node lastNode_10 = currentNode;
-                                    int lastIndex_10 = index;
                                     // 'volatile'
                                     match = stringMatcher("volatile", 8);
                                     if (match) {
@@ -1429,20 +1468,13 @@ public class JavaParser implements Parser {
                                        if (match) {
                                           // OptionalSpacing
                                           match = optionalSpacing$Rule();
-                                          if (! match) {
-                                             index = lastIndex_10;
-                                             lastNode_10.setSibling(null);
-                                             currentNode = lastNode_10;
-                                          }
-                                       } else {
-                                          index = lastIndex_10;
-                                          lastNode_10.setSibling(null);
                                        }
                                     }
                                     if (! match) {
+                                       index = lastIndex_1;
+                                       lastNode_1.setSibling(null);
+                                       currentNode = lastNode_1;
                                        // ('strictfp' TestNoAlpha OptionalSpacing)
-                                       Node lastNode_11 = currentNode;
-                                       int lastIndex_11 = index;
                                        // 'strictfp'
                                        match = stringMatcher("strictfp", 8);
                                        if (match) {
@@ -1451,15 +1483,12 @@ public class JavaParser implements Parser {
                                           if (match) {
                                              // OptionalSpacing
                                              match = optionalSpacing$Rule();
-                                             if (! match) {
-                                                index = lastIndex_11;
-                                                lastNode_11.setSibling(null);
-                                                currentNode = lastNode_11;
-                                             }
-                                          } else {
-                                             index = lastIndex_11;
-                                             lastNode_11.setSibling(null);
                                           }
+                                       }
+                                       if (! match) {
+                                          index = lastIndex_1;
+                                          lastNode_1.setSibling(null);
+                                          currentNode = lastNode_1;
                                        }
                                     }
                                  }
@@ -1525,16 +1554,46 @@ public class JavaParser implements Parser {
                   match = identifier$Rule();
                   if (match) {
                      // TypeParameters?
+                     Node lastNode_1 = currentNode;
+                     int lastIndex_1 = index;
                      // TypeParameters
-                     typeParameters$Rule();
-                     // Extends?
-                     // Extends
-                     extends$Rule();
-                     // Implements?
-                     // Implements
-                     implements$Rule();
-                     // ClassBody
-                     match = classBody$Rule();
+                     match = typeParameters$Rule();
+                     if (! match) {
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                        index = lastIndex_1;
+                        match = true;
+                     }
+                     if (match) {
+                        // Extends?
+                        Node lastNode_2 = currentNode;
+                        int lastIndex_2 = index;
+                        // Extends
+                        match = extends$Rule();
+                        if (! match) {
+                           lastNode_2.setSibling(null);
+                           currentNode = lastNode_2;
+                           index = lastIndex_2;
+                           match = true;
+                        }
+                        if (match) {
+                           // Implements?
+                           Node lastNode_3 = currentNode;
+                           int lastIndex_3 = index;
+                           // Implements
+                           match = implements$Rule();
+                           if (! match) {
+                              lastNode_3.setSibling(null);
+                              currentNode = lastNode_3;
+                              index = lastIndex_3;
+                              match = true;
+                           }
+                           if (match) {
+                              // ClassBody
+                              match = classBody$Rule();
+                           }
+                        }
+                     }
                   }
                }
             }
@@ -1601,10 +1660,20 @@ public class JavaParser implements Parser {
                   match = identifier$Rule();
                   if (match) {
                      // Implements?
+                     Node lastNode_1 = currentNode;
+                     int lastIndex_1 = index;
                      // Implements
-                     implements$Rule();
-                     // EnumBody
-                     match = enumBody$Rule();
+                     match = implements$Rule();
+                     if (! match) {
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                        index = lastIndex_1;
+                        match = true;
+                     }
+                     if (match) {
+                        // EnumBody
+                        match = enumBody$Rule();
+                     }
                   }
                }
             }
@@ -1671,13 +1740,33 @@ public class JavaParser implements Parser {
                   match = identifier$Rule();
                   if (match) {
                      // TypeParameters?
+                     Node lastNode_1 = currentNode;
+                     int lastIndex_1 = index;
                      // TypeParameters
-                     typeParameters$Rule();
-                     // ExtendsInterfaces?
-                     // ExtendsInterfaces
-                     extendsInterfaces$Rule();
-                     // InterfaceBody
-                     match = interfaceBody$Rule();
+                     match = typeParameters$Rule();
+                     if (! match) {
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                        index = lastIndex_1;
+                        match = true;
+                     }
+                     if (match) {
+                        // ExtendsInterfaces?
+                        Node lastNode_2 = currentNode;
+                        int lastIndex_2 = index;
+                        // ExtendsInterfaces
+                        match = extendsInterfaces$Rule();
+                        if (! match) {
+                           lastNode_2.setSibling(null);
+                           currentNode = lastNode_2;
+                           index = lastIndex_2;
+                           match = true;
+                        }
+                        if (match) {
+                           // InterfaceBody
+                           match = interfaceBody$Rule();
+                        }
+                     }
                   }
                }
             }
@@ -1843,10 +1932,12 @@ public class JavaParser implements Parser {
       match = className$Rule();
       if (match) {
          // ('.' OptionalSpacing ClassName)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // ('.' OptionalSpacing ClassName)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // '.'
             match = charMatcher('.');
             if (match) {
@@ -1855,17 +1946,12 @@ public class JavaParser implements Parser {
                if (match) {
                   // ClassName
                   match = className$Rule();
-                  if (! match) {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
-                     currentNode = lastNode_1;
-                  }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
@@ -1976,10 +2062,12 @@ public class JavaParser implements Parser {
       match = qualifiedClassName$Rule();
       if (match) {
          // (',' OptionalSpacing QualifiedClassName)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (',' OptionalSpacing QualifiedClassName)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // ','
             match = charMatcher(',');
             if (match) {
@@ -1988,17 +2076,12 @@ public class JavaParser implements Parser {
                if (match) {
                   // QualifiedClassName
                   match = qualifiedClassName$Rule();
-                  if (! match) {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
-                     currentNode = lastNode_1;
-                  }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
@@ -2251,24 +2334,23 @@ public class JavaParser implements Parser {
                      case 'r': {
                         ++index;
                         // ('ows' | 'ow')
-                        if (buffer.matchChar(index, 'o')) {
+                        match = buffer.matchChar(index, 'o');
+                        if (match) {
                            ++index;
                            // ('ws' | 'w')
-                           if (buffer.matchChar(index, 'w')) {
+                           match = buffer.matchChar(index, 'w');
+                           if (match) {
                               ++index;
                               // ('s' | <EMPTY>)
-                              if (buffer.matchChar(index, 's')) {
+                              match = buffer.matchChar(index, 's');
+                              if (match) {
                                  ++index;
                                  // <EMPTY>
                                  match = true;
                               } else {
                                  match = true;
                               }
-                           } else {
-                              match = false;
                            }
-                        } else {
-                           match = false;
                         }
                         break;
                      }
@@ -2295,7 +2377,8 @@ public class JavaParser implements Parser {
          case 'v': {
             ++index;
             // ('olatile' | 'oid')
-            if (buffer.matchChar(index, 'o')) {
+            match = buffer.matchChar(index, 'o');
+            if (match) {
                ++index;
                // ('latile' | 'id')
                switch(buffer.getChar(index)) {
@@ -2319,8 +2402,6 @@ public class JavaParser implements Parser {
                      match = false;
                   }
                }
-            } else {
-               match = false;
             }
             break;
          }
@@ -2407,7 +2488,8 @@ public class JavaParser implements Parser {
                case 'o': {
                   ++index;
                   // ('ntinue' | 'nst')
-                  if (buffer.matchChar(index, 'n')) {
+                  match = buffer.matchChar(index, 'n');
+                  if (match) {
                      ++index;
                      // ('tinue' | 'st')
                      switch(buffer.getChar(index)) {
@@ -2431,8 +2513,6 @@ public class JavaParser implements Parser {
                            match = false;
                         }
                      }
-                  } else {
-                     match = false;
                   }
                   break;
                }
@@ -2483,7 +2563,8 @@ public class JavaParser implements Parser {
                case 'o': {
                   ++index;
                   // ('uble' | <EMPTY>)
-                  if (buffer.matchChar(index, 'u')) {
+                  match = buffer.matchChar(index, 'u');
+                  if (match) {
                      ++index;
                      // 'ble'
                      if (match = stringTest("ble", 3)) {
@@ -2565,16 +2646,20 @@ public class JavaParser implements Parser {
                case 'i': {
                   ++index;
                   // ('nally' | 'nal')
-                  if (buffer.matchChar(index, 'n')) {
+                  match = buffer.matchChar(index, 'n');
+                  if (match) {
                      ++index;
                      // ('ally' | 'al')
-                     if (buffer.matchChar(index, 'a')) {
+                     match = buffer.matchChar(index, 'a');
+                     if (match) {
                         ++index;
                         // ('lly' | 'l')
-                        if (buffer.matchChar(index, 'l')) {
+                        match = buffer.matchChar(index, 'l');
+                        if (match) {
                            ++index;
                            // ('ly' | <EMPTY>)
-                           if (buffer.matchChar(index, 'l')) {
+                           match = buffer.matchChar(index, 'l');
+                           if (match) {
                               ++index;
                               // 'y'
                               if (match = buffer.matchChar(index, 'y')) {
@@ -2583,14 +2668,8 @@ public class JavaParser implements Parser {
                            } else {
                               match = true;
                            }
-                        } else {
-                           match = false;
                         }
-                     } else {
-                        match = false;
                      }
-                  } else {
-                     match = false;
                   }
                   break;
                }
@@ -2615,7 +2694,8 @@ public class JavaParser implements Parser {
                case 'm': {
                   ++index;
                   // ('plements' | 'port')
-                  if (buffer.matchChar(index, 'p')) {
+                  match = buffer.matchChar(index, 'p');
+                  if (match) {
                      ++index;
                      // ('lements' | 'ort')
                      switch(buffer.getChar(index)) {
@@ -2639,8 +2719,6 @@ public class JavaParser implements Parser {
                            match = false;
                         }
                      }
-                  } else {
-                     match = false;
                   }
                   break;
                }
@@ -2659,7 +2737,8 @@ public class JavaParser implements Parser {
                      case 't': {
                         ++index;
                         // ('erface' | <EMPTY>)
-                        if (buffer.matchChar(index, 'e')) {
+                        match = buffer.matchChar(index, 'e');
+                        if (match) {
                            ++index;
                            // 'rface'
                            if (match = stringTest("rface", 5)) {
@@ -2695,7 +2774,7 @@ public class JavaParser implements Parser {
       if (! match) {
          index = startIndex_2;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_2, index, false, false));
+         currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, startIndex_2, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -2748,6 +2827,8 @@ public class JavaParser implements Parser {
       startIndex = index;
       // (('a'-'z' | 'A'-'Z' | '_' | '$') ('a'-'z' | 'A'-'Z' | '0'-'9' | '_' | '$')*)
       // ('a'-'z' | 'A'-'Z' | '_' | '$')
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // 'a'-'z'
       match = charRangeMatcher('a', 'z');
       if (! match) {
@@ -2764,8 +2845,14 @@ public class JavaParser implements Parser {
       }
       if (match) {
          // ('a'-'z' | 'A'-'Z' | '0'-'9' | '_' | '$')*
+         Node lastNode_2;
+         int lastIndex_2;
          do {
+            lastNode_2 = currentNode;
+            lastIndex_2 = index;
             // ('a'-'z' | 'A'-'Z' | '0'-'9' | '_' | '$')
+            Node lastNode_3 = currentNode;
+            int lastIndex_3 = index;
             // 'a'-'z'
             match = charRangeMatcher('a', 'z');
             if (! match) {
@@ -2785,6 +2872,9 @@ public class JavaParser implements Parser {
                }
             }
          } while(match);
+         lastNode_2.setSibling(null);
+         currentNode = lastNode_2;
+         index = lastIndex_2;
          match = true;
       }
       if (match) {
@@ -2835,10 +2925,12 @@ public class JavaParser implements Parser {
             match = typeParameter$Rule();
             if (match) {
                // (',' OptionalSpacing TypeParameter)*
+               Node lastNode_1;
+               int lastIndex_1;
                do {
+                  lastNode_1 = currentNode;
+                  lastIndex_1 = index;
                   // (',' OptionalSpacing TypeParameter)
-                  Node lastNode_1 = currentNode;
-                  int lastIndex_1 = index;
                   // ','
                   match = charMatcher(',');
                   if (match) {
@@ -2847,17 +2939,12 @@ public class JavaParser implements Parser {
                      if (match) {
                         // TypeParameter
                         match = typeParameter$Rule();
-                        if (! match) {
-                           index = lastIndex_1;
-                           lastNode_1.setSibling(null);
-                           currentNode = lastNode_1;
-                        }
-                     } else {
-                        index = lastIndex_1;
-                        lastNode_1.setSibling(null);
                      }
                   }
                } while(match);
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
                // '>'
                match = charMatcher('>');
                if (match) {
@@ -2919,10 +3006,17 @@ public class JavaParser implements Parser {
          match = optionalSpacing$Rule();
          if (match) {
             // ClassBodyDeclaration*
+            Node lastNode_1;
+            int lastIndex_1;
             do {
+               lastNode_1 = currentNode;
+               lastIndex_1 = index;
                // ClassBodyDeclaration
                match = classBodyDeclaration$Rule();
             } while(match);
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
             // '}'
             match = charMatcher('}');
             if (match) {
@@ -2976,23 +3070,43 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (Semicolon | StaticBlock | MethodDeclaration | ConstructorDeclaration | FieldsDeclarations | InterfaceDeclaration | ClassDeclaration | EnumDeclaration | AnnotationDeclaration)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case ';': {
             // Semicolon
             match = semicolon$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '{': {
             // StaticBlock
             match = staticBlock$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '<': {
             // MethodDeclaration
             match = methodDeclaration$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ConstructorDeclaration
                match = constructorDeclaration$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -3006,23 +3120,46 @@ public class JavaParser implements Parser {
             // MethodDeclaration
             match = methodDeclaration$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ConstructorDeclaration
                match = constructorDeclaration$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // FieldsDeclarations
                   match = fieldsDeclarations$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // InterfaceDeclaration
                      match = interfaceDeclaration$Rule();
                      if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
                         // ClassDeclaration
                         match = classDeclaration$Rule();
                         if (! match) {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
                            // EnumDeclaration
                            match = enumDeclaration$Rule();
                            if (! match) {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
                               // AnnotationDeclaration
                               match = annotationDeclaration$Rule();
+                              if (! match) {
+                                 index = lastIndex_1;
+                                 lastNode_1.setSibling(null);
+                                 currentNode = lastNode_1;
+                              }
                            }
                         }
                      }
@@ -3078,11 +3215,22 @@ public class JavaParser implements Parser {
             // MethodDeclaration
             match = methodDeclaration$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ConstructorDeclaration
                match = constructorDeclaration$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // FieldsDeclarations
                   match = fieldsDeclarations$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -3091,14 +3239,28 @@ public class JavaParser implements Parser {
             // MethodDeclaration
             match = methodDeclaration$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ConstructorDeclaration
                match = constructorDeclaration$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // FieldsDeclarations
                   match = fieldsDeclarations$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // ClassDeclaration
                      match = classDeclaration$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
                   }
                }
             }
@@ -3108,26 +3270,52 @@ public class JavaParser implements Parser {
             // StaticBlock
             match = staticBlock$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // MethodDeclaration
                match = methodDeclaration$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // ConstructorDeclaration
                   match = constructorDeclaration$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // FieldsDeclarations
                      match = fieldsDeclarations$Rule();
                      if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
                         // InterfaceDeclaration
                         match = interfaceDeclaration$Rule();
                         if (! match) {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
                            // ClassDeclaration
                            match = classDeclaration$Rule();
                            if (! match) {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
                               // EnumDeclaration
                               match = enumDeclaration$Rule();
                               if (! match) {
+                                 index = lastIndex_1;
+                                 lastNode_1.setSibling(null);
+                                 currentNode = lastNode_1;
                                  // AnnotationDeclaration
                                  match = annotationDeclaration$Rule();
+                                 if (! match) {
+                                    index = lastIndex_1;
+                                    lastNode_1.setSibling(null);
+                                    currentNode = lastNode_1;
+                                 }
                               }
                            }
                         }
@@ -3141,14 +3329,28 @@ public class JavaParser implements Parser {
             // MethodDeclaration
             match = methodDeclaration$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ConstructorDeclaration
                match = constructorDeclaration$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // FieldsDeclarations
                   match = fieldsDeclarations$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // EnumDeclaration
                      match = enumDeclaration$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
                   }
                }
             }
@@ -3158,14 +3360,28 @@ public class JavaParser implements Parser {
             // MethodDeclaration
             match = methodDeclaration$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ConstructorDeclaration
                match = constructorDeclaration$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // FieldsDeclarations
                   match = fieldsDeclarations$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // InterfaceDeclaration
                      match = interfaceDeclaration$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
                   }
                }
             }
@@ -3221,9 +3437,9 @@ public class JavaParser implements Parser {
       startIndex = index;
       // (('static' TestNoAlpha OptionalSpacing)? Block)
       // ('static' TestNoAlpha OptionalSpacing)?
-      // ('static' TestNoAlpha OptionalSpacing)
       Node lastNode_1 = currentNode;
       int lastIndex_1 = index;
+      // ('static' TestNoAlpha OptionalSpacing)
       // 'static'
       match = stringMatcher("static", 6);
       if (match) {
@@ -3232,18 +3448,18 @@ public class JavaParser implements Parser {
          if (match) {
             // OptionalSpacing
             match = optionalSpacing$Rule();
-            if (! match) {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-               currentNode = lastNode_1;
-            }
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
          }
       }
-      // Block
-      match = block$Rule();
+      if (! match) {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
+         match = true;
+      }
+      if (match) {
+         // Block
+         match = block$Rule();
+      }
       if (match) {
          staticBlock$RuleMemoStart = startIndex;
          staticBlock$RuleMemoEnd = index;
@@ -3359,15 +3575,27 @@ public class JavaParser implements Parser {
          match = methodSignature$Rule();
          if (match) {
             // (Block | EmptyBody)
+            Node lastNode_1 = currentNode;
+            int lastIndex_1 = index;
             switch(buffer.getChar(index)) {
                case '{': {
                   // Block
                   match = block$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                   break;
                }
                case ';': {
                   // EmptyBody
                   match = emptyBody$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                   break;
                }
                default: {
@@ -3425,19 +3653,39 @@ public class JavaParser implements Parser {
       match = modifiers$Rule();
       if (match) {
          // TypeParameters?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // TypeParameters
-         typeParameters$Rule();
-         // Identifier
-         match = identifier$Rule();
+         match = typeParameters$Rule();
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
          if (match) {
-            // ParametersDeclarations
-            match = parametersDeclarations$Rule();
+            // Identifier
+            match = identifier$Rule();
             if (match) {
-               // Throws?
-               // Throws
-               throws$Rule();
-               // Block
-               match = block$Rule();
+               // ParametersDeclarations
+               match = parametersDeclarations$Rule();
+               if (match) {
+                  // Throws?
+                  Node lastNode_2 = currentNode;
+                  int lastIndex_2 = index;
+                  // Throws
+                  match = throws$Rule();
+                  if (! match) {
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
+                     index = lastIndex_2;
+                     match = true;
+                  }
+                  if (match) {
+                     // Block
+                     match = block$Rule();
+                  }
+               }
             }
          }
       }
@@ -3545,6 +3793,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (Array | BasicType | QualifiedClassName)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case 'A':
          case 'B':
@@ -3596,8 +3846,16 @@ public class JavaParser implements Parser {
             // Array
             match = array$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // QualifiedClassName
                match = qualifiedClassName$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -3611,11 +3869,22 @@ public class JavaParser implements Parser {
             // Array
             match = array$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // BasicType
                match = basicType$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // QualifiedClassName
                   match = qualifiedClassName$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -3673,10 +3942,12 @@ public class JavaParser implements Parser {
       match = variableDeclaration$Rule();
       if (match) {
          // (',' OptionalSpacing VariableDeclaration)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (',' OptionalSpacing VariableDeclaration)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // ','
             match = charMatcher(',');
             if (match) {
@@ -3685,17 +3956,12 @@ public class JavaParser implements Parser {
                if (match) {
                   // VariableDeclaration
                   match = variableDeclaration$Rule();
-                  if (! match) {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
-                     currentNode = lastNode_1;
-                  }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
@@ -3833,12 +4099,15 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (Type | ('void' TestNoAlpha OptionalSpacing))
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // Type
       match = type$Rule();
       if (! match) {
+         index = lastIndex_1;
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
          // ('void' TestNoAlpha OptionalSpacing)
-         Node lastNode_1 = currentNode;
-         int lastIndex_1 = index;
          // 'void'
          match = stringMatcher("void", 4);
          if (match) {
@@ -3847,15 +4116,12 @@ public class JavaParser implements Parser {
             if (match) {
                // OptionalSpacing
                match = optionalSpacing$Rule();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
-            } else {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
             }
+         }
+         if (! match) {
+            index = lastIndex_1;
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
          }
       }
       if (match) {
@@ -3896,24 +4162,41 @@ public class JavaParser implements Parser {
       startIndex = index;
       // (TypeParameters? ReturnType Identifier ParametersDeclarations Dimensions Throws?)
       // TypeParameters?
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // TypeParameters
-      typeParameters$Rule();
-      // ReturnType
-      match = returnType$Rule();
+      match = typeParameters$Rule();
+      if (! match) {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
+         match = true;
+      }
       if (match) {
-         // Identifier
-         match = identifier$Rule();
+         // ReturnType
+         match = returnType$Rule();
          if (match) {
-            // ParametersDeclarations
-            match = parametersDeclarations$Rule();
+            // Identifier
+            match = identifier$Rule();
             if (match) {
-               // Dimensions
-               match = dimensions$Rule();
+               // ParametersDeclarations
+               match = parametersDeclarations$Rule();
                if (match) {
-                  // Throws?
-                  // Throws
-                  throws$Rule();
-                  match = true;
+                  // Dimensions
+                  match = dimensions$Rule();
+                  if (match) {
+                     // Throws?
+                     Node lastNode_2 = currentNode;
+                     int lastIndex_2 = index;
+                     // Throws
+                     match = throws$Rule();
+                     if (! match) {
+                        lastNode_2.setSibling(null);
+                        currentNode = lastNode_2;
+                        index = lastIndex_2;
+                        match = true;
+                     }
+                  }
                }
             }
          }
@@ -3970,13 +4253,23 @@ public class JavaParser implements Parser {
          match = optionalSpacing$Rule();
          if (match) {
             // ParametersDeclarationList?
+            Node lastNode_1 = currentNode;
+            int lastIndex_1 = index;
             // ParametersDeclarationList
-            parametersDeclarationList$Rule();
-            // ')'
-            match = charMatcher(')');
+            match = parametersDeclarationList$Rule();
+            if (! match) {
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
+               match = true;
+            }
             if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
+               // ')'
+               match = charMatcher(')');
+               if (match) {
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
+               }
             }
          }
       }
@@ -4025,10 +4318,17 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // Dim*
+      Node lastNode_1;
+      int lastIndex_1;
       do {
+         lastNode_1 = currentNode;
+         lastIndex_1 = index;
          // Dim
          match = dim$Rule();
       } while(match);
+      lastNode_1.setSibling(null);
+      currentNode = lastNode_1;
+      index = lastIndex_1;
       dimensions$RuleMemoStart = startIndex;
       dimensions$RuleMemoEnd = index;
       if (currentRuleIsAtomic) {
@@ -4092,10 +4392,17 @@ public class JavaParser implements Parser {
          match = optionalSpacing$Rule();
          if (match) {
             // InterfaceBodyDeclaration*
+            Node lastNode_1;
+            int lastIndex_1;
             do {
+               lastNode_1 = currentNode;
+               lastIndex_1 = index;
                // InterfaceBodyDeclaration
                match = interfaceBodyDeclaration$Rule();
             } while(match);
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
             // '}'
             match = charMatcher('}');
             if (match) {
@@ -4126,15 +4433,27 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (InterfaceMethod | ConstantsDeclarations | InterfaceDeclaration | AnnotationDeclaration | ClassDeclaration | EnumDeclaration | Semicolon)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case ';': {
             // Semicolon
             match = semicolon$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '<': {
             // InterfaceMethod
             match = interfaceMethod$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '@':
@@ -4148,20 +4467,40 @@ public class JavaParser implements Parser {
             // InterfaceMethod
             match = interfaceMethod$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ConstantsDeclarations
                match = constantsDeclarations$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // InterfaceDeclaration
                   match = interfaceDeclaration$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // AnnotationDeclaration
                      match = annotationDeclaration$Rule();
                      if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
                         // ClassDeclaration
                         match = classDeclaration$Rule();
                         if (! match) {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
                            // EnumDeclaration
                            match = enumDeclaration$Rule();
+                           if (! match) {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
+                           }
                         }
                      }
                   }
@@ -4216,8 +4555,16 @@ public class JavaParser implements Parser {
             // InterfaceMethod
             match = interfaceMethod$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ConstantsDeclarations
                match = constantsDeclarations$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -4225,11 +4572,22 @@ public class JavaParser implements Parser {
             // InterfaceMethod
             match = interfaceMethod$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ConstantsDeclarations
                match = constantsDeclarations$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // ClassDeclaration
                   match = classDeclaration$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -4238,11 +4596,22 @@ public class JavaParser implements Parser {
             // InterfaceMethod
             match = interfaceMethod$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ConstantsDeclarations
                match = constantsDeclarations$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // EnumDeclaration
                   match = enumDeclaration$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -4251,11 +4620,22 @@ public class JavaParser implements Parser {
             // InterfaceMethod
             match = interfaceMethod$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ConstantsDeclarations
                match = constantsDeclarations$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // InterfaceDeclaration
                   match = interfaceDeclaration$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -4404,10 +4784,12 @@ public class JavaParser implements Parser {
       match = constantDeclaration$Rule();
       if (match) {
          // (',' OptionalSpacing ConstantDeclaration)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (',' OptionalSpacing ConstantDeclaration)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // ','
             match = charMatcher(',');
             if (match) {
@@ -4416,17 +4798,12 @@ public class JavaParser implements Parser {
                if (match) {
                   // ConstantDeclaration
                   match = constantDeclaration$Rule();
-                  if (! match) {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
-                     currentNode = lastNode_1;
-                  }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
@@ -4529,6 +4906,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (ArrayInitializer | Expression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -4604,11 +4983,21 @@ public class JavaParser implements Parser {
          case '~': {
             // Expression
             match = expression$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '{': {
             // ArrayInitializer
             match = arrayInitializer$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          default: {
@@ -4652,32 +5041,54 @@ public class JavaParser implements Parser {
          match = optionalSpacing$Rule();
          if (match) {
             // EnumConstants?
-            // EnumConstants
-            enumConstants$Rule();
-            match = true;
-            // (',' OptionalSpacing)?
-            // (',' OptionalSpacing)
             Node lastNode_1 = currentNode;
             int lastIndex_1 = index;
-            // ','
-            match = charMatcher(',');
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
+            // EnumConstants
+            match = enumConstants$Rule();
+            if (! match) {
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
+               match = true;
             }
-            // EnumBodyDeclarations?
-            // EnumBodyDeclarations
-            enumBodyDeclarations$Rule();
-            // '}'
-            match = charMatcher('}');
             if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
+               // (',' OptionalSpacing)?
+               Node lastNode_2 = currentNode;
+               int lastIndex_2 = index;
+               // (',' OptionalSpacing)
+               // ','
+               match = charMatcher(',');
+               if (match) {
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
+               }
+               if (! match) {
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+                  index = lastIndex_2;
+                  match = true;
+               }
+               if (match) {
+                  // EnumBodyDeclarations?
+                  Node lastNode_3 = currentNode;
+                  int lastIndex_3 = index;
+                  // EnumBodyDeclarations
+                  match = enumBodyDeclarations$Rule();
+                  if (! match) {
+                     lastNode_3.setSibling(null);
+                     currentNode = lastNode_3;
+                     index = lastIndex_3;
+                     match = true;
+                  }
+                  if (match) {
+                     // '}'
+                     match = charMatcher('}');
+                     if (match) {
+                        // OptionalSpacing
+                        match = optionalSpacing$Rule();
+                     }
+                  }
+               }
             }
          }
       }
@@ -4707,10 +5118,12 @@ public class JavaParser implements Parser {
       match = enumConstant$Rule();
       if (match) {
          // (',' OptionalSpacing EnumConstant)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (',' OptionalSpacing EnumConstant)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // ','
             match = charMatcher(',');
             if (match) {
@@ -4719,17 +5132,12 @@ public class JavaParser implements Parser {
                if (match) {
                   // EnumConstant
                   match = enumConstant$Rule();
-                  if (! match) {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
-                     currentNode = lastNode_1;
-                  }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
@@ -4758,10 +5166,17 @@ public class JavaParser implements Parser {
       match = semicolon$Rule();
       if (match) {
          // ClassBodyDeclaration*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // ClassBodyDeclaration
             match = classBodyDeclaration$Rule();
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
@@ -4808,12 +5223,29 @@ public class JavaParser implements Parser {
          match = identifier$Rule();
          if (match) {
             // Arguments?
+            Node lastNode_1 = currentNode;
+            int lastIndex_1 = index;
             // Arguments
-            arguments$Rule();
-            // ClassBody?
-            // ClassBody
-            classBody$Rule();
-            match = true;
+            match = arguments$Rule();
+            if (! match) {
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
+               match = true;
+            }
+            if (match) {
+               // ClassBody?
+               Node lastNode_2 = currentNode;
+               int lastIndex_2 = index;
+               // ClassBody
+               match = classBody$Rule();
+               if (! match) {
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+                  index = lastIndex_2;
+                  match = true;
+               }
+            }
          }
       }
       if (match) {
@@ -4868,17 +5300,19 @@ public class JavaParser implements Parser {
          match = optionalSpacing$Rule();
          if (match) {
             // (Expression (',' OptionalSpacing Expression)*)?
-            // (Expression (',' OptionalSpacing Expression)*)
             Node lastNode_1 = currentNode;
             int lastIndex_1 = index;
+            // (Expression (',' OptionalSpacing Expression)*)
             // Expression
             match = expression$Rule();
             if (match) {
                // (',' OptionalSpacing Expression)*
+               Node lastNode_2;
+               int lastIndex_2;
                do {
+                  lastNode_2 = currentNode;
+                  lastIndex_2 = index;
                   // (',' OptionalSpacing Expression)
-                  Node lastNode_2 = currentNode;
-                  int lastIndex_2 = index;
                   // ','
                   match = charMatcher(',');
                   if (match) {
@@ -4887,24 +5321,27 @@ public class JavaParser implements Parser {
                      if (match) {
                         // Expression
                         match = expression$Rule();
-                        if (! match) {
-                           index = lastIndex_2;
-                           lastNode_2.setSibling(null);
-                           currentNode = lastNode_2;
-                        }
-                     } else {
-                        index = lastIndex_2;
-                        lastNode_2.setSibling(null);
                      }
                   }
                } while(match);
+               lastNode_2.setSibling(null);
+               currentNode = lastNode_2;
+               index = lastIndex_2;
                match = true;
             }
-            // ')'
-            match = charMatcher(')');
+            if (! match) {
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
+               match = true;
+            }
             if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
+               // ')'
+               match = charMatcher(')');
+               if (match) {
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
+               }
             }
          }
       }
@@ -5008,17 +5445,33 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (Final | Annotation)*
+      Node lastNode_1;
+      int lastIndex_1;
       do {
+         lastNode_1 = currentNode;
+         lastIndex_1 = index;
          // (Final | Annotation)
+         Node lastNode_2 = currentNode;
+         int lastIndex_2 = index;
          switch(buffer.getChar(index)) {
             case '@': {
                // Annotation
                match = annotation$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+               }
                break;
             }
             case 'f': {
                // Final
                match = final$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+               }
                break;
             }
             default: {
@@ -5026,6 +5479,9 @@ public class JavaParser implements Parser {
             }
          }
       } while(match);
+      lastNode_1.setSibling(null);
+      currentNode = lastNode_1;
+      index = lastIndex_1;
       variableModifiers$RuleMemoStart = startIndex;
       variableModifiers$RuleMemoEnd = index;
       if (currentRuleIsAtomic) {
@@ -5127,9 +5583,16 @@ public class JavaParser implements Parser {
          match = dimensions$Rule();
          if (match) {
             // VariableInitialization?
+            Node lastNode_1 = currentNode;
+            int lastIndex_1 = index;
             // VariableInitialization
-            variableInitialization$Rule();
-            match = true;
+            match = variableInitialization$Rule();
+            if (! match) {
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
+               match = true;
+            }
          }
       }
       if (match) {
@@ -5209,9 +5672,9 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // ((ParameterDeclaration ',' OptionalSpacing ParametersDeclarationList) | ParameterDeclaration | ParameterVariableDeclaration)
-      // (ParameterDeclaration ',' OptionalSpacing ParametersDeclarationList)
       Node lastNode_1 = currentNode;
       int lastIndex_1 = index;
+      // (ParameterDeclaration ',' OptionalSpacing ParametersDeclarationList)
       // ParameterDeclaration
       match = parameterDeclaration$Rule();
       if (match) {
@@ -5223,26 +5686,26 @@ public class JavaParser implements Parser {
             if (match) {
                // ParametersDeclarationList
                match = parametersDeclarationList$Rule();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
-            } else {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
             }
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
          }
       }
       if (! match) {
+         index = lastIndex_1;
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
          // ParameterDeclaration
          match = parameterDeclaration$Rule();
          if (! match) {
+            index = lastIndex_1;
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
             // ParameterVariableDeclaration
             match = parameterVariableDeclaration$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
          }
       }
       if (match) {
@@ -5416,10 +5879,17 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // BlockStatement*
+      Node lastNode_1;
+      int lastIndex_1;
       do {
+         lastNode_1 = currentNode;
+         lastIndex_1 = index;
          // BlockStatement
          match = blockStatement$Rule();
       } while(match);
+      lastNode_1.setSibling(null);
+      currentNode = lastNode_1;
+      index = lastIndex_1;
       blockStatements$RuleMemoStart = startIndex;
       blockStatements$RuleMemoEnd = index;
       if (currentRuleIsAtomic) {
@@ -5440,6 +5910,8 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (LocalVariableDeclarationStatement | ClassDeclaration | EnumDeclaration | Statement)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -5463,17 +5935,33 @@ public class JavaParser implements Parser {
          case '~': {
             // Statement
             match = statement$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '@': {
             // LocalVariableDeclarationStatement
             match = localVariableDeclarationStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ClassDeclaration
                match = classDeclaration$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // EnumDeclaration
                   match = enumDeclaration$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -5526,8 +6014,16 @@ public class JavaParser implements Parser {
             // LocalVariableDeclarationStatement
             match = localVariableDeclarationStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // Statement
                match = statement$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -5541,14 +6037,28 @@ public class JavaParser implements Parser {
             // LocalVariableDeclarationStatement
             match = localVariableDeclarationStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ClassDeclaration
                match = classDeclaration$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // EnumDeclaration
                   match = enumDeclaration$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // Statement
                      match = statement$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
                   }
                }
             }
@@ -5558,11 +6068,22 @@ public class JavaParser implements Parser {
             // LocalVariableDeclarationStatement
             match = localVariableDeclarationStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ClassDeclaration
                match = classDeclaration$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // Statement
                   match = statement$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -5571,11 +6092,22 @@ public class JavaParser implements Parser {
             // LocalVariableDeclarationStatement
             match = localVariableDeclarationStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // EnumDeclaration
                match = enumDeclaration$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // Statement
                   match = statement$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -5621,6 +6153,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (Block | AssertStatement | IfStatement | ForStatement | ForIterableStatement | WhileStatement | DoWhileStatement | TryCatchStatement | SwitchStatement | SynchronizedStatement | ReturnStatement | ThrowStatement | BreakStatement | ContinueStatement | IdentifiedStatement | StatementExpression | Semicolon)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -5642,17 +6176,33 @@ public class JavaParser implements Parser {
          case '~': {
             // StatementExpression
             match = statementExpression$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case 'r': {
             // ReturnStatement
             match = returnStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // IdentifiedStatement
                match = identifiedStatement$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // StatementExpression
                   match = statementExpression$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -5661,14 +6211,28 @@ public class JavaParser implements Parser {
             // SwitchStatement
             match = switchStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // SynchronizedStatement
                match = synchronizedStatement$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // IdentifiedStatement
                   match = identifiedStatement$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // StatementExpression
                      match = statementExpression$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
                   }
                }
             }
@@ -5678,14 +6242,28 @@ public class JavaParser implements Parser {
             // TryCatchStatement
             match = tryCatchStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ThrowStatement
                match = throwStatement$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // IdentifiedStatement
                   match = identifiedStatement$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // StatementExpression
                      match = statementExpression$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
                   }
                }
             }
@@ -5695,11 +6273,22 @@ public class JavaParser implements Parser {
             // WhileStatement
             match = whileStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // IdentifiedStatement
                match = identifiedStatement$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // StatementExpression
                   match = statementExpression$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -5707,11 +6296,21 @@ public class JavaParser implements Parser {
          case ';': {
             // Semicolon
             match = semicolon$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '{': {
             // Block
             match = block$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case 'A':
@@ -5761,8 +6360,16 @@ public class JavaParser implements Parser {
             // IdentifiedStatement
             match = identifiedStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // StatementExpression
                match = statementExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -5770,11 +6377,22 @@ public class JavaParser implements Parser {
             // AssertStatement
             match = assertStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // IdentifiedStatement
                match = identifiedStatement$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // StatementExpression
                   match = statementExpression$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -5783,11 +6401,22 @@ public class JavaParser implements Parser {
             // BreakStatement
             match = breakStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // IdentifiedStatement
                match = identifiedStatement$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // StatementExpression
                   match = statementExpression$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -5796,11 +6425,22 @@ public class JavaParser implements Parser {
             // ContinueStatement
             match = continueStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // IdentifiedStatement
                match = identifiedStatement$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // StatementExpression
                   match = statementExpression$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -5809,11 +6449,22 @@ public class JavaParser implements Parser {
             // DoWhileStatement
             match = doWhileStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // IdentifiedStatement
                match = identifiedStatement$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // StatementExpression
                   match = statementExpression$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -5822,14 +6473,28 @@ public class JavaParser implements Parser {
             // ForStatement
             match = forStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ForIterableStatement
                match = forIterableStatement$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // IdentifiedStatement
                   match = identifiedStatement$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // StatementExpression
                      match = statementExpression$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
                   }
                }
             }
@@ -5839,11 +6504,22 @@ public class JavaParser implements Parser {
             // IfStatement
             match = ifStatement$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // IdentifiedStatement
                match = identifiedStatement$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // StatementExpression
                   match = statementExpression$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -5910,9 +6586,9 @@ public class JavaParser implements Parser {
                match = expression$Rule();
                if (match) {
                   // (':' OptionalSpacing Expression)?
-                  // (':' OptionalSpacing Expression)
                   Node lastNode_1 = currentNode;
                   int lastIndex_1 = index;
+                  // (':' OptionalSpacing Expression)
                   // ':'
                   match = charMatcher(':');
                   if (match) {
@@ -5921,18 +6597,18 @@ public class JavaParser implements Parser {
                      if (match) {
                         // Expression
                         match = expression$Rule();
-                        if (! match) {
-                           index = lastIndex_1;
-                           lastNode_1.setSibling(null);
-                           currentNode = lastNode_1;
-                        }
-                     } else {
-                        index = lastIndex_1;
-                        lastNode_1.setSibling(null);
                      }
                   }
-                  // Semicolon
-                  match = semicolon$Rule();
+                  if (! match) {
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                     index = lastIndex_1;
+                     match = true;
+                  }
+                  if (match) {
+                     // Semicolon
+                     match = semicolon$Rule();
+                  }
                }
             }
          }
@@ -5998,9 +6674,16 @@ public class JavaParser implements Parser {
                   match = statement$Rule();
                   if (match) {
                      // ElseStatement?
+                     Node lastNode_1 = currentNode;
+                     int lastIndex_1 = index;
                      // ElseStatement
-                     elseStatement$Rule();
-                     match = true;
+                     match = elseStatement$Rule();
+                     if (! match) {
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                        index = lastIndex_1;
+                        match = true;
+                     }
                   }
                }
             }
@@ -6067,28 +6750,58 @@ public class JavaParser implements Parser {
                   match = optionalSpacing$Rule();
                   if (match) {
                      // ForInit?
+                     Node lastNode_1 = currentNode;
+                     int lastIndex_1 = index;
                      // ForInit
-                     forInit$Rule();
-                     // Semicolon
-                     match = semicolon$Rule();
+                     match = forInit$Rule();
+                     if (! match) {
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                        index = lastIndex_1;
+                        match = true;
+                     }
                      if (match) {
-                        // Expression?
-                        // Expression
-                        expression$Rule();
                         // Semicolon
                         match = semicolon$Rule();
                         if (match) {
-                           // ForUpdate?
-                           // ForUpdate
-                           forUpdate$Rule();
-                           // ')'
-                           match = charMatcher(')');
+                           // Expression?
+                           Node lastNode_2 = currentNode;
+                           int lastIndex_2 = index;
+                           // Expression
+                           match = expression$Rule();
+                           if (! match) {
+                              lastNode_2.setSibling(null);
+                              currentNode = lastNode_2;
+                              index = lastIndex_2;
+                              match = true;
+                           }
                            if (match) {
-                              // OptionalSpacing
-                              match = optionalSpacing$Rule();
+                              // Semicolon
+                              match = semicolon$Rule();
                               if (match) {
-                                 // Statement
-                                 match = statement$Rule();
+                                 // ForUpdate?
+                                 Node lastNode_3 = currentNode;
+                                 int lastIndex_3 = index;
+                                 // ForUpdate
+                                 match = forUpdate$Rule();
+                                 if (! match) {
+                                    lastNode_3.setSibling(null);
+                                    currentNode = lastNode_3;
+                                    index = lastIndex_3;
+                                    match = true;
+                                 }
+                                 if (match) {
+                                    // ')'
+                                    match = charMatcher(')');
+                                    if (match) {
+                                       // OptionalSpacing
+                                       match = optionalSpacing$Rule();
+                                       if (match) {
+                                          // Statement
+                                          match = statement$Rule();
+                                       }
+                                    }
+                                 }
                               }
                            }
                         }
@@ -6386,20 +7099,45 @@ public class JavaParser implements Parser {
             match = optionalSpacing$Rule();
             if (match) {
                // ResourceSpecification?
+               Node lastNode_1 = currentNode;
+               int lastIndex_1 = index;
                // ResourceSpecification
-               resourceSpecification$Rule();
-               // Block
-               match = block$Rule();
-               if (match) {
-                  // Catch*
-                  do {
-                     // Catch
-                     match = catch$Rule();
-                  } while(match);
-                  // Finally?
-                  // Finally
-                  finally$Rule();
+               match = resourceSpecification$Rule();
+               if (! match) {
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+                  index = lastIndex_1;
                   match = true;
+               }
+               if (match) {
+                  // Block
+                  match = block$Rule();
+                  if (match) {
+                     // Catch*
+                     Node lastNode_2;
+                     int lastIndex_2;
+                     do {
+                        lastNode_2 = currentNode;
+                        lastIndex_2 = index;
+                        // Catch
+                        match = catch$Rule();
+                     } while(match);
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
+                     index = lastIndex_2;
+                     match = true;
+                     // Finally?
+                     Node lastNode_3 = currentNode;
+                     int lastIndex_3 = index;
+                     // Finally
+                     match = finally$Rule();
+                     if (! match) {
+                        lastNode_3.setSibling(null);
+                        currentNode = lastNode_3;
+                        index = lastIndex_3;
+                        match = true;
+                     }
+                  }
                }
             }
          }
@@ -6444,25 +7182,28 @@ public class JavaParser implements Parser {
             match = resources$Rule();
             if (match) {
                // (';' OptionalSpacing)?
-               // (';' OptionalSpacing)
                Node lastNode_1 = currentNode;
                int lastIndex_1 = index;
+               // (';' OptionalSpacing)
                // ';'
                match = charMatcher(';');
                if (match) {
                   // OptionalSpacing
                   match = optionalSpacing$Rule();
-                  if (! match) {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
-                     currentNode = lastNode_1;
-                  }
                }
-               // ')'
-               match = charMatcher(')');
+               if (! match) {
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+                  index = lastIndex_1;
+                  match = true;
+               }
                if (match) {
-                  // OptionalSpacing
-                  match = optionalSpacing$Rule();
+                  // ')'
+                  match = charMatcher(')');
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                  }
                }
             }
          }
@@ -6493,10 +7234,12 @@ public class JavaParser implements Parser {
       match = resource$Rule();
       if (match) {
          // (';' OptionalSpacing Resource)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (';' OptionalSpacing Resource)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // ';'
             match = charMatcher(';');
             if (match) {
@@ -6505,17 +7248,12 @@ public class JavaParser implements Parser {
                if (match) {
                   // Resource
                   match = resource$Rule();
-                  if (! match) {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
-                     currentNode = lastNode_1;
-                  }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
@@ -6778,10 +7516,20 @@ public class JavaParser implements Parser {
             match = optionalSpacing$Rule();
             if (match) {
                // Expression?
+               Node lastNode_1 = currentNode;
+               int lastIndex_1 = index;
                // Expression
-               expression$Rule();
-               // Semicolon
-               match = semicolon$Rule();
+               match = expression$Rule();
+               if (! match) {
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+                  index = lastIndex_1;
+                  match = true;
+               }
+               if (match) {
+                  // Semicolon
+                  match = semicolon$Rule();
+               }
             }
          }
       }
@@ -6903,10 +7651,20 @@ public class JavaParser implements Parser {
             match = optionalSpacing$Rule();
             if (match) {
                // Identifier?
+               Node lastNode_1 = currentNode;
+               int lastIndex_1 = index;
                // Identifier
-               identifier$Rule();
-               // Semicolon
-               match = semicolon$Rule();
+               match = identifier$Rule();
+               if (! match) {
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+                  index = lastIndex_1;
+                  match = true;
+               }
+               if (match) {
+                  // Semicolon
+                  match = semicolon$Rule();
+               }
             }
          }
       }
@@ -6965,10 +7723,20 @@ public class JavaParser implements Parser {
             match = optionalSpacing$Rule();
             if (match) {
                // Identifier?
+               Node lastNode_1 = currentNode;
+               int lastIndex_1 = index;
                // Identifier
-               identifier$Rule();
-               // Semicolon
-               match = semicolon$Rule();
+               match = identifier$Rule();
+               if (! match) {
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+                  index = lastIndex_1;
+                  match = true;
+               }
+               if (match) {
+                  // Semicolon
+                  match = semicolon$Rule();
+               }
             }
          }
       }
@@ -7226,6 +7994,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (AssignmentExpression | ConditionalExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -7302,8 +8072,16 @@ public class JavaParser implements Parser {
             // AssignmentExpression
             match = assignmentExpression$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ConditionalExpression
                match = conditionalExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -7341,6 +8119,8 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (ForInitVariables | ForInitExpressions)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -7362,11 +8142,21 @@ public class JavaParser implements Parser {
          case '~': {
             // ForInitExpressions
             match = forInitExpressions$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '@': {
             // ForInitVariables
             match = forInitVariables$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '$':
@@ -7426,8 +8216,16 @@ public class JavaParser implements Parser {
             // ForInitVariables
             match = forInitVariables$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ForInitExpressions
                match = forInitExpressions$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -7461,10 +8259,12 @@ public class JavaParser implements Parser {
       match = expression$Rule();
       if (match) {
          // (',' OptionalSpacing Expression)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (',' OptionalSpacing Expression)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // ','
             match = charMatcher(',');
             if (match) {
@@ -7473,17 +8273,12 @@ public class JavaParser implements Parser {
                if (match) {
                   // Expression
                   match = expression$Rule();
-                  if (! match) {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
-                     currentNode = lastNode_1;
-                  }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
@@ -7512,10 +8307,12 @@ public class JavaParser implements Parser {
       match = qualifiedIdentifier$Rule();
       if (match) {
          // ('|' OptionalSpacing QualifiedIdentifier)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // ('|' OptionalSpacing QualifiedIdentifier)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // '|'
             match = charMatcher('|');
             if (match) {
@@ -7524,17 +8321,12 @@ public class JavaParser implements Parser {
                if (match) {
                   // QualifiedIdentifier
                   match = qualifiedIdentifier$Rule();
-                  if (! match) {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
-                     currentNode = lastNode_1;
-                  }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
@@ -7683,10 +8475,17 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // SwitchBlockStatementGroup*
+      Node lastNode_1;
+      int lastIndex_1;
       do {
+         lastNode_1 = currentNode;
+         lastIndex_1 = index;
          // SwitchBlockStatementGroup
          match = switchBlockStatementGroup$Rule();
       } while(match);
+      lastNode_1.setSibling(null);
+      currentNode = lastNode_1;
+      index = lastIndex_1;
       if (! currentRuleIsAtomic) {
          currentNode = new NodeImpl(JavaRuleType.SWITCH_BLOCK_STATEMENT_GROUPS, startIndex, index, true, false);
          currentNode.setFirstChild(lastNode.getSibling());
@@ -7730,9 +8529,9 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (('case' TestNoAlpha OptionalSpacing Expression ':' OptionalSpacing) | ('case' TestNoAlpha OptionalSpacing EnumConstantName ':' OptionalSpacing) | ('default' TestNoAlpha OptionalSpacing ':' OptionalSpacing))
-      // ('case' TestNoAlpha OptionalSpacing Expression ':' OptionalSpacing)
       Node lastNode_1 = currentNode;
       int lastIndex_1 = index;
+      // ('case' TestNoAlpha OptionalSpacing Expression ':' OptionalSpacing)
       // 'case'
       match = stringMatcher("case", 4);
       if (match) {
@@ -7750,32 +8549,16 @@ public class JavaParser implements Parser {
                   if (match) {
                      // OptionalSpacing
                      match = optionalSpacing$Rule();
-                     if (! match) {
-                        index = lastIndex_1;
-                        lastNode_1.setSibling(null);
-                        currentNode = lastNode_1;
-                     }
-                  } else {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
                   }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
-            } else {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
             }
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
          }
       }
       if (! match) {
+         index = lastIndex_1;
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
          // ('case' TestNoAlpha OptionalSpacing EnumConstantName ':' OptionalSpacing)
-         Node lastNode_2 = currentNode;
-         int lastIndex_2 = index;
          // 'case'
          match = stringMatcher("case", 4);
          if (match) {
@@ -7793,32 +8576,16 @@ public class JavaParser implements Parser {
                      if (match) {
                         // OptionalSpacing
                         match = optionalSpacing$Rule();
-                        if (! match) {
-                           index = lastIndex_2;
-                           lastNode_2.setSibling(null);
-                           currentNode = lastNode_2;
-                        }
-                     } else {
-                        index = lastIndex_2;
-                        lastNode_2.setSibling(null);
                      }
-                  } else {
-                     index = lastIndex_2;
-                     lastNode_2.setSibling(null);
                   }
-               } else {
-                  index = lastIndex_2;
-                  lastNode_2.setSibling(null);
                }
-            } else {
-               index = lastIndex_2;
-               lastNode_2.setSibling(null);
             }
          }
          if (! match) {
+            index = lastIndex_1;
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
             // ('default' TestNoAlpha OptionalSpacing ':' OptionalSpacing)
-            Node lastNode_3 = currentNode;
-            int lastIndex_3 = index;
             // 'default'
             match = stringMatcher("default", 7);
             if (match) {
@@ -7833,23 +8600,14 @@ public class JavaParser implements Parser {
                      if (match) {
                         // OptionalSpacing
                         match = optionalSpacing$Rule();
-                        if (! match) {
-                           index = lastIndex_3;
-                           lastNode_3.setSibling(null);
-                           currentNode = lastNode_3;
-                        }
-                     } else {
-                        index = lastIndex_3;
-                        lastNode_3.setSibling(null);
                      }
-                  } else {
-                     index = lastIndex_3;
-                     lastNode_3.setSibling(null);
                   }
-               } else {
-                  index = lastIndex_3;
-                  lastNode_3.setSibling(null);
                }
+            }
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
             }
          }
       }
@@ -7972,10 +8730,12 @@ public class JavaParser implements Parser {
       match = expression$Rule();
       if (match) {
          // (',' OptionalSpacing Expression)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (',' OptionalSpacing Expression)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // ','
             match = charMatcher(',');
             if (match) {
@@ -7984,17 +8744,12 @@ public class JavaParser implements Parser {
                if (match) {
                   // Expression
                   match = expression$Rule();
-                  if (! match) {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
-                     currentNode = lastNode_1;
-                  }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
@@ -8097,6 +8852,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (TernaryExpression | ConditionalOrExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -8173,8 +8930,16 @@ public class JavaParser implements Parser {
             // TernaryExpression
             match = ternaryExpression$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ConditionalOrExpression
                match = conditionalOrExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -8264,7 +9029,8 @@ public class JavaParser implements Parser {
          case '>': {
             ++index;
             // ('>>=' | '>=')
-            if (buffer.matchChar(index, '>')) {
+            match = buffer.matchChar(index, '>');
+            if (match) {
                ++index;
                // ('>=' | '=')
                switch(buffer.getChar(index)) {
@@ -8286,8 +9052,6 @@ public class JavaParser implements Parser {
                      match = false;
                   }
                }
-            } else {
-               match = false;
             }
             break;
          }
@@ -8330,7 +9094,7 @@ public class JavaParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -8445,6 +9209,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (OrExpression | ConditionalAndExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -8521,8 +9287,16 @@ public class JavaParser implements Parser {
             // OrExpression
             match = orExpression$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ConditionalAndExpression
                match = conditionalAndExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -8634,6 +9408,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (AndExpression | OptionalBitOrExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -8710,8 +9486,16 @@ public class JavaParser implements Parser {
             // AndExpression
             match = andExpression$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // OptionalBitOrExpression
                match = optionalBitOrExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -8823,6 +9607,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (BitOrExpression | OptionalBitXOrExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -8899,8 +9685,16 @@ public class JavaParser implements Parser {
             // BitOrExpression
             match = bitOrExpression$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // OptionalBitXOrExpression
                match = optionalBitXOrExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -9012,6 +9806,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (BitXOrExpression | OptionalBitAndExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -9088,8 +9884,16 @@ public class JavaParser implements Parser {
             // BitXOrExpression
             match = bitXOrExpression$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // OptionalBitAndExpression
                match = optionalBitAndExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -9201,6 +10005,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (BitAndExpression | OptionalRelationalExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -9277,8 +10083,16 @@ public class JavaParser implements Parser {
             // BitAndExpression
             match = bitAndExpression$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // OptionalRelationalExpression
                match = optionalRelationalExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -9390,6 +10204,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (RelationalExpression | OptionalInstanceOfExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -9466,8 +10282,16 @@ public class JavaParser implements Parser {
             // RelationalExpression
             match = relationalExpression$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // OptionalInstanceOfExpression
                match = optionalInstanceOfExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -9530,7 +10354,8 @@ public class JavaParser implements Parser {
             case '<': {
                ++index;
                // ('=' | <EMPTY>)
-               if (buffer.matchChar(index, '=')) {
+               match = buffer.matchChar(index, '=');
+               if (match) {
                   ++index;
                   // <EMPTY>
                   match = true;
@@ -9550,7 +10375,8 @@ public class JavaParser implements Parser {
             case '>': {
                ++index;
                // ('=' | <EMPTY>)
-               if (buffer.matchChar(index, '=')) {
+               match = buffer.matchChar(index, '=');
+               if (match) {
                   ++index;
                   // <EMPTY>
                   match = true;
@@ -9574,7 +10400,7 @@ public class JavaParser implements Parser {
          if (! match) {
             index = startIndex_1;
          } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+            currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, startIndex_1, index, false, false));
             currentNode = currentNode.getSibling();
          }
          if (match) {
@@ -9631,6 +10457,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (InstanceOfExpression | OptionalAdditiveExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -9707,8 +10535,16 @@ public class JavaParser implements Parser {
             // InstanceOfExpression
             match = instanceOfExpression$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // OptionalAdditiveExpression
                match = optionalAdditiveExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -9824,6 +10660,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (AdditiveExpression | OptionalMultiplicativeExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -9900,8 +10738,16 @@ public class JavaParser implements Parser {
             // AdditiveExpression
             match = additiveExpression$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // OptionalMultiplicativeExpression
                match = optionalMultiplicativeExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -9954,6 +10800,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (BasicTypeArray | QualifiedClassNameArray | QualifiedClassName)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case 'A':
          case 'B':
@@ -10005,8 +10853,16 @@ public class JavaParser implements Parser {
             // QualifiedClassNameArray
             match = qualifiedClassNameArray$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // QualifiedClassName
                match = qualifiedClassName$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -10020,11 +10876,22 @@ public class JavaParser implements Parser {
             // BasicTypeArray
             match = basicTypeArray$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // QualifiedClassNameArray
                match = qualifiedClassNameArray$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // QualifiedClassName
                   match = qualifiedClassName$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -10104,7 +10971,7 @@ public class JavaParser implements Parser {
          if (! match) {
             index = startIndex_1;
          } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+            currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, startIndex_1, index, false, false));
             currentNode = currentNode.getSibling();
          }
          if (match) {
@@ -10161,6 +11028,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (MultiplicativeExpression | OptionalShiftExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -10237,8 +11106,16 @@ public class JavaParser implements Parser {
             // MultiplicativeExpression
             match = multiplicativeExpression$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // OptionalShiftExpression
                match = optionalShiftExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -10323,7 +11200,7 @@ public class JavaParser implements Parser {
          if (! match) {
             index = startIndex_1;
          } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+            currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, startIndex_1, index, false, false));
             currentNode = currentNode.getSibling();
          }
          if (match) {
@@ -10380,6 +11257,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (ShiftExpression | UnaryExpression)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -10456,8 +11335,16 @@ public class JavaParser implements Parser {
             // ShiftExpression
             match = shiftExpression$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // UnaryExpression
                match = unaryExpression$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -10528,18 +11415,18 @@ public class JavaParser implements Parser {
             case '>': {
                ++index;
                // ('>>' | '>')
-               if (buffer.matchChar(index, '>')) {
+               match = buffer.matchChar(index, '>');
+               if (match) {
                   ++index;
                   // ('>' | <EMPTY>)
-                  if (buffer.matchChar(index, '>')) {
+                  match = buffer.matchChar(index, '>');
+                  if (match) {
                      ++index;
                      // <EMPTY>
                      match = true;
                   } else {
                      match = true;
                   }
-               } else {
-                  match = false;
                }
                break;
             }
@@ -10550,7 +11437,7 @@ public class JavaParser implements Parser {
          if (! match) {
             index = startIndex_1;
          } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+            currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, startIndex_1, index, false, false));
             currentNode = currentNode.getSibling();
          }
          if (match) {
@@ -10607,6 +11494,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (PrefixedExpression | CastExpression | PostfixedExpression | Primary)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '+':
@@ -10614,6 +11503,11 @@ public class JavaParser implements Parser {
          case '~': {
             // PrefixedExpression
             match = prefixedExpression$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '\"':
@@ -10686,8 +11580,16 @@ public class JavaParser implements Parser {
             // PostfixedExpression
             match = postfixedExpression$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // Primary
                match = primary$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -10695,11 +11597,22 @@ public class JavaParser implements Parser {
             // CastExpression
             match = castExpression$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // PostfixedExpression
                match = postfixedExpression$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // Primary
                   match = primary$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -10879,14 +11792,25 @@ public class JavaParser implements Parser {
       match = primary$Rule();
       if (match) {
          // PostFixOp+
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // PostFixOp
          match = postFixOp$Rule();
          if (match) {
             do {
+               lastNode_1 = currentNode;
+               lastIndex_1 = index;
                // PostFixOp
                match = postFixOp$Rule();
             } while(match);
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
             match = true;
+         } else {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
          }
       }
       if (match) {
@@ -10925,7 +11849,8 @@ public class JavaParser implements Parser {
          case '+': {
             ++index;
             // ('+' | <EMPTY>)
-            if (buffer.matchChar(index, '+')) {
+            match = buffer.matchChar(index, '+');
+            if (match) {
                ++index;
                // <EMPTY>
                match = true;
@@ -10937,7 +11862,8 @@ public class JavaParser implements Parser {
          case '-': {
             ++index;
             // ('-' | <EMPTY>)
-            if (buffer.matchChar(index, '-')) {
+            match = buffer.matchChar(index, '-');
+            if (match) {
                ++index;
                // <EMPTY>
                match = true;
@@ -11011,7 +11937,7 @@ public class JavaParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -11055,6 +11981,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (QualifiedExpression | ArrayAccess | Atomic)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '\"':
          case '$':
@@ -11127,11 +12055,22 @@ public class JavaParser implements Parser {
             // QualifiedExpression
             match = qualifiedExpression$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ArrayAccess
                match = arrayAccess$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // Atomic
                   match = atomic$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -11186,6 +12125,8 @@ public class JavaParser implements Parser {
       startIndex = index;
       // ((ArrayAccess | Atomic) ('.' OptionalSpacing NonWildcardTypeArguments? (ArrayAccess | Atomic))+)
       // (ArrayAccess | Atomic)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '\"':
          case '$':
@@ -11258,8 +12199,16 @@ public class JavaParser implements Parser {
             // ArrayAccess
             match = arrayAccess$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // Atomic
                match = atomic$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -11269,9 +12218,9 @@ public class JavaParser implements Parser {
       }
       if (match) {
          // ('.' OptionalSpacing NonWildcardTypeArguments? (ArrayAccess | Atomic))+
+         Node lastNode_2 = currentNode;
+         int lastIndex_2 = index;
          // ('.' OptionalSpacing NonWildcardTypeArguments? (ArrayAccess | Atomic))
-         Node lastNode_1 = currentNode;
-         int lastIndex_1 = index;
          // '.'
          match = charMatcher('.');
          if (match) {
@@ -11279,101 +12228,117 @@ public class JavaParser implements Parser {
             match = optionalSpacing$Rule();
             if (match) {
                // NonWildcardTypeArguments?
+               Node lastNode_3 = currentNode;
+               int lastIndex_3 = index;
                // NonWildcardTypeArguments
-               nonWildcardTypeArguments$Rule();
-               match = true;
-               // (ArrayAccess | Atomic)
-               switch(buffer.getChar(index)) {
-                  case '\"':
-                  case '$':
-                  case '\'':
-                  case '(':
-                  case '.':
-                  case '0':
-                  case '1':
-                  case '2':
-                  case '3':
-                  case '4':
-                  case '5':
-                  case '6':
-                  case '7':
-                  case '8':
-                  case '9':
-                  case 'A':
-                  case 'B':
-                  case 'C':
-                  case 'D':
-                  case 'E':
-                  case 'F':
-                  case 'G':
-                  case 'H':
-                  case 'I':
-                  case 'J':
-                  case 'K':
-                  case 'L':
-                  case 'M':
-                  case 'N':
-                  case 'O':
-                  case 'P':
-                  case 'Q':
-                  case 'R':
-                  case 'S':
-                  case 'T':
-                  case 'U':
-                  case 'V':
-                  case 'W':
-                  case 'X':
-                  case 'Y':
-                  case 'Z':
-                  case '_':
-                  case 'a':
-                  case 'b':
-                  case 'c':
-                  case 'd':
-                  case 'e':
-                  case 'f':
-                  case 'g':
-                  case 'h':
-                  case 'i':
-                  case 'j':
-                  case 'k':
-                  case 'l':
-                  case 'm':
-                  case 'n':
-                  case 'o':
-                  case 'p':
-                  case 'q':
-                  case 'r':
-                  case 's':
-                  case 't':
-                  case 'u':
-                  case 'v':
-                  case 'w':
-                  case 'x':
-                  case 'y':
-                  case 'z': {
-                     // ArrayAccess
-                     match = arrayAccess$Rule();
-                     if (! match) {
-                        // Atomic
-                        match = atomic$Rule();
+               match = nonWildcardTypeArguments$Rule();
+               if (! match) {
+                  lastNode_3.setSibling(null);
+                  currentNode = lastNode_3;
+                  index = lastIndex_3;
+                  match = true;
+               }
+               if (match) {
+                  // (ArrayAccess | Atomic)
+                  Node lastNode_4 = currentNode;
+                  int lastIndex_4 = index;
+                  switch(buffer.getChar(index)) {
+                     case '\"':
+                     case '$':
+                     case '\'':
+                     case '(':
+                     case '.':
+                     case '0':
+                     case '1':
+                     case '2':
+                     case '3':
+                     case '4':
+                     case '5':
+                     case '6':
+                     case '7':
+                     case '8':
+                     case '9':
+                     case 'A':
+                     case 'B':
+                     case 'C':
+                     case 'D':
+                     case 'E':
+                     case 'F':
+                     case 'G':
+                     case 'H':
+                     case 'I':
+                     case 'J':
+                     case 'K':
+                     case 'L':
+                     case 'M':
+                     case 'N':
+                     case 'O':
+                     case 'P':
+                     case 'Q':
+                     case 'R':
+                     case 'S':
+                     case 'T':
+                     case 'U':
+                     case 'V':
+                     case 'W':
+                     case 'X':
+                     case 'Y':
+                     case 'Z':
+                     case '_':
+                     case 'a':
+                     case 'b':
+                     case 'c':
+                     case 'd':
+                     case 'e':
+                     case 'f':
+                     case 'g':
+                     case 'h':
+                     case 'i':
+                     case 'j':
+                     case 'k':
+                     case 'l':
+                     case 'm':
+                     case 'n':
+                     case 'o':
+                     case 'p':
+                     case 'q':
+                     case 'r':
+                     case 's':
+                     case 't':
+                     case 'u':
+                     case 'v':
+                     case 'w':
+                     case 'x':
+                     case 'y':
+                     case 'z': {
+                        // ArrayAccess
+                        match = arrayAccess$Rule();
+                        if (! match) {
+                           index = lastIndex_4;
+                           lastNode_4.setSibling(null);
+                           currentNode = lastNode_4;
+                           // Atomic
+                           match = atomic$Rule();
+                           if (! match) {
+                              index = lastIndex_4;
+                              lastNode_4.setSibling(null);
+                              currentNode = lastNode_4;
+                           }
+                        }
+                        break;
                      }
-                     break;
-                  }
-                  default: {
-                     match = false;
+                     default: {
+                        match = false;
+                     }
                   }
                }
-            } else {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
             }
          }
          if (match) {
             do {
+               lastNode_2 = currentNode;
+               lastIndex_2 = index;
                // ('.' OptionalSpacing NonWildcardTypeArguments? (ArrayAccess | Atomic))
-               Node lastNode_2 = currentNode;
-               int lastIndex_2 = index;
                // '.'
                match = charMatcher('.');
                if (match) {
@@ -11381,98 +12346,121 @@ public class JavaParser implements Parser {
                   match = optionalSpacing$Rule();
                   if (match) {
                      // NonWildcardTypeArguments?
+                     Node lastNode_5 = currentNode;
+                     int lastIndex_5 = index;
                      // NonWildcardTypeArguments
-                     nonWildcardTypeArguments$Rule();
-                     match = true;
-                     // (ArrayAccess | Atomic)
-                     switch(buffer.getChar(index)) {
-                        case '\"':
-                        case '$':
-                        case '\'':
-                        case '(':
-                        case '.':
-                        case '0':
-                        case '1':
-                        case '2':
-                        case '3':
-                        case '4':
-                        case '5':
-                        case '6':
-                        case '7':
-                        case '8':
-                        case '9':
-                        case 'A':
-                        case 'B':
-                        case 'C':
-                        case 'D':
-                        case 'E':
-                        case 'F':
-                        case 'G':
-                        case 'H':
-                        case 'I':
-                        case 'J':
-                        case 'K':
-                        case 'L':
-                        case 'M':
-                        case 'N':
-                        case 'O':
-                        case 'P':
-                        case 'Q':
-                        case 'R':
-                        case 'S':
-                        case 'T':
-                        case 'U':
-                        case 'V':
-                        case 'W':
-                        case 'X':
-                        case 'Y':
-                        case 'Z':
-                        case '_':
-                        case 'a':
-                        case 'b':
-                        case 'c':
-                        case 'd':
-                        case 'e':
-                        case 'f':
-                        case 'g':
-                        case 'h':
-                        case 'i':
-                        case 'j':
-                        case 'k':
-                        case 'l':
-                        case 'm':
-                        case 'n':
-                        case 'o':
-                        case 'p':
-                        case 'q':
-                        case 'r':
-                        case 's':
-                        case 't':
-                        case 'u':
-                        case 'v':
-                        case 'w':
-                        case 'x':
-                        case 'y':
-                        case 'z': {
-                           // ArrayAccess
-                           match = arrayAccess$Rule();
-                           if (! match) {
-                              // Atomic
-                              match = atomic$Rule();
+                     match = nonWildcardTypeArguments$Rule();
+                     if (! match) {
+                        lastNode_5.setSibling(null);
+                        currentNode = lastNode_5;
+                        index = lastIndex_5;
+                        match = true;
+                     }
+                     if (match) {
+                        // (ArrayAccess | Atomic)
+                        Node lastNode_6 = currentNode;
+                        int lastIndex_6 = index;
+                        switch(buffer.getChar(index)) {
+                           case '\"':
+                           case '$':
+                           case '\'':
+                           case '(':
+                           case '.':
+                           case '0':
+                           case '1':
+                           case '2':
+                           case '3':
+                           case '4':
+                           case '5':
+                           case '6':
+                           case '7':
+                           case '8':
+                           case '9':
+                           case 'A':
+                           case 'B':
+                           case 'C':
+                           case 'D':
+                           case 'E':
+                           case 'F':
+                           case 'G':
+                           case 'H':
+                           case 'I':
+                           case 'J':
+                           case 'K':
+                           case 'L':
+                           case 'M':
+                           case 'N':
+                           case 'O':
+                           case 'P':
+                           case 'Q':
+                           case 'R':
+                           case 'S':
+                           case 'T':
+                           case 'U':
+                           case 'V':
+                           case 'W':
+                           case 'X':
+                           case 'Y':
+                           case 'Z':
+                           case '_':
+                           case 'a':
+                           case 'b':
+                           case 'c':
+                           case 'd':
+                           case 'e':
+                           case 'f':
+                           case 'g':
+                           case 'h':
+                           case 'i':
+                           case 'j':
+                           case 'k':
+                           case 'l':
+                           case 'm':
+                           case 'n':
+                           case 'o':
+                           case 'p':
+                           case 'q':
+                           case 'r':
+                           case 's':
+                           case 't':
+                           case 'u':
+                           case 'v':
+                           case 'w':
+                           case 'x':
+                           case 'y':
+                           case 'z': {
+                              // ArrayAccess
+                              match = arrayAccess$Rule();
+                              if (! match) {
+                                 index = lastIndex_6;
+                                 lastNode_6.setSibling(null);
+                                 currentNode = lastNode_6;
+                                 // Atomic
+                                 match = atomic$Rule();
+                                 if (! match) {
+                                    index = lastIndex_6;
+                                    lastNode_6.setSibling(null);
+                                    currentNode = lastNode_6;
+                                 }
+                              }
+                              break;
                            }
-                           break;
-                        }
-                        default: {
-                           match = false;
+                           default: {
+                              match = false;
+                           }
                         }
                      }
-                  } else {
-                     index = lastIndex_2;
-                     lastNode_2.setSibling(null);
                   }
                }
             } while(match);
+            lastNode_2.setSibling(null);
+            currentNode = lastNode_2;
+            index = lastIndex_2;
             match = true;
+         } else {
+            lastNode_2.setSibling(null);
+            currentNode = lastNode_2;
+            index = lastIndex_2;
          }
       }
       if (match) {
@@ -11571,6 +12559,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (ParExpression | ClassTypeReference | Literal | BasicTypeClassReference | VoidClassReference | ThisMethodCall | This | SuperMethodCall | SuperConstructorCall | SuperFieldAccess | ClassCreator | ArrayCreator | MethodCall | Identifier)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '\"':
          case '\'':
@@ -11587,26 +12577,51 @@ public class JavaParser implements Parser {
          case '9': {
             // Literal
             match = literal$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case 'n': {
             // ClassTypeReference
             match = classTypeReference$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // Literal
                match = literal$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // ClassCreator
                   match = classCreator$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // ArrayCreator
                      match = arrayCreator$Rule();
                      if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
                         // MethodCall
                         match = methodCall$Rule();
                         if (! match) {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
                            // Identifier
                            match = identifier$Rule();
+                           if (! match) {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
+                           }
                         }
                      }
                   }
@@ -11661,11 +12676,22 @@ public class JavaParser implements Parser {
             // ClassTypeReference
             match = classTypeReference$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // MethodCall
                match = methodCall$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // Identifier
                   match = identifier$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -11678,14 +12704,28 @@ public class JavaParser implements Parser {
             // ClassTypeReference
             match = classTypeReference$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // BasicTypeClassReference
                match = basicTypeClassReference$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // MethodCall
                   match = methodCall$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // Identifier
                      match = identifier$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
                   }
                }
             }
@@ -11695,23 +12735,46 @@ public class JavaParser implements Parser {
             // ClassTypeReference
             match = classTypeReference$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // BasicTypeClassReference
                match = basicTypeClassReference$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // SuperMethodCall
                   match = superMethodCall$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // SuperConstructorCall
                      match = superConstructorCall$Rule();
                      if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
                         // SuperFieldAccess
                         match = superFieldAccess$Rule();
                         if (! match) {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
                            // MethodCall
                            match = methodCall$Rule();
                            if (! match) {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
                               // Identifier
                               match = identifier$Rule();
+                              if (! match) {
+                                 index = lastIndex_1;
+                                 lastNode_1.setSibling(null);
+                                 currentNode = lastNode_1;
+                              }
                            }
                         }
                      }
@@ -11724,20 +12787,40 @@ public class JavaParser implements Parser {
             // ClassTypeReference
             match = classTypeReference$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // Literal
                match = literal$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // ThisMethodCall
                   match = thisMethodCall$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // This
                      match = this$Rule();
                      if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
                         // MethodCall
                         match = methodCall$Rule();
                         if (! match) {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
                            // Identifier
                            match = identifier$Rule();
+                           if (! match) {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
+                           }
                         }
                      }
                   }
@@ -11749,17 +12832,34 @@ public class JavaParser implements Parser {
             // ClassTypeReference
             match = classTypeReference$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // Literal
                match = literal$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // BasicTypeClassReference
                   match = basicTypeClassReference$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // MethodCall
                      match = methodCall$Rule();
                      if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
                         // Identifier
                         match = identifier$Rule();
+                        if (! match) {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
+                        }
                      }
                   }
                }
@@ -11770,14 +12870,28 @@ public class JavaParser implements Parser {
             // ClassTypeReference
             match = classTypeReference$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // VoidClassReference
                match = voidClassReference$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // MethodCall
                   match = methodCall$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // Identifier
                      match = identifier$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
                   }
                }
             }
@@ -11786,6 +12900,11 @@ public class JavaParser implements Parser {
          case '(': {
             // ParExpression
             match = parExpression$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          default: {
@@ -11909,15 +13028,27 @@ public class JavaParser implements Parser {
       startIndex = index;
       // ((FloatLiteral | LongLiteral | IntegerLiteral | CharLiteral | StringLiteral | True | False | Null) OptionalSpacing)
       // (FloatLiteral | LongLiteral | IntegerLiteral | CharLiteral | StringLiteral | True | False | Null)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '.': {
             // FloatLiteral
             match = floatLiteral$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case 'n': {
             // Null
             match = null$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '0':
@@ -11933,11 +13064,22 @@ public class JavaParser implements Parser {
             // FloatLiteral
             match = floatLiteral$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // LongLiteral
                match = longLiteral$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // IntegerLiteral
                   match = integerLiteral$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -11945,21 +13087,41 @@ public class JavaParser implements Parser {
          case '\"': {
             // StringLiteral
             match = stringLiteral$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case 't': {
             // True
             match = true$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case 'f': {
             // False
             match = false$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '\'': {
             // CharLiteral
             match = charLiteral$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          default: {
@@ -12560,9 +13722,16 @@ public class JavaParser implements Parser {
             match = arguments$Rule();
             if (match) {
                // ClassBody?
+               Node lastNode_1 = currentNode;
+               int lastIndex_1 = index;
                // ClassBody
-               classBody$Rule();
-               match = true;
+               match = classBody$Rule();
+               if (! match) {
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+                  index = lastIndex_1;
+                  match = true;
+               }
             }
          }
       }
@@ -12611,13 +13780,23 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (InitializedArrayCreator | EmptyArrayCreator)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case 'n': {
             // InitializedArrayCreator
             match = initializedArrayCreator$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // EmptyArrayCreator
                match = emptyArrayCreator$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -12706,14 +13885,25 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // DimExpr+
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // DimExpr
       match = dimExpr$Rule();
       if (match) {
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // DimExpr
             match = dimExpr$Rule();
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
+      } else {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -12981,17 +14171,19 @@ public class JavaParser implements Parser {
          match = optionalSpacing$Rule();
          if (match) {
             // (ReferenceType (',' OptionalSpacing ReferenceType)*)?
-            // (ReferenceType (',' OptionalSpacing ReferenceType)*)
             Node lastNode_1 = currentNode;
             int lastIndex_1 = index;
+            // (ReferenceType (',' OptionalSpacing ReferenceType)*)
             // ReferenceType
             match = referenceType$Rule();
             if (match) {
                // (',' OptionalSpacing ReferenceType)*
+               Node lastNode_2;
+               int lastIndex_2;
                do {
+                  lastNode_2 = currentNode;
+                  lastIndex_2 = index;
                   // (',' OptionalSpacing ReferenceType)
-                  Node lastNode_2 = currentNode;
-                  int lastIndex_2 = index;
                   // ','
                   match = charMatcher(',');
                   if (match) {
@@ -13000,24 +14192,27 @@ public class JavaParser implements Parser {
                      if (match) {
                         // ReferenceType
                         match = referenceType$Rule();
-                        if (! match) {
-                           index = lastIndex_2;
-                           lastNode_2.setSibling(null);
-                           currentNode = lastNode_2;
-                        }
-                     } else {
-                        index = lastIndex_2;
-                        lastNode_2.setSibling(null);
                      }
                   }
                } while(match);
+               lastNode_2.setSibling(null);
+               currentNode = lastNode_2;
+               index = lastIndex_2;
                match = true;
             }
-            // '>'
-            match = charMatcher('>');
+            if (! match) {
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
+               match = true;
+            }
             if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
+               // '>'
+               match = charMatcher('>');
+               if (match) {
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
+               }
             }
          }
       }
@@ -13055,10 +14250,12 @@ public class JavaParser implements Parser {
       match = typeName$Rule();
       if (match) {
          // ('.' OptionalSpacing TypeName)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // ('.' OptionalSpacing TypeName)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // '.'
             match = charMatcher('.');
             if (match) {
@@ -13067,17 +14264,12 @@ public class JavaParser implements Parser {
                if (match) {
                   // TypeName
                   match = typeName$Rule();
-                  if (! match) {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
-                     currentNode = lastNode_1;
-                  }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
@@ -13124,14 +14316,25 @@ public class JavaParser implements Parser {
          match = arrayType$Rule();
          if (match) {
             // Dim+
+            Node lastNode_1 = currentNode;
+            int lastIndex_1 = index;
             // Dim
             match = dim$Rule();
             if (match) {
                do {
+                  lastNode_1 = currentNode;
+                  lastIndex_1 = index;
                   // Dim
                   match = dim$Rule();
                } while(match);
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
                match = true;
+            } else {
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
             }
             if (match) {
                // ArrayInitializer
@@ -13191,14 +14394,25 @@ public class JavaParser implements Parser {
          match = arrayType$Rule();
          if (match) {
             // DimExpr+
+            Node lastNode_1 = currentNode;
+            int lastIndex_1 = index;
             // DimExpr
             match = dimExpr$Rule();
             if (match) {
                do {
+                  lastNode_1 = currentNode;
+                  lastIndex_1 = index;
                   // DimExpr
                   match = dimExpr$Rule();
                } while(match);
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
                match = true;
+            } else {
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
             }
             if (match) {
                // Dimensions
@@ -13251,6 +14465,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (QualifiedClassName | BasicType)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case 'A':
          case 'B':
@@ -13301,6 +14517,11 @@ public class JavaParser implements Parser {
          case 'z': {
             // QualifiedClassName
             match = qualifiedClassName$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case 'b':
@@ -13313,8 +14534,16 @@ public class JavaParser implements Parser {
             // QualifiedClassName
             match = qualifiedClassName$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // BasicType
                match = basicType$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -13433,17 +14662,19 @@ public class JavaParser implements Parser {
          match = optionalSpacing$Rule();
          if (match) {
             // (VariableInitializer (',' OptionalSpacing VariableInitializer)*)?
-            // (VariableInitializer (',' OptionalSpacing VariableInitializer)*)
             Node lastNode_1 = currentNode;
             int lastIndex_1 = index;
+            // (VariableInitializer (',' OptionalSpacing VariableInitializer)*)
             // VariableInitializer
             match = variableInitializer$Rule();
             if (match) {
                // (',' OptionalSpacing VariableInitializer)*
+               Node lastNode_2;
+               int lastIndex_2;
                do {
+                  lastNode_2 = currentNode;
+                  lastIndex_2 = index;
                   // (',' OptionalSpacing VariableInitializer)
-                  Node lastNode_2 = currentNode;
-                  int lastIndex_2 = index;
                   // ','
                   match = charMatcher(',');
                   if (match) {
@@ -13452,40 +14683,45 @@ public class JavaParser implements Parser {
                      if (match) {
                         // VariableInitializer
                         match = variableInitializer$Rule();
-                        if (! match) {
-                           index = lastIndex_2;
-                           lastNode_2.setSibling(null);
-                           currentNode = lastNode_2;
-                        }
-                     } else {
-                        index = lastIndex_2;
-                        lastNode_2.setSibling(null);
                      }
                   }
                } while(match);
+               lastNode_2.setSibling(null);
+               currentNode = lastNode_2;
+               index = lastIndex_2;
                match = true;
             }
-            match = true;
-            // (',' OptionalSpacing)?
-            // (',' OptionalSpacing)
-            Node lastNode_3 = currentNode;
-            int lastIndex_3 = index;
-            // ','
-            match = charMatcher(',');
+            if (! match) {
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
+               match = true;
+            }
             if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
+               // (',' OptionalSpacing)?
+               Node lastNode_3 = currentNode;
+               int lastIndex_3 = index;
+               // (',' OptionalSpacing)
+               // ','
+               match = charMatcher(',');
+               if (match) {
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
+               }
                if (! match) {
-                  index = lastIndex_3;
                   lastNode_3.setSibling(null);
                   currentNode = lastNode_3;
+                  index = lastIndex_3;
+                  match = true;
                }
-            }
-            // '}'
-            match = charMatcher('}');
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
+               if (match) {
+                  // '}'
+                  match = charMatcher('}');
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                  }
+               }
             }
          }
       }
@@ -13585,6 +14821,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (TypedName | Identifier)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '$':
          case 'A':
@@ -13643,8 +14881,16 @@ public class JavaParser implements Parser {
             // TypedName
             match = typedName$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // Identifier
                match = identifier$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -13698,6 +14944,8 @@ public class JavaParser implements Parser {
       startIndex = index;
       // ((BasicType | QualifiedClassName) Dim+)
       // (BasicType | QualifiedClassName)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case 'A':
          case 'B':
@@ -13748,6 +14996,11 @@ public class JavaParser implements Parser {
          case 'z': {
             // QualifiedClassName
             match = qualifiedClassName$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case 'b':
@@ -13760,8 +15013,16 @@ public class JavaParser implements Parser {
             // BasicType
             match = basicType$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // QualifiedClassName
                match = qualifiedClassName$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -13771,14 +15032,25 @@ public class JavaParser implements Parser {
       }
       if (match) {
          // Dim+
+         Node lastNode_2 = currentNode;
+         int lastIndex_2 = index;
          // Dim
          match = dim$Rule();
          if (match) {
             do {
+               lastNode_2 = currentNode;
+               lastIndex_2 = index;
                // Dim
                match = dim$Rule();
             } while(match);
+            lastNode_2.setSibling(null);
+            currentNode = lastNode_2;
+            index = lastIndex_2;
             match = true;
+         } else {
+            lastNode_2.setSibling(null);
+            currentNode = lastNode_2;
+            index = lastIndex_2;
          }
       }
       if (match) {
@@ -13830,14 +15102,25 @@ public class JavaParser implements Parser {
       match = basicType$Rule();
       if (match) {
          // Dim+
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // Dim
          match = dim$Rule();
          if (match) {
             do {
+               lastNode_1 = currentNode;
+               lastIndex_1 = index;
                // Dim
                match = dim$Rule();
             } while(match);
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
             match = true;
+         } else {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
          }
       }
       if (match) {
@@ -13889,14 +15172,25 @@ public class JavaParser implements Parser {
       match = qualifiedClassName$Rule();
       if (match) {
          // Dim+
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // Dim
          match = dim$Rule();
          if (match) {
             do {
+               lastNode_1 = currentNode;
+               lastIndex_1 = index;
                // Dim
                match = dim$Rule();
             } while(match);
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
             match = true;
+         } else {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
          }
       }
       if (match) {
@@ -13944,6 +15238,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (TypedClassName | Identifier)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '$':
          case 'A':
@@ -14002,8 +15298,16 @@ public class JavaParser implements Parser {
             // TypedClassName
             match = typedClassName$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // Identifier
                match = identifier$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -14102,10 +15406,12 @@ public class JavaParser implements Parser {
             match = typeArgument$Rule();
             if (match) {
                // (',' OptionalSpacing TypeArgument)*
+               Node lastNode_1;
+               int lastIndex_1;
                do {
+                  lastNode_1 = currentNode;
+                  lastIndex_1 = index;
                   // (',' OptionalSpacing TypeArgument)
-                  Node lastNode_1 = currentNode;
-                  int lastIndex_1 = index;
                   // ','
                   match = charMatcher(',');
                   if (match) {
@@ -14114,17 +15420,12 @@ public class JavaParser implements Parser {
                      if (match) {
                         // TypeArgument
                         match = typeArgument$Rule();
-                        if (! match) {
-                           index = lastIndex_1;
-                           lastNode_1.setSibling(null);
-                           currentNode = lastNode_1;
-                        }
-                     } else {
-                        index = lastIndex_1;
-                        lastNode_1.setSibling(null);
                      }
                   }
                } while(match);
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
                // '>'
                match = charMatcher('>');
                if (match) {
@@ -14171,10 +15472,17 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (ReferenceType | QueryType)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '?': {
             // QueryType
             match = queryType$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '$':
@@ -14233,6 +15541,11 @@ public class JavaParser implements Parser {
          case 'z': {
             // ReferenceType
             match = referenceType$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          default: {
@@ -14291,14 +15604,12 @@ public class JavaParser implements Parser {
          match = optionalSpacing$Rule();
          if (match) {
             // ((('extends' | 'super') TestNoAlpha OptionalSpacing) ReferenceType)?
-            // ((('extends' | 'super') TestNoAlpha OptionalSpacing) ReferenceType)
             Node lastNode_1 = currentNode;
             int lastIndex_1 = index;
+            // ((('extends' | 'super') TestNoAlpha OptionalSpacing) ReferenceType)
             // (('extends' | 'super') TestNoAlpha OptionalSpacing)
-            Node lastNode_2 = currentNode;
-            int lastIndex_2 = index;
             // ('extends' | 'super')
-            int startIndex_3 = index;
+            int startIndex_2 = index;
             switch(buffer.getChar(index)) {
                case 's': {
                   ++index;
@@ -14321,9 +15632,9 @@ public class JavaParser implements Parser {
                }
             }
             if (! match) {
-               index = startIndex_3;
+               index = startIndex_2;
             } else if(! currentRuleIsAtomic) {
-               currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_3, index, false, false));
+               currentNode.setSibling(new NodeImpl(JavaRuleType.TERMINAL, startIndex_2, index, false, false));
                currentNode = currentNode.getSibling();
             }
             if (match) {
@@ -14332,26 +15643,18 @@ public class JavaParser implements Parser {
                if (match) {
                   // OptionalSpacing
                   match = optionalSpacing$Rule();
-                  if (! match) {
-                     index = lastIndex_2;
-                     lastNode_2.setSibling(null);
-                     currentNode = lastNode_2;
-                  }
-               } else {
-                  index = lastIndex_2;
-                  lastNode_2.setSibling(null);
                }
             }
             if (match) {
                // ReferenceType
                match = referenceType$Rule();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
             }
-            match = true;
+            if (! match) {
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
+               match = true;
+            }
          }
       }
       if (match) {
@@ -14403,9 +15706,16 @@ public class JavaParser implements Parser {
       match = identifier$Rule();
       if (match) {
          // Bound?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // Bound
-         bound$Rule();
-         match = true;
+         match = bound$Rule();
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          typeParameter$RuleMemoStart = startIndex;
@@ -14450,10 +15760,12 @@ public class JavaParser implements Parser {
                match = qualifiedClassName$Rule();
                if (match) {
                   // ('&' OptionalSpacing QualifiedClassName)*
+                  Node lastNode_1;
+                  int lastIndex_1;
                   do {
+                     lastNode_1 = currentNode;
+                     lastIndex_1 = index;
                      // ('&' OptionalSpacing QualifiedClassName)
-                     Node lastNode_1 = currentNode;
-                     int lastIndex_1 = index;
                      // '&'
                      match = charMatcher('&');
                      if (match) {
@@ -14462,17 +15774,12 @@ public class JavaParser implements Parser {
                         if (match) {
                            // QualifiedClassName
                            match = qualifiedClassName$Rule();
-                           if (! match) {
-                              index = lastIndex_1;
-                              lastNode_1.setSibling(null);
-                              currentNode = lastNode_1;
-                           }
-                        } else {
-                           index = lastIndex_1;
-                           lastNode_1.setSibling(null);
                         }
                      }
                   } while(match);
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+                  index = lastIndex_1;
                   match = true;
                }
             }
@@ -14507,10 +15814,17 @@ public class JavaParser implements Parser {
          match = optionalSpacing$Rule();
          if (match) {
             // AnnotationTypeElementDeclaration*
+            Node lastNode_1;
+            int lastIndex_1;
             do {
+               lastNode_1 = currentNode;
+               lastIndex_1 = index;
                // AnnotationTypeElementDeclaration
                match = annotationTypeElementDeclaration$Rule();
             } while(match);
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
             // '}'
             match = charMatcher('}');
             if (match) {
@@ -14541,10 +15855,17 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (AnnotationMethod | AnnotationsConstants | ClassDeclaration | EnumDeclaration | InterfaceDeclaration | AnnotationDeclaration | Semicolon)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case ';': {
             // Semicolon
             match = semicolon$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '@':
@@ -14558,20 +15879,40 @@ public class JavaParser implements Parser {
             // AnnotationMethod
             match = annotationMethod$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // AnnotationsConstants
                match = annotationsConstants$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // ClassDeclaration
                   match = classDeclaration$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // EnumDeclaration
                      match = enumDeclaration$Rule();
                      if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
                         // InterfaceDeclaration
                         match = interfaceDeclaration$Rule();
                         if (! match) {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
                            // AnnotationDeclaration
                            match = annotationDeclaration$Rule();
+                           if (! match) {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
+                           }
                         }
                      }
                   }
@@ -14626,8 +15967,16 @@ public class JavaParser implements Parser {
             // AnnotationMethod
             match = annotationMethod$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // AnnotationsConstants
                match = annotationsConstants$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -14635,11 +15984,22 @@ public class JavaParser implements Parser {
             // AnnotationMethod
             match = annotationMethod$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // AnnotationsConstants
                match = annotationsConstants$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // ClassDeclaration
                   match = classDeclaration$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -14648,11 +16008,22 @@ public class JavaParser implements Parser {
             // AnnotationMethod
             match = annotationMethod$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // AnnotationsConstants
                match = annotationsConstants$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // EnumDeclaration
                   match = enumDeclaration$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -14661,11 +16032,22 @@ public class JavaParser implements Parser {
             // AnnotationMethod
             match = annotationMethod$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // AnnotationsConstants
                match = annotationsConstants$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // InterfaceDeclaration
                   match = interfaceDeclaration$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
                }
             }
             break;
@@ -14733,10 +16115,20 @@ public class JavaParser implements Parser {
                         match = optionalSpacing$Rule();
                         if (match) {
                            // DefaultValue?
+                           Node lastNode_1 = currentNode;
+                           int lastIndex_1 = index;
                            // DefaultValue
-                           defaultValue$Rule();
-                           // Semicolon
-                           match = semicolon$Rule();
+                           match = defaultValue$Rule();
+                           if (! match) {
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
+                              index = lastIndex_1;
+                              match = true;
+                           }
+                           if (match) {
+                              // Semicolon
+                              match = semicolon$Rule();
+                           }
                         }
                      }
                   }
@@ -14884,6 +16276,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (ConditionalExpression | Annotation | ElementValueArrayInitializer)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '!':
          case '\"':
@@ -14959,16 +16353,31 @@ public class JavaParser implements Parser {
          case '~': {
             // ConditionalExpression
             match = conditionalExpression$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '{': {
             // ElementValueArrayInitializer
             match = elementValueArrayInitializer$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '@': {
             // Annotation
             match = annotation$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          default: {
@@ -15005,13 +16414,23 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (NormalAnnotationRest | SingleElementAnnotationRest)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '(': {
             // NormalAnnotationRest
             match = normalAnnotationRest$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // SingleElementAnnotationRest
                match = singleElementAnnotationRest$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -15063,13 +16482,23 @@ public class JavaParser implements Parser {
          match = optionalSpacing$Rule();
          if (match) {
             // ElementValuePairs?
+            Node lastNode_1 = currentNode;
+            int lastIndex_1 = index;
             // ElementValuePairs
-            elementValuePairs$Rule();
-            // ')'
-            match = charMatcher(')');
+            match = elementValuePairs$Rule();
+            if (! match) {
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
+               match = true;
+            }
             if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
+               // ')'
+               match = charMatcher(')');
+               if (match) {
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
+               }
             }
          }
       }
@@ -15170,10 +16599,12 @@ public class JavaParser implements Parser {
       match = elementValuePair$Rule();
       if (match) {
          // (',' OptionalSpacing ElementValuePair)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (',' OptionalSpacing ElementValuePair)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // ','
             match = charMatcher(',');
             if (match) {
@@ -15182,17 +16613,12 @@ public class JavaParser implements Parser {
                if (match) {
                   // ElementValuePair
                   match = elementValuePair$Rule();
-                  if (! match) {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
-                     currentNode = lastNode_1;
-                  }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
@@ -15298,29 +16724,41 @@ public class JavaParser implements Parser {
          match = optionalSpacing$Rule();
          if (match) {
             // ElementValues?
-            // ElementValues
-            elementValues$Rule();
-            match = true;
-            // (',' OptionalSpacing)?
-            // (',' OptionalSpacing)
             Node lastNode_1 = currentNode;
             int lastIndex_1 = index;
-            // ','
-            match = charMatcher(',');
-            if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
+            // ElementValues
+            match = elementValues$Rule();
+            if (! match) {
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
+               match = true;
             }
-            // '}'
-            match = charMatcher('}');
             if (match) {
-               // OptionalSpacing
-               match = optionalSpacing$Rule();
+               // (',' OptionalSpacing)?
+               Node lastNode_2 = currentNode;
+               int lastIndex_2 = index;
+               // (',' OptionalSpacing)
+               // ','
+               match = charMatcher(',');
+               if (match) {
+                  // OptionalSpacing
+                  match = optionalSpacing$Rule();
+               }
+               if (! match) {
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+                  index = lastIndex_2;
+                  match = true;
+               }
+               if (match) {
+                  // '}'
+                  match = charMatcher('}');
+                  if (match) {
+                     // OptionalSpacing
+                     match = optionalSpacing$Rule();
+                  }
+               }
             }
          }
       }
@@ -15358,10 +16796,12 @@ public class JavaParser implements Parser {
       match = elementValue$Rule();
       if (match) {
          // (',' OptionalSpacing ElementValue)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (',' OptionalSpacing ElementValue)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // ','
             match = charMatcher(',');
             if (match) {
@@ -15370,17 +16810,12 @@ public class JavaParser implements Parser {
                if (match) {
                   // ElementValue
                   match = elementValue$Rule();
-                  if (! match) {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
-                     currentNode = lastNode_1;
-                  }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
@@ -15421,6 +16856,8 @@ public class JavaParser implements Parser {
       startIndex = index;
       // ('a'-'z' | 'A'-'Z' | '0'-'9' | '_' | '$')!
       // ('a'-'z' | 'A'-'Z' | '0'-'9' | '_' | '$')
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // 'a'-'z'
       match = buffer.matchCharRange(index, 'a', 'z');
       if (! match) {
@@ -15470,21 +16907,38 @@ public class JavaParser implements Parser {
       boolean match;
       startIndex = index;
       // (BlockComment | LineComment | NewLine | Spaces)+
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // (BlockComment | LineComment | NewLine | Spaces)
+      Node lastNode_2 = currentNode;
+      int lastIndex_2 = index;
       switch(buffer.getChar(index)) {
          case ' ':
          case '\t':
          case '\f': {
             // Spaces
             match = spaces$Rule();
+            if (! match) {
+               index = lastIndex_2;
+               lastNode_2.setSibling(null);
+               currentNode = lastNode_2;
+            }
             break;
          }
          case '\r': {
             // NewLine
             match = newLine$Rule();
             if (! match) {
+               index = lastIndex_2;
+               lastNode_2.setSibling(null);
+               currentNode = lastNode_2;
                // Spaces
                match = spaces$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+               }
             }
             break;
          }
@@ -15492,14 +16946,27 @@ public class JavaParser implements Parser {
             // BlockComment
             match = blockComment$Rule();
             if (! match) {
+               index = lastIndex_2;
+               lastNode_2.setSibling(null);
+               currentNode = lastNode_2;
                // LineComment
                match = lineComment$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+               }
             }
             break;
          }
          case '\n': {
             // NewLine
             match = newLine$Rule();
+            if (! match) {
+               index = lastIndex_2;
+               lastNode_2.setSibling(null);
+               currentNode = lastNode_2;
+            }
             break;
          }
          default: {
@@ -15508,21 +16975,38 @@ public class JavaParser implements Parser {
       }
       if (match) {
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (BlockComment | LineComment | NewLine | Spaces)
+            Node lastNode_3 = currentNode;
+            int lastIndex_3 = index;
             switch(buffer.getChar(index)) {
                case ' ':
                case '\t':
                case '\f': {
                   // Spaces
                   match = spaces$Rule();
+                  if (! match) {
+                     index = lastIndex_3;
+                     lastNode_3.setSibling(null);
+                     currentNode = lastNode_3;
+                  }
                   break;
                }
                case '\r': {
                   // NewLine
                   match = newLine$Rule();
                   if (! match) {
+                     index = lastIndex_3;
+                     lastNode_3.setSibling(null);
+                     currentNode = lastNode_3;
                      // Spaces
                      match = spaces$Rule();
+                     if (! match) {
+                        index = lastIndex_3;
+                        lastNode_3.setSibling(null);
+                        currentNode = lastNode_3;
+                     }
                   }
                   break;
                }
@@ -15530,14 +17014,27 @@ public class JavaParser implements Parser {
                   // BlockComment
                   match = blockComment$Rule();
                   if (! match) {
+                     index = lastIndex_3;
+                     lastNode_3.setSibling(null);
+                     currentNode = lastNode_3;
                      // LineComment
                      match = lineComment$Rule();
+                     if (! match) {
+                        index = lastIndex_3;
+                        lastNode_3.setSibling(null);
+                        currentNode = lastNode_3;
+                     }
                   }
                   break;
                }
                case '\n': {
                   // NewLine
                   match = newLine$Rule();
+                  if (! match) {
+                     index = lastIndex_3;
+                     lastNode_3.setSibling(null);
+                     currentNode = lastNode_3;
+                  }
                   break;
                }
                default: {
@@ -15545,7 +17042,14 @@ public class JavaParser implements Parser {
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
+      } else {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -15584,22 +17088,41 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (BlockComment | LineComment | NewLine | Spaces)*
+      Node lastNode_1;
+      int lastIndex_1;
       do {
+         lastNode_1 = currentNode;
+         lastIndex_1 = index;
          // (BlockComment | LineComment | NewLine | Spaces)
+         Node lastNode_2 = currentNode;
+         int lastIndex_2 = index;
          switch(buffer.getChar(index)) {
             case ' ':
             case '\t':
             case '\f': {
                // Spaces
                match = spaces$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+               }
                break;
             }
             case '\r': {
                // NewLine
                match = newLine$Rule();
                if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
                   // Spaces
                   match = spaces$Rule();
+                  if (! match) {
+                     index = lastIndex_2;
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
+                  }
                }
                break;
             }
@@ -15607,14 +17130,27 @@ public class JavaParser implements Parser {
                // BlockComment
                match = blockComment$Rule();
                if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
                   // LineComment
                   match = lineComment$Rule();
+                  if (! match) {
+                     index = lastIndex_2;
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
+                  }
                }
                break;
             }
             case '\n': {
                // NewLine
                match = newLine$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+               }
                break;
             }
             default: {
@@ -15622,6 +17158,9 @@ public class JavaParser implements Parser {
             }
          }
       } while(match);
+      lastNode_1.setSibling(null);
+      currentNode = lastNode_1;
+      index = lastIndex_1;
       optionalSpacing$RuleMemoStart = startIndex;
       optionalSpacing$RuleMemoEnd = index;
       if (currentRuleIsAtomic) {
@@ -15659,6 +17198,8 @@ public class JavaParser implements Parser {
       currentRuleIsAtomic = true;
       startIndex = index;
       // (' ' | '\r' | '\t' | '\f')+
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // (' ' | '\r' | '\t' | '\f')
       switch(buffer.getChar(index)) {
          case '\f': {
@@ -15691,6 +17232,8 @@ public class JavaParser implements Parser {
       }
       if (match) {
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (' ' | '\r' | '\t' | '\f')
             switch(buffer.getChar(index)) {
                case '\f': {
@@ -15722,7 +17265,14 @@ public class JavaParser implements Parser {
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
+      } else {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
@@ -15776,10 +17326,12 @@ public class JavaParser implements Parser {
       match = stringMatcher("/*", 2);
       if (match) {
          // ('*/'! .)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // ('*/'! .)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // '*/'!
             // '*/'
             match = stringTest("*/", 2);
@@ -15787,13 +17339,11 @@ public class JavaParser implements Parser {
             if (match) {
                // .
                match = anyCharMatcher();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          // '*/'
          match = stringMatcher("*/", 2);
       }
@@ -15916,10 +17466,12 @@ public class JavaParser implements Parser {
       match = stringMatcher("//", 2);
       if (match) {
          // ('\n'! .)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // ('\n'! .)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // '\n'!
             // '\n'
             match = buffer.matchChar(index, '\n');
@@ -15927,19 +17479,28 @@ public class JavaParser implements Parser {
             if (match) {
                // .
                match = anyCharMatcher();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
+         match = true;
          // (NewLine | <EOI>)
+         Node lastNode_2 = currentNode;
+         int lastIndex_2 = index;
          // NewLine
          match = newLine$Rule();
          if (! match) {
+            index = lastIndex_2;
+            lastNode_2.setSibling(null);
+            currentNode = lastNode_2;
             // <EOI>
             match = eoi();
+            if (! match) {
+               index = lastIndex_2;
+               lastNode_2.setSibling(null);
+               currentNode = lastNode_2;
+            }
          }
       }
       if (match) {
@@ -15988,6 +17549,8 @@ public class JavaParser implements Parser {
       }
       startIndex = index;
       // (HexFloat | DecimalFloat)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '1':
          case '2':
@@ -16001,14 +17564,27 @@ public class JavaParser implements Parser {
          case '.': {
             // DecimalFloat
             match = decimalFloat$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
             break;
          }
          case '0': {
             // HexFloat
             match = hexFloat$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // DecimalFloat
                match = decimalFloat$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
             }
             break;
          }
@@ -16133,11 +17709,11 @@ public class JavaParser implements Parser {
       currentRuleIsAtomic = true;
       startIndex = index;
       // (HexNumeral | OctalNumeral | DecimalNumeral)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       switch(buffer.getChar(index)) {
          case '0': {
             // ('0' ('x' | 'X') HexDigit+)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // '0'
             match = charMatcher('0');
             if (match) {
@@ -16161,7 +17737,11 @@ public class JavaParser implements Parser {
                }
                if (match) {
                   // HexDigit+
+                  Node lastNode_2 = currentNode;
+                  int lastIndex_2 = index;
                   // ('a'-'f' | 'A'-'F' | '0'-'9')
+                  Node lastNode_3 = currentNode;
+                  int lastIndex_3 = index;
                   // 'a'-'f'
                   match = charRangeMatcher('a', 'f');
                   if (! match) {
@@ -16174,7 +17754,11 @@ public class JavaParser implements Parser {
                   }
                   if (match) {
                      do {
+                        lastNode_2 = currentNode;
+                        lastIndex_2 = index;
                         // ('a'-'f' | 'A'-'F' | '0'-'9')
+                        Node lastNode_4 = currentNode;
+                        int lastIndex_4 = index;
                         // 'a'-'f'
                         match = charRangeMatcher('a', 'f');
                         if (! match) {
@@ -16186,64 +17770,85 @@ public class JavaParser implements Parser {
                            }
                         }
                      } while(match);
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
+                     index = lastIndex_2;
                      match = true;
+                  } else {
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
+                     index = lastIndex_2;
+                  }
+               }
+            }
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // ('0' '0'-'7'+)
+               // '0'
+               match = charMatcher('0');
+               if (match) {
+                  // '0'-'7'+
+                  Node lastNode_5 = currentNode;
+                  int lastIndex_5 = index;
+                  // '0'-'7'
+                  match = charRangeMatcher('0', '7');
+                  if (match) {
+                     do {
+                        lastNode_5 = currentNode;
+                        lastIndex_5 = index;
+                        // '0'-'7'
+                        match = charRangeMatcher('0', '7');
+                     } while(match);
+                     lastNode_5.setSibling(null);
+                     currentNode = lastNode_5;
+                     index = lastIndex_5;
+                     match = true;
+                  } else {
+                     lastNode_5.setSibling(null);
+                     currentNode = lastNode_5;
+                     index = lastIndex_5;
+                  }
+               }
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+                  // ('0' | ('1'-'9' Digit*))
+                  Node lastNode_6 = currentNode;
+                  int lastIndex_6 = index;
+                  // '0'
+                  match = charMatcher('0');
+                  if (! match) {
+                     // ('1'-'9' Digit*)
+                     // '1'-'9'
+                     match = charRangeMatcher('1', '9');
+                     if (match) {
+                        // Digit*
+                        Node lastNode_7;
+                        int lastIndex_7;
+                        do {
+                           lastNode_7 = currentNode;
+                           lastIndex_7 = index;
+                           // '0'-'9'
+                           match = charRangeMatcher('0', '9');
+                        } while(match);
+                        lastNode_7.setSibling(null);
+                        currentNode = lastNode_7;
+                        index = lastIndex_7;
+                        match = true;
+                     }
+                     if (! match) {
+                        index = lastIndex_6;
+                        lastNode_6.setSibling(null);
+                        currentNode = lastNode_6;
+                     }
                   }
                   if (! match) {
                      index = lastIndex_1;
                      lastNode_1.setSibling(null);
                      currentNode = lastNode_1;
-                  }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-               }
-            }
-            if (! match) {
-               // ('0' '0'-'7'+)
-               Node lastNode_2 = currentNode;
-               int lastIndex_2 = index;
-               // '0'
-               match = charMatcher('0');
-               if (match) {
-                  // '0'-'7'+
-                  // '0'-'7'
-                  match = charRangeMatcher('0', '7');
-                  if (match) {
-                     do {
-                        // '0'-'7'
-                        match = charRangeMatcher('0', '7');
-                     } while(match);
-                     match = true;
-                  }
-                  if (! match) {
-                     index = lastIndex_2;
-                     lastNode_2.setSibling(null);
-                     currentNode = lastNode_2;
-                  }
-               }
-               if (! match) {
-                  // ('0' | ('1'-'9' Digit*))
-                  // '0'
-                  match = charMatcher('0');
-                  if (! match) {
-                     // ('1'-'9' Digit*)
-                     Node lastNode_3 = currentNode;
-                     int lastIndex_3 = index;
-                     // '1'-'9'
-                     match = charRangeMatcher('1', '9');
-                     if (match) {
-                        // Digit*
-                        do {
-                           // '0'-'9'
-                           match = charRangeMatcher('0', '9');
-                        } while(match);
-                        match = true;
-                        if (! match) {
-                           index = lastIndex_3;
-                           lastNode_3.setSibling(null);
-                           currentNode = lastNode_3;
-                        }
-                     }
                   }
                }
             }
@@ -16259,27 +17864,39 @@ public class JavaParser implements Parser {
          case '8':
          case '9': {
             // ('0' | ('1'-'9' Digit*))
+            Node lastNode_8 = currentNode;
+            int lastIndex_8 = index;
             // '0'
             match = charMatcher('0');
             if (! match) {
                // ('1'-'9' Digit*)
-               Node lastNode_4 = currentNode;
-               int lastIndex_4 = index;
                // '1'-'9'
                match = charRangeMatcher('1', '9');
                if (match) {
                   // Digit*
+                  Node lastNode_9;
+                  int lastIndex_9;
                   do {
+                     lastNode_9 = currentNode;
+                     lastIndex_9 = index;
                      // '0'-'9'
                      match = charRangeMatcher('0', '9');
                   } while(match);
+                  lastNode_9.setSibling(null);
+                  currentNode = lastNode_9;
+                  index = lastIndex_9;
                   match = true;
-                  if (! match) {
-                     index = lastIndex_4;
-                     lastNode_4.setSibling(null);
-                     currentNode = lastNode_4;
-                  }
                }
+               if (! match) {
+                  index = lastIndex_8;
+                  lastNode_8.setSibling(null);
+                  currentNode = lastNode_8;
+               }
+            }
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
             }
             break;
          }
@@ -16311,7 +17928,7 @@ public class JavaParser implements Parser {
       }
    }
 
-   //CharLiteral : (''' (Escape | ((''' | '\')! .)) ''')
+   //CharLiteral : ('\'' (Escape | (('\'' | '\')! .)) '\'')
    protected boolean charLiteral$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -16334,19 +17951,21 @@ public class JavaParser implements Parser {
       }
       currentRuleIsAtomic = true;
       startIndex = index;
-      // (''' (Escape | ((''' | '\')! .)) ''')
-      // '''
+      // ('\'' (Escape | (('\'' | '\')! .)) '\'')
+      // '\''
       match = charMatcher('\'');
       if (match) {
-         // (Escape | ((''' | '\')! .))
-         // ('\' (('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\') | OctalEscape | UnicodeEscape))
+         // (Escape | (('\'' | '\')! .))
          Node lastNode_1 = currentNode;
          int lastIndex_1 = index;
+         // ('\' (('b' | 't' | 'n' | 'f' | 'r' | '"' | '\'' | '\') | OctalEscape | UnicodeEscape))
          // '\'
          match = charMatcher('\\');
          if (match) {
-            // (('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\') | OctalEscape | UnicodeEscape)
-            // ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\')
+            // (('b' | 't' | 'n' | 'f' | 'r' | '"' | '\'' | '\') | OctalEscape | UnicodeEscape)
+            Node lastNode_2 = currentNode;
+            int lastIndex_2 = index;
+            // ('b' | 't' | 'n' | 'f' | 'r' | '"' | '\'' | '\')
             switch(buffer.getChar(index)) {
                case '\\': {
                   ++index;
@@ -16401,10 +18020,13 @@ public class JavaParser implements Parser {
                }
             }
             if (! match) {
+               index = lastIndex_2;
+               lastNode_2.setSibling(null);
+               currentNode = lastNode_2;
                // (('0'-'3' '0'-'7' '0'-'7') | ('0'-'7' '0'-'7') | '0'-'7')
+               Node lastNode_3 = currentNode;
+               int lastIndex_3 = index;
                // ('0'-'3' '0'-'7' '0'-'7')
-               Node lastNode_2 = currentNode;
-               int lastIndex_2 = index;
                // '0'-'3'
                match = charRangeMatcher('0', '3');
                if (match) {
@@ -16413,56 +18035,63 @@ public class JavaParser implements Parser {
                   if (match) {
                      // '0'-'7'
                      match = charRangeMatcher('0', '7');
-                     if (! match) {
-                        index = lastIndex_2;
-                        lastNode_2.setSibling(null);
-                        currentNode = lastNode_2;
-                     }
-                  } else {
-                     index = lastIndex_2;
-                     lastNode_2.setSibling(null);
                   }
                }
                if (! match) {
+                  index = lastIndex_3;
+                  lastNode_3.setSibling(null);
+                  currentNode = lastNode_3;
                   // ('0'-'7' '0'-'7')
-                  Node lastNode_3 = currentNode;
-                  int lastIndex_3 = index;
                   // '0'-'7'
                   match = charRangeMatcher('0', '7');
                   if (match) {
                      // '0'-'7'
                      match = charRangeMatcher('0', '7');
-                     if (! match) {
-                        index = lastIndex_3;
-                        lastNode_3.setSibling(null);
-                        currentNode = lastNode_3;
-                     }
                   }
                   if (! match) {
+                     index = lastIndex_3;
+                     lastNode_3.setSibling(null);
+                     currentNode = lastNode_3;
                      // '0'-'7'
                      match = charRangeMatcher('0', '7');
                   }
                }
                if (! match) {
-                  // (('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))) | ('u'+ HexDigit HexDigit HexDigit HexDigit))
-                  // ('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit)))
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+                  // (('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | '\'' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))) | ('u'+ HexDigit HexDigit HexDigit HexDigit))
                   Node lastNode_4 = currentNode;
                   int lastIndex_4 = index;
+                  // ('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | '\'' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit)))
                   // 'u'+
+                  Node lastNode_5 = currentNode;
+                  int lastIndex_5 = index;
                   // 'u'
                   match = charMatcher('u');
                   if (match) {
                      do {
+                        lastNode_5 = currentNode;
+                        lastIndex_5 = index;
                         // 'u'
                         match = charMatcher('u');
                      } while(match);
+                     lastNode_5.setSibling(null);
+                     currentNode = lastNode_5;
+                     index = lastIndex_5;
                      match = true;
+                  } else {
+                     lastNode_5.setSibling(null);
+                     currentNode = lastNode_5;
+                     index = lastIndex_5;
                   }
                   if (match) {
                      // "005C"
                      match = ignoreCaseStringMatcher("005C", 4);
                      if (match) {
-                        // ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))
+                        // ('b' | 't' | 'n' | 'f' | 'r' | '"' | '\'' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))
+                        Node lastNode_6 = currentNode;
+                        int lastIndex_6 = index;
                         // 'b'
                         match = charMatcher('b');
                         if (! match) {
@@ -16481,27 +18110,38 @@ public class JavaParser implements Parser {
                                        // '"'
                                        match = charMatcher('\"');
                                        if (! match) {
-                                          // '''
+                                          // '\''
                                           match = charMatcher('\'');
                                           if (! match) {
                                              // '\'
                                              match = charMatcher('\\');
                                              if (! match) {
                                                 // ('u'+ HexDigit HexDigit HexDigit HexDigit)
-                                                Node lastNode_5 = currentNode;
-                                                int lastIndex_5 = index;
                                                 // 'u'+
+                                                Node lastNode_7 = currentNode;
+                                                int lastIndex_7 = index;
                                                 // 'u'
                                                 match = charMatcher('u');
                                                 if (match) {
                                                    do {
+                                                      lastNode_7 = currentNode;
+                                                      lastIndex_7 = index;
                                                       // 'u'
                                                       match = charMatcher('u');
                                                    } while(match);
+                                                   lastNode_7.setSibling(null);
+                                                   currentNode = lastNode_7;
+                                                   index = lastIndex_7;
                                                    match = true;
+                                                } else {
+                                                   lastNode_7.setSibling(null);
+                                                   currentNode = lastNode_7;
+                                                   index = lastIndex_7;
                                                 }
                                                 if (match) {
                                                    // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                                   Node lastNode_8 = currentNode;
+                                                   int lastIndex_8 = index;
                                                    // 'a'-'f'
                                                    match = charRangeMatcher('a', 'f');
                                                    if (! match) {
@@ -16514,6 +18154,8 @@ public class JavaParser implements Parser {
                                                    }
                                                    if (match) {
                                                       // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                                      Node lastNode_9 = currentNode;
+                                                      int lastIndex_9 = index;
                                                       // 'a'-'f'
                                                       match = charRangeMatcher('a', 'f');
                                                       if (! match) {
@@ -16526,6 +18168,8 @@ public class JavaParser implements Parser {
                                                       }
                                                       if (match) {
                                                          // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                                         Node lastNode_10 = currentNode;
+                                                         int lastIndex_10 = index;
                                                          // 'a'-'f'
                                                          match = charRangeMatcher('a', 'f');
                                                          if (! match) {
@@ -16538,6 +18182,8 @@ public class JavaParser implements Parser {
                                                          }
                                                          if (match) {
                                                             // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                                            Node lastNode_11 = currentNode;
+                                                            int lastIndex_11 = index;
                                                             // 'a'-'f'
                                                             match = charRangeMatcher('a', 'f');
                                                             if (! match) {
@@ -16548,23 +18194,14 @@ public class JavaParser implements Parser {
                                                                   match = charRangeMatcher('0', '9');
                                                                }
                                                             }
-                                                            if (! match) {
-                                                               index = lastIndex_5;
-                                                               lastNode_5.setSibling(null);
-                                                               currentNode = lastNode_5;
-                                                            }
-                                                         } else {
-                                                            index = lastIndex_5;
-                                                            lastNode_5.setSibling(null);
                                                          }
-                                                      } else {
-                                                         index = lastIndex_5;
-                                                         lastNode_5.setSibling(null);
                                                       }
-                                                   } else {
-                                                      index = lastIndex_5;
-                                                      lastNode_5.setSibling(null);
                                                    }
+                                                }
+                                                if (! match) {
+                                                   index = lastIndex_6;
+                                                   lastNode_6.setSibling(null);
+                                                   currentNode = lastNode_6;
                                                 }
                                              }
                                           }
@@ -16574,32 +18211,38 @@ public class JavaParser implements Parser {
                               }
                            }
                         }
-                        if (! match) {
-                           index = lastIndex_4;
-                           lastNode_4.setSibling(null);
-                           currentNode = lastNode_4;
-                        }
-                     } else {
-                        index = lastIndex_4;
-                        lastNode_4.setSibling(null);
                      }
                   }
                   if (! match) {
+                     index = lastIndex_4;
+                     lastNode_4.setSibling(null);
+                     currentNode = lastNode_4;
                      // ('u'+ HexDigit HexDigit HexDigit HexDigit)
-                     Node lastNode_6 = currentNode;
-                     int lastIndex_6 = index;
                      // 'u'+
+                     Node lastNode_12 = currentNode;
+                     int lastIndex_12 = index;
                      // 'u'
                      match = charMatcher('u');
                      if (match) {
                         do {
+                           lastNode_12 = currentNode;
+                           lastIndex_12 = index;
                            // 'u'
                            match = charMatcher('u');
                         } while(match);
+                        lastNode_12.setSibling(null);
+                        currentNode = lastNode_12;
+                        index = lastIndex_12;
                         match = true;
+                     } else {
+                        lastNode_12.setSibling(null);
+                        currentNode = lastNode_12;
+                        index = lastIndex_12;
                      }
                      if (match) {
                         // ('a'-'f' | 'A'-'F' | '0'-'9')
+                        Node lastNode_13 = currentNode;
+                        int lastIndex_13 = index;
                         // 'a'-'f'
                         match = charRangeMatcher('a', 'f');
                         if (! match) {
@@ -16612,6 +18255,8 @@ public class JavaParser implements Parser {
                         }
                         if (match) {
                            // ('a'-'f' | 'A'-'F' | '0'-'9')
+                           Node lastNode_14 = currentNode;
+                           int lastIndex_14 = index;
                            // 'a'-'f'
                            match = charRangeMatcher('a', 'f');
                            if (! match) {
@@ -16624,6 +18269,8 @@ public class JavaParser implements Parser {
                            }
                            if (match) {
                               // ('a'-'f' | 'A'-'F' | '0'-'9')
+                              Node lastNode_15 = currentNode;
+                              int lastIndex_15 = index;
                               // 'a'-'f'
                               match = charRangeMatcher('a', 'f');
                               if (! match) {
@@ -16636,6 +18283,8 @@ public class JavaParser implements Parser {
                               }
                               if (match) {
                                  // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                 Node lastNode_16 = currentNode;
+                                 int lastIndex_16 = index;
                                  // 'a'-'f'
                                  match = charRangeMatcher('a', 'f');
                                  if (! match) {
@@ -16646,40 +18295,32 @@ public class JavaParser implements Parser {
                                        match = charRangeMatcher('0', '9');
                                     }
                                  }
-                                 if (! match) {
-                                    index = lastIndex_6;
-                                    lastNode_6.setSibling(null);
-                                    currentNode = lastNode_6;
-                                 }
-                              } else {
-                                 index = lastIndex_6;
-                                 lastNode_6.setSibling(null);
                               }
-                           } else {
-                              index = lastIndex_6;
-                              lastNode_6.setSibling(null);
                            }
-                        } else {
-                           index = lastIndex_6;
-                           lastNode_6.setSibling(null);
                         }
                      }
+                     if (! match) {
+                        index = lastIndex_4;
+                        lastNode_4.setSibling(null);
+                        currentNode = lastNode_4;
+                     }
+                  }
+                  if (! match) {
+                     index = lastIndex_2;
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
                   }
                }
             }
-            if (! match) {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-               currentNode = lastNode_1;
-            }
          }
          if (! match) {
-            // ((''' | '\')! .)
-            Node lastNode_7 = currentNode;
-            int lastIndex_7 = index;
-            // (''' | '\')!
-            // (''' | '\')
-            int startIndex_8 = index;
+            index = lastIndex_1;
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            // (('\'' | '\')! .)
+            // ('\'' | '\')!
+            // ('\'' | '\')
+            int startIndex_17 = index;
             switch(buffer.getChar(index)) {
                case '\\': {
                   ++index;
@@ -16697,20 +18338,20 @@ public class JavaParser implements Parser {
                   match = false;
                }
             }
-            index = startIndex_8;
+            index = startIndex_17;
             match = ! match;
             if (match) {
                // .
                match = anyCharMatcher();
-               if (! match) {
-                  index = lastIndex_7;
-                  lastNode_7.setSibling(null);
-                  currentNode = lastNode_7;
-               }
+            }
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
             }
          }
          if (match) {
-            // '''
+            // '\''
             match = charMatcher('\'');
          }
       }
@@ -16766,16 +18407,22 @@ public class JavaParser implements Parser {
       match = charMatcher('\"');
       if (match) {
          // (Escape | (('\r' | '\n' | '"' | '\')! .))*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (Escape | (('\r' | '\n' | '"' | '\')! .))
-            // ('\' (('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\') | OctalEscape | UnicodeEscape))
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
+            Node lastNode_2 = currentNode;
+            int lastIndex_2 = index;
+            // ('\' (('b' | 't' | 'n' | 'f' | 'r' | '"' | '\'' | '\') | OctalEscape | UnicodeEscape))
             // '\'
             match = charMatcher('\\');
             if (match) {
-               // (('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\') | OctalEscape | UnicodeEscape)
-               // ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\')
+               // (('b' | 't' | 'n' | 'f' | 'r' | '"' | '\'' | '\') | OctalEscape | UnicodeEscape)
+               Node lastNode_3 = currentNode;
+               int lastIndex_3 = index;
+               // ('b' | 't' | 'n' | 'f' | 'r' | '"' | '\'' | '\')
                switch(buffer.getChar(index)) {
                   case '\\': {
                      ++index;
@@ -16830,10 +18477,13 @@ public class JavaParser implements Parser {
                   }
                }
                if (! match) {
+                  index = lastIndex_3;
+                  lastNode_3.setSibling(null);
+                  currentNode = lastNode_3;
                   // (('0'-'3' '0'-'7' '0'-'7') | ('0'-'7' '0'-'7') | '0'-'7')
+                  Node lastNode_4 = currentNode;
+                  int lastIndex_4 = index;
                   // ('0'-'3' '0'-'7' '0'-'7')
-                  Node lastNode_2 = currentNode;
-                  int lastIndex_2 = index;
                   // '0'-'3'
                   match = charRangeMatcher('0', '3');
                   if (match) {
@@ -16842,56 +18492,63 @@ public class JavaParser implements Parser {
                      if (match) {
                         // '0'-'7'
                         match = charRangeMatcher('0', '7');
-                        if (! match) {
-                           index = lastIndex_2;
-                           lastNode_2.setSibling(null);
-                           currentNode = lastNode_2;
-                        }
-                     } else {
-                        index = lastIndex_2;
-                        lastNode_2.setSibling(null);
                      }
                   }
                   if (! match) {
+                     index = lastIndex_4;
+                     lastNode_4.setSibling(null);
+                     currentNode = lastNode_4;
                      // ('0'-'7' '0'-'7')
-                     Node lastNode_3 = currentNode;
-                     int lastIndex_3 = index;
                      // '0'-'7'
                      match = charRangeMatcher('0', '7');
                      if (match) {
                         // '0'-'7'
                         match = charRangeMatcher('0', '7');
-                        if (! match) {
-                           index = lastIndex_3;
-                           lastNode_3.setSibling(null);
-                           currentNode = lastNode_3;
-                        }
                      }
                      if (! match) {
+                        index = lastIndex_4;
+                        lastNode_4.setSibling(null);
+                        currentNode = lastNode_4;
                         // '0'-'7'
                         match = charRangeMatcher('0', '7');
                      }
                   }
                   if (! match) {
-                     // (('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))) | ('u'+ HexDigit HexDigit HexDigit HexDigit))
-                     // ('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit)))
-                     Node lastNode_4 = currentNode;
-                     int lastIndex_4 = index;
+                     index = lastIndex_3;
+                     lastNode_3.setSibling(null);
+                     currentNode = lastNode_3;
+                     // (('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | '\'' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))) | ('u'+ HexDigit HexDigit HexDigit HexDigit))
+                     Node lastNode_5 = currentNode;
+                     int lastIndex_5 = index;
+                     // ('u'+ "005C" ('b' | 't' | 'n' | 'f' | 'r' | '"' | '\'' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit)))
                      // 'u'+
+                     Node lastNode_6 = currentNode;
+                     int lastIndex_6 = index;
                      // 'u'
                      match = charMatcher('u');
                      if (match) {
                         do {
+                           lastNode_6 = currentNode;
+                           lastIndex_6 = index;
                            // 'u'
                            match = charMatcher('u');
                         } while(match);
+                        lastNode_6.setSibling(null);
+                        currentNode = lastNode_6;
+                        index = lastIndex_6;
                         match = true;
+                     } else {
+                        lastNode_6.setSibling(null);
+                        currentNode = lastNode_6;
+                        index = lastIndex_6;
                      }
                      if (match) {
                         // "005C"
                         match = ignoreCaseStringMatcher("005C", 4);
                         if (match) {
-                           // ('b' | 't' | 'n' | 'f' | 'r' | '"' | ''' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))
+                           // ('b' | 't' | 'n' | 'f' | 'r' | '"' | '\'' | '\' | ('u'+ HexDigit HexDigit HexDigit HexDigit))
+                           Node lastNode_7 = currentNode;
+                           int lastIndex_7 = index;
                            // 'b'
                            match = charMatcher('b');
                            if (! match) {
@@ -16910,27 +18567,38 @@ public class JavaParser implements Parser {
                                           // '"'
                                           match = charMatcher('\"');
                                           if (! match) {
-                                             // '''
+                                             // '\''
                                              match = charMatcher('\'');
                                              if (! match) {
                                                 // '\'
                                                 match = charMatcher('\\');
                                                 if (! match) {
                                                    // ('u'+ HexDigit HexDigit HexDigit HexDigit)
-                                                   Node lastNode_5 = currentNode;
-                                                   int lastIndex_5 = index;
                                                    // 'u'+
+                                                   Node lastNode_8 = currentNode;
+                                                   int lastIndex_8 = index;
                                                    // 'u'
                                                    match = charMatcher('u');
                                                    if (match) {
                                                       do {
+                                                         lastNode_8 = currentNode;
+                                                         lastIndex_8 = index;
                                                          // 'u'
                                                          match = charMatcher('u');
                                                       } while(match);
+                                                      lastNode_8.setSibling(null);
+                                                      currentNode = lastNode_8;
+                                                      index = lastIndex_8;
                                                       match = true;
+                                                   } else {
+                                                      lastNode_8.setSibling(null);
+                                                      currentNode = lastNode_8;
+                                                      index = lastIndex_8;
                                                    }
                                                    if (match) {
                                                       // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                                      Node lastNode_9 = currentNode;
+                                                      int lastIndex_9 = index;
                                                       // 'a'-'f'
                                                       match = charRangeMatcher('a', 'f');
                                                       if (! match) {
@@ -16943,6 +18611,8 @@ public class JavaParser implements Parser {
                                                       }
                                                       if (match) {
                                                          // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                                         Node lastNode_10 = currentNode;
+                                                         int lastIndex_10 = index;
                                                          // 'a'-'f'
                                                          match = charRangeMatcher('a', 'f');
                                                          if (! match) {
@@ -16955,6 +18625,8 @@ public class JavaParser implements Parser {
                                                          }
                                                          if (match) {
                                                             // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                                            Node lastNode_11 = currentNode;
+                                                            int lastIndex_11 = index;
                                                             // 'a'-'f'
                                                             match = charRangeMatcher('a', 'f');
                                                             if (! match) {
@@ -16967,6 +18639,8 @@ public class JavaParser implements Parser {
                                                             }
                                                             if (match) {
                                                                // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                                               Node lastNode_12 = currentNode;
+                                                               int lastIndex_12 = index;
                                                                // 'a'-'f'
                                                                match = charRangeMatcher('a', 'f');
                                                                if (! match) {
@@ -16977,23 +18651,14 @@ public class JavaParser implements Parser {
                                                                      match = charRangeMatcher('0', '9');
                                                                   }
                                                                }
-                                                               if (! match) {
-                                                                  index = lastIndex_5;
-                                                                  lastNode_5.setSibling(null);
-                                                                  currentNode = lastNode_5;
-                                                               }
-                                                            } else {
-                                                               index = lastIndex_5;
-                                                               lastNode_5.setSibling(null);
                                                             }
-                                                         } else {
-                                                            index = lastIndex_5;
-                                                            lastNode_5.setSibling(null);
                                                          }
-                                                      } else {
-                                                         index = lastIndex_5;
-                                                         lastNode_5.setSibling(null);
                                                       }
+                                                   }
+                                                   if (! match) {
+                                                      index = lastIndex_7;
+                                                      lastNode_7.setSibling(null);
+                                                      currentNode = lastNode_7;
                                                    }
                                                 }
                                              }
@@ -17003,32 +18668,38 @@ public class JavaParser implements Parser {
                                  }
                               }
                            }
-                           if (! match) {
-                              index = lastIndex_4;
-                              lastNode_4.setSibling(null);
-                              currentNode = lastNode_4;
-                           }
-                        } else {
-                           index = lastIndex_4;
-                           lastNode_4.setSibling(null);
                         }
                      }
                      if (! match) {
+                        index = lastIndex_5;
+                        lastNode_5.setSibling(null);
+                        currentNode = lastNode_5;
                         // ('u'+ HexDigit HexDigit HexDigit HexDigit)
-                        Node lastNode_6 = currentNode;
-                        int lastIndex_6 = index;
                         // 'u'+
+                        Node lastNode_13 = currentNode;
+                        int lastIndex_13 = index;
                         // 'u'
                         match = charMatcher('u');
                         if (match) {
                            do {
+                              lastNode_13 = currentNode;
+                              lastIndex_13 = index;
                               // 'u'
                               match = charMatcher('u');
                            } while(match);
+                           lastNode_13.setSibling(null);
+                           currentNode = lastNode_13;
+                           index = lastIndex_13;
                            match = true;
+                        } else {
+                           lastNode_13.setSibling(null);
+                           currentNode = lastNode_13;
+                           index = lastIndex_13;
                         }
                         if (match) {
                            // ('a'-'f' | 'A'-'F' | '0'-'9')
+                           Node lastNode_14 = currentNode;
+                           int lastIndex_14 = index;
                            // 'a'-'f'
                            match = charRangeMatcher('a', 'f');
                            if (! match) {
@@ -17041,6 +18712,8 @@ public class JavaParser implements Parser {
                            }
                            if (match) {
                               // ('a'-'f' | 'A'-'F' | '0'-'9')
+                              Node lastNode_15 = currentNode;
+                              int lastIndex_15 = index;
                               // 'a'-'f'
                               match = charRangeMatcher('a', 'f');
                               if (! match) {
@@ -17053,6 +18726,8 @@ public class JavaParser implements Parser {
                               }
                               if (match) {
                                  // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                 Node lastNode_16 = currentNode;
+                                 int lastIndex_16 = index;
                                  // 'a'-'f'
                                  match = charRangeMatcher('a', 'f');
                                  if (! match) {
@@ -17065,6 +18740,8 @@ public class JavaParser implements Parser {
                                  }
                                  if (match) {
                                     // ('a'-'f' | 'A'-'F' | '0'-'9')
+                                    Node lastNode_17 = currentNode;
+                                    int lastIndex_17 = index;
                                     // 'a'-'f'
                                     match = charRangeMatcher('a', 'f');
                                     if (! match) {
@@ -17075,40 +18752,32 @@ public class JavaParser implements Parser {
                                           match = charRangeMatcher('0', '9');
                                        }
                                     }
-                                    if (! match) {
-                                       index = lastIndex_6;
-                                       lastNode_6.setSibling(null);
-                                       currentNode = lastNode_6;
-                                    }
-                                 } else {
-                                    index = lastIndex_6;
-                                    lastNode_6.setSibling(null);
                                  }
-                              } else {
-                                 index = lastIndex_6;
-                                 lastNode_6.setSibling(null);
                               }
-                           } else {
-                              index = lastIndex_6;
-                              lastNode_6.setSibling(null);
                            }
                         }
+                        if (! match) {
+                           index = lastIndex_5;
+                           lastNode_5.setSibling(null);
+                           currentNode = lastNode_5;
+                        }
+                     }
+                     if (! match) {
+                        index = lastIndex_3;
+                        lastNode_3.setSibling(null);
+                        currentNode = lastNode_3;
                      }
                   }
                }
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
             }
             if (! match) {
+               index = lastIndex_2;
+               lastNode_2.setSibling(null);
+               currentNode = lastNode_2;
                // (('\r' | '\n' | '"' | '\')! .)
-               Node lastNode_7 = currentNode;
-               int lastIndex_7 = index;
                // ('\r' | '\n' | '"' | '\')!
                // ('\r' | '\n' | '"' | '\')
-               int startIndex_8 = index;
+               int startIndex_18 = index;
                switch(buffer.getChar(index)) {
                   case '\\': {
                      ++index;
@@ -17138,19 +18807,22 @@ public class JavaParser implements Parser {
                      match = false;
                   }
                }
-               index = startIndex_8;
+               index = startIndex_18;
                match = ! match;
                if (match) {
                   // .
                   match = anyCharMatcher();
-                  if (! match) {
-                     index = lastIndex_7;
-                     lastNode_7.setSibling(null);
-                     currentNode = lastNode_7;
-                  }
+               }
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          // '"'
          match = charMatcher('\"');
       }
@@ -17368,11 +19040,12 @@ public class JavaParser implements Parser {
       startIndex = index;
       // (HexSignificant BinaryExponent ('f' | 'F' | 'd' | 'D')?)
       // ((('0x' | '0X') HexDigit* '.' HexDigit+) | (HexNumeral '.'?))
-      // (('0x' | '0X') HexDigit* '.' HexDigit+)
       Node lastNode_1 = currentNode;
       int lastIndex_1 = index;
+      // (('0x' | '0X') HexDigit* '.' HexDigit+)
       // ('0x' | '0X')
-      if (buffer.matchChar(index, '0')) {
+      match = buffer.matchChar(index, '0');
+      if (match) {
          ++index;
          // ('x' | 'X')
          switch(buffer.getChar(index)) {
@@ -17392,13 +19065,17 @@ public class JavaParser implements Parser {
                match = false;
             }
          }
-      } else {
-         match = false;
       }
       if (match) {
          // HexDigit*
+         Node lastNode_2;
+         int lastIndex_2;
          do {
+            lastNode_2 = currentNode;
+            lastIndex_2 = index;
             // ('a'-'f' | 'A'-'F' | '0'-'9')
+            Node lastNode_3 = currentNode;
+            int lastIndex_3 = index;
             // 'a'-'f'
             match = charRangeMatcher('a', 'f');
             if (! match) {
@@ -17410,11 +19087,18 @@ public class JavaParser implements Parser {
                }
             }
          } while(match);
+         lastNode_2.setSibling(null);
+         currentNode = lastNode_2;
+         index = lastIndex_2;
          // '.'
          match = charMatcher('.');
          if (match) {
             // HexDigit+
+            Node lastNode_4 = currentNode;
+            int lastIndex_4 = index;
             // ('a'-'f' | 'A'-'F' | '0'-'9')
+            Node lastNode_5 = currentNode;
+            int lastIndex_5 = index;
             // 'a'-'f'
             match = charRangeMatcher('a', 'f');
             if (! match) {
@@ -17427,7 +19111,11 @@ public class JavaParser implements Parser {
             }
             if (match) {
                do {
+                  lastNode_4 = currentNode;
+                  lastIndex_4 = index;
                   // ('a'-'f' | 'A'-'F' | '0'-'9')
+                  Node lastNode_6 = currentNode;
+                  int lastIndex_6 = index;
                   // 'a'-'f'
                   match = charRangeMatcher('a', 'f');
                   if (! match) {
@@ -17439,25 +19127,23 @@ public class JavaParser implements Parser {
                      }
                   }
                } while(match);
+               lastNode_4.setSibling(null);
+               currentNode = lastNode_4;
+               index = lastIndex_4;
                match = true;
+            } else {
+               lastNode_4.setSibling(null);
+               currentNode = lastNode_4;
+               index = lastIndex_4;
             }
-            if (! match) {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-               currentNode = lastNode_1;
-            }
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
          }
       }
       if (! match) {
+         index = lastIndex_1;
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
          // (HexNumeral '.'?)
-         Node lastNode_2 = currentNode;
-         int lastIndex_2 = index;
          // ('0' ('x' | 'X') HexDigit+)
-         Node lastNode_3 = currentNode;
-         int lastIndex_3 = index;
          // '0'
          match = charMatcher('0');
          if (match) {
@@ -17481,7 +19167,11 @@ public class JavaParser implements Parser {
             }
             if (match) {
                // HexDigit+
+               Node lastNode_7 = currentNode;
+               int lastIndex_7 = index;
                // ('a'-'f' | 'A'-'F' | '0'-'9')
+               Node lastNode_8 = currentNode;
+               int lastIndex_8 = index;
                // 'a'-'f'
                match = charRangeMatcher('a', 'f');
                if (! match) {
@@ -17494,7 +19184,11 @@ public class JavaParser implements Parser {
                }
                if (match) {
                   do {
+                     lastNode_7 = currentNode;
+                     lastIndex_7 = index;
                      // ('a'-'f' | 'A'-'F' | '0'-'9')
+                     Node lastNode_9 = currentNode;
+                     int lastIndex_9 = index;
                      // 'a'-'f'
                      match = charRangeMatcher('a', 'f');
                      if (! match) {
@@ -17506,23 +19200,34 @@ public class JavaParser implements Parser {
                         }
                      }
                   } while(match);
+                  lastNode_7.setSibling(null);
+                  currentNode = lastNode_7;
+                  index = lastIndex_7;
                   match = true;
+               } else {
+                  lastNode_7.setSibling(null);
+                  currentNode = lastNode_7;
+                  index = lastIndex_7;
                }
-               if (! match) {
-                  index = lastIndex_3;
-                  lastNode_3.setSibling(null);
-                  currentNode = lastNode_3;
-               }
-            } else {
-               index = lastIndex_3;
-               lastNode_3.setSibling(null);
             }
          }
          if (match) {
             // '.'?
+            Node lastNode_10 = currentNode;
+            int lastIndex_10 = index;
             // '.'
-            charMatcher('.');
-            match = true;
+            match = charMatcher('.');
+            if (! match) {
+               lastNode_10.setSibling(null);
+               currentNode = lastNode_10;
+               index = lastIndex_10;
+               match = true;
+            }
+         }
+         if (! match) {
+            index = lastIndex_1;
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
          }
       }
       if (match) {
@@ -17547,6 +19252,8 @@ public class JavaParser implements Parser {
          }
          if (match) {
             // ('+' | '-')?
+            Node lastNode_11 = currentNode;
+            int lastIndex_11 = index;
             // ('+' | '-')
             switch(buffer.getChar(index)) {
                case '+': {
@@ -17565,19 +19272,40 @@ public class JavaParser implements Parser {
                   match = false;
                }
             }
-            // Digit+
-            // '0'-'9'
-            match = charRangeMatcher('0', '9');
-            if (match) {
-               do {
-                  // '0'-'9'
-                  match = charRangeMatcher('0', '9');
-               } while(match);
+            if (! match) {
+               lastNode_11.setSibling(null);
+               currentNode = lastNode_11;
+               index = lastIndex_11;
                match = true;
+            }
+            if (match) {
+               // Digit+
+               Node lastNode_12 = currentNode;
+               int lastIndex_12 = index;
+               // '0'-'9'
+               match = charRangeMatcher('0', '9');
+               if (match) {
+                  do {
+                     lastNode_12 = currentNode;
+                     lastIndex_12 = index;
+                     // '0'-'9'
+                     match = charRangeMatcher('0', '9');
+                  } while(match);
+                  lastNode_12.setSibling(null);
+                  currentNode = lastNode_12;
+                  index = lastIndex_12;
+                  match = true;
+               } else {
+                  lastNode_12.setSibling(null);
+                  currentNode = lastNode_12;
+                  index = lastIndex_12;
+               }
             }
          }
          if (match) {
             // ('f' | 'F' | 'd' | 'D')?
+            Node lastNode_13 = currentNode;
+            int lastIndex_13 = index;
             // ('f' | 'F' | 'd' | 'D')
             switch(buffer.getChar(index)) {
                case 'd': {
@@ -17608,7 +19336,12 @@ public class JavaParser implements Parser {
                   match = false;
                }
             }
-            match = true;
+            if (! match) {
+               lastNode_13.setSibling(null);
+               currentNode = lastNode_13;
+               index = lastIndex_13;
+               match = true;
+            }
          }
       }
       if (match) {
@@ -17659,33 +19392,51 @@ public class JavaParser implements Parser {
       currentRuleIsAtomic = true;
       startIndex = index;
       // ((Digit+ '.' Digit* Exponent? ('f' | 'F' | 'd' | 'D')?) | ('.' Digit+ Exponent? ('f' | 'F' | 'd' | 'D')?) | (Digit+ Exponent ('f' | 'F' | 'd' | 'D')?) | (Digit+ Exponent? ('f' | 'F' | 'd' | 'D')))
-      // (Digit+ '.' Digit* Exponent? ('f' | 'F' | 'd' | 'D')?)
       Node lastNode_1 = currentNode;
       int lastIndex_1 = index;
+      // (Digit+ '.' Digit* Exponent? ('f' | 'F' | 'd' | 'D')?)
       // Digit+
+      Node lastNode_2 = currentNode;
+      int lastIndex_2 = index;
       // '0'-'9'
       match = charRangeMatcher('0', '9');
       if (match) {
          do {
+            lastNode_2 = currentNode;
+            lastIndex_2 = index;
             // '0'-'9'
             match = charRangeMatcher('0', '9');
          } while(match);
+         lastNode_2.setSibling(null);
+         currentNode = lastNode_2;
+         index = lastIndex_2;
          match = true;
+      } else {
+         lastNode_2.setSibling(null);
+         currentNode = lastNode_2;
+         index = lastIndex_2;
       }
       if (match) {
          // '.'
          match = charMatcher('.');
          if (match) {
             // Digit*
+            Node lastNode_3;
+            int lastIndex_3;
             do {
+               lastNode_3 = currentNode;
+               lastIndex_3 = index;
                // '0'-'9'
                match = charRangeMatcher('0', '9');
             } while(match);
+            lastNode_3.setSibling(null);
+            currentNode = lastNode_3;
+            index = lastIndex_3;
             match = true;
             // Exponent?
+            Node lastNode_4 = currentNode;
+            int lastIndex_4 = index;
             // (('e' | 'E') ('+' | '-')? Digit+)
-            Node lastNode_2 = currentNode;
-            int lastIndex_2 = index;
             // ('e' | 'E')
             switch(buffer.getChar(index)) {
                case 'e': {
@@ -17705,6 +19456,8 @@ public class JavaParser implements Parser {
                }
             }
             // ('+' | '-')?
+            Node lastNode_5 = currentNode;
+            int lastIndex_5 = index;
             // ('+' | '-')
             switch(buffer.getChar(index)) {
                case '+': {
@@ -17724,136 +19477,36 @@ public class JavaParser implements Parser {
                }
             }
             // Digit+
+            Node lastNode_6 = currentNode;
+            int lastIndex_6 = index;
             // '0'-'9'
             match = charRangeMatcher('0', '9');
             if (match) {
                do {
+                  lastNode_6 = currentNode;
+                  lastIndex_6 = index;
                   // '0'-'9'
                   match = charRangeMatcher('0', '9');
                } while(match);
+               lastNode_6.setSibling(null);
+               currentNode = lastNode_6;
+               index = lastIndex_6;
                match = true;
+            } else {
+               lastNode_6.setSibling(null);
+               currentNode = lastNode_6;
+               index = lastIndex_6;
             }
             if (! match) {
-               index = lastIndex_2;
-               lastNode_2.setSibling(null);
-               currentNode = lastNode_2;
-            }
-            match = true;
-            // ('f' | 'F' | 'd' | 'D')?
-            // ('f' | 'F' | 'd' | 'D')
-            switch(buffer.getChar(index)) {
-               case 'd': {
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               }
-               case 'D': {
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               }
-               case 'f': {
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               }
-               case 'F': {
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               }
-               default: {
-                  match = false;
-               }
-            }
-            match = true;
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-         }
-      }
-      if (! match) {
-         // ('.' Digit+ Exponent? ('f' | 'F' | 'd' | 'D')?)
-         Node lastNode_3 = currentNode;
-         int lastIndex_3 = index;
-         // '.'
-         match = charMatcher('.');
-         if (match) {
-            // Digit+
-            // '0'-'9'
-            match = charRangeMatcher('0', '9');
-            if (match) {
-               do {
-                  // '0'-'9'
-                  match = charRangeMatcher('0', '9');
-               } while(match);
+               lastNode_4.setSibling(null);
+               currentNode = lastNode_4;
+               index = lastIndex_4;
                match = true;
             }
             if (match) {
-               // Exponent?
-               // (('e' | 'E') ('+' | '-')? Digit+)
-               Node lastNode_4 = currentNode;
-               int lastIndex_4 = index;
-               // ('e' | 'E')
-               switch(buffer.getChar(index)) {
-                  case 'e': {
-                     ++index;
-                     // <EMPTY>
-                     match = true;
-                     break;
-                  }
-                  case 'E': {
-                     ++index;
-                     // <EMPTY>
-                     match = true;
-                     break;
-                  }
-                  default: {
-                     match = false;
-                  }
-               }
-               if (match) {
-                  // ('+' | '-')?
-                  // ('+' | '-')
-                  switch(buffer.getChar(index)) {
-                     case '+': {
-                        ++index;
-                        // <EMPTY>
-                        match = true;
-                        break;
-                     }
-                     case '-': {
-                        ++index;
-                        // <EMPTY>
-                        match = true;
-                        break;
-                     }
-                     default: {
-                        match = false;
-                     }
-                  }
-                  // Digit+
-                  // '0'-'9'
-                  match = charRangeMatcher('0', '9');
-                  if (match) {
-                     do {
-                        // '0'-'9'
-                        match = charRangeMatcher('0', '9');
-                     } while(match);
-                     match = true;
-                  }
-                  if (! match) {
-                     index = lastIndex_4;
-                     lastNode_4.setSibling(null);
-                     currentNode = lastNode_4;
-                  }
-               }
-               match = true;
                // ('f' | 'F' | 'd' | 'D')?
+               Node lastNode_7 = currentNode;
+               int lastIndex_7 = index;
                // ('f' | 'F' | 'd' | 'D')
                switch(buffer.getChar(index)) {
                   case 'd': {
@@ -17884,30 +19537,49 @@ public class JavaParser implements Parser {
                      match = false;
                   }
                }
-               match = true;
-            } else {
-               index = lastIndex_3;
-               lastNode_3.setSibling(null);
+               if (! match) {
+                  lastNode_7.setSibling(null);
+                  currentNode = lastNode_7;
+                  index = lastIndex_7;
+                  match = true;
+               }
             }
          }
-         if (! match) {
-            // (Digit+ Exponent ('f' | 'F' | 'd' | 'D')?)
-            Node lastNode_5 = currentNode;
-            int lastIndex_5 = index;
+      }
+      if (! match) {
+         index = lastIndex_1;
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         // ('.' Digit+ Exponent? ('f' | 'F' | 'd' | 'D')?)
+         // '.'
+         match = charMatcher('.');
+         if (match) {
             // Digit+
+            Node lastNode_8 = currentNode;
+            int lastIndex_8 = index;
             // '0'-'9'
             match = charRangeMatcher('0', '9');
             if (match) {
                do {
+                  lastNode_8 = currentNode;
+                  lastIndex_8 = index;
                   // '0'-'9'
                   match = charRangeMatcher('0', '9');
                } while(match);
+               lastNode_8.setSibling(null);
+               currentNode = lastNode_8;
+               index = lastIndex_8;
                match = true;
+            } else {
+               lastNode_8.setSibling(null);
+               currentNode = lastNode_8;
+               index = lastIndex_8;
             }
             if (match) {
+               // Exponent?
+               Node lastNode_9 = currentNode;
+               int lastIndex_9 = index;
                // (('e' | 'E') ('+' | '-')? Digit+)
-               Node lastNode_6 = currentNode;
-               int lastIndex_6 = index;
                // ('e' | 'E')
                switch(buffer.getChar(index)) {
                   case 'e': {
@@ -17928,6 +19600,8 @@ public class JavaParser implements Parser {
                }
                if (match) {
                   // ('+' | '-')?
+                  Node lastNode_10 = currentNode;
+                  int lastIndex_10 = index;
                   // ('+' | '-')
                   switch(buffer.getChar(index)) {
                      case '+': {
@@ -17946,24 +19620,46 @@ public class JavaParser implements Parser {
                         match = false;
                      }
                   }
-                  // Digit+
-                  // '0'-'9'
-                  match = charRangeMatcher('0', '9');
-                  if (match) {
-                     do {
-                        // '0'-'9'
-                        match = charRangeMatcher('0', '9');
-                     } while(match);
+                  if (! match) {
+                     lastNode_10.setSibling(null);
+                     currentNode = lastNode_10;
+                     index = lastIndex_10;
                      match = true;
                   }
-                  if (! match) {
-                     index = lastIndex_6;
-                     lastNode_6.setSibling(null);
-                     currentNode = lastNode_6;
+                  if (match) {
+                     // Digit+
+                     Node lastNode_11 = currentNode;
+                     int lastIndex_11 = index;
+                     // '0'-'9'
+                     match = charRangeMatcher('0', '9');
+                     if (match) {
+                        do {
+                           lastNode_11 = currentNode;
+                           lastIndex_11 = index;
+                           // '0'-'9'
+                           match = charRangeMatcher('0', '9');
+                        } while(match);
+                        lastNode_11.setSibling(null);
+                        currentNode = lastNode_11;
+                        index = lastIndex_11;
+                        match = true;
+                     } else {
+                        lastNode_11.setSibling(null);
+                        currentNode = lastNode_11;
+                        index = lastIndex_11;
+                     }
                   }
+               }
+               if (! match) {
+                  lastNode_9.setSibling(null);
+                  currentNode = lastNode_9;
+                  index = lastIndex_9;
+                  match = true;
                }
                if (match) {
                   // ('f' | 'F' | 'd' | 'D')?
+                  Node lastNode_12 = currentNode;
+                  int lastIndex_12 = index;
                   // ('f' | 'F' | 'd' | 'D')
                   switch(buffer.getChar(index)) {
                      case 'd': {
@@ -17994,31 +19690,186 @@ public class JavaParser implements Parser {
                         match = false;
                      }
                   }
-                  match = true;
-               } else {
-                  index = lastIndex_5;
-                  lastNode_5.setSibling(null);
+                  if (! match) {
+                     lastNode_12.setSibling(null);
+                     currentNode = lastNode_12;
+                     index = lastIndex_12;
+                     match = true;
+                  }
+               }
+            }
+         }
+         if (! match) {
+            index = lastIndex_1;
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            // (Digit+ Exponent ('f' | 'F' | 'd' | 'D')?)
+            // Digit+
+            Node lastNode_13 = currentNode;
+            int lastIndex_13 = index;
+            // '0'-'9'
+            match = charRangeMatcher('0', '9');
+            if (match) {
+               do {
+                  lastNode_13 = currentNode;
+                  lastIndex_13 = index;
+                  // '0'-'9'
+                  match = charRangeMatcher('0', '9');
+               } while(match);
+               lastNode_13.setSibling(null);
+               currentNode = lastNode_13;
+               index = lastIndex_13;
+               match = true;
+            } else {
+               lastNode_13.setSibling(null);
+               currentNode = lastNode_13;
+               index = lastIndex_13;
+            }
+            if (match) {
+               // (('e' | 'E') ('+' | '-')? Digit+)
+               // ('e' | 'E')
+               switch(buffer.getChar(index)) {
+                  case 'e': {
+                     ++index;
+                     // <EMPTY>
+                     match = true;
+                     break;
+                  }
+                  case 'E': {
+                     ++index;
+                     // <EMPTY>
+                     match = true;
+                     break;
+                  }
+                  default: {
+                     match = false;
+                  }
+               }
+               if (match) {
+                  // ('+' | '-')?
+                  Node lastNode_14 = currentNode;
+                  int lastIndex_14 = index;
+                  // ('+' | '-')
+                  switch(buffer.getChar(index)) {
+                     case '+': {
+                        ++index;
+                        // <EMPTY>
+                        match = true;
+                        break;
+                     }
+                     case '-': {
+                        ++index;
+                        // <EMPTY>
+                        match = true;
+                        break;
+                     }
+                     default: {
+                        match = false;
+                     }
+                  }
+                  if (! match) {
+                     lastNode_14.setSibling(null);
+                     currentNode = lastNode_14;
+                     index = lastIndex_14;
+                     match = true;
+                  }
+                  if (match) {
+                     // Digit+
+                     Node lastNode_15 = currentNode;
+                     int lastIndex_15 = index;
+                     // '0'-'9'
+                     match = charRangeMatcher('0', '9');
+                     if (match) {
+                        do {
+                           lastNode_15 = currentNode;
+                           lastIndex_15 = index;
+                           // '0'-'9'
+                           match = charRangeMatcher('0', '9');
+                        } while(match);
+                        lastNode_15.setSibling(null);
+                        currentNode = lastNode_15;
+                        index = lastIndex_15;
+                        match = true;
+                     } else {
+                        lastNode_15.setSibling(null);
+                        currentNode = lastNode_15;
+                        index = lastIndex_15;
+                     }
+                  }
+               }
+               if (match) {
+                  // ('f' | 'F' | 'd' | 'D')?
+                  Node lastNode_16 = currentNode;
+                  int lastIndex_16 = index;
+                  // ('f' | 'F' | 'd' | 'D')
+                  switch(buffer.getChar(index)) {
+                     case 'd': {
+                        ++index;
+                        // <EMPTY>
+                        match = true;
+                        break;
+                     }
+                     case 'D': {
+                        ++index;
+                        // <EMPTY>
+                        match = true;
+                        break;
+                     }
+                     case 'f': {
+                        ++index;
+                        // <EMPTY>
+                        match = true;
+                        break;
+                     }
+                     case 'F': {
+                        ++index;
+                        // <EMPTY>
+                        match = true;
+                        break;
+                     }
+                     default: {
+                        match = false;
+                     }
+                  }
+                  if (! match) {
+                     lastNode_16.setSibling(null);
+                     currentNode = lastNode_16;
+                     index = lastIndex_16;
+                     match = true;
+                  }
                }
             }
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // (Digit+ Exponent? ('f' | 'F' | 'd' | 'D'))
-               Node lastNode_7 = currentNode;
-               int lastIndex_7 = index;
                // Digit+
+               Node lastNode_17 = currentNode;
+               int lastIndex_17 = index;
                // '0'-'9'
                match = charRangeMatcher('0', '9');
                if (match) {
                   do {
+                     lastNode_17 = currentNode;
+                     lastIndex_17 = index;
                      // '0'-'9'
                      match = charRangeMatcher('0', '9');
                   } while(match);
+                  lastNode_17.setSibling(null);
+                  currentNode = lastNode_17;
+                  index = lastIndex_17;
                   match = true;
+               } else {
+                  lastNode_17.setSibling(null);
+                  currentNode = lastNode_17;
+                  index = lastIndex_17;
                }
                if (match) {
                   // Exponent?
+                  Node lastNode_18 = currentNode;
+                  int lastIndex_18 = index;
                   // (('e' | 'E') ('+' | '-')? Digit+)
-                  Node lastNode_8 = currentNode;
-                  int lastIndex_8 = index;
                   // ('e' | 'E')
                   switch(buffer.getChar(index)) {
                      case 'e': {
@@ -18039,6 +19890,8 @@ public class JavaParser implements Parser {
                   }
                   if (match) {
                      // ('+' | '-')?
+                     Node lastNode_19 = currentNode;
+                     int lastIndex_19 = index;
                      // ('+' | '-')
                      switch(buffer.getChar(index)) {
                         case '+': {
@@ -18057,53 +19910,79 @@ public class JavaParser implements Parser {
                            match = false;
                         }
                      }
-                     // Digit+
-                     // '0'-'9'
-                     match = charRangeMatcher('0', '9');
-                     if (match) {
-                        do {
-                           // '0'-'9'
-                           match = charRangeMatcher('0', '9');
-                        } while(match);
-                        match = true;
-                     }
                      if (! match) {
-                        index = lastIndex_8;
-                        lastNode_8.setSibling(null);
-                        currentNode = lastNode_8;
+                        lastNode_19.setSibling(null);
+                        currentNode = lastNode_19;
+                        index = lastIndex_19;
+                        match = true;
+                     }
+                     if (match) {
+                        // Digit+
+                        Node lastNode_20 = currentNode;
+                        int lastIndex_20 = index;
+                        // '0'-'9'
+                        match = charRangeMatcher('0', '9');
+                        if (match) {
+                           do {
+                              lastNode_20 = currentNode;
+                              lastIndex_20 = index;
+                              // '0'-'9'
+                              match = charRangeMatcher('0', '9');
+                           } while(match);
+                           lastNode_20.setSibling(null);
+                           currentNode = lastNode_20;
+                           index = lastIndex_20;
+                           match = true;
+                        } else {
+                           lastNode_20.setSibling(null);
+                           currentNode = lastNode_20;
+                           index = lastIndex_20;
+                        }
                      }
                   }
-                  match = true;
-                  // ('f' | 'F' | 'd' | 'D')
-                  switch(buffer.getChar(index)) {
-                     case 'd': {
-                        ++index;
-                        // <EMPTY>
-                        match = true;
-                        break;
-                     }
-                     case 'D': {
-                        ++index;
-                        // <EMPTY>
-                        match = true;
-                        break;
-                     }
-                     case 'f': {
-                        ++index;
-                        // <EMPTY>
-                        match = true;
-                        break;
-                     }
-                     case 'F': {
-                        ++index;
-                        // <EMPTY>
-                        match = true;
-                        break;
-                     }
-                     default: {
-                        match = false;
+                  if (! match) {
+                     lastNode_18.setSibling(null);
+                     currentNode = lastNode_18;
+                     index = lastIndex_18;
+                     match = true;
+                  }
+                  if (match) {
+                     // ('f' | 'F' | 'd' | 'D')
+                     switch(buffer.getChar(index)) {
+                        case 'd': {
+                           ++index;
+                           // <EMPTY>
+                           match = true;
+                           break;
+                        }
+                        case 'D': {
+                           ++index;
+                           // <EMPTY>
+                           match = true;
+                           break;
+                        }
+                        case 'f': {
+                           ++index;
+                           // <EMPTY>
+                           match = true;
+                           break;
+                        }
+                        case 'F': {
+                           ++index;
+                           // <EMPTY>
+                           match = true;
+                           break;
+                        }
+                        default: {
+                           match = false;
+                        }
                      }
                   }
+               }
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                }
             }
          }

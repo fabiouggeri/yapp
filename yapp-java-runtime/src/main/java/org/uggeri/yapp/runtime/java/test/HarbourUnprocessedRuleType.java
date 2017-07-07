@@ -8,6 +8,30 @@ import org.uggeri.yapp.runtime.java.node.Node;
 import org.uggeri.yapp.runtime.java.parser.Rule;
 
 public enum HarbourUnprocessedRuleType implements Rule<HarbourUnprocessedVisitor> {
+   TERMINAL {
+      @Override
+      public String getLabel() {
+         return "Terminal";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return true;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(HarbourUnprocessedVisitor visitor, Node node) {
+      }
+
+      @Override
+      public void exitRule(HarbourUnprocessedVisitor visitor, Node node) {
+      }
+   },
    HARBOUR_PROGRAM {
       @Override
       public String getLabel() {

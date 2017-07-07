@@ -30,17 +30,246 @@ public class HarbourPPParser implements Parser {
    private int ignore$RuleMemoStart = -1;
    private int ignore$RuleMemoEnd;
    private Node ignore$RuleMemoFirstNode;
-   private Node ignore$RuleMemoLastNode;
+   private int whitespace$RuleMemoStart = -1;
+   private int whitespace$RuleMemoEnd;
+   private Node whitespace$RuleMemoFirstNode;
    private int blockComment$RuleMemoStart = -1;
    private int blockComment$RuleMemoEnd;
+   private Node blockComment$RuleMemoFirstNode;
+   private int lineComment$RuleMemoStart = -1;
+   private int lineComment$RuleMemoEnd;
+   private Node lineComment$RuleMemoFirstNode;
    private int continueNL$RuleMemoStart = -1;
    private int continueNL$RuleMemoEnd;
    private Node continueNL$RuleMemoFirstNode;
-   private Node continueNL$RuleMemoLastNode;
-   private int aloneLineComment$RuleMemoStart = -1;
-   private int aloneLineComment$RuleMemoEnd;
+   private int ignoreOptionalSpacing$RuleMemoStart = -1;
+   private int ignoreOptionalSpacing$RuleMemoEnd;
+   private Node ignoreOptionalSpacing$RuleMemoFirstNode;
+   private int ignoreSpacing$RuleMemoStart = -1;
+   private int ignoreSpacing$RuleMemoEnd;
+   private Node ignoreSpacing$RuleMemoFirstNode;
+   private int directiveStatement$RuleMemoStart = -1;
+   private int directiveStatement$RuleMemoEnd;
+   private Node directiveStatement$RuleMemoFirstNode;
+   private int emptyStatement$RuleMemoStart = -1;
+   private int emptyStatement$RuleMemoEnd;
+   private Node emptyStatement$RuleMemoFirstNode;
+   private int anyStatement$RuleMemoStart = -1;
+   private int anyStatement$RuleMemoEnd;
+   private Node anyStatement$RuleMemoFirstNode;
+   private int newLine$RuleMemoStart = -1;
+   private int newLine$RuleMemoEnd;
+   private Node newLine$RuleMemoFirstNode;
+   private int anyRules$RuleMemoStart = -1;
+   private int anyRules$RuleMemoEnd;
+   private Node anyRules$RuleMemoFirstNode;
+   private int endStmt$RuleMemoStart = -1;
+   private int endStmt$RuleMemoEnd;
+   private Node endStmt$RuleMemoFirstNode;
+   private int directiveMark$RuleMemoStart = -1;
+   private int directiveMark$RuleMemoEnd;
+   private Node directiveMark$RuleMemoFirstNode;
+   private int defineDirective$RuleMemoStart = -1;
+   private int defineDirective$RuleMemoEnd;
+   private Node defineDirective$RuleMemoFirstNode;
+   private int stdOutDirective$RuleMemoStart = -1;
+   private int stdOutDirective$RuleMemoEnd;
+   private Node stdOutDirective$RuleMemoFirstNode;
+   private int commandDirective$RuleMemoStart = -1;
+   private int commandDirective$RuleMemoEnd;
+   private Node commandDirective$RuleMemoFirstNode;
+   private int xCommandDirective$RuleMemoStart = -1;
+   private int xCommandDirective$RuleMemoEnd;
+   private Node xCommandDirective$RuleMemoFirstNode;
+   private int yCommandDirective$RuleMemoStart = -1;
+   private int yCommandDirective$RuleMemoEnd;
+   private Node yCommandDirective$RuleMemoFirstNode;
+   private int translateDirective$RuleMemoStart = -1;
+   private int translateDirective$RuleMemoEnd;
+   private Node translateDirective$RuleMemoFirstNode;
+   private int xTranslateDirective$RuleMemoStart = -1;
+   private int xTranslateDirective$RuleMemoEnd;
+   private Node xTranslateDirective$RuleMemoFirstNode;
+   private int yTranslateDirective$RuleMemoStart = -1;
+   private int yTranslateDirective$RuleMemoEnd;
+   private Node yTranslateDirective$RuleMemoFirstNode;
+   private int ifDefDirective$RuleMemoStart = -1;
+   private int ifDefDirective$RuleMemoEnd;
+   private Node ifDefDirective$RuleMemoFirstNode;
+   private int ifNDefDirective$RuleMemoStart = -1;
+   private int ifNDefDirective$RuleMemoEnd;
+   private Node ifNDefDirective$RuleMemoFirstNode;
+   private int elseDirective$RuleMemoStart = -1;
+   private int elseDirective$RuleMemoEnd;
+   private Node elseDirective$RuleMemoFirstNode;
+   private int elseIfDirective$RuleMemoStart = -1;
+   private int elseIfDirective$RuleMemoEnd;
+   private Node elseIfDirective$RuleMemoFirstNode;
+   private int endIfDirective$RuleMemoStart = -1;
+   private int endIfDirective$RuleMemoEnd;
+   private Node endIfDirective$RuleMemoFirstNode;
+   private int undefDirective$RuleMemoStart = -1;
+   private int undefDirective$RuleMemoEnd;
+   private Node undefDirective$RuleMemoFirstNode;
+   private int errorDirective$RuleMemoStart = -1;
+   private int errorDirective$RuleMemoEnd;
+   private Node errorDirective$RuleMemoFirstNode;
+   private int includeDirective$RuleMemoStart = -1;
+   private int includeDirective$RuleMemoEnd;
+   private Node includeDirective$RuleMemoFirstNode;
+   private int lineDirective$RuleMemoStart = -1;
+   private int lineDirective$RuleMemoEnd;
+   private Node lineDirective$RuleMemoFirstNode;
+   private int uncommandDirective$RuleMemoStart = -1;
+   private int uncommandDirective$RuleMemoEnd;
+   private Node uncommandDirective$RuleMemoFirstNode;
+   private int xUncommandDirective$RuleMemoStart = -1;
+   private int xUncommandDirective$RuleMemoEnd;
+   private Node xUncommandDirective$RuleMemoFirstNode;
+   private int yUncommandDirective$RuleMemoStart = -1;
+   private int yUncommandDirective$RuleMemoEnd;
+   private Node yUncommandDirective$RuleMemoFirstNode;
+   private int untranslateDirective$RuleMemoStart = -1;
+   private int untranslateDirective$RuleMemoEnd;
+   private Node untranslateDirective$RuleMemoFirstNode;
+   private int xUntranslateDirective$RuleMemoStart = -1;
+   private int xUntranslateDirective$RuleMemoEnd;
+   private Node xUntranslateDirective$RuleMemoFirstNode;
+   private int yUntranslateDirective$RuleMemoStart = -1;
+   private int yUntranslateDirective$RuleMemoEnd;
+   private Node yUntranslateDirective$RuleMemoFirstNode;
+   private int dumpBlock$RuleMemoStart = -1;
+   private int dumpBlock$RuleMemoEnd;
+   private Node dumpBlock$RuleMemoFirstNode;
+   private int resultRules$RuleMemoStart = -1;
+   private int resultRules$RuleMemoEnd;
+   private Node resultRules$RuleMemoFirstNode;
+   private int matchPattern$RuleMemoStart = -1;
+   private int matchPattern$RuleMemoEnd;
+   private Node matchPattern$RuleMemoFirstNode;
+   private int resultSep$RuleMemoStart = -1;
+   private int resultSep$RuleMemoEnd;
+   private Node resultSep$RuleMemoFirstNode;
+   private int resultPattern$RuleMemoStart = -1;
+   private int resultPattern$RuleMemoEnd;
+   private Node resultPattern$RuleMemoFirstNode;
+   private int directivePattern$RuleMemoStart = -1;
+   private int directivePattern$RuleMemoEnd;
+   private Node directivePattern$RuleMemoFirstNode;
+   private int undefDirectivePattern$RuleMemoStart = -1;
+   private int undefDirectivePattern$RuleMemoEnd;
+   private Node undefDirectivePattern$RuleMemoFirstNode;
+   private int escapedChar$RuleMemoStart = -1;
+   private int escapedChar$RuleMemoEnd;
+   private Node escapedChar$RuleMemoFirstNode;
+   private int optionalMatchMarker$RuleMemoStart = -1;
+   private int optionalMatchMarker$RuleMemoEnd;
+   private Node optionalMatchMarker$RuleMemoFirstNode;
+   private int matchMarker$RuleMemoStart = -1;
+   private int matchMarker$RuleMemoEnd;
+   private Node matchMarker$RuleMemoFirstNode;
+   private int literal$RuleMemoStart = -1;
+   private int literal$RuleMemoEnd;
+   private Node literal$RuleMemoFirstNode;
+   private int separator$RuleMemoStart = -1;
+   private int separator$RuleMemoEnd;
+   private Node separator$RuleMemoFirstNode;
+   private int idMarker$RuleMemoStart = -1;
+   private int idMarker$RuleMemoEnd;
+   private Node idMarker$RuleMemoFirstNode;
+   private int listMarker$RuleMemoStart = -1;
+   private int listMarker$RuleMemoEnd;
+   private Node listMarker$RuleMemoFirstNode;
+   private int restrictMarker$RuleMemoStart = -1;
+   private int restrictMarker$RuleMemoEnd;
+   private Node restrictMarker$RuleMemoFirstNode;
+   private int wildMarker$RuleMemoStart = -1;
+   private int wildMarker$RuleMemoEnd;
+   private Node wildMarker$RuleMemoFirstNode;
+   private int extendedMarker$RuleMemoStart = -1;
+   private int extendedMarker$RuleMemoEnd;
+   private Node extendedMarker$RuleMemoFirstNode;
+   private int identifierMarker$RuleMemoStart = -1;
+   private int identifierMarker$RuleMemoEnd;
+   private Node identifierMarker$RuleMemoFirstNode;
+   private int restrictValue$RuleMemoStart = -1;
+   private int restrictValue$RuleMemoEnd;
+   private Node restrictValue$RuleMemoFirstNode;
+   private int nullMarker$RuleMemoStart = -1;
+   private int nullMarker$RuleMemoEnd;
+   private Node nullMarker$RuleMemoFirstNode;
+   private int resultMarker$RuleMemoStart = -1;
+   private int resultMarker$RuleMemoEnd;
+   private Node resultMarker$RuleMemoFirstNode;
+   private int dumbStringifyMarker$RuleMemoStart = -1;
+   private int dumbStringifyMarker$RuleMemoEnd;
+   private Node dumbStringifyMarker$RuleMemoFirstNode;
+   private int normalStringifyMarker$RuleMemoStart = -1;
+   private int normalStringifyMarker$RuleMemoEnd;
+   private Node normalStringifyMarker$RuleMemoFirstNode;
+   private int smartStringifyMarker$RuleMemoStart = -1;
+   private int smartStringifyMarker$RuleMemoEnd;
+   private Node smartStringifyMarker$RuleMemoFirstNode;
+   private int blockifyMarker$RuleMemoStart = -1;
+   private int blockifyMarker$RuleMemoEnd;
+   private Node blockifyMarker$RuleMemoFirstNode;
+   private int logifyMarker$RuleMemoStart = -1;
+   private int logifyMarker$RuleMemoEnd;
+   private Node logifyMarker$RuleMemoFirstNode;
+   private int optionalResultMarker$RuleMemoStart = -1;
+   private int optionalResultMarker$RuleMemoEnd;
+   private Node optionalResultMarker$RuleMemoFirstNode;
+   private int discardedRemainingLine$RuleMemoStart = -1;
+   private int discardedRemainingLine$RuleMemoEnd;
+   private Node discardedRemainingLine$RuleMemoFirstNode;
+   private int doubleQuoteString$RuleMemoStart = -1;
+   private int doubleQuoteString$RuleMemoEnd;
+   private Node doubleQuoteString$RuleMemoFirstNode;
+   private int singleQuoteString$RuleMemoStart = -1;
+   private int singleQuoteString$RuleMemoEnd;
+   private Node singleQuoteString$RuleMemoFirstNode;
+   private int endDumpBlock$RuleMemoStart = -1;
+   private int endDumpBlock$RuleMemoEnd;
+   private Node endDumpBlock$RuleMemoFirstNode;
+   private int bracketSequence$RuleMemoStart = -1;
+   private int bracketSequence$RuleMemoEnd;
+   private Node bracketSequence$RuleMemoFirstNode;
+   private int anyRule$RuleMemoStart = -1;
+   private int anyRule$RuleMemoEnd;
+   private Node anyRule$RuleMemoFirstNode;
+   private int bracketString$RuleMemoStart = -1;
+   private int bracketString$RuleMemoEnd;
+   private Node bracketString$RuleMemoFirstNode;
+   private int logicalLiteral$RuleMemoStart = -1;
+   private int logicalLiteral$RuleMemoEnd;
+   private Node logicalLiteral$RuleMemoFirstNode;
+   private int dateTimeLiteral$RuleMemoStart = -1;
+   private int dateTimeLiteral$RuleMemoEnd;
+   private Node dateTimeLiteral$RuleMemoFirstNode;
+   private int numberLiteral$RuleMemoStart = -1;
+   private int numberLiteral$RuleMemoEnd;
+   private Node numberLiteral$RuleMemoFirstNode;
+   private int multiLineDoubleQuoteString$RuleMemoStart = -1;
+   private int multiLineDoubleQuoteString$RuleMemoEnd;
+   private Node multiLineDoubleQuoteString$RuleMemoFirstNode;
+   private int multiLineSingleQuoteString$RuleMemoStart = -1;
+   private int multiLineSingleQuoteString$RuleMemoEnd;
+   private Node multiLineSingleQuoteString$RuleMemoFirstNode;
+   private int breakString$RuleMemoStart = -1;
+   private int breakString$RuleMemoEnd;
+   private Node breakString$RuleMemoFirstNode;
    private int integerNumber$RuleMemoStart = -1;
    private int integerNumber$RuleMemoEnd;
+   private Node integerNumber$RuleMemoFirstNode;
+   private int timePattern$RuleMemoStart = -1;
+   private int timePattern$RuleMemoEnd;
+   private Node timePattern$RuleMemoFirstNode;
+   private int datePattern$RuleMemoStart = -1;
+   private int datePattern$RuleMemoEnd;
+   private Node datePattern$RuleMemoFirstNode;
+   private int identifier$RuleMemoStart = -1;
+   private int identifier$RuleMemoEnd;
+   private Node identifier$RuleMemoFirstNode;
 
    private int[] newArrayInt(final int size) {
       final int[] array = new int[size];
@@ -51,7 +280,7 @@ public class HarbourPPParser implements Parser {
    protected boolean charMatcher(char c) {
       if (buffer.matchChar(index, c)) {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + 1, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourPPRuleType.TERMINAL, index, index + 1, false, false));
             currentNode = currentNode.getSibling();
          }
          ++index;
@@ -63,7 +292,7 @@ public class HarbourPPParser implements Parser {
    protected boolean ignoreCaseCharMatcher(char c) {
       if (buffer.matchIgnoreCaseChar(index, c)) {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + 1, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourPPRuleType.TERMINAL, index, index + 1, false, false));
             currentNode = currentNode.getSibling();
          }
          ++index;
@@ -75,7 +304,7 @@ public class HarbourPPParser implements Parser {
    protected boolean stringMatcher(String str, int strLen) {
       if (buffer.matchString(index, str, strLen)) {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + strLen, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourPPRuleType.TERMINAL, index, index + strLen, false, false));
             currentNode = currentNode.getSibling();
          }
          index += strLen;
@@ -96,7 +325,7 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + i, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourPPRuleType.TERMINAL, index, index + i, false, false));
          currentNode = currentNode.getSibling();
       }
       index += i;
@@ -106,7 +335,7 @@ public class HarbourPPParser implements Parser {
    protected boolean ignoreCaseStringMatcher(String str, int strLen) {
       if (buffer.matchIgnoreCaseString(index, str, strLen)) {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + strLen, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourPPRuleType.TERMINAL, index, index + strLen, false, false));
             currentNode = currentNode.getSibling();
          }
          index += strLen;
@@ -127,7 +356,7 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + i, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourPPRuleType.TERMINAL, index, index + i, false, false));
          currentNode = currentNode.getSibling();
       }
       index += i;
@@ -137,7 +366,7 @@ public class HarbourPPParser implements Parser {
    protected boolean charRangeMatcher(char charIni, char charEnd) {
       if (buffer.matchCharRange(index, charIni, charEnd)) {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + 1, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourPPRuleType.TERMINAL, index, index + 1, false, false));
             currentNode = currentNode.getSibling();
          }
          ++index;
@@ -149,7 +378,7 @@ public class HarbourPPParser implements Parser {
    protected boolean anyCharMatcher() {
       if (buffer.getChar(index) != '\0') {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + 1, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourPPRuleType.TERMINAL, index, index + 1, false, false));
             currentNode = currentNode.getSibling();
          }
          ++index;
@@ -242,10 +471,56 @@ public class HarbourPPParser implements Parser {
    public void setTrace(boolean trace) {
    }
 
+   private Node lastChild(Node node) {
+      Node child = node.getFirstChild();
+      if (child != null) {
+         while (child.getSibling() != null) {
+            child = child.getSibling();
+         }
+      }
+      return child;
+   }
+
+   private Node removeNode(Node parent, Node left, Node node) {
+      if (node.getFirstChild() != null) {
+         if (node.getSibling() != null) {
+            lastChild(node).setSibling(node.getSibling());
+         }
+         if (left == null) {
+            parent.setFirstChild(node.getFirstChild());
+         } else {
+            left.setSibling(node.getFirstChild());
+         }
+         return node.getFirstChild();
+      } else if (left == null) {
+         parent.setFirstChild(node.getSibling());
+      } else {
+         left.setSibling(node.getSibling());
+      }
+      return node.getSibling();
+   }
+
+   private void removeSkipedNodes(Node node) {
+      if (node != null) {
+         Node leftNode = null;
+         Node child = node.getFirstChild();
+         while (child != null) {
+            if (child.isSkiped()) {
+               child = removeNode(node, leftNode, child);
+            } else {
+               removeSkipedNodes(child);
+               leftNode = child;
+               child = child.getSibling();
+            }
+         }
+      }
+   }
+
    @Override
    public Node parse(InputBuffer inputBuffer) {
       buffer = inputBuffer;
       if (preProcessor$Rule()) {
+         removeSkipedNodes(currentNode);
          return currentNode;
       } else {
          return null;
@@ -288,10 +563,17 @@ public class HarbourPPParser implements Parser {
       boolean match;
       startIndex = index;
       // Statement*
+      Node lastNode_1;
+      int lastIndex_1;
       do {
+         lastNode_1 = currentNode;
+         lastIndex_1 = index;
          // Statement
          match = statement$Rule();
       } while(match);
+      lastNode_1.setSibling(null);
+      currentNode = lastNode_1;
+      index = lastIndex_1;
       if (! currentRuleIsAtomic) {
          currentNode = new NodeImpl(HarbourPPRuleType.STATEMENTS, startIndex, index, true, true);
          currentNode.setFirstChild(lastNode.getSibling());
@@ -308,9 +590,12 @@ public class HarbourPPParser implements Parser {
       if (ignore$RuleMemoStart == index) {
          if (ignore$RuleMemoStart <= ignore$RuleMemoEnd) {
             index = ignore$RuleMemoEnd;
-            if (! currentRuleIsAtomic && ignore$RuleMemoFirstNode != null) {
-               lastNode.setSibling(ignore$RuleMemoFirstNode);
-               currentNode = ignore$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.IGNORE, ignore$RuleMemoStart, ignore$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (ignore$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(ignore$RuleMemoFirstNode.getFirstChild());
+               }
             }
             return true;
          } else {
@@ -319,18 +604,67 @@ public class HarbourPPParser implements Parser {
       }
       startIndex = index;
       // (Whitespace | BlockComment | LineComment | ContinueNL)
-      // Whitespace
-      match = whitespace$Rule();
-      if (! match) {
-         // BlockComment
-         match = blockComment$Rule();
-         if (! match) {
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case ';': {
+            // ContinueNL
+            match = continueNL$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         case ' ':
+         case '\t':
+         case '\f': {
+            // Whitespace
+            match = whitespace$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // ContinueNL
+               match = continueNL$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '/': {
+            // BlockComment
+            match = blockComment$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // LineComment
+               match = lineComment$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '&': {
             // LineComment
             match = lineComment$Rule();
             if (! match) {
-               // ContinueNL
-               match = continueNL$Rule();
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
             }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -343,7 +677,6 @@ public class HarbourPPParser implements Parser {
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
             ignore$RuleMemoFirstNode = currentNode;
-            ignore$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
@@ -363,63 +696,105 @@ public class HarbourPPParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (whitespace$RuleMemoStart == index) {
+         if (whitespace$RuleMemoStart <= whitespace$RuleMemoEnd) {
+            index = whitespace$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.WHITESPACE, whitespace$RuleMemoStart, whitespace$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (whitespace$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(whitespace$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // Space+
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // (' ' | '\t' | '\f')
       switch(buffer.getChar(index)) {
-         case ' ':
+         case '\f': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         case '\f':
+         }
+         case ' ': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         case '\t':
+         }
+         case '\t': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         default:
+         }
+         default: {
             match = false;
+         }
       }
       if (match) {
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (' ' | '\t' | '\f')
             switch(buffer.getChar(index)) {
-               case ' ':
+               case '\f': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\f':
+               }
+               case ' ': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\t':
+               }
+               case '\t': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
+      } else {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         whitespace$RuleMemoStart = startIndex;
+         whitespace$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            whitespace$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.WHITESPACE, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            whitespace$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         whitespace$RuleMemoStart = startIndex;
+         whitespace$RuleMemoEnd = -1;
+         whitespace$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -436,6 +811,13 @@ public class HarbourPPParser implements Parser {
       if (blockComment$RuleMemoStart == index) {
          if (blockComment$RuleMemoStart <= blockComment$RuleMemoEnd) {
             index = blockComment$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.BLOCK_COMMENT, blockComment$RuleMemoStart, blockComment$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (blockComment$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(blockComment$RuleMemoFirstNode.getFirstChild());
+               }
+            }
             return true;
          } else {
             return false;
@@ -448,10 +830,12 @@ public class HarbourPPParser implements Parser {
       match = stringMatcher("/*", 2);
       if (match) {
          // ('*/'! .)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // ('*/'! .)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // '*/'!
             // '*/'
             match = stringTest("*/", 2);
@@ -459,13 +843,11 @@ public class HarbourPPParser implements Parser {
             if (match) {
                // .
                match = anyCharMatcher();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          // '*/'
          match = stringMatcher("*/", 2);
       }
@@ -473,15 +855,19 @@ public class HarbourPPParser implements Parser {
          currentRuleIsAtomic = lastRuleIsAtomic;
          blockComment$RuleMemoStart = startIndex;
          blockComment$RuleMemoEnd = index;
-         if (! currentRuleIsAtomic) {
+         if (currentRuleIsAtomic) {
+            blockComment$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.BLOCK_COMMENT, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            blockComment$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
          blockComment$RuleMemoStart = startIndex;
          blockComment$RuleMemoEnd = -1;
+         blockComment$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -495,64 +881,97 @@ public class HarbourPPParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (lineComment$RuleMemoStart == index) {
+         if (lineComment$RuleMemoStart <= lineComment$RuleMemoEnd) {
+            index = lineComment$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.LINE_COMMENT, lineComment$RuleMemoStart, lineComment$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (lineComment$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(lineComment$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // (('//' | '&&') (('\n' | <EOI>)! .)*)
       // ('//' | '&&')
       switch(buffer.getChar(index)) {
-         case '&':
-            ++index;
-            // '&'
-            if (match = buffer.matchChar(index, '&')) {
-               ++index;
-            }
-            break;
-         case '/':
+         case '/': {
             ++index;
             // '/'
             if (match = buffer.matchChar(index, '/')) {
                ++index;
             }
             break;
-         default:
+         }
+         case '&': {
+            ++index;
+            // '&'
+            if (match = buffer.matchChar(index, '&')) {
+               ++index;
+            }
+            break;
+         }
+         default: {
             match = false;
+         }
       }
       if (match) {
          // (('\n' | <EOI>)! .)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (('\n' | <EOI>)! .)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // ('\n' | <EOI>)!
             // ('\n' | <EOI>)
+            Node lastNode_2 = currentNode;
+            int lastIndex_2 = index;
             // '\n'
             match = buffer.matchChar(index, '\n');
             if (! match) {
                // <EOI>
                match = eoi();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+               }
             }
             match = ! match;
             if (match) {
                // .
                match = anyCharMatcher();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         lineComment$RuleMemoStart = startIndex;
+         lineComment$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            lineComment$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.LINE_COMMENT, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            lineComment$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         lineComment$RuleMemoStart = startIndex;
+         lineComment$RuleMemoEnd = -1;
+         lineComment$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -568,9 +987,12 @@ public class HarbourPPParser implements Parser {
       if (continueNL$RuleMemoStart == index) {
          if (continueNL$RuleMemoStart <= continueNL$RuleMemoEnd) {
             index = continueNL$RuleMemoEnd;
-            if (! currentRuleIsAtomic && continueNL$RuleMemoFirstNode != null) {
-               lastNode.setSibling(continueNL$RuleMemoFirstNode);
-               currentNode = continueNL$RuleMemoLastNode;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.CONTINUE_NL, continueNL$RuleMemoStart, continueNL$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (continueNL$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(continueNL$RuleMemoFirstNode.getFirstChild());
+               }
             }
             return true;
          } else {
@@ -580,52 +1002,106 @@ public class HarbourPPParser implements Parser {
       startIndex = index;
       // (Space* ';' (BlockComment | LineComment | Whitespace)* NewLine)
       // Space*
+      Node lastNode_1;
+      int lastIndex_1;
       do {
+         lastNode_1 = currentNode;
+         lastIndex_1 = index;
          // (' ' | '\t' | '\f')
-         int startIndex_1 = index;
+         int startIndex_2 = index;
          switch(buffer.getChar(index)) {
-            case ' ':
+            case '\f': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            case '\f':
+            }
+            case ' ': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            case '\t':
+            }
+            case '\t': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            default:
+            }
+            default: {
                match = false;
+            }
          }
          if (! match) {
-            index = startIndex_1;
+            index = startIndex_2;
          } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourPPRuleType.TERMINAL, startIndex_2, index, false, false));
             currentNode = currentNode.getSibling();
          }
       } while(match);
+      lastNode_1.setSibling(null);
+      currentNode = lastNode_1;
+      index = lastIndex_1;
       // ';'
       match = charMatcher(';');
       if (match) {
          // (BlockComment | LineComment | Whitespace)*
+         Node lastNode_3;
+         int lastIndex_3;
          do {
+            lastNode_3 = currentNode;
+            lastIndex_3 = index;
             // (BlockComment | LineComment | Whitespace)
-            // BlockComment
-            match = blockComment$Rule();
-            if (! match) {
-               // LineComment
-               match = lineComment$Rule();
-               if (! match) {
+            Node lastNode_4 = currentNode;
+            int lastIndex_4 = index;
+            switch(buffer.getChar(index)) {
+               case ' ':
+               case '\t':
+               case '\f': {
                   // Whitespace
                   match = whitespace$Rule();
+                  if (! match) {
+                     index = lastIndex_4;
+                     lastNode_4.setSibling(null);
+                     currentNode = lastNode_4;
+                  }
+                  break;
+               }
+               case '/': {
+                  // BlockComment
+                  match = blockComment$Rule();
+                  if (! match) {
+                     index = lastIndex_4;
+                     lastNode_4.setSibling(null);
+                     currentNode = lastNode_4;
+                     // LineComment
+                     match = lineComment$Rule();
+                     if (! match) {
+                        index = lastIndex_4;
+                        lastNode_4.setSibling(null);
+                        currentNode = lastNode_4;
+                     }
+                  }
+                  break;
+               }
+               case '&': {
+                  // LineComment
+                  match = lineComment$Rule();
+                  if (! match) {
+                     index = lastIndex_4;
+                     lastNode_4.setSibling(null);
+                     currentNode = lastNode_4;
+                  }
+                  break;
+               }
+               default: {
+                  match = false;
                }
             }
          } while(match);
+         lastNode_3.setSibling(null);
+         currentNode = lastNode_3;
+         index = lastIndex_3;
          // NewLine
          match = newLine$Rule();
       }
@@ -639,7 +1115,6 @@ public class HarbourPPParser implements Parser {
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
             continueNL$RuleMemoFirstNode = currentNode;
-            continueNL$RuleMemoLastNode = currentNode;
          }
          return true;
       } else {
@@ -660,12 +1135,19 @@ public class HarbourPPParser implements Parser {
       boolean match;
       startIndex = index;
       // Ignore*
+      Node lastNode_1;
+      int lastIndex_1;
       do {
+         lastNode_1 = currentNode;
+         lastIndex_1 = index;
          // Ignore
          match = ignore$Rule();
       } while(match);
+      lastNode_1.setSibling(null);
+      currentNode = lastNode_1;
+      index = lastIndex_1;
       if (! currentRuleIsAtomic) {
-         currentNode = new NodeImpl(HarbourPPRuleType.SPACING, startIndex, index, true, false);
+         currentNode = new NodeImpl(HarbourPPRuleType.SPACING, startIndex, index, true, true);
          currentNode.setFirstChild(lastNode.getSibling());
          lastNode.setSibling(currentNode);
       }
@@ -677,16 +1159,43 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (ignoreOptionalSpacing$RuleMemoStart == index) {
+         if (ignoreOptionalSpacing$RuleMemoStart <= ignoreOptionalSpacing$RuleMemoEnd) {
+            index = ignoreOptionalSpacing$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.SPACING, ignoreOptionalSpacing$RuleMemoStart, ignoreOptionalSpacing$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (ignoreOptionalSpacing$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(ignoreOptionalSpacing$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // Ignore*
+      Node lastNode_1;
+      int lastIndex_1;
       do {
+         lastNode_1 = currentNode;
+         lastIndex_1 = index;
          // Ignore
          match = ignore$Rule();
       } while(match);
-      if (! currentRuleIsAtomic) {
-         currentNode = new NodeImpl(HarbourPPRuleType.SPACING, startIndex, index, false, false);
+      lastNode_1.setSibling(null);
+      currentNode = lastNode_1;
+      index = lastIndex_1;
+      ignoreOptionalSpacing$RuleMemoStart = startIndex;
+      ignoreOptionalSpacing$RuleMemoEnd = index;
+      if (currentRuleIsAtomic) {
+         ignoreOptionalSpacing$RuleMemoFirstNode = null;
+      } else {
+         currentNode = new NodeImpl(HarbourPPRuleType.SPACING, startIndex, index, true, true);
          currentNode.setFirstChild(lastNode.getSibling());
          lastNode.setSibling(currentNode);
+         ignoreOptionalSpacing$RuleMemoFirstNode = currentNode;
       }
       return true;
    }
@@ -696,25 +1205,59 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (ignoreSpacing$RuleMemoStart == index) {
+         if (ignoreSpacing$RuleMemoStart <= ignoreSpacing$RuleMemoEnd) {
+            index = ignoreSpacing$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.SPACING, ignoreSpacing$RuleMemoStart, ignoreSpacing$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (ignoreSpacing$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(ignoreSpacing$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // Ignore+
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // Ignore
       match = ignore$Rule();
       if (match) {
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // Ignore
             match = ignore$Rule();
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
+      } else {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.SPACING, startIndex, index, false, false);
+         ignoreSpacing$RuleMemoStart = startIndex;
+         ignoreSpacing$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            ignoreSpacing$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(HarbourPPRuleType.SPACING, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            ignoreSpacing$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         ignoreSpacing$RuleMemoStart = startIndex;
+         ignoreSpacing$RuleMemoEnd = -1;
+         ignoreSpacing$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -729,18 +1272,29 @@ public class HarbourPPParser implements Parser {
       boolean match;
       startIndex = index;
       // Ignore+
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // Ignore
       match = ignore$Rule();
       if (match) {
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // Ignore
             match = ignore$Rule();
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
+      } else {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
       }
       if (match) {
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.SPACING, startIndex, index, true, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.SPACING, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
          }
@@ -760,14 +1314,181 @@ public class HarbourPPParser implements Parser {
       boolean match;
       startIndex = index;
       // (DirectiveStatement | EmptyStatement | AnyStatement)
-      // DirectiveStatement
-      match = directiveStatement$Rule();
-      if (! match) {
-         // EmptyStatement
-         match = emptyStatement$Rule();
-         if (! match) {
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case '!':
+         case '\"':
+         case '$':
+         case '%':
+         case '\'':
+         case '(':
+         case ')':
+         case '+':
+         case ',':
+         case '-':
+         case '.':
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9':
+         case ':':
+         case '<':
+         case '=':
+         case '>':
+         case '?':
+         case '@':
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'D':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case '[':
+         case '\\':
+         case '^':
+         case '_':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'd':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z':
+         case '{':
+         case '|':
+         case '}':
+         case '~': {
             // AnyStatement
             match = anyStatement$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         case ' ':
+         case '&':
+         case '\t':
+         case ';':
+         case '\f':
+         case '/': {
+            // DirectiveStatement
+            match = directiveStatement$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // EmptyStatement
+               match = emptyStatement$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+                  // AnyStatement
+                  match = anyStatement$Rule();
+                  if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                  }
+               }
+            }
+            break;
+         }
+         case '#': {
+            // DirectiveStatement
+            match = directiveStatement$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // AnyStatement
+               match = anyStatement$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '\n':
+         case '\r': {
+            // EmptyStatement
+            match = emptyStatement$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         case '*': {
+            // EmptyStatement
+            match = emptyStatement$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // AnyStatement
+               match = anyStatement$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -790,6 +1511,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (directiveStatement$RuleMemoStart == index) {
+         if (directiveStatement$RuleMemoStart <= directiveStatement$RuleMemoEnd) {
+            index = directiveStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.DIRECTIVE_STATEMENT, directiveStatement$RuleMemoStart, directiveStatement$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (directiveStatement$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(directiveStatement$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (IgnoreOptionalSpacing DirectiveMark IgnoreOptionalSpacing (DefineDirective | StdOutDirective | CommandDirective | XCommandDirective | YCommandDirective | TranslateDirective | XTranslateDirective | YTranslateDirective | IfDefDirective | IfNDefDirective | ElseDirective | ElseIfDirective | EndIfDirective | UndefDirective | ErrorDirective | IncludeDirective | LineDirective | UncommandDirective | XUncommandDirective | YUncommandDirective | UntranslateDirective | XUntranslateDirective | YUntranslateDirective | DumpBlock) IgnoreOptionalSpacing EndStmt)
       // IgnoreOptionalSpacing
@@ -802,98 +1538,223 @@ public class HarbourPPParser implements Parser {
             match = ignoreOptionalSpacing$Rule();
             if (match) {
                // (DefineDirective | StdOutDirective | CommandDirective | XCommandDirective | YCommandDirective | TranslateDirective | XTranslateDirective | YTranslateDirective | IfDefDirective | IfNDefDirective | ElseDirective | ElseIfDirective | EndIfDirective | UndefDirective | ErrorDirective | IncludeDirective | LineDirective | UncommandDirective | XUncommandDirective | YUncommandDirective | UntranslateDirective | XUntranslateDirective | YUntranslateDirective | DumpBlock)
-               // DefineDirective
-               match = defineDirective$Rule();
-               if (! match) {
-                  // StdOutDirective
-                  match = stdOutDirective$Rule();
-                  if (! match) {
+               Node lastNode_1 = currentNode;
+               int lastIndex_1 = index;
+               switch(buffer.getChar(index)) {
+                  case 'l':
+                  case 'L': {
+                     // LineDirective
+                     match = lineDirective$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
+                     break;
+                  }
+                  case 'p':
+                  case 'P': {
+                     // DumpBlock
+                     match = dumpBlock$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
+                     break;
+                  }
+                  case 's':
+                  case 'S': {
+                     // StdOutDirective
+                     match = stdOutDirective$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
+                     break;
+                  }
+                  case 'c':
+                  case 'C': {
                      // CommandDirective
                      match = commandDirective$Rule();
                      if (! match) {
-                        // XCommandDirective
-                        match = xCommandDirective$Rule();
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
+                     break;
+                  }
+                  case 't':
+                  case 'T': {
+                     // TranslateDirective
+                     match = translateDirective$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
+                     break;
+                  }
+                  case 'd':
+                  case 'D': {
+                     // DefineDirective
+                     match = defineDirective$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                     }
+                     break;
+                  }
+                  case 'u':
+                  case 'U': {
+                     // UndefDirective
+                     match = undefDirective$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                        // UncommandDirective
+                        match = uncommandDirective$Rule();
                         if (! match) {
-                           // YCommandDirective
-                           match = yCommandDirective$Rule();
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
+                           // UntranslateDirective
+                           match = untranslateDirective$Rule();
                            if (! match) {
-                              // TranslateDirective
-                              match = translateDirective$Rule();
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
+                           }
+                        }
+                     }
+                     break;
+                  }
+                  case 'e':
+                  case 'E': {
+                     // ElseDirective
+                     match = elseDirective$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                        // ElseIfDirective
+                        match = elseIfDirective$Rule();
+                        if (! match) {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
+                           // EndIfDirective
+                           match = endIfDirective$Rule();
+                           if (! match) {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
+                              // ErrorDirective
+                              match = errorDirective$Rule();
                               if (! match) {
-                                 // XTranslateDirective
-                                 match = xTranslateDirective$Rule();
-                                 if (! match) {
-                                    // YTranslateDirective
-                                    match = yTranslateDirective$Rule();
-                                    if (! match) {
-                                       // IfDefDirective
-                                       match = ifDefDirective$Rule();
-                                       if (! match) {
-                                          // IfNDefDirective
-                                          match = ifNDefDirective$Rule();
-                                          if (! match) {
-                                             // ElseDirective
-                                             match = elseDirective$Rule();
-                                             if (! match) {
-                                                // ElseIfDirective
-                                                match = elseIfDirective$Rule();
-                                                if (! match) {
-                                                   // EndIfDirective
-                                                   match = endIfDirective$Rule();
-                                                   if (! match) {
-                                                      // UndefDirective
-                                                      match = undefDirective$Rule();
-                                                      if (! match) {
-                                                         // ErrorDirective
-                                                         match = errorDirective$Rule();
-                                                         if (! match) {
-                                                            // IncludeDirective
-                                                            match = includeDirective$Rule();
-                                                            if (! match) {
-                                                               // LineDirective
-                                                               match = lineDirective$Rule();
-                                                               if (! match) {
-                                                                  // UncommandDirective
-                                                                  match = uncommandDirective$Rule();
-                                                                  if (! match) {
-                                                                     // XUncommandDirective
-                                                                     match = xUncommandDirective$Rule();
-                                                                     if (! match) {
-                                                                        // YUncommandDirective
-                                                                        match = yUncommandDirective$Rule();
-                                                                        if (! match) {
-                                                                           // UntranslateDirective
-                                                                           match = untranslateDirective$Rule();
-                                                                           if (! match) {
-                                                                              // XUntranslateDirective
-                                                                              match = xUntranslateDirective$Rule();
-                                                                              if (! match) {
-                                                                                 // YUntranslateDirective
-                                                                                 match = yUntranslateDirective$Rule();
-                                                                                 if (! match) {
-                                                                                    // DumpBlock
-                                                                                    match = dumpBlock$Rule();
-                                                                                 }
-                                                                              }
-                                                                           }
-                                                                        }
-                                                                     }
-                                                                  }
-                                                               }
-                                                            }
-                                                         }
-                                                      }
-                                                   }
-                                                }
-                                             }
-                                          }
-                                       }
-                                    }
-                                 }
+                                 index = lastIndex_1;
+                                 lastNode_1.setSibling(null);
+                                 currentNode = lastNode_1;
                               }
                            }
                         }
                      }
+                     break;
+                  }
+                  case 'x':
+                  case 'X': {
+                     // XCommandDirective
+                     match = xCommandDirective$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                        // XTranslateDirective
+                        match = xTranslateDirective$Rule();
+                        if (! match) {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
+                           // XUncommandDirective
+                           match = xUncommandDirective$Rule();
+                           if (! match) {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
+                              // XUntranslateDirective
+                              match = xUntranslateDirective$Rule();
+                              if (! match) {
+                                 index = lastIndex_1;
+                                 lastNode_1.setSibling(null);
+                                 currentNode = lastNode_1;
+                              }
+                           }
+                        }
+                     }
+                     break;
+                  }
+                  case 'y':
+                  case 'Y': {
+                     // YCommandDirective
+                     match = yCommandDirective$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                        // YTranslateDirective
+                        match = yTranslateDirective$Rule();
+                        if (! match) {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
+                           // YUncommandDirective
+                           match = yUncommandDirective$Rule();
+                           if (! match) {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
+                              // YUntranslateDirective
+                              match = yUntranslateDirective$Rule();
+                              if (! match) {
+                                 index = lastIndex_1;
+                                 lastNode_1.setSibling(null);
+                                 currentNode = lastNode_1;
+                              }
+                           }
+                        }
+                     }
+                     break;
+                  }
+                  case 'i':
+                  case 'I': {
+                     // IfDefDirective
+                     match = ifDefDirective$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                        // IfNDefDirective
+                        match = ifNDefDirective$Rule();
+                        if (! match) {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
+                           // IncludeDirective
+                           match = includeDirective$Rule();
+                           if (! match) {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
+                           }
+                        }
+                     }
+                     break;
+                  }
+                  default: {
+                     match = false;
                   }
                }
                if (match) {
@@ -908,13 +1769,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         directiveStatement$RuleMemoStart = startIndex;
+         directiveStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            directiveStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.DIRECTIVE_STATEMENT, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            directiveStatement$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         directiveStatement$RuleMemoStart = startIndex;
+         directiveStatement$RuleMemoEnd = -1;
+         directiveStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -927,26 +1796,67 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (emptyStatement$RuleMemoStart == index) {
+         if (emptyStatement$RuleMemoStart <= emptyStatement$RuleMemoEnd) {
+            index = emptyStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.EMPTY_STATEMENT, emptyStatement$RuleMemoStart, emptyStatement$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (emptyStatement$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(emptyStatement$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Ignore* AloneLineComment? EndEmptyStmt)
       // Ignore*
+      Node lastNode_1;
+      int lastIndex_1;
       do {
+         lastNode_1 = currentNode;
+         lastIndex_1 = index;
          // Ignore
          match = ignore$Rule();
       } while(match);
+      lastNode_1.setSibling(null);
+      currentNode = lastNode_1;
+      index = lastIndex_1;
+      match = true;
       // AloneLineComment?
+      Node lastNode_2 = currentNode;
+      int lastIndex_2 = index;
       // AloneLineComment
-      aloneLineComment$Rule();
-      // EndEmptyStmt
-      match = endEmptyStmt$Rule();
+      match = aloneLineComment$Rule();
+      if (! match) {
+         lastNode_2.setSibling(null);
+         currentNode = lastNode_2;
+         index = lastIndex_2;
+         match = true;
+      }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         // EndEmptyStmt
+         match = endEmptyStmt$Rule();
+      }
+      if (match) {
+         emptyStatement$RuleMemoStart = startIndex;
+         emptyStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            emptyStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.EMPTY_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            emptyStatement$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         emptyStatement$RuleMemoStart = startIndex;
+         emptyStatement$RuleMemoEnd = -1;
+         emptyStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -959,6 +1869,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (anyStatement$RuleMemoStart == index) {
+         if (anyStatement$RuleMemoStart <= anyStatement$RuleMemoEnd) {
+            index = anyStatement$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.ANY_STATEMENT, anyStatement$RuleMemoStart, anyStatement$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (anyStatement$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(anyStatement$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (AnyRules EndStmt)
       // AnyRules
@@ -968,13 +1893,21 @@ public class HarbourPPParser implements Parser {
          match = endStmt$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         anyStatement$RuleMemoStart = startIndex;
+         anyStatement$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            anyStatement$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.ANY_STATEMENT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            anyStatement$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         anyStatement$RuleMemoStart = startIndex;
+         anyStatement$RuleMemoEnd = -1;
+         anyStatement$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1016,34 +1949,60 @@ public class HarbourPPParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (newLine$RuleMemoStart == index) {
+         if (newLine$RuleMemoStart <= newLine$RuleMemoEnd) {
+            index = newLine$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.NEW_LINE, newLine$RuleMemoStart, newLine$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (newLine$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(newLine$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // ('\n' | '\r\n')
       switch(buffer.getChar(index)) {
-         case '\r':
+         case '\r': {
             ++index;
             // '\n'
             if (match = buffer.matchChar(index, '\n')) {
                ++index;
             }
             break;
-         case '\n':
+         }
+         case '\n': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         default:
+         }
+         default: {
             match = false;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         newLine$RuleMemoStart = startIndex;
+         newLine$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            newLine$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.NEW_LINE, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            newLine$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         newLine$RuleMemoStart = startIndex;
+         newLine$RuleMemoEnd = -1;
+         newLine$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1057,14 +2016,6 @@ public class HarbourPPParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
-      if (aloneLineComment$RuleMemoStart == index) {
-         if (aloneLineComment$RuleMemoStart <= aloneLineComment$RuleMemoEnd) {
-            index = aloneLineComment$RuleMemoEnd;
-            return true;
-         } else {
-            return false;
-         }
-      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // ('*' (('\n' | <EOI>)! .)*)
@@ -1072,35 +2023,40 @@ public class HarbourPPParser implements Parser {
       match = charMatcher('*');
       if (match) {
          // (('\n' | <EOI>)! .)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (('\n' | <EOI>)! .)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // ('\n' | <EOI>)!
             // ('\n' | <EOI>)
+            Node lastNode_2 = currentNode;
+            int lastIndex_2 = index;
             // '\n'
             match = buffer.matchChar(index, '\n');
             if (! match) {
                // <EOI>
                match = eoi();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+               }
             }
             match = ! match;
             if (match) {
                // .
                match = anyCharMatcher();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         aloneLineComment$RuleMemoStart = startIndex;
-         aloneLineComment$RuleMemoEnd = index;
          if (! currentRuleIsAtomic) {
             currentNode = new NodeImpl(HarbourPPRuleType.ALONE_LINE_COMMENT, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
@@ -1108,8 +2064,6 @@ public class HarbourPPParser implements Parser {
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         aloneLineComment$RuleMemoStart = startIndex;
-         aloneLineComment$RuleMemoEnd = -1;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1122,25 +2076,59 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (anyRules$RuleMemoStart == index) {
+         if (anyRules$RuleMemoStart <= anyRules$RuleMemoEnd) {
+            index = anyRules$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.ANY_RULES, anyRules$RuleMemoStart, anyRules$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (anyRules$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(anyRules$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // AnyRule+
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // AnyRule
       match = anyRule$Rule();
       if (match) {
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // AnyRule
             match = anyRule$Rule();
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
+      } else {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.ANY_RULES, startIndex, index, true, false);
+         anyRules$RuleMemoStart = startIndex;
+         anyRules$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            anyRules$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(HarbourPPRuleType.ANY_RULES, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            anyRules$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         anyRules$RuleMemoStart = startIndex;
+         anyRules$RuleMemoEnd = -1;
+         anyRules$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1153,22 +2141,55 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (endStmt$RuleMemoStart == index) {
+         if (endStmt$RuleMemoStart <= endStmt$RuleMemoEnd) {
+            index = endStmt$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.END_STMT, endStmt$RuleMemoStart, endStmt$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (endStmt$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(endStmt$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (NewLine | <EOI>)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // NewLine
       match = newLine$Rule();
       if (! match) {
+         index = lastIndex_1;
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
          // <EOI>
          match = eoi();
+         if (! match) {
+            index = lastIndex_1;
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+         }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         endStmt$RuleMemoStart = startIndex;
+         endStmt$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            endStmt$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.END_STMT, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            endStmt$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         endStmt$RuleMemoStart = startIndex;
+         endStmt$RuleMemoEnd = -1;
+         endStmt$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1181,6 +2202,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (directiveMark$RuleMemoStart == index) {
+         if (directiveMark$RuleMemoStart <= directiveMark$RuleMemoEnd) {
+            index = directiveMark$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.DIRECTIVE_MARK, directiveMark$RuleMemoStart, directiveMark$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (directiveMark$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(directiveMark$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (IgnoreOptionalSpacing '#')
       // IgnoreOptionalSpacing
@@ -1190,13 +2226,21 @@ public class HarbourPPParser implements Parser {
          match = charMatcher('#');
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         directiveMark$RuleMemoStart = startIndex;
+         directiveMark$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            directiveMark$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.DIRECTIVE_MARK, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            directiveMark$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         directiveMark$RuleMemoStart = startIndex;
+         directiveMark$RuleMemoEnd = -1;
+         directiveMark$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1209,6 +2253,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (defineDirective$RuleMemoStart == index) {
+         if (defineDirective$RuleMemoStart <= defineDirective$RuleMemoEnd) {
+            index = defineDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.DEFINE_DIRECTIVE, defineDirective$RuleMemoStart, defineDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (defineDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(defineDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Define IgnoreSpacing Identifier DefineParameters? IgnoreOptionalSpacing ResultRules?)
       // Define
@@ -1221,27 +2280,52 @@ public class HarbourPPParser implements Parser {
             match = identifier$Rule();
             if (match) {
                // DefineParameters?
+               Node lastNode_1 = currentNode;
+               int lastIndex_1 = index;
                // DefineParameters
-               defineParameters$Rule();
-               // IgnoreOptionalSpacing
-               match = ignoreOptionalSpacing$Rule();
-               if (match) {
-                  // ResultRules?
-                  // ResultRules
-                  resultRules$Rule();
+               match = defineParameters$Rule();
+               if (! match) {
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+                  index = lastIndex_1;
                   match = true;
+               }
+               if (match) {
+                  // IgnoreOptionalSpacing
+                  match = ignoreOptionalSpacing$Rule();
+                  if (match) {
+                     // ResultRules?
+                     Node lastNode_2 = currentNode;
+                     int lastIndex_2 = index;
+                     // ResultRules
+                     match = resultRules$Rule();
+                     if (! match) {
+                        lastNode_2.setSibling(null);
+                        currentNode = lastNode_2;
+                        index = lastIndex_2;
+                        match = true;
+                     }
+                  }
                }
             }
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         defineDirective$RuleMemoStart = startIndex;
+         defineDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            defineDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.DEFINE_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            defineDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         defineDirective$RuleMemoStart = startIndex;
+         defineDirective$RuleMemoEnd = -1;
+         defineDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1254,6 +2338,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (stdOutDirective$RuleMemoStart == index) {
+         if (stdOutDirective$RuleMemoStart <= stdOutDirective$RuleMemoEnd) {
+            index = stdOutDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.STD_OUT_DIRECTIVE, stdOutDirective$RuleMemoStart, stdOutDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (stdOutDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(stdOutDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (StdOut ResultRules)
       // StdOut
@@ -1263,13 +2362,21 @@ public class HarbourPPParser implements Parser {
          match = resultRules$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         stdOutDirective$RuleMemoStart = startIndex;
+         stdOutDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            stdOutDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.STD_OUT_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            stdOutDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         stdOutDirective$RuleMemoStart = startIndex;
+         stdOutDirective$RuleMemoEnd = -1;
+         stdOutDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1282,6 +2389,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (commandDirective$RuleMemoStart == index) {
+         if (commandDirective$RuleMemoStart <= commandDirective$RuleMemoEnd) {
+            index = commandDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.COMMAND_DIRECTIVE, commandDirective$RuleMemoStart, commandDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (commandDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(commandDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Command IgnoreOptionalSpacing MatchPattern IgnoreOptionalSpacing ResultSep IgnoreOptionalSpacing ResultPattern?)
       // Command
@@ -1303,9 +2425,16 @@ public class HarbourPPParser implements Parser {
                      match = ignoreOptionalSpacing$Rule();
                      if (match) {
                         // ResultPattern?
+                        Node lastNode_1 = currentNode;
+                        int lastIndex_1 = index;
                         // ResultPattern
-                        resultPattern$Rule();
-                        match = true;
+                        match = resultPattern$Rule();
+                        if (! match) {
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
+                           index = lastIndex_1;
+                           match = true;
+                        }
                      }
                   }
                }
@@ -1313,13 +2442,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         commandDirective$RuleMemoStart = startIndex;
+         commandDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            commandDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.COMMAND_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            commandDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         commandDirective$RuleMemoStart = startIndex;
+         commandDirective$RuleMemoEnd = -1;
+         commandDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1332,6 +2469,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (xCommandDirective$RuleMemoStart == index) {
+         if (xCommandDirective$RuleMemoStart <= xCommandDirective$RuleMemoEnd) {
+            index = xCommandDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.XCOMMAND_DIRECTIVE, xCommandDirective$RuleMemoStart, xCommandDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (xCommandDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(xCommandDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (XCommand directivePattern)
       // XCommand
@@ -1341,13 +2493,21 @@ public class HarbourPPParser implements Parser {
          match = directivePattern$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         xCommandDirective$RuleMemoStart = startIndex;
+         xCommandDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            xCommandDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.XCOMMAND_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            xCommandDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         xCommandDirective$RuleMemoStart = startIndex;
+         xCommandDirective$RuleMemoEnd = -1;
+         xCommandDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1360,6 +2520,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (yCommandDirective$RuleMemoStart == index) {
+         if (yCommandDirective$RuleMemoStart <= yCommandDirective$RuleMemoEnd) {
+            index = yCommandDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.YCOMMAND_DIRECTIVE, yCommandDirective$RuleMemoStart, yCommandDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (yCommandDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(yCommandDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (YCommand IgnoreOptionalSpacing MatchPattern IgnoreOptionalSpacing ResultSep IgnoreOptionalSpacing ResultPattern?)
       // YCommand
@@ -1381,9 +2556,16 @@ public class HarbourPPParser implements Parser {
                      match = ignoreOptionalSpacing$Rule();
                      if (match) {
                         // ResultPattern?
+                        Node lastNode_1 = currentNode;
+                        int lastIndex_1 = index;
                         // ResultPattern
-                        resultPattern$Rule();
-                        match = true;
+                        match = resultPattern$Rule();
+                        if (! match) {
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
+                           index = lastIndex_1;
+                           match = true;
+                        }
                      }
                   }
                }
@@ -1391,13 +2573,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         yCommandDirective$RuleMemoStart = startIndex;
+         yCommandDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            yCommandDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.YCOMMAND_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            yCommandDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         yCommandDirective$RuleMemoStart = startIndex;
+         yCommandDirective$RuleMemoEnd = -1;
+         yCommandDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1410,6 +2600,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (translateDirective$RuleMemoStart == index) {
+         if (translateDirective$RuleMemoStart <= translateDirective$RuleMemoEnd) {
+            index = translateDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.TRANSLATE_DIRECTIVE, translateDirective$RuleMemoStart, translateDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (translateDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(translateDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Translate directivePattern)
       // Translate
@@ -1419,13 +2624,21 @@ public class HarbourPPParser implements Parser {
          match = directivePattern$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         translateDirective$RuleMemoStart = startIndex;
+         translateDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            translateDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.TRANSLATE_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            translateDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         translateDirective$RuleMemoStart = startIndex;
+         translateDirective$RuleMemoEnd = -1;
+         translateDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1438,6 +2651,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (xTranslateDirective$RuleMemoStart == index) {
+         if (xTranslateDirective$RuleMemoStart <= xTranslateDirective$RuleMemoEnd) {
+            index = xTranslateDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.XTRANSLATE_DIRECTIVE, xTranslateDirective$RuleMemoStart, xTranslateDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (xTranslateDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(xTranslateDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (XTranslate directivePattern)
       // XTranslate
@@ -1447,13 +2675,21 @@ public class HarbourPPParser implements Parser {
          match = directivePattern$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         xTranslateDirective$RuleMemoStart = startIndex;
+         xTranslateDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            xTranslateDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.XTRANSLATE_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            xTranslateDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         xTranslateDirective$RuleMemoStart = startIndex;
+         xTranslateDirective$RuleMemoEnd = -1;
+         xTranslateDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1466,6 +2702,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (yTranslateDirective$RuleMemoStart == index) {
+         if (yTranslateDirective$RuleMemoStart <= yTranslateDirective$RuleMemoEnd) {
+            index = yTranslateDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.YTRANSLATE_DIRECTIVE, yTranslateDirective$RuleMemoStart, yTranslateDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (yTranslateDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(yTranslateDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (YTranslate directivePattern)
       // YTranslate
@@ -1475,13 +2726,21 @@ public class HarbourPPParser implements Parser {
          match = directivePattern$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         yTranslateDirective$RuleMemoStart = startIndex;
+         yTranslateDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            yTranslateDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.YTRANSLATE_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            yTranslateDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         yTranslateDirective$RuleMemoStart = startIndex;
+         yTranslateDirective$RuleMemoEnd = -1;
+         yTranslateDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1494,6 +2753,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (ifDefDirective$RuleMemoStart == index) {
+         if (ifDefDirective$RuleMemoStart <= ifDefDirective$RuleMemoEnd) {
+            index = ifDefDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.IF_DEF_DIRECTIVE, ifDefDirective$RuleMemoStart, ifDefDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (ifDefDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(ifDefDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (IfDef IgnoreSpacing Identifier)
       // IfDef
@@ -1507,13 +2781,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         ifDefDirective$RuleMemoStart = startIndex;
+         ifDefDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            ifDefDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.IF_DEF_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            ifDefDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         ifDefDirective$RuleMemoStart = startIndex;
+         ifDefDirective$RuleMemoEnd = -1;
+         ifDefDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1526,6 +2808,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (ifNDefDirective$RuleMemoStart == index) {
+         if (ifNDefDirective$RuleMemoStart <= ifNDefDirective$RuleMemoEnd) {
+            index = ifNDefDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.IF_NDEF_DIRECTIVE, ifNDefDirective$RuleMemoStart, ifNDefDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (ifNDefDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(ifNDefDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (IfNDef IgnoreSpacing Identifier)
       // IfNDef
@@ -1539,13 +2836,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         ifNDefDirective$RuleMemoStart = startIndex;
+         ifNDefDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            ifNDefDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.IF_NDEF_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            ifNDefDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         ifNDefDirective$RuleMemoStart = startIndex;
+         ifNDefDirective$RuleMemoEnd = -1;
+         ifNDefDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1559,6 +2864,21 @@ public class HarbourPPParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (elseDirective$RuleMemoStart == index) {
+         if (elseDirective$RuleMemoStart <= elseDirective$RuleMemoEnd) {
+            index = elseDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.ELSE_DIRECTIVE, elseDirective$RuleMemoStart, elseDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (elseDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(elseDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // ("else" DiscardedRemainingLine)
@@ -1570,13 +2890,21 @@ public class HarbourPPParser implements Parser {
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.ELSE_DIRECTIVE, startIndex, index, false, false);
+         elseDirective$RuleMemoStart = startIndex;
+         elseDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            elseDirective$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(HarbourPPRuleType.ELSE_DIRECTIVE, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            elseDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         elseDirective$RuleMemoStart = startIndex;
+         elseDirective$RuleMemoEnd = -1;
+         elseDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1589,6 +2917,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (elseIfDirective$RuleMemoStart == index) {
+         if (elseIfDirective$RuleMemoStart <= elseIfDirective$RuleMemoEnd) {
+            index = elseIfDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.ELSE_IF_DIRECTIVE, elseIfDirective$RuleMemoStart, elseIfDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (elseIfDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(elseIfDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (ElseIf IgnoreSpacing Identifier)
       // ElseIf
@@ -1602,13 +2945,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         elseIfDirective$RuleMemoStart = startIndex;
+         elseIfDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            elseIfDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.ELSE_IF_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            elseIfDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         elseIfDirective$RuleMemoStart = startIndex;
+         elseIfDirective$RuleMemoEnd = -1;
+         elseIfDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1622,6 +2973,21 @@ public class HarbourPPParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (endIfDirective$RuleMemoStart == index) {
+         if (endIfDirective$RuleMemoStart <= endIfDirective$RuleMemoEnd) {
+            index = endIfDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.END_IF_DIRECTIVE, endIfDirective$RuleMemoStart, endIfDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (endIfDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(endIfDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // (EndIf DiscardedRemainingLine)
@@ -1633,13 +2999,21 @@ public class HarbourPPParser implements Parser {
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.END_IF_DIRECTIVE, startIndex, index, false, false);
+         endIfDirective$RuleMemoStart = startIndex;
+         endIfDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            endIfDirective$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(HarbourPPRuleType.END_IF_DIRECTIVE, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            endIfDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         endIfDirective$RuleMemoStart = startIndex;
+         endIfDirective$RuleMemoEnd = -1;
+         endIfDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1652,6 +3026,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (undefDirective$RuleMemoStart == index) {
+         if (undefDirective$RuleMemoStart <= undefDirective$RuleMemoEnd) {
+            index = undefDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.UNDEF_DIRECTIVE, undefDirective$RuleMemoStart, undefDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (undefDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(undefDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Undef IgnoreSpacing Identifier)
       // Undef
@@ -1665,13 +3054,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         undefDirective$RuleMemoStart = startIndex;
+         undefDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            undefDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.UNDEF_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            undefDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         undefDirective$RuleMemoStart = startIndex;
+         undefDirective$RuleMemoEnd = -1;
+         undefDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1684,6 +3081,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (errorDirective$RuleMemoStart == index) {
+         if (errorDirective$RuleMemoStart <= errorDirective$RuleMemoEnd) {
+            index = errorDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.ERROR_DIRECTIVE, errorDirective$RuleMemoStart, errorDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (errorDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(errorDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ("error" ResultRules)
       // "error"
@@ -1693,13 +3105,21 @@ public class HarbourPPParser implements Parser {
          match = resultRules$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         errorDirective$RuleMemoStart = startIndex;
+         errorDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            errorDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.ERROR_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            errorDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         errorDirective$RuleMemoStart = startIndex;
+         errorDirective$RuleMemoEnd = -1;
+         errorDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1716,11 +3136,32 @@ public class HarbourPPParser implements Parser {
       currentRuleIsAtomic = true;
       startIndex = index;
       // (DoubleQuoteString | SingleQuoteString)
-      // DoubleQuoteString
-      match = doubleQuoteString$Rule();
-      if (! match) {
-         // SingleQuoteString
-         match = singleQuoteString$Rule();
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case '\"': {
+            // DoubleQuoteString
+            match = doubleQuoteString$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         case '\'': {
+            // SingleQuoteString
+            match = singleQuoteString$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         default: {
+            match = false;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
@@ -1743,6 +3184,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (includeDirective$RuleMemoStart == index) {
+         if (includeDirective$RuleMemoStart <= includeDirective$RuleMemoEnd) {
+            index = includeDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.INCLUDE_DIRECTIVE, includeDirective$RuleMemoStart, includeDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (includeDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(includeDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Include IgnoreSpacing IncludeName)
       // Include
@@ -1756,13 +3212,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         includeDirective$RuleMemoStart = startIndex;
+         includeDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            includeDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.INCLUDE_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            includeDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         includeDirective$RuleMemoStart = startIndex;
+         includeDirective$RuleMemoEnd = -1;
+         includeDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1775,6 +3239,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (lineDirective$RuleMemoStart == index) {
+         if (lineDirective$RuleMemoStart <= lineDirective$RuleMemoEnd) {
+            index = lineDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.LINE_DIRECTIVE, lineDirective$RuleMemoStart, lineDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (lineDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(lineDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ("line" DiscardedRemainingLine)
       // "line"
@@ -1784,13 +3263,21 @@ public class HarbourPPParser implements Parser {
          match = discardedRemainingLine$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         lineDirective$RuleMemoStart = startIndex;
+         lineDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            lineDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.LINE_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            lineDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         lineDirective$RuleMemoStart = startIndex;
+         lineDirective$RuleMemoEnd = -1;
+         lineDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1803,6 +3290,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (uncommandDirective$RuleMemoStart == index) {
+         if (uncommandDirective$RuleMemoStart <= uncommandDirective$RuleMemoEnd) {
+            index = uncommandDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.UNCOMMAND_DIRECTIVE, uncommandDirective$RuleMemoStart, uncommandDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (uncommandDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(uncommandDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Uncommand undefDirectivePattern)
       // Uncommand
@@ -1812,13 +3314,21 @@ public class HarbourPPParser implements Parser {
          match = undefDirectivePattern$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         uncommandDirective$RuleMemoStart = startIndex;
+         uncommandDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            uncommandDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.UNCOMMAND_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            uncommandDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         uncommandDirective$RuleMemoStart = startIndex;
+         uncommandDirective$RuleMemoEnd = -1;
+         uncommandDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1831,6 +3341,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (xUncommandDirective$RuleMemoStart == index) {
+         if (xUncommandDirective$RuleMemoStart <= xUncommandDirective$RuleMemoEnd) {
+            index = xUncommandDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.XUNCOMMAND_DIRECTIVE, xUncommandDirective$RuleMemoStart, xUncommandDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (xUncommandDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(xUncommandDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Xuncommand undefDirectivePattern)
       // Xuncommand
@@ -1840,13 +3365,21 @@ public class HarbourPPParser implements Parser {
          match = undefDirectivePattern$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         xUncommandDirective$RuleMemoStart = startIndex;
+         xUncommandDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            xUncommandDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.XUNCOMMAND_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            xUncommandDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         xUncommandDirective$RuleMemoStart = startIndex;
+         xUncommandDirective$RuleMemoEnd = -1;
+         xUncommandDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1859,6 +3392,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (yUncommandDirective$RuleMemoStart == index) {
+         if (yUncommandDirective$RuleMemoStart <= yUncommandDirective$RuleMemoEnd) {
+            index = yUncommandDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.YUNCOMMAND_DIRECTIVE, yUncommandDirective$RuleMemoStart, yUncommandDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (yUncommandDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(yUncommandDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Yuncommand undefDirectivePattern)
       // Yuncommand
@@ -1868,13 +3416,21 @@ public class HarbourPPParser implements Parser {
          match = undefDirectivePattern$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         yUncommandDirective$RuleMemoStart = startIndex;
+         yUncommandDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            yUncommandDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.YUNCOMMAND_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            yUncommandDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         yUncommandDirective$RuleMemoStart = startIndex;
+         yUncommandDirective$RuleMemoEnd = -1;
+         yUncommandDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1887,6 +3443,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (untranslateDirective$RuleMemoStart == index) {
+         if (untranslateDirective$RuleMemoStart <= untranslateDirective$RuleMemoEnd) {
+            index = untranslateDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.UNTRANSLATE_DIRECTIVE, untranslateDirective$RuleMemoStart, untranslateDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (untranslateDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(untranslateDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Untranslate undefDirectivePattern)
       // Untranslate
@@ -1896,13 +3467,21 @@ public class HarbourPPParser implements Parser {
          match = undefDirectivePattern$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         untranslateDirective$RuleMemoStart = startIndex;
+         untranslateDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            untranslateDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.UNTRANSLATE_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            untranslateDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         untranslateDirective$RuleMemoStart = startIndex;
+         untranslateDirective$RuleMemoEnd = -1;
+         untranslateDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1915,6 +3494,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (xUntranslateDirective$RuleMemoStart == index) {
+         if (xUntranslateDirective$RuleMemoStart <= xUntranslateDirective$RuleMemoEnd) {
+            index = xUntranslateDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.XUNTRANSLATE_DIRECTIVE, xUntranslateDirective$RuleMemoStart, xUntranslateDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (xUntranslateDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(xUntranslateDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Xuntranslate undefDirectivePattern)
       // Xuntranslate
@@ -1924,13 +3518,21 @@ public class HarbourPPParser implements Parser {
          match = undefDirectivePattern$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         xUntranslateDirective$RuleMemoStart = startIndex;
+         xUntranslateDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            xUntranslateDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.XUNTRANSLATE_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            xUntranslateDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         xUntranslateDirective$RuleMemoStart = startIndex;
+         xUntranslateDirective$RuleMemoEnd = -1;
+         xUntranslateDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1943,6 +3545,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (yUntranslateDirective$RuleMemoStart == index) {
+         if (yUntranslateDirective$RuleMemoStart <= yUntranslateDirective$RuleMemoEnd) {
+            index = yUntranslateDirective$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.YUNTRANSLATE_DIRECTIVE, yUntranslateDirective$RuleMemoStart, yUntranslateDirective$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (yUntranslateDirective$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(yUntranslateDirective$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (Yuntranslate undefDirectivePattern)
       // Yuntranslate
@@ -1952,13 +3569,21 @@ public class HarbourPPParser implements Parser {
          match = undefDirectivePattern$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         yUntranslateDirective$RuleMemoStart = startIndex;
+         yUntranslateDirective$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            yUntranslateDirective$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.YUNTRANSLATE_DIRECTIVE, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            yUntranslateDirective$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         yUntranslateDirective$RuleMemoStart = startIndex;
+         yUntranslateDirective$RuleMemoEnd = -1;
+         yUntranslateDirective$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -1971,6 +3596,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (dumpBlock$RuleMemoStart == index) {
+         if (dumpBlock$RuleMemoStart <= dumpBlock$RuleMemoEnd) {
+            index = dumpBlock$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.DUMP_BLOCK, dumpBlock$RuleMemoStart, dumpBlock$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (dumpBlock$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(dumpBlock$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (BeginDumpBlock EndStmt ((EndDumpBlock | <EOI>)! .)* EndDumpBlock)
       // BeginDumpBlock
@@ -1980,20 +3620,32 @@ public class HarbourPPParser implements Parser {
          match = endStmt$Rule();
          if (match) {
             // ((EndDumpBlock | <EOI>)! .)*
+            Node lastNode_1;
+            int lastIndex_1;
             do {
+               lastNode_1 = currentNode;
+               lastIndex_1 = index;
                // ((EndDumpBlock | <EOI>)! .)
-               Node lastNode_1 = currentNode;
-               int lastIndex_1 = index;
                // (EndDumpBlock | <EOI>)!
                Node lastNode_2 = currentNode;
                int lastIndex_2 = index;
                boolean lastAtomic_2 = currentRuleIsAtomic;
                // (EndDumpBlock | <EOI>)
+               Node lastNode_3 = currentNode;
+               int lastIndex_3 = index;
                // EndDumpBlock
                match = endDumpBlock$Rule();
                if (! match) {
+                  index = lastIndex_3;
+                  lastNode_3.setSibling(null);
+                  currentNode = lastNode_3;
                   // <EOI>
                   match = eoi();
+                  if (! match) {
+                     index = lastIndex_3;
+                     lastNode_3.setSibling(null);
+                     currentNode = lastNode_3;
+                  }
                }
                currentRuleIsAtomic = lastAtomic_2;
                index = lastIndex_2;
@@ -2003,25 +3655,31 @@ public class HarbourPPParser implements Parser {
                if (match) {
                   // .
                   match = anyCharMatcher();
-                  if (! match) {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
-                     currentNode = lastNode_1;
-                  }
                }
             } while(match);
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
             // EndDumpBlock
             match = endDumpBlock$Rule();
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         dumpBlock$RuleMemoStart = startIndex;
+         dumpBlock$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            dumpBlock$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.DUMP_BLOCK, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            dumpBlock$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         dumpBlock$RuleMemoStart = startIndex;
+         dumpBlock$RuleMemoEnd = -1;
+         dumpBlock$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -2042,26 +3700,33 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("defi", 4);
       if (match) {
          // ("ne" | "n")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("ne" | "n")
-         if (buffer.matchIgnoreCaseChar(index, 'n')) {
+         match = buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N');
+         if (match) {
             ++index;
             // ("e" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 'e')) {
+            match = buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E');
+            if (match) {
                ++index;
                // <EMPTY>
                match = true;
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.DEFINE, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.DEFINE, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -2088,10 +3753,20 @@ public class HarbourPPParser implements Parser {
          match = ignoreOptionalSpacing$Rule();
          if (match) {
             // ParametersList?
+            Node lastNode_1 = currentNode;
+            int lastIndex_1 = index;
             // ParametersList
-            parametersList$Rule();
-            // ')'
-            match = charMatcher(')');
+            match = parametersList$Rule();
+            if (! match) {
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               index = lastIndex_1;
+               match = true;
+            }
+            if (match) {
+               // ')'
+               match = charMatcher(')');
+            }
          }
       }
       if (match) {
@@ -2114,17 +3789,40 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (resultRules$RuleMemoStart == index) {
+         if (resultRules$RuleMemoStart <= resultRules$RuleMemoEnd) {
+            index = resultRules$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.RESULT_RULES, resultRules$RuleMemoStart, resultRules$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (resultRules$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(resultRules$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // AnyRules
       match = anyRules$Rule();
       if (match) {
-         if (! currentRuleIsAtomic) {
+         resultRules$RuleMemoStart = startIndex;
+         resultRules$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            resultRules$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.RESULT_RULES, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            resultRules$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         resultRules$RuleMemoStart = startIndex;
+         resultRules$RuleMemoEnd = -1;
+         resultRules$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -2143,10 +3841,12 @@ public class HarbourPPParser implements Parser {
       match = identifier$Rule();
       if (match) {
          // (IgnoreOptionalSpacing ',' IgnoreOptionalSpacing Identifier)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (IgnoreOptionalSpacing ',' IgnoreOptionalSpacing Identifier)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // IgnoreOptionalSpacing
             match = ignoreOptionalSpacing$Rule();
             if (match) {
@@ -2158,21 +3858,13 @@ public class HarbourPPParser implements Parser {
                   if (match) {
                      // Identifier
                      match = identifier$Rule();
-                     if (! match) {
-                        index = lastIndex_1;
-                        lastNode_1.setSibling(null);
-                        currentNode = lastNode_1;
-                     }
-                  } else {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
                   }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          // IgnoreOptionalSpacing
          match = ignoreOptionalSpacing$Rule();
       }
@@ -2204,26 +3896,33 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("stdo", 4);
       if (match) {
          // ("ut" | "u")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("ut" | "u")
-         if (buffer.matchIgnoreCaseChar(index, 'u')) {
+         match = buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U');
+         if (match) {
             ++index;
             // ("t" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 't')) {
+            match = buffer.matchChar(index, 't') || buffer.matchChar(index, 'T');
+            if (match) {
                ++index;
                // <EMPTY>
                match = true;
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.STD_OUT, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.STD_OUT, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -2249,30 +3948,40 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("comm", 4);
       if (match) {
          // ("and" | "an" | "a")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("and" | "an" | "a")
-         if (buffer.matchIgnoreCaseChar(index, 'a')) {
+         match = buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A');
+         if (match) {
             ++index;
             // ("nd" | "n" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 'n')) {
+            match = buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N');
+            if (match) {
                ++index;
-               // "d"
-               if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
+               // ("d" | <EMPTY>)
+               match = buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D');
+               if (match) {
                   ++index;
+                  // <EMPTY>
+                  match = true;
+               } else {
+                  match = true;
                }
-               // <EMPTY>
-               match = true;
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.COMMAND, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.COMMAND, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -2290,25 +3999,59 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (matchPattern$RuleMemoStart == index) {
+         if (matchPattern$RuleMemoStart <= matchPattern$RuleMemoEnd) {
+            index = matchPattern$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.MATCH_PATTERN, matchPattern$RuleMemoStart, matchPattern$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (matchPattern$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(matchPattern$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // MatchChunk+
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // MatchChunk
       match = matchChunk$Rule();
       if (match) {
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // MatchChunk
             match = matchChunk$Rule();
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
+      } else {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         matchPattern$RuleMemoStart = startIndex;
+         matchPattern$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            matchPattern$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.MATCH_PATTERN, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            matchPattern$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         matchPattern$RuleMemoStart = startIndex;
+         matchPattern$RuleMemoEnd = -1;
+         matchPattern$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -2322,6 +4065,21 @@ public class HarbourPPParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (resultSep$RuleMemoStart == index) {
+         if (resultSep$RuleMemoStart <= resultSep$RuleMemoEnd) {
+            index = resultSep$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.RESULT_SEP, resultSep$RuleMemoStart, resultSep$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (resultSep$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(resultSep$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // ('=' IgnoreOptionalSpacing '>')
@@ -2337,13 +4095,21 @@ public class HarbourPPParser implements Parser {
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.RESULT_SEP, startIndex, index, false, false);
+         resultSep$RuleMemoStart = startIndex;
+         resultSep$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            resultSep$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(HarbourPPRuleType.RESULT_SEP, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            resultSep$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         resultSep$RuleMemoStart = startIndex;
+         resultSep$RuleMemoEnd = -1;
+         resultSep$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -2356,25 +4122,59 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (resultPattern$RuleMemoStart == index) {
+         if (resultPattern$RuleMemoStart <= resultPattern$RuleMemoEnd) {
+            index = resultPattern$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.RESULT_PATTERN, resultPattern$RuleMemoStart, resultPattern$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (resultPattern$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(resultPattern$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ResultChunk+
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // ResultChunk
       match = resultChunk$Rule();
       if (match) {
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // ResultChunk
             match = resultChunk$Rule();
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
+      } else {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         resultPattern$RuleMemoStart = startIndex;
+         resultPattern$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            resultPattern$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.RESULT_PATTERN, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            resultPattern$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         resultPattern$RuleMemoStart = startIndex;
+         resultPattern$RuleMemoEnd = -1;
+         resultPattern$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -2395,36 +4195,47 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("ycom", 4);
       if (match) {
          // ("mand" | "man" | "ma" | "m")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("mand" | "man" | "ma" | "m")
-         if (buffer.matchIgnoreCaseChar(index, 'm')) {
+         match = buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M');
+         if (match) {
             ++index;
             // ("and" | "an" | "a" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 'a')) {
+            match = buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A');
+            if (match) {
                ++index;
                // ("nd" | "n" | <EMPTY>)
-               if (buffer.matchIgnoreCaseChar(index, 'n')) {
+               match = buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N');
+               if (match) {
                   ++index;
-                  // "d"
-                  if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
+                  // ("d" | <EMPTY>)
+                  match = buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D');
+                  if (match) {
                      ++index;
+                     // <EMPTY>
+                     match = true;
+                  } else {
+                     match = true;
                   }
-                  // <EMPTY>
-                  match = true;
                } else {
                   match = true;
                }
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.YCOMMAND, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.YCOMMAND, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -2442,6 +4253,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (directivePattern$RuleMemoStart == index) {
+         if (directivePattern$RuleMemoStart <= directivePattern$RuleMemoEnd) {
+            index = directivePattern$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.DIRECTIVE_PATTERN, directivePattern$RuleMemoStart, directivePattern$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (directivePattern$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(directivePattern$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (IgnoreOptionalSpacing MatchPattern IgnoreOptionalSpacing ResultSep IgnoreOptionalSpacing ResultPattern?)
       // IgnoreOptionalSpacing
@@ -2460,22 +4286,37 @@ public class HarbourPPParser implements Parser {
                   match = ignoreOptionalSpacing$Rule();
                   if (match) {
                      // ResultPattern?
+                     Node lastNode_1 = currentNode;
+                     int lastIndex_1 = index;
                      // ResultPattern
-                     resultPattern$Rule();
-                     match = true;
+                     match = resultPattern$Rule();
+                     if (! match) {
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                        index = lastIndex_1;
+                        match = true;
+                     }
                   }
                }
             }
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         directivePattern$RuleMemoStart = startIndex;
+         directivePattern$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            directivePattern$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.DIRECTIVE_PATTERN, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            directivePattern$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         directivePattern$RuleMemoStart = startIndex;
+         directivePattern$RuleMemoEnd = -1;
+         directivePattern$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -2488,6 +4329,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (undefDirectivePattern$RuleMemoStart == index) {
+         if (undefDirectivePattern$RuleMemoStart <= undefDirectivePattern$RuleMemoEnd) {
+            index = undefDirectivePattern$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.UNDEF_DIRECTIVE_PATTERN, undefDirectivePattern$RuleMemoStart, undefDirectivePattern$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (undefDirectivePattern$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(undefDirectivePattern$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (IgnoreOptionalSpacing MatchPattern IgnoreOptionalSpacing)
       // IgnoreOptionalSpacing
@@ -2501,13 +4357,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         undefDirectivePattern$RuleMemoStart = startIndex;
+         undefDirectivePattern$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            undefDirectivePattern$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.UNDEF_DIRECTIVE_PATTERN, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            undefDirectivePattern$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         undefDirectivePattern$RuleMemoStart = startIndex;
+         undefDirectivePattern$RuleMemoEnd = -1;
+         undefDirectivePattern$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -2528,24 +4392,33 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("unco", 4);
       if (match) {
          // ("mmand" | "mman" | "mma" | "mm" | "m")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("mmand" | "mman" | "mma" | "mm" | "m")
-         if (buffer.matchIgnoreCaseChar(index, 'm')) {
+         match = buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M');
+         if (match) {
             ++index;
             // ("mand" | "man" | "ma" | "m" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 'm')) {
+            match = buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M');
+            if (match) {
                ++index;
                // ("and" | "an" | "a" | <EMPTY>)
-               if (buffer.matchIgnoreCaseChar(index, 'a')) {
+               match = buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A');
+               if (match) {
                   ++index;
                   // ("nd" | "n" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'n')) {
+                  match = buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N');
+                  if (match) {
                      ++index;
-                     // "d"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
+                     // ("d" | <EMPTY>)
+                     match = buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D');
+                     if (match) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -2555,15 +4428,18 @@ public class HarbourPPParser implements Parser {
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.UNCOMMAND, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.UNCOMMAND, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -2589,27 +4465,37 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("xunc", 4);
       if (match) {
          // ("ommand" | "omman" | "omma" | "omm" | "om" | "o")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("ommand" | "omman" | "omma" | "omm" | "om" | "o")
-         if (buffer.matchIgnoreCaseChar(index, 'o')) {
+         match = buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O');
+         if (match) {
             ++index;
             // ("mmand" | "mman" | "mma" | "mm" | "m" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 'm')) {
+            match = buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M');
+            if (match) {
                ++index;
                // ("mand" | "man" | "ma" | "m" | <EMPTY>)
-               if (buffer.matchIgnoreCaseChar(index, 'm')) {
+               match = buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M');
+               if (match) {
                   ++index;
                   // ("and" | "an" | "a" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                  match = buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A');
+                  if (match) {
                      ++index;
                      // ("nd" | "n" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'n')) {
+                     match = buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N');
+                     if (match) {
                         ++index;
-                        // "d"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
+                        // ("d" | <EMPTY>)
+                        match = buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D');
+                        if (match) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -2622,15 +4508,18 @@ public class HarbourPPParser implements Parser {
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.XUNCOMMAND, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.XUNCOMMAND, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -2656,27 +4545,37 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("yunc", 4);
       if (match) {
          // ("ommand" | "omman" | "omma" | "omm" | "om" | "o")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("ommand" | "omman" | "omma" | "omm" | "om" | "o")
-         if (buffer.matchIgnoreCaseChar(index, 'o')) {
+         match = buffer.matchChar(index, 'o') || buffer.matchChar(index, 'O');
+         if (match) {
             ++index;
             // ("mmand" | "mman" | "mma" | "mm" | "m" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 'm')) {
+            match = buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M');
+            if (match) {
                ++index;
                // ("mand" | "man" | "ma" | "m" | <EMPTY>)
-               if (buffer.matchIgnoreCaseChar(index, 'm')) {
+               match = buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M');
+               if (match) {
                   ++index;
                   // ("and" | "an" | "a" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                  match = buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A');
+                  if (match) {
                      ++index;
                      // ("nd" | "n" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'n')) {
+                     match = buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N');
+                     if (match) {
                         ++index;
-                        // "d"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
+                        // ("d" | <EMPTY>)
+                        match = buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D');
+                        if (match) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -2689,15 +4588,18 @@ public class HarbourPPParser implements Parser {
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.YUNCOMMAND, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.YUNCOMMAND, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -2723,36 +4625,47 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("xcom", 4);
       if (match) {
          // ("mand" | "man" | "ma" | "m")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("mand" | "man" | "ma" | "m")
-         if (buffer.matchIgnoreCaseChar(index, 'm')) {
+         match = buffer.matchChar(index, 'm') || buffer.matchChar(index, 'M');
+         if (match) {
             ++index;
             // ("and" | "an" | "a" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 'a')) {
+            match = buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A');
+            if (match) {
                ++index;
                // ("nd" | "n" | <EMPTY>)
-               if (buffer.matchIgnoreCaseChar(index, 'n')) {
+               match = buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N');
+               if (match) {
                   ++index;
-                  // "d"
-                  if (match = buffer.matchIgnoreCaseChar(index, 'd')) {
+                  // ("d" | <EMPTY>)
+                  match = buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D');
+                  if (match) {
                      ++index;
+                     // <EMPTY>
+                     match = true;
+                  } else {
+                     match = true;
                   }
-                  // <EMPTY>
-                  match = true;
                } else {
                   match = true;
                }
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.XCOMMAND, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.XCOMMAND, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -2778,30 +4691,41 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("untr", 4);
       if (match) {
          // ("anslate" | "anslat" | "ansla" | "ansl" | "ans" | "an" | "a")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("anslate" | "anslat" | "ansla" | "ansl" | "ans" | "an" | "a")
-         if (buffer.matchIgnoreCaseChar(index, 'a')) {
+         match = buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A');
+         if (match) {
             ++index;
             // ("nslate" | "nslat" | "nsla" | "nsl" | "ns" | "n" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 'n')) {
+            match = buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N');
+            if (match) {
                ++index;
                // ("slate" | "slat" | "sla" | "sl" | "s" | <EMPTY>)
-               if (buffer.matchIgnoreCaseChar(index, 's')) {
+               match = buffer.matchChar(index, 's') || buffer.matchChar(index, 'S');
+               if (match) {
                   ++index;
                   // ("late" | "lat" | "la" | "l" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'l')) {
+                  match = buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L');
+                  if (match) {
                      ++index;
                      // ("ate" | "at" | "a" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                     match = buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A');
+                     if (match) {
                         ++index;
                         // ("te" | "t" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 't')) {
+                        match = buffer.matchChar(index, 't') || buffer.matchChar(index, 'T');
+                        if (match) {
                            ++index;
-                           // "e"
-                           if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                           // ("e" | <EMPTY>)
+                           match = buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E');
+                           if (match) {
                               ++index;
+                              // <EMPTY>
+                              match = true;
+                           } else {
+                              match = true;
                            }
-                           // <EMPTY>
-                           match = true;
                         } else {
                            match = true;
                         }
@@ -2817,15 +4741,18 @@ public class HarbourPPParser implements Parser {
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.UNTRANSLATE, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.UNTRANSLATE, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -2851,33 +4778,45 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("xunt", 4);
       if (match) {
          // ("ranslate" | "ranslat" | "ransla" | "ransl" | "rans" | "ran" | "ra" | "r")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("ranslate" | "ranslat" | "ransla" | "ransl" | "rans" | "ran" | "ra" | "r")
-         if (buffer.matchIgnoreCaseChar(index, 'r')) {
+         match = buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R');
+         if (match) {
             ++index;
             // ("anslate" | "anslat" | "ansla" | "ansl" | "ans" | "an" | "a" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 'a')) {
+            match = buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A');
+            if (match) {
                ++index;
                // ("nslate" | "nslat" | "nsla" | "nsl" | "ns" | "n" | <EMPTY>)
-               if (buffer.matchIgnoreCaseChar(index, 'n')) {
+               match = buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N');
+               if (match) {
                   ++index;
                   // ("slate" | "slat" | "sla" | "sl" | "s" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 's')) {
+                  match = buffer.matchChar(index, 's') || buffer.matchChar(index, 'S');
+                  if (match) {
                      ++index;
                      // ("late" | "lat" | "la" | "l" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'l')) {
+                     match = buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L');
+                     if (match) {
                         ++index;
                         // ("ate" | "at" | "a" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                        match = buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A');
+                        if (match) {
                            ++index;
                            // ("te" | "t" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 't')) {
+                           match = buffer.matchChar(index, 't') || buffer.matchChar(index, 'T');
+                           if (match) {
                               ++index;
-                              // "e"
-                              if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                              // ("e" | <EMPTY>)
+                              match = buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E');
+                              if (match) {
                                  ++index;
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
                               }
-                              // <EMPTY>
-                              match = true;
                            } else {
                               match = true;
                            }
@@ -2896,15 +4835,18 @@ public class HarbourPPParser implements Parser {
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.XUNTRANSLATE, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.XUNTRANSLATE, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -2930,33 +4872,45 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("yunt", 4);
       if (match) {
          // ("ranslate" | "ranslat" | "ransla" | "ransl" | "rans" | "ran" | "ra" | "r")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("ranslate" | "ranslat" | "ransla" | "ransl" | "rans" | "ran" | "ra" | "r")
-         if (buffer.matchIgnoreCaseChar(index, 'r')) {
+         match = buffer.matchChar(index, 'r') || buffer.matchChar(index, 'R');
+         if (match) {
             ++index;
             // ("anslate" | "anslat" | "ansla" | "ansl" | "ans" | "an" | "a" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 'a')) {
+            match = buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A');
+            if (match) {
                ++index;
                // ("nslate" | "nslat" | "nsla" | "nsl" | "ns" | "n" | <EMPTY>)
-               if (buffer.matchIgnoreCaseChar(index, 'n')) {
+               match = buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N');
+               if (match) {
                   ++index;
                   // ("slate" | "slat" | "sla" | "sl" | "s" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 's')) {
+                  match = buffer.matchChar(index, 's') || buffer.matchChar(index, 'S');
+                  if (match) {
                      ++index;
                      // ("late" | "lat" | "la" | "l" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 'l')) {
+                     match = buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L');
+                     if (match) {
                         ++index;
                         // ("ate" | "at" | "a" | <EMPTY>)
-                        if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                        match = buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A');
+                        if (match) {
                            ++index;
                            // ("te" | "t" | <EMPTY>)
-                           if (buffer.matchIgnoreCaseChar(index, 't')) {
+                           match = buffer.matchChar(index, 't') || buffer.matchChar(index, 'T');
+                           if (match) {
                               ++index;
-                              // "e"
-                              if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                              // ("e" | <EMPTY>)
+                              match = buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E');
+                              if (match) {
                                  ++index;
+                                 // <EMPTY>
+                                 match = true;
+                              } else {
+                                 match = true;
                               }
-                              // <EMPTY>
-                              match = true;
                            } else {
                               match = true;
                            }
@@ -2975,15 +4929,18 @@ public class HarbourPPParser implements Parser {
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.YUNTRANSLATE, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.YUNTRANSLATE, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -3009,24 +4966,33 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("tran", 4);
       if (match) {
          // ("slate" | "slat" | "sla" | "sl" | "s")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("slate" | "slat" | "sla" | "sl" | "s")
-         if (buffer.matchIgnoreCaseChar(index, 's')) {
+         match = buffer.matchChar(index, 's') || buffer.matchChar(index, 'S');
+         if (match) {
             ++index;
             // ("late" | "lat" | "la" | "l" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 'l')) {
+            match = buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L');
+            if (match) {
                ++index;
                // ("ate" | "at" | "a" | <EMPTY>)
-               if (buffer.matchIgnoreCaseChar(index, 'a')) {
+               match = buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A');
+               if (match) {
                   ++index;
                   // ("te" | "t" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 't')) {
+                  match = buffer.matchChar(index, 't') || buffer.matchChar(index, 'T');
+                  if (match) {
                      ++index;
-                     // "e"
-                     if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                     // ("e" | <EMPTY>)
+                     match = buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E');
+                     if (match) {
                         ++index;
+                        // <EMPTY>
+                        match = true;
+                     } else {
+                        match = true;
                      }
-                     // <EMPTY>
-                     match = true;
                   } else {
                      match = true;
                   }
@@ -3036,15 +5002,18 @@ public class HarbourPPParser implements Parser {
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.TRANSLATE, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.TRANSLATE, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -3070,27 +5039,37 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("ytra", 4);
       if (match) {
          // ("nslate" | "nslat" | "nsla" | "nsl" | "ns" | "n")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("nslate" | "nslat" | "nsla" | "nsl" | "ns" | "n")
-         if (buffer.matchIgnoreCaseChar(index, 'n')) {
+         match = buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N');
+         if (match) {
             ++index;
             // ("slate" | "slat" | "sla" | "sl" | "s" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 's')) {
+            match = buffer.matchChar(index, 's') || buffer.matchChar(index, 'S');
+            if (match) {
                ++index;
                // ("late" | "lat" | "la" | "l" | <EMPTY>)
-               if (buffer.matchIgnoreCaseChar(index, 'l')) {
+               match = buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L');
+               if (match) {
                   ++index;
                   // ("ate" | "at" | "a" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                  match = buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A');
+                  if (match) {
                      ++index;
                      // ("te" | "t" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 't')) {
+                     match = buffer.matchChar(index, 't') || buffer.matchChar(index, 'T');
+                     if (match) {
                         ++index;
-                        // "e"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                        // ("e" | <EMPTY>)
+                        match = buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E');
+                        if (match) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -3103,15 +5082,18 @@ public class HarbourPPParser implements Parser {
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.YTRANSLATE, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.YTRANSLATE, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -3137,27 +5119,37 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("xtra", 4);
       if (match) {
          // ("nslate" | "nslat" | "nsla" | "nsl" | "ns" | "n")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("nslate" | "nslat" | "nsla" | "nsl" | "ns" | "n")
-         if (buffer.matchIgnoreCaseChar(index, 'n')) {
+         match = buffer.matchChar(index, 'n') || buffer.matchChar(index, 'N');
+         if (match) {
             ++index;
             // ("slate" | "slat" | "sla" | "sl" | "s" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 's')) {
+            match = buffer.matchChar(index, 's') || buffer.matchChar(index, 'S');
+            if (match) {
                ++index;
                // ("late" | "lat" | "la" | "l" | <EMPTY>)
-               if (buffer.matchIgnoreCaseChar(index, 'l')) {
+               match = buffer.matchChar(index, 'l') || buffer.matchChar(index, 'L');
+               if (match) {
                   ++index;
                   // ("ate" | "at" | "a" | <EMPTY>)
-                  if (buffer.matchIgnoreCaseChar(index, 'a')) {
+                  match = buffer.matchChar(index, 'a') || buffer.matchChar(index, 'A');
+                  if (match) {
                      ++index;
                      // ("te" | "t" | <EMPTY>)
-                     if (buffer.matchIgnoreCaseChar(index, 't')) {
+                     match = buffer.matchChar(index, 't') || buffer.matchChar(index, 'T');
+                     if (match) {
                         ++index;
-                        // "e"
-                        if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+                        // ("e" | <EMPTY>)
+                        match = buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E');
+                        if (match) {
                            ++index;
+                           // <EMPTY>
+                           match = true;
+                        } else {
+                           match = true;
                         }
-                        // <EMPTY>
-                        match = true;
                      } else {
                         match = true;
                      }
@@ -3170,15 +5162,18 @@ public class HarbourPPParser implements Parser {
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.XTRANSLATE, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.XTRANSLATE, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -3197,6 +5192,21 @@ public class HarbourPPParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (escapedChar$RuleMemoStart == index) {
+         if (escapedChar$RuleMemoStart <= escapedChar$RuleMemoEnd) {
+            index = escapedChar$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.ESCAPED_CHAR, escapedChar$RuleMemoStart, escapedChar$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (escapedChar$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(escapedChar$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // ('\' ('\n'! .))
@@ -3215,13 +5225,21 @@ public class HarbourPPParser implements Parser {
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         escapedChar$RuleMemoStart = startIndex;
+         escapedChar$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            escapedChar$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.ESCAPED_CHAR, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            escapedChar$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         escapedChar$RuleMemoStart = startIndex;
+         escapedChar$RuleMemoEnd = -1;
+         escapedChar$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3234,6 +5252,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (optionalMatchMarker$RuleMemoStart == index) {
+         if (optionalMatchMarker$RuleMemoStart <= optionalMatchMarker$RuleMemoEnd) {
+            index = optionalMatchMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.OPTIONAL_MATCH_MARKER, optionalMatchMarker$RuleMemoStart, optionalMatchMarker$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (optionalMatchMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(optionalMatchMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('[' IgnoreOptionalSpacing OptionalMatchMarkerPattern IgnoreOptionalSpacing ']')
       // '['
@@ -3255,13 +5288,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         optionalMatchMarker$RuleMemoStart = startIndex;
+         optionalMatchMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            optionalMatchMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.OPTIONAL_MATCH_MARKER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            optionalMatchMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         optionalMatchMarker$RuleMemoStart = startIndex;
+         optionalMatchMarker$RuleMemoEnd = -1;
+         optionalMatchMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3276,14 +5317,25 @@ public class HarbourPPParser implements Parser {
       boolean match;
       startIndex = index;
       // OptionalMatchMarkerChunk+
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // OptionalMatchMarkerChunk
       match = optionalMatchMarkerChunk$Rule();
       if (match) {
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // OptionalMatchMarkerChunk
             match = optionalMatchMarkerChunk$Rule();
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
+      } else {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -3320,30 +5372,254 @@ public class HarbourPPParser implements Parser {
       match = ! match;
       if (match) {
          // (OptionalMatchMarker | MatchMarker | Identifier | Literal | Ignore | EscapedChar | Separator)
-         // OptionalMatchMarker
-         match = optionalMatchMarker$Rule();
-         if (! match) {
-            // MatchMarker
-            match = matchMarker$Rule();
-            if (! match) {
+         Node lastNode_2 = currentNode;
+         int lastIndex_2 = index;
+         switch(buffer.getChar(index)) {
+            case '@':
+            case '!':
+            case '#':
+            case '$':
+            case '%':
+            case '(':
+            case ')':
+            case '*':
+            case '+':
+            case ',':
+            case '-':
+            case ':':
+            case '|':
+            case '=':
+            case '}':
+            case '>':
+            case '^':
+            case '~':
+            case '?': {
+               // Separator
+               match = separator$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+               }
+               break;
+            }
+            case '[': {
+               // OptionalMatchMarker
+               match = optionalMatchMarker$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+                  // Separator
+                  match = separator$Rule();
+                  if (! match) {
+                     index = lastIndex_2;
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
+                  }
+               }
+               break;
+            }
+            case '<': {
+               // MatchMarker
+               match = matchMarker$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+                  // Separator
+                  match = separator$Rule();
+                  if (! match) {
+                     index = lastIndex_2;
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
+                  }
+               }
+               break;
+            }
+            case '\\': {
+               // EscapedChar
+               match = escapedChar$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+                  // Separator
+                  match = separator$Rule();
+                  if (! match) {
+                     index = lastIndex_2;
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
+                  }
+               }
+               break;
+            }
+            case '\"':
+            case '\'':
+            case '{':
+            case '.': {
+               // Literal
+               match = literal$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+                  // Separator
+                  match = separator$Rule();
+                  if (! match) {
+                     index = lastIndex_2;
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
+                  }
+               }
+               break;
+            }
+            case '&':
+            case ';':
+            case '/': {
+               // Ignore
+               match = ignore$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+                  // Separator
+                  match = separator$Rule();
+                  if (! match) {
+                     index = lastIndex_2;
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
+                  }
+               }
+               break;
+            }
+            case '_': {
                // Identifier
                match = identifier$Rule();
                if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+                  // Separator
+                  match = separator$Rule();
+                  if (! match) {
+                     index = lastIndex_2;
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
+                  }
+               }
+               break;
+            }
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9': {
+               // Literal
+               match = literal$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+               }
+               break;
+            }
+            case 'A':
+            case 'B':
+            case 'C':
+            case 'E':
+            case 'F':
+            case 'G':
+            case 'H':
+            case 'I':
+            case 'J':
+            case 'K':
+            case 'L':
+            case 'M':
+            case 'N':
+            case 'O':
+            case 'P':
+            case 'Q':
+            case 'R':
+            case 'S':
+            case 'T':
+            case 'U':
+            case 'V':
+            case 'W':
+            case 'X':
+            case 'Y':
+            case 'Z':
+            case 'a':
+            case 'b':
+            case 'c':
+            case 'e':
+            case 'f':
+            case 'g':
+            case 'h':
+            case 'i':
+            case 'j':
+            case 'k':
+            case 'l':
+            case 'm':
+            case 'n':
+            case 'o':
+            case 'p':
+            case 'q':
+            case 'r':
+            case 's':
+            case 't':
+            case 'u':
+            case 'v':
+            case 'w':
+            case 'x':
+            case 'y':
+            case 'z': {
+               // Identifier
+               match = identifier$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+               }
+               break;
+            }
+            case 'D':
+            case 'd': {
+               // Identifier
+               match = identifier$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
                   // Literal
                   match = literal$Rule();
                   if (! match) {
-                     // Ignore
-                     match = ignore$Rule();
-                     if (! match) {
-                        // EscapedChar
-                        match = escapedChar$Rule();
-                        if (! match) {
-                           // Separator
-                           match = separator$Rule();
-                        }
-                     }
+                     index = lastIndex_2;
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
                   }
                }
+               break;
+            }
+            case ' ':
+            case '\t':
+            case '\f': {
+               // Ignore
+               match = ignore$Rule();
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+               }
+               break;
+            }
+            default: {
+               match = false;
             }
          }
       }
@@ -3367,38 +5643,91 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (matchMarker$RuleMemoStart == index) {
+         if (matchMarker$RuleMemoStart <= matchMarker$RuleMemoEnd) {
+            index = matchMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.MATCH_MARKER, matchMarker$RuleMemoStart, matchMarker$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (matchMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(matchMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (IdMarker | ListMarker | RestrictMarker | WildMarker | ExtendedMarker | IdentifierMarker)
-      // IdMarker
-      match = idMarker$Rule();
-      if (! match) {
-         // ListMarker
-         match = listMarker$Rule();
-         if (! match) {
-            // RestrictMarker
-            match = restrictMarker$Rule();
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case '<': {
+            // IdMarker
+            match = idMarker$Rule();
             if (! match) {
-               // WildMarker
-               match = wildMarker$Rule();
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // ListMarker
+               match = listMarker$Rule();
                if (! match) {
-                  // ExtendedMarker
-                  match = extendedMarker$Rule();
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+                  // RestrictMarker
+                  match = restrictMarker$Rule();
                   if (! match) {
-                     // IdentifierMarker
-                     match = identifierMarker$Rule();
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                     // WildMarker
+                     match = wildMarker$Rule();
+                     if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                        // ExtendedMarker
+                        match = extendedMarker$Rule();
+                        if (! match) {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
+                           // IdentifierMarker
+                           match = identifierMarker$Rule();
+                           if (! match) {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
+                           }
+                        }
+                     }
                   }
                }
             }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         matchMarker$RuleMemoStart = startIndex;
+         matchMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            matchMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.MATCH_MARKER, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            matchMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         matchMarker$RuleMemoStart = startIndex;
+         matchMarker$RuleMemoEnd = -1;
+         matchMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3411,42 +5740,144 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (literal$RuleMemoStart == index) {
+         if (literal$RuleMemoStart <= literal$RuleMemoEnd) {
+            index = literal$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.LITERAL, literal$RuleMemoStart, literal$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (literal$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(literal$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (LogicalLiteral | DoubleQuoteString | SingleQuoteString | DateTimeLiteral | NumberLiteral | MultiLineDoubleQuoteString | MultiLineSingleQuoteString)
-      // LogicalLiteral
-      match = logicalLiteral$Rule();
-      if (! match) {
-         // DoubleQuoteString
-         match = doubleQuoteString$Rule();
-         if (! match) {
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case 'd':
+         case 'D':
+         case '{': {
+            // DateTimeLiteral
+            match = dateTimeLiteral$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         case '.': {
+            // LogicalLiteral
+            match = logicalLiteral$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // NumberLiteral
+               match = numberLiteral$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '0': {
+            // DateTimeLiteral
+            match = dateTimeLiteral$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // NumberLiteral
+               match = numberLiteral$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9': {
+            // NumberLiteral
+            match = numberLiteral$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         case '\"': {
+            // DoubleQuoteString
+            match = doubleQuoteString$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // MultiLineDoubleQuoteString
+               match = multiLineDoubleQuoteString$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '\'': {
             // SingleQuoteString
             match = singleQuoteString$Rule();
             if (! match) {
-               // DateTimeLiteral
-               match = dateTimeLiteral$Rule();
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // MultiLineSingleQuoteString
+               match = multiLineSingleQuoteString$Rule();
                if (! match) {
-                  // NumberLiteral
-                  match = numberLiteral$Rule();
-                  if (! match) {
-                     // MultiLineDoubleQuoteString
-                     match = multiLineDoubleQuoteString$Rule();
-                     if (! match) {
-                        // MultiLineSingleQuoteString
-                        match = multiLineSingleQuoteString$Rule();
-                     }
-                  }
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                }
             }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         literal$RuleMemoStart = startIndex;
+         literal$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            literal$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.LITERAL, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            literal$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         literal$RuleMemoStart = startIndex;
+         literal$RuleMemoEnd = -1;
+         literal$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3454,223 +5885,137 @@ public class HarbourPPParser implements Parser {
       }
    }
 
-   //Separator : (".or." | ".and." | ".not." | ':=' | '==' | '!=' | '>=' | '<=' | '->' | '++' | '--' | '+=' | '-=' | '*=' | '/=' | '%=' | '^=' | '**' | '^^' | '<<' | '>>' | '::' | '<>' | '...' | '&&' | '||' | '^^' | '**=' | '$' | ',' | '>' | '+' | '*' | '!' | '-' | '/' | '(' | ')' | ':' | '{' | '}' | '%' | '\' | '?' | '~' | '.' | '@' | '|' | '&' | '=' | '^' | '#' | ';' | '<' | '[' | '"' | ''' | '_')
+   //Separator : (".or." | ".and." | ".not." | ':=' | '==' | '!=' | '>=' | '<=' | '->' | '++' | '--' | '+=' | '-=' | '*=' | '/=' | '%=' | '^=' | '**' | '^^' | '<<' | '>>' | '::' | '<>' | '...' | '&&' | '||' | '^^' | '**=' | '$' | ',' | '>' | '+' | '*' | '!' | '-' | '/' | '(' | ')' | ':' | '{' | '}' | '%' | '\' | '?' | '~' | '.' | '@' | '|' | '&' | '=' | '^' | '#' | ';' | '<' | '[' | '"' | '\'' | '_')
    protected boolean separator$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (separator$RuleMemoStart == index) {
+         if (separator$RuleMemoStart <= separator$RuleMemoEnd) {
+            index = separator$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.SEPARATOR, separator$RuleMemoStart, separator$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (separator$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(separator$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
-      // (".or." | ".and." | ".not." | ':=' | '==' | '!=' | '>=' | '<=' | '->' | '++' | '--' | '+=' | '-=' | '*=' | '/=' | '%=' | '^=' | '**' | '^^' | '<<' | '>>' | '::' | '<>' | '...' | '&&' | '||' | '^^' | '**=' | '$' | ',' | '>' | '+' | '*' | '!' | '-' | '/' | '(' | ')' | ':' | '{' | '}' | '%' | '\' | '?' | '~' | '.' | '@' | '|' | '&' | '=' | '^' | '#' | ';' | '<' | '[' | '"' | ''' | '_')
+      // (".or." | ".and." | ".not." | ':=' | '==' | '!=' | '>=' | '<=' | '->' | '++' | '--' | '+=' | '-=' | '*=' | '/=' | '%=' | '^=' | '**' | '^^' | '<<' | '>>' | '::' | '<>' | '...' | '&&' | '||' | '^^' | '**=' | '$' | ',' | '>' | '+' | '*' | '!' | '-' | '/' | '(' | ')' | ':' | '{' | '}' | '%' | '\' | '?' | '~' | '.' | '@' | '|' | '&' | '=' | '^' | '#' | ';' | '<' | '[' | '"' | '\'' | '_')
       switch(buffer.getChar(index)) {
-         case '(':
+         case '+': {
             ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '$':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '>':
-            ++index;
-            // ('=' | '>' | <EMPTY>)
+            // ('+' | '=' | <EMPTY>)
             switch(buffer.getChar(index)) {
-               case '>':
+               case '+': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '=':
+               }
+               case '=': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = true;
+               }
             }
             break;
-         case '~':
+         }
+         case ',': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         case '-':
+         }
+         case '-': {
             ++index;
             // ('>' | '-' | '=' | <EMPTY>)
             switch(buffer.getChar(index)) {
-               case '>':
+               case '-': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '-':
+               }
+               case '=': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '=':
+               }
+               case '>': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = true;
+               }
             }
             break;
-         case '\\':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case ':':
-            ++index;
-            // ('=' | ':' | <EMPTY>)
-            switch(buffer.getChar(index)) {
-               case '=':
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               case ':':
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               default:
-                  match = true;
-            }
-            break;
-         case ')':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '%':
-            ++index;
-            // ('=' | <EMPTY>)
-            if (buffer.matchChar(index, '=')) {
-               ++index;
-               // <EMPTY>
-               match = true;
-            } else {
-               match = true;
-            }
-            break;
-         case '!':
-            ++index;
-            // ('=' | <EMPTY>)
-            if (buffer.matchChar(index, '=')) {
-               ++index;
-               // <EMPTY>
-               match = true;
-            } else {
-               match = true;
-            }
-            break;
-         case '?':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '.':
+         }
+         case '.': {
             ++index;
             // ("and." | "not." | "or." | '..' | <EMPTY>)
             switch(buffer.getChar(index)) {
-               case 'a':
-               case 'A':
-                  ++index;
-                  // "nd."
-                  if (match = ignoreCaseStringTest("nd.", 3)) {
-                     index += 3;
-                  }
-                  break;
-               case 'o':
-               case 'O':
-                  ++index;
-                  // "r."
-                  if (match = ignoreCaseStringTest("r.", 2)) {
-                     index += 2;
-                  }
-                  break;
                case 'n':
-               case 'N':
+               case 'N': {
                   ++index;
                   // "ot."
                   if (match = ignoreCaseStringTest("ot.", 3)) {
                      index += 3;
                   }
                   break;
-               case '.':
+               }
+               case 'o':
+               case 'O': {
+                  ++index;
+                  // "r."
+                  if (match = ignoreCaseStringTest("r.", 2)) {
+                     index += 2;
+                  }
+                  break;
+               }
+               case '.': {
                   ++index;
                   // '.'
                   if (match = buffer.matchChar(index, '.')) {
                      ++index;
                   }
                   break;
-               default:
-                  match = true;
-            }
-            break;
-         case '{':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case ';':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '*':
-            ++index;
-            // ('*=' | '=' | '*' | <EMPTY>)
-            switch(buffer.getChar(index)) {
-               case '=':
+               }
+               case 'a':
+               case 'A': {
                   ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               case '*':
-                  ++index;
-                  // '='
-                  if (match = buffer.matchChar(index, '=')) {
-                     ++index;
+                  // "nd."
+                  if (match = ignoreCaseStringTest("nd.", 3)) {
+                     index += 3;
                   }
-                  // <EMPTY>
-                  match = true;
                   break;
-               default:
+               }
+               default: {
                   match = true;
+               }
             }
             break;
-         case '&':
-            ++index;
-            // ('&' | <EMPTY>)
-            if (buffer.matchChar(index, '&')) {
-               ++index;
-               // <EMPTY>
-               match = true;
-            } else {
-               match = true;
-            }
-            break;
-         case '\"':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '@':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '/':
+         }
+         case '/': {
             ++index;
             // ('=' | <EMPTY>)
-            if (buffer.matchChar(index, '=')) {
+            match = buffer.matchChar(index, '=');
+            if (match) {
                ++index;
                // <EMPTY>
                match = true;
@@ -3678,53 +6023,74 @@ public class HarbourPPParser implements Parser {
                match = true;
             }
             break;
-         case '^':
+         }
+         case ':': {
             ++index;
-            // ('=' | '^' | '^' | <EMPTY>)
+            // ('=' | ':' | <EMPTY>)
             switch(buffer.getChar(index)) {
-               case '^':
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               case '=':
+               case '=': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               case ':': {
+                  ++index;
+                  // <EMPTY>
                   match = true;
+                  break;
+               }
+               default: {
+                  match = true;
+               }
             }
             break;
-         case '<':
+         }
+         case '{': {
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         }
+         case ';': {
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         }
+         case '<': {
             ++index;
             // ('=' | '<' | '>' | <EMPTY>)
             switch(buffer.getChar(index)) {
-               case '>':
+               case '<': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '=':
+               }
+               case '=': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '<':
+               }
+               case '>': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = true;
+               }
             }
             break;
-         case '|':
+         }
+         case '|': {
             ++index;
             // ('|' | <EMPTY>)
-            if (buffer.matchChar(index, '|')) {
+            match = buffer.matchChar(index, '|');
+            if (match) {
                ++index;
                // <EMPTY>
                match = true;
@@ -3732,43 +6098,12 @@ public class HarbourPPParser implements Parser {
                match = true;
             }
             break;
-         case '+':
-            ++index;
-            // ('+' | '=' | <EMPTY>)
-            switch(buffer.getChar(index)) {
-               case '=':
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               case '+':
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               default:
-                  match = true;
-            }
-            break;
-         case '\'':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '#':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '_':
-            ++index;
-            // <EMPTY>
-            match = true;
-            break;
-         case '=':
+         }
+         case '=': {
             ++index;
             // ('=' | <EMPTY>)
-            if (buffer.matchChar(index, '=')) {
+            match = buffer.matchChar(index, '=');
+            if (match) {
                ++index;
                // <EMPTY>
                match = true;
@@ -3776,33 +6111,218 @@ public class HarbourPPParser implements Parser {
                match = true;
             }
             break;
-         case '}':
+         }
+         case '}': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         case ',':
+         }
+         case '>': {
+            ++index;
+            // ('=' | '>' | <EMPTY>)
+            switch(buffer.getChar(index)) {
+               case '=': {
+                  ++index;
+                  // <EMPTY>
+                  match = true;
+                  break;
+               }
+               case '>': {
+                  ++index;
+                  // <EMPTY>
+                  match = true;
+                  break;
+               }
+               default: {
+                  match = true;
+               }
+            }
+            break;
+         }
+         case '~': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         case '[':
+         }
+         case '?': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         default:
+         }
+         case '@': {
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         }
+         case '[': {
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         }
+         case '\\': {
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         }
+         case '^': {
+            ++index;
+            // ('=' | '^' | '^' | <EMPTY>)
+            switch(buffer.getChar(index)) {
+               case '=': {
+                  ++index;
+                  // <EMPTY>
+                  match = true;
+                  break;
+               }
+               case '^': {
+                  ++index;
+                  // <EMPTY>
+                  match = true;
+                  break;
+               }
+               default: {
+                  match = true;
+               }
+            }
+            break;
+         }
+         case '_': {
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         }
+         case '!': {
+            ++index;
+            // ('=' | <EMPTY>)
+            match = buffer.matchChar(index, '=');
+            if (match) {
+               ++index;
+               // <EMPTY>
+               match = true;
+            } else {
+               match = true;
+            }
+            break;
+         }
+         case '\"': {
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         }
+         case '#': {
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         }
+         case '$': {
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         }
+         case '%': {
+            ++index;
+            // ('=' | <EMPTY>)
+            match = buffer.matchChar(index, '=');
+            if (match) {
+               ++index;
+               // <EMPTY>
+               match = true;
+            } else {
+               match = true;
+            }
+            break;
+         }
+         case '&': {
+            ++index;
+            // ('&' | <EMPTY>)
+            match = buffer.matchChar(index, '&');
+            if (match) {
+               ++index;
+               // <EMPTY>
+               match = true;
+            } else {
+               match = true;
+            }
+            break;
+         }
+         case '\'': {
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         }
+         case '(': {
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         }
+         case ')': {
+            ++index;
+            // <EMPTY>
+            match = true;
+            break;
+         }
+         case '*': {
+            ++index;
+            // ('*=' | '=' | '*' | <EMPTY>)
+            switch(buffer.getChar(index)) {
+               case '=': {
+                  ++index;
+                  // <EMPTY>
+                  match = true;
+                  break;
+               }
+               case '*': {
+                  ++index;
+                  // ('=' | <EMPTY>)
+                  match = buffer.matchChar(index, '=');
+                  if (match) {
+                     ++index;
+                     // <EMPTY>
+                     match = true;
+                  } else {
+                     match = true;
+                  }
+                  break;
+               }
+               default: {
+                  match = true;
+               }
+            }
+            break;
+         }
+         default: {
             match = false;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         separator$RuleMemoStart = startIndex;
+         separator$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            separator$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.SEPARATOR, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            separator$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         separator$RuleMemoStart = startIndex;
+         separator$RuleMemoEnd = -1;
+         separator$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3830,29 +6350,54 @@ public class HarbourPPParser implements Parser {
       match = ! match;
       if (match) {
          // (OptionalMatchMarker | MatchMarker | Identifier | Literal | Ignore | EscapedChar | ']' | Separator)
+         Node lastNode_2 = currentNode;
+         int lastIndex_2 = index;
          // OptionalMatchMarker
          match = optionalMatchMarker$Rule();
          if (! match) {
+            index = lastIndex_2;
+            lastNode_2.setSibling(null);
+            currentNode = lastNode_2;
             // MatchMarker
             match = matchMarker$Rule();
             if (! match) {
+               index = lastIndex_2;
+               lastNode_2.setSibling(null);
+               currentNode = lastNode_2;
                // Identifier
                match = identifier$Rule();
                if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
                   // Literal
                   match = literal$Rule();
                   if (! match) {
+                     index = lastIndex_2;
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
                      // Ignore
                      match = ignore$Rule();
                      if (! match) {
+                        index = lastIndex_2;
+                        lastNode_2.setSibling(null);
+                        currentNode = lastNode_2;
                         // EscapedChar
                         match = escapedChar$Rule();
                         if (! match) {
+                           index = lastIndex_2;
+                           lastNode_2.setSibling(null);
+                           currentNode = lastNode_2;
                            // ']'
                            match = charMatcher(']');
                            if (! match) {
                               // Separator
                               match = separator$Rule();
+                              if (! match) {
+                                 index = lastIndex_2;
+                                 lastNode_2.setSibling(null);
+                                 currentNode = lastNode_2;
+                              }
                            }
                         }
                      }
@@ -3881,6 +6426,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (idMarker$RuleMemoStart == index) {
+         if (idMarker$RuleMemoStart <= idMarker$RuleMemoEnd) {
+            index = idMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.ID_MARKER, idMarker$RuleMemoStart, idMarker$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (idMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(idMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('<' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '>')
       // '<'
@@ -3902,13 +6462,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         idMarker$RuleMemoStart = startIndex;
+         idMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            idMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.ID_MARKER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            idMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         idMarker$RuleMemoStart = startIndex;
+         idMarker$RuleMemoEnd = -1;
+         idMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3921,6 +6489,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (listMarker$RuleMemoStart == index) {
+         if (listMarker$RuleMemoStart <= listMarker$RuleMemoEnd) {
+            index = listMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.LIST_MARKER, listMarker$RuleMemoStart, listMarker$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (listMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(listMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('<' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing ',' IgnoreOptionalSpacing '...' IgnoreOptionalSpacing '>')
       // '<'
@@ -3958,13 +6541,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         listMarker$RuleMemoStart = startIndex;
+         listMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            listMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.LIST_MARKER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            listMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         listMarker$RuleMemoStart = startIndex;
+         listMarker$RuleMemoEnd = -1;
+         listMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -3977,6 +6568,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (restrictMarker$RuleMemoStart == index) {
+         if (restrictMarker$RuleMemoStart <= restrictMarker$RuleMemoEnd) {
+            index = restrictMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.RESTRICT_MARKER, restrictMarker$RuleMemoStart, restrictMarker$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (restrictMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(restrictMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('<' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing ':' IgnoreOptionalSpacing RestrictValues IgnoreOptionalSpacing '>')
       // '<'
@@ -4014,13 +6620,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         restrictMarker$RuleMemoStart = startIndex;
+         restrictMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            restrictMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.RESTRICT_MARKER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            restrictMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         restrictMarker$RuleMemoStart = startIndex;
+         restrictMarker$RuleMemoEnd = -1;
+         restrictMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4033,6 +6647,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (wildMarker$RuleMemoStart == index) {
+         if (wildMarker$RuleMemoStart <= wildMarker$RuleMemoEnd) {
+            index = wildMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.WILD_MARKER, wildMarker$RuleMemoStart, wildMarker$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (wildMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(wildMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('<' IgnoreOptionalSpacing '*' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '*' IgnoreOptionalSpacing '>')
       // '<'
@@ -4070,13 +6699,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         wildMarker$RuleMemoStart = startIndex;
+         wildMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            wildMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.WILD_MARKER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            wildMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         wildMarker$RuleMemoStart = startIndex;
+         wildMarker$RuleMemoEnd = -1;
+         wildMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4089,6 +6726,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (extendedMarker$RuleMemoStart == index) {
+         if (extendedMarker$RuleMemoStart <= extendedMarker$RuleMemoEnd) {
+            index = extendedMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.EXTENDED_MARKER, extendedMarker$RuleMemoStart, extendedMarker$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (extendedMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(extendedMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('<' IgnoreOptionalSpacing '(' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing ')' IgnoreOptionalSpacing '>')
       // '<'
@@ -4126,13 +6778,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         extendedMarker$RuleMemoStart = startIndex;
+         extendedMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            extendedMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.EXTENDED_MARKER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            extendedMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         extendedMarker$RuleMemoStart = startIndex;
+         extendedMarker$RuleMemoEnd = -1;
+         extendedMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4145,6 +6805,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (identifierMarker$RuleMemoStart == index) {
+         if (identifierMarker$RuleMemoStart <= identifierMarker$RuleMemoEnd) {
+            index = identifierMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.IDENTIFIER_MARKER, identifierMarker$RuleMemoStart, identifierMarker$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (identifierMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(identifierMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('<' IgnoreOptionalSpacing '!' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '!' IgnoreOptionalSpacing '>')
       // '<'
@@ -4182,13 +6857,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         identifierMarker$RuleMemoStart = startIndex;
+         identifierMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            identifierMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.IDENTIFIER_MARKER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            identifierMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         identifierMarker$RuleMemoStart = startIndex;
+         identifierMarker$RuleMemoEnd = -1;
+         identifierMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4207,10 +6890,12 @@ public class HarbourPPParser implements Parser {
       match = restrictValue$Rule();
       if (match) {
          // (IgnoreOptionalSpacing ',' IgnoreOptionalSpacing RestrictValue)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (IgnoreOptionalSpacing ',' IgnoreOptionalSpacing RestrictValue)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // IgnoreOptionalSpacing
             match = ignoreOptionalSpacing$Rule();
             if (match) {
@@ -4222,21 +6907,13 @@ public class HarbourPPParser implements Parser {
                   if (match) {
                      // RestrictValue
                      match = restrictValue$Rule();
-                     if (! match) {
-                        index = lastIndex_1;
-                        lastNode_1.setSibling(null);
-                        currentNode = lastNode_1;
-                     }
-                  } else {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
                   }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
       }
       if (match) {
@@ -4259,117 +6936,543 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (restrictValue$RuleMemoStart == index) {
+         if (restrictValue$RuleMemoStart <= restrictValue$RuleMemoEnd) {
+            index = restrictValue$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.RESTRICT_VALUE, restrictValue$RuleMemoStart, restrictValue$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (restrictValue$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(restrictValue$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (('>' | ',')! (Identifier | Literal | Ignore | EscapedChar | Separator))+
-      // (('>' | ',')! (Identifier | Literal | Ignore | EscapedChar | Separator))
       Node lastNode_1 = currentNode;
       int lastIndex_1 = index;
+      // (('>' | ',')! (Identifier | Literal | Ignore | EscapedChar | Separator))
       // ('>' | ',')!
       // ('>' | ',')
       int startIndex_2 = index;
       switch(buffer.getChar(index)) {
-         case '>':
+         case ',': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         case ',':
+         }
+         case '>': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         default:
+         }
+         default: {
             match = false;
+         }
       }
       index = startIndex_2;
       match = ! match;
       if (match) {
          // (Identifier | Literal | Ignore | EscapedChar | Separator)
-         // Identifier
-         match = identifier$Rule();
-         if (! match) {
-            // Literal
-            match = literal$Rule();
-            if (! match) {
-               // Ignore
-               match = ignore$Rule();
-               if (! match) {
-                  // EscapedChar
-                  match = escapedChar$Rule();
-                  if (! match) {
-                     // Separator
-                     match = separator$Rule();
-                  }
-               }
-            }
-         }
-         if (! match) {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-         }
-      }
-      if (match) {
-         do {
-            // (('>' | ',')! (Identifier | Literal | Ignore | EscapedChar | Separator))
-            Node lastNode_3 = currentNode;
-            int lastIndex_3 = index;
-            // ('>' | ',')!
-            // ('>' | ',')
-            int startIndex_4 = index;
-            switch(buffer.getChar(index)) {
-               case '>':
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               case ',':
-                  ++index;
-                  // <EMPTY>
-                  match = true;
-                  break;
-               default:
-                  match = false;
-            }
-            index = startIndex_4;
-            match = ! match;
-            if (match) {
-               // (Identifier | Literal | Ignore | EscapedChar | Separator)
-               // Identifier
-               match = identifier$Rule();
-               if (! match) {
-                  // Literal
-                  match = literal$Rule();
-                  if (! match) {
-                     // Ignore
-                     match = ignore$Rule();
-                     if (! match) {
-                        // EscapedChar
-                        match = escapedChar$Rule();
-                        if (! match) {
-                           // Separator
-                           match = separator$Rule();
-                        }
-                     }
-                  }
-               }
+         Node lastNode_3 = currentNode;
+         int lastIndex_3 = index;
+         switch(buffer.getChar(index)) {
+            case '@':
+            case '!':
+            case '#':
+            case '$':
+            case '%':
+            case '(':
+            case ')':
+            case '*':
+            case '+':
+            case ',':
+            case '-':
+            case ':':
+            case '[':
+            case '<':
+            case '|':
+            case '=':
+            case '}':
+            case '>':
+            case '^':
+            case '~':
+            case '?': {
+               // Separator
+               match = separator$Rule();
                if (! match) {
                   index = lastIndex_3;
                   lastNode_3.setSibling(null);
                   currentNode = lastNode_3;
                }
+               break;
             }
-         } while(match);
-         match = true;
+            case '\\': {
+               // EscapedChar
+               match = escapedChar$Rule();
+               if (! match) {
+                  index = lastIndex_3;
+                  lastNode_3.setSibling(null);
+                  currentNode = lastNode_3;
+                  // Separator
+                  match = separator$Rule();
+                  if (! match) {
+                     index = lastIndex_3;
+                     lastNode_3.setSibling(null);
+                     currentNode = lastNode_3;
+                  }
+               }
+               break;
+            }
+            case '\"':
+            case '\'':
+            case '{':
+            case '.': {
+               // Literal
+               match = literal$Rule();
+               if (! match) {
+                  index = lastIndex_3;
+                  lastNode_3.setSibling(null);
+                  currentNode = lastNode_3;
+                  // Separator
+                  match = separator$Rule();
+                  if (! match) {
+                     index = lastIndex_3;
+                     lastNode_3.setSibling(null);
+                     currentNode = lastNode_3;
+                  }
+               }
+               break;
+            }
+            case '&':
+            case ';':
+            case '/': {
+               // Ignore
+               match = ignore$Rule();
+               if (! match) {
+                  index = lastIndex_3;
+                  lastNode_3.setSibling(null);
+                  currentNode = lastNode_3;
+                  // Separator
+                  match = separator$Rule();
+                  if (! match) {
+                     index = lastIndex_3;
+                     lastNode_3.setSibling(null);
+                     currentNode = lastNode_3;
+                  }
+               }
+               break;
+            }
+            case '_': {
+               // Identifier
+               match = identifier$Rule();
+               if (! match) {
+                  index = lastIndex_3;
+                  lastNode_3.setSibling(null);
+                  currentNode = lastNode_3;
+                  // Separator
+                  match = separator$Rule();
+                  if (! match) {
+                     index = lastIndex_3;
+                     lastNode_3.setSibling(null);
+                     currentNode = lastNode_3;
+                  }
+               }
+               break;
+            }
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9': {
+               // Literal
+               match = literal$Rule();
+               if (! match) {
+                  index = lastIndex_3;
+                  lastNode_3.setSibling(null);
+                  currentNode = lastNode_3;
+               }
+               break;
+            }
+            case 'A':
+            case 'B':
+            case 'C':
+            case 'E':
+            case 'F':
+            case 'G':
+            case 'H':
+            case 'I':
+            case 'J':
+            case 'K':
+            case 'L':
+            case 'M':
+            case 'N':
+            case 'O':
+            case 'P':
+            case 'Q':
+            case 'R':
+            case 'S':
+            case 'T':
+            case 'U':
+            case 'V':
+            case 'W':
+            case 'X':
+            case 'Y':
+            case 'Z':
+            case 'a':
+            case 'b':
+            case 'c':
+            case 'e':
+            case 'f':
+            case 'g':
+            case 'h':
+            case 'i':
+            case 'j':
+            case 'k':
+            case 'l':
+            case 'm':
+            case 'n':
+            case 'o':
+            case 'p':
+            case 'q':
+            case 'r':
+            case 's':
+            case 't':
+            case 'u':
+            case 'v':
+            case 'w':
+            case 'x':
+            case 'y':
+            case 'z': {
+               // Identifier
+               match = identifier$Rule();
+               if (! match) {
+                  index = lastIndex_3;
+                  lastNode_3.setSibling(null);
+                  currentNode = lastNode_3;
+               }
+               break;
+            }
+            case 'D':
+            case 'd': {
+               // Identifier
+               match = identifier$Rule();
+               if (! match) {
+                  index = lastIndex_3;
+                  lastNode_3.setSibling(null);
+                  currentNode = lastNode_3;
+                  // Literal
+                  match = literal$Rule();
+                  if (! match) {
+                     index = lastIndex_3;
+                     lastNode_3.setSibling(null);
+                     currentNode = lastNode_3;
+                  }
+               }
+               break;
+            }
+            case ' ':
+            case '\t':
+            case '\f': {
+               // Ignore
+               match = ignore$Rule();
+               if (! match) {
+                  index = lastIndex_3;
+                  lastNode_3.setSibling(null);
+                  currentNode = lastNode_3;
+               }
+               break;
+            }
+            default: {
+               match = false;
+            }
+         }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.RESTRICT_VALUE, startIndex, index, true, false);
+         do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
+            // (('>' | ',')! (Identifier | Literal | Ignore | EscapedChar | Separator))
+            // ('>' | ',')!
+            // ('>' | ',')
+            int startIndex_4 = index;
+            switch(buffer.getChar(index)) {
+               case ',': {
+                  ++index;
+                  // <EMPTY>
+                  match = true;
+                  break;
+               }
+               case '>': {
+                  ++index;
+                  // <EMPTY>
+                  match = true;
+                  break;
+               }
+               default: {
+                  match = false;
+               }
+            }
+            index = startIndex_4;
+            match = ! match;
+            if (match) {
+               // (Identifier | Literal | Ignore | EscapedChar | Separator)
+               Node lastNode_5 = currentNode;
+               int lastIndex_5 = index;
+               switch(buffer.getChar(index)) {
+                  case '@':
+                  case '!':
+                  case '#':
+                  case '$':
+                  case '%':
+                  case '(':
+                  case ')':
+                  case '*':
+                  case '+':
+                  case ',':
+                  case '-':
+                  case ':':
+                  case '[':
+                  case '<':
+                  case '|':
+                  case '=':
+                  case '}':
+                  case '>':
+                  case '^':
+                  case '~':
+                  case '?': {
+                     // Separator
+                     match = separator$Rule();
+                     if (! match) {
+                        index = lastIndex_5;
+                        lastNode_5.setSibling(null);
+                        currentNode = lastNode_5;
+                     }
+                     break;
+                  }
+                  case '\\': {
+                     // EscapedChar
+                     match = escapedChar$Rule();
+                     if (! match) {
+                        index = lastIndex_5;
+                        lastNode_5.setSibling(null);
+                        currentNode = lastNode_5;
+                        // Separator
+                        match = separator$Rule();
+                        if (! match) {
+                           index = lastIndex_5;
+                           lastNode_5.setSibling(null);
+                           currentNode = lastNode_5;
+                        }
+                     }
+                     break;
+                  }
+                  case '\"':
+                  case '\'':
+                  case '{':
+                  case '.': {
+                     // Literal
+                     match = literal$Rule();
+                     if (! match) {
+                        index = lastIndex_5;
+                        lastNode_5.setSibling(null);
+                        currentNode = lastNode_5;
+                        // Separator
+                        match = separator$Rule();
+                        if (! match) {
+                           index = lastIndex_5;
+                           lastNode_5.setSibling(null);
+                           currentNode = lastNode_5;
+                        }
+                     }
+                     break;
+                  }
+                  case '&':
+                  case ';':
+                  case '/': {
+                     // Ignore
+                     match = ignore$Rule();
+                     if (! match) {
+                        index = lastIndex_5;
+                        lastNode_5.setSibling(null);
+                        currentNode = lastNode_5;
+                        // Separator
+                        match = separator$Rule();
+                        if (! match) {
+                           index = lastIndex_5;
+                           lastNode_5.setSibling(null);
+                           currentNode = lastNode_5;
+                        }
+                     }
+                     break;
+                  }
+                  case '_': {
+                     // Identifier
+                     match = identifier$Rule();
+                     if (! match) {
+                        index = lastIndex_5;
+                        lastNode_5.setSibling(null);
+                        currentNode = lastNode_5;
+                        // Separator
+                        match = separator$Rule();
+                        if (! match) {
+                           index = lastIndex_5;
+                           lastNode_5.setSibling(null);
+                           currentNode = lastNode_5;
+                        }
+                     }
+                     break;
+                  }
+                  case '0':
+                  case '1':
+                  case '2':
+                  case '3':
+                  case '4':
+                  case '5':
+                  case '6':
+                  case '7':
+                  case '8':
+                  case '9': {
+                     // Literal
+                     match = literal$Rule();
+                     if (! match) {
+                        index = lastIndex_5;
+                        lastNode_5.setSibling(null);
+                        currentNode = lastNode_5;
+                     }
+                     break;
+                  }
+                  case 'A':
+                  case 'B':
+                  case 'C':
+                  case 'E':
+                  case 'F':
+                  case 'G':
+                  case 'H':
+                  case 'I':
+                  case 'J':
+                  case 'K':
+                  case 'L':
+                  case 'M':
+                  case 'N':
+                  case 'O':
+                  case 'P':
+                  case 'Q':
+                  case 'R':
+                  case 'S':
+                  case 'T':
+                  case 'U':
+                  case 'V':
+                  case 'W':
+                  case 'X':
+                  case 'Y':
+                  case 'Z':
+                  case 'a':
+                  case 'b':
+                  case 'c':
+                  case 'e':
+                  case 'f':
+                  case 'g':
+                  case 'h':
+                  case 'i':
+                  case 'j':
+                  case 'k':
+                  case 'l':
+                  case 'm':
+                  case 'n':
+                  case 'o':
+                  case 'p':
+                  case 'q':
+                  case 'r':
+                  case 's':
+                  case 't':
+                  case 'u':
+                  case 'v':
+                  case 'w':
+                  case 'x':
+                  case 'y':
+                  case 'z': {
+                     // Identifier
+                     match = identifier$Rule();
+                     if (! match) {
+                        index = lastIndex_5;
+                        lastNode_5.setSibling(null);
+                        currentNode = lastNode_5;
+                     }
+                     break;
+                  }
+                  case 'D':
+                  case 'd': {
+                     // Identifier
+                     match = identifier$Rule();
+                     if (! match) {
+                        index = lastIndex_5;
+                        lastNode_5.setSibling(null);
+                        currentNode = lastNode_5;
+                        // Literal
+                        match = literal$Rule();
+                        if (! match) {
+                           index = lastIndex_5;
+                           lastNode_5.setSibling(null);
+                           currentNode = lastNode_5;
+                        }
+                     }
+                     break;
+                  }
+                  case ' ':
+                  case '\t':
+                  case '\f': {
+                     // Ignore
+                     match = ignore$Rule();
+                     if (! match) {
+                        index = lastIndex_5;
+                        lastNode_5.setSibling(null);
+                        currentNode = lastNode_5;
+                     }
+                     break;
+                  }
+                  default: {
+                     match = false;
+                  }
+               }
+            }
+         } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
+         match = true;
+      } else {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
+      }
+      if (match) {
+         restrictValue$RuleMemoStart = startIndex;
+         restrictValue$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            restrictValue$RuleMemoFirstNode = null;
+         } else {
+            currentNode = new NodeImpl(HarbourPPRuleType.RESTRICT_VALUE, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            restrictValue$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         restrictValue$RuleMemoStart = startIndex;
+         restrictValue$RuleMemoEnd = -1;
+         restrictValue$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4382,6 +7485,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (nullMarker$RuleMemoStart == index) {
+         if (nullMarker$RuleMemoStart <= nullMarker$RuleMemoEnd) {
+            index = nullMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.NULL_MARKER, nullMarker$RuleMemoStart, nullMarker$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (nullMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(nullMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('<' IgnoreOptionalSpacing '-' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '-' IgnoreOptionalSpacing '>')
       // '<'
@@ -4419,13 +7537,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         nullMarker$RuleMemoStart = startIndex;
+         nullMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            nullMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.NULL_MARKER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            nullMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         nullMarker$RuleMemoStart = startIndex;
+         nullMarker$RuleMemoEnd = -1;
+         nullMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4438,42 +7564,107 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (resultMarker$RuleMemoStart == index) {
+         if (resultMarker$RuleMemoStart <= resultMarker$RuleMemoEnd) {
+            index = resultMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.RESULT_MARKER, resultMarker$RuleMemoStart, resultMarker$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (resultMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(resultMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (IdMarker | DumbStringifyMarker | NormalStringifyMarker | SmartStringifyMarker | BlockifyMarker | LogifyMarker | NullMarker)
-      // IdMarker
-      match = idMarker$Rule();
-      if (! match) {
-         // DumbStringifyMarker
-         match = dumbStringifyMarker$Rule();
-         if (! match) {
-            // NormalStringifyMarker
-            match = normalStringifyMarker$Rule();
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case ' ':
+         case '#':
+         case '&':
+         case '\t':
+         case ';':
+         case '\f':
+         case '/': {
+            // DumbStringifyMarker
+            match = dumbStringifyMarker$Rule();
             if (! match) {
-               // SmartStringifyMarker
-               match = smartStringifyMarker$Rule();
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         case '<': {
+            // IdMarker
+            match = idMarker$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // NormalStringifyMarker
+               match = normalStringifyMarker$Rule();
                if (! match) {
-                  // BlockifyMarker
-                  match = blockifyMarker$Rule();
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+                  // SmartStringifyMarker
+                  match = smartStringifyMarker$Rule();
                   if (! match) {
-                     // LogifyMarker
-                     match = logifyMarker$Rule();
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
+                     // BlockifyMarker
+                     match = blockifyMarker$Rule();
                      if (! match) {
-                        // NullMarker
-                        match = nullMarker$Rule();
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
+                        // LogifyMarker
+                        match = logifyMarker$Rule();
+                        if (! match) {
+                           index = lastIndex_1;
+                           lastNode_1.setSibling(null);
+                           currentNode = lastNode_1;
+                           // NullMarker
+                           match = nullMarker$Rule();
+                           if (! match) {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
+                           }
+                        }
                      }
                   }
                }
             }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         resultMarker$RuleMemoStart = startIndex;
+         resultMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            resultMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.RESULT_MARKER, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            resultMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         resultMarker$RuleMemoStart = startIndex;
+         resultMarker$RuleMemoEnd = -1;
+         resultMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4486,6 +7677,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (dumbStringifyMarker$RuleMemoStart == index) {
+         if (dumbStringifyMarker$RuleMemoStart <= dumbStringifyMarker$RuleMemoEnd) {
+            index = dumbStringifyMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.DUMB_STRINGIFY_MARKER, dumbStringifyMarker$RuleMemoStart, dumbStringifyMarker$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (dumbStringifyMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(dumbStringifyMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (DirectiveMark IgnoreOptionalSpacing '<' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '>')
       // DirectiveMark
@@ -4515,13 +7721,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         dumbStringifyMarker$RuleMemoStart = startIndex;
+         dumbStringifyMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            dumbStringifyMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.DUMB_STRINGIFY_MARKER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            dumbStringifyMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         dumbStringifyMarker$RuleMemoStart = startIndex;
+         dumbStringifyMarker$RuleMemoEnd = -1;
+         dumbStringifyMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4529,23 +7743,38 @@ public class HarbourPPParser implements Parser {
       }
    }
 
-   //NormalStringifyMarker : ('<' IgnoreOptionalSpacing (('"' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '"') | (''' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing ''')) IgnoreOptionalSpacing '>')
+   //NormalStringifyMarker : ('<' IgnoreOptionalSpacing (('"' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '"') | ('\'' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '\'')) IgnoreOptionalSpacing '>')
    protected boolean normalStringifyMarker$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (normalStringifyMarker$RuleMemoStart == index) {
+         if (normalStringifyMarker$RuleMemoStart <= normalStringifyMarker$RuleMemoEnd) {
+            index = normalStringifyMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.NORMAL_STRINGIFY_MARKER, normalStringifyMarker$RuleMemoStart, normalStringifyMarker$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (normalStringifyMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(normalStringifyMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
-      // ('<' IgnoreOptionalSpacing (('"' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '"') | (''' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing ''')) IgnoreOptionalSpacing '>')
+      // ('<' IgnoreOptionalSpacing (('"' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '"') | ('\'' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '\'')) IgnoreOptionalSpacing '>')
       // '<'
       match = charMatcher('<');
       if (match) {
          // IgnoreOptionalSpacing
          match = ignoreOptionalSpacing$Rule();
          if (match) {
-            // (('"' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '"') | (''' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '''))
-            // ('"' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '"')
+            // (('"' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '"') | ('\'' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '\''))
             Node lastNode_1 = currentNode;
             int lastIndex_1 = index;
+            // ('"' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '"')
             // '"'
             match = charMatcher('\"');
             if (match) {
@@ -4560,29 +7789,16 @@ public class HarbourPPParser implements Parser {
                      if (match) {
                         // '"'
                         match = charMatcher('\"');
-                        if (! match) {
-                           index = lastIndex_1;
-                           lastNode_1.setSibling(null);
-                           currentNode = lastNode_1;
-                        }
-                     } else {
-                        index = lastIndex_1;
-                        lastNode_1.setSibling(null);
                      }
-                  } else {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
                   }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
             }
             if (! match) {
-               // (''' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing ''')
-               Node lastNode_2 = currentNode;
-               int lastIndex_2 = index;
-               // '''
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // ('\'' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '\'')
+               // '\''
                match = charMatcher('\'');
                if (match) {
                   // IgnoreOptionalSpacing
@@ -4594,25 +7810,16 @@ public class HarbourPPParser implements Parser {
                         // IgnoreOptionalSpacing
                         match = ignoreOptionalSpacing$Rule();
                         if (match) {
-                           // '''
+                           // '\''
                            match = charMatcher('\'');
-                           if (! match) {
-                              index = lastIndex_2;
-                              lastNode_2.setSibling(null);
-                              currentNode = lastNode_2;
-                           }
-                        } else {
-                           index = lastIndex_2;
-                           lastNode_2.setSibling(null);
                         }
-                     } else {
-                        index = lastIndex_2;
-                        lastNode_2.setSibling(null);
                      }
-                  } else {
-                     index = lastIndex_2;
-                     lastNode_2.setSibling(null);
                   }
+               }
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                }
             }
             if (match) {
@@ -4626,13 +7833,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         normalStringifyMarker$RuleMemoStart = startIndex;
+         normalStringifyMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            normalStringifyMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.NORMAL_STRINGIFY_MARKER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            normalStringifyMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         normalStringifyMarker$RuleMemoStart = startIndex;
+         normalStringifyMarker$RuleMemoEnd = -1;
+         normalStringifyMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4645,6 +7860,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (smartStringifyMarker$RuleMemoStart == index) {
+         if (smartStringifyMarker$RuleMemoStart <= smartStringifyMarker$RuleMemoEnd) {
+            index = smartStringifyMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.SMART_STRINGIFY_MARKER, smartStringifyMarker$RuleMemoStart, smartStringifyMarker$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (smartStringifyMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(smartStringifyMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('<' IgnoreOptionalSpacing '(' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing ')' IgnoreOptionalSpacing '>')
       // '<'
@@ -4682,13 +7912,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         smartStringifyMarker$RuleMemoStart = startIndex;
+         smartStringifyMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            smartStringifyMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.SMART_STRINGIFY_MARKER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            smartStringifyMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         smartStringifyMarker$RuleMemoStart = startIndex;
+         smartStringifyMarker$RuleMemoEnd = -1;
+         smartStringifyMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4701,6 +7939,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (blockifyMarker$RuleMemoStart == index) {
+         if (blockifyMarker$RuleMemoStart <= blockifyMarker$RuleMemoEnd) {
+            index = blockifyMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.BLOCKIFY_MARKER, blockifyMarker$RuleMemoStart, blockifyMarker$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (blockifyMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(blockifyMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('<' IgnoreOptionalSpacing '{' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '}' IgnoreOptionalSpacing '>')
       // '<'
@@ -4738,13 +7991,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         blockifyMarker$RuleMemoStart = startIndex;
+         blockifyMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            blockifyMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.BLOCKIFY_MARKER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            blockifyMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         blockifyMarker$RuleMemoStart = startIndex;
+         blockifyMarker$RuleMemoEnd = -1;
+         blockifyMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4757,6 +8018,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (logifyMarker$RuleMemoStart == index) {
+         if (logifyMarker$RuleMemoStart <= logifyMarker$RuleMemoEnd) {
+            index = logifyMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.LOGIFY_MARKER, logifyMarker$RuleMemoStart, logifyMarker$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (logifyMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(logifyMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('<' IgnoreOptionalSpacing '.' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '.' IgnoreOptionalSpacing '>')
       // '<'
@@ -4794,13 +8070,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         logifyMarker$RuleMemoStart = startIndex;
+         logifyMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            logifyMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.LOGIFY_MARKER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            logifyMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         logifyMarker$RuleMemoStart = startIndex;
+         logifyMarker$RuleMemoEnd = -1;
+         logifyMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4813,6 +8097,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (optionalResultMarker$RuleMemoStart == index) {
+         if (optionalResultMarker$RuleMemoStart <= optionalResultMarker$RuleMemoEnd) {
+            index = optionalResultMarker$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.OPTIONAL_RESULT_MARKER, optionalResultMarker$RuleMemoStart, optionalResultMarker$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (optionalResultMarker$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(optionalResultMarker$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('[' IgnoreOptionalSpacing OptionalResultMarkerPattern IgnoreOptionalSpacing ']')
       // '['
@@ -4834,13 +8133,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         optionalResultMarker$RuleMemoStart = startIndex;
+         optionalResultMarker$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            optionalResultMarker$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.OPTIONAL_RESULT_MARKER, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            optionalResultMarker$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         optionalResultMarker$RuleMemoStart = startIndex;
+         optionalResultMarker$RuleMemoEnd = -1;
+         optionalResultMarker$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -4855,14 +8162,25 @@ public class HarbourPPParser implements Parser {
       boolean match;
       startIndex = index;
       // OptionalResultMarkerChunk+
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // OptionalResultMarkerChunk
       match = optionalResultMarkerChunk$Rule();
       if (match) {
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // OptionalResultMarkerChunk
             match = optionalResultMarkerChunk$Rule();
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
+      } else {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
       }
       if (match) {
          if (! currentRuleIsAtomic) {
@@ -4886,30 +8204,268 @@ public class HarbourPPParser implements Parser {
       boolean match;
       startIndex = index;
       // (OptionalResultMarker | ResultMarker | Identifier | Literal | Ignore | EscapedChar | Separator)
-      // OptionalResultMarker
-      match = optionalResultMarker$Rule();
-      if (! match) {
-         // ResultMarker
-         match = resultMarker$Rule();
-         if (! match) {
-            // Identifier
-            match = identifier$Rule();
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case '@':
+         case '!':
+         case '$':
+         case '%':
+         case '(':
+         case ')':
+         case '*':
+         case '+':
+         case ',':
+         case '-':
+         case ':':
+         case '|':
+         case '=':
+         case '}':
+         case '>':
+         case '^':
+         case '~':
+         case '?': {
+            // Separator
+            match = separator$Rule();
             if (! match) {
-               // Literal
-               match = literal$Rule();
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         case '[': {
+            // OptionalResultMarker
+            match = optionalResultMarker$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // Separator
+               match = separator$Rule();
                if (! match) {
-                  // Ignore
-                  match = ignore$Rule();
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '#':
+         case '<': {
+            // ResultMarker
+            match = resultMarker$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // Separator
+               match = separator$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '\\': {
+            // EscapedChar
+            match = escapedChar$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // Separator
+               match = separator$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '\"':
+         case '\'':
+         case '{':
+         case '.': {
+            // Literal
+            match = literal$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // Separator
+               match = separator$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '&':
+         case ';':
+         case '/': {
+            // ResultMarker
+            match = resultMarker$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // Ignore
+               match = ignore$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+                  // Separator
+                  match = separator$Rule();
                   if (! match) {
-                     // EscapedChar
-                     match = escapedChar$Rule();
-                     if (! match) {
-                        // Separator
-                        match = separator$Rule();
-                     }
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                   }
                }
             }
+            break;
+         }
+         case '_': {
+            // Identifier
+            match = identifier$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // Separator
+               match = separator$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9': {
+            // Literal
+            match = literal$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // Identifier
+            match = identifier$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         case 'D':
+         case 'd': {
+            // Identifier
+            match = identifier$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // Literal
+               match = literal$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case ' ':
+         case '\t':
+         case '\f': {
+            // ResultMarker
+            match = resultMarker$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // Ignore
+               match = ignore$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
@@ -4934,29 +8490,54 @@ public class HarbourPPParser implements Parser {
       boolean match;
       startIndex = index;
       // (OptionalResultMarker | ResultMarker | Identifier | Literal | Ignore | EscapedChar | ']' | Separator)
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // OptionalResultMarker
       match = optionalResultMarker$Rule();
       if (! match) {
+         index = lastIndex_1;
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
          // ResultMarker
          match = resultMarker$Rule();
          if (! match) {
+            index = lastIndex_1;
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
             // Identifier
             match = identifier$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // Literal
                match = literal$Rule();
                if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                   // Ignore
                   match = ignore$Rule();
                   if (! match) {
+                     index = lastIndex_1;
+                     lastNode_1.setSibling(null);
+                     currentNode = lastNode_1;
                      // EscapedChar
                      match = escapedChar$Rule();
                      if (! match) {
+                        index = lastIndex_1;
+                        lastNode_1.setSibling(null);
+                        currentNode = lastNode_1;
                         // ']'
                         match = charMatcher(']');
                         if (! match) {
                            // Separator
                            match = separator$Rule();
+                           if (! match) {
+                              index = lastIndex_1;
+                              lastNode_1.setSibling(null);
+                              currentNode = lastNode_1;
+                           }
                         }
                      }
                   }
@@ -4992,14 +8573,21 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("ifde", 4);
       if (match) {
          // "f"?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // "f"
-         ignoreCaseCharMatcher('f');
-         match = true;
+         match = ignoreCaseCharMatcher('f');
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.IF_DEF, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.IF_DEF, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -5025,26 +8613,33 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("ifnd", 4);
       if (match) {
          // ("ef" | "e")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("ef" | "e")
-         if (buffer.matchIgnoreCaseChar(index, 'e')) {
+         match = buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E');
+         if (match) {
             ++index;
             // ("f" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 'f')) {
+            match = buffer.matchChar(index, 'f') || buffer.matchChar(index, 'F');
+            if (match) {
                ++index;
                // <EMPTY>
                match = true;
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.IF_NDEF, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.IF_NDEF, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -5062,12 +8657,29 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (discardedRemainingLine$RuleMemoStart == index) {
+         if (discardedRemainingLine$RuleMemoStart <= discardedRemainingLine$RuleMemoEnd) {
+            index = discardedRemainingLine$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.DISCARDED_REMAINING_LINE, discardedRemainingLine$RuleMemoStart, discardedRemainingLine$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (discardedRemainingLine$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(discardedRemainingLine$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (EndStmt! .)*
+      Node lastNode_1;
+      int lastIndex_1;
       do {
+         lastNode_1 = currentNode;
+         lastIndex_1 = index;
          // (EndStmt! .)
-         Node lastNode_1 = currentNode;
-         int lastIndex_1 = index;
          // EndStmt!
          // EndStmt
          match = endStmt$Rule();
@@ -5075,17 +8687,20 @@ public class HarbourPPParser implements Parser {
          if (match) {
             // .
             match = anyCharMatcher();
-            if (! match) {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-               currentNode = lastNode_1;
-            }
          }
       } while(match);
-      if (! currentRuleIsAtomic) {
+      lastNode_1.setSibling(null);
+      currentNode = lastNode_1;
+      index = lastIndex_1;
+      discardedRemainingLine$RuleMemoStart = startIndex;
+      discardedRemainingLine$RuleMemoEnd = index;
+      if (currentRuleIsAtomic) {
+         discardedRemainingLine$RuleMemoFirstNode = null;
+      } else {
          currentNode = new NodeImpl(HarbourPPRuleType.DISCARDED_REMAINING_LINE, startIndex, index, true, false);
          currentNode.setFirstChild(lastNode.getSibling());
          lastNode.setSibling(currentNode);
+         discardedRemainingLine$RuleMemoFirstNode = currentNode;
       }
       return true;
    }
@@ -5103,26 +8718,33 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("else", 4);
       if (match) {
          // ("if" | "i")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("if" | "i")
-         if (buffer.matchIgnoreCaseChar(index, 'i')) {
+         match = buffer.matchChar(index, 'i') || buffer.matchChar(index, 'I');
+         if (match) {
             ++index;
             // ("f" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 'f')) {
+            match = buffer.matchChar(index, 'f') || buffer.matchChar(index, 'F');
+            if (match) {
                ++index;
                // <EMPTY>
                match = true;
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.ELSE_IF, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.ELSE_IF, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -5148,14 +8770,21 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("endi", 4);
       if (match) {
          // "f"?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // "f"
-         ignoreCaseCharMatcher('f');
-         match = true;
+         match = ignoreCaseCharMatcher('f');
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.END_IF, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.END_IF, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -5181,14 +8810,21 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("unde", 4);
       if (match) {
          // "f"?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // "f"
-         ignoreCaseCharMatcher('f');
-         match = true;
+         match = ignoreCaseCharMatcher('f');
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.UNDEF, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.UNDEF, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -5214,30 +8850,40 @@ public class HarbourPPParser implements Parser {
       match = ignoreCaseStringMatcher("incl", 4);
       if (match) {
          // ("ude" | "ud" | "u")?
+         Node lastNode_1 = currentNode;
+         int lastIndex_1 = index;
          // ("ude" | "ud" | "u")
-         if (buffer.matchIgnoreCaseChar(index, 'u')) {
+         match = buffer.matchChar(index, 'u') || buffer.matchChar(index, 'U');
+         if (match) {
             ++index;
             // ("de" | "d" | <EMPTY>)
-            if (buffer.matchIgnoreCaseChar(index, 'd')) {
+            match = buffer.matchChar(index, 'd') || buffer.matchChar(index, 'D');
+            if (match) {
                ++index;
-               // "e"
-               if (match = buffer.matchIgnoreCaseChar(index, 'e')) {
+               // ("e" | <EMPTY>)
+               match = buffer.matchChar(index, 'e') || buffer.matchChar(index, 'E');
+               if (match) {
                   ++index;
+                  // <EMPTY>
+                  match = true;
+               } else {
+                  match = true;
                }
-               // <EMPTY>
-               match = true;
             } else {
                match = true;
             }
-         } else {
-            match = false;
          }
-         match = true;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          if (! currentRuleIsAtomic) {
-            currentNode = new NodeImpl(HarbourPPRuleType.INCLUDE, startIndex, index, false, false);
+            currentNode = new NodeImpl(HarbourPPRuleType.INCLUDE, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
          }
          return true;
@@ -5256,6 +8902,21 @@ public class HarbourPPParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (doubleQuoteString$RuleMemoStart == index) {
+         if (doubleQuoteString$RuleMemoStart <= doubleQuoteString$RuleMemoEnd) {
+            index = doubleQuoteString$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.DOUBLE_QUOTE_STRING, doubleQuoteString$RuleMemoStart, doubleQuoteString$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (doubleQuoteString$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(doubleQuoteString$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // ('"' (('\n' | '"')! .)* '"')
@@ -5263,51 +8924,62 @@ public class HarbourPPParser implements Parser {
       match = charMatcher('\"');
       if (match) {
          // (('\n' | '"')! .)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (('\n' | '"')! .)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // ('\n' | '"')!
             // ('\n' | '"')
             int startIndex_2 = index;
             switch(buffer.getChar(index)) {
-               case '\"':
+               case '\"': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\n':
+               }
+               case '\n': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             index = startIndex_2;
             match = ! match;
             if (match) {
                // .
                match = anyCharMatcher();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          // '"'
          match = charMatcher('\"');
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         doubleQuoteString$RuleMemoStart = startIndex;
+         doubleQuoteString$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            doubleQuoteString$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.DOUBLE_QUOTE_STRING, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            doubleQuoteString$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         doubleQuoteString$RuleMemoStart = startIndex;
+         doubleQuoteString$RuleMemoEnd = -1;
+         doubleQuoteString$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5315,64 +8987,90 @@ public class HarbourPPParser implements Parser {
       }
    }
 
-   //SingleQuoteString : (''' (('\n' | ''')! .)* ''')
+   //SingleQuoteString : ('\'' (('\n' | '\'')! .)* '\'')
    protected boolean singleQuoteString$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (singleQuoteString$RuleMemoStart == index) {
+         if (singleQuoteString$RuleMemoStart <= singleQuoteString$RuleMemoEnd) {
+            index = singleQuoteString$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.SINGLE_QUOTE_STRING, singleQuoteString$RuleMemoStart, singleQuoteString$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (singleQuoteString$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(singleQuoteString$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
-      // (''' (('\n' | ''')! .)* ''')
-      // '''
+      // ('\'' (('\n' | '\'')! .)* '\'')
+      // '\''
       match = charMatcher('\'');
       if (match) {
-         // (('\n' | ''')! .)*
+         // (('\n' | '\'')! .)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
-            // (('\n' | ''')! .)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
-            // ('\n' | ''')!
-            // ('\n' | ''')
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
+            // (('\n' | '\'')! .)
+            // ('\n' | '\'')!
+            // ('\n' | '\'')
             int startIndex_2 = index;
             switch(buffer.getChar(index)) {
-               case '\'':
+               case '\'': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\n':
+               }
+               case '\n': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             index = startIndex_2;
             match = ! match;
             if (match) {
                // .
                match = anyCharMatcher();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
             }
          } while(match);
-         // '''
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
+         // '\''
          match = charMatcher('\'');
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         singleQuoteString$RuleMemoStart = startIndex;
+         singleQuoteString$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            singleQuoteString$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.SINGLE_QUOTE_STRING, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            singleQuoteString$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         singleQuoteString$RuleMemoStart = startIndex;
+         singleQuoteString$RuleMemoEnd = -1;
+         singleQuoteString$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5417,6 +9115,21 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (endDumpBlock$RuleMemoStart == index) {
+         if (endDumpBlock$RuleMemoStart <= endDumpBlock$RuleMemoEnd) {
+            index = endDumpBlock$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.END_DUMP_BLOCK, endDumpBlock$RuleMemoStart, endDumpBlock$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (endDumpBlock$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(endDumpBlock$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ("pragma" IgnoreSpacing "enddump")
       // "pragma"
@@ -5430,13 +9143,21 @@ public class HarbourPPParser implements Parser {
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         endDumpBlock$RuleMemoStart = startIndex;
+         endDumpBlock$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            endDumpBlock$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.END_DUMP_BLOCK, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            endDumpBlock$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         endDumpBlock$RuleMemoStart = startIndex;
+         endDumpBlock$RuleMemoEnd = -1;
+         endDumpBlock$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5449,18 +9170,33 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (bracketSequence$RuleMemoStart == index) {
+         if (bracketSequence$RuleMemoStart <= bracketSequence$RuleMemoEnd) {
+            index = bracketSequence$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.BRACKET_SEQUENCE, bracketSequence$RuleMemoStart, bracketSequence$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (bracketSequence$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(bracketSequence$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (('[' (']'! AnyRule)+ ']') | BracketString)
-      // ('[' (']'! AnyRule)+ ']')
       Node lastNode_1 = currentNode;
       int lastIndex_1 = index;
+      // ('[' (']'! AnyRule)+ ']')
       // '['
       match = charMatcher('[');
       if (match) {
          // (']'! AnyRule)+
-         // (']'! AnyRule)
          Node lastNode_2 = currentNode;
          int lastIndex_2 = index;
+         // (']'! AnyRule)
          // ']'!
          // ']'
          match = buffer.matchChar(index, ']');
@@ -5468,17 +9204,12 @@ public class HarbourPPParser implements Parser {
          if (match) {
             // AnyRule
             match = anyRule$Rule();
-            if (! match) {
-               index = lastIndex_2;
-               lastNode_2.setSibling(null);
-               currentNode = lastNode_2;
-            }
          }
          if (match) {
             do {
+               lastNode_2 = currentNode;
+               lastIndex_2 = index;
                // (']'! AnyRule)
-               Node lastNode_3 = currentNode;
-               int lastIndex_3 = index;
                // ']'!
                // ']'
                match = buffer.matchChar(index, ']');
@@ -5486,40 +9217,50 @@ public class HarbourPPParser implements Parser {
                if (match) {
                   // AnyRule
                   match = anyRule$Rule();
-                  if (! match) {
-                     index = lastIndex_3;
-                     lastNode_3.setSibling(null);
-                     currentNode = lastNode_3;
-                  }
                }
             } while(match);
+            lastNode_2.setSibling(null);
+            currentNode = lastNode_2;
+            index = lastIndex_2;
             match = true;
+         } else {
+            lastNode_2.setSibling(null);
+            currentNode = lastNode_2;
+            index = lastIndex_2;
          }
          if (match) {
             // ']'
             match = charMatcher(']');
-            if (! match) {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-               currentNode = lastNode_1;
-            }
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
          }
       }
       if (! match) {
+         index = lastIndex_1;
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
          // BracketString
          match = bracketString$Rule();
+         if (! match) {
+            index = lastIndex_1;
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+         }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         bracketSequence$RuleMemoStart = startIndex;
+         bracketSequence$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            bracketSequence$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.BRACKET_SEQUENCE, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            bracketSequence$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         bracketSequence$RuleMemoStart = startIndex;
+         bracketSequence$RuleMemoEnd = -1;
+         bracketSequence$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5532,34 +9273,257 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (anyRule$RuleMemoStart == index) {
+         if (anyRule$RuleMemoStart <= anyRule$RuleMemoEnd) {
+            index = anyRule$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.ANY_RULE, anyRule$RuleMemoStart, anyRule$RuleMemoEnd, true, true);
+               lastNode.setSibling(currentNode);
+               if (anyRule$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(anyRule$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (BracketSequence | Literal | Ignore | Identifier | Separator)
-      // BracketSequence
-      match = bracketSequence$Rule();
-      if (! match) {
-         // Literal
-         match = literal$Rule();
-         if (! match) {
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
+      switch(buffer.getChar(index)) {
+         case '@':
+         case '!':
+         case '#':
+         case '$':
+         case '%':
+         case '(':
+         case ')':
+         case '*':
+         case '+':
+         case ',':
+         case '-':
+         case ':':
+         case '<':
+         case '\\':
+         case '|':
+         case '=':
+         case '}':
+         case '>':
+         case '^':
+         case '~':
+         case '?': {
+            // Separator
+            match = separator$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         case '[': {
+            // BracketSequence
+            match = bracketSequence$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // Separator
+               match = separator$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '\"':
+         case '\'':
+         case '{':
+         case '.': {
+            // Literal
+            match = literal$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // Separator
+               match = separator$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '&':
+         case ';':
+         case '/': {
             // Ignore
             match = ignore$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // Separator
+               match = separator$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '_': {
+            // Identifier
+            match = identifier$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+               // Separator
+               match = separator$Rule();
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
+               }
+            }
+            break;
+         }
+         case '0':
+         case '1':
+         case '2':
+         case '3':
+         case '4':
+         case '5':
+         case '6':
+         case '7':
+         case '8':
+         case '9': {
+            // Literal
+            match = literal$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         case 'A':
+         case 'B':
+         case 'C':
+         case 'E':
+         case 'F':
+         case 'G':
+         case 'H':
+         case 'I':
+         case 'J':
+         case 'K':
+         case 'L':
+         case 'M':
+         case 'N':
+         case 'O':
+         case 'P':
+         case 'Q':
+         case 'R':
+         case 'S':
+         case 'T':
+         case 'U':
+         case 'V':
+         case 'W':
+         case 'X':
+         case 'Y':
+         case 'Z':
+         case 'a':
+         case 'b':
+         case 'c':
+         case 'e':
+         case 'f':
+         case 'g':
+         case 'h':
+         case 'i':
+         case 'j':
+         case 'k':
+         case 'l':
+         case 'm':
+         case 'n':
+         case 'o':
+         case 'p':
+         case 'q':
+         case 'r':
+         case 's':
+         case 't':
+         case 'u':
+         case 'v':
+         case 'w':
+         case 'x':
+         case 'y':
+         case 'z': {
+            // Identifier
+            match = identifier$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         case 'D':
+         case 'd': {
+            // Literal
+            match = literal$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // Identifier
                match = identifier$Rule();
                if (! match) {
-                  // Separator
-                  match = separator$Rule();
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                }
             }
+            break;
+         }
+         case ' ':
+         case '\t':
+         case '\f': {
+            // Ignore
+            match = ignore$Rule();
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
+            }
+            break;
+         }
+         default: {
+            match = false;
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         anyRule$RuleMemoStart = startIndex;
+         anyRule$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            anyRule$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.ANY_RULE, startIndex, index, true, true);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            anyRule$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         anyRule$RuleMemoStart = startIndex;
+         anyRule$RuleMemoEnd = -1;
+         anyRule$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5573,6 +9537,21 @@ public class HarbourPPParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (bracketString$RuleMemoStart == index) {
+         if (bracketString$RuleMemoStart <= bracketString$RuleMemoEnd) {
+            index = bracketString$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.BRACKET_STRING, bracketString$RuleMemoStart, bracketString$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (bracketString$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(bracketString$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // ('[' (('\n' | ']')! .)* ']')
@@ -5580,51 +9559,62 @@ public class HarbourPPParser implements Parser {
       match = charMatcher('[');
       if (match) {
          // (('\n' | ']')! .)*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (('\n' | ']')! .)
-            Node lastNode_1 = currentNode;
-            int lastIndex_1 = index;
             // ('\n' | ']')!
             // ('\n' | ']')
             int startIndex_2 = index;
             switch(buffer.getChar(index)) {
-               case ']':
+               case ']': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\n':
+               }
+               case '\n': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             index = startIndex_2;
             match = ! match;
             if (match) {
                // .
                match = anyCharMatcher();
-               if (! match) {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
-                  currentNode = lastNode_1;
-               }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          // ']'
          match = charMatcher(']');
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         bracketString$RuleMemoStart = startIndex;
+         bracketString$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            bracketString$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.BRACKET_STRING, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            bracketString$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         bracketString$RuleMemoStart = startIndex;
+         bracketString$RuleMemoEnd = -1;
+         bracketString$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5638,60 +9628,87 @@ public class HarbourPPParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (logicalLiteral$RuleMemoStart == index) {
+         if (logicalLiteral$RuleMemoStart <= logicalLiteral$RuleMemoEnd) {
+            index = logicalLiteral$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.LOGICAL_LITERAL, logicalLiteral$RuleMemoStart, logicalLiteral$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (logicalLiteral$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(logicalLiteral$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // (".T." | ".F." | ".Y." | ".N.")
-      if (buffer.matchChar(index, '.')) {
+      match = buffer.matchChar(index, '.');
+      if (match) {
          ++index;
          // ("T." | "F." | "Y." | "N.")
          switch(buffer.getChar(index)) {
             case 'f':
-            case 'F':
+            case 'F': {
                ++index;
                // "."
                if (match = buffer.matchIgnoreCaseChar(index, '.')) {
                   ++index;
                }
                break;
-            case 't':
-            case 'T':
-               ++index;
-               // "."
-               if (match = buffer.matchIgnoreCaseChar(index, '.')) {
-                  ++index;
-               }
-               break;
+            }
             case 'n':
-            case 'N':
+            case 'N': {
                ++index;
                // "."
                if (match = buffer.matchIgnoreCaseChar(index, '.')) {
                   ++index;
                }
                break;
+            }
             case 'y':
-            case 'Y':
+            case 'Y': {
                ++index;
                // "."
                if (match = buffer.matchIgnoreCaseChar(index, '.')) {
                   ++index;
                }
                break;
-            default:
+            }
+            case 't':
+            case 'T': {
+               ++index;
+               // "."
+               if (match = buffer.matchIgnoreCaseChar(index, '.')) {
+                  ++index;
+               }
+               break;
+            }
+            default: {
                match = false;
+            }
          }
-      } else {
-         match = false;
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         logicalLiteral$RuleMemoStart = startIndex;
+         logicalLiteral$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            logicalLiteral$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.LOGICAL_LITERAL, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            logicalLiteral$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         logicalLiteral$RuleMemoStart = startIndex;
+         logicalLiteral$RuleMemoEnd = -1;
+         logicalLiteral$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -5699,18 +9716,33 @@ public class HarbourPPParser implements Parser {
       }
    }
 
-   //DateTimeLiteral : (('0d' Digit Digit Digit Digit Digit Digit Digit Digit) | ("d" (('"' DatePattern ("T"? TimePattern)? '"') | (''' DatePattern ("T"? TimePattern)? ''') | ('[' DatePattern ("T"? TimePattern)? ']'))) | ('{' '^' (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)? TimePattern? Ignore '}'))
+   //DateTimeLiteral : (('0d' Digit Digit Digit Digit Digit Digit Digit Digit) | ("d" (('"' DatePattern ("T"? TimePattern)? '"') | ('\'' DatePattern ("T"? TimePattern)? '\'') | ('[' DatePattern ("T"? TimePattern)? ']'))) | ('{' '^' (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)? TimePattern? Ignore '}'))
    protected boolean dateTimeLiteral$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (dateTimeLiteral$RuleMemoStart == index) {
+         if (dateTimeLiteral$RuleMemoStart <= dateTimeLiteral$RuleMemoEnd) {
+            index = dateTimeLiteral$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.DATE_TIME_LITERAL, dateTimeLiteral$RuleMemoStart, dateTimeLiteral$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (dateTimeLiteral$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(dateTimeLiteral$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
-      // (('0d' Digit Digit Digit Digit Digit Digit Digit Digit) | ("d" (('"' DatePattern ("T"? TimePattern)? '"') | (''' DatePattern ("T"? TimePattern)? ''') | ('[' DatePattern ("T"? TimePattern)? ']'))) | ('{' '^' (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)? TimePattern? Ignore '}'))
-      // ('0d' Digit Digit Digit Digit Digit Digit Digit Digit)
+      // (('0d' Digit Digit Digit Digit Digit Digit Digit Digit) | ("d" (('"' DatePattern ("T"? TimePattern)? '"') | ('\'' DatePattern ("T"? TimePattern)? '\'') | ('[' DatePattern ("T"? TimePattern)? ']'))) | ('{' '^' (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)? TimePattern? Ignore '}'))
       Node lastNode_1 = currentNode;
       int lastIndex_1 = index;
+      // ('0d' Digit Digit Digit Digit Digit Digit Digit Digit)
       // '0d'
       match = stringMatcher("0d", 2);
       if (match) {
@@ -5737,51 +9769,26 @@ public class HarbourPPParser implements Parser {
                            if (match) {
                               // '0'-'9'
                               match = charRangeMatcher('0', '9');
-                              if (! match) {
-                                 index = lastIndex_1;
-                                 lastNode_1.setSibling(null);
-                                 currentNode = lastNode_1;
-                              }
-                           } else {
-                              index = lastIndex_1;
-                              lastNode_1.setSibling(null);
                            }
-                        } else {
-                           index = lastIndex_1;
-                           lastNode_1.setSibling(null);
                         }
-                     } else {
-                        index = lastIndex_1;
-                        lastNode_1.setSibling(null);
                      }
-                  } else {
-                     index = lastIndex_1;
-                     lastNode_1.setSibling(null);
                   }
-               } else {
-                  index = lastIndex_1;
-                  lastNode_1.setSibling(null);
                }
-            } else {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
             }
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
          }
       }
       if (! match) {
-         // ("d" (('"' DatePattern ("T"? TimePattern)? '"') | (''' DatePattern ("T"? TimePattern)? ''') | ('[' DatePattern ("T"? TimePattern)? ']')))
-         Node lastNode_2 = currentNode;
-         int lastIndex_2 = index;
+         index = lastIndex_1;
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         // ("d" (('"' DatePattern ("T"? TimePattern)? '"') | ('\'' DatePattern ("T"? TimePattern)? '\'') | ('[' DatePattern ("T"? TimePattern)? ']')))
          // "d"
          match = ignoreCaseCharMatcher('d');
          if (match) {
-            // (('"' DatePattern ("T"? TimePattern)? '"') | (''' DatePattern ("T"? TimePattern)? ''') | ('[' DatePattern ("T"? TimePattern)? ']'))
+            // (('"' DatePattern ("T"? TimePattern)? '"') | ('\'' DatePattern ("T"? TimePattern)? '\'') | ('[' DatePattern ("T"? TimePattern)? ']'))
+            Node lastNode_2 = currentNode;
+            int lastIndex_2 = index;
             // ('"' DatePattern ("T"? TimePattern)? '"')
-            Node lastNode_3 = currentNode;
-            int lastIndex_3 = index;
             // '"'
             match = charMatcher('\"');
             if (match) {
@@ -5789,102 +9796,33 @@ public class HarbourPPParser implements Parser {
                match = datePattern$Rule();
                if (match) {
                   // ("T"? TimePattern)?
+                  Node lastNode_3 = currentNode;
+                  int lastIndex_3 = index;
                   // ("T"? TimePattern)
+                  // "T"?
                   Node lastNode_4 = currentNode;
                   int lastIndex_4 = index;
-                  // "T"?
                   // "T"
-                  ignoreCaseCharMatcher('T');
-                  // TimePattern
-                  match = timePattern$Rule();
+                  match = ignoreCaseCharMatcher('T');
                   if (! match) {
-                     index = lastIndex_4;
                      lastNode_4.setSibling(null);
                      currentNode = lastNode_4;
+                     index = lastIndex_4;
+                     match = true;
                   }
-                  // '"'
-                  match = charMatcher('\"');
-                  if (! match) {
-                     index = lastIndex_3;
-                     lastNode_3.setSibling(null);
-                     currentNode = lastNode_3;
-                  }
-               } else {
-                  index = lastIndex_3;
-                  lastNode_3.setSibling(null);
-               }
-            }
-            if (! match) {
-               // (''' DatePattern ("T"? TimePattern)? ''')
-               Node lastNode_5 = currentNode;
-               int lastIndex_5 = index;
-               // '''
-               match = charMatcher('\'');
-               if (match) {
-                  // DatePattern
-                  match = datePattern$Rule();
                   if (match) {
-                     // ("T"? TimePattern)?
-                     // ("T"? TimePattern)
-                     Node lastNode_6 = currentNode;
-                     int lastIndex_6 = index;
-                     // "T"?
-                     // "T"
-                     ignoreCaseCharMatcher('T');
                      // TimePattern
                      match = timePattern$Rule();
-                     if (! match) {
-                        index = lastIndex_6;
-                        lastNode_6.setSibling(null);
-                        currentNode = lastNode_6;
-                     }
-                     // '''
-                     match = charMatcher('\'');
-                     if (! match) {
-                        index = lastIndex_5;
-                        lastNode_5.setSibling(null);
-                        currentNode = lastNode_5;
-                     }
-                  } else {
-                     index = lastIndex_5;
-                     lastNode_5.setSibling(null);
                   }
-               }
-               if (! match) {
-                  // ('[' DatePattern ("T"? TimePattern)? ']')
-                  Node lastNode_7 = currentNode;
-                  int lastIndex_7 = index;
-                  // '['
-                  match = charMatcher('[');
+                  if (! match) {
+                     lastNode_3.setSibling(null);
+                     currentNode = lastNode_3;
+                     index = lastIndex_3;
+                     match = true;
+                  }
                   if (match) {
-                     // DatePattern
-                     match = datePattern$Rule();
-                     if (match) {
-                        // ("T"? TimePattern)?
-                        // ("T"? TimePattern)
-                        Node lastNode_8 = currentNode;
-                        int lastIndex_8 = index;
-                        // "T"?
-                        // "T"
-                        ignoreCaseCharMatcher('T');
-                        // TimePattern
-                        match = timePattern$Rule();
-                        if (! match) {
-                           index = lastIndex_8;
-                           lastNode_8.setSibling(null);
-                           currentNode = lastNode_8;
-                        }
-                        // ']'
-                        match = charMatcher(']');
-                        if (! match) {
-                           index = lastIndex_7;
-                           lastNode_7.setSibling(null);
-                           currentNode = lastNode_7;
-                        }
-                     } else {
-                        index = lastIndex_7;
-                        lastNode_7.setSibling(null);
-                     }
+                     // '"'
+                     match = charMatcher('\"');
                   }
                }
             }
@@ -5892,12 +9830,99 @@ public class HarbourPPParser implements Parser {
                index = lastIndex_2;
                lastNode_2.setSibling(null);
                currentNode = lastNode_2;
+               // ('\'' DatePattern ("T"? TimePattern)? '\'')
+               // '\''
+               match = charMatcher('\'');
+               if (match) {
+                  // DatePattern
+                  match = datePattern$Rule();
+                  if (match) {
+                     // ("T"? TimePattern)?
+                     Node lastNode_5 = currentNode;
+                     int lastIndex_5 = index;
+                     // ("T"? TimePattern)
+                     // "T"?
+                     Node lastNode_6 = currentNode;
+                     int lastIndex_6 = index;
+                     // "T"
+                     match = ignoreCaseCharMatcher('T');
+                     if (! match) {
+                        lastNode_6.setSibling(null);
+                        currentNode = lastNode_6;
+                        index = lastIndex_6;
+                        match = true;
+                     }
+                     if (match) {
+                        // TimePattern
+                        match = timePattern$Rule();
+                     }
+                     if (! match) {
+                        lastNode_5.setSibling(null);
+                        currentNode = lastNode_5;
+                        index = lastIndex_5;
+                        match = true;
+                     }
+                     if (match) {
+                        // '\''
+                        match = charMatcher('\'');
+                     }
+                  }
+               }
+               if (! match) {
+                  index = lastIndex_2;
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+                  // ('[' DatePattern ("T"? TimePattern)? ']')
+                  // '['
+                  match = charMatcher('[');
+                  if (match) {
+                     // DatePattern
+                     match = datePattern$Rule();
+                     if (match) {
+                        // ("T"? TimePattern)?
+                        Node lastNode_7 = currentNode;
+                        int lastIndex_7 = index;
+                        // ("T"? TimePattern)
+                        // "T"?
+                        Node lastNode_8 = currentNode;
+                        int lastIndex_8 = index;
+                        // "T"
+                        match = ignoreCaseCharMatcher('T');
+                        if (! match) {
+                           lastNode_8.setSibling(null);
+                           currentNode = lastNode_8;
+                           index = lastIndex_8;
+                           match = true;
+                        }
+                        if (match) {
+                           // TimePattern
+                           match = timePattern$Rule();
+                        }
+                        if (! match) {
+                           lastNode_7.setSibling(null);
+                           currentNode = lastNode_7;
+                           index = lastIndex_7;
+                           match = true;
+                        }
+                        if (match) {
+                           // ']'
+                           match = charMatcher(']');
+                        }
+                     }
+                  }
+                  if (! match) {
+                     index = lastIndex_2;
+                     lastNode_2.setSibling(null);
+                     currentNode = lastNode_2;
+                  }
+               }
             }
          }
          if (! match) {
+            index = lastIndex_1;
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
             // ('{' '^' (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)? TimePattern? Ignore '}')
-            Node lastNode_9 = currentNode;
-            int lastIndex_9 = index;
             // '{'
             match = charMatcher('{');
             if (match) {
@@ -5905,26 +9930,29 @@ public class HarbourPPParser implements Parser {
                match = charMatcher('^');
                if (match) {
                   // (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)?
+                  Node lastNode_9 = currentNode;
+                  int lastIndex_9 = index;
                   // (IntegerNumber ('-' | '/') IntegerNumber ('-' | '/') IntegerNumber ','?)
-                  Node lastNode_10 = currentNode;
-                  int lastIndex_10 = index;
                   // IntegerNumber
                   match = integerNumber$Rule();
                   if (match) {
                      // ('-' | '/')
                      switch(buffer.getChar(index)) {
-                        case '/':
+                        case '-': {
                            ++index;
                            // <EMPTY>
                            match = true;
                            break;
-                        case '-':
+                        }
+                        case '/': {
                            ++index;
                            // <EMPTY>
                            match = true;
                            break;
-                        default:
+                        }
+                        default: {
                            match = false;
+                        }
                      }
                      if (match) {
                         // IntegerNumber
@@ -5932,77 +9960,95 @@ public class HarbourPPParser implements Parser {
                         if (match) {
                            // ('-' | '/')
                            switch(buffer.getChar(index)) {
-                              case '/':
+                              case '-': {
                                  ++index;
                                  // <EMPTY>
                                  match = true;
                                  break;
-                              case '-':
+                              }
+                              case '/': {
                                  ++index;
                                  // <EMPTY>
                                  match = true;
                                  break;
-                              default:
+                              }
+                              default: {
                                  match = false;
+                              }
                            }
                            if (match) {
                               // IntegerNumber
                               match = integerNumber$Rule();
                               if (match) {
                                  // ','?
+                                 Node lastNode_10 = currentNode;
+                                 int lastIndex_10 = index;
                                  // ','
-                                 charMatcher(',');
-                                 match = true;
-                              } else {
-                                 index = lastIndex_10;
-                                 lastNode_10.setSibling(null);
+                                 match = charMatcher(',');
+                                 if (! match) {
+                                    lastNode_10.setSibling(null);
+                                    currentNode = lastNode_10;
+                                    index = lastIndex_10;
+                                    match = true;
+                                 }
                               }
-                           } else {
-                              index = lastIndex_10;
-                              lastNode_10.setSibling(null);
                            }
-                        } else {
-                           index = lastIndex_10;
-                           lastNode_10.setSibling(null);
                         }
-                     } else {
-                        index = lastIndex_10;
-                        lastNode_10.setSibling(null);
                      }
                   }
-                  // TimePattern?
-                  // TimePattern
-                  timePattern$Rule();
-                  // Ignore
-                  match = ignore$Rule();
-                  if (match) {
-                     // '}'
-                     match = charMatcher('}');
-                     if (! match) {
-                        index = lastIndex_9;
-                        lastNode_9.setSibling(null);
-                        currentNode = lastNode_9;
-                     }
-                  } else {
-                     index = lastIndex_9;
+                  if (! match) {
                      lastNode_9.setSibling(null);
+                     currentNode = lastNode_9;
+                     index = lastIndex_9;
+                     match = true;
                   }
-               } else {
-                  index = lastIndex_9;
-                  lastNode_9.setSibling(null);
+                  if (match) {
+                     // TimePattern?
+                     Node lastNode_11 = currentNode;
+                     int lastIndex_11 = index;
+                     // TimePattern
+                     match = timePattern$Rule();
+                     if (! match) {
+                        lastNode_11.setSibling(null);
+                        currentNode = lastNode_11;
+                        index = lastIndex_11;
+                        match = true;
+                     }
+                     if (match) {
+                        // Ignore
+                        match = ignore$Rule();
+                        if (match) {
+                           // '}'
+                           match = charMatcher('}');
+                        }
+                     }
+                  }
                }
+            }
+            if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
             }
          }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         dateTimeLiteral$RuleMemoStart = startIndex;
+         dateTimeLiteral$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            dateTimeLiteral$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.DATE_TIME_LITERAL, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            dateTimeLiteral$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         dateTimeLiteral$RuleMemoStart = startIndex;
+         dateTimeLiteral$RuleMemoEnd = -1;
+         dateTimeLiteral$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -6016,12 +10062,27 @@ public class HarbourPPParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (numberLiteral$RuleMemoStart == index) {
+         if (numberLiteral$RuleMemoStart <= numberLiteral$RuleMemoEnd) {
+            index = numberLiteral$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.NUMBER_LITERAL, numberLiteral$RuleMemoStart, numberLiteral$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (numberLiteral$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(numberLiteral$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // ((IntegerNumber '.' IntegerNumber) | (IntegerNumber '.' Letter!) | IntegerNumber | ('.' IntegerNumber))
-      // (IntegerNumber '.' IntegerNumber)
       Node lastNode_1 = currentNode;
       int lastIndex_1 = index;
+      // (IntegerNumber '.' IntegerNumber)
       // IntegerNumber
       match = integerNumber$Rule();
       if (match) {
@@ -6030,20 +10091,13 @@ public class HarbourPPParser implements Parser {
          if (match) {
             // IntegerNumber
             match = integerNumber$Rule();
-            if (! match) {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-               currentNode = lastNode_1;
-            }
-         } else {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
          }
       }
       if (! match) {
+         index = lastIndex_1;
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
          // (IntegerNumber '.' Letter!)
-         Node lastNode_2 = currentNode;
-         int lastIndex_2 = index;
          // IntegerNumber
          match = integerNumber$Rule();
          if (match) {
@@ -6054,46 +10108,50 @@ public class HarbourPPParser implements Parser {
                // Letter
                match = letter$Rule();
                match = ! match;
-               if (! match) {
-                  index = lastIndex_2;
-                  lastNode_2.setSibling(null);
-                  currentNode = lastNode_2;
-               }
-            } else {
-               index = lastIndex_2;
-               lastNode_2.setSibling(null);
             }
          }
          if (! match) {
+            index = lastIndex_1;
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
             // IntegerNumber
             match = integerNumber$Rule();
             if (! match) {
+               index = lastIndex_1;
+               lastNode_1.setSibling(null);
+               currentNode = lastNode_1;
                // ('.' IntegerNumber)
-               Node lastNode_3 = currentNode;
-               int lastIndex_3 = index;
                // '.'
                match = charMatcher('.');
                if (match) {
                   // IntegerNumber
                   match = integerNumber$Rule();
-                  if (! match) {
-                     index = lastIndex_3;
-                     lastNode_3.setSibling(null);
-                     currentNode = lastNode_3;
-                  }
+               }
+               if (! match) {
+                  index = lastIndex_1;
+                  lastNode_1.setSibling(null);
+                  currentNode = lastNode_1;
                }
             }
          }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         numberLiteral$RuleMemoStart = startIndex;
+         numberLiteral$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            numberLiteral$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.NUMBER_LITERAL, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            numberLiteral$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         numberLiteral$RuleMemoStart = startIndex;
+         numberLiteral$RuleMemoEnd = -1;
+         numberLiteral$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -6106,92 +10164,115 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (multiLineDoubleQuoteString$RuleMemoStart == index) {
+         if (multiLineDoubleQuoteString$RuleMemoStart <= multiLineDoubleQuoteString$RuleMemoEnd) {
+            index = multiLineDoubleQuoteString$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.MULTI_LINE_DOUBLE_QUOTE_STRING, multiLineDoubleQuoteString$RuleMemoStart, multiLineDoubleQuoteString$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (multiLineDoubleQuoteString$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(multiLineDoubleQuoteString$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // ('"' (MultilineDoubleQuoteStringSegment BreakString)+ (('\n' | '"')! .)* '"')
       // '"'
       match = charMatcher('\"');
       if (match) {
          // (MultilineDoubleQuoteStringSegment BreakString)+
-         // (MultilineDoubleQuoteStringSegment BreakString)
          Node lastNode_1 = currentNode;
          int lastIndex_1 = index;
+         // (MultilineDoubleQuoteStringSegment BreakString)
          // MultilineDoubleQuoteStringSegment
          match = multilineDoubleQuoteStringSegment$Rule();
          if (match) {
             // BreakString
             match = breakString$Rule();
-            if (! match) {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-               currentNode = lastNode_1;
-            }
          }
          if (match) {
             do {
+               lastNode_1 = currentNode;
+               lastIndex_1 = index;
                // (MultilineDoubleQuoteStringSegment BreakString)
-               Node lastNode_2 = currentNode;
-               int lastIndex_2 = index;
                // MultilineDoubleQuoteStringSegment
                match = multilineDoubleQuoteStringSegment$Rule();
                if (match) {
                   // BreakString
                   match = breakString$Rule();
-                  if (! match) {
-                     index = lastIndex_2;
-                     lastNode_2.setSibling(null);
-                     currentNode = lastNode_2;
-                  }
                }
             } while(match);
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
             match = true;
+         } else {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
          }
          if (match) {
             // (('\n' | '"')! .)*
+            Node lastNode_2;
+            int lastIndex_2;
             do {
+               lastNode_2 = currentNode;
+               lastIndex_2 = index;
                // (('\n' | '"')! .)
-               Node lastNode_3 = currentNode;
-               int lastIndex_3 = index;
                // ('\n' | '"')!
                // ('\n' | '"')
-               int startIndex_4 = index;
+               int startIndex_3 = index;
                switch(buffer.getChar(index)) {
-                  case '\"':
+                  case '\"': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case '\n':
+                  }
+                  case '\n': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  default:
+                  }
+                  default: {
                      match = false;
+                  }
                }
-               index = startIndex_4;
+               index = startIndex_3;
                match = ! match;
                if (match) {
                   // .
                   match = anyCharMatcher();
-                  if (! match) {
-                     index = lastIndex_3;
-                     lastNode_3.setSibling(null);
-                     currentNode = lastNode_3;
-                  }
                }
             } while(match);
+            lastNode_2.setSibling(null);
+            currentNode = lastNode_2;
+            index = lastIndex_2;
             // '"'
             match = charMatcher('\"');
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         multiLineDoubleQuoteString$RuleMemoStart = startIndex;
+         multiLineDoubleQuoteString$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            multiLineDoubleQuoteString$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.MULTI_LINE_DOUBLE_QUOTE_STRING, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            multiLineDoubleQuoteString$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         multiLineDoubleQuoteString$RuleMemoStart = startIndex;
+         multiLineDoubleQuoteString$RuleMemoEnd = -1;
+         multiLineDoubleQuoteString$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -6199,97 +10280,120 @@ public class HarbourPPParser implements Parser {
       }
    }
 
-   //MultiLineSingleQuoteString : (''' (MultilineSingleQuoteStringSegment BreakString)+ (('\n' | ''')! .)* ''')
+   //MultiLineSingleQuoteString : ('\'' (MultilineSingleQuoteStringSegment BreakString)+ (('\n' | '\'')! .)* '\'')
    protected boolean multiLineSingleQuoteString$Rule() {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (multiLineSingleQuoteString$RuleMemoStart == index) {
+         if (multiLineSingleQuoteString$RuleMemoStart <= multiLineSingleQuoteString$RuleMemoEnd) {
+            index = multiLineSingleQuoteString$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.MULTI_LINE_SINGLE_QUOTE_STRING, multiLineSingleQuoteString$RuleMemoStart, multiLineSingleQuoteString$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (multiLineSingleQuoteString$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(multiLineSingleQuoteString$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
-      // (''' (MultilineSingleQuoteStringSegment BreakString)+ (('\n' | ''')! .)* ''')
-      // '''
+      // ('\'' (MultilineSingleQuoteStringSegment BreakString)+ (('\n' | '\'')! .)* '\'')
+      // '\''
       match = charMatcher('\'');
       if (match) {
          // (MultilineSingleQuoteStringSegment BreakString)+
-         // (MultilineSingleQuoteStringSegment BreakString)
          Node lastNode_1 = currentNode;
          int lastIndex_1 = index;
+         // (MultilineSingleQuoteStringSegment BreakString)
          // MultilineSingleQuoteStringSegment
          match = multilineSingleQuoteStringSegment$Rule();
          if (match) {
             // BreakString
             match = breakString$Rule();
-            if (! match) {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
-               currentNode = lastNode_1;
-            }
          }
          if (match) {
             do {
+               lastNode_1 = currentNode;
+               lastIndex_1 = index;
                // (MultilineSingleQuoteStringSegment BreakString)
-               Node lastNode_2 = currentNode;
-               int lastIndex_2 = index;
                // MultilineSingleQuoteStringSegment
                match = multilineSingleQuoteStringSegment$Rule();
                if (match) {
                   // BreakString
                   match = breakString$Rule();
-                  if (! match) {
-                     index = lastIndex_2;
-                     lastNode_2.setSibling(null);
-                     currentNode = lastNode_2;
-                  }
                }
             } while(match);
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
             match = true;
+         } else {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
          }
          if (match) {
-            // (('\n' | ''')! .)*
+            // (('\n' | '\'')! .)*
+            Node lastNode_2;
+            int lastIndex_2;
             do {
-               // (('\n' | ''')! .)
-               Node lastNode_3 = currentNode;
-               int lastIndex_3 = index;
-               // ('\n' | ''')!
-               // ('\n' | ''')
-               int startIndex_4 = index;
+               lastNode_2 = currentNode;
+               lastIndex_2 = index;
+               // (('\n' | '\'')! .)
+               // ('\n' | '\'')!
+               // ('\n' | '\'')
+               int startIndex_3 = index;
                switch(buffer.getChar(index)) {
-                  case '\'':
+                  case '\'': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case '\n':
+                  }
+                  case '\n': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  default:
+                  }
+                  default: {
                      match = false;
+                  }
                }
-               index = startIndex_4;
+               index = startIndex_3;
                match = ! match;
                if (match) {
                   // .
                   match = anyCharMatcher();
-                  if (! match) {
-                     index = lastIndex_3;
-                     lastNode_3.setSibling(null);
-                     currentNode = lastNode_3;
-                  }
                }
             } while(match);
-            // '''
+            lastNode_2.setSibling(null);
+            currentNode = lastNode_2;
+            index = lastIndex_2;
+            // '\''
             match = charMatcher('\'');
          }
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         multiLineSingleQuoteString$RuleMemoStart = startIndex;
+         multiLineSingleQuoteString$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            multiLineSingleQuoteString$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.MULTI_LINE_SINGLE_QUOTE_STRING, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            multiLineSingleQuoteString$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         multiLineSingleQuoteString$RuleMemoStart = startIndex;
+         multiLineSingleQuoteString$RuleMemoEnd = -1;
+         multiLineSingleQuoteString$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -6302,52 +10406,86 @@ public class HarbourPPParser implements Parser {
       Node lastNode = currentNode;
       int startIndex;
       boolean match;
+      if (breakString$RuleMemoStart == index) {
+         if (breakString$RuleMemoStart <= breakString$RuleMemoEnd) {
+            index = breakString$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.BREAK_STRING, breakString$RuleMemoStart, breakString$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (breakString$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(breakString$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       startIndex = index;
       // (';' (' ' | '\t' | '\f')* NewLine)
       // ';'
       match = charMatcher(';');
       if (match) {
          // (' ' | '\t' | '\f')*
+         Node lastNode_1;
+         int lastIndex_1;
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // (' ' | '\t' | '\f')
-            int startIndex_1 = index;
+            int startIndex_2 = index;
             switch(buffer.getChar(index)) {
-               case ' ':
+               case '\f': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\f':
+               }
+               case ' ': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\t':
+               }
+               case '\t': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             if (! match) {
-               index = startIndex_1;
+               index = startIndex_2;
             } else if(! currentRuleIsAtomic) {
-               currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+               currentNode.setSibling(new NodeImpl(HarbourPPRuleType.TERMINAL, startIndex_2, index, false, false));
                currentNode = currentNode.getSibling();
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          // NewLine
          match = newLine$Rule();
       }
       if (match) {
-         if (! currentRuleIsAtomic) {
+         breakString$RuleMemoStart = startIndex;
+         breakString$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            breakString$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.BREAK_STRING, startIndex, index, true, false);
             currentNode.setFirstChild(lastNode.getSibling());
             lastNode.setSibling(currentNode);
+            breakString$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
+         breakString$RuleMemoStart = startIndex;
+         breakString$RuleMemoEnd = -1;
+         breakString$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -6364,32 +10502,45 @@ public class HarbourPPParser implements Parser {
       currentRuleIsAtomic = true;
       startIndex = index;
       // ((('\n' | '"') | BreakString)! .)+
-      // ((('\n' | '"') | BreakString)! .)
       Node lastNode_1 = currentNode;
       int lastIndex_1 = index;
+      // ((('\n' | '"') | BreakString)! .)
       // (('\n' | '"') | BreakString)!
       Node lastNode_2 = currentNode;
       int lastIndex_2 = index;
       boolean lastAtomic_2 = currentRuleIsAtomic;
       // (('\n' | '"') | BreakString)
+      Node lastNode_3 = currentNode;
+      int lastIndex_3 = index;
       // ('\n' | '"')
       switch(buffer.getChar(index)) {
-         case '\"':
+         case '\"': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         case '\n':
+         }
+         case '\n': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         default:
+         }
+         default: {
             match = false;
+         }
       }
       if (! match) {
+         index = lastIndex_3;
+         lastNode_3.setSibling(null);
+         currentNode = lastNode_3;
          // BreakString
          match = breakString$Rule();
+         if (! match) {
+            index = lastIndex_3;
+            lastNode_3.setSibling(null);
+            currentNode = lastNode_3;
+         }
       }
       currentRuleIsAtomic = lastAtomic_2;
       index = lastIndex_2;
@@ -6399,40 +10550,48 @@ public class HarbourPPParser implements Parser {
       if (match) {
          // .
          match = anyCharMatcher();
-         if (! match) {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-         }
       }
       if (match) {
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // ((('\n' | '"') | BreakString)! .)
-            Node lastNode_3 = currentNode;
-            int lastIndex_3 = index;
             // (('\n' | '"') | BreakString)!
             Node lastNode_4 = currentNode;
             int lastIndex_4 = index;
             boolean lastAtomic_4 = currentRuleIsAtomic;
             // (('\n' | '"') | BreakString)
+            Node lastNode_5 = currentNode;
+            int lastIndex_5 = index;
             // ('\n' | '"')
             switch(buffer.getChar(index)) {
-               case '\"':
+               case '\"': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\n':
+               }
+               case '\n': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             if (! match) {
+               index = lastIndex_5;
+               lastNode_5.setSibling(null);
+               currentNode = lastNode_5;
                // BreakString
                match = breakString$Rule();
+               if (! match) {
+                  index = lastIndex_5;
+                  lastNode_5.setSibling(null);
+                  currentNode = lastNode_5;
+               }
             }
             currentRuleIsAtomic = lastAtomic_4;
             index = lastIndex_4;
@@ -6442,14 +10601,16 @@ public class HarbourPPParser implements Parser {
             if (match) {
                // .
                match = anyCharMatcher();
-               if (! match) {
-                  index = lastIndex_3;
-                  lastNode_3.setSibling(null);
-                  currentNode = lastNode_3;
-               }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
+      } else {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
@@ -6467,7 +10628,7 @@ public class HarbourPPParser implements Parser {
       }
    }
 
-   //MultilineSingleQuoteStringSegment : ((('\n' | ''') | BreakString)! .)+
+   //MultilineSingleQuoteStringSegment : ((('\n' | '\'') | BreakString)! .)+
    protected boolean multilineSingleQuoteStringSegment$Rule() {
       Node lastNode = currentNode;
       int startIndex;
@@ -6475,33 +10636,46 @@ public class HarbourPPParser implements Parser {
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
       currentRuleIsAtomic = true;
       startIndex = index;
-      // ((('\n' | ''') | BreakString)! .)+
-      // ((('\n' | ''') | BreakString)! .)
+      // ((('\n' | '\'') | BreakString)! .)+
       Node lastNode_1 = currentNode;
       int lastIndex_1 = index;
-      // (('\n' | ''') | BreakString)!
+      // ((('\n' | '\'') | BreakString)! .)
+      // (('\n' | '\'') | BreakString)!
       Node lastNode_2 = currentNode;
       int lastIndex_2 = index;
       boolean lastAtomic_2 = currentRuleIsAtomic;
-      // (('\n' | ''') | BreakString)
-      // ('\n' | ''')
+      // (('\n' | '\'') | BreakString)
+      Node lastNode_3 = currentNode;
+      int lastIndex_3 = index;
+      // ('\n' | '\'')
       switch(buffer.getChar(index)) {
-         case '\'':
+         case '\'': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         case '\n':
+         }
+         case '\n': {
             ++index;
             // <EMPTY>
             match = true;
             break;
-         default:
+         }
+         default: {
             match = false;
+         }
       }
       if (! match) {
+         index = lastIndex_3;
+         lastNode_3.setSibling(null);
+         currentNode = lastNode_3;
          // BreakString
          match = breakString$Rule();
+         if (! match) {
+            index = lastIndex_3;
+            lastNode_3.setSibling(null);
+            currentNode = lastNode_3;
+         }
       }
       currentRuleIsAtomic = lastAtomic_2;
       index = lastIndex_2;
@@ -6511,40 +10685,48 @@ public class HarbourPPParser implements Parser {
       if (match) {
          // .
          match = anyCharMatcher();
-         if (! match) {
-            index = lastIndex_1;
-            lastNode_1.setSibling(null);
-            currentNode = lastNode_1;
-         }
       }
       if (match) {
          do {
-            // ((('\n' | ''') | BreakString)! .)
-            Node lastNode_3 = currentNode;
-            int lastIndex_3 = index;
-            // (('\n' | ''') | BreakString)!
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
+            // ((('\n' | '\'') | BreakString)! .)
+            // (('\n' | '\'') | BreakString)!
             Node lastNode_4 = currentNode;
             int lastIndex_4 = index;
             boolean lastAtomic_4 = currentRuleIsAtomic;
-            // (('\n' | ''') | BreakString)
-            // ('\n' | ''')
+            // (('\n' | '\'') | BreakString)
+            Node lastNode_5 = currentNode;
+            int lastIndex_5 = index;
+            // ('\n' | '\'')
             switch(buffer.getChar(index)) {
-               case '\'':
+               case '\'': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               case '\n':
+               }
+               case '\n': {
                   ++index;
                   // <EMPTY>
                   match = true;
                   break;
-               default:
+               }
+               default: {
                   match = false;
+               }
             }
             if (! match) {
+               index = lastIndex_5;
+               lastNode_5.setSibling(null);
+               currentNode = lastNode_5;
                // BreakString
                match = breakString$Rule();
+               if (! match) {
+                  index = lastIndex_5;
+                  lastNode_5.setSibling(null);
+                  currentNode = lastNode_5;
+               }
             }
             currentRuleIsAtomic = lastAtomic_4;
             index = lastIndex_4;
@@ -6554,14 +10736,16 @@ public class HarbourPPParser implements Parser {
             if (match) {
                // .
                match = anyCharMatcher();
-               if (! match) {
-                  index = lastIndex_3;
-                  lastNode_3.setSibling(null);
-                  currentNode = lastNode_3;
-               }
             }
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
+      } else {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
@@ -6588,6 +10772,8 @@ public class HarbourPPParser implements Parser {
       currentRuleIsAtomic = true;
       startIndex = index;
       // ('a'-'z' | 'A'-'Z')
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // 'a'-'z'
       match = charRangeMatcher('a', 'z');
       if (! match) {
@@ -6619,6 +10805,13 @@ public class HarbourPPParser implements Parser {
       if (integerNumber$RuleMemoStart == index) {
          if (integerNumber$RuleMemoStart <= integerNumber$RuleMemoEnd) {
             index = integerNumber$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.INTEGER_NUMBER, integerNumber$RuleMemoStart, integerNumber$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (integerNumber$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(integerNumber$RuleMemoFirstNode.getFirstChild());
+               }
+            }
             return true;
          } else {
             return false;
@@ -6627,28 +10820,43 @@ public class HarbourPPParser implements Parser {
       currentRuleIsAtomic = true;
       startIndex = index;
       // Digit+
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // '0'-'9'
       match = charRangeMatcher('0', '9');
       if (match) {
          do {
+            lastNode_1 = currentNode;
+            lastIndex_1 = index;
             // '0'-'9'
             match = charRangeMatcher('0', '9');
          } while(match);
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
          match = true;
+      } else {
+         lastNode_1.setSibling(null);
+         currentNode = lastNode_1;
+         index = lastIndex_1;
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
          integerNumber$RuleMemoStart = startIndex;
          integerNumber$RuleMemoEnd = index;
-         if (! currentRuleIsAtomic) {
+         if (currentRuleIsAtomic) {
+            integerNumber$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.INTEGER_NUMBER, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            integerNumber$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
          integerNumber$RuleMemoStart = startIndex;
          integerNumber$RuleMemoEnd = -1;
+         integerNumber$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -6662,6 +10870,21 @@ public class HarbourPPParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (timePattern$RuleMemoStart == index) {
+         if (timePattern$RuleMemoStart <= timePattern$RuleMemoEnd) {
+            index = timePattern$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.TIME_PATTERN, timePattern$RuleMemoStart, timePattern$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (timePattern$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(timePattern$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // (IntegerNumber (':' IntegerNumber (':' IntegerNumber)? ('.' IntegerNumber)?)? ("AM" | "PM")?)
@@ -6669,9 +10892,9 @@ public class HarbourPPParser implements Parser {
       match = integerNumber$Rule();
       if (match) {
          // (':' IntegerNumber (':' IntegerNumber)? ('.' IntegerNumber)?)?
-         // (':' IntegerNumber (':' IntegerNumber)? ('.' IntegerNumber)?)
          Node lastNode_1 = currentNode;
          int lastIndex_1 = index;
+         // (':' IntegerNumber (':' IntegerNumber)? ('.' IntegerNumber)?)
          // ':'
          match = charMatcher(':');
          if (match) {
@@ -6679,76 +10902,100 @@ public class HarbourPPParser implements Parser {
             match = integerNumber$Rule();
             if (match) {
                // (':' IntegerNumber)?
-               // (':' IntegerNumber)
                Node lastNode_2 = currentNode;
                int lastIndex_2 = index;
+               // (':' IntegerNumber)
                // ':'
                match = charMatcher(':');
                if (match) {
                   // IntegerNumber
                   match = integerNumber$Rule();
-                  if (! match) {
-                     index = lastIndex_2;
-                     lastNode_2.setSibling(null);
-                     currentNode = lastNode_2;
-                  }
                }
-               match = true;
-               // ('.' IntegerNumber)?
-               // ('.' IntegerNumber)
-               Node lastNode_3 = currentNode;
-               int lastIndex_3 = index;
-               // '.'
-               match = charMatcher('.');
+               if (! match) {
+                  lastNode_2.setSibling(null);
+                  currentNode = lastNode_2;
+                  index = lastIndex_2;
+                  match = true;
+               }
                if (match) {
-                  // IntegerNumber
-                  match = integerNumber$Rule();
+                  // ('.' IntegerNumber)?
+                  Node lastNode_3 = currentNode;
+                  int lastIndex_3 = index;
+                  // ('.' IntegerNumber)
+                  // '.'
+                  match = charMatcher('.');
+                  if (match) {
+                     // IntegerNumber
+                     match = integerNumber$Rule();
+                  }
                   if (! match) {
-                     index = lastIndex_3;
                      lastNode_3.setSibling(null);
                      currentNode = lastNode_3;
+                     index = lastIndex_3;
+                     match = true;
                   }
                }
-               match = true;
-            } else {
-               index = lastIndex_1;
-               lastNode_1.setSibling(null);
             }
          }
-         match = true;
-         // ("AM" | "PM")?
-         // ("AM" | "PM")
-         switch(buffer.getChar(index)) {
-            case 'a':
-            case 'A':
-               ++index;
-               // "M"
-               if (match = buffer.matchIgnoreCaseChar(index, 'M')) {
-                  ++index;
-               }
-               break;
-            case 'p':
-            case 'P':
-               ++index;
-               // "M"
-               if (match = buffer.matchIgnoreCaseChar(index, 'M')) {
-                  ++index;
-               }
-               break;
-            default:
-               match = false;
+         if (! match) {
+            lastNode_1.setSibling(null);
+            currentNode = lastNode_1;
+            index = lastIndex_1;
+            match = true;
          }
-         match = true;
+         if (match) {
+            // ("AM" | "PM")?
+            Node lastNode_4 = currentNode;
+            int lastIndex_4 = index;
+            // ("AM" | "PM")
+            switch(buffer.getChar(index)) {
+               case 'p':
+               case 'P': {
+                  ++index;
+                  // "M"
+                  if (match = buffer.matchIgnoreCaseChar(index, 'M')) {
+                     ++index;
+                  }
+                  break;
+               }
+               case 'a':
+               case 'A': {
+                  ++index;
+                  // "M"
+                  if (match = buffer.matchIgnoreCaseChar(index, 'M')) {
+                     ++index;
+                  }
+                  break;
+               }
+               default: {
+                  match = false;
+               }
+            }
+            if (! match) {
+               lastNode_4.setSibling(null);
+               currentNode = lastNode_4;
+               index = lastIndex_4;
+               match = true;
+            }
+         }
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         timePattern$RuleMemoStart = startIndex;
+         timePattern$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            timePattern$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.TIME_PATTERN, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            timePattern$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         timePattern$RuleMemoStart = startIndex;
+         timePattern$RuleMemoEnd = -1;
+         timePattern$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -6762,6 +11009,21 @@ public class HarbourPPParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (datePattern$RuleMemoStart == index) {
+         if (datePattern$RuleMemoStart <= datePattern$RuleMemoEnd) {
+            index = datePattern$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.DATE_PATTERN, datePattern$RuleMemoStart, datePattern$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (datePattern$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(datePattern$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // (IntegerNumber ('-' | '/' | '.') IntegerNumber ('-' | '/' | '.') IntegerNumber)
@@ -6770,23 +11032,27 @@ public class HarbourPPParser implements Parser {
       if (match) {
          // ('-' | '/' | '.')
          switch(buffer.getChar(index)) {
-            case '/':
+            case '-': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            case '.':
+            }
+            case '.': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            case '-':
+            }
+            case '/': {
                ++index;
                // <EMPTY>
                match = true;
                break;
-            default:
+            }
+            default: {
                match = false;
+            }
          }
          if (match) {
             // IntegerNumber
@@ -6794,23 +11060,27 @@ public class HarbourPPParser implements Parser {
             if (match) {
                // ('-' | '/' | '.')
                switch(buffer.getChar(index)) {
-                  case '/':
+                  case '-': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case '.':
+                  }
+                  case '.': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  case '-':
+                  }
+                  case '/': {
                      ++index;
                      // <EMPTY>
                      match = true;
                      break;
-                  default:
+                  }
+                  default: {
                      match = false;
+                  }
                }
                if (match) {
                   // IntegerNumber
@@ -6821,13 +11091,21 @@ public class HarbourPPParser implements Parser {
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         datePattern$RuleMemoStart = startIndex;
+         datePattern$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            datePattern$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.DATE_PATTERN, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            datePattern$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         datePattern$RuleMemoStart = startIndex;
+         datePattern$RuleMemoEnd = -1;
+         datePattern$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;
@@ -6841,10 +11119,27 @@ public class HarbourPPParser implements Parser {
       int startIndex;
       boolean match;
       boolean lastRuleIsAtomic = currentRuleIsAtomic;
+      if (identifier$RuleMemoStart == index) {
+         if (identifier$RuleMemoStart <= identifier$RuleMemoEnd) {
+            index = identifier$RuleMemoEnd;
+            if (! currentRuleIsAtomic) {
+               currentNode = new NodeImpl(HarbourPPRuleType.IDENTIFIER, identifier$RuleMemoStart, identifier$RuleMemoEnd, true, false);
+               lastNode.setSibling(currentNode);
+               if (identifier$RuleMemoFirstNode != null) {
+                  currentNode.setFirstChild(identifier$RuleMemoFirstNode.getFirstChild());
+               }
+            }
+            return true;
+         } else {
+            return false;
+         }
+      }
       currentRuleIsAtomic = true;
       startIndex = index;
       // (('A'-'Z' | 'a'-'z' | '_') ('A'-'Z' | 'a'-'z' | '0'-'9' | '_')*)
       // ('A'-'Z' | 'a'-'z' | '_')
+      Node lastNode_1 = currentNode;
+      int lastIndex_1 = index;
       // 'A'-'Z'
       match = charRangeMatcher('A', 'Z');
       if (! match) {
@@ -6857,8 +11152,14 @@ public class HarbourPPParser implements Parser {
       }
       if (match) {
          // ('A'-'Z' | 'a'-'z' | '0'-'9' | '_')*
+         Node lastNode_2;
+         int lastIndex_2;
          do {
+            lastNode_2 = currentNode;
+            lastIndex_2 = index;
             // ('A'-'Z' | 'a'-'z' | '0'-'9' | '_')
+            Node lastNode_3 = currentNode;
+            int lastIndex_3 = index;
             // 'A'-'Z'
             match = charRangeMatcher('A', 'Z');
             if (! match) {
@@ -6874,17 +11175,28 @@ public class HarbourPPParser implements Parser {
                }
             }
          } while(match);
+         lastNode_2.setSibling(null);
+         currentNode = lastNode_2;
+         index = lastIndex_2;
          match = true;
       }
       if (match) {
          currentRuleIsAtomic = lastRuleIsAtomic;
-         if (! currentRuleIsAtomic) {
+         identifier$RuleMemoStart = startIndex;
+         identifier$RuleMemoEnd = index;
+         if (currentRuleIsAtomic) {
+            identifier$RuleMemoFirstNode = null;
+         } else {
             currentNode = new NodeImpl(HarbourPPRuleType.IDENTIFIER, startIndex, index, true, false);
             lastNode.setSibling(currentNode);
+            identifier$RuleMemoFirstNode = currentNode;
          }
          return true;
       } else {
          currentRuleIsAtomic = lastRuleIsAtomic;
+         identifier$RuleMemoStart = startIndex;
+         identifier$RuleMemoEnd = -1;
+         identifier$RuleMemoFirstNode = null;
          index = startIndex;
          lastNode.setSibling(null);
          currentNode = lastNode;

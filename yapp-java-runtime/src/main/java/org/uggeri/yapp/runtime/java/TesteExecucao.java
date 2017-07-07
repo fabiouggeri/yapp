@@ -62,8 +62,8 @@ public class TesteExecucao {
       // new TesteExecucao().testeParsePlSqlSources();
       //new TesteExecucao().testeExecucaoPlSql();
       //new TesteExecucao().testeExecucaoJava();
-      //new TesteExecucao().testeExecucaoHarbourPP();
-      new TesteExecucao().testeExecucaoHarbourUnprocessed();
+      new TesteExecucao().testeExecucaoHarbourPP();
+      //new TesteExecucao().testeExecucaoHarbourUnprocessed();
       //new TesteExecucao().testeExecucao();
    }
 
@@ -341,14 +341,15 @@ public class TesteExecucao {
          //javaParser.setTraceParser(traceFile);
          //javaParser.setTrace(true);
          //javax.swing.JOptionPane.showMessageDialog(null, "Tecla para continuar");
-         inputBuffer = new FileInputBuffer(new File("C:\\temp\\rtbam.prg"));
+         inputBuffer = new FileInputBuffer(new File("W:\\sistemas\\legado\\ccrp-6.42.50\\libsiret\\rtpfun4.prg"));
          node = parser.parse(inputBuffer);
          System.out.println("Tempo : " + (System.currentTimeMillis() - iniParse));
          traceFile.close();
          //javax.swing.JOptionPane.showMessageDialog(null, "Fim");
          //printTree(inputBuffer, node, 0);
          //System.out.println("==============================");
-         printProfile(parser.getProfilesMap());
+         //printProfile(parser.getProfilesMap());
+         printTree(inputBuffer, node, 0);
          //printSemanticTree(inputBuffer, node, 0);
          //new ParseTreeWalker().walk(node, new HarbourPPVisitor(inputBuffer));
       } catch (IOException ex) {

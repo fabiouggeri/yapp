@@ -805,7 +805,7 @@ public class HarbourUnprocessedParser implements Parser {
    protected boolean charMatcher(char c) {
       if (buffer.matchChar(index, c)) {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + 1, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, index, index + 1, false, false));
             currentNode = currentNode.getSibling();
          }
          ++index;
@@ -817,7 +817,7 @@ public class HarbourUnprocessedParser implements Parser {
    protected boolean ignoreCaseCharMatcher(char c) {
       if (buffer.matchIgnoreCaseChar(index, c)) {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + 1, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, index, index + 1, false, false));
             currentNode = currentNode.getSibling();
          }
          ++index;
@@ -829,7 +829,7 @@ public class HarbourUnprocessedParser implements Parser {
    protected boolean stringMatcher(String str, int strLen) {
       if (buffer.matchString(index, str, strLen)) {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + strLen, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, index, index + strLen, false, false));
             currentNode = currentNode.getSibling();
          }
          index += strLen;
@@ -850,7 +850,7 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       if (! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + i, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, index, index + i, false, false));
          currentNode = currentNode.getSibling();
       }
       index += i;
@@ -860,7 +860,7 @@ public class HarbourUnprocessedParser implements Parser {
    protected boolean ignoreCaseStringMatcher(String str, int strLen) {
       if (buffer.matchIgnoreCaseString(index, str, strLen)) {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + strLen, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, index, index + strLen, false, false));
             currentNode = currentNode.getSibling();
          }
          index += strLen;
@@ -881,7 +881,7 @@ public class HarbourUnprocessedParser implements Parser {
          }
       }
       if (! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + i, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, index, index + i, false, false));
          currentNode = currentNode.getSibling();
       }
       index += i;
@@ -891,7 +891,7 @@ public class HarbourUnprocessedParser implements Parser {
    protected boolean charRangeMatcher(char charIni, char charEnd) {
       if (buffer.matchCharRange(index, charIni, charEnd)) {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + 1, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, index, index + 1, false, false));
             currentNode = currentNode.getSibling();
          }
          ++index;
@@ -903,7 +903,7 @@ public class HarbourUnprocessedParser implements Parser {
    protected boolean anyCharMatcher() {
       if (buffer.getChar(index) != '\0') {
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, index, index + 1, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, index, index + 1, false, false));
             currentNode = currentNode.getSibling();
          }
          ++index;
@@ -5215,7 +5215,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -5349,7 +5349,7 @@ public class HarbourUnprocessedParser implements Parser {
          if (! match) {
             index = startIndex_1;
          } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
             currentNode = currentNode.getSibling();
          }
          if (match) {
@@ -5504,7 +5504,7 @@ public class HarbourUnprocessedParser implements Parser {
          if (! match) {
             index = startIndex_1;
          } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
             currentNode = currentNode.getSibling();
          }
          if (match) {
@@ -5644,7 +5644,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -5705,7 +5705,7 @@ public class HarbourUnprocessedParser implements Parser {
          if (! match) {
             index = startIndex_4;
          } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_4, index, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_4, index, false, false));
             currentNode = currentNode.getSibling();
          }
          if (match) {
@@ -6438,7 +6438,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -6624,7 +6624,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -6803,7 +6803,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -7210,7 +7210,7 @@ public class HarbourUnprocessedParser implements Parser {
          if (! match) {
             index = startIndex_2;
          } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_2, index, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_2, index, false, false));
             currentNode = currentNode.getSibling();
          }
          if (match) {
@@ -7300,7 +7300,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -7410,7 +7410,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -7644,7 +7644,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -7768,7 +7768,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -10766,7 +10766,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -11087,7 +11087,7 @@ public class HarbourUnprocessedParser implements Parser {
          if (! match) {
             index = startIndex_2;
          } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_2, index, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_2, index, false, false));
             currentNode = currentNode.getSibling();
          }
          if (match) {
@@ -11266,7 +11266,7 @@ public class HarbourUnprocessedParser implements Parser {
                               if (! match) {
                                  index = startIndex_6;
                               } else if(! currentRuleIsAtomic) {
-                                 currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_6, index, false, false));
+                                 currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_6, index, false, false));
                                  currentNode = currentNode.getSibling();
                               }
                               if (match) {
@@ -12049,7 +12049,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_2;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_2, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_2, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -13779,7 +13779,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -13972,7 +13972,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -14172,7 +14172,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -14296,7 +14296,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -14406,7 +14406,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -14701,7 +14701,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -14890,7 +14890,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -15007,7 +15007,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -15359,7 +15359,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -15476,7 +15476,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -15650,7 +15650,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -15781,7 +15781,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -15974,7 +15974,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -16091,7 +16091,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -16352,7 +16352,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -16527,7 +16527,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -16810,7 +16810,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -16999,7 +16999,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -17123,7 +17123,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -17240,7 +17240,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -17357,7 +17357,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -17626,7 +17626,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -17902,7 +17902,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -18102,7 +18102,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -18219,7 +18219,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -18329,7 +18329,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -18439,7 +18439,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -18592,7 +18592,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -18688,7 +18688,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -18896,7 +18896,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -20207,7 +20207,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -21337,7 +21337,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -21602,7 +21602,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -21776,7 +21776,7 @@ public class HarbourUnprocessedParser implements Parser {
          if (! match) {
             index = startIndex_3;
          } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_3, index, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_3, index, false, false));
             currentNode = currentNode.getSibling();
          }
          if (match) {
@@ -21952,7 +21952,7 @@ public class HarbourUnprocessedParser implements Parser {
          if (! match) {
             index = startIndex_4;
          } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_4, index, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_4, index, false, false));
             currentNode = currentNode.getSibling();
          }
          if (match) {
@@ -22490,7 +22490,7 @@ public class HarbourUnprocessedParser implements Parser {
          if (! match) {
             index = startIndex_4;
          } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_4, index, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_4, index, false, false));
             currentNode = currentNode.getSibling();
          }
          if (match) {
@@ -22751,7 +22751,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -23222,7 +23222,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -23341,7 +23341,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -23621,7 +23621,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -23745,7 +23745,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -23876,7 +23876,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -24007,7 +24007,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -24131,7 +24131,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -25671,7 +25671,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -26763,7 +26763,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -26973,7 +26973,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -27383,7 +27383,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -27464,7 +27464,7 @@ public class HarbourUnprocessedParser implements Parser {
                if (! match) {
                   index = startIndex_3;
                } else if(! currentRuleIsAtomic) {
-                  currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_3, index, false, false));
+                  currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_3, index, false, false));
                   currentNode = currentNode.getSibling();
                }
                if (match) {
@@ -27752,7 +27752,7 @@ public class HarbourUnprocessedParser implements Parser {
                if (! match) {
                   index = startIndex_3;
                } else if(! currentRuleIsAtomic) {
-                  currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_3, index, false, false));
+                  currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_3, index, false, false));
                   currentNode = currentNode.getSibling();
                }
                if (match) {
@@ -27863,7 +27863,7 @@ public class HarbourUnprocessedParser implements Parser {
          if (! match) {
             index = startIndex_5;
          } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_5, index, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_5, index, false, false));
             currentNode = currentNode.getSibling();
          }
          if (match) {
@@ -27964,7 +27964,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -28112,7 +28112,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -28229,7 +28229,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -28564,7 +28564,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -34976,7 +34976,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -35444,7 +35444,7 @@ public class HarbourUnprocessedParser implements Parser {
             if (! match) {
                index = startIndex_2;
             } else if(! currentRuleIsAtomic) {
-               currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_2, index, false, false));
+               currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_2, index, false, false));
                currentNode = currentNode.getSibling();
             }
          } while(match);
@@ -35703,7 +35703,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_2;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_2, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_2, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -35783,7 +35783,7 @@ public class HarbourUnprocessedParser implements Parser {
          if (! match) {
             index = startIndex_4;
          } else if(! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_4, index, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_4, index, false, false));
             currentNode = currentNode.getSibling();
          }
          if (match) {
@@ -35895,7 +35895,7 @@ public class HarbourUnprocessedParser implements Parser {
                if (! match) {
                   index = startIndex_7;
                } else if(! currentRuleIsAtomic) {
-                  currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_7, index, false, false));
+                  currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_7, index, false, false));
                   currentNode = currentNode.getSibling();
                }
                if (match) {
@@ -35974,7 +35974,7 @@ public class HarbourUnprocessedParser implements Parser {
                      if (! match) {
                         index = startIndex_9;
                      } else if(! currentRuleIsAtomic) {
-                        currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_9, index, false, false));
+                        currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_9, index, false, false));
                         currentNode = currentNode.getSibling();
                      }
                      if (match) {
@@ -36068,7 +36068,7 @@ public class HarbourUnprocessedParser implements Parser {
                         if (! match) {
                            index = startIndex_11;
                         } else if(! currentRuleIsAtomic) {
-                           currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_11, index, false, false));
+                           currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_11, index, false, false));
                            currentNode = currentNode.getSibling();
                         }
                         if (match) {
@@ -36264,7 +36264,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -36374,7 +36374,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_1;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_1, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_1, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -37712,7 +37712,7 @@ public class HarbourUnprocessedParser implements Parser {
       if (! match) {
          index = startIndex_2;
       } else if(! currentRuleIsAtomic) {
-         currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_2, index, false, false));
+         currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_2, index, false, false));
          currentNode = currentNode.getSibling();
       }
       if (match) {
@@ -38574,7 +38574,7 @@ public class HarbourUnprocessedParser implements Parser {
             }
          }
          if (! currentRuleIsAtomic) {
-            currentNode.setSibling(new NodeImpl(Rule.TERMINAL, startIndex_3, index, false, false));
+            currentNode.setSibling(new NodeImpl(HarbourUnprocessedRuleType.TERMINAL, startIndex_3, index, false, false));
             currentNode = currentNode.getSibling();
          }
       }

@@ -272,15 +272,36 @@ public class JavaParserGenerator extends AbstractParserGenerator {
    }
 
    private boolean generateEnums(Grammar mainGrammar, Grammar grammar, boolean first, Set<String> generatedRules, int indent) {
+      generatedRules.add("TERMINAL");
+      indent(getOutput().append('\n'), indent).append("TERMINAL {");
+      indent(getOutput().append('\n'), indent).append("   @Override");
+      indent(getOutput().append('\n'), indent).append("   public String getLabel() {");
+      indent(getOutput().append('\n'), indent).append("      return \"Terminal\";");
+      indent(getOutput().append('\n'), indent).append("   }");
+      getOutput().append('\n');
+      indent(getOutput().append('\n'), indent).append("   @Override");
+      indent(getOutput().append('\n'), indent).append("   public boolean isAtomic() {");
+      indent(getOutput().append('\n'), indent).append("      return true;");
+      indent(getOutput().append('\n'), indent).append("   }");
+      getOutput().append('\n');
+      indent(getOutput().append('\n'), indent).append("   @Override");
+      indent(getOutput().append('\n'), indent).append("   public boolean isSkiped() {");
+      indent(getOutput().append('\n'), indent).append("      return false;");
+      indent(getOutput().append('\n'), indent).append("   }");
+      getOutput().append('\n');
+      indent(getOutput().append('\n'), indent).append("   @Override");
+      indent(getOutput().append('\n'), indent).append("   public void enterRule(").append(visitorClassName(mainGrammar)).append(" visitor, Node node) {");
+      indent(getOutput().append('\n'), indent).append("   }");
+      getOutput().append('\n');
+      indent(getOutput().append('\n'), indent).append("   @Override");
+      indent(getOutput().append('\n'), indent).append("   public void exitRule(").append(visitorClassName(mainGrammar)).append(" visitor, Node node) {");
+      indent(getOutput().append('\n'), indent).append("   }");
+      indent(getOutput().append('\n'), indent).append("}");
       for (NonTerminalRule rule : grammar.getDeclaredRules()) {
          if (! generatedRules.contains(rule.getRuleId()) &&
                  ! rule.getOptions().containsKey(NonTerminalOption.FRAGMENT)) {
             generatedRules.add(rule.getRuleId());
-            if (first) {
-               first = false;
-            } else {
-               getOutput().append(',');
-            }
+            getOutput().append(',');
             indent(getOutput().append('\n'), indent).append(rule.getRuleId()).append(" {");
             indent(getOutput().append('\n'), indent).append("   @Override");
             indent(getOutput().append('\n'), indent).append("   public String getLabel() {");
@@ -590,7 +611,7 @@ public class JavaParserGenerator extends AbstractParserGenerator {
 
    @Override
    protected Expression terminalRule() {
-      return new JavaLiteralExpression<String>("Rule.TERMINAL");
+      return new JavaLiteralExpression<String>(rulesEnumName(getGrammar()) + ".TERMINAL");
    }
 
    @Override

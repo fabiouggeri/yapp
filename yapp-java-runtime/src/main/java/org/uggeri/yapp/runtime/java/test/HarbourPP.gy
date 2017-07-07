@@ -27,16 +27,18 @@ LineComment : ('//' | '&&') (('\n' | EOI)! .)*;
 ContinueNL : Space* ';' (BlockComment | LineComment | Whitespace)* NewLine;
 
 @Rule(Spacing)
+@SkipNode
 OptionalSpacing : Ignore*;
 
 @Rule(Spacing)
-@SyntaxOnly
+@SkipNode
 IgnoreOptionalSpacing : Ignore*;
 
 @Rule(Spacing)
-@SyntaxOnly
+@SkipNode
 IgnoreSpacing : Ignore+;
 
+@SkipNode
 Spacing : Ignore+;
 
 @SkipNode
@@ -84,6 +86,7 @@ NewLine : '\n' | '\r\n';
 @Atomic
 AloneLineComment : '*' (('\n' | EOI)! .)*;
 
+@SkipNode
 AnyRules : AnyRule+;
 
 EndStmt : NewLine | EOI;
@@ -110,13 +113,11 @@ IfDefDirective : IfDef IgnoreSpacing Identifier;
 
 IfNDefDirective : IfNDef IgnoreSpacing Identifier;
 
-@SyntaxOnly
 @Atomic
 ElseDirective : "else" DiscardedRemainingLine;
 
 ElseIfDirective : ElseIf IgnoreSpacing Identifier;
 
-@SyntaxOnly
 @Atomic
 EndIfDirective : EndIf DiscardedRemainingLine;
 
@@ -145,7 +146,6 @@ YUntranslateDirective : Yuntranslate undefDirectivePattern;
 
 DumpBlock : BeginDumpBlock EndStmt ((EndDumpBlock | EOI)! .)* EndDumpBlock;
 
-@SyntaxOnly
 @Atomic
 Define : "defi" ("ne" | "n")?;
 
@@ -156,23 +156,19 @@ ResultRules : AnyRules;
 @SkipNode
 ParametersList : Identifier (IgnoreOptionalSpacing ',' IgnoreOptionalSpacing Identifier)* IgnoreOptionalSpacing;
 
-@SyntaxOnly
 @Atomic
 StdOut : "stdo" ("ut" | "u")?;
 
-@SyntaxOnly
 @Atomic
 Command : "comm" ("and" | "an" | "a")?;
 
 MatchPattern : MatchChunk+;
 
-@SyntaxOnly
 @Atomic
 ResultSep : '=' IgnoreOptionalSpacing '>';
 
 ResultPattern : ResultChunk+;
 
-@SyntaxOnly
 @Atomic
 YCommand : "ycom" ("mand" | "man" | "ma" | "m")?;
 
@@ -182,43 +178,33 @@ directivePattern : IgnoreOptionalSpacing MatchPattern IgnoreOptionalSpacing Resu
 @SkipNode
 undefDirectivePattern : IgnoreOptionalSpacing MatchPattern IgnoreOptionalSpacing;
 
-@SyntaxOnly
 @Atomic
 Uncommand : "unco" ("mmand" | "mman" | "mma" | "mm" | "m")?;
 
-@SyntaxOnly
 @Atomic
 Xuncommand : "xunc" ("ommand" | "omman" | "omma" | "omm" | "om" | "o")?;
 
-@SyntaxOnly
 @Atomic
 Yuncommand : "yunc" ("ommand" | "omman" | "omma" | "omm" | "om" | "o")?;
 
-@SyntaxOnly
 @Atomic
 XCommand : "xcom" ("mand" | "man" | "ma" | "m")?;
 
-@SyntaxOnly
 @Atomic
 Untranslate : "untr" ("anslate" | "anslat" | "ansla" | "ansl" | "ans" | "an" | "a")?;
 
-@SyntaxOnly
 @Atomic
 Xuntranslate : "xunt" ("ranslate" | "ranslat" | "ransla" | "ransl" | "rans" | "ran" | "ra" | "r")?;
 
-@SyntaxOnly
 @Atomic
 Yuntranslate : "yunt" ("ranslate" | "ranslat" | "ransla" | "ransl" | "rans" | "ran" | "ra" | "r")?;
 
-@SyntaxOnly
 @Atomic
 Translate : "tran" ("slate" | "slat" | "sla" | "sl" | "s")?;
 
-@SyntaxOnly
 @Atomic
 YTranslate : "ytra" ("nslate" | "nslat" | "nsla" | "nsl" | "ns" | "n")?;
 
-@SyntaxOnly
 @Atomic
 XTranslate : "xtra" ("nslate" | "nslat" | "nsla" | "nsl" | "ns" | "n")?;
 
@@ -262,6 +248,7 @@ IdentifierMarker : '<' IgnoreOptionalSpacing '!' IgnoreOptionalSpacing Identifie
 
 RestrictValues : RestrictValue (IgnoreOptionalSpacing ',' IgnoreOptionalSpacing RestrictValue)*;
 
+@SkipNode
 RestrictValue : (('>' | ',')! (Identifier | Literal | Ignore | EscapedChar | Separator))+;
 
 NullMarker : '<' IgnoreOptionalSpacing '-' IgnoreOptionalSpacing Identifier IgnoreOptionalSpacing '-' IgnoreOptionalSpacing '>';
@@ -290,29 +277,23 @@ OptionalResultMarkerChunk : OptionalResultMarker | ResultMarker | Identifier | L
 @SkipNode
 ResultChunk : OptionalResultMarker | ResultMarker | Identifier | Literal | Ignore | EscapedChar | ']' | Separator;
 
-@SyntaxOnly
 @Atomic
 IfDef : "ifde" ("f")?;
 
-@SyntaxOnly
 @Atomic
 IfNDef : "ifnd" ("ef" | "e")?;
 
 DiscardedRemainingLine : (EndStmt! .)*;
 
-@SyntaxOnly
 @Atomic
 ElseIf : "else" ("if" | "i")?;
 
-@SyntaxOnly
 @Atomic
 EndIf : "endi" ("f")?;
 
-@SyntaxOnly
 @Atomic
 Undef : "unde" ("f")?;
 
-@SyntaxOnly
 @Atomic
 Include : "incl" ("ude" | "ud" | "u")?;
 

@@ -8,6 +8,30 @@ import org.uggeri.yapp.runtime.java.node.Node;
 import org.uggeri.yapp.runtime.java.parser.Rule;
 
 public enum OracleScriptRuleType implements Rule<OracleScriptVisitor> {
+   TERMINAL {
+      @Override
+      public String getLabel() {
+         return "Terminal";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return true;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(OracleScriptVisitor visitor, Node node) {
+      }
+
+      @Override
+      public void exitRule(OracleScriptVisitor visitor, Node node) {
+      }
+   },
    SQL_SENTENCE {
       @Override
       public String getLabel() {

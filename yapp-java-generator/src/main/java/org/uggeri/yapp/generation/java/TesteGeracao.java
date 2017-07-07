@@ -51,9 +51,9 @@ public class TesteGeracao {
    public static void main(String[] args) {
       //new TesteGeracao().showFirstLiterals();
       //new TesteGeracao().testeGeracaoJava();
-      //new TesteGeracao().testeGeracaoHarbourPP();
+      new TesteGeracao().testeGeracaoHarbourPP();
       //new TesteGeracao().testeGeracaoPlSql();
-       new TesteGeracao().testeGeracaoHarbour();
+      //new TesteGeracao().testeGeracaoHarbour();
    }
 
    private void showFirstLiterals() {
@@ -61,7 +61,7 @@ public class TesteGeracao {
          GrammarLoader gr;
          Grammar g;
          gr = new GrammarLoader();
-         g = gr.loadGrammar(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test\\Java.gy"));
+         g = gr.loadGrammar(new File("C:\\Users\\fabio_uggeri\\sicredi\\sistemas\\externos\\fabiouggeri\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test\\Java.gy"));
          for (NonTerminalRule rule : g.getDeclaredRules()) {
             final FirstLiteralsVisitor visitor = new FirstLiteralsVisitor();
             rule.visit(null, visitor);
@@ -82,8 +82,8 @@ public class TesteGeracao {
          GrammarLoader gr;
          Grammar g;
          gr = new GrammarLoader();
-         g = gr.loadGrammar(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test\\Java.gy"));
-         options = new JavaParserGenerationOptions(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test"),
+         g = gr.loadGrammar(new File("C:\\Users\\fabio_uggeri\\sicredi\\sistemas\\externos\\fabiouggeri\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test\\Java.gy"));
+         options = new JavaParserGenerationOptions(new File("C:\\Users\\fabio_uggeri\\sicredi\\sistemas\\externos\\fabiouggeri\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test"),
                  "org.uggeri.yapp.runtime.java.test");
          options.setGenerateTraceCode(false);
          options.setProfile(false);
@@ -112,8 +112,8 @@ public class TesteGeracao {
          GrammarLoader gr;
          Grammar g;
          gr = new GrammarLoader();    
-         g = gr.loadGrammar(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test\\OracleScript.gy"));
-         options = new JavaParserGenerationOptions(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test"),
+         g = gr.loadGrammar(new File("C:\\Users\\fabio_uggeri\\sicredi\\sistemas\\externos\\fabiouggeri\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test\\OracleScript.gy"));
+         options = new JavaParserGenerationOptions(new File("C:\\Users\\fabio_uggeri\\sicredi\\sistemas\\externos\\fabiouggeri\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test"),
                  "org.uggeri.yapp.runtime.java.test");
          options.setGenerateTraceCode(false);
          options.setProfile(false);
@@ -142,13 +142,13 @@ public class TesteGeracao {
          GrammarLoader gr;
          Grammar g;
          gr = new GrammarLoader();
-         g = gr.loadGrammar(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test\\HarbourPP.gy"));
-         options = new JavaParserGenerationOptions(new File("E:\\desenvolvimento\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test"),
+         g = gr.loadGrammar(new File("C:\\Users\\fabio_uggeri\\sicredi\\sistemas\\externos\\fabiouggeri\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test\\HarbourPP.gy"));
+         options = new JavaParserGenerationOptions(new File("C:\\Users\\fabio_uggeri\\sicredi\\sistemas\\externos\\fabiouggeri\\yapp\\yapp-java-runtime\\src\\main\\java\\org\\uggeri\\yapp\\runtime\\java\\test\\"),
                  "org.uggeri.yapp.runtime.java.test");
          options.setGenerateTraceCode(false);
          options.setProfile(false);
          options.setCatchMismatches(false);
-         options.setMemoizeMode(MemoizeMode.EXPLICIT);
+         options.setMemoizeMode(MemoizeMode.AUTO);
          //options.setGenerateSingleFileSource(true);
          pg = new JavaParserGenerator(g, options);
          pg.generateParser();

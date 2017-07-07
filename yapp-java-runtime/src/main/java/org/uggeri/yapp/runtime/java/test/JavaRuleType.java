@@ -8,6 +8,30 @@ import org.uggeri.yapp.runtime.java.node.Node;
 import org.uggeri.yapp.runtime.java.parser.Rule;
 
 public enum JavaRuleType implements Rule<JavaVisitor> {
+   TERMINAL {
+      @Override
+      public String getLabel() {
+         return "Terminal";
+      }
+
+      @Override
+      public boolean isAtomic() {
+         return true;
+      }
+
+      @Override
+      public boolean isSkiped() {
+         return false;
+      }
+
+      @Override
+      public void enterRule(JavaVisitor visitor, Node node) {
+      }
+
+      @Override
+      public void exitRule(JavaVisitor visitor, Node node) {
+      }
+   },
    COMPILATION_UNIT {
       @Override
       public String getLabel() {

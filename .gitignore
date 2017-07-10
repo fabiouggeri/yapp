@@ -4,3 +4,4 @@
 /yapp-c-runtime/yapp-c-runtime-headers/target
 /yapp-c-generator/target
 /yapp-base/target
+/yapp-maven-plugin/target/

@@ -21,5 +21,6 @@
       <module>yapp-java-runtime</module>
       <module>yapp-c-generator</module>
       <module>yapp-c-runtime</module>
+      <module>yapp-maven-plugin</module>
    </modules>
 </project>
